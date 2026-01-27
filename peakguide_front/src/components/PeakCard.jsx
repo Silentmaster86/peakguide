@@ -1,33 +1,46 @@
+import { Link } from "react-router-dom";
+
 export default function PeakCard({ peak, lang }) {
   const heightLabel = lang === "pl" ? "Wysokość" : "Elevation";
 
   return (
-    <article
-      style={card}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-2px)";
-        e.currentTarget.style.boxShadow = "var(--shadow)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0px)";
-        e.currentTarget.style.boxShadow = "var(--shadow-soft)";
+    <Link
+      to={`/peaks/${peak.slug}`}
+      aria-label={`Open details for ${peak.peak_name}`}
+      style={{
+        textDecoration: "none",
+        color: "inherit",
+        display: "block",
       }}
     >
-      <header style={cardTop}>
-        <div style={{ minWidth: 0 }}>
-          <h3 style={title} title={peak.peak_name}>
-            {peak.peak_name}
-          </h3>
-          <div style={sub}>{peak.range_name}</div>
-        </div>
+      <article
+        style={card}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-2px)";
+          e.currentTarget.style.boxShadow = "var(--shadow)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0px)";
+          e.currentTarget.style.boxShadow = "var(--shadow-soft)";
+        }}
+      >
+        <header style={cardTop}>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={title} title={peak.peak_name}>
+              {peak.peak_name}
+            </h3>
+            <div style={sub}>{peak.range_name}</div>
+          </div>
 
-        <div style={badge} title={heightLabel}>
-          ⛰️ {peak.elevation_m} m
-        </div>
-      </header>
-    </article>
+          <div style={badge} title={heightLabel}>
+            ⛰️ {peak.elevation_m} m
+          </div>
+        </header>
+      </article>
+    </Link>
   );
 }
+
 
 const card = {
   border: "1px solid rgba(15,23,42,0.10)",
