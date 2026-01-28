@@ -1,46 +1,60 @@
+import { useMemo } from "react";
+
 export default function LanguageSwitcher({ lang, setLang }) {
+	const items = useMemo(
+		() => [
+			{ key: "pl", label: "PL" },
+			{ key: "en", label: "EN" },
+			{ key: "ua", label: "UA" },
+			{ key: "zh", label: "ZH" },
+		],
+		[],
+	);
+
 	return (
-		<div style={{ display: "flex", gap: 8 }}>
-			<button
-				onClick={() => setLang("pl")}
-				aria-pressed={lang === "pl"}
-				style={btn(lang === "pl")}
-			>
-				PL
-			</button>
-			<button
-				onClick={() => setLang("en")}
-				aria-pressed={lang === "en"}
-				style={btn(lang === "en")}
-			>
-				EN
-			</button>
-			<button
-				onClick={() => setLang("ua")}
-				aria-pressed={lang === "ua"}
-				style={btn(lang === "ua")}
-			>
-				UA
-			</button>
-			<button
-				onClick={() => setLang("zh")}
-				aria-pressed={lang === "zh"}
-				style={btn(lang === "zh")}
-			>
-				ZH
-			</button>
+		<div style={wrap} role='group' aria-label='Language switcher'>
+			{items.map((it) => {
+				const active = lang === it.key;
+				return (
+					<button
+						key={it.key}
+						type='button'
+						onClick={() => setLang(it.key)}
+						style={pill(active)}
+						aria-pressed={active}
+						title={`Switch language to ${it.key.toUpperCase()}`}
+					>
+						{it.label}
+					</button>
+				);
+			})}
 		</div>
 	);
 }
 
-function btn(active) {
-	return {
-		padding: "8px 10px",
-		borderRadius: 10,
-		border: "1px solid #2a2a2a",
-		background: active ? "#1f1f1f" : "transparent",
-		color: "inherit",
-		cursor: "pointer",
-		fontWeight: 700,
-	};
-}
+const wrap = {
+	display: "inline-flex",
+	alignItems: "center",
+	gap: 8,
+	padding: 6,
+	borderRadius: 999,
+	border: "1px solid var(--border)",
+	background: "rgba(255,255,255,0.55)",
+	boxShadow: "var(--shadow-soft)",
+};
+
+const pill = (active) => ({
+	// Accessible button styling
+	border: "1px solid rgba(15,23,42,0.10)",
+	borderRadius: 999,
+	padding: "8px 10px",
+	minWidth: 44,
+	cursor: "pointer",
+	fontWeight: 1000,
+	letterSpacing: "-0.2px",
+	background: active ? "rgba(15,23,42,0.92)" : "rgba(255,255,255,0.70)",
+	color: active ? "#fff" : "var(--text)",
+	transition:
+		"transform 120ms ease, box-shadow 120ms ease, background 120ms ease",
+	boxShadow: active ? "var(--shadow-soft)" : "none",
+});

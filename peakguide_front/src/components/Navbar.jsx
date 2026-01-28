@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 	const t = getLabels(lang);
+	const { pathname } = useLocation();
+	const isHome = pathname === "/";
 
 	return (
 		<nav style={nav} aria-label='Primary'>
@@ -15,9 +17,11 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 			</div>
 
 			<div style={center}>
-				<NavLink to='/' style={navLink}>
-					{t.home}
-				</NavLink>
+				{!isHome && (
+					<NavLink to='/' style={navLink}>
+						{t.home}
+					</NavLink>
+				)}
 
 				<NavLink to='/peaks' style={navLink}>
 					{t.peaks}

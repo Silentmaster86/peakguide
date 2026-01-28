@@ -7,6 +7,7 @@ import PeakDetailsPage from "../pages/PeakDetailsPage";
 import RangesPage from "../pages/RangesPage";
 import RangeDetailsPage from "../pages/RangeDetailsPage";
 import Footer from "../components/Footer";
+import AboutPage from "../pages/AboutPage";
 
 export default function App() {
 	const [lang, setLang] = useState(
@@ -21,16 +22,15 @@ export default function App() {
 		const titles = {
 			pl: "Korona Gór Polski i nie tylko — Przewodnik",
 			en: "Crown of Poland's Mountains & more — PeakGuide",
-			ua: "Корона гір Польщі та більше — PeakGuide",
-			zh: "波兰山峰王冠及更多 — PeakGuide",
+			ua: "Корона гір Польщі та більше — Путівник",
+			zh: "波兰山峰王冠及更多 — 高峰指南",
 		};
 
-		// Update document language and theme hook
 		document.title = titles[safeLang] || titles.pl;
 		document.documentElement.lang = safeLang;
 		document.documentElement.dataset.lang = safeLang;
 
-		// Persist user's choice
+		// Persist user's choice (save the raw UI choice)
 		localStorage.setItem("peakguide_lang", lang);
 	}, [lang, safeLang]);
 
@@ -39,44 +39,33 @@ export default function App() {
 			<div style={page}>
 				<Navbar lang={safeLang} uiLang={lang} setUiLang={setLang} />
 
-				<main style={main}>
-					<Routes>
-						{/* Home is a real page now */}
-						<Route path='/' element={<HomePage lang={safeLang} />} />
+				{/* This wrapper makes footer stick to the bottom when content is short */}
+				<div style={contentCol}>
+					<main style={main}>
+						<Routes>
+							<Route path='/' element={<HomePage lang={safeLang} />} />
 
-						<Route path='/peaks' element={<PeaksPage lang={safeLang} />} />
-						<Route
-							path='/peaks/:slug'
-							element={<PeakDetailsPage lang={safeLang} />}
-						/>
+							<Route path='/peaks' element={<PeaksPage lang={safeLang} />} />
+							<Route
+								path='/peaks/:slug'
+								element={<PeakDetailsPage lang={safeLang} />}
+							/>
 
-						<Route path='/ranges' element={<RangesPage lang={safeLang} />} />
-						<Route
-							path='/ranges/:slug'
-							element={<RangeDetailsPage lang={safeLang} />}
-						/>
+							<Route path='/ranges' element={<RangesPage lang={safeLang} />} />
+							<Route
+								path='/ranges/:slug'
+								element={<RangeDetailsPage lang={safeLang} />}
+							/>
+							<Route path='/about' element={<AboutPage lang={safeLang} />} />
+						</Routes>
+					</main>
 
-						{/* Optional later:
-                <Route path="*" element={<NotFoundPage lang={safeLang} />} />
-            */}
-					</Routes>
-				</main>
-
-				<Footer lang={safeLang} />
+					<Footer lang={safeLang} />
+				</div>
 			</div>
 		</div>
 	);
 }
-
-const page = {
-	maxWidth: 1140,
-	margin: "0 auto",
-	background: "var(--surface)",
-	border: "1px solid var(--border)",
-	borderRadius: 22,
-	padding: 18,
-	boxShadow: "var(--shadow)",
-};
 
 const layout = {
 	minHeight: "100vh",
@@ -84,6 +73,27 @@ const layout = {
 	background: "transparent",
 	color: "var(--text)",
 	fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+	display: "flex",
+};
+
+const page = {
+	width: "100%",
+	maxWidth: 1140,
+	margin: "0 auto",
+	background: "var(--surface)",
+	border: "1px solid var(--border)",
+	borderRadius: 22,
+	padding: 18,
+	boxShadow: "var(--shadow)",
+	display: "flex",
+	flexDirection: "column",
+	minHeight: "calc(100vh - 36px)", // padding top+bottom in layout (18 + 18)
+};
+
+const contentCol = {
+	display: "flex",
+	flexDirection: "column",
+	flex: 1,
 };
 
 const main = {
@@ -91,4 +101,5 @@ const main = {
 	margin: "0 auto",
 	width: "100%",
 	padding: "10px 0 24px",
+	flex: 1, // <-- this is the key for sticky footer
 };
