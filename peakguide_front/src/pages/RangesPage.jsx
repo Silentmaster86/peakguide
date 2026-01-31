@@ -124,7 +124,7 @@ const headerCard = {
 	border: "1px solid var(--border)",
 	borderRadius: 18,
 	padding: 12,
-	background: "var(--surface)",
+	background: "var(--muted)",
 	boxShadow: "var(--shadow-soft)",
 };
 
@@ -135,8 +135,8 @@ const pill = {
 	padding: "6px 10px",
 	borderRadius: 999,
 	border: "1px solid var(--border)",
-	background: "rgba(31,122,79,0.08)",
-	color: "var(--primary)",
+	background: "rgba(31, 122, 79, 0.93)",
+	color: "var(--btn-bg)",
 	fontWeight: 900,
 	fontSize: 12,
 };
@@ -157,7 +157,7 @@ const card = {
 	border: "1px solid rgba(15,23,42,0.10)",
 	borderRadius: 18,
 	padding: 14,
-	background: "var(--surface-2)",
+	background: "var(--muted)",
 	boxShadow: "var(--shadow-soft)",
 	transition: "transform 140ms ease, box-shadow 140ms ease",
 };
@@ -180,8 +180,8 @@ const rangeBadge = {
 	borderRadius: 999,
 	padding: "6px 10px",
 	fontWeight: 1000,
-	color: "var(--primary)",
-	background: "rgba(31,122,79,0.09)",
+	color: "var(--btn-bg)",
+	background: "rgba(31, 122, 79, 0.93)",
 };
 
 const errorBox = {

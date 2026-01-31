@@ -399,7 +399,7 @@ const crumbs = {
 };
 
 const crumbLink = {
-	color: "var(--text)",
+	color: "var(--btn-bg)",
 	textDecoration: "none",
 	fontWeight: 900,
 	borderBottom: "1px dashed var(--ink)",
@@ -417,7 +417,7 @@ const hero = {
 	borderRadius: 22,
 	padding: 18,
 	background:
-		"radial-gradient(900px 340px at 20% 0%, rgba(31,122,79,0.18), transparent 60%), radial-gradient(700px 340px at 90% 20%, rgba(217,119,6,0.14), transparent 55%), var(--surface)",
+		"radial-gradient(900px 340px at 20% 0%, rgba(31,122,79,0.18), transparent 60%), radial-gradient(700px 340px at 90% 20%, rgba(217,119,6,0.14), transparent 55%), var(--muted)",
 	boxShadow: "var(--shadow-soft)",
 	marginBottom: 14,
 };
@@ -460,7 +460,7 @@ const panel = {
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--surface)",
+	background: "var(--muted)",
 	boxShadow: "var(--shadow-soft)",
 };
 
@@ -488,7 +488,7 @@ const sideStyle = (isMobile) => ({
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--surface)",
+	background: "var(--muted)",
 	boxShadow: "var(--shadow-soft)",
 });
 
@@ -496,6 +496,7 @@ const sideTitle = {
 	fontWeight: 1000,
 	letterSpacing: "-0.2px",
 	marginBottom: 12,
+	overflow: "hidden",
 };
 
 const kv = {
@@ -523,18 +524,16 @@ const coordsRow = {
 
 const cta = {
 	display: "inline-flex",
-	width: "50%",
-	justifyContent: "left",
-	alignItems: "left",
+	width: "100%",
+	justifyContent: "center",
+	alignItems: "center",
 	gap: 8,
-
 	marginTop: 12,
-	margin: "0 25%",
-	padding: "8px 10px",
+	padding: "10px 12px",
 	borderRadius: 12,
 	border: "1px solid var(--btn-border)",
 	background: "color-mix(in srgb, var(--primary) 14%, transparent)",
-	color: "var(--primary)",
+	color: "var(--text)",
 	fontWeight: 1000,
 	fontSize: 13,
 	textDecoration: "none",
@@ -547,13 +546,13 @@ const code = {
 	padding: "5px 8px",
 	borderRadius: 10,
 	border: "1px solid var(--ink)",
-	background: "var(--wash)",
+	background: "var(--btn-bg)",
 	color: "var(--text)",
 };
 
 const miniBtn = {
 	border: "1px solid var(--ink)",
-	background: "var(--btn-bg",
+	background: "var(--btn-bg)",
 	color: "var(--text)",
 	padding: "6px 10px",
 	borderRadius: 12,
@@ -620,7 +619,7 @@ const rangeSection = {
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--surface)",
+	background: "var(--muted)",
 	boxShadow: "var(--shadow-soft)",
 };
 
