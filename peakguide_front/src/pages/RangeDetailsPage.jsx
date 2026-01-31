@@ -192,7 +192,7 @@ const crumbLink = {
 	color: "var(--text)",
 	textDecoration: "none",
 	fontWeight: 900,
-	borderBottom: "1px dashed rgba(15,23,42,0.25)",
+	borderBottom: "1px dashed var(--ink)",
 };
 
 const crumbSep = { opacity: 0.6 };
@@ -239,10 +239,10 @@ const grid = {
 
 const backLink = {
 	textDecoration: "none",
-	color: "var(--text)",
 	fontWeight: 1000,
+	color: "var(--text)",
 	border: "1px solid var(--border)",
-	background: "rgba(255,255,255,0.5)",
+	background: "var(--btn-bg)",
 	padding: "8px 10px",
 	borderRadius: 14,
 	display: "inline-flex",

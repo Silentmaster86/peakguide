@@ -402,7 +402,7 @@ const crumbLink = {
 	color: "var(--text)",
 	textDecoration: "none",
 	fontWeight: 900,
-	borderBottom: "1px dashed rgba(15,23,42,0.25)",
+	borderBottom: "1px dashed var(--ink)",
 };
 
 const crumbSep = { opacity: 0.6 };
@@ -436,7 +436,7 @@ const heroPillMuted = {
 	padding: "8px 12px",
 	borderRadius: 999,
 	border: "1px solid var(--border)",
-	background: "rgba(15,23,42,0.03)",
+	background: "var(--pill-bg)",
 	color: "var(--muted)",
 	fontWeight: 900,
 	fontSize: 12,
@@ -526,14 +526,17 @@ const cta = {
 	width: "100%",
 	justifyContent: "center",
 	alignItems: "center",
-	gap: 10,
-	marginTop: 14,
-	padding: "10px 12px",
-	borderRadius: 14,
-	border: "1px solid rgba(15,23,42,0.10)",
-	background: "rgba(31,122,79,0.10)",
+	gap: 8,
+
+	marginTop: 12,
+	padding: "8px 10px", // mniejsze
+	borderRadius: 12, // trochę mniejsze
+	border: "1px solid var(--ink)",
+	background: "var(--pill-bg)",
+
 	color: "var(--primary)",
 	fontWeight: 1000,
+	fontSize: 13,
 	textDecoration: "none",
 };
 
@@ -543,13 +546,15 @@ const code = {
 	fontSize: 12,
 	padding: "5px 8px",
 	borderRadius: 10,
-	border: "1px solid rgba(15,23,42,0.10)",
-	background: "rgba(15,23,42,0.04)",
+	border: "1px solid var(--ink)",
+	background: "var(--wash)",
+	color: "var(--text)",
 };
 
 const miniBtn = {
-	border: "1px solid rgba(15,23,42,0.12)",
-	background: "rgba(255,255,255,0.85)",
+	border: "1px solid var(--ink)",
+	background: "var(--wash)",
+	color: "var(--text)",
 	padding: "6px 10px",
 	borderRadius: 12,
 	cursor: "pointer",
@@ -562,7 +567,7 @@ const backLink = {
 	color: "var(--text)",
 	fontWeight: 1000,
 	border: "1px solid var(--border)",
-	background: "rgba(255,255,255,0.5)",
+	background: "var(--btn-bg)",
 	padding: "8px 10px",
 	borderRadius: 14,
 	display: "inline-flex",
@@ -634,7 +639,7 @@ const rangeGrid = {
 };
 
 const miniCard = {
-	border: "1px solid rgba(15,23,42,0.10)",
+	border: "1px solid var(--ink)",
 	borderRadius: 18,
 	padding: 12,
 	background: "var(--surface-2)",
