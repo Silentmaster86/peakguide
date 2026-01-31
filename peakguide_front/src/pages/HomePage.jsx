@@ -298,8 +298,7 @@ const styles = {
 		border: "1px solid var(--border)",
 		borderRadius: 22,
 		padding: 16,
-		background:
-			"radial-gradient(900px 340px at 20% 0%, rgba(31,122,79,0.10), transparent 60%), radial-gradient(700px 340px at 90% 20%, rgba(217,119,6,0.08), transparent 55%), var(--surface)",
+		background: "rgb(255 255 255 / 70%)",
 		boxShadow: "var(--shadow-soft)",
 	},
 

@@ -82,7 +82,7 @@ const styles = {
 		position: "absolute",
 		top: "calc(100% + 8px)",
 		borderRadius: 14,
-		border: "1px solid var(--border)",
+		border: "1px solid var(--btn-border)",
 		background: "var(--surface)",
 		boxShadow: "var(--shadow-soft)",
 		overflow: "hidden",
@@ -121,12 +121,18 @@ const styles = {
 
 	badge: {
 		minWidth: 44,
+		height: 34,
+		display: "grid",
+		placeItems: "center",
 		textAlign: "center",
 		fontWeight: 1000,
-		padding: "6px 8px",
+		padding: "0 8px",
 		borderRadius: 10,
-		border: "1px solid rgba(15,23,42,0.14)",
-		background: "rgba(255,255,255,0.55)",
+		background: "var(--btn-bg)",
+		border: "1px solid var(--btn-border)",
+		color: "var(--text)",
+		lineHeight: 1,
+		fontSize: 16, // <-- ważne dla flag
 	},
 
 	sub: {

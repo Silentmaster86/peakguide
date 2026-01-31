@@ -10,9 +10,9 @@ const OPTIONS = [
 ];
 
 export default function LanguageSwitcherDropdown({
-	lang = "pl",
+	lang = "pl", // current lang
 	setLang,
-	compact = false,
+	compact = false, // compact mode (show less text)
 }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
 	const { open, setOpen, wrapRef } = useDropdown();
@@ -20,19 +20,11 @@ export default function LanguageSwitcherDropdown({
 	const current = OPTIONS.find((o) => o.value === lang) || OPTIONS[0];
 
 	const items = OPTIONS.map((o) => ({
-		key: o.value,
-		// pokaż flagę + nazwę w menu
-		label: (
-			<span style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-				<span aria-hidden='true' style={{ fontSize: 16, lineHeight: 1 }}>
-					{o.flag}
-				</span>
-				<span style={{ fontWeight: 900 }}>{o.name}</span>
-			</span>
-		),
-		// jeśli DropdownMenu wspiera badge (u Ciebie chyba tak)
-		badge: o.label,
-		active: o.value === lang,
+		key: o.value, // value to set
+		label: o.name, // full name in menu
+		badge: o.flag, // flag icon in menu
+		sub: o.label, // short label in menu
+		active: o.value === lang, // highlight current lang
 	}));
 
 	return (
@@ -49,11 +41,7 @@ export default function LanguageSwitcherDropdown({
 					<span aria-hidden='true' style={{ fontSize: 16, lineHeight: 1 }}>
 						{current.flag}
 					</span>
-
-					{/* zawsze pokazuj skrót PL/EN... */}
 					<span style={styles.btnText}>{current.label}</span>
-
-					{/* nie-compact: pokaż też pełną nazwę */}
 					{!compact ? (
 						<span style={{ ...styles.btnText, opacity: 0.8 }}>
 							{current.name}
@@ -102,10 +90,10 @@ const styles = {
 		height: "var(--nav-pill-h)",
 		padding: "0 var(--nav-pill-px)",
 		borderRadius: 999,
-		border: "1px solid var(--border)",
+		border: "1px solid var(--btn-border)",
 		fontSize: "var(--nav-pill-fs)",
-		background: "var(--menu-bg)",
-		color: "var(--menu-text)",
+		background: "var(--btn-bg)",
+		color: "var(--text)",
 		boxShadow: "var(--shadow-soft)",
 		fontWeight: 900,
 		cursor: "pointer",

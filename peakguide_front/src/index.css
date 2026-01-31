@@ -1,3 +1,17 @@
+/* ---- base reset (important for layout) ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
 /* =========================
    THEME TOKENS (default: light)
    ========================= */
@@ -24,6 +38,15 @@
   --btn-bg: rgba(255, 255, 255, 0.85);
   /* light button background */
 
+  --nav-pill-h: 36px;
+  /* height of nav pills */
+  --nav-pill-px: 12px;
+  /* horizontal padding of nav pills */
+  --nav-pill-fs: 13px;
+  /* font size of nav pills */
+  --nav-gap: 10px;
+  /* gap between nav pills */
+
 
   /* overlay used for body background */
   --bg-overlay-from: rgba(255, 255, 255, 0.62);
@@ -44,17 +67,20 @@ html[data-theme="dark"] {
   --surface-2: rgba(15, 23, 42, 0.50);
   --border: rgba(226, 232, 240, 0.14);
   --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
-  --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
-  --text: rgb(255, 255, 255);
+  --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.549);
+  --text: rgb(33, 32, 32);
   --menu-bg: rgba(15, 23, 42, 0.92);
-  --menu-text: rgba(226, 232, 240, 0.92);
+  --menu-text: rgba(226, 232, 240, 0.344);
   --muted: rgba(226, 232, 240, 0.70);
   --primary: rgb(34, 197, 94);
 
   --ink: rgba(226, 232, 240, 0.14);
   --wash: rgba(226, 232, 240, 0.06);
   --pill-bg: rgba(226, 232, 240, 0.06);
-  --btn-bg: rgba(15, 23, 42, 0.55);
+  --btn-bg: rgba(255, 255, 255, 0.85);
+  --card-bg: var(--surface);
+  --chip-bg: var(--pill-bg);
+  --btn-border: var(--ink);
 
 
   --bg-overlay-from: rgba(2, 6, 23, 0.62);
@@ -72,16 +98,19 @@ html[data-theme="dark"] {
     --border: rgba(226, 232, 240, 0.14);
     --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
     --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
-    --text: rgba(226, 232, 240, 0.95);
+    --text: rgb(33, 32, 32);
     --menu-bg: rgba(15, 23, 42, 0.92);
-    --menu-text: rgba(226, 232, 240, 0.92);
+    --menu-text: rgba(157, 161, 166, 0.92);
     --muted: rgba(226, 232, 240, 0.70);
     --primary: rgb(34, 197, 94);
 
     --ink: rgba(226, 232, 240, 0.14);
     --wash: rgba(226, 232, 240, 0.06);
     --pill-bg: rgba(226, 232, 240, 0.06);
-    --btn-bg: rgba(15, 23, 42, 0.55);
+    --btn-bg: rgba(247, 247, 247, 0.83);
+    --card-bg: var(--surface);
+    --chip-bg: var(--pill-bg);
+    --btn-border: var(--ink);
 
     --bg-overlay-from: rgba(2, 6, 23, 0.62);
     --bg-overlay-to: rgba(2, 6, 23, 0.70);
@@ -101,6 +130,17 @@ body {
 }
 
 body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji",
+    sans-serif;
+
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
     var(--bg);
@@ -147,15 +187,9 @@ html[data-lang="zh"] body {
 }
 
 /* =========================
-   UTIL
+    RESPONSIVE TOKENS
    ========================= */
 
-:root {
-  --nav-pill-h: 36px;
-  --nav-pill-px: 12px;
-  --nav-pill-fs: 13px;
-  --nav-gap: 10px;
-}
 
 @media (max-width: 1024px) {
   :root {
@@ -172,6 +206,13 @@ html[data-lang="zh"] body {
     --nav-pill-px: 10px;
     --nav-pill-fs: 12px;
     --nav-gap: 8px;
+
+    html[data-lang="pl"] body,
+    html[data-lang="en"] body,
+    html[data-lang="ua"] body,
+    html[data-lang="zh"] body {
+      background-attachment: scroll;
+    }
   }
 }
 

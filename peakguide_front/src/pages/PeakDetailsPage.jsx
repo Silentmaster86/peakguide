@@ -523,17 +523,17 @@ const coordsRow = {
 
 const cta = {
 	display: "inline-flex",
-	width: "100%",
-	justifyContent: "center",
-	alignItems: "center",
+	width: "50%",
+	justifyContent: "left",
+	alignItems: "left",
 	gap: 8,
 
 	marginTop: 12,
-	padding: "8px 10px", // mniejsze
-	borderRadius: 12, // trochę mniejsze
-	border: "1px solid var(--ink)",
-	background: "var(--pill-bg)",
-
+	margin: "0 25%",
+	padding: "8px 10px",
+	borderRadius: 12,
+	border: "1px solid var(--btn-border)",
+	background: "color-mix(in srgb, var(--primary) 14%, transparent)",
 	color: "var(--primary)",
 	fontWeight: 1000,
 	fontSize: 13,
@@ -553,7 +553,7 @@ const code = {
 
 const miniBtn = {
 	border: "1px solid var(--ink)",
-	background: "var(--wash)",
+	background: "var(--btn-bg",
 	color: "var(--text)",
 	padding: "6px 10px",
 	borderRadius: 12,
