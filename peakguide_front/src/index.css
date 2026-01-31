@@ -1,15 +1,98 @@
+/* =========================
+   THEME TOKENS (default: light)
+   ========================= */
+
 :root {
   --bg: #e2eaf3;
-  --surface: #ffffffb0;
-  --surface-2: #f1f5f947;
+  --surface: rgba(255, 255, 255, 0.69);
+  --surface-2: rgba(241, 245, 249, 0.28);
   --border: rgba(15, 23, 42, 0.16);
   --shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
   --shadow-soft: 0 10px 22px rgba(15, 23, 42, 0.14);
   --text: #0f172a;
   --muted: rgba(15, 23, 42, 0.70);
   --primary: rgb(31, 122, 79);
+  --menu-bg: rgba(255, 255, 255, 0.92);
+  --menu-text: var(--text);
 
+  --ink: rgba(15, 23, 42, 0.10);
+  /* default overlay ink */
+  --wash: rgba(15, 23, 42, 0.04);
+  /* delicate overlay wash */
+  --pill-bg: rgba(15, 23, 42, 0.03);
+  /* pill background */
+  --btn-bg: rgba(255, 255, 255, 0.85);
+  /* light button background */
+
+
+  /* overlay used for body background */
+  --bg-overlay-from: rgba(255, 255, 255, 0.62);
+  --bg-overlay-to: rgba(255, 255, 255, 0.65);
+
+  color-scheme: light;
 }
+
+/* Explicit light mode (optional but nice to have) */
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Explicit dark mode */
+html[data-theme="dark"] {
+  --bg: #0b1220;
+  --surface: rgba(15, 23, 42, 0.72);
+  --surface-2: rgba(15, 23, 42, 0.50);
+  --border: rgba(226, 232, 240, 0.14);
+  --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
+  --text: rgb(255, 255, 255);
+  --menu-bg: rgba(15, 23, 42, 0.92);
+  --menu-text: rgba(226, 232, 240, 0.92);
+  --muted: rgba(226, 232, 240, 0.70);
+  --primary: rgb(34, 197, 94);
+
+  --ink: rgba(226, 232, 240, 0.14);
+  --wash: rgba(226, 232, 240, 0.06);
+  --pill-bg: rgba(226, 232, 240, 0.06);
+  --btn-bg: rgba(15, 23, 42, 0.55);
+
+
+  --bg-overlay-from: rgba(2, 6, 23, 0.62);
+  --bg-overlay-to: rgba(2, 6, 23, 0.70);
+
+  color-scheme: dark;
+}
+
+/* System dark when no explicit data-theme */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --bg: #0b1220;
+    --surface: rgba(15, 23, 42, 0.72);
+    --surface-2: rgba(15, 23, 42, 0.50);
+    --border: rgba(226, 232, 240, 0.14);
+    --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+    --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
+    --text: rgba(226, 232, 240, 0.95);
+    --menu-bg: rgba(15, 23, 42, 0.92);
+    --menu-text: rgba(226, 232, 240, 0.92);
+    --muted: rgba(226, 232, 240, 0.70);
+    --primary: rgb(34, 197, 94);
+
+    --ink: rgba(226, 232, 240, 0.14);
+    --wash: rgba(226, 232, 240, 0.06);
+    --pill-bg: rgba(226, 232, 240, 0.06);
+    --btn-bg: rgba(15, 23, 42, 0.55);
+
+    --bg-overlay-from: rgba(2, 6, 23, 0.62);
+    --bg-overlay-to: rgba(2, 6, 23, 0.70);
+
+    color-scheme: dark;
+  }
+}
+
+/* =========================
+   BASE
+   ========================= */
 
 html,
 body {
@@ -17,50 +100,88 @@ body {
   color: var(--text);
 }
 
-/* DEFAULT */
 body {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.644)),
+    linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
     var(--bg);
-  transition: background-image 300ms ease;
-}
-
-/* PL */
-html[data-lang="pl"] body {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.644)),
-    url("/bg/bg_pl.png") center / cover no-repeat fixed;
-
-}
-
-/* EN */
-html[data-lang="en"] body {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.644)),
-    url("/bg/bg_en.png") center / cover no-repeat fixed;
-}
-
-/* UA */
-html[data-lang="ua"] body {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.644)),
-    url("/bg/bg_ua.png") center / cover no-repeat fixed;
-}
-
-/* ZH */
-html[data-lang="zh"] body {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.644)),
-    url("/bg/bg_zh.png") center / cover no-repeat fixed;
-}
-
-body {
+  transition: background-image 300ms ease, color 200ms ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   color: var(--primary);
+}
+
+/* =========================
+   LANGUAGE BACKGROUNDS
+   (keeps your images, overlay adapts to theme)
+   ========================= */
+
+/* PL */
+html[data-lang="pl"] body {
+  background:
+    linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
+    url("/bg/bg_pl.png") center / cover no-repeat fixed;
+}
+
+/* EN */
+html[data-lang="en"] body {
+  background:
+    linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
+    url("/bg/bg_en.png") center / cover no-repeat fixed;
+}
+
+/* UA */
+html[data-lang="ua"] body {
+  background:
+    linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
+    url("/bg/bg_ua.png") center / cover no-repeat fixed;
+}
+
+/* ZH */
+html[data-lang="zh"] body {
+  background:
+    linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
+    url("/bg/bg_zh.png") center / cover no-repeat fixed;
+}
+
+/* =========================
+   UTIL
+   ========================= */
+
+:root {
+  --nav-pill-h: 36px;
+  --nav-pill-px: 12px;
+  --nav-pill-fs: 13px;
+  --nav-gap: 10px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --nav-pill-h: 34px;
+    --nav-pill-px: 10px;
+    --nav-pill-fs: 12.5px;
+    --nav-gap: 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --nav-pill-h: 32px;
+    --nav-pill-px: 10px;
+    --nav-pill-fs: 12px;
+    --nav-gap: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --nav-pill-h: 30px;
+    --nav-pill-px: 9px;
+    --nav-pill-fs: 11.5px;
+    --nav-gap: 7px;
+  }
 }
 
 @keyframes shimmer {
