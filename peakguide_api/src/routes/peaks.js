@@ -4,10 +4,11 @@ import { db } from "../db.js";
 export const peaksRouter = Router();
 
 peaksRouter.get("/peaks", async (req, res) => {
-  const lang = (req.query.lang || "pl").toLowerCase();
+	try {
+		const lang = (req.query.lang || "pl").toLowerCase();
 
-  const { rows } = await db.query(
-    `
+		const { rows } = await db.query(
+			`
     SELECT
       p.slug,
       pi.name AS peak_name,
@@ -24,18 +25,23 @@ peaksRouter.get("/peaks", async (req, res) => {
     -- no active filter for now
     ORDER BY p.elevation_m DESC;
     `,
-    [lang]
-  );
+			[lang],
+		);
 
-  res.json(rows);
+		res.json(rows);
+	} catch (err) {
+		console.error("GET /peaks failed:", err);
+		res.status(500).json({ error: "Internal server error" });
+	}
 });
 
 peaksRouter.get("/peaks/:slug", async (req, res) => {
-  const lang = (req.query.lang || "pl").toLowerCase();
-  const { slug } = req.params;
+	try {
+		const lang = (req.query.lang || "pl").toLowerCase();
+		const { slug } = req.params;
 
-  const { rows } = await db.query(
-    `
+		const { rows } = await db.query(
+			`
     SELECT
       p.slug,
       pi.name,
@@ -55,9 +61,13 @@ peaksRouter.get("/peaks/:slug", async (req, res) => {
       ON ri.range_id = r.id AND ri.lang = $1
     WHERE p.slug = $2;
     `,
-    [lang, slug]
-  );
+			[lang, slug],
+		);
 
-  if (!rows.length) return res.status(404).json({ error: "Peak not found" });
-  res.json(rows[0]);
+		if (!rows.length) return res.status(404).json({ error: "Peak not found" });
+		res.json(rows[0]);
+	} catch (err) {
+		console.error("GET /peaks/:slug failed:", err);
+		res.status(500).json({ error: "Internal server error" });
+	}
 });
