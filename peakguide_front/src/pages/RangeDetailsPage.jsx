@@ -189,7 +189,7 @@ const crumbsStyle = {
 };
 
 const crumbLink = {
-	color: "var(--btn-bg)",
+	color: "var(--muted)",
 	textDecoration: "none",
 	fontWeight: 900,
 	borderBottom: "1px dashed var(--ink)",
@@ -202,7 +202,7 @@ const headerCard = {
 	border: "1px solid var(--btn-bg)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--muted)",
+	background: "var(--btn-bg)",
 	boxShadow: "var(--shadow-soft)",
 	marginBottom: 14,
 };
@@ -221,7 +221,7 @@ const pill = {
 };
 
 const title = { margin: "10px 0 0", fontSize: 30, letterSpacing: "-0.6px" };
-const sub = { marginTop: 6, color: "var(--muted)" };
+const sub = { marginTop: 6, color: "var(--text)" };
 
 const card = {
 	border: "1px solid var(--border)",

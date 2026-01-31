@@ -79,6 +79,8 @@ function getLabels(lang) {
 	return dict[lang] || dict.pl;
 }
 
+/* ---------- styles ---------- */
+
 const styles = {
 	wrap: { position: "relative" },
 
@@ -90,14 +92,13 @@ const styles = {
 		height: "var(--nav-pill-h)",
 		padding: "0 var(--nav-pill-px)",
 		borderRadius: 999,
-		border: "1px solid var(--btn-border)",
+		border: "1px solid var(--border)",
 		fontSize: "var(--nav-pill-fs)",
-		background: "var(--btn-bg)",
+		background: "var(--tollbar-bg)",
 		color: "var(--text)",
 		boxShadow: "var(--shadow-soft)",
 		fontWeight: 900,
 		cursor: "pointer",
-		outline: "none",
 	},
 
 	btnText: { fontSize: 13, opacity: 0.9 },

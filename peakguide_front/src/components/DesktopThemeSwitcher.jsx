@@ -158,8 +158,8 @@ const styles = {
 		borderRadius: 999,
 		border: "1px solid var(--border)",
 		fontSize: "var(--nav-pill-fs)",
-		background: "var(--menu-bg)",
-		color: "var(--menu-text)",
+		background: "var(--tollbar-bg)",
+		color: "var(--text)",
 		boxShadow: "var(--shadow-soft)",
 		fontWeight: 900,
 		cursor: "pointer",
@@ -174,7 +174,7 @@ const styles = {
 		minWidth: 180,
 		borderRadius: 14,
 		border: "1px solid var(--border)",
-		background: "var(--surface)",
+		background: "var(--btn-bg)",
 		boxShadow: "var(--shadow-soft)",
 		overflow: "hidden",
 		backdropFilter: "blur(10px)",
@@ -192,7 +192,7 @@ const styles = {
 		border: "1px solid transparent",
 		background: "transparent",
 		cursor: "pointer",
-		color: "var(--text)", // <-- ważne: było var(--menu-text)
+		color: "var(--text)",
 	},
 
 	itemActive: {

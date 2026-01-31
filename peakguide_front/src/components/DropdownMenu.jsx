@@ -83,10 +83,10 @@ const styles = {
 		top: "calc(100% + 8px)",
 		borderRadius: 14,
 		border: "1px solid var(--btn-border)",
-		background: "var(--surface)",
+		background: "var(--btn-bg)",
 		boxShadow: "var(--shadow-soft)",
 		overflow: "hidden",
-		backdropFilter: "blur(12px)",
+		backdropFilter: "blur(10px)",
 		padding: 6,
 		zIndex: 50,
 	},
@@ -111,6 +111,7 @@ const styles = {
 	itemActive: {
 		border: "1px solid rgba(31,122,79,0.22)",
 		background: "rgba(31,122,79,0.08)",
+		backdropFilter: "blur(50px)",
 	},
 
 	itemDisabled: {

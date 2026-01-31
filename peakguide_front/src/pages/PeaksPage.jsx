@@ -129,7 +129,8 @@ const toolbarBox = {
 	border: "1px solid var(--border)",
 	borderRadius: 18,
 	padding: 12,
-	background: "var(--menu-text)",
+	background: "var(--menu-bg)",
+	color: "var(--tollbar-text)",
 	boxShadow: "var(--shadow-soft)",
 };
 

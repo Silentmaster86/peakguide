@@ -399,7 +399,7 @@ const crumbs = {
 };
 
 const crumbLink = {
-	color: "var(--btn-bg)",
+	color: "var(--muted)",
 	textDecoration: "none",
 	fontWeight: 900,
 	borderBottom: "1px dashed var(--ink)",
@@ -416,8 +416,7 @@ const hero = {
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 18,
-	background:
-		"radial-gradient(900px 340px at 20% 0%, rgba(31,122,79,0.18), transparent 60%), radial-gradient(700px 340px at 90% 20%, rgba(217,119,6,0.14), transparent 55%), var(--muted)",
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 	marginBottom: 14,
 };
@@ -460,7 +459,7 @@ const panel = {
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--muted)",
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 };
 
@@ -478,7 +477,7 @@ const textBlock = {
 
 const muted = {
 	marginTop: 10,
-	color: "var(--muted)",
+	color: "var(--text)",
 };
 
 const sideStyle = (isMobile) => ({
@@ -488,7 +487,7 @@ const sideStyle = (isMobile) => ({
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--muted)",
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 });
 
@@ -619,7 +618,7 @@ const rangeSection = {
 	border: "1px solid var(--border)",
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--muted)",
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 };
 

@@ -28,7 +28,6 @@ body {
   --primary: rgb(31, 122, 79);
   --menu-bg: rgba(255, 255, 255, 0.92);
   --menu-text: var(--text);
-
   --ink: rgba(15, 23, 42, 0.10);
   /* default overlay ink */
   --wash: rgba(15, 23, 42, 0.04);
@@ -37,7 +36,7 @@ body {
   /* pill background */
   --btn-bg: rgba(255, 255, 255, 0.85);
   /* light button background */
-
+  --tollbar-text: var(--text);
   --nav-pill-h: 36px;
   /* height of nav pills */
   --nav-pill-px: 12px;
@@ -69,10 +68,11 @@ html[data-theme="dark"] {
   --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
   --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.549);
   --text: rgb(33, 32, 32);
-  --menu-bg: rgba(15, 23, 42, 0.92);
+  --menu-bg: rgba(255, 255, 255, 0.92);
   --menu-text: rgba(226, 232, 240, 0.344);
   --muted: rgba(226, 232, 240, 0.70);
   --primary: rgb(34, 197, 94);
+  --tollbar-text: rgba(255, 255, 255, 0.85);
 
   --ink: rgba(226, 232, 240, 0.14);
   --wash: rgba(226, 232, 240, 0.06);
@@ -99,10 +99,11 @@ html[data-theme="dark"] {
     --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
     --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
     --text: rgb(33, 32, 32);
-    --menu-bg: rgba(15, 23, 42, 0.92);
+    --menu-bg: rgba(255, 255, 255, 0.92);
     --menu-text: rgba(157, 161, 166, 0.92);
     --muted: rgba(226, 232, 240, 0.70);
     --primary: rgb(34, 197, 94);
+    --tollbar-text: rgba(255, 255, 255, 0.85);
 
     --ink: rgba(226, 232, 240, 0.14);
     --wash: rgba(226, 232, 240, 0.06);

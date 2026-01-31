@@ -124,7 +124,7 @@ const headerCard = {
 	border: "1px solid var(--border)",
 	borderRadius: 18,
 	padding: 12,
-	background: "var(--muted)",
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 };
 
@@ -143,7 +143,7 @@ const pill = {
 
 const sub = {
 	marginTop: 8,
-	color: "var(--muted)",
+	color: "var(--text)",
 	fontSize: 13,
 };
 
@@ -157,7 +157,7 @@ const card = {
 	border: "1px solid rgba(15,23,42,0.10)",
 	borderRadius: 18,
 	padding: 14,
-	background: "var(--muted)",
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 	transition: "transform 140ms ease, box-shadow 140ms ease",
 };
