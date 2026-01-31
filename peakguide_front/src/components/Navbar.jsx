@@ -1,56 +1,108 @@
-import { NavLink, useLocation } from "react-router-dom";
-import LanguageSwitcher from "./LanguageSwitcher";
+import { NavLink, Link, useLocation } from "react-router-dom";
+import DesktopThemeSwitcher from "./DesktopThemeSwitcher";
+import LanguageSwitcherDropdown from "./LanguageSwitcherDropdown";
+import NavDropdown from "./NavDropdown";
+import { useMedia } from "../hooks/useMedia";
 
 export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 	const t = getLabels(lang);
 	const { pathname } = useLocation();
 	const isHome = pathname === "/";
 
+	// Breakpoints
+	const isCompact = useMedia("(max-width: 959px)"); // tablet & down
+	const isMobile = useMedia("(max-width: 759px)"); // mobile & down
+
+	const homeSections = [
+		{ to: "/#why", label: t.why },
+		{ to: "/#how", label: t.how },
+		{ to: "/#featured", label: t.featured },
+		{ to: "/#faq", label: t.faq },
+	];
+
+	// What goes into "More"
+	const moreItems = [
+		...(isHome && (isCompact || isMobile)
+			? [
+					{ key: "s1", href: "/#why", label: t.why, sub: t.moreHome },
+					{ key: "s2", href: "/#how", label: t.how, sub: t.moreHome },
+					{ key: "s3", href: "/#featured", label: t.featured, sub: t.moreHome },
+					{ key: "s4", href: "/#faq", label: t.faq, sub: t.moreHome },
+					{ key: "sep-home", type: "sep" },
+				]
+			: []),
+
+		{
+			key: "routes",
+			label: t.routes,
+			disabled: true,
+			pill: t.soon,
+			tip: t.soonTip,
+		},
+		{
+			key: "trailheads",
+			label: t.trailheads,
+			disabled: true,
+			pill: t.soon,
+			tip: t.soonTip,
+		},
+	];
+
 	return (
-		<nav style={nav} aria-label='Primary'>
-			<div style={left}>
-				<span style={brandBadge}>⛰️</span>
+		<nav id='main-nav' style={styles.nav} aria-label='Primary'>
+			<div style={styles.left}>
+				<span style={styles.brandBadge}>⛰️</span>
 				<div style={{ lineHeight: 1.1 }}>
-					<div style={brandTitle}>PeakGuide</div>
-					<div style={brandSub}>{t.tagline}</div>
+					<div style={styles.brandTitle}>PeakGuide</div>
+					<div style={styles.brandSub}>{t.tagline}</div>
 				</div>
 			</div>
 
-			<div style={center}>
+			<div style={styles.center}>
 				{!isHome && (
-					<NavLink to='/' style={navLink}>
+					<NavLink to='/' style={styles.navLink}>
 						{t.home}
 					</NavLink>
 				)}
 
-				<NavLink to='/peaks' style={navLink}>
+				<NavLink to='/peaks' style={styles.navLink}>
 					{t.peaks}
 				</NavLink>
 
-				<NavLink to='/ranges' style={navLink}>
+				<NavLink to='/ranges' style={styles.navLink}>
 					{t.ranges}
 				</NavLink>
 
-				<span style={disabledLink} title={t.soonTip}>
-					{t.routes}
-					<span style={soonPill}>{t.soon}</span>
-				</span>
+				{/* Desktop: show home sections inline */}
+				{isHome && !isCompact && (
+					<>
+						<span style={styles.sep} aria-hidden='true' />
+						{homeSections.map((i) => (
+							<Link key={i.to} to={i.to} style={styles.hashLink}>
+								{i.label}
+							</Link>
+						))}
+					</>
+				)}
 
-				<span style={disabledLink} title={t.soonTip}>
-					{t.trailheads}
-					<span style={soonPill}>{t.soon}</span>
-				</span>
+				{/* Always: More (on desktop it holds only "soon"; on compact it also holds home sections) */}
+				<NavDropdown label={t.more} items={moreItems} />
 			</div>
 
-			<div style={right}>
-				{/* Keep UI choice (pl/en/ua/zh) even if DB fallback happens */}
-				<LanguageSwitcher lang={uiLang} setLang={setUiLang} />
+			<div style={styles.right}>
+				{/* Desktop-only text, compact shows icons only */}
+				<DesktopThemeSwitcher lang={uiLang} compact={isMobile} />
+				<LanguageSwitcherDropdown
+					lang={uiLang}
+					setLang={setUiLang}
+					compact={isMobile}
+				/>
 			</div>
 		</nav>
 	);
 }
 
-/* ----------------------------- labels ------------------------------ */
+/* ---------------- labels ---------------- */
 
 function getLabels(lang) {
 	const dict = {
@@ -63,6 +115,13 @@ function getLabels(lang) {
 			trailheads: "Punkty startowe",
 			soon: "wkrótce",
 			soonTip: "Ta sekcja będzie dostępna wkrótce.",
+			more: "Więcej",
+
+			why: "Dlaczego",
+			how: "Jak działa",
+			featured: "Polecane",
+			faq: "FAQ",
+			moreHome: "Sekcja na stronie głównej",
 		},
 		en: {
 			tagline: "Crown of Polish Mountains & more",
@@ -73,6 +132,13 @@ function getLabels(lang) {
 			trailheads: "Trailheads",
 			soon: "soon",
 			soonTip: "This section is coming soon.",
+			more: "More",
+
+			why: "Why",
+			how: "How it works",
+			featured: "Featured",
+			faq: "FAQ",
+			moreHome: "Home section",
 		},
 		ua: {
 			tagline: "Корона польських гір і не тільки",
@@ -83,6 +149,13 @@ function getLabels(lang) {
 			trailheads: "Стартові точки",
 			soon: "скоро",
 			soonTip: "Цей розділ скоро буде доступний.",
+			more: "Більше",
+
+			why: "Чому",
+			how: "Як працює",
+			featured: "Вибране",
+			faq: "FAQ",
+			moreHome: "Розділ головної",
 		},
 		zh: {
 			tagline: "波兰山冠及更多",
@@ -93,100 +166,105 @@ function getLabels(lang) {
 			trailheads: "起点",
 			soon: "即将",
 			soonTip: "该功能即将上线。",
+			more: "更多",
+
+			why: "为什么",
+			how: "如何使用",
+			featured: "精选",
+			faq: "FAQ",
+			moreHome: "主页区块",
 		},
 	};
 
 	return dict[lang] || dict.pl;
 }
 
-/* ----------------------------- styles ------------------------------ */
+/* ---------------- styles ---------------- */
 
-const nav = {
-	display: "grid",
-	gridTemplateColumns: "1fr auto 1fr",
-	alignItems: "center",
-	gap: 12,
-	border: "1px solid var(--border)",
-	borderRadius: 18,
-	padding: 12,
-	background: "var(--surface-2)",
-	boxShadow: "var(--shadow-soft)",
-	marginBottom: 14,
-};
+const styles = {
+	nav: {
+		position: "sticky",
+		top: 0,
+		zIndex: 100,
+		backdropFilter: "blur(12px)",
+		WebkitBackdropFilter: "blur(12px)",
+		display: "grid",
+		gridTemplateColumns: "1fr auto 1fr",
+		alignItems: "center",
+		gap: 12,
+		border: "1px solid var(--border)",
+		borderRadius: 18,
+		padding: 12,
+		background: "rgba(241,245,249,0.65)",
+		boxShadow: "var(--shadow-soft)",
+		marginBottom: 14,
+	},
 
-const left = {
-	display: "flex",
-	alignItems: "center",
-	gap: 10,
-	minWidth: 220,
-};
+	left: { display: "flex", alignItems: "center", gap: 10, minWidth: 220 },
 
-const center = {
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
-	gap: 10,
-	flexWrap: "wrap",
-};
+	center: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		gap: "var(--nav-gap)",
+		flexWrap: "wrap",
+		maxWidth: 860,
+		overflow: "visible",
+		minWidth: 0, // important for text truncation
+	},
 
-const right = {
-	display: "flex",
-	justifyContent: "flex-end",
-};
+	right: {
+		display: "flex",
+		justifyContent: "flex-end",
+		gap: 10,
+		alignItems: "center",
+	},
 
-const brandBadge = {
-	width: 34,
-	height: 34,
-	borderRadius: 12,
-	display: "grid",
-	placeItems: "center",
-	border: "1px solid rgba(31,122,79,0.28)",
-	background: "rgba(31,122,79,0.10)",
-	fontWeight: 1000,
-};
+	brandBadge: {
+		width: 34,
+		height: 34,
+		borderRadius: 12,
+		display: "grid",
+		placeItems: "center",
+		border: "1px solid rgba(31,122,79,0.28)",
+		background: "rgba(31,122,79,0.10)",
+		fontWeight: 1000,
+	},
 
-const brandTitle = {
-	fontWeight: 1000,
-	letterSpacing: "-0.3px",
-};
+	brandTitle: { fontWeight: 1000, letterSpacing: "-0.3px" },
+	brandSub: { fontSize: 12, color: "var(--muted)", marginTop: 2 },
 
-const brandSub = {
-	fontSize: 12,
-	color: "var(--muted)",
-	marginTop: 2,
-};
+	navLink: ({ isActive }) => ({
+		textDecoration: "none",
+		fontWeight: 1000,
+		height: "var(--nav-pill-h)",
+		padding: `0 var(--nav-pill-px)`,
+		display: "inline-flex",
+		alignItems: "center",
+		borderRadius: 999,
+		border: "1px solid var(--border)",
+		fontSize: "var(--nav-pill-fs)",
+		background: isActive ? "rgba(31,122,79,0.10)" : "rgba(255,255,255,0.55)",
+		color: isActive ? "var(--primary)" : "var(--text)",
+		boxShadow: "var(--shadow-soft)",
+	}),
 
-const navLink = ({ isActive }) => ({
-	textDecoration: "none",
-	fontWeight: 1000,
-	padding: "10px 12px",
-	borderRadius: 999,
-	border: "1px solid var(--border)",
-	background: isActive ? "rgba(31,122,79,0.10)" : "rgba(255,255,255,0.55)",
-	color: isActive ? "var(--primary)" : "var(--text)",
-	boxShadow: "var(--shadow-soft)",
-});
+	hashLink: {
+		textDecoration: "none",
+		fontWeight: 1000,
+		padding: "10px 12px",
+		borderRadius: 999,
+		border: "1px solid var(--border)",
+		background: "rgba(255,255,255,0.55)",
+		color: "var(--text)",
+		boxShadow: "var(--shadow-soft)",
+	},
 
-const disabledLink = {
-	display: "inline-flex",
-	alignItems: "center",
-	gap: 8,
-	padding: "10px 12px",
-	borderRadius: 999,
-	border: "1px dashed rgba(15,23,42,0.22)",
-	background: "rgba(255,255,255,0.45)",
-	color: "var(--muted)",
-	fontWeight: 1000,
-	cursor: "not-allowed",
-	userSelect: "none",
-};
-
-const soonPill = {
-	fontSize: 11,
-	fontWeight: 1000,
-	padding: "4px 8px",
-	borderRadius: 999,
-	border: "1px solid rgba(217,119,6,0.25)",
-	background: "rgba(217,119,6,0.10)",
-	color: "rgba(217,119,6,0.95)",
+	sep: {
+		width: 1,
+		height: 26,
+		borderRadius: 99,
+		background: "rgba(15,23,42,0.14)",
+		margin: "0 2px",
+	},
 };
