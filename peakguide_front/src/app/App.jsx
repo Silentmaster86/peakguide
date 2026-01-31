@@ -68,8 +68,8 @@ export default function App() {
 }
 
 const layout = {
-	minHeight: "100vh",
-	padding: 18,
+	minHeight: "95vh",
+	padding: 14,
 	background: "transparent",
 	color: "var(--text)",
 	fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
@@ -83,11 +83,11 @@ const page = {
 	background: "var(--surface)",
 	border: "1px solid var(--border)",
 	borderRadius: 22,
-	padding: 18,
+	padding: 18, // extra space for box shadow
 	boxShadow: "var(--shadow)",
 	display: "flex",
 	flexDirection: "column",
-	minHeight: "calc(100vh - 36px)", // padding top+bottom in layout (18 + 18)
+	minHeight: "calc(95vh - 36px)", // 36px = padding 18px top + 18px bottom
 };
 
 const contentCol = {
