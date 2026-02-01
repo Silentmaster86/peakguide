@@ -21,31 +21,52 @@ export default function PeaksPage({ lang }) {
 	const peaks = useMemo(() => peaksState.data || [], [peaksState.data]);
 
 	const filteredPeaks = useMemo(() => {
-		// Filter peaks by range from URL first (if present)
 		const safeQ = q.trim().toLowerCase();
 
-		let list = peaks;
+		let list = Array.isArray(peaks) ? peaks : [];
 
+		// 1) URL range filter (highest priority)
 		if (rangeSlug) {
 			list = list.filter((p) => p.range_slug === rangeSlug);
 		}
 
-		// Apply local toolbar filters (q + range) on top (optional / future-proof)
-		if (range) {
+		// 2) Toolbar range filter (only if not "all" AND no URL override)
+		if (!rangeSlug && range !== "all") {
 			list = list.filter((p) => p.range_slug === range);
 		}
 
-		if (q.trim()) {
-			const needle = q.trim().toLowerCase();
+		// 3) Search
+		if (safeQ) {
 			list = list.filter((p) => {
 				const name = String(p.peak_name || "").toLowerCase();
 				const rname = String(p.range_name || "").toLowerCase();
-				return name.includes(needle) || rname.includes(needle);
+				return name.includes(safeQ) || rname.includes(safeQ);
 			});
 		}
 
-		return list;
-	}, [peaks, rangeSlug, range, q]);
+		// 4) Sort
+		const out = [...list];
+		if (sort === "elev_desc")
+			out.sort((a, b) => (b.elevation_m || 0) - (a.elevation_m || 0));
+		if (sort === "elev_asc")
+			out.sort((a, b) => (a.elevation_m || 0) - (b.elevation_m || 0));
+		if (sort === "name_asc")
+			out.sort((a, b) =>
+				String(a.peak_name || "").localeCompare(
+					String(b.peak_name || ""),
+					"pl",
+				),
+			);
+		if (sort === "name_desc")
+			out.sort((a, b) =>
+				String(b.peak_name || "").localeCompare(
+					String(a.peak_name || ""),
+					"pl",
+				),
+			);
+
+		return out;
+	}, [peaks, rangeSlug, range, q, sort]);
 
 	const isLoading = peaksState.status === "loading";
 	const isError = peaksState.status === "error";
@@ -58,8 +79,11 @@ export default function PeaksPage({ lang }) {
 					setQ={setQ}
 					range={range}
 					setRange={setRange}
+					sort={sort}
+					setSort={setSort}
 					ranges={rangesState.data || []}
 					lang={lang}
+					urlRangeSlug={rangeSlug}
 				/>
 
 				<div style={rightBox}>
