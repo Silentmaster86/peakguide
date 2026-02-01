@@ -40,3 +40,25 @@ export async function fetchPeakBySlug(lang, slug) {
 	if (!res.ok) throw new Error("Failed to load peak details");
 	return res.json();
 }
+
+export async function fetchPeakTrailsBySlug(lang, slug) {
+	const safeLang = apiLang(lang);
+	const res = await fetch(
+		url(
+			`/api/peaks/${encodeURIComponent(slug)}/trails?lang=${encodeURIComponent(safeLang)}`,
+		),
+	);
+	if (!res.ok) throw new Error("Failed to load trails");
+	return res.json();
+}
+
+export async function fetchPeakPoisBySlug(lang, slug) {
+	const safeLang = apiLang(lang);
+	const res = await fetch(
+		url(
+			`/api/peaks/${encodeURIComponent(slug)}/pois?lang=${encodeURIComponent(safeLang)}`,
+		),
+	);
+	if (!res.ok) throw new Error("Failed to load POIs");
+	return res.json();
+}

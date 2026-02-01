@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchPeakBySlug, fetchPeaks } from "../api/peakguide";
+import {
+	fetchPeakBySlug,
+	fetchPeaks,
+	fetchPeakPoisBySlug,
+	fetchPeakTrailsBySlug,
+} from "../api/peakguide";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export default function PeakDetailsPage({ lang = "pl" }) {
@@ -13,6 +18,11 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 	const [rangePeaks, setRangePeaks] = useState([]);
 	const [rangeStatus, setRangeStatus] = useState("idle"); // idle | loading | success | error
+
+	const [trailsStatus, setTrailsStatus] = useState("idle"); // idle
+	const [trails, setTrails] = useState([]);
+	const [poisStatus, setPoisStatus] = useState("idle"); // idle
+	const [pois, setPois] = useState([]);
 
 	const labels = useMemo(() => getLabels(lang), [lang]);
 
@@ -86,6 +96,37 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 			alive = false;
 		};
 	}, [lang, peak?.range_slug, peak?.slug]);
+
+	useEffect(() => {
+		let cancelled = false;
+
+		async function loadExtras() {
+			setTrailsStatus("loading");
+			setPoisStatus("loading");
+
+			try {
+				const [t, p] = await Promise.all([
+					fetchPeakTrailsBySlug(lang, slug),
+					fetchPeakPoisBySlug(lang, slug),
+				]);
+
+				if (cancelled) return;
+				setTrails(Array.isArray(t) ? t : []);
+				setPois(Array.isArray(p) ? p : []);
+				setTrailsStatus("success");
+				setPoisStatus("success");
+			} catch {
+				if (cancelled) return;
+				setTrailsStatus("error");
+				setPoisStatus("error");
+			}
+		}
+
+		loadExtras();
+		return () => {
+			cancelled = true;
+		};
+	}, [lang, slug]);
 
 	const mapUrl = useMemo(() => {
 		if (!peak) return null;
@@ -315,6 +356,85 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 						))}
 					</div>
 				)}
+			</section>
+
+			<section style={{ marginTop: 16 }}>
+				<h2>Trails</h2>
+				{trailsStatus === "loading" && <p>Loading trails…</p>}
+				{trailsStatus === "error" && <p>Failed to load trails.</p>}
+				{trailsStatus === "success" && trails.length === 0 && (
+					<p>No trails yet.</p>
+				)}
+
+				{trails.map((t) => (
+					<div
+						key={t.slug}
+						style={{
+							padding: 12,
+							border: "1px solid rgba(255,255,255,0.12)",
+							borderRadius: 12,
+							marginTop: 10,
+						}}
+					>
+						<div style={{ fontWeight: 800 }}>{t.name}</div>
+						<div style={{ opacity: 0.9, fontSize: 14 }}>
+							{t.distance_km ? `${t.distance_km} km` : null}
+							{t.time_min ? ` • ${t.time_min} min` : null}
+							{t.elevation_gain_m ? ` • +${t.elevation_gain_m} m` : null}
+						</div>
+						{t.description && (
+							<p style={{ marginTop: 8, opacity: 0.95 }}>{t.description}</p>
+						)}
+						{t.map_url && (
+							<a href={t.map_url} target='_blank' rel='noreferrer'>
+								Open map
+							</a>
+						)}
+					</div>
+				))}
+			</section>
+
+			<section style={{ marginTop: 18 }}>
+				<h2>POI</h2>
+				{poisStatus === "loading" && <p>Loading POI…</p>}
+				{poisStatus === "error" && <p>Failed to load POIs.</p>}
+				{poisStatus === "success" && pois.length === 0 && <p>No POIs yet.</p>}
+
+				{pois.map((poi) => (
+					<div
+						key={poi.id}
+						style={{
+							padding: 12,
+							border: "1px solid rgba(255,255,255,0.12)",
+							borderRadius: 12,
+							marginTop: 10,
+						}}
+					>
+						<div style={{ display: "flex", gap: 10, alignItems: "baseline" }}>
+							<div style={{ fontWeight: 800 }}>{poi.name}</div>
+							<span style={{ fontSize: 12, opacity: 0.85 }}>
+								{poi.type_name}
+							</span>
+						</div>
+
+						{poi.description && (
+							<p style={{ marginTop: 8, opacity: 0.95 }}>{poi.description}</p>
+						)}
+
+						<div style={{ display: "flex", gap: 12 }}>
+							{poi.google_maps_url && (
+								<a href={poi.google_maps_url} target='_blank' rel='noreferrer'>
+									Google Maps
+								</a>
+							)}
+							{poi.website_url && (
+								<a href={poi.website_url} target='_blank' rel='noreferrer'>
+									Website
+								</a>
+							)}
+						</div>
+					</div>
+				))}
 			</section>
 		</div>
 	);
