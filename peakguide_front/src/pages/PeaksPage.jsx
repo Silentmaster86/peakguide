@@ -8,8 +8,9 @@ import PeakCardSkeleton from "../components/PeakCardSkeleton";
 
 export default function PeaksPage({ lang }) {
 	const [q, setQ] = useState("");
-	const [range, setRange] = useState("");
+	const [range, setRange] = useState("all");
 	const [refreshKey, setRefreshKey] = useState(0);
+	const [sort, setSort] = useState("elev_desc"); // elev_desc | elev_asc | name_asc | name_desc
 
 	const [searchParams] = useSearchParams();
 	const rangeSlug = searchParams.get("range"); // Range filter from URL
@@ -21,6 +22,8 @@ export default function PeaksPage({ lang }) {
 
 	const filteredPeaks = useMemo(() => {
 		// Filter peaks by range from URL first (if present)
+		const safeQ = q.trim().toLowerCase();
+
 		let list = peaks;
 
 		if (rangeSlug) {

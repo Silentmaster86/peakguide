@@ -23,6 +23,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	const [trails, setTrails] = useState([]);
 	const [poisStatus, setPoisStatus] = useState("idle"); // idle
 	const [pois, setPois] = useState([]);
+	const [tab, setTab] = useState("overview"); // overview | trails | pois
 
 	const labels = useMemo(() => getLabels(lang), [lang]);
 
@@ -127,6 +128,10 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 			cancelled = true;
 		};
 	}, [lang, slug]);
+
+	useEffect(() => {
+		setTab("overview");
+	}, [slug]);
 
 	const mapUrl = useMemo(() => {
 		if (!peak) return null;
@@ -268,174 +273,261 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				)}
 			</section>
 
-			{/* Main content */}
-			<div style={gridStyle}>
-				{/* Left column */}
-				<section style={panel}>
-					<h2 style={h2}>{labels.description}</h2>
+			{/* Tab navigation */}
 
-					{peak.description ? (
-						<div style={textBlock}>{peak.description}</div>
-					) : (
-						<div style={muted}>—</div>
-					)}
-				</section>
+			<nav style={tabsWrap} aria-label='Sections'>
+				<button
+					type='button'
+					onClick={() => setTab("overview")}
+					style={tabBtn(tab === "overview")}
+				>
+					{labels.description}
+				</button>
 
-				{/* Right info panel */}
-				<aside style={sideStyle(isMobile)}>
-					<div style={sideTitle}>Info</div>
+				<button
+					type='button'
+					onClick={() => setTab("trails")}
+					style={tabBtn(tab === "trails")}
+				>
+					{labels.trails}
+					<span style={tabCount}>{trails.length}</span>
+				</button>
 
-					<div style={kv}>
-						<div style={k}>{labels.elevation}</div>
-						<div style={v}>{peak.elevation_m} m</div>
-					</div>
+				<button
+					type='button'
+					onClick={() => setTab("pois")}
+					style={tabBtn(tab === "pois")}
+				>
+					{labels.pois}
+					<span style={tabCount}>{pois.length}</span>
+				</button>
+			</nav>
+			{tab === "overview" && (
+				<>
+					{/* Main content */}
+					<div style={gridStyle}>
+						{/* Left column */}
+						<section style={panel}>
+							<h2 style={h2}>{labels.description}</h2>
 
-					<div style={kv}>
-						<div style={k}>{labels.range}</div>
-						<div style={v}>{peak.range_name || "—"}</div>
-					</div>
-
-					<div style={divider} />
-
-					<div style={kv}>
-						<div style={k}>{labels.coords}</div>
-						<div style={v}>
-							{coordsText ? (
-								<div style={coordsRow}>
-									<code style={code}>{coordsText}</code>
-									<button
-										type='button'
-										style={miniBtn}
-										onClick={() => handleCopy(coordsText)}
-										title='Copy coordinates'
-									>
-										{labels.copy}
-									</button>
-								</div>
+							{peak.description ? (
+								<div style={textBlock}>{peak.description}</div>
 							) : (
-								"—"
+								<div style={muted}>—</div>
 							)}
-						</div>
+						</section>
+
+						{/* Right info panel */}
+						<aside style={sideStyle(isMobile)}>
+							<div style={sideTitle}>Info</div>
+
+							<div style={kv}>
+								<div style={k}>{labels.elevation}</div>
+								<div style={v}>{peak.elevation_m} m</div>
+							</div>
+
+							<div style={kv}>
+								<div style={k}>{labels.range}</div>
+								<div style={v}>{peak.range_name || "—"}</div>
+							</div>
+
+							<div style={divider} />
+
+							<div style={kv}>
+								<div style={k}>{labels.coords}</div>
+								<div style={v}>
+									{coordsText ? (
+										<div style={coordsRow}>
+											<code style={code}>{coordsText}</code>
+											<button
+												type='button'
+												style={miniBtn}
+												onClick={() => handleCopy(coordsText)}
+												title='Copy coordinates'
+											>
+												{labels.copy}
+											</button>
+										</div>
+									) : (
+										"—"
+									)}
+								</div>
+							</div>
+
+							{mapUrl && (
+								<a href={mapUrl} target='_blank' rel='noreferrer' style={cta}>
+									🗺️ {labels.openMaps}
+								</a>
+							)}
+						</aside>
 					</div>
 
-					{mapUrl && (
-						<a href={mapUrl} target='_blank' rel='noreferrer' style={cta}>
-							🗺️ {labels.openMaps}
-						</a>
-					)}
-				</aside>
-			</div>
+					{/* Peaks in the same range */}
+					<section style={rangeSection}>
+						<h3 style={rangeTitle}>{labels.inRange}</h3>
 
-			{/* Peaks in the same range */}
-			<section style={rangeSection}>
-				<h3 style={rangeTitle}>{labels.inRange}</h3>
+						{rangeStatus === "loading" && <div style={muted}>Loading…</div>}
 
-				{rangeStatus === "loading" && <div style={muted}>Loading…</div>}
+						{rangeStatus === "error" && (
+							<div style={muted}>Could not load related peaks.</div>
+						)}
 
-				{rangeStatus === "error" && (
-					<div style={muted}>Could not load related peaks.</div>
-				)}
+						{rangeStatus === "success" && rangePeaks.length === 0 && (
+							<div style={muted}>—</div>
+						)}
 
-				{rangeStatus === "success" && rangePeaks.length === 0 && (
-					<div style={muted}>—</div>
-				)}
+						{rangeStatus === "success" && rangePeaks.length > 0 && (
+							<div style={rangeGrid}>
+								{rangePeaks.map((p) => (
+									<Link
+										key={p.slug}
+										to={`/peaks/${p.slug}`}
+										style={{ textDecoration: "none", color: "inherit" }}
+									>
+										<article style={miniCard}>
+											<div style={miniTitle}>{p.peak_name}</div>
+											<div style={miniMeta}>⛰️ {p.elevation_m} m</div>
+										</article>
+									</Link>
+								))}
+							</div>
+						)}
+					</section>
+				</>
+			)}
+			{/* Trails sections */}
+			{tab === "trails" && (
+				<>
+					<section style={block}>
+						<div style={blockHead}>
+							<h2 style={blockTitle}>{labels.trails}</h2>
+							<span style={countPill}>{trails.length}</span>
+						</div>
 
-				{rangeStatus === "success" && rangePeaks.length > 0 && (
-					<div style={rangeGrid}>
-						{rangePeaks.map((p) => (
-							<Link
-								key={p.slug}
-								to={`/peaks/${p.slug}`}
-								style={{ textDecoration: "none", color: "inherit" }}
-							>
-								<article style={miniCard}>
-									<div style={miniTitle}>{p.peak_name}</div>
-									<div style={miniMeta}>⛰️ {p.elevation_m} m</div>
-								</article>
-							</Link>
+						{trailsStatus === "loading" && (
+							<div style={mutedRow}>{labels.loading}</div>
+						)}
+						{trailsStatus === "error" && (
+							<div style={mutedRow}>{labels.failedTrails}</div>
+						)}
+						{trailsStatus === "success" && trails.length === 0 && (
+							<div style={mutedRow}>{labels.noTrails}</div>
+						)}
+
+						{trails.map((t) => (
+							<article key={t.slug} style={itemCard}>
+								<div style={itemTop}>
+									<div style={itemTitle}>{t.name}</div>
+									{t.difficulty ? (
+										<span style={badge}>{t.difficulty}</span>
+									) : null}
+								</div>
+
+								<div style={metaRow}>
+									{t.distance_km ? (
+										<span style={metaPill}>🥾 {t.distance_km} km</span>
+									) : null}
+									{t.time_min ? (
+										<span style={metaPill}>⏱️ {t.time_min} min</span>
+									) : null}
+									{t.elevation_gain_m ? (
+										<span style={metaPill}>📈 +{t.elevation_gain_m} m</span>
+									) : null}
+									{t.route_type ? (
+										<span style={metaPill}>🧭 {t.route_type}</span>
+									) : null}
+								</div>
+
+								{t.description ? (
+									<div style={itemText}>{t.description}</div>
+								) : null}
+
+								<div style={actionsRow}>
+									{t.map_url ? (
+										<a
+											href={t.map_url}
+											target='_blank'
+											rel='noreferrer'
+											style={actionBtn}
+										>
+											🗺️ {labels.openMap}
+										</a>
+									) : null}
+									{t.gpx_url ? (
+										<a
+											href={t.gpx_url}
+											target='_blank'
+											rel='noreferrer'
+											style={actionBtn}
+										>
+											🧾 GPX
+										</a>
+									) : null}
+								</div>
+							</article>
 						))}
-					</div>
-				)}
-			</section>
+					</section>
+				</>
+			)}
 
-			<section style={{ marginTop: 16 }}>
-				<h2>Trails</h2>
-				{trailsStatus === "loading" && <p>Loading trails…</p>}
-				{trailsStatus === "error" && <p>Failed to load trails.</p>}
-				{trailsStatus === "success" && trails.length === 0 && (
-					<p>No trails yet.</p>
-				)}
+			{/* POIs section */}
 
-				{trails.map((t) => (
-					<div
-						key={t.slug}
-						style={{
-							padding: 12,
-							border: "1px solid rgba(255,255,255,0.12)",
-							borderRadius: 12,
-							marginTop: 10,
-						}}
-					>
-						<div style={{ fontWeight: 800 }}>{t.name}</div>
-						<div style={{ opacity: 0.9, fontSize: 14 }}>
-							{t.distance_km ? `${t.distance_km} km` : null}
-							{t.time_min ? ` • ${t.time_min} min` : null}
-							{t.elevation_gain_m ? ` • +${t.elevation_gain_m} m` : null}
-						</div>
-						{t.description && (
-							<p style={{ marginTop: 8, opacity: 0.95 }}>{t.description}</p>
-						)}
-						{t.map_url && (
-							<a href={t.map_url} target='_blank' rel='noreferrer'>
-								Open map
-							</a>
-						)}
-					</div>
-				))}
-			</section>
-
-			<section style={{ marginTop: 18 }}>
-				<h2>POI</h2>
-				{poisStatus === "loading" && <p>Loading POI…</p>}
-				{poisStatus === "error" && <p>Failed to load POIs.</p>}
-				{poisStatus === "success" && pois.length === 0 && <p>No POIs yet.</p>}
-
-				{pois.map((poi) => (
-					<div
-						key={poi.id}
-						style={{
-							padding: 12,
-							border: "1px solid rgba(255,255,255,0.12)",
-							borderRadius: 12,
-							marginTop: 10,
-						}}
-					>
-						<div style={{ display: "flex", gap: 10, alignItems: "baseline" }}>
-							<div style={{ fontWeight: 800 }}>{poi.name}</div>
-							<span style={{ fontSize: 12, opacity: 0.85 }}>
-								{poi.type_name}
-							</span>
+			{tab === "pois" && (
+				<>
+					<section style={block}>
+						<div style={blockHead}>
+							<h2 style={blockTitle}>{labels.pois}</h2>
+							<span style={countPill}>{pois.length}</span>
 						</div>
 
-						{poi.description && (
-							<p style={{ marginTop: 8, opacity: 0.95 }}>{poi.description}</p>
+						{poisStatus === "loading" && (
+							<div style={mutedRow}>{labels.loading}</div>
+						)}
+						{poisStatus === "error" && (
+							<div style={mutedRow}>{labels.failedPois}</div>
+						)}
+						{poisStatus === "success" && pois.length === 0 && (
+							<div style={mutedRow}>{labels.noPois}</div>
 						)}
 
-						<div style={{ display: "flex", gap: 12 }}>
-							{poi.google_maps_url && (
-								<a href={poi.google_maps_url} target='_blank' rel='noreferrer'>
-									Google Maps
-								</a>
-							)}
-							{poi.website_url && (
-								<a href={poi.website_url} target='_blank' rel='noreferrer'>
-									Website
-								</a>
-							)}
-						</div>
-					</div>
-				))}
-			</section>
+						{pois.map((poi) => (
+							<article key={poi.id} style={itemCard}>
+								<div style={itemTop}>
+									<div style={itemTitle}>{poi.name}</div>
+									<span style={badgeMuted}>{poi.type_name || "POI"}</span>
+								</div>
+
+								{poi.description ? (
+									<div style={itemText}>{poi.description}</div>
+								) : null}
+
+								<div style={actionsRow}>
+									{poi.google_maps_url ? (
+										<a
+											href={poi.google_maps_url}
+											target='_blank'
+											rel='noreferrer'
+											style={actionBtn}
+										>
+											📍 Google Maps
+										</a>
+									) : null}
+									{poi.website_url ? (
+										<a
+											href={poi.website_url}
+											target='_blank'
+											rel='noreferrer'
+											style={actionBtn}
+										>
+											🔗 {labels.website}
+										</a>
+									) : null}
+								</div>
+							</article>
+						))}
+					</section>
+				</>
+			)}
 		</div>
 	);
 }
@@ -456,6 +548,19 @@ function getLabels(lang) {
 			copy: "Kopiuj",
 			description: "Opis",
 			notFound: "Nie znaleziono szczytu",
+
+			/* ------------------- trails and pois PL ------------------- */
+
+			trails: "Szlaki",
+			pois: "Punkty (POI)",
+			loading: "Ładowanie…",
+			noTrails: "Brak szlaków.",
+			noPois: "Brak punktów POI.",
+			failedTrails: "Nie udało się wczytać szlaków.",
+			failedPois: "Nie udało się wczytać POI.",
+			openMap: "Otwórz mapę",
+			website: "Strona",
+			overview: "Opis",
 		},
 		en: {
 			peaks: "Peaks",
@@ -469,6 +574,19 @@ function getLabels(lang) {
 			copy: "Copy",
 			description: "Description",
 			notFound: "Peak not found",
+
+			/* ------------------- trails and pois EN ------------------- */
+
+			trails: "Trails",
+			pois: "Points (POI)",
+			loading: "Loading…",
+			noTrails: "No trails yet.",
+			noPois: "No POIs yet.",
+			failedTrails: "Failed to load trails.",
+			failedPois: "Failed to load POIs.",
+			openMap: "Open map",
+			website: "Website",
+			overview: "Overview",
 		},
 		ua: {
 			peaks: "Вершини",
@@ -482,6 +600,19 @@ function getLabels(lang) {
 			copy: "Копіювати",
 			description: "Опис",
 			notFound: "Вершину не знайдено",
+
+			/* ------------------- trails and pois UA------------------- */
+
+			trails: "Маршрути",
+			pois: "Пункти (POI)",
+			loading: "Завантаження…",
+			noTrails: "Немає маршрутів.",
+			noPois: "Немає POI.",
+			failedTrails: "Не вдалося завантажити маршрути.",
+			failedPois: "Не вдалося завантажити POI.",
+			openMap: "Відкрити мапу",
+			website: "Вебсайт",
+			overview: "Огляд",
 		},
 		zh: {
 			peaks: "山峰",
@@ -495,6 +626,19 @@ function getLabels(lang) {
 			copy: "复制",
 			description: "介绍",
 			notFound: "未找到该山峰",
+
+			/* ------------------- trails and pois ZH ------------------- */
+
+			trails: "路线",
+			pois: "兴趣点 (POI)",
+			loading: "加载中…",
+			noTrails: "暂无路线。",
+			noPois: "暂无兴趣点。",
+			failedTrails: "加载路线失败。",
+			failedPois: "加载兴趣点失败。",
+			openMap: "打开地图",
+			website: "网站",
+			overview: "概览",
 		},
 	};
 
@@ -775,4 +919,187 @@ const miniMeta = {
 	color: "var(--muted)",
 	fontSize: 12,
 	fontWeight: 900,
+};
+
+/* ------------------- trails and pois ------------------- */
+
+const block = {
+	marginTop: 14,
+	border: "1px solid var(--border)",
+	borderRadius: 22,
+	padding: 16,
+	background: "var(--menu-bg)",
+	boxShadow: "var(--shadow-soft)",
+};
+
+const blockHead = {
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "space-between",
+	gap: 10,
+	marginBottom: 10,
+};
+
+const blockTitle = {
+	margin: 0,
+	fontSize: 16,
+	letterSpacing: "-0.2px",
+};
+
+const countPill = {
+	display: "inline-flex",
+	alignItems: "center",
+	justifyContent: "center",
+	minWidth: 34,
+	height: 28,
+	padding: "0 10px",
+	borderRadius: 999,
+	border: "1px solid var(--border)",
+	background: "var(--pill-bg)",
+	color: "var(--muted)",
+	fontWeight: 1000,
+	fontSize: 12,
+};
+
+const mutedRow = {
+	color: "var(--muted)",
+	padding: "8px 0",
+	fontWeight: 800,
+};
+
+const itemCard = {
+	border: "1px solid rgba(255,255,255,0.12)",
+	borderRadius: 18,
+	padding: 14,
+	marginTop: 10,
+	background: "color-mix(in srgb, var(--menu-bg) 60%, transparent)",
+};
+
+const itemTop = {
+	display: "flex",
+	gap: 10,
+	alignItems: "baseline",
+	justifyContent: "space-between",
+};
+
+const itemTitle = {
+	fontWeight: 1000,
+	letterSpacing: "-0.2px",
+};
+
+const itemText = {
+	marginTop: 8,
+	opacity: 0.95,
+	lineHeight: 1.6,
+	whiteSpace: "pre-wrap",
+};
+
+const metaRow = {
+	display: "flex",
+	flexWrap: "wrap",
+	gap: 8,
+	marginTop: 10,
+};
+
+const metaPill = {
+	display: "inline-flex",
+	alignItems: "center",
+	gap: 6,
+	padding: "6px 10px",
+	borderRadius: 999,
+	border: "1px solid rgba(255,255,255,0.12)",
+	background: "rgba(255,255,255,0.04)",
+	fontWeight: 900,
+	fontSize: 12,
+	color: "var(--muted)",
+};
+
+const badge = {
+	display: "inline-flex",
+	alignItems: "center",
+	padding: "6px 10px",
+	borderRadius: 999,
+	border: "1px solid var(--btn-border)",
+	background: "color-mix(in srgb, var(--primary) 14%, transparent)",
+	fontWeight: 1000,
+	fontSize: 12,
+};
+
+const badgeMuted = {
+	display: "inline-flex",
+	alignItems: "center",
+	padding: "6px 10px",
+	borderRadius: 999,
+	border: "1px solid rgba(255,255,255,0.12)",
+	background: "rgba(255,255,255,0.03)",
+	color: "var(--muted)",
+	fontWeight: 1000,
+	fontSize: 12,
+};
+
+const actionsRow = {
+	display: "flex",
+	flexWrap: "wrap",
+	gap: 10,
+	marginTop: 12,
+};
+
+const actionBtn = {
+	display: "inline-flex",
+	alignItems: "center",
+	justifyContent: "center",
+	gap: 8,
+	padding: "9px 12px",
+	borderRadius: 12,
+	border: "1px solid var(--btn-border)",
+	background: "var(--btn-bg)",
+	color: "var(--text)",
+	fontWeight: 1000,
+	fontSize: 13,
+	textDecoration: "none",
+};
+
+/* ------------------- tabs ------------------- */
+
+const tabsWrap = {
+	position: "sticky",
+	top: 10,
+	zIndex: 5,
+	display: "flex",
+	gap: 8,
+	padding: 10,
+	marginBottom: 14,
+	borderRadius: 18,
+	border: "1px solid var(--border)",
+	background: "color-mix(in srgb, var(--menu-bg) 85%, transparent)",
+	backdropFilter: "blur(8px)",
+};
+
+const tabBtn = (active) => ({
+	display: "inline-flex",
+	alignItems: "center",
+	gap: 8,
+	padding: "10px 12px",
+	borderRadius: 999,
+	border: active ? "1px solid var(--btn-border)" : "1px solid var(--border)",
+	background: active
+		? "color-mix(in srgb, var(--primary) 16%, transparent)"
+		: "var(--btn-bg)",
+	color: "var(--text)",
+	fontWeight: 1000,
+	cursor: "pointer",
+});
+
+const tabCount = {
+	display: "inline-flex",
+	alignItems: "center",
+	justifyContent: "center",
+	minWidth: 22,
+	height: 20,
+	padding: "0 8px",
+	borderRadius: 999,
+	border: "1px solid rgba(255,255,255,0.14)",
+	color: "var(--muted)",
+	fontSize: 12,
+	fontWeight: 1000,
 };

@@ -1,15 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchPeaks, fetchRanges } from "../api/peakguide";
-import PeakCard from "../components/PeakCard";
+import { fetchPeaks } from "../api/peakguide";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export default function RangeDetailsPage({ lang = "pl" }) {
 	const { slug } = useParams();
+	const isMobile = useMediaQuery("(max-width: 900px)");
 
 	const [status, setStatus] = useState("loading"); // loading | success | error
-	const [error, setError] = useState(null);
-
-	const [rangeName, setRangeName] = useState(null);
 	const [peaks, setPeaks] = useState([]);
 
 	const labels = useMemo(() => getLabels(lang), [lang]);
@@ -20,30 +18,18 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 		(async () => {
 			try {
 				setStatus("loading");
-				setError(null);
-				setRangeName(null);
-				setPeaks([]);
+				const all = await fetchPeaks({ lang });
 
-				// Load ranges (to display a human-readable name)
-				const ranges = await fetchRanges({ lang });
 				if (!alive) return;
 
-				const found = (ranges || []).find((r) => r.slug === slug);
-				setRangeName(found?.name || slug);
+				const filtered = (Array.isArray(all) ? all : []).filter(
+					(p) => p.range_slug === slug,
+				);
 
-				// Load peaks and filter by range slug
-				const allPeaks = await fetchPeaks({ lang });
-				if (!alive) return;
-
-				const inRange = (allPeaks || [])
-					.filter((p) => p.range_slug === slug)
-					.sort((a, b) => Number(b.elevation_m) - Number(a.elevation_m)); // Highest first
-
-				setPeaks(inRange);
+				setPeaks(filtered);
 				setStatus("success");
-			} catch (e) {
+			} catch {
 				if (!alive) return;
-				setError(e?.message || "Failed to load range");
 				setStatus("error");
 			}
 		})();
@@ -53,67 +39,27 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 		};
 	}, [lang, slug]);
 
-	const crumbs = (
-		<nav style={crumbsStyle} aria-label='Breadcrumb'>
-			<Link to='/peaks' style={crumbLink}>
-				{labels.peaks}
-			</Link>
-
-			<span style={crumbSep}>›</span>
-
-			<Link to='/ranges' style={crumbLink}>
-				{labels.ranges}
-			</Link>
-
-			<span style={crumbSep}>›</span>
-
-			<span style={crumbCurrent}>{rangeName || slug}</span>
-		</nav>
-	);
-
 	if (status === "loading") {
-		return (
-			<div style={wrap}>
-				{crumbs}
-				<div style={card}>
-					<div style={{ fontWeight: 1000 }}>{labels.loading}</div>
-				</div>
-			</div>
-		);
+		return <div style={wrap}>Loading…</div>;
 	}
 
 	if (status === "error") {
-		return (
-			<div style={wrap}>
-				{crumbs}
-				<div style={card}>
-					<div style={{ fontWeight: 1000, marginBottom: 6 }}>Error</div>
-					<div style={{ color: "var(--muted)" }}>{error}</div>
-					<div style={{ marginTop: 12 }}>
-						<Link to='/peaks' style={backLink}>
-							← {labels.back}
-						</Link>
-					</div>
-				</div>
-			</div>
-		);
+		return <div style={wrap}>Failed to load range.</div>;
 	}
 
 	return (
 		<div style={wrap}>
-			{crumbs}
+			{/* Header */}
+			<section style={hero}>
+				<h1 style={heroTitle(isMobile)}>
+					{labels.range}: {slug}
+				</h1>
+				<p style={heroSubtitle}>{labels.peaksCount(peaks.length)}</p>
+			</section>
 
-			<div style={headerCard}>
-				<div style={pill}>🏔️ {labels.range}</div>
-				<h1 style={title}>{rangeName || slug}</h1>
-
-				<div style={sub}>
-					{labels.count}: <b>{peaks.length}</b>
-				</div>
-			</div>
-
+			{/* Peaks list */}
 			{peaks.length === 0 ? (
-				<div style={card}>{labels.empty}</div>
+				<div style={muted}>—</div>
 			) : (
 				<div style={grid}>
 					{peaks.map((p) => (
@@ -122,8 +68,10 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 							to={`/peaks/${p.slug}`}
 							style={{ textDecoration: "none", color: "inherit" }}
 						>
-							{/* PeakCard doesn't include its own link */}
-							<PeakCard peak={p} lang={lang} />
+							<article style={card}>
+								<div style={cardTitle}>{p.peak_name}</div>
+								<div style={cardMeta}>⛰️ {p.elevation_m} m</div>
+							</article>
 						</Link>
 					))}
 				</div>
@@ -132,118 +80,87 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 	);
 }
 
+/* ----------------------------- labels ----------------------------- */
+
 function getLabels(lang) {
 	const dict = {
 		pl: {
-			peaks: "Szczyty",
-			ranges: "Pasma",
 			range: "Pasmo",
-			back: "Wróć do listy",
-			count: "Liczba szczytów",
-			empty: "Brak szczytów w tym paśmie.",
-			loading: "Ładowanie…",
+			peaksCount: (n) => `Liczba szczytów: ${n}`,
 		},
 		en: {
-			peaks: "Peaks",
-			ranges: "Ranges",
 			range: "Range",
-			back: "Back to list",
-			count: "Peaks count",
-			empty: "No peaks in this range.",
-			loading: "Loading…",
+			peaksCount: (n) => `Number of peaks: ${n}`,
 		},
 		ua: {
-			peaks: "Вершини",
-			ranges: "Хребти",
 			range: "Хребет",
-			back: "Назад до списку",
-			count: "Кількість вершин",
-			empty: "У цьому хребті немає вершин.",
-			loading: "Завантаження…",
+			peaksCount: (n) => `Кількість вершин: ${n}`,
 		},
 		zh: {
-			peaks: "山峰",
-			ranges: "山脉",
 			range: "山脉",
-			back: "返回列表",
-			count: "山峰数量",
-			empty: "该山脉暂无山峰。",
-			loading: "加载中…",
+			peaksCount: (n) => `山峰数量: ${n}`,
 		},
 	};
 
 	return dict[lang] || dict.pl;
 }
 
-/* ----------------------------- styles ------------------------------ */
+/* ----------------------------- styles ----------------------------- */
 
-const wrap = { maxWidth: 1140, margin: "0 auto", padding: "8px 0 20px" };
-
-const crumbsStyle = {
-	display: "flex",
-	alignItems: "center",
-	gap: 8,
-	marginBottom: 10,
-	color: "var(--muted)",
-	fontSize: 13,
+const wrap = {
+	maxWidth: 1140,
+	margin: "0 auto",
+	padding: "8px 0 20px",
 };
 
-const crumbLink = {
-	color: "var(--muted)",
-	textDecoration: "none",
-	fontWeight: 900,
-	borderBottom: "1px dashed var(--ink)",
-};
-
-const crumbSep = { opacity: 0.6 };
-const crumbCurrent = { color: "var(--muted)", fontWeight: 900 };
-
-const headerCard = {
-	border: "1px solid var(--btn-bg)",
+const hero = {
+	border: "1px solid var(--border)",
 	borderRadius: 22,
-	padding: 16,
-	background: "var(--btn-bg)",
+	padding: 18,
+	background: "var(--menu-bg)",
 	boxShadow: "var(--shadow-soft)",
 	marginBottom: 14,
 };
 
-const pill = {
-	display: "inline-flex",
-	alignItems: "center",
-	gap: 8,
-	padding: "6px 10px",
-	borderRadius: 999,
-	border: "1px solid var(--border)",
-	background: "rgba(31, 122, 79, 0.93)",
-	color: "var(--btn-bg)",
-	fontWeight: 900,
-	fontSize: 12,
+const heroTitle = (isMobile) => ({
+	margin: 0,
+	fontSize: isMobile ? 26 : 32,
+	letterSpacing: "-0.6px",
+});
+
+const heroSubtitle = {
+	marginTop: 8,
+	color: "var(--muted)",
 };
 
-const title = { margin: "10px 0 0", fontSize: 30, letterSpacing: "-0.6px" };
-const sub = { marginTop: 6, color: "var(--text)" };
-
-const card = {
-	border: "1px solid var(--border)",
-	borderRadius: 22,
-	padding: 16,
-	background: "var(--surface)",
-	boxShadow: "var(--shadow-soft)",
+const muted = {
+	marginTop: 10,
+	color: "var(--muted)",
 };
 
 const grid = {
 	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+	gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
 	gap: 12,
 };
 
-const backLink = {
-	textDecoration: "none",
+const card = {
+	border: "1px solid var(--ink)",
+	borderRadius: 18,
+	padding: 14,
+	background: "var(--surface-2)",
+	boxShadow: "var(--shadow-soft)",
+	transition: "transform 140ms ease, box-shadow 140ms ease",
+};
+
+const cardTitle = {
 	fontWeight: 1000,
-	color: "var(--text)",
-	border: "1px solid var(--border)",
-	background: "var(--btn-bg)",
-	padding: "8px 10px",
-	borderRadius: 14,
-	display: "inline-flex",
+	letterSpacing: "-0.2px",
+};
+
+const cardMeta = {
+	marginTop: 6,
+	color: "var(--muted)",
+	fontSize: 12,
+	fontWeight: 900,
 };

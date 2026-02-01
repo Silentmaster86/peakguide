@@ -1,64 +1,144 @@
-const API_URL = import.meta.env.VITE_API_URL || "";
-// jeśli pusty → lokalny proxy / relative (dev)
+/**
+ * PeakGuide API client
+ * --------------------
+ * Lightweight fetch helpers with in-memory cache.
+ * Cache is reset on page refresh.
+ *
+ * Intended for READ-ONLY endpoints only.
+ */
 
+const API_URL = import.meta.env.VITE_API_URL || "";
+// If empty -> use relative URLs (dev / local proxy)
+
+/* ------------------------------------------------------------------ */
+/* In-memory cache (per session)                                       */
+/* ------------------------------------------------------------------ */
+
+const cache = {
+	peaks: new Map(), // key: lang -> Peak[]
+	ranges: new Map(), // key: lang -> Range[]
+	peakBySlug: new Map(), // key: `${lang}:${slug}` -> Peak
+	trailsBySlug: new Map(), // key: `${lang}:${slug}` -> Trail[]
+	poisBySlug: new Map(), // key: `${lang}:${slug}` -> Poi[]
+};
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Normalize language used by API.
+ * Backend supports: pl / en
+ * UI supports: pl / en / ua / zh
+ */
 function apiLang(lang) {
 	if (lang === "ua" || lang === "zh") return "en";
-	return lang;
+	return lang || "pl";
 }
 
+/**
+ * Build API URL without double slashes.
+ */
 function url(path) {
-	// zapewnia brak podwójnych slashy
 	if (!API_URL) return path;
 	return `${API_URL.replace(/\/$/, "")}${path}`;
 }
 
+/**
+ * Generic GET with basic error handling.
+ */
+async function apiGet(path) {
+	const res = await fetch(url(path));
+	if (!res.ok) {
+		throw new Error(`API error ${res.status}: ${path}`);
+	}
+	return res.json();
+}
+
+/* ------------------------------------------------------------------ */
+/* Public API                                                          */
+/* ------------------------------------------------------------------ */
+
 export async function fetchPeaks({ lang = "pl" } = {}) {
 	const safeLang = apiLang(lang);
-	const res = await fetch(
-		url(`/api/peaks?lang=${encodeURIComponent(safeLang)}`),
-	);
-	if (!res.ok) throw new Error(`Failed to load peaks (${res.status})`);
-	return res.json();
+
+	if (cache.peaks.has(safeLang)) {
+		return cache.peaks.get(safeLang);
+	}
+
+	const data = await apiGet(`/api/peaks?lang=${encodeURIComponent(safeLang)}`);
+	cache.peaks.set(safeLang, data);
+	return data;
 }
 
 export async function fetchRanges({ lang = "pl" } = {}) {
 	const safeLang = apiLang(lang);
-	const res = await fetch(
-		url(`/api/ranges?lang=${encodeURIComponent(safeLang)}`),
-	);
-	if (!res.ok) throw new Error(`Failed to load ranges (${res.status})`);
-	return res.json();
+
+	if (cache.ranges.has(safeLang)) {
+		return cache.ranges.get(safeLang);
+	}
+
+	const data = await apiGet(`/api/ranges?lang=${encodeURIComponent(safeLang)}`);
+	cache.ranges.set(safeLang, data);
+	return data;
 }
 
 export async function fetchPeakBySlug(lang, slug) {
 	const safeLang = apiLang(lang);
-	const res = await fetch(
-		url(
-			`/api/peaks/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
-		),
+	const key = `${safeLang}:${slug}`;
+
+	if (cache.peakBySlug.has(key)) {
+		return cache.peakBySlug.get(key);
+	}
+
+	const data = await apiGet(
+		`/api/peaks/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
 	);
-	if (!res.ok) throw new Error("Failed to load peak details");
-	return res.json();
+
+	cache.peakBySlug.set(key, data);
+	return data;
 }
 
 export async function fetchPeakTrailsBySlug(lang, slug) {
 	const safeLang = apiLang(lang);
-	const res = await fetch(
-		url(
-			`/api/peaks/${encodeURIComponent(slug)}/trails?lang=${encodeURIComponent(safeLang)}`,
-		),
+	const key = `${safeLang}:${slug}`;
+
+	if (cache.trailsBySlug.has(key)) {
+		return cache.trailsBySlug.get(key);
+	}
+
+	const data = await apiGet(
+		`/api/peaks/${encodeURIComponent(slug)}/trails?lang=${encodeURIComponent(safeLang)}`,
 	);
-	if (!res.ok) throw new Error("Failed to load trails");
-	return res.json();
+
+	cache.trailsBySlug.set(key, data);
+	return data;
 }
 
 export async function fetchPeakPoisBySlug(lang, slug) {
 	const safeLang = apiLang(lang);
-	const res = await fetch(
-		url(
-			`/api/peaks/${encodeURIComponent(slug)}/pois?lang=${encodeURIComponent(safeLang)}`,
-		),
+	const key = `${safeLang}:${slug}`;
+
+	if (cache.poisBySlug.has(key)) {
+		return cache.poisBySlug.get(key);
+	}
+
+	const data = await apiGet(
+		`/api/peaks/${encodeURIComponent(slug)}/pois?lang=${encodeURIComponent(safeLang)}`,
 	);
-	if (!res.ok) throw new Error("Failed to load POIs");
-	return res.json();
+
+	cache.poisBySlug.set(key, data);
+	return data;
+}
+
+/* ------------------------------------------------------------------ */
+/* Optional helpers                                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Clear all cached data.
+ * Useful after admin updates or during development.
+ */
+export function clearApiCache() {
+	Object.values(cache).forEach((map) => map.clear());
 }
