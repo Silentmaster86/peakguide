@@ -1,6 +1,4 @@
-// PeaksToolbar.jsx
-// Small toolbar for /peaks: search + range filter + sorting.
-// Designed to be minimal and match your existing UI tokens.
+import { useEffect, useState } from "react";
 
 export default function PeaksToolbar({
 	q,
@@ -11,55 +9,71 @@ export default function PeaksToolbar({
 	setSort,
 	ranges,
 	lang,
-	urlRangeSlug, // optional: if present, URL filter overrides local range select
 }) {
-	const isUrlLocked = Boolean(urlRangeSlug);
+	const [localQ, setLocalQ] = useState(q || "");
+
+	// Keep local input in sync when URL changes (e.g. back/forward)
+	useEffect(() => {
+		setLocalQ(q || "");
+	}, [q]);
+
+	// Debounce: push to URL after 300ms
+	useEffect(() => {
+		const t = setTimeout(() => {
+			if ((q || "") !== (localQ || "")) setQ(localQ);
+		}, 300);
+		return () => clearTimeout(t);
+	}, [localQ, q, setQ]);
+
+	function clearSearch() {
+		setLocalQ("");
+		setQ(""); // immediately clears URL param
+	}
 
 	return (
 		<div style={wrap}>
 			{/* Search */}
 			<label style={field}>
 				<span style={label}>{lang === "pl" ? "Szukaj" : "Search"}</span>
-				<input
-					value={q}
-					onChange={(e) => setQ(e.target.value)}
-					placeholder={
-						lang === "pl" ? "np. Rysy, Tarnica..." : "e.g. Rysy, Tarnica..."
-					}
-					style={input}
-				/>
+
+				<div style={inputWrap}>
+					<input
+						value={localQ}
+						onChange={(e) => setLocalQ(e.target.value)}
+						placeholder={
+							lang === "pl" ? "np. Rysy, Tarnica..." : "e.g. Rysy, Tarnica..."
+						}
+						style={input}
+					/>
+
+					{localQ?.trim() ? (
+						<button
+							type='button'
+							onClick={clearSearch}
+							style={clearX}
+							aria-label={
+								lang === "pl" ? "Wyczyść wyszukiwanie" : "Clear search"
+							}
+							title={lang === "pl" ? "Wyczyść" : "Clear"}
+						>
+							✕
+						</button>
+					) : null}
+				</div>
 			</label>
 
 			{/* Range */}
 			<label style={field}>
-				<span style={label}>
-					{lang === "pl" ? "Pasma" : "Ranges"}
-					{isUrlLocked ? (
-						<span style={hint}>
-							{lang === "pl" ? " (ustawione z linku)" : " (set by URL)"}
-						</span>
-					) : null}
-				</span>
-
+				<span style={label}>{lang === "pl" ? "Pasma" : "Ranges"}</span>
 				<select
-					value={isUrlLocked ? "all" : range}
+					value={range}
 					onChange={(e) => setRange(e.target.value)}
 					style={select}
-					disabled={isUrlLocked}
-					aria-disabled={isUrlLocked}
-					title={
-						isUrlLocked
-							? lang === "pl"
-								? "Filtr pasma jest ustawiony w URL"
-								: "Range filter is set in URL"
-							: ""
-					}
 				>
 					<option value='all'>
 						{lang === "pl" ? "Wszystkie pasma" : "All ranges"}
 					</option>
-
-					{ranges?.map((r) => (
+					{(ranges || []).map((r) => (
 						<option key={r.slug} value={r.slug}>
 							{r.name}
 						</option>
@@ -126,16 +140,14 @@ const label = {
 	letterSpacing: "0.2px",
 };
 
-const hint = {
-	marginLeft: 6,
-	fontSize: 11,
-	fontWeight: 900,
-	color: "var(--muted)",
+const inputWrap = {
+	position: "relative",
 };
 
 const input = {
 	height: 42,
-	padding: "0 12px",
+	width: "100%",
+	padding: "0 38px 0 12px",
 	borderRadius: 14,
 	border: "1px solid var(--border)",
 	background: "var(--surface)",
@@ -143,6 +155,22 @@ const input = {
 	fontWeight: 900,
 	boxShadow: "var(--shadow-soft)",
 	outline: "none",
+};
+
+const clearX = {
+	position: "absolute",
+	right: 8,
+	top: "50%",
+	transform: "translateY(-50%)",
+	height: 28,
+	width: 28,
+	borderRadius: 10,
+	border: "1px solid var(--border)",
+	background: "var(--btn-bg)",
+	color: "var(--muted)",
+	cursor: "pointer",
+	fontWeight: 1000,
+	lineHeight: 1,
 };
 
 const select = {
