@@ -283,7 +283,215 @@ function getLabels(lang) {
 			],
 		},
 
-		// możesz dopiąć EN/UA/ZH później (albo skopiować z Twoich wersji 1:1)
+		en: {
+			kicker: "Welcome",
+			title: "PeakGuide",
+			subtitle:
+				"Guide to the Crown of Polish Mountains designed to be simply useful: quickly find a peak, check the range, and dive into details.",
+			p1: "At the top, you have navigation to the peaks and ranges list. There, you can browse, filter, and select your next destinations.",
+			p2: "The project will be developed with practical information (start point, access, parking, tips) — without unnecessary embellishments.",
+			whyTitle: "Why PeakGuide",
+			whyHint: "the purpose of this site",
+			whyCards: [
+				{
+					title: "Fast and clear",
+					body: "Minimal chaos. The most important information at your fingertips.",
+				},
+				{
+					title: "A real guide",
+					body: "It's meant to help plan outings, not just look good.",
+				},
+				{
+					title: "Development towards practicality",
+					body: "Start/access, parking, tips, and map links.",
+				},
+			],
+			howTitle: "How it works",
+			howHint: "3 simple steps",
+			steps: [
+				{
+					n: "1",
+					title: "Choose a peak",
+					body: "Go to the list and click on a peak card.",
+				},
+				{
+					n: "2",
+					title: "Check the details",
+					body: "See the range, elevation, and key information.",
+				},
+				{
+					n: "3",
+					title: "Plan your outing",
+					body: "In future versions: start point, access, and parking.",
+				},
+			],
+			featuredTitle: "Featured",
+			seeAll: "See all",
+			openDetails: "Open details",
+			featuredEmpty: "No data — add peaks to the database or start the API.",
+			featuredErrorTitle: "Failed to fetch peaks",
+			featuredErrorBody: "Check the API / proxy in Vite.",
+			faqTitle: "FAQ",
+			faqHint: "brief answers",
+			faq: [
+				{
+					q: "Is it only the Crown of Polish Mountains?",
+					a: "For now, yes — the database can be expanded later.",
+				},
+				{
+					q: "Will there be routes and GPX?",
+					a: "Yes — first start/parking/links, then GPX.",
+				},
+				{
+					q: "Where do the data come from?",
+					a: "The database is being developed and will be supplemented with sources/links.",
+				},
+				{
+					q: "Will there be 'Favorites'?",
+					a: "Yes — first locally, then with an account / synchronization.",
+				},
+			], // możesz dopiąć PL/UA/ZH później (albo skopiować z Twoich wersji 1:1)
+		},
+
+		ua: {
+			kicker: "Ласкаво просимо",
+			title: "PeakGuide",
+			subtitle:
+				"Гід по Короні гір Польщі, створений, щоб бути просто корисним: швидко знайдіть вершину, перевірте хребет і заглибтеся в деталі.",
+			p1: "Угорі у вас є навігація до списку вершин і хребтів. Там ви можете переглядати, фільтрувати та вибирати свої наступні напрямки.",
+			p2: "Проект буде розвиватися з практичною інформацією (стартова точка, доступ, паркування, поради) — без зайвих прикрас.",
+			whyTitle: "Чому PeakGuide",
+			whyHint: "мета цього сайту",
+			whyCards: [
+				{
+					title: "Швидко і чітко",
+					body: "Мінімум хаосу. Найважливіша інформація під рукою.",
+				},
+				{
+					title: "Справжній гід",
+					body: "Він призначений для допомоги у плануванні виходів, а не просто для гарного вигляду.",
+				},
+				{
+					title: "Розвиток у бік практичності",
+					body: "Старт/доступ, паркування, поради та посилання на карти.",
+				},
+			],
+			howTitle: "Як це працює",
+			howHint: "3 прості кроки",
+			steps: [
+				{
+					n: "1",
+					title: "Виберіть вершину",
+					body: "Перейдіть до списку та натисніть на картку вершини.",
+				},
+				{
+					n: "2",
+					title: "Перевірте деталі",
+					body: "Перегляньте хребет, висоту та ключову інформацію.",
+				},
+				{
+					n: "3",
+					title: "Сплануйте свій вихід",
+					body: "У майбутніх версіях: стартова точка, доступ і паркування.",
+				},
+			],
+			featuredTitle: "Рекомендовані",
+			seeAll: "Переглянути всі",
+			openDetails: "Відкрити деталі",
+			featuredEmpty:
+				"Немає даних — додайте вершини до бази даних або запустіть API.",
+			featuredErrorTitle: "Не вдалося отримати вершини",
+			featuredErrorBody: "Перевірте API / проксі у Vite.",
+			faqTitle: "FAQ",
+			faqHint: "короткі відповіді",
+			faq: [
+				{
+					q: "Чи це лише Корона гір Польщі?",
+					a: "Поки що так — базу даних можна розширити пізніше.",
+				},
+				{
+					q: "Чи будуть маршрути та GPX?",
+					a: "Так — спочатку старт/паркування/посилання, потім GPX.",
+				},
+				{
+					q: "Звідки беруться дані?",
+					a: "База даних розробляється і буде доповнюватися джерелами/посиланнями.",
+				},
+				{
+					q: "Чи буде 'Вибране'?",
+					a: "Так — спочатку локально, потім з обліковим записом / синхронізацією.",
+				},
+			],
+		},
+		zh: {
+			kicker: "欢迎",
+			title: "PeakGuide",
+			subtitle:
+				"波兰山峰之冠指南，旨在提供实用功能：快速查找山峰，查看山脉，并深入了解详情。",
+			p1: "顶部有导航链接到山峰和山脉列表。在那里，您可以浏览、筛选并选择下一个目的地。",
+			p2: "该项目将开发实用信息（起点、通道、停车场、提示）——没有不必要的装饰。",
+			whyTitle: "为什么选择 PeakGuide",
+			whyHint: "本网站的目的",
+			whyCards: [
+				{
+					title: "快速且清晰",
+					body: "最小的混乱。最重要的信息触手可及。",
+				},
+				{
+					title: "真正的指南",
+					body: "它旨在帮助规划出行，而不仅仅是好看。",
+				},
+				{
+					title: "朝实用性发展",
+					body: "起点/通道、停车场、提示和地图链接。",
+				},
+			],
+			howTitle: "它是如何运作的",
+			howHint: "3 个简单步骤",
+			steps: [
+				{
+					n: "1",
+					title: "选择一个山峰",
+					body: "进入列表并点击山峰卡片。",
+				},
+				{
+					n: "2",
+					title: "查看详情",
+					body: "查看山脉、海拔和关键信息。",
+				},
+				{
+					n: "3",
+					title: "规划您的出行",
+					body: "在未来的版本中：起点、通道和停车场。",
+				},
+			],
+			featuredTitle: "精选推荐",
+			seeAll: "查看全部",
+			openDetails: "打开详情",
+			featuredEmpty: "无数据——将山峰添加到数据库或启动 API。",
+			featuredErrorTitle: "获取山峰失败",
+			featuredErrorBody: "检查 Vite 中的 API / 代理。",
+			faqTitle: "常见问题",
+			faqHint: "简短回答",
+			faq: [
+				{
+					q: "这只是波兰山峰之冠吗？",
+					a: "目前是的——数据库以后可以扩展。",
+				},
+				{
+					q: "会有路线和 GPX 吗？",
+					a: "会的——首先是起点/停车场/链接，然后是 GPX。",
+				},
+				{
+					q: "数据来自哪里？",
+					a: "数据库正在开发中，将补充来源/链接。",
+				},
+				{
+					q: "会有“收藏夹”吗？",
+					a: "会的——首先是本地的，然后是账户/同步。",
+				},
+			],
+		},
 	};
 
 	return dict[lang] || dict.pl;

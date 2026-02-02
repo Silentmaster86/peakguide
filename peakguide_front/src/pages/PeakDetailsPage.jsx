@@ -281,7 +281,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 					onClick={() => setTab("overview")}
 					style={tabBtn(tab === "overview")}
 				>
-					{labels.description}
+					{labels.overview}
 				</button>
 
 				<button
