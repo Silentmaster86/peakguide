@@ -131,6 +131,17 @@ export async function fetchPeakPoisBySlug(lang, slug) {
 	return data;
 }
 
+export async function fetchRangeBySlug(lang, slug) {
+	const safeLang = apiLang(lang);
+	const res = await fetch(
+		url(
+			`/api/ranges/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
+		),
+	);
+	if (!res.ok) throw new Error("Failed to load range details");
+	return res.json();
+}
+
 /* ------------------------------------------------------------------ */
 /* Optional helpers                                                    */
 /* ------------------------------------------------------------------ */
