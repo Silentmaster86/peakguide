@@ -51,20 +51,16 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 	return (
 		<nav id='main-nav' style={styles.nav} aria-label='Primary'>
 			<div style={styles.left}>
-				<span style={styles.brandBadge}>⛰️</span>
-				<div style={{ lineHeight: 1.1 }}>
-					<div style={styles.brandTitle}>PeakGuide</div>
-					<div style={styles.brandSub}>{t.tagline}</div>
-				</div>
+				<NavLink to='/' style={styles.homeLink}>
+					<span style={styles.brandBadge}>⛰️</span>
+					<div style={{ lineHeight: 1.1, gap: 2, marginLeft: 8 }}>
+						<div style={styles.brandTitle}>PeakGuide</div>
+						<div style={styles.brandSub}>{t.tagline}</div>
+					</div>
+				</NavLink>
 			</div>
 
 			<div style={styles.center}>
-				{!isHome && (
-					<NavLink to='/' style={styles.navLink}>
-						{t.home}
-					</NavLink>
-				)}
-
 				<NavLink to='/peaks' style={styles.navLink}>
 					{t.peaks}
 				</NavLink>
@@ -221,8 +217,8 @@ const styles = {
 	},
 
 	brandBadge: {
-		width: 34,
-		height: 34,
+		width: 40,
+		height: 40,
 		borderRadius: 12,
 		display: "grid",
 		placeItems: "center",
@@ -234,9 +230,19 @@ const styles = {
 	brandTitle: { fontWeight: 1000, letterSpacing: "-0.3px" },
 	brandSub: { fontSize: 12, color: "var(--muted)", marginTop: 2 },
 
+	homeLink: {
+		textDecoration: "none",
+		fontWeight: 700,
+		color: "var(--text)",
+		height: "var(--nav-pill-h)",
+		padding: `0 var(--nav-pill-px)`,
+		display: "inline-flex",
+		alignItems: "center",
+	},
+
 	navLink: ({ isActive }) => ({
 		textDecoration: "none",
-		fontWeight: 1000,
+		fontWeight: 700,
 		height: "var(--nav-pill-h)",
 		padding: `0 var(--nav-pill-px)`,
 		display: "inline-flex",
@@ -251,8 +257,12 @@ const styles = {
 
 	hashLink: {
 		textDecoration: "none",
-		fontWeight: 1000,
-		padding: "10px 12px",
+		fontWeight: 700,
+		height: "var(--nav-pill-h)",
+		fontSize: "var(--nav-pill-fs)",
+		padding: `0 var(--nav-pill-px)`,
+		display: "inline-flex",
+		alignItems: "center",
 		borderRadius: 999,
 		border: "1px solid var(--border)",
 		background: "rgba(255,255,255,0.55)",
