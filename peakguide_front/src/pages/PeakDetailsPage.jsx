@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
 	fetchPeakBySlug,
-	fetchPeaks,
 	fetchPeakPoisBySlug,
 	fetchPeakTrailsBySlug,
+	fetchNearbyPeaksBySlug,
 } from "../api/peakguide";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import PeakMap from "../components/PeakMap";
 
 export default function PeakDetailsPage({ lang = "pl" }) {
 	const { slug } = useParams();
@@ -16,14 +17,14 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	const [error, setError] = useState(null);
 	const [peak, setPeak] = useState(null);
 
-	const [rangePeaks, setRangePeaks] = useState([]);
-	const [rangeStatus, setRangeStatus] = useState("idle"); // idle | loading | success | error
-
 	const [trailsStatus, setTrailsStatus] = useState("idle"); // idle
 	const [trails, setTrails] = useState([]);
 	const [poisStatus, setPoisStatus] = useState("idle"); // idle
 	const [pois, setPois] = useState([]);
 	const [tab, setTab] = useState("overview"); // overview | trails | pois
+
+	const [nearbyStatus, setNearbyStatus] = useState("idle"); // idle | loading | success | error
+	const [nearbyPeaks, setNearbyPeaks] = useState([]);
 
 	const labels = useMemo(() => getLabels(lang), [lang]);
 
@@ -65,40 +66,6 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	}, [lang, slug]);
 
 	useEffect(() => {
-		// Wait until peak details are loaded (range_slug is needed)
-		if (!peak?.range_slug) return;
-
-		let alive = true;
-
-		(async () => {
-			try {
-				setRangeStatus("loading");
-				setRangePeaks([]);
-
-				// Load all peaks and filter by the same range
-				const all = await fetchPeaks({ lang });
-
-				if (!alive) return;
-
-				const related = (Array.isArray(all) ? all : [])
-					.filter((p) => p.range_slug === peak.range_slug)
-					.filter((p) => p.slug !== peak.slug)
-					.slice(0, 6);
-
-				setRangePeaks(related);
-				setRangeStatus("success");
-			} catch {
-				if (!alive) return;
-				setRangeStatus("error");
-			}
-		})();
-
-		return () => {
-			alive = false;
-		};
-	}, [lang, peak?.range_slug, peak?.slug]);
-
-	useEffect(() => {
 		let cancelled = false;
 
 		async function loadExtras() {
@@ -132,6 +99,31 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	useEffect(() => {
 		setTab("overview");
 	}, [slug]);
+
+	useEffect(() => {
+		let cancelled = false;
+
+		async function loadNearby() {
+			if (!slug) return;
+			setNearbyStatus("loading");
+			setNearbyPeaks([]);
+
+			try {
+				const items = await fetchNearbyPeaksBySlug(lang, slug);
+				if (cancelled) return;
+				setNearbyPeaks(items);
+				setNearbyStatus("success");
+			} catch {
+				if (cancelled) return;
+				setNearbyStatus("error");
+			}
+		}
+
+		loadNearby();
+		return () => {
+			cancelled = true;
+		};
+	}, [lang, slug, peak?.slug]);
 
 	const mapUrl = useMemo(() => {
 		if (!peak) return null;
@@ -315,6 +307,14 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 							) : (
 								<div style={muted}>—</div>
 							)}
+
+							<div style={{ marginTop: 12 }}>
+								<PeakMap
+									name={peak.name}
+									lat={peak.latitude}
+									lon={peak.longitude}
+								/>
+							</div>
 						</section>
 
 						{/* Right info panel */}
@@ -364,29 +364,31 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 					{/* Peaks in the same range */}
 					<section style={rangeSection}>
-						<h3 style={rangeTitle}>{labels.inRange}</h3>
+						<h3 style={rangeTitle}>
+							{lang === "pl" ? "W pobliżu warto zdobyć" : "Nearby worth hiking"}
+						</h3>
 
-						{rangeStatus === "loading" && <div style={muted}>Loading…</div>}
-
-						{rangeStatus === "error" && (
-							<div style={muted}>Could not load related peaks.</div>
+						{nearbyStatus === "loading" && <div style={muted}>Loading…</div>}
+						{nearbyStatus === "error" && (
+							<div style={muted}>Could not load nearby peaks.</div>
 						)}
-
-						{rangeStatus === "success" && rangePeaks.length === 0 && (
+						{nearbyStatus === "success" && nearbyPeaks.length === 0 && (
 							<div style={muted}>—</div>
 						)}
 
-						{rangeStatus === "success" && rangePeaks.length > 0 && (
+						{nearbyStatus === "success" && nearbyPeaks.length > 0 && (
 							<div style={rangeGrid}>
-								{rangePeaks.map((p) => (
+								{nearbyPeaks.map((p) => (
 									<Link
 										key={p.slug}
 										to={`/peaks/${p.slug}`}
 										style={{ textDecoration: "none", color: "inherit" }}
 									>
 										<article style={miniCard}>
-											<div style={miniTitle}>{p.peak_name}</div>
-											<div style={miniMeta}>⛰️ {p.elevation_m} m</div>
+											<div style={miniTitle}>{p.name || p.slug}</div>
+											<div style={miniMeta}>
+												⛰️ {p.elevation_m} m · 📍 {p.distance_km} km
+											</div>
 										</article>
 									</Link>
 								))}

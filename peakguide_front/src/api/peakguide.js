@@ -83,6 +83,15 @@ export async function fetchRanges({ lang = "pl" } = {}) {
 	return data;
 }
 
+export async function fetchNearbyPeaksBySlug(lang, slug) {
+	const res = await fetch(`${API_URL}/peaks/${slug}/nearby?lang=${lang}`, {
+		credentials: "include",
+	});
+	if (!res.ok) throw new Error("Failed to load nearby peaks");
+	const json = await res.json();
+	return Array.isArray(json.items) ? json.items : [];
+}
+
 export async function fetchPeakBySlug(lang, slug) {
 	const safeLang = apiLang(lang);
 	const key = `${safeLang}:${slug}`;
