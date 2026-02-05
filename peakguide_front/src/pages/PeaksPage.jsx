@@ -96,6 +96,16 @@ export default function PeaksPage({ lang }) {
 		return out;
 	}, [peaks, range, q, sort]);
 
+	const [kgpPeaks, nearbyPeaks] = useMemo(() => {
+		const kgp = [];
+		const near = [];
+		for (const p of filteredPeaks) {
+			if (p.is_korona) kgp.push(p);
+			else near.push(p);
+		}
+		return [kgp, near];
+	}, [filteredPeaks]);
+
 	const isLoading = peaksState.status === "loading";
 	const isError = peaksState.status === "error";
 
@@ -147,15 +157,42 @@ export default function PeaksPage({ lang }) {
 
 			{/* Grid */}
 			{!isError && (
-				<div style={grid}>
-					{isLoading
-						? Array.from({ length: 10 }).map((_, i) => (
-								<PeakCardSkeleton key={i} />
-							))
-						: filteredPeaks.map((p) => (
+				<>
+					{/* KGP */}
+					<div style={sectionHead}>
+						<h2 style={sectionTitle}>
+							{lang === "pl"
+								? "Korona Gór Polski"
+								: "Crown of Polish Mountains"}
+						</h2>
+						<div style={sectionCount}>{kgpPeaks.length}</div>
+					</div>
+
+					<div style={grid}>
+						{isLoading
+							? Array.from({ length: 10 }).map((_, i) => (
+									<PeakCardSkeleton key={`kgp-${i}`} />
+								))
+							: kgpPeaks.map((p) => (
+									<PeakCard key={p.slug} peak={p} lang={lang} />
+								))}
+					</div>
+
+					{/* Nearby */}
+					<div style={{ ...sectionHead, marginTop: 18 }}>
+						<h2 style={sectionTitle}>
+							{lang === "pl" ? "Nearby / dodatkowe szczyty" : "Nearby peaks"}
+						</h2>
+						<div style={sectionCount}>{nearbyPeaks.length}</div>
+					</div>
+
+					<div style={grid}>
+						{!isLoading &&
+							nearbyPeaks.map((p) => (
 								<PeakCard key={p.slug} peak={p} lang={lang} />
 							))}
-				</div>
+					</div>
+				</>
 			)}
 
 			{/* Optional empty state */}
@@ -238,4 +275,26 @@ const emptyBox = {
 	background: "rgba(15,23,42,0.02)",
 	color: "var(--muted)",
 	fontWeight: 900,
+};
+
+/*-------KGP + nearby----------*/
+
+const sectionHead = {
+	display: "flex",
+	alignItems: "baseline",
+	justifyContent: "space-between",
+	gap: 10,
+};
+
+const sectionTitle = {
+	margin: 0,
+	fontSize: 16,
+	letterSpacing: "-0.2px",
+	fontWeight: 1000,
+};
+
+const sectionCount = {
+	color: "var(--muted)",
+	fontWeight: 1000,
+	fontSize: 13,
 };

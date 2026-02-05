@@ -7,11 +7,19 @@ function safeLang(lang) {
 }
 
 /**
- * GET /peaks?lang=pl
+ * GET /peaks?lang=pl&only=all|korona|nearby
  */
 export async function listPeaks(req, res) {
 	try {
 		const lang = safeLang(req.query.lang);
+		const only = String(req.query.only || "all").toLowerCase(); // all | korona | nearby
+
+		const where =
+			only === "korona"
+				? "WHERE p.is_korona = true"
+				: only === "nearby"
+					? "WHERE p.is_korona = false"
+					: "";
 
 		const { rows } = await db.query(
 			`
@@ -19,6 +27,9 @@ export async function listPeaks(req, res) {
         p.slug,
         pi.name AS peak_name,
         p.elevation_m,
+        p.latitude,
+        p.longitude,
+        p.is_korona,
         r.slug AS range_slug,
         ri.name AS range_name
       FROM peaks p
@@ -28,6 +39,7 @@ export async function listPeaks(req, res) {
         ON r.id = p.range_id
       JOIN mountain_ranges_i18n ri
         ON ri.range_id = r.id AND ri.lang = $1
+      ${where}
       ORDER BY p.elevation_m DESC;
       `,
 			[lang],
@@ -167,15 +179,13 @@ export async function getPeakPois(req, res) {
 }
 
 /**
- * GET /peaks/:slug/nearby?lang=pl
- * peaks.geom column (GEOGRAPHY or GEOMETRY) created from latitude/longitude
- * Additional peaks in the same range_id (besides the KGP peak),
- * so there are nearby results to return
+ * GET /peaks/:slug/nearby?lang=pl&limit=6
  */
 export async function getNearbyPeaks(req, res) {
 	try {
 		const lang = safeLang(req.query.lang);
 		const { slug } = req.params;
+		const limit = Math.min(Number(req.query.limit || 6), 30);
 
 		const baseRes = await db.query(
 			`
@@ -205,10 +215,11 @@ export async function getNearbyPeaks(req, res) {
       WHERE p.range_id = $3
         AND p.slug <> $4
         AND p.geom IS NOT NULL
+        AND p.is_korona = false
       ORDER BY ST_Distance(p.geom, $1) ASC
-      LIMIT 2;
+      LIMIT $5;
       `,
-			[base.geom, lang, base.range_id, slug],
+			[base.geom, lang, base.range_id, slug, limit],
 		);
 
 		res.json({ items: rows });

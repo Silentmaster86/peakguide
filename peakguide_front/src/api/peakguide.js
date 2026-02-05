@@ -15,7 +15,7 @@ const API_URL = import.meta.env.VITE_API_URL || "";
 /* ------------------------------------------------------------------ */
 
 const cache = {
-	peaks: new Map(), // key: lang -> Peak[]
+	peaks: new Map(), // key: `${lang}:${only}` -> Peak[]
 	ranges: new Map(), // key: lang -> Range[]
 	peakBySlug: new Map(), // key: `${lang}:${slug}` -> Peak
 	trailsBySlug: new Map(), // key: `${lang}:${slug}` -> Trail[]
@@ -32,8 +32,9 @@ const cache = {
  * UI supports: pl / en / ua / zh
  */
 function apiLang(lang) {
-	if (lang === "ua" || lang === "zh") return "en";
-	return lang || "pl";
+	const v = (lang || "pl").toLowerCase();
+	if (v === "pl" || v === "en" || v === "ua" || v === "zh") return v;
+	return "pl";
 }
 
 /**
@@ -59,15 +60,17 @@ async function apiGet(path) {
 /* Public API                                                          */
 /* ------------------------------------------------------------------ */
 
-export async function fetchPeaks({ lang = "pl" } = {}) {
+export async function fetchPeaks({ lang = "pl", only = "all" } = {}) {
 	const safeLang = apiLang(lang);
+	const key = `${safeLang}:${only}`;
 
-	if (cache.peaks.has(safeLang)) {
-		return cache.peaks.get(safeLang);
-	}
+	if (cache.peaks.has(key)) return cache.peaks.get(key);
 
-	const data = await apiGet(`/api/peaks?lang=${encodeURIComponent(safeLang)}`);
-	cache.peaks.set(safeLang, data);
+	const data = await apiGet(
+		`/api/peaks?lang=${encodeURIComponent(safeLang)}&only=${encodeURIComponent(only)}`,
+	);
+
+	cache.peaks.set(key, data);
 	return data;
 }
 
@@ -83,12 +86,13 @@ export async function fetchRanges({ lang = "pl" } = {}) {
 	return data;
 }
 
-export async function fetchNearbyPeaksBySlug(lang, slug) {
-	const res = await fetch(`${API_URL}/peaks/${slug}/nearby?lang=${lang}`, {
-		credentials: "include",
-	});
-	if (!res.ok) throw new Error("Failed to load nearby peaks");
-	const json = await res.json();
+export async function fetchNearbyPeaksBySlug(lang, slug, limit = 6) {
+	const safeLang = apiLang(lang);
+
+	const json = await apiGet(
+		`/api/peaks/${encodeURIComponent(slug)}/nearby?lang=${encodeURIComponent(safeLang)}&limit=${limit}`,
+	);
+
 	return Array.isArray(json.items) ? json.items : [];
 }
 
