@@ -271,5 +271,418 @@
     "elev_m": 594,
     "qid": "Q384267",
     "label": "Łysa Góra"
+  },
+  "Sasanka": {
+    "lat": 50.26134,
+    "lon": 16.56082,
+    "elev_m": 965,
+    "qid": "Q9333947",
+    "label": "Sasanka (Góry Bystrzyckie)"
+  },
+  "Rudawiec": {
+    "lat": 50.2447,
+    "lon": 16.9769,
+    "elev_m": 1107,
+    "qid": "Q9323684",
+    "label": "Rudawiec"
+  },
+  "Srebrna Góra": {
+    "lat": 50.57604,
+    "lon": 16.65991,
+    "elev_m": 400,
+    "qid": "Q992929",
+    "label": "Srebrna Góra"
+  },
+  "Rotunda": {
+    "lat": 48.244166666,
+    "lon": 27.306388888,
+    "elev_m": 258,
+    "qid": "Q1983962",
+    "label": "Rotunda"
+  },
+  "Góra Żar": {
+    "lat": 50.8293,
+    "lon": 15.6361,
+    "elev_m": 685,
+    "qid": "Q9397221",
+    "label": "Żar (Karkonosze)"
+  },
+  "Łysica": {
+    "lat": 50.9,
+    "lon": 20.9,
+    "elev_m": null,
+    "qid": "Q384265",
+    "label": "Łysica"
+  },
+  "label:Wielki Szyszak": {
+    "lat": 50.7775,
+    "lon": 15.5675,
+    "elev_m": 1510,
+    "qid": "Q1562236",
+    "label": "Wielki Szyszak"
+  },
+  "label:Smogornia": {
+    "lat": 50.755,
+    "lon": 15.676388888,
+    "elev_m": 1490,
+    "qid": "Q3487004",
+    "label": "Smogornia"
+  },
+  "label:Mały Śnieżnik": {
+    "lat": 50.1914,
+    "lon": 16.8153,
+    "elev_m": 1327,
+    "qid": "Q3509399",
+    "label": "Mały Śnieżnik"
+  },
+  "label:Czarna Góra": {
+    "lat": 50.6525,
+    "lon": 15.74194444,
+    "elev_m": 1300,
+    "qid": "Q200808",
+    "label": "Czarna Góra"
+  },
+  "label:Stóg Izerski": {
+    "lat": 50.89058,
+    "lon": 15.30344,
+    "elev_m": 1105,
+    "qid": "Q9347609",
+    "label": "Stóg"
+  },
+  "label:Wysoki Kamień": {
+    "lat": 50.84555556,
+    "lon": 15.49138889,
+    "elev_m": 1058,
+    "qid": "Q527915",
+    "label": "Wysoki Kamień"
+  },
+  "label:Postawna": {
+    "lat": 50.2233,
+    "lon": 17.0117,
+    "elev_m": 1117,
+    "qid": "Q11825131",
+    "label": "Postawna"
+  },
+  "label:Sasanka": {
+    "lat": 50.26134,
+    "lon": 16.56082,
+    "elev_m": 965,
+    "qid": "Q9333947",
+    "label": "Sasanka (Góry Bystrzyckie)"
+  },
+  "label:Jeleniec": {
+    "lat": 50.69015,
+    "lon": 16.31135,
+    "elev_m": 902,
+    "qid": "Q11724085",
+    "label": "Jeleniec"
+  },
+  "label:Kalenica": {
+    "lat": 50.642777777,
+    "lon": 16.546388888,
+    "elev_m": 964,
+    "qid": "Q6352117",
+    "label": "Kalenica"
+  },
+  "label:Średniak": {
+    "lat": 50.6717,
+    "lon": 16.2353,
+    "elev_m": 781,
+    "qid": "Q9395770",
+    "label": "Średniak"
+  },
+  "label:Lesista Wielka": {
+    "lat": 50.702722222,
+    "lon": 16.190222222,
+    "elev_m": null,
+    "qid": "Q11754821",
+    "label": "Lesista Wielka"
+  },
+  "label:Trojak": {
+    "lat": 41.793611111,
+    "lon": 20.3925,
+    "elev_m": null,
+    "qid": "Q16360107",
+    "label": "Trojak"
+  },
+  "label:Borowa": {
+    "lat": 50.173333333,
+    "lon": 30.103888888,
+    "elev_m": 162,
+    "qid": "Q780732",
+    "label": "Borowa"
+  },
+  "label:Skalniak": {
+    "lat": 50.47226,
+    "lon": 16.31929,
+    "elev_m": 915,
+    "qid": "Q9337568",
+    "label": "Skalniak"
+  },
+  "label:Narożnik": {
+    "lat": 50.4591,
+    "lon": 16.3467,
+    "elev_m": 849,
+    "qid": "Q11789753",
+    "label": "Narożnik"
+  },
+  "qid:Q9248915": {
+    "lat": 50.723888888,
+    "lon": 16.205833333,
+    "elev_m": 836,
+    "qid": "Q9248915",
+    "label": "Dzikowiec"
+  },
+  "label:Trzy Kopy": {
+    "lat": 49.199722222,
+    "lon": 19.729444444,
+    "elev_m": 2136,
+    "qid": "Q9362324",
+    "label": "Trzy Kopy"
+  },
+  "qid:Q6478316": {
+    "lat": 53.5625,
+    "lon": 26.355555555,
+    "elev_m": null,
+    "qid": "Q6478316",
+    "label": "Obryń Wielki"
+  },
+  "label:Baraniec": {
+    "lat": 49.173611111,
+    "lon": 19.741388888,
+    "elev_m": 2184,
+    "qid": "Q3509342",
+    "label": "Baraniec"
+  },
+  "label:Ostrzyca Proboszczowicka": {
+    "lat": 51.0565,
+    "lon": 15.7654,
+    "elev_m": null,
+    "qid": "Q128591553",
+    "label": "Ostrzyca Proboszczowicka"
+  },
+  "qid:Q517345": {
+    "lat": 47.125,
+    "lon": 25.18583333,
+    "elev_m": 2100,
+    "qid": "Q517345",
+    "label": "Pietrosul Călimanilor"
+  },
+  "label:Srebrna Kopa": {
+    "lat": 50.2567,
+    "lon": 17.4556,
+    "elev_m": null,
+    "qid": "Q23824276",
+    "label": "Srebrna Kopa"
+  },
+  "qid:Q3132319": {
+    "lat": 49.187222222,
+    "lon": 20.06,
+    "elev_m": 2438,
+    "qid": "Q3132319",
+    "label": "Mięguszowiecki Szczyt"
+  },
+  "label:Kozi Wierch": {
+    "lat": 49.21825,
+    "lon": 20.0286,
+    "elev_m": 2291,
+    "qid": "Q1765870",
+    "label": "Kozi Wierch"
+  },
+  "label:Mała Babia Góra": {
+    "lat": 49.5812,
+    "lon": 19.4996,
+    "elev_m": 1515,
+    "qid": "Q11772027",
+    "label": "Mała Babia Góra"
+  },
+  "label:Polica": {
+    "lat": 46.265,
+    "lon": 14.3275,
+    "elev_m": 428,
+    "qid": "Q2147763",
+    "label": "Polica (gmina Naklo)"
+  },
+  "label:Krzemień": {
+    "lat": 49.085833333,
+    "lon": 22.738888888,
+    "elev_m": 1335,
+    "qid": "Q5159023",
+    "label": "Krzemień"
+  },
+  "label:Halicz": {
+    "lat": 49.258055555,
+    "lon": 25.138888888,
+    "elev_m": 400,
+    "qid": "Q4132562",
+    "label": "Halicz"
+  },
+  "label:Jaworzyna Kamienicka": {
+    "lat": 49.54775,
+    "lon": 20.15718,
+    "elev_m": 1288,
+    "qid": "Q11723470",
+    "label": "Jaworzyna Kamienicka"
+  },
+  "label:Kudłoń": {
+    "lat": 49.5725,
+    "lon": 20.1762,
+    "elev_m": 1274,
+    "qid": "Q11750776",
+    "label": "Kudłoń"
+  },
+  "label:Wielki Rogacz": {
+    "lat": 49.4399,
+    "lon": 20.6103,
+    "elev_m": null,
+    "qid": "Q9372966",
+    "label": "Wielki Rogacz"
+  },
+  "label:Niemcowa": {
+    "lat": 49.44469,
+    "lon": 20.64644,
+    "elev_m": null,
+    "qid": "Q11791534",
+    "label": "Niemcowa (szczyt)"
+  },
+  "label:Śnieżnica": {
+    "lat": 49.7158,
+    "lon": 20.1785,
+    "elev_m": 1007,
+    "qid": "Q9395711",
+    "label": "Śnieżnica"
+  },
+  "label:Jastrząbka": {
+    "lat": 53.133055555,
+    "lon": 21.247222222,
+    "elev_m": null,
+    "qid": "Q2502651",
+    "label": "Jastrząbka"
+  },
+  "label:Ostry Wierch": {
+    "lat": 49.4178,
+    "lon": 20.4204,
+    "elev_m": 851,
+    "qid": "Q11800795",
+    "label": "Ostry Wierch (Pieniny)"
+  },
+  "label:Rotunda": {
+    "lat": 48.244166666,
+    "lon": 27.306388888,
+    "elev_m": 258,
+    "qid": "Q1983962",
+    "label": "Rotunda"
+  },
+  "label:Leskowiec": {
+    "lat": 49.7106,
+    "lon": 18.3281,
+    "elev_m": null,
+    "qid": "Q10856780",
+    "label": "Leskowiec"
+  },
+  "label:Góra Żar": {
+    "lat": 50.8293,
+    "lon": 15.6361,
+    "elev_m": 685,
+    "qid": "Q9397221",
+    "label": "Żar (Karkonosze)"
+  },
+  "label:Barania Góra": {
+    "lat": 49.611388888,
+    "lon": 19.010555555,
+    "elev_m": 1220,
+    "qid": "Q787991",
+    "label": "Barania Góra"
+  },
+  "label:Klimczok": {
+    "lat": 49.73983,
+    "lon": 18.9952742,
+    "elev_m": 1117,
+    "qid": "Q976723",
+    "label": "Klimczok"
+  },
+  "label:Trzy Korony": {
+    "lat": 49.4136,
+    "lon": 20.4144,
+    "elev_m": 982,
+    "qid": "Q7849064",
+    "label": "Trzy Korony"
+  },
+  "label:Sokolica": {
+    "lat": 49.58434,
+    "lon": 19.56425,
+    "elev_m": 1367,
+    "qid": "Q9339200",
+    "label": "Sokolica (Beskid Żywiecki)"
+  },
+  "label:Radunia": {
+    "lat": 50.837369444,
+    "lon": 16.710386111,
+    "elev_m": 573,
+    "qid": "Q778975",
+    "label": "Radunia"
+  },
+  "label:Wieżyca": {
+    "lat": 54.224444444,
+    "lon": 18.123611111,
+    "elev_m": 329,
+    "qid": "Q360129",
+    "label": "Wieżyca"
+  },
+  "label:Łysa Góra": {
+    "lat": 50.860277777,
+    "lon": 21.046944444,
+    "elev_m": 594,
+    "qid": "Q384267",
+    "label": "Łysa Góra"
+  },
+  "qid:Q5731913": {
+    "lat": 53.55,
+    "lon": 22.4167,
+    "elev_m": null,
+    "qid": "Q5731913",
+    "label": "Kudłaczewo"
+  },
+  "qid:Q31554510": {
+    "lat": 49.4217,
+    "lon": 21.1017,
+    "elev_m": null,
+    "qid": "Q31554510",
+    "label": "Lackowa"
+  },
+  "label:Łysica": {
+    "lat": 50.9,
+    "lon": 20.9,
+    "elev_m": null,
+    "qid": "Q384265",
+    "label": "Łysica"
+  },
+  "label:Rudawiec": {
+    "lat": 50.2447,
+    "lon": 16.9769,
+    "elev_m": 1107,
+    "qid": "Q9323684",
+    "label": "Rudawiec"
+  },
+  "label:Iwinka": {
+    "lat": 50.23963,
+    "lon": 16.98216,
+    "elev_m": 1079,
+    "qid": "Q11714538",
+    "label": "Iwinka"
+  },
+  "label:Wołek": {
+    "lat": 50.838024,
+    "lon": 15.9354436,
+    "elev_m": 878,
+    "qid": "Q8024074",
+    "label": "Wołek"
+  },
+  "label:Sokolik": {
+    "lat": 50.8697,
+    "lon": 15.8679,
+    "elev_m": 642,
+    "qid": "Q9339205",
+    "label": "Sokolik"
   }
 }
