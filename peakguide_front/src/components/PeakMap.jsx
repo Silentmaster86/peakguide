@@ -1,16 +1,20 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
+// Vite needs explicit URLs for Leaflet marker assets:
+import marker2x from "leaflet/dist/images/marker-icon-2x.png";
+import marker1x from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 // FIX: Default icons Leaflet on production (Netlify/Vite)
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-	iconRetinaUrl: markerIcon2x,
-	iconUrl: markerIcon,
+const DefaultIcon = L.icon({
+	iconRetinaUrl: marker2x,
+	iconUrl: marker1x,
 	shadowUrl: markerShadow,
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	popupAnchor: [1, -34],
+	shadowSize: [41, 41],
 });
 
 export default function PeakMap({ name, lat, lon }) {
