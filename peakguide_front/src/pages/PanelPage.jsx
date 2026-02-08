@@ -226,7 +226,7 @@ function getLabels(lang) {
 	return dict[lang] || dict.pl;
 }
 
-/* ---------------- styles (spójne z Twoim UI) ---------------- */
+/* ---------------- styles ---------------- */
 
 const card = {
 	border: "1px solid var(--border)",

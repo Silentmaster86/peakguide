@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import AuthShell from "../components/AuthShell";
+import { Field, TextInput, PrimaryBtn } from "../components/AuthFormBits";
 
 function isEmail(v) {
 	return /^\S+@\S+\.\S+$/.test(v);
@@ -17,6 +19,7 @@ export default function RegisterPage() {
 	const [localError, setLocalError] = useState("");
 
 	const busy = status === "loading";
+	const authed = status === "authed";
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -31,71 +34,60 @@ export default function RegisterPage() {
 			await register({ email, password, firstName, lastName });
 			nav("/panel", { replace: true });
 		} catch {
-			// error w context
+			// handled in context
 		}
 	}
 
+	if (authed) return <Navigate to='/panel' replace />;
+
 	return (
-		<div style={{ maxWidth: 520, margin: "40px auto", padding: 16 }}>
-			<h1>Rejestracja</h1>
-
-			{(localError || error) && (
-				<div
-					style={{
-						padding: 12,
-						border: "1px solid #f00",
-						borderRadius: 8,
-						margin: "12px 0",
-					}}
-				>
-					{localError || error}
-				</div>
-			)}
-
+		<AuthShell
+			title='Rejestracja'
+			error={localError || error}
+			footer={
+				<>
+					Masz konto? <Link to='/login'>Logowanie</Link>
+				</>
+			}
+		>
 			<form onSubmit={onSubmit} style={{ display: "grid", gap: 10 }}>
-				<label>
-					Imię
-					<input
+				<Field label='Imię'>
+					<TextInput
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
 					/>
-				</label>
+				</Field>
 
-				<label>
-					Nazwisko (opcjonalnie)
-					<input
+				<Field label='Nazwisko (opcjonalnie)'>
+					<TextInput
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
 					/>
-				</label>
+				</Field>
 
-				<label>
-					Email
-					<input
+				<Field label='Email'>
+					<TextInput
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						autoComplete='email'
+						placeholder='you@example.com'
 					/>
-				</label>
+				</Field>
 
-				<label>
-					Hasło
-					<input
+				<Field label='Hasło'>
+					<TextInput
 						type='password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						autoComplete='new-password'
+						placeholder='min. 6 znaków'
 					/>
-				</label>
+				</Field>
 
-				<button type='submit' disabled={busy}>
-					{busy ? "Tworzę konto…" : "Utwórz konto"}
-				</button>
+				<PrimaryBtn type='submit' disabled={busy}>
+					{busy ? "..." : "Utwórz konto"}
+				</PrimaryBtn>
 			</form>
-
-			<p style={{ marginTop: 12 }}>
-				Masz konto? <Link to='/login'>Zaloguj się</Link>
-			</p>
-		</div>
+		</AuthShell>
 	);
 }

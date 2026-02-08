@@ -43,8 +43,6 @@ function ToolCard({ title, text, cta, onClick }) {
 	);
 }
 
-/* --- styles: skopiowane z PanelPage, żeby wyglądało identycznie --- */
-
 const card = {
 	border: "1px solid var(--border)",
 	borderRadius: 22,

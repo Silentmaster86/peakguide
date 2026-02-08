@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import AuthShell from "../components/AuthShell";
+import { Field, TextInput, PrimaryBtn } from "../components/AuthFormBits";
 
 function isEmail(v) {
 	return /^\S+@\S+\.\S+$/.test(v);
@@ -21,6 +23,7 @@ export default function LoginPage() {
 	const [localError, setLocalError] = useState("");
 
 	const busy = status === "loading";
+	const authed = status === "authed";
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -34,55 +37,46 @@ export default function LoginPage() {
 			await login({ email, password });
 			nav(from, { replace: true });
 		} catch {
-			// error obsłużony w context
+			// handled in context
 		}
 	}
 
+	if (authed) return <Navigate to='/panel' replace />;
+
 	return (
-		<div style={{ maxWidth: 520, margin: "40px auto", padding: 16 }}>
-			<h1>Logowanie</h1>
-
-			{(localError || error) && (
-				<div
-					style={{
-						padding: 12,
-						border: "1px solid #f00",
-						borderRadius: 8,
-						margin: "12px 0",
-					}}
-				>
-					{localError || error}
-				</div>
-			)}
-
+		<AuthShell
+			title='Logowanie'
+			error={localError || error}
+			footer={
+				<>
+					Nie masz konta? <Link to='/register'>Rejestracja</Link>
+				</>
+			}
+		>
 			<form onSubmit={onSubmit} style={{ display: "grid", gap: 10 }}>
-				<label>
-					Email
-					<input
+				<Field label='Email'>
+					<TextInput
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						autoComplete='email'
+						placeholder='you@example.com'
 					/>
-				</label>
+				</Field>
 
-				<label>
-					Hasło
-					<input
+				<Field label='Hasło'>
+					<TextInput
 						type='password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						autoComplete='current-password'
+						placeholder='••••••••'
 					/>
-				</label>
+				</Field>
 
-				<button type='submit' disabled={busy}>
-					{busy ? "Loguję…" : "Zaloguj"}
-				</button>
+				<PrimaryBtn type='submit' disabled={busy}>
+					{busy ? "..." : "Zaloguj"}
+				</PrimaryBtn>
 			</form>
-
-			<p style={{ marginTop: 12 }}>
-				Nie masz konta? <Link to='/register'>Zarejestruj się</Link>
-			</p>
-		</div>
+		</AuthShell>
 	);
 }
