@@ -76,6 +76,8 @@ function Hero({ t }) {
 			<p style={styles.lead}>{t.subtitle}</p>
 			<p style={styles.para}>{t.p1}</p>
 			<p style={styles.para}>{t.p2}</p>
+			<p style={styles.para}>{t.p3}</p>
+			<p style={styles.para}>{t.p4}</p>
 		</section>
 	);
 }
@@ -245,6 +247,8 @@ function getLabels(lang) {
 				"Przewodnik po Koronie Gór Polski, który ma być po prostu użyteczny: szybko znajdziesz szczyt, sprawdzisz pasmo i wejdziesz w detale.",
 			p1: "Na górze masz nawigację do listy szczytów i pasm. Tam możesz przeglądać, filtrować i wybierać kolejne miejsca.",
 			p2: "Projekt będzie rozwijany o praktyczne informacje (start, dojazd, parking, wskazówki) — bez zbędnych ozdobników.",
+			p3: "Jeśli masz ciekawy pomysł jak rozbudować tą bazę lub coś innego, wejdź w panel i wypełnij formularz.",
+			p4: "Mam nadzieję, że znajdziesz tu wszystko czego szukasz.",
 
 			whyTitle: "Dlaczego PeakGuide",
 			whyHint: "po co ta strona istnieje",
@@ -319,6 +323,8 @@ function getLabels(lang) {
 				"Guide to the Crown of Polish Mountains designed to be simply useful: quickly find a peak, check the range, and dive into details.",
 			p1: "At the top, you have navigation to the peaks and ranges list. There, you can browse, filter, and select your next destinations.",
 			p2: "The project will be developed with practical information (start point, access, parking, tips) — without unnecessary embellishments.",
+			p3: "If you have an interesting idea on how to expand this database or anything else, go to the panel and fill out the form.",
+			p4: "I hope you will find everything you are looking for here.",
 			whyTitle: "Why PeakGuide",
 			whyHint: "the purpose of this site",
 			whyCards: [
@@ -379,7 +385,7 @@ function getLabels(lang) {
 					q: "Will there be 'Favorites'?",
 					a: "Yes — first locally, then with an account / synchronization.",
 				},
-			], // możesz dopiąć PL/UA/ZH później (albo skopiować z Twoich wersji 1:1)
+			],
 		},
 
 		ua: {
@@ -389,6 +395,8 @@ function getLabels(lang) {
 				"Гід по Короні гір Польщі, створений, щоб бути просто корисним: швидко знайдіть вершину, перевірте хребет і заглибтеся в деталі.",
 			p1: "Угорі у вас є навігація до списку вершин і хребтів. Там ви можете переглядати, фільтрувати та вибирати свої наступні напрямки.",
 			p2: "Проект буде розвиватися з практичною інформацією (стартова точка, доступ, паркування, поради) — без зайвих прикрас.",
+			p3: "Якщо у вас є цікава ідея, як розширити цю базу даних або додати щось інше, перейдіть до панелі та заповніть форму.",
+			p4: "Сподіваюся, що тут ви знайдете все, що шукаєте.",
 			whyTitle: "Чому PeakGuide",
 			whyHint: "мета цього сайту",
 			whyCards: [
@@ -459,6 +467,8 @@ function getLabels(lang) {
 				"波兰山峰之冠指南，旨在提供实用功能：快速查找山峰，查看山脉，并深入了解详情。",
 			p1: "顶部有导航链接到山峰和山脉列表。在那里，您可以浏览、筛选并选择下一个目的地。",
 			p2: "该项目将开发实用信息（起点、通道、停车场、提示）——没有不必要的装饰。",
+			p3: "如果你有关于如何扩展这个数据库或添加其他内容的有趣想法，请进入面板并填写表单。",
+			p4: "希望你能在这里找到你想要的一切。",
 			whyTitle: "为什么选择 PeakGuide",
 			whyHint: "本网站的目的",
 			whyCards: [

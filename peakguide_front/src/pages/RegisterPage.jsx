@@ -33,7 +33,7 @@ export default function RegisterPage({ lang = "pl" }) {
 
 		try {
 			await register({ email, password, firstName, lastName });
-			nav("/panel", { replace: true });
+			nav("/", { replace: true });
 		} catch {
 			// handled in context
 		}

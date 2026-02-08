@@ -16,7 +16,7 @@ export default function LoginPage({ lang = "pl" }) {
 	const loc = useLocation();
 
 	const from = useMemo(
-		() => loc.state?.from?.pathname || "/panel",
+		() => loc.state?.from?.pathname || "/",
 		[loc.state?.from?.pathname],
 	);
 
@@ -42,7 +42,7 @@ export default function LoginPage({ lang = "pl" }) {
 		}
 	}
 
-	if (authed) return <Navigate to='/panel' replace />;
+	if (authed) return <Navigate to='/' replace />;
 
 	return (
 		<AuthShell
