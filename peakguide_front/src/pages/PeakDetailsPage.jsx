@@ -8,6 +8,7 @@ import {
 } from "../api/peakguide";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import PeakMap from "../components/PeakMap";
+import ComingSoonBox from "../components/ComingSoonBox";
 
 export default function PeakDetailsPage({ lang = "pl" }) {
 	const { slug } = useParams();
@@ -412,62 +413,22 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 						{trailsStatus === "error" && (
 							<div style={mutedRow}>{labels.failedTrails}</div>
 						)}
-						{trailsStatus === "success" && trails.length === 0 && (
-							<div style={mutedRow}>{labels.noTrails}</div>
-						)}
+						{trailsStatus === "success" && (trails?.length ?? 0) === 0 ? (
+							<ComingSoonBox
+								title={labels.trailsSoonTitle || "Szlaki będą dostępne wkrótce"}
+								text={
+									labels.trailsSoonText ||
+									"Dodajemy realne trasy, czasy przejść i linki do map. Wróć tu niedługo 🙂"
+								}
+							/>
+						) : null}
 
-						{trails.map((t) => (
-							<article key={t.slug} style={itemCard}>
-								<div style={itemTop}>
-									<div style={itemTitle}>{t.name}</div>
-									{t.difficulty ? (
-										<span style={badge}>{t.difficulty}</span>
-									) : null}
-								</div>
-
-								<div style={metaRow}>
-									{t.distance_km ? (
-										<span style={metaPill}>🥾 {t.distance_km} km</span>
-									) : null}
-									{t.time_min ? (
-										<span style={metaPill}>⏱️ {t.time_min} min</span>
-									) : null}
-									{t.elevation_gain_m ? (
-										<span style={metaPill}>📈 +{t.elevation_gain_m} m</span>
-									) : null}
-									{t.route_type ? (
-										<span style={metaPill}>🧭 {t.route_type}</span>
-									) : null}
-								</div>
-
-								{t.description ? (
-									<div style={itemText}>{t.description}</div>
-								) : null}
-
-								<div style={actionsRow}>
-									{t.map_url ? (
-										<a
-											href={t.map_url}
-											target='_blank'
-											rel='noreferrer'
-											style={actionBtn}
-										>
-											🗺️ {labels.openMap}
-										</a>
-									) : null}
-									{t.gpx_url ? (
-										<a
-											href={t.gpx_url}
-											target='_blank'
-											rel='noreferrer'
-											style={actionBtn}
-										>
-											🧾 GPX
-										</a>
-									) : null}
-								</div>
-							</article>
-						))}
+						{(trails?.length ?? 0) > 0 &&
+							trails.map((t) => (
+								<article key={t.slug} style={itemCard}>
+									{/* cały Twój istniejący kod itemCard */}
+								</article>
+							))}
 					</section>
 				</>
 			)}
@@ -488,45 +449,24 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 						{poisStatus === "error" && (
 							<div style={mutedRow}>{labels.failedPois}</div>
 						)}
-						{poisStatus === "success" && pois.length === 0 && (
-							<div style={mutedRow}>{labels.noPois}</div>
-						)}
+						{poisStatus === "success" && (pois?.length ?? 0) === 0 ? (
+							<ComingSoonBox
+								title={
+									labels.poisSoonTitle || "Punkty POI będą dostępne wkrótce"
+								}
+								text={
+									labels.poisSoonText ||
+									"Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych update’ach."
+								}
+							/>
+						) : null}
 
-						{pois.map((poi) => (
-							<article key={poi.id} style={itemCard}>
-								<div style={itemTop}>
-									<div style={itemTitle}>{poi.name}</div>
-									<span style={badgeMuted}>{poi.type_name || "POI"}</span>
-								</div>
-
-								{poi.description ? (
-									<div style={itemText}>{poi.description}</div>
-								) : null}
-
-								<div style={actionsRow}>
-									{poi.google_maps_url ? (
-										<a
-											href={poi.google_maps_url}
-											target='_blank'
-											rel='noreferrer'
-											style={actionBtn}
-										>
-											📍 Google Maps
-										</a>
-									) : null}
-									{poi.website_url ? (
-										<a
-											href={poi.website_url}
-											target='_blank'
-											rel='noreferrer'
-											style={actionBtn}
-										>
-											🔗 {labels.website}
-										</a>
-									) : null}
-								</div>
-							</article>
-						))}
+						{(pois?.length ?? 0) > 0 &&
+							pois.map((poi) => (
+								<article key={poi.id} style={itemCard}>
+									{/* cały Twój istniejący kod itemCard */}
+								</article>
+							))}
 					</section>
 				</>
 			)}
@@ -563,6 +503,13 @@ function getLabels(lang) {
 			openMap: "Otwórz mapę",
 			website: "Strona",
 			overview: "Opis",
+			trailsSoonTitle: "Szlaki będą dostępne wkrótce",
+			trailsSoonText:
+				"Dodajemy realne trasy, czasy przejść i linki do map. Wróć tu niedługo 🙂",
+
+			poisSoonTitle: "Punkty POI będą dostępne wkrótce",
+			poisSoonText:
+				"Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych aktualizacjach.",
 		},
 		en: {
 			peaks: "Peaks",
@@ -589,6 +536,12 @@ function getLabels(lang) {
 			openMap: "Open map",
 			website: "Website",
 			overview: "Overview",
+			trailsSoonTitle: "Hiking trails coming soon",
+			trailsSoonText:
+				"We are adding real hiking routes with distances, time estimates, and map links. Check back soon 🙂",
+			poisSoonTitle: "Points of interest coming soon",
+			poisSoonText:
+				"Parking areas, mountain huts, viewpoints, and other useful locations will be added in upcoming updates.",
 		},
 		ua: {
 			peaks: "Вершини",
@@ -615,6 +568,13 @@ function getLabels(lang) {
 			openMap: "Відкрити мапу",
 			website: "Вебсайт",
 			overview: "Огляд",
+			trailsSoonTitle: "Маршрути будуть доступні незабаром",
+			trailsSoonText:
+				"Ми додаємо реальні пішохідні маршрути з довжиною, часом проходження та посиланнями на карти. Завітайте знову трохи пізніше 🙂",
+
+			poisSoonTitle: "Корисні точки зʼявляться незабаром",
+			poisSoonText:
+				"Парковки, гірські притулки, оглядові точки та інші корисні місця будуть додані в наступних оновленнях.",
 		},
 		zh: {
 			peaks: "山峰",
@@ -641,6 +601,13 @@ function getLabels(lang) {
 			openMap: "打开地图",
 			website: "网站",
 			overview: "概览",
+			trailsSoonTitle: "登山路线即将上线",
+			trailsSoonText:
+				"我们正在添加真实的登山路线，包括距离、预计时间和地图链接。欢迎稍后再来查看 🙂",
+
+			poisSoonTitle: "兴趣点即将上线",
+			poisSoonText:
+				"停车场、山间小屋、观景点以及其他实用地点将在后续更新中加入。",
 		},
 	};
 
@@ -977,7 +944,9 @@ const itemCard = {
 	background: "color-mix(in srgb, var(--menu-bg) 60%, transparent)",
 };
 
-const itemTop = {
+/*------------------Styles for Trails and POIs(future project)---------------*/
+
+/*const itemTop = {
 	display: "flex",
 	gap: 10,
 	alignItems: "baseline",
@@ -1059,7 +1028,7 @@ const actionBtn = {
 	fontWeight: 1000,
 	fontSize: 13,
 	textDecoration: "none",
-};
+};*/
 
 /* ------------------- tabs ------------------- */
 
