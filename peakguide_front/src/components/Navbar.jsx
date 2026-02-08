@@ -3,6 +3,7 @@ import DesktopThemeSwitcher from "./DesktopThemeSwitcher";
 import LanguageSwitcherDropdown from "./LanguageSwitcherDropdown";
 import NavDropdown from "./NavDropdown";
 import { useMedia } from "../hooks/useMedia";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 	const t = getLabels(lang);
@@ -12,6 +13,10 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 	// Breakpoints
 	const isCompact = useMedia("(max-width: 959px)"); // tablet & down
 	const isMobile = useMedia("(max-width: 759px)"); // mobile & down
+
+	const { status, logout } = useAuth();
+	const authed = status === "authed";
+	const busy = status === "loading";
 
 	const homeSections = [
 		{ to: "/#why", label: t.why },
@@ -86,6 +91,25 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 			</div>
 
 			<div style={styles.right}>
+				{/* Auth actions */}
+				{busy ? (
+					<span style={styles.authPillMuted}>{t.sessionLoading}</span>
+				) : authed ? (
+					<>
+						<NavLink to='/panel' style={styles.authLink}>
+							{isMobile ? "👤" : t.panel}
+						</NavLink>
+
+						<button type='button' onClick={logout} style={styles.logoutBtn}>
+							{isMobile ? "⎋" : t.logout}
+						</button>
+					</>
+				) : (
+					<NavLink to='/login' style={styles.authLink}>
+						{isMobile ? "🔐" : t.login}
+					</NavLink>
+				)}
+
 				{/* Desktop-only text, compact shows icons only */}
 				<DesktopThemeSwitcher lang={uiLang} compact={isMobile} />
 				<LanguageSwitcherDropdown
@@ -118,6 +142,14 @@ function getLabels(lang) {
 			featured: "Polecane",
 			faq: "FAQ",
 			moreHome: "Sekcja na stronie głównej",
+
+			/*--------------------admin + zaloguj/wyloguj + panel--------------------*/
+
+			login: "Zaloguj",
+			logout: "Wyloguj",
+			panel: "Panel",
+			admin: "Admin",
+			sessionLoading: "Ładowanie sesji...",
 		},
 		en: {
 			tagline: "Crown of Polish Mountains & more",
@@ -135,6 +167,14 @@ function getLabels(lang) {
 			featured: "Featured",
 			faq: "FAQ",
 			moreHome: "Home section",
+
+			/*--------------------admin + login/logout panel--------------------*/
+
+			login: "Login",
+			logout: "Logout",
+			panel: "Panel",
+			admin: "Admin",
+			sessionLoading: "Loading session..",
 		},
 		ua: {
 			tagline: "Корона польських гір і не тільки",
@@ -152,6 +192,14 @@ function getLabels(lang) {
 			featured: "Вибране",
 			faq: "FAQ",
 			moreHome: "Розділ головної",
+
+			/*--------------------aдмін + Увійти/Вийти Панель--------------------*/
+
+			login: "Увійти",
+			logout: "Вийти",
+			panel: "Панель",
+			admin: "Адмін",
+			sessionLoading: "Завантаження сесії…",
 		},
 		zh: {
 			tagline: "波兰山冠及更多",
@@ -169,6 +217,14 @@ function getLabels(lang) {
 			featured: "精选",
 			faq: "FAQ",
 			moreHome: "主页区块",
+
+			/*--------------------管理 + 登录/退出 面板--------------------*/
+
+			login: "登录",
+			logout: "退出",
+			panel: "面板",
+			admin: "管理",
+			sessionLoading: "正在加载会话…",
 		},
 	};
 
@@ -276,5 +332,56 @@ const styles = {
 		borderRadius: 99,
 		background: "rgba(15,23,42,0.14)",
 		margin: "0 2px",
+	},
+	/* ---------------- styles (admin/login/logout/panel) ---------------- */
+	authLink: ({ isActive }) => ({
+		textDecoration: "none",
+		fontWeight: 900,
+		height: "var(--nav-pill-h)",
+		padding: `0 var(--nav-pill-px)`,
+		display: "inline-flex",
+		alignItems: "center",
+		borderRadius: 999,
+		border: "1px solid var(--border)",
+		fontSize: "var(--nav-pill-fs)",
+		background: isActive ? "var(--ink)" : "var(--btn-bg)",
+		color: isActive ? "var(--btn-bg)" : "var(--text)",
+		boxShadow: "var(--shadow-soft)",
+	}),
+
+	logoutBtn: {
+		height: "var(--nav-pill-h)",
+		padding: `0 var(--nav-pill-px)`,
+		borderRadius: 999,
+		border: "1px solid var(--border)",
+		background: "var(--btn-bg)",
+		color: "var(--text)",
+		fontWeight: 900,
+		fontSize: "var(--nav-pill-fs)",
+		cursor: "pointer",
+		boxShadow: "var(--shadow-soft)",
+	},
+
+	authPillMuted: {
+		height: "var(--nav-pill-h)",
+		padding: `0 var(--nav-pill-px)`,
+		borderRadius: 999,
+		border: "1px solid var(--border)",
+		background: "rgba(255,255,255,0.35)",
+		color: "var(--muted)",
+		fontWeight: 900,
+		fontSize: "var(--nav-pill-fs)",
+		display: "inline-flex",
+		alignItems: "center",
+	},
+	navBtn: {
+		height: "var(--nav-pill-h)",
+		padding: `0 var(--nav-pill-px)`,
+		borderRadius: 999,
+		border: "1px solid var(--border)",
+		background: "var(--btn-bg)",
+		color: "var(--text)",
+		fontWeight: 800,
+		cursor: "pointer",
 	},
 };

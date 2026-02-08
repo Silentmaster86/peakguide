@@ -1,4 +1,6 @@
-export const API_URL = import.meta.env.VITE_API_URL;
+export const API_URL = import.meta.env.VITE_API_URL || "";
+
+const base = API_URL ? API_URL.replace(/\/$/, "") : "";
 
 async function parseError(res) {
 	// backend can return JSON or text
@@ -14,7 +16,7 @@ async function parseError(res) {
 }
 
 export async function apiRequest(path, options = {}) {
-	const res = await fetch(`${API_URL}${path}`, {
+	const res = await fetch(`${base}${path}`, {
 		credentials: "include", // important: cookie session
 		headers: {
 			"Content-Type": "application/json",

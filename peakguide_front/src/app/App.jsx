@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import Navbar from "../components/Navbar";
+
 import PeaksPage from "../pages/PeaksPage";
 import PeakDetailsPage from "../pages/PeakDetailsPage";
 import RangesPage from "../pages/RangesPage";
 import RangeDetailsPage from "../pages/RangeDetailsPage";
+
 import Footer from "../components/Footer";
 import AboutPage from "../pages/AboutPage";
+
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import PanelPage from "../pages/PanelPage";
+import { ProtectedRoute } from "../auth/ProtectedRoute";
 
 export default function App() {
 	const [lang, setLang] = useState(
@@ -57,6 +64,18 @@ export default function App() {
 								element={<RangeDetailsPage lang={safeLang} />}
 							/>
 							<Route path='/about' element={<AboutPage lang={safeLang} />} />
+
+							{/* AUTH */}
+							<Route path='/login' element={<LoginPage />} />
+							<Route path='/register' element={<RegisterPage />} />
+
+							<Route element={<ProtectedRoute />}>
+								<Route path='/panel' element={<PanelPage lang={safeLang} />} />
+							</Route>
+							<Route
+								path='*'
+								element={<div style={{ padding: 16 }}>404</div>}
+							/>
 						</Routes>
 					</main>
 

@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { fetchPeaks } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 
-const SCROLL_OFFSET = 140; // to match navbar height
 export default function HomePage({ lang = "pl" }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
 
@@ -15,8 +14,16 @@ export default function HomePage({ lang = "pl" }) {
 
 	// featured peaks
 	const peaksState = useAsync(() => fetchPeaks({ lang }), [lang]);
-	const peaks = Array.isArray(peaksState.data) ? peaksState.data : [];
-	const featured = useMemo(() => getFeaturedPeaks(peaks, 4), [peaks]);
+
+	// keep a stable "peaks" array derived from async state
+	const peaks = useMemo(() => {
+		return Array.isArray(peaksState?.data) ? peaksState.data : [];
+	}, [peaksState]);
+
+	// compute featured peaks in a memo-safe way (no eslint deps warning)
+	const featured = useMemo(() => {
+		return getFeaturedPeaks(peaks, 4);
+	}, [peaks]);
 
 	return (
 		<div style={styles.wrap}>
@@ -36,7 +43,7 @@ export default function HomePage({ lang = "pl" }) {
 
 function getNavOffset() {
 	const nav = document.getElementById("main-nav");
-	return nav ? nav.getBoundingClientRect().height + 12 : 140; // +12 = mały oddech
+	return nav ? nav.getBoundingClientRect().height + 12 : 140; // +12 = small breathing room
 }
 
 function scrollToHash(hash) {
@@ -107,6 +114,10 @@ function How({ t }) {
 }
 
 function Featured({ t, peaksState, featured }) {
+	const isLoading = peaksState?.status === "loading";
+	const isError = peaksState?.status === "error";
+	const hasFeatured = Array.isArray(featured) && featured.length > 0;
+
 	return (
 		<Section
 			id='featured'
@@ -118,23 +129,11 @@ function Featured({ t, peaksState, featured }) {
 			}
 			ariaLabel='Featured peaks'
 		>
-			{peaksState.status === "loading" ? (
-				<div style={styles.cardsGrid4}>
-					{Array.from({ length: 4 }).map((_, i) => (
-						<div
-							key={`sk-${i}`}
-							style={{ ...styles.peakCard, ...styles.cardSkeleton }}
-						/>
-					))}
-				</div>
-			) : peaksState.status === "error" ? (
-				<div style={styles.noticeWarn}>
-					<div style={{ fontWeight: 1000 }}>{t.featuredErrorTitle}</div>
-					<div style={{ opacity: 0.85, marginTop: 6 }}>
-						{String(peaksState.error || t.featuredErrorBody)}
-					</div>
-				</div>
-			) : featured.length === 0 ? (
+			{isLoading ? (
+				<FeaturedSkeleton />
+			) : isError ? (
+				<FeaturedError t={t} error={peaksState?.error} />
+			) : !hasFeatured ? (
 				<div style={styles.notice}>{t.featuredEmpty}</div>
 			) : (
 				<div style={styles.cardsGrid4}>
@@ -148,6 +147,7 @@ function Featured({ t, peaksState, featured }) {
 										</div>
 										<div style={styles.peakSub}>{p.range_name || "—"}</div>
 									</div>
+
 									<div style={styles.elevBadge}>{p.elevation_m} m</div>
 								</div>
 
@@ -161,6 +161,30 @@ function Featured({ t, peaksState, featured }) {
 				</div>
 			)}
 		</Section>
+	);
+}
+
+function FeaturedSkeleton() {
+	return (
+		<div style={styles.cardsGrid4}>
+			{Array.from({ length: 4 }).map((_, i) => (
+				<div
+					key={`sk-${i}`}
+					style={{ ...styles.peakCard, ...styles.cardSkeleton }}
+				/>
+			))}
+		</div>
+	);
+}
+
+function FeaturedError({ t, error }) {
+	return (
+		<div style={styles.noticeWarn}>
+			<div style={{ fontWeight: 1000 }}>{t.featuredErrorTitle}</div>
+			<div style={{ opacity: 0.85, marginTop: 6 }}>
+				{String(error || t.featuredErrorBody)}
+			</div>
+		</div>
 	);
 }
 
@@ -180,10 +204,13 @@ function Faq({ t }) {
 }
 
 function Section({ id, title, hint, right, ariaLabel, children }) {
+	// dynamic scroll margin – matches your navbar height (better than constant)
+	const scrollMarginTop = getNavOffset();
+
 	return (
 		<section
 			id={id}
-			style={{ ...styles.panel, scrollMarginTop: SCROLL_OFFSET }}
+			style={{ ...styles.panel, scrollMarginTop }}
 			aria-label={ariaLabel || title}
 		>
 			<div style={styles.headRow}>
@@ -198,8 +225,10 @@ function Section({ id, title, hint, right, ariaLabel, children }) {
 					<h2 style={styles.h2}>{title}</h2>
 					{hint ? <span style={styles.microMuted}>{hint}</span> : null}
 				</div>
+
 				{right || null}
 			</div>
+
 			{children}
 		</section>
 	);

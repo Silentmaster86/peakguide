@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, {
 	createContext,
 	useCallback,
@@ -6,12 +7,12 @@ import React, {
 	useMemo,
 	useState,
 } from "react";
-import * as authApi from "../api/auth";
+import * as authApi from "../api/auth"; // <-- fix
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-	const [status, setStatus] = useState("loading");
+	const [status, setStatus] = useState("loading"); // loading | authed | guest | error
 	const [user, setUser] = useState(null);
 	const [error, setError] = useState(null);
 
@@ -20,8 +21,8 @@ export function AuthProvider({ children }) {
 		setStatus("loading");
 		try {
 			const data = await authApi.me();
-			// zakładam, że backend zwraca { user: {...} } albo sam user
 			const u = data?.user ?? data ?? null;
+
 			if (u) {
 				setUser(u);
 				setStatus("authed");
@@ -30,7 +31,6 @@ export function AuthProvider({ children }) {
 				setStatus("guest");
 			}
 		} catch (e) {
-			// 401 = brak sesji -> guest (to normalne)
 			if (e?.status === 401) {
 				setUser(null);
 				setStatus("guest");
@@ -86,7 +86,6 @@ export function AuthProvider({ children }) {
 		try {
 			await authApi.logout();
 		} finally {
-			// niezależnie czy logout endpoint padł, czyści stan
 			setUser(null);
 			setStatus("guest");
 		}
