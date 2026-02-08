@@ -3,7 +3,7 @@ import { useAuth } from "../auth/AuthContext";
 import AdminTools from "./AdminTools";
 
 export default function PanelPage({ lang = "pl" }) {
-	const { user, status, logout } = useAuth();
+	const { user, status } = useAuth();
 	const t = useMemo(() => getLabels(lang), [lang]);
 
 	const [msg, setMsg] = useState("");
@@ -27,10 +27,6 @@ export default function PanelPage({ lang = "pl" }) {
 							{isAdmin ? <span style={pill}>{t.adminPill}</span> : null}
 						</div>
 					</div>
-
-					<button type='button' onClick={logout} style={btn}>
-						{t.logout}
-					</button>
 				</div>
 			</section>
 
@@ -112,7 +108,6 @@ function getLabels(lang) {
 			panelTitle: "Panel",
 			signedInAs: "Zalogowano jako:",
 			adminPill: "ADMIN",
-			logout: "Wyloguj",
 
 			adminTools: "Narzędzia admina",
 			addNearbyTitle: "Dodaj szczyt (Nearby)",
@@ -142,7 +137,6 @@ function getLabels(lang) {
 			panelTitle: "Panel",
 			signedInAs: "Signed in as:",
 			adminPill: "ADMIN",
-			logout: "Log out",
 
 			adminTools: "Admin tools",
 			addNearbyTitle: "Add a nearby peak",
@@ -170,7 +164,6 @@ function getLabels(lang) {
 			panelTitle: "Панель",
 			signedInAs: "Ви увійшли як:",
 			adminPill: "ADMIN",
-			logout: "Вийти",
 
 			adminTools: "Інструменти адміністратора",
 			addNearbyTitle: "Додати вершину (Nearby)",
@@ -199,7 +192,6 @@ function getLabels(lang) {
 			panelTitle: "面板",
 			signedInAs: "当前登录：",
 			adminPill: "ADMIN",
-			logout: "退出登录",
 
 			adminTools: "管理员工具",
 			addNearbyTitle: "添加 Nearby 山峰",

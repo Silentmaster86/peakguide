@@ -66,8 +66,11 @@ export default function App() {
 							<Route path='/about' element={<AboutPage lang={safeLang} />} />
 
 							{/* AUTH */}
-							<Route path='/login' element={<LoginPage />} />
-							<Route path='/register' element={<RegisterPage />} />
+							<Route path='/login' element={<LoginPage lang={safeLang} />} />
+							<Route
+								path='/register'
+								element={<RegisterPage lang={safeLang} />}
+							/>
 
 							<Route element={<ProtectedRoute />}>
 								<Route path='/panel' element={<PanelPage lang={safeLang} />} />

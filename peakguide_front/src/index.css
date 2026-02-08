@@ -67,20 +67,22 @@ html[data-theme="dark"] {
   --border: rgba(226, 232, 240, 0.14);
   --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
   --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.549);
+
   --text: rgb(33, 32, 32);
   --menu-bg: rgba(255, 255, 255, 0.92);
   --menu-text: rgba(226, 232, 240, 0.344);
-  --muted: rgba(226, 232, 240, 0.70);
+  --btn-bg: rgba(255, 255, 255, 0.85);
+  --btn-border: var(--ink);
+
+  --muted: rgba(145, 160, 177, 0.7);
   --primary: rgb(34, 197, 94);
   --tollbar-text: rgba(255, 255, 255, 0.85);
 
   --ink: rgba(226, 232, 240, 0.14);
   --wash: rgba(226, 232, 240, 0.06);
   --pill-bg: rgba(226, 232, 240, 0.06);
-  --btn-bg: rgba(255, 255, 255, 0.85);
   --card-bg: var(--surface);
   --chip-bg: var(--pill-bg);
-  --btn-border: var(--ink);
 
 
   --bg-overlay-from: rgba(2, 6, 23, 0.62);
@@ -101,7 +103,7 @@ html[data-theme="dark"] {
     --text: rgb(33, 32, 32);
     --menu-bg: rgba(255, 255, 255, 0.92);
     --menu-text: rgba(157, 161, 166, 0.92);
-    --muted: rgba(226, 232, 240, 0.70);
+    --muted: rgba(145, 160, 177, 0.7);
     --primary: rgb(34, 197, 94);
     --tollbar-text: rgba(255, 255, 255, 0.85);
 
