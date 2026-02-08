@@ -82,7 +82,9 @@ function getLabels(lang) {
 /* ---------- styles ---------- */
 
 const styles = {
-	wrap: { position: "relative" },
+	wrap: {
+		position: "relative",
+	},
 
 	btn: {
 		display: "inline-flex",

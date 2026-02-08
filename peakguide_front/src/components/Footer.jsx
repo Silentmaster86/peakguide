@@ -1,19 +1,20 @@
 import { NavLink } from "react-router-dom";
-
-/**
- * Footer PRO
- * - Lightweight + low contrast
- * - No duplicated "full navigation" feel
- * - No tech stack / dev status / MVP talk
- * - Uses your CSS variables (var(--surface), var(--border), etc.)
- */
+import { useMedia } from "../hooks/useMedia";
 
 export default function Footer({ lang = "pl" }) {
 	const t = getLabels(lang);
-
+	const isMobile = useMedia("(max-width: 759px)");
 	return (
-		<footer style={wrap} aria-label='Footer'>
-			<div style={left}>
+		<footer
+			style={{
+				...wrap,
+				...(isMobile
+					? { flexDirection: "column", alignItems: "stretch", gap: 10 }
+					: null),
+			}}
+			aria-label='Footer'
+		>
+			<div style={{ ...left, ...(isMobile ? { minWidth: 0 } : null) }}>
 				<div style={brandRow}>
 					<span style={brandBadge} aria-hidden='true'>
 						⛰️
@@ -31,7 +32,13 @@ export default function Footer({ lang = "pl" }) {
 				</div>
 			</div>
 
-			<nav style={right} aria-label='Footer links'>
+			<nav
+				style={{
+					...right,
+					...(isMobile ? { justifyContent: "flex-start" } : null),
+				}}
+				aria-label='Footer links'
+			>
 				<NavLink to='/peaks' style={footLink}>
 					{t.peaks}
 				</NavLink>

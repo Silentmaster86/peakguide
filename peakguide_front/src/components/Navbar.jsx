@@ -54,8 +54,28 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 	];
 
 	return (
-		<nav id='main-nav' style={styles.nav} aria-label='Primary'>
-			<div style={styles.left}>
+		<nav
+			id='main-nav'
+			style={{
+				...styles.nav,
+				...(isMobile
+					? {
+							gridTemplateColumns: "1fr",
+							gap: 10,
+							padding: 10,
+						}
+					: null),
+			}}
+			aria-label='Primary'
+		>
+			<div
+				style={{
+					...styles.left,
+					...(isMobile
+						? { minWidth: 0, justifyContent: "space-between" }
+						: null),
+				}}
+			>
 				<NavLink to='/' style={styles.homeLink}>
 					<span style={styles.brandBadge}>⛰️</span>
 					<div style={{ lineHeight: 1.1, gap: 2, marginLeft: 8 }}>
@@ -65,7 +85,20 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 				</NavLink>
 			</div>
 
-			<div style={styles.center}>
+			<div
+				style={{
+					...styles.center,
+					...(isMobile
+						? {
+								justifyContent: "flex-start",
+								flexWrap: "nowrap",
+								overflowX: "auto",
+								WebkitOverflowScrolling: "touch",
+								paddingBottom: 2,
+							}
+						: null),
+				}}
+			>
 				<NavLink to='/peaks' style={styles.navLink}>
 					{t.peaks}
 				</NavLink>
@@ -90,7 +123,12 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 				<NavDropdown label={t.more} items={moreItems} />
 			</div>
 
-			<div style={styles.right}>
+			<div
+				style={{
+					...styles.right,
+					...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
+				}}
+			>
 				{/* Auth actions */}
 				{busy ? (
 					<span style={styles.authPillMuted}>{t.sessionLoading}</span>
@@ -252,7 +290,7 @@ const styles = {
 		marginBottom: 14,
 	},
 
-	left: { display: "flex", alignItems: "center", gap: 10, minWidth: 220 },
+	left: { display: "flex", alignItems: "center", gap: 10 },
 
 	center: {
 		display: "flex",
