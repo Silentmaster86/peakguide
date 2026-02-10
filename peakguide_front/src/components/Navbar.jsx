@@ -51,21 +51,24 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 			pill: t.soon,
 			tip: t.soonTip,
 		},
-	];
-
-	return (
-		<nav
-			id='main-nav'
-			style={{
-				...styles.nav,
-				...(isMobile
-					? {
-							gridTemplateColumns: "1fr auto",
+<nav
+  id="main-nav"
+  style={{
+    ...styles.nav,
+    ...(isMobile
+      ? {
+          gridTemplateColumns: "1fr auto",
           gridTemplateAreas: `
             "left right"
             "center center"
           `,
-							gap: 10,
+          gap: 10,
+          padding: 10,
+        }
+      : null),
+  }}
+  aria-label="Primary"
+>
 <div
   style={{
     ...styles.left,
