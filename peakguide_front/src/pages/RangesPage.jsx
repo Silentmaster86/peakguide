@@ -149,15 +149,15 @@ const sub = {
 
 const grid = {
 	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-	gap: 12,
+	gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+	gap: 10,
 };
 
 const card = {
-	border: "1px solid rgba(15,23,42,0.10)",
+	border: "1px solid var(--border)",
 	borderRadius: 18,
-	padding: 14,
-	background: "var(--menu-bg)",
+	padding: 12,
+	background: "var(--btn-bg)",
 	boxShadow: "var(--shadow-soft)",
 	transition: "transform 140ms ease, box-shadow 140ms ease",
 };
@@ -176,12 +176,12 @@ const rangeName = {
 };
 
 const rangeBadge = {
-	border: "1px solid rgba(31,122,79,0.28)",
-	borderRadius: 999,
-	padding: "6px 10px",
-	fontWeight: 1000,
-	color: "var(--btn-bg)",
-	background: "rgba(31, 122, 79, 0.93)",
+  border: "1px solid rgba(31,122,79,0.30)",
+  borderRadius: 999,
+  padding: "6px 10px",
+  fontWeight: 1000,
+  color: "var(--primary)",
+  background: "rgba(31,122,79,0.10)",
 };
 
 const errorBox = {
