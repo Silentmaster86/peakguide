@@ -1,4 +1,4 @@
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import DesktopThemeSwitcher from "./DesktopThemeSwitcher";
 import LanguageSwitcherDropdown from "./LanguageSwitcherDropdown";
 import NavDropdown from "./NavDropdown";
@@ -6,105 +6,25 @@ import { useMedia } from "../hooks/useMedia";
 import { useAuth } from "../auth/AuthContext";
 
 export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
-	const t = getLabels(lang);
-	const { pathname } = useLocation();
-	const isHome = pathname === "/";
+  const t = getLabels(lang);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
-	// Breakpoints
-	const isCompact = useMedia("(max-width: 959px)"); // tablet & down
-	const isMobile = useMedia("(max-width: 759px)"); // mobile & down
+  // Breakpoints
+  const isCompact = useMedia("(max-width: 959px)"); // tablet & down
+  const isMobile = useMedia("(max-width: 759px)"); // mobile & down
 
-	const { status, logout } = useAuth();
-	const authed = status === "authed";
-	const busy = status === "loading";
+  const { status, logout } = useAuth();
+  const authed = status === "authed";
+  const busy = status === "loading";
 
-	const homeSections = [
-		{ to: "/#why", label: t.why },
-		{ to: "/#how", label: t.how },
-		{ to: "/#featured", label: t.featured },
-		{ to: "/#faq", label: t.faq },
-	];
+  const homeSections = [
+    { to: "/#why", label: t.why },
+    { to: "/#how", label: t.how },
+    { to: "/#featured", label: t.featured },
+    { to: "/#faq", label: t.faq },
+  ];
 
-	// What goes into "More"
-	const moreItems = [
-		...(isHome && (isCompact || isMobile)
-			? [
-					{ key: "s1", href: "/#why", label: t.why, sub: t.moreHome },
-					{ key: "s2", href: "/#how", label: t.how, sub: t.moreHome },
-					{ key: "s3", href: "/#featured", label: t.featured, sub: t.moreHome },
-					{ key: "s4", href: "/#faq", label: t.faq, sub: t.moreHome },
-					{ key: "sep-home", type: "sep" },
-				]
-			: []),
-
-		{
-			key: "routes",
-			label: t.routes,
-			disabled: true,
-			pill: t.soon,
-			tip: t.soonTip,
-		},
-		{
-			key: "trailheads",
-			label: t.trailheads,
-			disabled: true,
-			pill: t.soon,
-			tip: t.soonTip,
-		},];
-<nav
-  id="main-nav"
-  style={{
-    ...styles.nav,
-    ...(isMobile
-      ? {
-          gridTemplateColumns: "1fr auto",
-          gridTemplateAreas: `
-            "left right"
-            "center center"
-          `,
-          gap: 10,
-          padding: 10,
-        }
-      : null),
-  }}
-  aria-label="Primary"
->
-<div
-  style={{
-    ...styles.left,
-    gridArea: isMobile ? "left" : undefined,
-    ...(isMobile ? { minWidth: 0 } : null),
-  }}
->
-				<NavLink to='/' style={styles.homeLink}>
-					<span style={styles.brandBadge}>⛰️</span>
-					<div style={{ lineHeight: 1.1, gap: 2, marginLeft: 8 }}>
-						<div style={styles.brandTitle}>PeakGuide</div>
-						<div style={{ ...styles.brandSub, display: isMobile ? "none" : "block" }}>
-  {t.tagline}
-</div>
-					</div>
-				</NavLink>
-			</div>
-
-			<div
-  style={{
-    ...styles.center,
-    gridArea: isMobile ? "center" : undefined,
-    ...(isMobile
-      ? {
-          justifyContent: "flex-start",
-          flexWrap: "nowrap",
-          overflowX: "auto",
-          WebkitOverflowScrolling: "touch",
-          paddingBottom: 2,
-        }
-      : null),
-  }}
->
-				<NavLink to='/peaks' style={styles.navLink}>
-					{t.peaks}
-// What goes into "More"
   const moreItems = [
     ...(isHome && isCompact
       ? [
@@ -135,6 +55,7 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
   return (
     <nav
       id="main-nav"
+      aria-label="Primary"
       style={{
         ...styles.nav,
         ...(isMobile
@@ -149,8 +70,8 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
             }
           : null),
       }}
-      aria-label="Primary"
     >
+      {/* LEFT */}
       <div
         style={{
           ...styles.left,
@@ -160,15 +81,25 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
       >
         <NavLink to="/" style={styles.homeLink}>
           <span style={styles.brandBadge}>⛰️</span>
-          <div style={{ lineHeight: 1.1, gap: 2, marginLeft: 8 }}>
+
+          <div style={{ lineHeight: 1.1, marginLeft: 8, minWidth: 0 }}>
             <div style={styles.brandTitle}>PeakGuide</div>
-            <div style={{ ...styles.brandSub, display: isMobile ? "none" : "block" }}>
+            <div
+              style={{
+                ...styles.brandSub,
+                display: isMobile ? "none" : "block",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
               {t.tagline}
             </div>
           </div>
         </NavLink>
       </div>
 
+      {/* CENTER */}
       <div
         style={{
           ...styles.center,
@@ -208,6 +139,7 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
         <NavDropdown label={t.more} items={moreItems} />
       </div>
 
+      {/* RIGHT */}
       <div
         style={{
           ...styles.right,
@@ -215,9 +147,11 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
           ...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
         }}
       >
-        {/* Auth actions */}
+        {/* Auth */}
         {busy ? (
-          <span style={styles.authPillMuted}>{isMobile ? "⏳" : t.sessionLoading}</span>
+          <span style={styles.authPillMuted}>
+            {isMobile ? "⏳" : t.sessionLoading}
+          </span>
         ) : authed ? (
           <>
             <NavLink to="/panel" style={styles.authLink}>
@@ -235,7 +169,11 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
         )}
 
         <DesktopThemeSwitcher lang={uiLang} compact={isMobile} />
-        <LanguageSwitcherDropdown lang={uiLang} setLang={setUiLang} compact={isMobile} />
+        <LanguageSwitcherDropdown
+          lang={uiLang}
+          setLang={setUiLang}
+          compact={isMobile}
+        />
       </div>
     </nav>
   );
@@ -244,263 +182,244 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 /* ---------------- labels ---------------- */
 
 function getLabels(lang) {
-	const dict = {
-		pl: {
-			tagline: "Korona Gór Polski i nie tylko",
-			home: "Start",
-			peaks: "Szczyty",
-			ranges: "Pasma",
-			routes: "Trasy",
-			trailheads: "Punkty startowe",
-			soon: "wkrótce",
-			soonTip: "Ta sekcja będzie dostępna wkrótce.",
-			more: "Więcej",
+  const dict = {
+    pl: {
+      tagline: "Korona Gór Polski i nie tylko",
+      peaks: "Szczyty",
+      ranges: "Pasma",
+      routes: "Trasy",
+      trailheads: "Punkty startowe",
+      soon: "wkrótce",
+      soonTip: "Ta sekcja będzie dostępna wkrótce.",
+      more: "Więcej",
 
-			why: "Dlaczego",
-			how: "Jak działa",
-			featured: "Polecane",
-			faq: "FAQ",
-			moreHome: "Sekcja na stronie głównej",
+      why: "Dlaczego",
+      how: "Jak działa",
+      featured: "Polecane",
+      faq: "FAQ",
+      moreHome: "Sekcja na stronie głównej",
 
-			/*--------------------admin + zaloguj/wyloguj + panel--------------------*/
+      login: "Zaloguj",
+      logout: "Wyloguj",
+      panel: "Panel",
+      sessionLoading: "Ładowanie sesji...",
+    },
+    en: {
+      tagline: "Crown of Polish Mountains & more",
+      peaks: "Peaks",
+      ranges: "Ranges",
+      routes: "Routes",
+      trailheads: "Trailheads",
+      soon: "soon",
+      soonTip: "This section is coming soon.",
+      more: "More",
 
-			login: "Zaloguj",
-			logout: "Wyloguj",
-			panel: "Panel",
-			admin: "Admin",
-			sessionLoading: "Ładowanie sesji...",
-		},
-		en: {
-			tagline: "Crown of Polish Mountains & more",
-			home: "Home",
-			peaks: "Peaks",
-			ranges: "Ranges",
-			routes: "Routes",
-			trailheads: "Trailheads",
-			soon: "soon",
-			soonTip: "This section is coming soon.",
-			more: "More",
+      why: "Why",
+      how: "How it works",
+      featured: "Featured",
+      faq: "FAQ",
+      moreHome: "Home section",
 
-			why: "Why",
-			how: "How it works",
-			featured: "Featured",
-			faq: "FAQ",
-			moreHome: "Home section",
+      login: "Login",
+      logout: "Logout",
+      panel: "Panel",
+      sessionLoading: "Loading session..",
+    },
+    ua: {
+      tagline: "Корона польських гір і не тільки",
+      peaks: "Вершини",
+      ranges: "Хребти",
+      routes: "Маршрути",
+      trailheads: "Стартові точки",
+      soon: "скоро",
+      soonTip: "Цей розділ скоро буде доступний.",
+      more: "Більше",
 
-			/*--------------------admin + login/logout panel--------------------*/
+      why: "Чому",
+      how: "Як працює",
+      featured: "Вибране",
+      faq: "FAQ",
+      moreHome: "Розділ головної",
 
-			login: "Login",
-			logout: "Logout",
-			panel: "Panel",
-			admin: "Admin",
-			sessionLoading: "Loading session..",
-		},
-		ua: {
-			tagline: "Корона польських гір і не тільки",
-			home: "Головна",
-			peaks: "Вершини",
-			ranges: "Хребти",
-			routes: "Маршрути",
-			trailheads: "Стартові точки",
-			soon: "скоро",
-			soonTip: "Цей розділ скоро буде доступний.",
-			more: "Більше",
+      login: "Увійти",
+      logout: "Вийти",
+      panel: "Панель",
+      sessionLoading: "Завантаження сесії…",
+    },
+    zh: {
+      tagline: "波兰山冠及更多",
+      peaks: "山峰",
+      ranges: "山脉",
+      routes: "路线",
+      trailheads: "起点",
+      soon: "即将",
+      soonTip: "该功能即将上线。",
+      more: "更多",
 
-			why: "Чому",
-			how: "Як працює",
-			featured: "Вибране",
-			faq: "FAQ",
-			moreHome: "Розділ головної",
+      why: "为什么",
+      how: "如何使用",
+      featured: "精选",
+      faq: "FAQ",
+      moreHome: "主页区块",
 
-			/*--------------------aдмін + Увійти/Вийти Панель--------------------*/
+      login: "登录",
+      logout: "退出",
+      panel: "面板",
+      sessionLoading: "正在加载会话…",
+    },
+  };
 
-			login: "Увійти",
-			logout: "Вийти",
-			panel: "Панель",
-			admin: "Адмін",
-			sessionLoading: "Завантаження сесії…",
-		},
-		zh: {
-			tagline: "波兰山冠及更多",
-			home: "首页",
-			peaks: "山峰",
-			ranges: "山脉",
-			routes: "路线",
-			trailheads: "起点",
-			soon: "即将",
-			soonTip: "该功能即将上线。",
-			more: "更多",
-
-			why: "为什么",
-			how: "如何使用",
-			featured: "精选",
-			faq: "FAQ",
-			moreHome: "主页区块",
-
-			/*--------------------管理 + 登录/退出 面板--------------------*/
-
-			login: "登录",
-			logout: "退出",
-			panel: "面板",
-			admin: "管理",
-			sessionLoading: "正在加载会话…",
-		},
-	};
-
-	return dict[lang] || dict.pl;
+  return dict[lang] || dict.pl;
 }
 
 /* ---------------- styles ---------------- */
 
 const styles = {
-	nav: {
-		position: "sticky",
-		top: 0,
-		zIndex: 100,
-		backdropFilter: "blur(12px)",
-		WebkitBackdropFilter: "blur(12px)",
-		display: "grid",
-		gridTemplateColumns: "1fr auto 1fr",
-		alignItems: "center",
-		gap: 12,
-		borderRadius: 18,
-		padding: 12,
-		background: "var(--btn-bg)",
-		boxShadow: "var(--surface)",
-		border: "1px solid var(--border)",
-		marginBottom: 14,
-	},
+  nav: {
+    position: "sticky",
+    top: 0,
+    zIndex: 100,
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    display: "grid",
+    gridTemplateColumns: "1fr auto 1fr",
+    alignItems: "center",
+    gap: 12,
+    borderRadius: 18,
+    padding: 12,
+    background: "var(--btn-bg)",
+    boxShadow: "var(--shadow-soft)",
+    border: "1px solid var(--border)",
+    marginBottom: 14,
+  },
 
-	left: { display: "flex", alignItems: "center", gap: 10 },
+  left: { display: "flex", alignItems: "center", gap: 10 },
 
-	center: {
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		gap: "var(--nav-gap)",
-		flexWrap: "wrap",
-		maxWidth: 860,
-		overflow: "visible",
-		minWidth: 0, // important for text truncation
-	},
+  center: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "var(--nav-gap)",
+    flexWrap: "wrap",
+    maxWidth: 860,
+    overflow: "visible",
+    minWidth: 0,
+  },
 
-	right: {
-		display: "flex",
-		justifyContent: "flex-end",
-		gap: 10,
-		alignItems: "center",
-	},
+  right: {
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: 10,
+    alignItems: "center",
+  },
 
-	brandBadge: {
-		width: 40,
-		height: 40,
-		borderRadius: 12,
-		display: "grid",
-		placeItems: "center",
-		border: "1px solid rgba(31,122,79,0.28)",
-		background: "var(--primary)",
-		fontWeight: 1000,
-	},
+  brandBadge: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    display: "grid",
+    placeItems: "center",
+    border: "1px solid rgba(31,122,79,0.28)",
+    background: "var(--primary)",
+    fontWeight: 1000,
+    flex: "0 0 auto",
+  },
 
-	brandTitle: { fontWeight: 1000, letterSpacing: "-0.3px" },
-	brandSub: { fontSize: 12, color: "var(--muted)", marginTop: 2 },
+  brandTitle: { fontWeight: 1000, letterSpacing: "-0.3px" },
+  brandSub: { fontSize: 12, color: "var(--muted)", marginTop: 2 },
 
-	homeLink: {
-		textDecoration: "none",
-		fontWeight: 700,
-		color: "var(--text)",
-		height: "var(--nav-pill-h)",
-		padding: `0 var(--nav-pill-px)`,
-		display: "inline-flex",
-		alignItems: "center",
-	},
+  homeLink: {
+    textDecoration: "none",
+    fontWeight: 700,
+    color: "var(--text)",
+    height: "var(--nav-pill-h)",
+    padding: `0 var(--nav-pill-px)`,
+    display: "inline-flex",
+    alignItems: "center",
+    minWidth: 0,
+  },
 
-	navLink: ({ isActive }) => ({
-		textDecoration: "none",
-		fontWeight: 700,
-		height: "var(--nav-pill-h)",
-		padding: `0 var(--nav-pill-px)`,
-		display: "inline-flex",
-		alignItems: "center",
-		borderRadius: 999,
-		border: "1px solid var(--border)",
-		fontSize: "var(--nav-pill-fs)",
-		background: isActive ? "var(--ink)" : "var(--btn-bg)",
-		color: isActive ? "var(--btn-bg)" : "var(--text)",
-		boxShadow: "var(--shadow-soft)",
-	}),
+  navLink: ({ isActive }) => ({
+    textDecoration: "none",
+    fontWeight: 700,
+    height: "var(--nav-pill-h)",
+    padding: `0 var(--nav-pill-px)`,
+    display: "inline-flex",
+    alignItems: "center",
+    borderRadius: 999,
+    border: "1px solid var(--border)",
+    fontSize: "var(--nav-pill-fs)",
+    background: isActive ? "var(--ink)" : "var(--btn-bg)",
+    color: isActive ? "var(--btn-bg)" : "var(--text)",
+    boxShadow: "var(--shadow-soft)",
+    whiteSpace: "nowrap",
+  }),
 
-	hashLink: {
-		textDecoration: "none",
-		fontWeight: 700,
-		height: "var(--nav-pill-h)",
-		fontSize: "var(--nav-pill-fs)",
-		padding: `0 var(--nav-pill-px)`,
-		display: "inline-flex",
-		alignItems: "center",
-		borderRadius: 999,
-		border: "1px solid var(--border)",
-		background: "rgba(255,255,255,0.55)",
-		color: "var(--text)",
-		boxShadow: "var(--shadow-soft)",
-	},
+  hashLink: {
+    textDecoration: "none",
+    fontWeight: 700,
+    height: "var(--nav-pill-h)",
+    fontSize: "var(--nav-pill-fs)",
+    padding: `0 var(--nav-pill-px)`,
+    display: "inline-flex",
+    alignItems: "center",
+    borderRadius: 999,
+    border: "1px solid var(--border)",
+    background: "rgba(255,255,255,0.55)",
+    color: "var(--text)",
+    boxShadow: "var(--shadow-soft)",
+    whiteSpace: "nowrap",
+  },
 
-	sep: {
-		width: 1,
-		height: 26,
-		borderRadius: 99,
-		background: "rgba(15,23,42,0.14)",
-		margin: "0 2px",
-	},
-	/* ---------------- styles (admin/login/logout/panel) ---------------- */
-	authLink: ({ isActive }) => ({
-		textDecoration: "none",
-		fontWeight: 900,
-		height: "var(--nav-pill-h)",
-		padding: `0 var(--nav-pill-px)`,
-		display: "inline-flex",
-		alignItems: "center",
-		borderRadius: 999,
-		border: "1px solid var(--border)",
-		fontSize: "var(--nav-pill-fs)",
-		background: isActive ? "var(--ink)" : "var(--btn-bg)",
-		color: isActive ? "var(--btn-bg)" : "var(--text)",
-		boxShadow: "var(--shadow-soft)",
-	}),
+  sep: {
+    width: 1,
+    height: 26,
+    borderRadius: 99,
+    background: "rgba(15,23,42,0.14)",
+    margin: "0 2px",
+  },
 
-	logoutBtn: {
-		height: "var(--nav-pill-h)",
-		padding: `0 var(--nav-pill-px)`,
-		borderRadius: 999,
-		border: "1px solid var(--border)",
-		background: "var(--btn-bg)",
-		color: "var(--text)",
-		fontWeight: 900,
-		fontSize: "var(--nav-pill-fs)",
-		cursor: "pointer",
-		boxShadow: "var(--shadow-soft)",
-	},
+  authLink: ({ isActive }) => ({
+    textDecoration: "none",
+    fontWeight: 900,
+    height: "var(--nav-pill-h)",
+    padding: `0 var(--nav-pill-px)`,
+    display: "inline-flex",
+    alignItems: "center",
+    borderRadius: 999,
+    border: "1px solid var(--border)",
+    fontSize: "var(--nav-pill-fs)",
+    background: isActive ? "var(--ink)" : "var(--btn-bg)",
+    color: isActive ? "var(--btn-bg)" : "var(--text)",
+    boxShadow: "var(--shadow-soft)",
+    whiteSpace: "nowrap",
+  }),
 
-	authPillMuted: {
-		height: "var(--nav-pill-h)",
-		padding: `0 var(--nav-pill-px)`,
-		borderRadius: 999,
-		border: "1px solid var(--border)",
-		background: "rgba(255,255,255,0.35)",
-		color: "var(--muted)",
-		fontWeight: 900,
-		fontSize: "var(--nav-pill-fs)",
-		display: "inline-flex",
-		alignItems: "center",
-	},
-	navBtn: {
-		height: "var(--nav-pill-h)",
-		padding: `0 var(--nav-pill-px)`,
-		borderRadius: 999,
-		border: "1px solid var(--border)",
-		background: "var(--btn-bg)",
-		color: "var(--text)",
-		fontWeight: 800,
-		cursor: "pointer",
-	},
+  logoutBtn: {
+    height: "var(--nav-pill-h)",
+    padding: `0 var(--nav-pill-px)`,
+    borderRadius: 999,
+    border: "1px solid var(--border)",
+    background: "var(--btn-bg)",
+    color: "var(--text)",
+    fontWeight: 900,
+    fontSize: "var(--nav-pill-fs)",
+    cursor: "pointer",
+    boxShadow: "var(--shadow-soft)",
+    whiteSpace: "nowrap",
+  },
+
+  authPillMuted: {
+    height: "var(--nav-pill-h)",
+    padding: `0 var(--nav-pill-px)`,
+    borderRadius: 999,
+    border: "1px solid var(--border)",
+    background: "rgba(255,255,255,0.35)",
+    color: "var(--muted)",
+    fontWeight: 900,
+    fontSize: "var(--nav-pill-fs)",
+    display: "inline-flex",
+    alignItems: "center",
+    whiteSpace: "nowrap",
+  },
 };
