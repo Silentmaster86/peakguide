@@ -162,8 +162,7 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 					compact={isMobile}
 				/>
 			</div>
-		</nav>
-	);
+		</nav>;
 }
 
 /* ---------------- labels ---------------- */
