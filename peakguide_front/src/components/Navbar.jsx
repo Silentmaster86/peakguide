@@ -5,14 +5,13 @@ import NavDropdown from "./NavDropdown";
 import { useMedia } from "../hooks/useMedia";
 import { useAuth } from "../auth/AuthContext";
 
-export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
+  export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
   const t = getLabels(lang);
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
-  // Breakpoints
-  const isCompact = useMedia("(max-width: 959px)"); // tablet & down
-  const isMobile = useMedia("(max-width: 759px)"); // mobile & down
+  const isCompact = useMedia("(max-width: 959px)");
+  const isMobile = useMedia("(max-width: 759px)");
 
   const { status, logout } = useAuth();
   const authed = status === "authed";
@@ -65,8 +64,9 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
                 "left right"
                 "center center"
               `,
-              gap: 10,
+              gap: 8,
               padding: 10,
+              alignItems: "center",
             }
           : null),
       }}
@@ -76,67 +76,39 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
         style={{
           ...styles.left,
           gridArea: isMobile ? "left" : undefined,
-          ...(isMobile ? { minWidth: 0 } : null),
+          minWidth: 0,
+          overflow: "hidden",
         }}
       >
-        <NavLink to="/" style={styles.homeLink}>
+        <NavLink
+          to="/"
+          style={{
+            ...styles.homeLink,
+            minWidth: 0,
+            maxWidth: "100%",
+            overflow: "hidden",
+          }}
+        >
           <span style={styles.brandBadge}>⛰️</span>
 
-          <div style={{ lineHeight: 1.1, marginLeft: 8, minWidth: 0 }}>
-            <div style={styles.brandTitle}>PeakGuide</div>
+          {/* brand text wrapper */}
+          <div style={{ marginLeft: 8, minWidth: 0, overflow: "hidden" }}>
             <div
               style={{
-                ...styles.brandSub,
-                display: isMobile ? "none" : "block",
+                ...styles.brandTitle,
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
+                maxWidth: isMobile ? 140 : "none",
               }}
             >
-              {t.tagline}
+              PeakGuide
             </div>
+
+            {/* tagline hidden on mobile (żeby nie walczyło o miejsce) */}
+            {!isMobile ? <div style={styles.brandSub}>{t.tagline}</div> : null}
           </div>
         </NavLink>
-      </div>
-
-      {/* CENTER */}
-      <div
-        style={{
-          ...styles.center,
-          gridArea: isMobile ? "center" : undefined,
-          ...(isMobile
-            ? {
-                justifyContent: "flex-start",
-                flexWrap: "nowrap",
-                overflowX: "auto",
-                WebkitOverflowScrolling: "touch",
-                paddingBottom: 2,
-                maxWidth: "100%",
-              }
-            : null),
-        }}
-      >
-        <NavLink to="/peaks" style={styles.navLink}>
-          {t.peaks}
-        </NavLink>
-
-        <NavLink to="/ranges" style={styles.navLink}>
-          {t.ranges}
-        </NavLink>
-
-        {/* Desktop: show home sections inline */}
-        {isHome && !isCompact && (
-          <>
-            <span style={styles.sep} aria-hidden="true" />
-            {homeSections.map((i) => (
-              <Link key={i.to} to={i.to} style={styles.hashLink}>
-                {i.label}
-              </Link>
-            ))}
-          </>
-        )}
-
-        <NavDropdown label={t.more} items={moreItems} />
       </div>
 
       {/* RIGHT */}
@@ -144,14 +116,13 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
         style={{
           ...styles.right,
           gridArea: isMobile ? "right" : undefined,
-          ...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
+          flexWrap: "nowrap",
+          gap: 8,
+          justifyContent: "flex-end",
         }}
       >
-        {/* Auth */}
         {busy ? (
-          <span style={styles.authPillMuted}>
-            {isMobile ? "⏳" : t.sessionLoading}
-          </span>
+          <span style={styles.authPillMuted}>{isMobile ? "⏳" : t.sessionLoading}</span>
         ) : authed ? (
           <>
             <NavLink to="/panel" style={styles.authLink}>
@@ -169,15 +140,52 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
         )}
 
         <DesktopThemeSwitcher lang={uiLang} compact={isMobile} />
-        <LanguageSwitcherDropdown
-          lang={uiLang}
-          setLang={setUiLang}
-          compact={isMobile}
-        />
+        <LanguageSwitcherDropdown lang={uiLang} setLang={setUiLang} compact={isMobile} />
+      </div>
+
+      {/* CENTER */}
+      <div
+        style={{
+          ...styles.center,
+          gridArea: isMobile ? "center" : undefined,
+          minWidth: 0,
+          ...(isMobile
+            ? {
+                justifyContent: "flex-start",
+                flexWrap: "nowrap",
+                overflowX: "auto",
+                WebkitOverflowScrolling: "touch",
+                paddingTop: 6,
+                paddingBottom: 2,
+                maxWidth: "100%",
+              }
+            : null),
+        }}
+      >
+        <NavLink to="/peaks" style={styles.navLink}>
+          {t.peaks}
+        </NavLink>
+
+        <NavLink to="/ranges" style={styles.navLink}>
+          {t.ranges}
+        </NavLink>
+
+        {isHome && !isCompact && (
+          <>
+            <span style={styles.sep} aria-hidden="true" />
+            {homeSections.map((i) => (
+              <Link key={i.to} to={i.to} style={styles.hashLink}>
+                {i.label}
+              </Link>
+            ))}
+          </>
+        )}
+
+        <NavDropdown label={t.more} items={moreItems} />
       </div>
     </nav>
   );
-}
+  }      
 
 /* ---------------- labels ---------------- */
 
