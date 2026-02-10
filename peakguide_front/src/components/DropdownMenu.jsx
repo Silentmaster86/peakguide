@@ -27,13 +27,16 @@ export default function DropdownMenu({
 	}, [open, wrapRef, minWidth]);
 
 	const menuStyle = useMemo(
-		() => ({
-			...styles.menu,
-			minWidth,
-			...(align === "right" ? styles.right : styles.left),
-		}),
-		[align, minWidth],
-	);
+  () => ({
+    ...styles.menu,
+    minWidth,
+    maxWidth: "min(320px, calc(100vw - 24px))",
+    maxHeight: "min(70vh, 420px)",
+    overflowY: "auto",
+    ...(align === "right" ? styles.right : styles.left),
+  }),
+  [align, minWidth]
+);
 
 	if (!open) return null;
 
