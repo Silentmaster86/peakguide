@@ -104,65 +104,141 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 >
 				<NavLink to='/peaks' style={styles.navLink}>
 					{t.peaks}
-				</NavLink>
+// What goes into "More"
+  const moreItems = [
+    ...(isHome && isCompact
+      ? [
+          { key: "s1", href: "/#why", label: t.why, sub: t.moreHome },
+          { key: "s2", href: "/#how", label: t.how, sub: t.moreHome },
+          { key: "s3", href: "/#featured", label: t.featured, sub: t.moreHome },
+          { key: "s4", href: "/#faq", label: t.faq, sub: t.moreHome },
+          { key: "sep-home", type: "sep" },
+        ]
+      : []),
 
-				<NavLink to='/ranges' style={styles.navLink}>
-					{t.ranges}
-				</NavLink>
+    {
+      key: "routes",
+      label: t.routes,
+      disabled: true,
+      pill: t.soon,
+      tip: t.soonTip,
+    },
+    {
+      key: "trailheads",
+      label: t.trailheads,
+      disabled: true,
+      pill: t.soon,
+      tip: t.soonTip,
+    },
+  ];
 
-				{/* Desktop: show home sections inline */}
-				{isHome && !isCompact && (
-					<>
-						<span style={styles.sep} aria-hidden='true' />
-						{homeSections.map((i) => (
-							<Link key={i.to} to={i.to} style={styles.hashLink}>
-								{i.label}
-							</Link>
-						))}
-					</>
-				)}
+  return (
+    <nav
+      id="main-nav"
+      style={{
+        ...styles.nav,
+        ...(isMobile
+          ? {
+              gridTemplateColumns: "1fr auto",
+              gridTemplateAreas: `
+                "left right"
+                "center center"
+              `,
+              gap: 10,
+              padding: 10,
+            }
+          : null),
+      }}
+      aria-label="Primary"
+    >
+      <div
+        style={{
+          ...styles.left,
+          gridArea: isMobile ? "left" : undefined,
+          ...(isMobile ? { minWidth: 0 } : null),
+        }}
+      >
+        <NavLink to="/" style={styles.homeLink}>
+          <span style={styles.brandBadge}>⛰️</span>
+          <div style={{ lineHeight: 1.1, gap: 2, marginLeft: 8 }}>
+            <div style={styles.brandTitle}>PeakGuide</div>
+            <div style={{ ...styles.brandSub, display: isMobile ? "none" : "block" }}>
+              {t.tagline}
+            </div>
+          </div>
+        </NavLink>
+      </div>
 
-				{/* Always: More (on desktop it holds only "soon"; on compact it also holds home sections) */}
-				<NavDropdown label={t.more} items={moreItems} />
-			</div>
+      <div
+        style={{
+          ...styles.center,
+          gridArea: isMobile ? "center" : undefined,
+          ...(isMobile
+            ? {
+                justifyContent: "flex-start",
+                flexWrap: "nowrap",
+                overflowX: "auto",
+                WebkitOverflowScrolling: "touch",
+                paddingBottom: 2,
+                maxWidth: "100%",
+              }
+            : null),
+        }}
+      >
+        <NavLink to="/peaks" style={styles.navLink}>
+          {t.peaks}
+        </NavLink>
 
-			<div
-  style={{
-    ...styles.right,
-    gridArea: isMobile ? "right" : undefined,
-    ...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
-  }}
->
-				{/* Auth actions */}
-				{busy ? (
-  <span style={styles.authPillMuted}>
-    {isMobile ? "⏳" : t.sessionLoading}
-  </span>
-) : authed ? (
-					<>
-						<NavLink to='/panel' style={styles.authLink}>
-							{isMobile ? "👤" : t.panel}
-						</NavLink>
+        <NavLink to="/ranges" style={styles.navLink}>
+          {t.ranges}
+        </NavLink>
 
-						<button type='button' onClick={logout} style={styles.logoutBtn}>
-							{isMobile ? "⎋" : t.logout}
-						</button>
-					</>
-				) : (
-					<NavLink to='/login' style={styles.authLink}>
-						{isMobile ? "🔐" : t.login}
-					</NavLink>
-				)}
+        {/* Desktop: show home sections inline */}
+        {isHome && !isCompact && (
+          <>
+            <span style={styles.sep} aria-hidden="true" />
+            {homeSections.map((i) => (
+              <Link key={i.to} to={i.to} style={styles.hashLink}>
+                {i.label}
+              </Link>
+            ))}
+          </>
+        )}
 
-				{/* Desktop-only text, compact shows icons only */}
-				<DesktopThemeSwitcher lang={uiLang} compact={isMobile} />
-				<LanguageSwitcherDropdown
-					lang={uiLang}
-					setLang={setUiLang}
-					compact={isMobile}
-				/>
-			</div>
-		</nav>;
+        <NavDropdown label={t.more} items={moreItems} />
+      </div>
+
+      <div
+        style={{
+          ...styles.right,
+          gridArea: isMobile ? "right" : undefined,
+          ...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
+        }}
+      >
+        {/* Auth actions */}
+        {busy ? (
+          <span style={styles.authPillMuted}>{isMobile ? "⏳" : t.sessionLoading}</span>
+        ) : authed ? (
+          <>
+            <NavLink to="/panel" style={styles.authLink}>
+              {isMobile ? "👤" : t.panel}
+            </NavLink>
+
+            <button type="button" onClick={logout} style={styles.logoutBtn}>
+              {isMobile ? "⎋" : t.logout}
+            </button>
+          </>
+        ) : (
+          <NavLink to="/login" style={styles.authLink}>
+            {isMobile ? "🔐" : t.login}
+          </NavLink>
+        )}
+
+        <DesktopThemeSwitcher lang={uiLang} compact={isMobile} />
+        <LanguageSwitcherDropdown lang={uiLang} setLang={setUiLang} compact={isMobile} />
+      </div>
+    </nav>
+  );
 }
 
 /* ---------------- labels ---------------- */
