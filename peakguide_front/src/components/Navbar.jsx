@@ -60,45 +60,45 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 				...styles.nav,
 				...(isMobile
 					? {
-							gridTemplateColumns: "1fr",
+							gridTemplateColumns: "1fr auto",
+          gridTemplateAreas: `
+            "left right"
+            "center center"
+          `,
 							gap: 10,
-							padding: 10,
-						}
-					: null),
-			}}
-			aria-label='Primary'
-		>
-			<div
-				style={{
-					...styles.left,
-					...(isMobile
-						? { minWidth: 0, justifyContent: "space-between" }
-						: null),
-				}}
-			>
+<div
+  style={{
+    ...styles.left,
+    gridArea: isMobile ? "left" : undefined,
+    ...(isMobile ? { minWidth: 0 } : null),
+  }}
+>
 				<NavLink to='/' style={styles.homeLink}>
 					<span style={styles.brandBadge}>⛰️</span>
 					<div style={{ lineHeight: 1.1, gap: 2, marginLeft: 8 }}>
 						<div style={styles.brandTitle}>PeakGuide</div>
-						<div style={styles.brandSub}>{t.tagline}</div>
+						<div style={{ ...styles.brandSub, display: isMobile ? "none" : "block" }}>
+  {t.tagline}
+</div>
 					</div>
 				</NavLink>
 			</div>
 
 			<div
-				style={{
-					...styles.center,
-					...(isMobile
-						? {
-								justifyContent: "flex-start",
-								flexWrap: "nowrap",
-								overflowX: "auto",
-								WebkitOverflowScrolling: "touch",
-								paddingBottom: 2,
-							}
-						: null),
-				}}
-			>
+  style={{
+    ...styles.center,
+    gridArea: isMobile ? "center" : undefined,
+    ...(isMobile
+      ? {
+          justifyContent: "flex-start",
+          flexWrap: "nowrap",
+          overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
+          paddingBottom: 2,
+        }
+      : null),
+  }}
+>
 				<NavLink to='/peaks' style={styles.navLink}>
 					{t.peaks}
 				</NavLink>
@@ -124,15 +124,18 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 			</div>
 
 			<div
-				style={{
-					...styles.right,
-					...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
-				}}
-			>
+  style={{
+    ...styles.right,
+    gridArea: isMobile ? "right" : undefined,
+    ...(isMobile ? { flexWrap: "nowrap", gap: 8 } : null),
+  }}
+>
 				{/* Auth actions */}
 				{busy ? (
-					<span style={styles.authPillMuted}>{t.sessionLoading}</span>
-				) : authed ? (
+  <span style={styles.authPillMuted}>
+    {isMobile ? "⏳" : t.sessionLoading}
+  </span>
+) : authed ? (
 					<>
 						<NavLink to='/panel' style={styles.authLink}>
 							{isMobile ? "👤" : t.panel}
