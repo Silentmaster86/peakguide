@@ -50,7 +50,7 @@ export default function Navbar({ lang = "pl", uiLang, setUiLang }) {
 			disabled: true,
 			pill: t.soon,
 			tip: t.soonTip,
-		},
+		},];
 <nav
   id="main-nav"
   style={{
