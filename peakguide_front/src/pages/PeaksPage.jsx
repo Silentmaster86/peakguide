@@ -238,9 +238,9 @@ const rightBox = {
 const counter = {
 	border: "1px solid var(--border)",
 	borderRadius: 999,
-	padding: "10px 12px",
-	background: "var(--surface)",
-	fontSize: 13,
+	padding: "8px 10px",
+	background: "var(--pill-bg)",
+	fontSize: 12.5,
 	boxShadow: "var(--shadow-soft)",
 };
 
@@ -263,8 +263,8 @@ const retryBtn = {
 
 const grid = {
 	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-	gap: 12,
+	gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+	gap: 10,
 	paddingTop: 6,
 };
 
