@@ -8,6 +8,8 @@ import {
 
 const LANGS = ["pl", "en", "ua", "zh"];
 
+/* ---------------- helpers ---------------- */
+
 function emptyI18n() {
 	return LANGS.reduce((acc, l) => {
 		acc[l] = { name: "", short_description: "", description: "", tips: "" };
@@ -15,19 +17,19 @@ function emptyI18n() {
 	}, {});
 }
 
-// Ensures i18n always has all languages (prevents crash when backend returns partial)
+// Ensures i18n always has all languages
 function normalizeI18n(i18n) {
 	const base = emptyI18n();
 	if (!i18n || typeof i18n !== "object") return base;
-	for (const l of LANGS) {
-		base[l] = { ...base[l], ...(i18n[l] || {}) };
-	}
+	for (const l of LANGS) base[l] = { ...base[l], ...(i18n[l] || {}) };
 	return base;
 }
 
 function cls(...x) {
 	return x.filter(Boolean).join(" ");
 }
+
+/* ---------------- small UI bits ---------------- */
 
 function Badge({ tone = "neutral", children }) {
 	return (
@@ -55,6 +57,10 @@ function TextArea(props) {
 	return (
 		<textarea {...props} className={cls("ap-textarea", props.className)} />
 	);
+}
+
+function Select(props) {
+	return <select {...props} className={cls("ap-input", props.className)} />;
 }
 
 function Toggle({ checked, onChange, label }) {
@@ -111,11 +117,17 @@ function DangerBtn({ children, ...props }) {
 	);
 }
 
+/* ---------------- component ---------------- */
+
 export default function AdminPeaksSection({ lang = "pl" }) {
 	const [q, setQ] = useState("");
 	const [status, setStatus] = useState("idle");
 	const [error, setError] = useState(null);
 	const [items, setItems] = useState([]);
+
+	// ranges/subranges (dropdown)
+	const [ranges, setRanges] = useState([]); // [{id, slug, name}]
+	const [subranges, setSubranges] = useState([]); // [{id, name}] optional
 
 	const [open, setOpen] = useState(false);
 	const [mode, setMode] = useState("create"); // create | edit
@@ -139,6 +151,8 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 	const [editId, setEditId] = useState(null);
 	const [activeLangTab, setActiveLangTab] = useState("pl");
 
+	const busy = status === "loading";
+
 	async function load() {
 		setStatus("loading");
 		setError(null);
@@ -152,10 +166,50 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 		}
 	}
 
+	// load peaks on lang change
 	useEffect(() => {
 		load();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [lang]);
+
+	// load ranges for dropdown (needs id from backend!)
+	useEffect(() => {
+		(async () => {
+			try {
+				const res = await fetch(`/api/ranges?lang=${encodeURIComponent(lang)}`);
+				const data = await res.json();
+				setRanges(Array.isArray(data) ? data : []);
+			} catch (e) {
+				console.error("Ranges load failed", e);
+				setRanges([]);
+			}
+		})();
+	}, [lang]);
+
+	// OPTIONAL: load subranges when range changes
+	// If you don't have /api/subranges endpoint yet, this will just stay empty.
+	useEffect(() => {
+		(async () => {
+			if (!form.range_id) {
+				setSubranges([]);
+				return;
+			}
+			try {
+				const res = await fetch(
+					`/api/subranges?range_id=${encodeURIComponent(form.range_id)}&lang=${encodeURIComponent(lang)}`,
+				);
+				if (!res.ok) {
+					setSubranges([]);
+					return;
+				}
+				const data = await res.json();
+				setSubranges(Array.isArray(data) ? data : []);
+			} catch (e) {
+				console.error("Subranges load failed", e);
+				setSubranges([]);
+			}
+		})();
+	}, [form.range_id, lang]);
 
 	const filtered = useMemo(() => items, [items]);
 
@@ -255,11 +309,18 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 		}
 	}
 
-	const busy = status === "loading";
+	// For display: map range_id -> range name (if backend doesn't return range_name)
+	const rangeNameById = useMemo(() => {
+		const map = new Map();
+		for (const r of ranges) {
+			if (r?.id != null)
+				map.set(String(r.id), r.name || r.slug || String(r.id));
+		}
+		return map;
+	}, [ranges]);
 
 	return (
 		<section className='ap-wrap'>
-			{/* Local styles for this section */}
 			<style>{css}</style>
 
 			<header className='ap-head'>
@@ -290,10 +351,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 						</SubtleBtn>
 						<IconBtn
 							type='button'
-							onClick={() => {
-								setQ("");
-								// keep current list; user can hit Search
-							}}
+							onClick={() => setQ("")}
 							title='Clear'
 							aria-label='Clear search'
 						>
@@ -332,36 +390,45 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 							</tr>
 						</thead>
 						<tbody>
-							{filtered.map((r) => (
-								<tr key={r.id}>
-									<td className='ap-strong'>{r.name || "—"}</td>
-									<td className='ap-mono'>{r.slug}</td>
-									<td className='ap-num'>{r.elevation_m ?? "—"}</td>
-									<td>{r.range_name ?? r.range_slug ?? r.range_id ?? "—"}</td>
-									<td>
-										{r.is_korona ? (
-											<Badge tone='brand'>Yes</Badge>
-										) : (
-											<Badge tone='neutral'>No</Badge>
-										)}
-									</td>
-									<td>
-										{r.active ? (
-											<Badge tone='ok'>Yes</Badge>
-										) : (
-											<Badge tone='warn'>No</Badge>
-										)}
-									</td>
-									<td className='ap-actions'>
-										<SubtleBtn type='button' onClick={() => openEdit(r)}>
-											Edit
-										</SubtleBtn>
-										<DangerBtn type='button' onClick={() => onDelete(r.id)}>
-											Delete
-										</DangerBtn>
-									</td>
-								</tr>
-							))}
+							{filtered.map((r) => {
+								const rangeLabel =
+									r.range_name ??
+									r.range_slug ??
+									(r.range_id ? rangeNameById.get(String(r.range_id)) : null) ??
+									r.range_id ??
+									"—";
+
+								return (
+									<tr key={r.id}>
+										<td className='ap-strong'>{r.name || "—"}</td>
+										<td className='ap-mono'>{r.slug}</td>
+										<td className='ap-num'>{r.elevation_m ?? "—"}</td>
+										<td>{rangeLabel}</td>
+										<td>
+											{r.is_korona ? (
+												<Badge tone='brand'>Yes</Badge>
+											) : (
+												<Badge tone='neutral'>No</Badge>
+											)}
+										</td>
+										<td>
+											{r.active ? (
+												<Badge tone='ok'>Yes</Badge>
+											) : (
+												<Badge tone='warn'>No</Badge>
+											)}
+										</td>
+										<td className='ap-actions'>
+											<SubtleBtn type='button' onClick={() => openEdit(r)}>
+												Edit
+											</SubtleBtn>
+											<DangerBtn type='button' onClick={() => onDelete(r.id)}>
+												Delete
+											</DangerBtn>
+										</td>
+									</tr>
+								);
+							})}
 
 							{status === "success" && filtered.length === 0 && (
 								<tr>
@@ -422,25 +489,46 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 									/>
 								</Field>
 
-								<Field label='Range ID' hint='required'>
-									<TextInput
-										value={form.range_id}
+								<Field label='Range' hint='required'>
+									<Select
+										value={form.range_id || ""}
 										onChange={(e) =>
-											setForm({ ...form, range_id: e.target.value })
+											setForm((prev) => ({
+												...prev,
+												range_id: e.target.value,
+												subrange_id: "", // reset when range changes
+											}))
 										}
-										placeholder='e.g. 1'
 										required
-									/>
+									>
+										<option value='' disabled>
+											Select range…
+										</option>
+										{ranges.map((r) => (
+											<option key={r.id ?? r.slug} value={String(r.id ?? "")}>
+												{r.name ?? r.slug}
+											</option>
+										))}
+									</Select>
 								</Field>
 
-								<Field label='Subrange ID' hint='optional'>
-									<TextInput
-										value={form.subrange_id}
+								<Field label='Subrange' hint='optional'>
+									<Select
+										value={form.subrange_id || ""}
 										onChange={(e) =>
 											setForm({ ...form, subrange_id: e.target.value })
 										}
-										placeholder='e.g. 12'
-									/>
+										disabled={!subranges.length}
+									>
+										<option value=''>
+											{subranges.length ? "Select subrange…" : "No subranges"}
+										</option>
+										{subranges.map((s) => (
+											<option key={s.id} value={String(s.id)}>
+												{s.name}
+											</option>
+										))}
+									</Select>
 								</Field>
 
 								<Field label='Elevation (m)'>
@@ -538,7 +626,6 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 
 							<div className='ap-divider' />
 
-							{/* Translations */}
 							<div className='ap-translations'>
 								<div className='ap-tabs'>
 									<div className='ap-tabsLeft'>
@@ -644,6 +731,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 		</section>
 	);
 }
+
 /*-----------------------------styles-----------------------------*/
 const css = `
 /* ====== Theme-ish tokens (works with light/dark/system) ====== */
