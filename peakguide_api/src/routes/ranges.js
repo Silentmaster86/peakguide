@@ -9,16 +9,15 @@ rangesRouter.get("/ranges", async (req, res) => {
 
 		const { rows } = await db.query(
 			`
-      SELECT r.id r.slug, ri.name
-      FROM mountain_ranges r
-      JOIN mountain_ranges_i18n ri
-        ON ri.range_id = r.id
-      WHERE ri.lang = $1
-      ORDER BY ri.name;
-      `,
+  SELECT r.id, r.slug, ri.name
+  FROM mountain_ranges r
+  JOIN mountain_ranges_i18n ri
+    ON ri.range_id = r.id
+  WHERE ri.lang = $1
+  ORDER BY ri.name;
+  `,
 			[lang],
 		);
-
 		res.json(rows);
 	} catch (err) {
 		console.error("GET /ranges failed:", err);

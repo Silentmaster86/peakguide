@@ -243,7 +243,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 		setEditId(row.id);
 		setForm({
 			slug: row.slug || "",
-			range_id: row.range_id || "",
+			range_id: row.range_id ? String(row.range_id) : "",
 			subrange_id: row.subrange_id || "",
 			elevation_m: row.elevation_m || 0,
 			latitude: row.latitude ?? "",
@@ -490,26 +490,24 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 								</Field>
 
 								<Field label='Range' hint='required'>
-									<Select
-										value={form.range_id || ""}
+									<select
+										className='ap-input'
+										value={form.range_id ? String(form.range_id) : ""}
 										onChange={(e) =>
-											setForm((prev) => ({
-												...prev,
-												range_id: e.target.value,
-												subrange_id: "", // reset when range changes
-											}))
+											setForm({ ...form, range_id: e.target.value })
 										}
 										required
 									>
 										<option value='' disabled>
-											Select range…
+											Select range...
 										</option>
+
 										{ranges.map((r) => (
-											<option key={r.id ?? r.slug} value={String(r.id ?? "")}>
-												{r.name ?? r.slug}
+											<option key={r.id} value={String(r.id)}>
+												{r.name}
 											</option>
 										))}
-									</Select>
+									</select>
 								</Field>
 
 								<Field label='Subrange' hint='optional'>
