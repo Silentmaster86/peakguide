@@ -37,12 +37,27 @@ const peakSchema = z.object({
 
 // JSON nie wspiera BigInt -> zamieniamy na string
 function serializePeak(peak, lang = "pl") {
-	const t = (peak.peaks_i18n || []).find((x) => x.lang === lang) || null;
+	const peakI18n = peak.peaks_i18n || [];
+	const t =
+		peakI18n.find((x) => x.lang === lang) ||
+		peakI18n.find((x) => x.lang === "pl") ||
+		null;
+
+	const range = peak.mountain_ranges || null;
+	const rangeI18n = range?.mountain_ranges_i18n || [];
+	const rLang =
+		rangeI18n.find((x) => x.lang === lang) ||
+		rangeI18n.find((x) => x.lang === "pl") ||
+		null;
 
 	return {
 		id: peak.id.toString(),
 		slug: peak.slug,
+
 		range_id: peak.range_id?.toString?.() ?? null,
+		range_slug: range?.slug ?? null,
+		range_name: rLang?.name ?? range?.slug ?? null,
+
 		subrange_id: peak.subrange_id?.toString?.() ?? null,
 		elevation_m: peak.elevation_m,
 		latitude: peak.latitude ? Number(peak.latitude) : null,
@@ -53,12 +68,14 @@ function serializePeak(peak, lang = "pl") {
 		is_korona: peak.is_korona,
 		active: peak.active,
 		created_at: peak.created_at,
-		// name dla tabeli
+
+		// nazwa do tabeli (z i18n)
 		name: t?.name ?? null,
 		lang,
-		// pełne i18n dla edit modala (opcjonalnie)
+
+		// pełne i18n do modala edycji
 		i18n: LANGS.reduce((acc, l) => {
-			const row = (peak.peaks_i18n || []).find((x) => x.lang === l);
+			const row = peakI18n.find((x) => x.lang === l);
 			acc[l] = {
 				name: row?.name ?? "",
 				short_description: row?.short_description ?? "",
@@ -98,7 +115,12 @@ router.get("/peaks", requireAuth, requireAdmin, async (req, res) => {
 	const peaks = await prisma.peaks.findMany({
 		where,
 		orderBy: { elevation_m: "desc" },
-		include: { peaks_i18n: true },
+		include: {
+			peaks_i18n: true,
+			mountain_ranges: {
+				include: { mountain_ranges_i18n: true },
+			},
+		},
 	});
 
 	res.json({ items: peaks.map((p) => serializePeak(p, lang)) });
