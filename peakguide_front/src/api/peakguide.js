@@ -67,7 +67,7 @@ export async function fetchPeaks({ lang = "pl", only = "all" } = {}) {
 	if (cache.peaks.has(key)) return cache.peaks.get(key);
 
 	const data = await apiGet(
-		`/peaks?lang=${encodeURIComponent(safeLang)}&only=${encodeURIComponent(only)}`,
+		`/api/peaks?lang=${encodeURIComponent(safeLang)}&only=${encodeURIComponent(only)}`,
 	);
 
 	cache.peaks.set(key, data);
@@ -79,7 +79,7 @@ export async function fetchRanges({ lang = "pl" } = {}) {
 
 	if (cache.ranges.has(safeLang)) return cache.ranges.get(safeLang);
 
-	const data = await apiGet(`/ranges?lang=${encodeURIComponent(safeLang)}`);
+	const data = await apiGet(`/api/ranges?lang=${encodeURIComponent(safeLang)}`);
 	cache.ranges.set(safeLang, data);
 	return data;
 }
@@ -88,7 +88,7 @@ export async function fetchNearbyPeaksBySlug(lang, slug, limit = 6) {
 	const safeLang = apiLang(lang);
 
 	const json = await apiGet(
-		`/peaks/${encodeURIComponent(slug)}/nearby?lang=${encodeURIComponent(safeLang)}&limit=${limit}`,
+		`/api/peaks/${encodeURIComponent(slug)}/nearby?lang=${encodeURIComponent(safeLang)}&limit=${limit}`,
 	);
 
 	return Array.isArray(json.items) ? json.items : [];
@@ -103,7 +103,7 @@ export async function fetchPeakBySlug(lang, slug) {
 	}
 
 	const data = await apiGet(
-		`/peaks/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
+		`/api/peaks/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
 	);
 
 	cache.peakBySlug.set(key, data);
@@ -119,7 +119,7 @@ export async function fetchPeakTrailsBySlug(lang, slug) {
 	}
 
 	const data = await apiGet(
-		`/peaks/${encodeURIComponent(slug)}/trails?lang=${encodeURIComponent(safeLang)}`,
+		`/api/peaks/${encodeURIComponent(slug)}/trails?lang=${encodeURIComponent(safeLang)}`,
 	);
 
 	cache.trailsBySlug.set(key, data);
@@ -135,7 +135,7 @@ export async function fetchPeakPoisBySlug(lang, slug) {
 	}
 
 	const data = await apiGet(
-		`/peaks/${encodeURIComponent(slug)}/pois?lang=${encodeURIComponent(safeLang)}`,
+		`/api/peaks/${encodeURIComponent(slug)}/pois?lang=${encodeURIComponent(safeLang)}`,
 	);
 
 	cache.poisBySlug.set(key, data);
@@ -146,7 +146,7 @@ export async function fetchRangeBySlug(lang, slug) {
 	const safeLang = apiLang(lang);
 	const res = await fetch(
 		url(
-			`/ranges/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
+			`/api/ranges/${encodeURIComponent(slug)}?lang=${encodeURIComponent(safeLang)}`,
 		),
 	);
 	if (!res.ok) throw new Error("Failed to load range details");
