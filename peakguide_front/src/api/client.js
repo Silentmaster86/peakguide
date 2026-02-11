@@ -1,9 +1,10 @@
 export const API_URL = import.meta.env.VITE_API_URL || "";
 
-const base = API_URL ? API_URL.replace(/\/$/, "") : "";
+// base = https://.../api  (albo "" w dev jeśli nie ustawisz VITE_API_URL)
+const origin = API_URL ? API_URL.replace(/\/$/, "") : "";
+const base = origin ? `${origin}/api` : "/api";
 
 async function parseError(res) {
-	// backend can return JSON or text
 	const ct = res.headers.get("content-type") || "";
 	if (ct.includes("application/json")) {
 		const data = await res.json().catch(() => null);
@@ -17,7 +18,7 @@ async function parseError(res) {
 
 export async function apiRequest(path, options = {}) {
 	const res = await fetch(`${base}${path}`, {
-		credentials: "include", // important: cookie session
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 			...(options.headers || {}),
@@ -32,7 +33,6 @@ export async function apiRequest(path, options = {}) {
 		throw err;
 	}
 
-	// if 204 No Content
 	if (res.status === 204) return null;
 
 	const ct = res.headers.get("content-type") || "";
@@ -40,18 +40,9 @@ export async function apiRequest(path, options = {}) {
 	return res.text();
 }
 
-export function apiGet(path) {
-	return apiRequest(path, { method: "GET" });
-}
-
-export function apiPost(path, body) {
-	return apiRequest(path, { method: "POST", body: JSON.stringify(body || {}) });
-}
-
-export function apiPut(path, body) {
-	return apiRequest(path, { method: "PUT", body: JSON.stringify(body || {}) });
-}
-
-export function apiDelete(path) {
-	return apiRequest(path, { method: "DELETE" });
-}
+export const apiGet = (p) => apiRequest(p, { method: "GET" });
+export const apiPost = (p, b) =>
+	apiRequest(p, { method: "POST", body: JSON.stringify(b || {}) });
+export const apiPut = (p, b) =>
+	apiRequest(p, { method: "PUT", body: JSON.stringify(b || {}) });
+export const apiDelete = (p) => apiRequest(p, { method: "DELETE" });

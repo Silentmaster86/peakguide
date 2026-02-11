@@ -1,15 +1,15 @@
 import { apiGet, apiPost } from "./client";
 
 export function me() {
-	return apiGet("/api/auth/me");
+	return apiGet("/auth/me");
 }
 
 export function login({ email, password }) {
-	return apiPost("/api/auth/login", { email, password });
+	return apiPost("/auth/login", { email, password });
 }
 
 export function register({ email, password, firstName, lastName }) {
-	return apiPost("/api/auth/register", {
+	return apiPost("/auth/register", {
 		email,
 		password,
 		firstName,

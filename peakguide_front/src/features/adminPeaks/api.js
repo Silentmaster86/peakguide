@@ -4,17 +4,17 @@ export function adminFetchPeaks({ lang = "pl", q = "" }) {
 	const qs = new URLSearchParams();
 	qs.set("lang", lang);
 	if (q) qs.set("q", q);
-	return apiGet(`/api/admin/peaks?${qs.toString()}`);
+	return apiGet(`/admin/peaks?${qs.toString()}`);
 }
 
 export function adminCreatePeak(body) {
-	return apiPost("/api/admin/peaks", body);
+	return apiPost("/admin/peaks", body);
 }
 
 export function adminUpdatePeak(id, body) {
-	return apiPut(`/api/admin/peaks/${id}`, body);
+	return apiPut(`/admin/peaks/${id}`, body);
 }
 
 export function adminDeletePeak(id) {
-	return apiDelete(`/api/admin/peaks/${id}`);
+	return apiDelete(`/admin/peaks/${id}`);
 }
