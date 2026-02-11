@@ -77,11 +77,9 @@ export async function fetchPeaks({ lang = "pl", only = "all" } = {}) {
 export async function fetchRanges({ lang = "pl" } = {}) {
 	const safeLang = apiLang(lang);
 
-	if (cache.ranges.has(safeLang)) {
-		return cache.ranges.get(safeLang);
-	}
+	if (cache.ranges.has(safeLang)) return cache.ranges.get(safeLang);
 
-	const data = await apiGet(`/api/ranges?lang=${encodeURIComponent(safeLang)}`);
+	const data = await apiGet(`/ranges?lang=${encodeURIComponent(safeLang)}`);
 	cache.ranges.set(safeLang, data);
 	return data;
 }
