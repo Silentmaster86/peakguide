@@ -9,7 +9,7 @@ rangesRouter.get("/ranges", async (req, res) => {
 
 		const { rows } = await db.query(
 			`
-      SELECT r.slug, ri.name
+      SELECT r.id r.slug, ri.name
       FROM mountain_ranges r
       JOIN mountain_ranges_i18n ri
         ON ri.range_id = r.id
