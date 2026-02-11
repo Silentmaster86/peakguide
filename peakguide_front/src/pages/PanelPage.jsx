@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import AdminTools from "./AdminTools";
+import AdminPeaksSection from "../features/adminPeaks/AdminPeaksSection";
 
 export default function PanelPage({ lang = "pl" }) {
 	const { user, status } = useAuth();
@@ -31,12 +32,18 @@ export default function PanelPage({ lang = "pl" }) {
 			</section>
 
 			{isAdmin && (
-				<AdminTools
-					t={t}
-					onAddNearby={() => alert("TODO: Admin form — Add Nearby Peak")}
-					onAddTrail={() => alert("TODO: Admin form — Add Trail")}
-					onAddPoi={() => alert("TODO: Admin form — Add POI")}
-				/>
+				<>
+					<AdminTools
+						t={t}
+						onAddNearby={() => alert("TODO: Admin form — Add Nearby Peak")}
+						onAddTrail={() => alert("TODO: Admin form — Add Trail")}
+						onAddPoi={() => alert("TODO: Admin form — Add POI")}
+					/>
+					{/* New: CRUD peaks */}
+					<div style={{ marginTop: 12 }}>
+						<AdminPeaksSection lang={lang} />
+					</div>
+				</>
 			)}
 
 			{!isAdmin && (
@@ -84,20 +91,6 @@ export default function PanelPage({ lang = "pl" }) {
 				</section>
 			)}
 		</div>
-	);
-}
-
-function ToolCard({ title, text, cta, onClick }) {
-	return (
-		<article style={toolCard}>
-			<div style={{ fontWeight: 1000 }}>{title}</div>
-			<div style={{ color: "var(--muted)", marginTop: 8, lineHeight: 1.6 }}>
-				{text}
-			</div>
-			<button type='button' onClick={onClick} style={{ ...btn, marginTop: 12 }}>
-				{cta}
-			</button>
-		</article>
 	);
 }
 
@@ -239,13 +232,6 @@ const headRow = {
 
 const h2 = { margin: "0 0 10px", fontSize: 16, letterSpacing: "-0.2px" };
 const p = { margin: 0, lineHeight: 1.7 };
-
-const toolCard = {
-	border: "1px solid rgba(255,255,255,0.12)",
-	borderRadius: 18,
-	padding: 14,
-	background: "color-mix(in srgb, var(--menu-bg) 60%, transparent)",
-};
 
 const btn = {
 	border: "1px solid var(--btn-border)",
