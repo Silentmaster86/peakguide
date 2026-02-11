@@ -6,9 +6,13 @@
 	"scripts": {
 		"dev": "node --watch src/server.js",
 		"start": "node src/server.js",
-		"postinstall": "prisma generate",
-		"migrate:deploy": "prisma migrate deploy",
-		"prisma:generate": "prisma generate"
+		"prisma:generate": "prisma generate",
+		"migrate:dev": "dotenv -e .env.local -- prisma migrate dev",
+		"migrate:dev:create": "dotenv -e .env.local -- prisma migrate dev --create-only",
+		"migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
+		"migrate:prod:baseline": "dotenv -e .env.production -- prisma migrate resolve --applied 0001_init",
+		"studio:dev": "dotenv -e .env.local -- prisma studio",
+		"studio:prod": "dotenv -e .env.production -- prisma studio"
 	},
 	"engines": {
 		"node": ">=18"
@@ -26,6 +30,8 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
+		"cross-env": "^10.1.0",
+		"dotenv-cli": "^11.0.0",
 		"prisma": "^6.1.0"
 	}
 }
