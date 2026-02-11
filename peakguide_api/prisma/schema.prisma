@@ -1,0 +1,252 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model languages {
+  code                 String                 @id @db.VarChar(8)
+  name                 String
+  mountain_ranges_i18n mountain_ranges_i18n[]
+  peaks_i18n           peaks_i18n[]
+  poi_types_i18n       poi_types_i18n[]
+  pois_i18n            pois_i18n[]
+  subranges_i18n       subranges_i18n[]
+  trails_i18n          trails_i18n[]
+}
+
+model mountain_ranges {
+  id                   BigInt                 @id @default(autoincrement())
+  slug                 String                 @unique
+  created_at           DateTime               @default(now()) @db.Timestamptz(6)
+  mountain_ranges_i18n mountain_ranges_i18n[]
+  peaks                peaks[]
+  subranges            subranges[]
+}
+
+model mountain_ranges_i18n {
+  range_id        BigInt
+  lang            String          @db.VarChar(8)
+  name            String
+  description     String?
+  languages       languages       @relation(fields: [lang], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  mountain_ranges mountain_ranges @relation(fields: [range_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([range_id, lang])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model peak_nearby {
+  peak_id                                 BigInt
+  nearby_peak_id                          BigInt
+  note                                    String?
+  peaks_peak_nearby_nearby_peak_idTopeaks peaks   @relation("peak_nearby_nearby_peak_idTopeaks", fields: [nearby_peak_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  peaks_peak_nearby_peak_idTopeaks        peaks   @relation("peak_nearby_peak_idTopeaks", fields: [peak_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([peak_id, nearby_peak_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model peaks {
+  id                                            BigInt                    @id @default(autoincrement())
+  slug                                          String                    @unique
+  range_id                                      BigInt
+  subrange_id                                   BigInt?
+  elevation_m                                   Int
+  latitude                                      Decimal?                  @db.Decimal(9, 6)
+  longitude                                     Decimal?                  @db.Decimal(9, 6)
+  difficulty                                    String?
+  best_season                                   String?
+  cover_image_url                               String?
+  is_korona                                     Boolean                   @default(true)
+  active                                        Boolean                   @default(true)
+  created_at                                    DateTime                  @default(now()) @db.Timestamptz(6)
+  geom                                          Unsupported("geography")?
+  peak_nearby_peak_nearby_nearby_peak_idTopeaks peak_nearby[]             @relation("peak_nearby_nearby_peak_idTopeaks")
+  peak_nearby_peak_nearby_peak_idTopeaks        peak_nearby[]             @relation("peak_nearby_peak_idTopeaks")
+  mountain_ranges                               mountain_ranges           @relation(fields: [range_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  subranges                                     subranges?                @relation(fields: [subrange_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  peaks_i18n                                    peaks_i18n[]
+  pois                                          pois[]
+  trails                                        trails[]
+  user_peak_status                              user_peak_status[]
+
+  @@index([elevation_m], map: "idx_peaks_elevation")
+  @@index([range_id], map: "idx_peaks_range_id")
+  @@index([subrange_id], map: "idx_peaks_subrange_id")
+  @@index([geom], map: "peaks_geom_gix", type: Gist)
+}
+
+model peaks_i18n {
+  peak_id           BigInt
+  lang              String    @db.VarChar(8)
+  name              String
+  short_description String?
+  description       String?
+  tips              String?
+  languages         languages @relation(fields: [lang], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  peaks             peaks     @relation(fields: [peak_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([peak_id, lang])
+}
+
+model poi_types {
+  id             BigInt           @id @default(autoincrement())
+  slug           String           @unique
+  poi_types_i18n poi_types_i18n[]
+  pois           pois[]
+}
+
+model poi_types_i18n {
+  type_id   BigInt
+  lang      String    @db.VarChar(8)
+  name      String
+  languages languages @relation(fields: [lang], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  poi_types poi_types @relation(fields: [type_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([type_id, lang])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model pois {
+  id              BigInt      @id @default(autoincrement())
+  peak_id         BigInt?
+  trail_id        BigInt?
+  type_id         BigInt
+  latitude        Decimal?    @db.Decimal(9, 6)
+  longitude       Decimal?    @db.Decimal(9, 6)
+  website_url     String?
+  google_maps_url String?
+  active          Boolean     @default(true)
+  created_at      DateTime    @default(now()) @db.Timestamptz(6)
+  peaks           peaks?      @relation(fields: [peak_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  trails          trails?     @relation(fields: [trail_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  poi_types       poi_types   @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  pois_i18n       pois_i18n[]
+
+  @@index([peak_id], map: "idx_pois_peak_id")
+  @@index([trail_id], map: "idx_pois_trail_id")
+  @@index([type_id], map: "idx_pois_type_id")
+}
+
+model pois_i18n {
+  poi_id      BigInt
+  lang        String    @db.VarChar(8)
+  name        String
+  description String?
+  tips        String?
+  languages   languages @relation(fields: [lang], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  pois        pois      @relation(fields: [poi_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([poi_id, lang])
+  @@unique([poi_id, lang], map: "pois_i18n_poi_lang_uniq")
+}
+
+model schema_migrations {
+  id         BigInt   @id @default(autoincrement())
+  filename   String   @unique
+  applied_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+}
+
+model subranges {
+  id              BigInt           @id @default(autoincrement())
+  range_id        BigInt
+  slug            String
+  created_at      DateTime         @default(now()) @db.Timestamptz(6)
+  peaks           peaks[]
+  mountain_ranges mountain_ranges  @relation(fields: [range_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  subranges_i18n  subranges_i18n[]
+
+  @@unique([range_id, slug])
+  @@index([range_id], map: "idx_subranges_range_id")
+}
+
+model subranges_i18n {
+  subrange_id BigInt
+  lang        String    @db.VarChar(8)
+  name        String
+  description String?
+  languages   languages @relation(fields: [lang], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  subranges   subranges @relation(fields: [subrange_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([subrange_id, lang])
+}
+
+model trails {
+  id               BigInt        @id @default(autoincrement())
+  peak_id          BigInt
+  slug             String
+  start_point_name String?
+  end_point_name   String?
+  distance_km      Decimal?      @db.Decimal(5, 2)
+  elevation_gain_m Int?
+  time_min         Int?
+  difficulty       String?
+  route_type       String?
+  gpx_url          String?
+  map_url          String?
+  active           Boolean       @default(true)
+  created_at       DateTime      @default(now()) @db.Timestamptz(6)
+  pois             pois[]
+  peaks            peaks         @relation(fields: [peak_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  trails_i18n      trails_i18n[]
+
+  @@unique([peak_id, slug])
+  @@index([peak_id], map: "idx_trails_peak_id")
+}
+
+model trails_i18n {
+  trail_id    BigInt
+  lang        String    @db.VarChar(8)
+  name        String
+  description String?
+  notes       String?
+  languages   languages @relation(fields: [lang], references: [code], onDelete: NoAction, onUpdate: NoAction)
+  trails      trails    @relation(fields: [trail_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([trail_id, lang])
+  @@unique([trail_id, lang], map: "trails_i18n_trail_lang_uniq")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model user_peak_status {
+  user_id    BigInt
+  peak_id    BigInt
+  status     String
+  date_done  DateTime? @db.Date
+  notes      String?
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  peaks      peaks     @relation(fields: [peak_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([user_id, peak_id])
+  @@index([status], map: "idx_user_peak_status_status")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model users {
+  id               BigInt             @id @default(autoincrement())
+  email            String             @unique
+  password_hash    String
+  role             String             @default("user")
+  created_at       DateTime           @default(now()) @db.Timestamptz(6)
+  is_admin         Boolean            @default(false)
+  active           Boolean            @default(true)
+  display_name     String
+  user_peak_status user_peak_status[]
+
+  @@index([is_admin], map: "idx_users_is_admin")
+}
