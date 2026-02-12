@@ -15,6 +15,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import PanelPage from "../pages/PanelPage";
 import { ProtectedRoute } from "../auth/ProtectedRoute";
+import AdminTools from "../pages/AdminTools";
 
 export default function App() {
 	const [lang, setLang] = useState(
@@ -81,7 +82,6 @@ export default function App() {
 							/>
 						</Routes>
 					</main>
-
 					<Footer lang={safeLang} />
 				</div>
 			</div>
