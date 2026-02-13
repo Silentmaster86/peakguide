@@ -1,5 +1,17 @@
+# node
 node_modules
+# env
+.env
+!.env.example
+!.env.test.example
 .env.local
 .env.production
+
+# tests output
+coverage/
+test-report.json
+junit.xml
+*.junit.xml
+
 cookies.txt
 /src/generated/prisma

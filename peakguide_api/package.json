@@ -12,7 +12,12 @@
 		"migrate:prod": "dotenv -e .env.production -- prisma migrate deploy",
 		"migrate:prod:baseline": "dotenv -e .env.production -- prisma migrate resolve --applied 0001_init",
 		"studio:dev": "dotenv -e .env.local -- prisma studio",
-		"studio:prod": "dotenv -e .env.production -- prisma studio"
+		"studio:prod": "dotenv -e .env.production -- prisma studio",
+		"test": "cross-env NODE_ENV=test node --env-file=.env.test ./node_modules/vitest/vitest.mjs",
+		"test:run": "cross-env NODE_ENV=test node --env-file=.env.test ./node_modules/vitest/vitest.mjs run",
+		"test:cov": "cross-env NODE_ENV=test node --env-file=.env.test ./node_modules/vitest/vitest.mjs run --coverage",
+		"test:report": "cross-env NODE_ENV=test node --env-file=.env.test ./node_modules/vitest/vitest.mjs run --reporter=json --outputFile=./test-report.json",
+		"test:junit": "cross-env NODE_ENV=test node --env-file=.env.test ./node_modules/vitest/vitest.mjs run --reporter=junit --outputFile=./junit.xml"
 	},
 	"engines": {
 		"node": ">=18"
@@ -30,8 +35,12 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
+		"@types/jsonwebtoken": "^9.0.10",
+		"@vitest/coverage-v8": "^4.0.18",
 		"cross-env": "^10.1.0",
 		"dotenv-cli": "^11.0.0",
-		"prisma": "^6.1.0"
+		"prisma": "^6.1.0",
+		"supertest": "^7.2.2",
+		"vitest": "^4.0.18"
 	}
 }
