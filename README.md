@@ -162,9 +162,20 @@ This separation allows:
 
 ## API - backend
 
+### Api health page
+
 ![API Health](/docs/screenshots/api/01-health.png)
+
+### Api POSTMAN auth
+
 ![API POSTMAN Auth](/docs/screenshots/api/02-postman-auth.png)
+
+### Api POSTMAN admin messages
+
 ![API Admin messages](/docs/screenshots/api/03-admin-messages.png)
+
+### Api admin peaks
+
 ![API Admin Peaks](docs/screenshots/api/04-admin-peaks.png)
 
 ## 🧩 Architecture Overview

@@ -107,7 +107,7 @@ The frontend was built to demonstrate:
 
 ### Peaks list page
 
-![Peak List](/docs/screenshots/front/02-peak-list.png)
+![Peak List](/docs/screenshots/front/02-peaks-list.png)
 
 ### Peak details page
 
