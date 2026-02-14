@@ -45,7 +45,7 @@ The frontend was built to demonstrate:
 
 ---
 
-## 🧩 Architecture Overview
+# 🧩 Architecture Overview
 
 ![PeakGuide Architecture](../docs/screenshots/architecture/architecture-overview.png)
 
@@ -101,19 +101,33 @@ The frontend was built to demonstrate:
 
 ## 📸 Screenshots
 
-Store screenshots inside:
-
-- docs/screenshots/front/
-
-Example:
+### Home page
 
 ![Home](/docs/screenshots/front/01-home.png)
+
+### Peaks list page
+
 ![Peak List](/docs/screenshots/front/02-peak-list.png)
+
+### Peak details page
+
 ![Peak details](/docs/screenshots/front/03-peak-details.png)
+
+### Peak map page
+
 ![Map](/docs/screenshots/front/04-map.png)
+
+### Admin Panel page
+
 ![Admin Panel](/docs/screenshots/front/05-admin-panel.png)
+
+### Mobile Home page
+
 ![Mobile Home](/docs/screenshots/front/06-mobile-home.png)
-![Mobile peaks](/docs/screenshots/front/07-mobile-peaks.png)
+
+### Mobile peks list page
+
+![Mobile peaks list](/docs/screenshots/front/07-mobile-peaks.png)
 
 ---
 
