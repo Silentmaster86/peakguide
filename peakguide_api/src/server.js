@@ -1,40 +1,12 @@
 import dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import cookieParser from "cookie-parser";
-import { apiRouter } from "./routes/index.js";
-dotenv.config();
-const app = express();
 
-app.use(helmet());
-app.use(express.json());
-app.use(cookieParser());
+dotenv.config({ path: process.env.NODE_ENV === "test" ? ".env.test" : ".env" });
 
-app.use(
-	cors({
-		origin: (origin, cb) => {
-			const allowList = process.env.CORS_ORIGIN?.split(",")
-				.map((s) => s.trim())
-				.filter(Boolean) ?? ["http://localhost:5173"];
+const { createApp } = await import("./app.js");
 
-			// pozwól na brak origin (curl/postman)
-			if (!origin) return cb(null, true);
-
-			if (allowList.includes(origin)) return cb(null, true);
-			return cb(new Error("CORS blocked: " + origin));
-		},
-		credentials: true,
-	}),
-);
-
-app.get("/api/health", (req, res) => {
-	res.json({ ok: true, name: "peakguide-api" });
-});
-
-app.use("/api", apiRouter);
-
+const app = createApp();
 const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
 	console.log(`API running on http://localhost:${port}`);
 });
