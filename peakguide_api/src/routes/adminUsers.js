@@ -63,4 +63,18 @@ router.patch(
 	},
 );
 
+router.delete("/users/:id", requireAuth, requireAdmin, async (req, res) => {
+	const id = Number(req.params.id);
+
+	try {
+		await prisma.users.delete({
+			where: { id },
+		});
+
+		return res.json({ ok: true });
+	} catch (err) {
+		return res.status(400).json({ error: "Delete failed" });
+	}
+});
+
 export default router;

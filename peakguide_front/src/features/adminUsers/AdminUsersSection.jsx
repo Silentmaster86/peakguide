@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { adminFetchUsers, adminToggleAdmin } from "./api";
+import { adminDeleteUser, adminFetchUsers, adminToggleAdmin } from "./api";
 
 export default function AdminUsersSection() {
 	const [users, setUsers] = useState([]);
@@ -15,6 +15,14 @@ export default function AdminUsersSection() {
 	useEffect(() => {
 		load();
 	}, []);
+
+	async function deleteUser(id, email) {
+		const ok = window.confirm(`Na pewno usunąć usera?\n\n${email}`);
+		if (!ok) return;
+
+		await adminDeleteUser(id);
+		await load();
+	}
 
 	async function toggleAdmin(id) {
 		await adminToggleAdmin(id);
@@ -49,6 +57,19 @@ export default function AdminUsersSection() {
 								<td>
 									<button onClick={() => toggleAdmin(u.id)}>
 										{u.is_admin ? "Remove admin" : "Make admin"}
+									</button>
+								</td>
+								<td>
+									<button
+										onClick={() => deleteUser(u.id, u.email)}
+										disabled={u.is_admin} // opcjonalnie: nie kasuj admina z UI
+										title={
+											u.is_admin
+												? "Najpierw zdejmij admina"
+												: "Usuń użytkownika"
+										}
+									>
+										Delete
 									</button>
 								</td>
 							</tr>

@@ -1,16 +1,169 @@
-# React + Vite
+# PeakGuide — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **React frontend** for the PeakGuide application.
 
-Currently, two official plugins are available:
+PeakGuide is a full-stack project for exploring the Crown of Polish Mountains and other mountain peaks, built as a portfolio-grade MVP.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository contains the client-side application responsible for:
 
-## React Compiler
+- UI rendering
+- Routing
+- Multilingual interface
+- API communication
+- Responsive layout
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🌍 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[Frontend](https://peak-guide.netlify.app/)
+[API](https://peakguide-api.onrender.com)
+
+---
+
+## 🎯 Frontend Goals
+
+The frontend was built to demonstrate:
+
+- Clean React architecture
+- Real API integration (no mock data)
+- Multilingual UI handling
+- Responsive production-style layout
+- Reusable UI components
+- Clear routing hierarchy
+
+---
+
+## ⚙️ Tech Stack
+
+- React (Vite)
+- React Router
+- Fetch API
+- Custom hooks
+- CSS-based responsive layout
+- ESLint (clean code structure)
+
+---
+
+## 🧩 Architecture Overview
+
+![PeakGuide Architecture](docs/screenshots/architecture/peakguide-system-architecture.png)
+
+### Folder Structure (Simplified)
+
+- src/
+- components/
+- pages/
+- features/
+- hooks/
+- api/
+- auth/
+
+### Key Architectural Decisions
+
+- **Feature-based structure** — separation by responsibility
+- **API layer isolated from UI**
+- **Reusable UI components**
+- **Custom hooks for logic separation**
+- **Multilingual labels abstraction**
+- **Admin panel structure ready for expansion**
+
+---
+
+## ✨ Core Features
+
+### Public
+
+- 🌍 Multilingual UI (PL / EN / UA / ZH – UI ready)
+- ⛰️ Peaks list
+- 🏔️ Mountain ranges list
+- 📄 Peak detail pages
+- 🔎 Filtering by range
+- 🧭 Breadcrumb navigation
+- 📱 Fully responsive layout
+- 🖼️ Language-based backgrounds
+
+### Admin (UI structure prepared)
+
+- Admin panel layout
+- Section switching (Messages / Peaks / Users / Tools)
+- Role-aware rendering
+
+---
+
+## 🔐 Authentication Handling
+
+- Cookie-based JWT authentication
+- Role-based rendering (admin vs user)
+- Protected admin panel
+
+---
+
+## 📸 Screenshots
+
+Store screenshots inside:
+
+- docs/screenshots/front/
+
+Example:
+
+```md
+![Home](../docs/screenshots/front/01-home.png)
+![Peak List](../docs/screenshots/front/02-peak-list.png)
+![Peak details](../docs/screenshots/front/03-peak-details.png)
+![Map](../docs/screenshots/front/04-map.png)
+![Admin Panel](../docs/screenshots/front/05-admin-panel.png)
+![Mobile Home](../docs/screenshots/front/06-mobile-home.png)
+![Mobile peaks](../docs/screenshots/front/07-mobile-peaks.png)
+```
+
+---
+
+## 🧠 What I Learned (Frontend)
+
+- Structuring a scalable React project
+
+- Separating logic (hooks) from presentation (components)
+
+- Handling multilingual UI state cleanly
+
+- Integrating a real backend API
+
+- Managing role-based rendering
+
+- Designing UI for hierarchical data (Peaks → Ranges → Details)
+
+- Preparing UI for future expansion without rewriting structure
+
+---
+
+## 🚀 Running Locally
+
+```bash
+npm install
+npm run dev
+```
+
+# Environment variables:
+
+```bash
+VITE_API_URL=http://localhost:5000
+```
+
+---
+
+### 📌 Status
+
+## MVP complete — actively expanding.
+
+- The core browsing experience is stable and production-ready.
+- Next steps include deeper admin functionality and extended hiking features.
+
+---
+
+### 👨‍💻 Author
+
+- Przemysław Pietkun
+- Frontend / Full-Stack Developer Portfolio Project
+
+---
