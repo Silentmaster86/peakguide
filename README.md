@@ -134,7 +134,6 @@ This separation allows:
 
 - Frontend
 
-```md
 ![Home](/docs/screenshots/front/01-home.png)
 ![Peak List](/docs/screenshots/front/02-peak-list.png)
 ![Peak details](/docs/screenshots/front/03-peak-details.png)
@@ -142,16 +141,13 @@ This separation allows:
 ![Admin Panel](/docs/screenshots/front/05-admin-panel.png)
 ![Mobile Home](/docs/screenshots/front/06-mobile-home.png)
 ![Mobile peaks](/docs/screenshots/front/07-mobile-peaks.png)
-```
 
 - API - backend
 
-```md
 ![API Health](/docs/screenshots/api/01-health.png)
 ![API POSTMAN Auth](/docs/screenshots/api/02-postman-auth.png)
 ![API Admin messages](/docs/screenshots/api/03-admin-messages.png)
-![API Admin Peaks](/docs/screenshots/api/04-admin-peaks.png)
-```
+![API Admin Peaks](docs/screenshots/api/04-admin-peaks.png)
 
 ## 🧩 Architecture Overview
 

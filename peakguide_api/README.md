@@ -50,7 +50,7 @@ The API was built to demonstrate:
 
 ## 🧱 Architecture Overview
 
-![PeakGuide Architecture](docs/screenshots/architecture/peakguide-system-architecture.png)
+![PeakGuide Architecture](../docs/screenshots/architecture/architecture-overview.png)
 
 ### Layered Structure
 

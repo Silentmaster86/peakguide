@@ -47,7 +47,7 @@ The frontend was built to demonstrate:
 
 ## 🧩 Architecture Overview
 
-![PeakGuide Architecture](docs/screenshots/architecture/peakguide-system-architecture.png)
+![PeakGuide Architecture](../docs/screenshots/architecture/architecture-overview.png)
 
 ### Folder Structure (Simplified)
 
@@ -107,7 +107,6 @@ Store screenshots inside:
 
 Example:
 
-```md
 ![Home](/docs/screenshots/front/01-home.png)
 ![Peak List](/docs/screenshots/front/02-peak-list.png)
 ![Peak details](/docs/screenshots/front/03-peak-details.png)
@@ -115,7 +114,6 @@ Example:
 ![Admin Panel](/docs/screenshots/front/05-admin-panel.png)
 ![Mobile Home](/docs/screenshots/front/06-mobile-home.png)
 ![Mobile peaks](/docs/screenshots/front/07-mobile-peaks.png)
-```
 
 ---
 
