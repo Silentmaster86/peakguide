@@ -176,7 +176,7 @@ This separation allows:
 
 ### Api admin peaks
 
-![API Admin Peaks](docs/screenshots/api/04-admin-peaks.png)
+![API Admin Peaks](/docs/screenshots/api/04-admin-peaks.png)
 
 ## 🧩 Architecture Overview
 
