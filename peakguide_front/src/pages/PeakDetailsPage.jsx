@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { PeakSEO } from "../seo/SEO";
 import {
 	fetchPeakBySlug,
 	fetchPeakPoisBySlug,
@@ -204,6 +205,9 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 	return (
 		<div style={wrap}>
+
+			{/* SEO */}
+			<PeakSEO peak={peak} lang={lang} />
 			{/* Breadcrumbs */}
 			<nav style={crumbs} aria-label='Breadcrumb'>
 				<Link to='/peaks' style={crumbLink}>

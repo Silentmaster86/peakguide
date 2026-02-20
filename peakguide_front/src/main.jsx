@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./app/App.jsx";
 import "./index.css";
 import { AuthProvider } from "./auth/AuthContext.jsx";
+import { HelmetProvider } from "react-helmet-async";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<AuthProvider>
-				<App />
+				<HelmetProvider>
+					<App />
+				</HelmetProvider>
 			</AuthProvider>
 		</BrowserRouter>
 	</React.StrictMode>,

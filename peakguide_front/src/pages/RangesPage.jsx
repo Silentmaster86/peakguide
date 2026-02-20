@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { SITE_URL, SITE_NAME } from "../seo/site";
+import { SEO, SITE_URL, SITE_NAME } from "../seo/site";
 import { fetchRanges } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 
@@ -24,7 +24,7 @@ export default function RangesPage({ lang = "pl" }) {
 			? `Pasma górskie — ${SITE_NAME}`
 			: `Mountain ranges — ${SITE_NAME}`;
 
-	const desc =
+	const description =
 		lang === "pl"
 			? "Lista pasm górskich w Polsce. Wybierz pasmo, aby zobaczyć szczyty i przejść do szczegółów."
 			: "Browse mountain ranges in Poland. Pick a range to see peaks and open details.";
@@ -32,20 +32,7 @@ export default function RangesPage({ lang = "pl" }) {
 	return (
 		<div style={{ display: "grid", gap: 14 }}>
 			{/* SEO & Social tags */}
-			<Helmet>
-				<title>{title}</title>
-				<meta name='description' content={desc} />
-				<link rel='canonical' href={canonical} />
-
-				<meta property='og:type' content='website' />
-				<meta property='og:title' content={title} />
-				<meta property='og:description' content={desc} />
-				<meta property='og:url' content={canonical} />
-
-				<meta name='twitter:card' content='summary' />
-				<meta name='twitter:title' content={title} />
-				<meta name='twitter:description' content={desc} />
-			</Helmet>
+			<SEO title={title} description={description} canonical={canonical} />
 			<div style={headerCard}>
 				<div style={pill}>🏔️ {t.title}</div>
 				<div style={sub}>{t.subtitle}</div>

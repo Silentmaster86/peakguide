@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { RangeSEO } from "../seo/SEO";
 import { fetchRangeBySlug } from "../api/peakguide";
 import PeakCard from "../components/PeakCard";
 import PeakCardSkeleton from "../components/PeakCardSkeleton";
@@ -114,6 +115,8 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 
 	return (
 		<div style={wrap}>
+			{/* SEO */}
+			<RangeSEO range={range} lang={lang} />
 			{/* Breadcrumbs */}
 			<nav style={crumbs} aria-label='Breadcrumb'>
 				<Link to='/ranges' style={crumbLink}>
