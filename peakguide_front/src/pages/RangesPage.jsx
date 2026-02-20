@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { SITE_URL, SITE_NAME } from "../seo/site";
 import { fetchRanges } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 
@@ -15,8 +17,35 @@ export default function RangesPage({ lang = "pl" }) {
 
 	const t = useMemo(() => getLabels(lang), [lang]);
 
+	const canonical = `${SITE_URL}/ranges`;
+
+	const title =
+		lang === "pl"
+			? `Pasma górskie — ${SITE_NAME}`
+			: `Mountain ranges — ${SITE_NAME}`;
+
+	const desc =
+		lang === "pl"
+			? "Lista pasm górskich w Polsce. Wybierz pasmo, aby zobaczyć szczyty i przejść do szczegółów."
+			: "Browse mountain ranges in Poland. Pick a range to see peaks and open details.";
+
 	return (
 		<div style={{ display: "grid", gap: 14 }}>
+			{/* SEO & Social tags */}
+			<Helmet>
+				<title>{title}</title>
+				<meta name='description' content={desc} />
+				<link rel='canonical' href={canonical} />
+
+				<meta property='og:type' content='website' />
+				<meta property='og:title' content={title} />
+				<meta property='og:description' content={desc} />
+				<meta property='og:url' content={canonical} />
+
+				<meta name='twitter:card' content='summary' />
+				<meta name='twitter:title' content={title} />
+				<meta name='twitter:description' content={desc} />
+			</Helmet>
 			<div style={headerCard}>
 				<div style={pill}>🏔️ {t.title}</div>
 				<div style={sub}>{t.subtitle}</div>
@@ -176,12 +205,12 @@ const rangeName = {
 };
 
 const rangeBadge = {
-  border: "1px solid rgba(31,122,79,0.30)",
-  borderRadius: 999,
-  padding: "6px 10px",
-  fontWeight: 1000,
-  color: "var(--primary)",
-  background: "rgba(31,122,79,0.10)",
+	border: "1px solid rgba(31,122,79,0.30)",
+	borderRadius: 999,
+	padding: "6px 10px",
+	fontWeight: 1000,
+	color: "var(--primary)",
+	background: "rgba(31,122,79,0.10)",
 };
 
 const errorBox = {

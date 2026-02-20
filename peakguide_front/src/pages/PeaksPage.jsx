@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { SITE_URL, SITE_NAME } from "../seo/site";
 import { fetchPeaks, fetchRanges } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 import PeaksToolbar from "../components/PeaksToolbar";
@@ -109,8 +111,50 @@ export default function PeaksPage({ lang }) {
 	const isLoading = peaksState.status === "loading";
 	const isError = peaksState.status === "error";
 
+	const pageUrl = useMemo(() => {
+		const qs = searchParams.toString();
+		return `${SITE_URL}/peaks${qs ? `?${qs}` : ""}`;
+	}, [searchParams]);
+
+	const title = useMemo(() => {
+		const base = lang === "pl" ? "Szczyty — PeakGuide" : "Peaks — PeakGuide";
+
+		const parts = [];
+		if (q.trim()) parts.push(`"${q.trim()}"`);
+		if (range !== "all") parts.push(range);
+		if (parts.length) return `${base} (${parts.join(", ")})`;
+		return base;
+	}, [lang, q, range]);
+
+	const desc = useMemo(() => {
+		if (lang === "pl") {
+			return `Lista szczytów i Korony Gór Polski. Filtruj po paśmie, szukaj po nazwie i sortuj wysokości. Wyników: ${filteredPeaks.length}.`;
+		}
+		return `Browse Polish mountain peaks and the Crown of Polish Mountains. Filter by range, search by name and sort by elevation. Results: ${filteredPeaks.length}.`;
+	}, [lang, filteredPeaks.length]);
+
+	// Canonical: UWAGA dla listy z filtrami
+	// Najbezpieczniej dać canonical na /peaks bez query, żeby nie robić duplikatów.
+	const canonical = `${SITE_URL}/peaks`;
+
 	return (
 		<div style={page}>
+			{/* Helmet SEO */}
+			<Helmet>
+				<title>{title}</title>
+				<meta name='description' content={desc} />
+				<link rel='canonical' href={canonical} />
+
+				<meta property='og:type' content='website' />
+				<meta property='og:title' content={title} />
+				<meta property='og:description' content={desc} />
+				<meta property='og:url' content={canonical} />
+
+				<meta name='twitter:card' content='summary' />
+				<meta name='twitter:title' content={title} />
+				<meta name='twitter:description' content={desc} />
+			</Helmet>
+
 			{/* Toolbar */}
 			<div style={toolbarBox}>
 				<PeaksToolbar
