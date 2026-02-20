@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { SEO, SITE_URL, SITE_NAME } from "../seo/site";
+import { SEO } from "../seo/SEO";
+import { SITE_URL, SITE_NAME } from "../seo/site";
 import { fetchRanges } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { SEO, SITE_URL, SITE_NAME } from "../seo/site";
+import { SEO } from "../seo/SEO";
+import { SITE_URL, SITE_NAME } from "../seo/site";
 import { fetchPeaks, fetchRanges } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 import PeaksToolbar from "../components/PeaksToolbar";
