@@ -73,6 +73,10 @@ export async function register({ email, password, firstName, lastName }) {
 
 export async function logout() {
 	const { error } = await supabase.auth.signOut();
-	if (error) throw new Error(error.message);
+
+	if (error) {
+		console.warn('Supabase logout warning:', error.message);
+	}
+
 	return { ok: true };
 }
