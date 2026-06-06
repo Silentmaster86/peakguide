@@ -198,7 +198,7 @@ Current development focuses on:
 
 ## 👨‍💻 Author
 
-###Przemysław Pietkun
+### Przemysław Pietkun
 
 **Frontend / Full-Stack Developer**
 

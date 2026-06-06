@@ -261,7 +261,7 @@ The current production version of PeakGuide uses:
 
 ## 👨‍💻 Author
 
-###Przemysław Pietkun
+### Przemysław Pietkun
 
 **Front-end/Full-Stack Developer**
 
