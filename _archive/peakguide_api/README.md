@@ -1,50 +1,54 @@
-# PeakGuide — Backend API
+# PeakGuide — Legacy Backend API
 
-This is the **Node.js + Express REST API** for the PeakGuide application.
+## ⚠️ Legacy Express Backend
 
-The API serves mountain peaks, ranges, authentication, admin features, and public contact messages.
+This repository contains the original **Node.js + Express backend** created during the early development of PeakGuide.
 
-It is designed as a **clean, scalable backend architecture** suitable for real-world production applications.
+The project has since been migrated to:
 
----
+* Supabase Authentication
+* Supabase PostgreSQL
+* Supabase REST API
+* Supabase Role-Based Access Control
 
-## 🌍 Live API
+This codebase is retained for:
 
-Base URL:
+* Educational purposes
+* Architecture reference
+* Portfolio demonstration
+* Backend learning showcase
 
-- https://peakguide-api.onrender.com
-
-# Health check:
-
-- [GET /api/health](https://peakguide-api.onrender.com/api/health)
+It is **not used in the current production deployment**.
 
 ---
 
 ## 🎯 Backend Goals
 
-The API was built to demonstrate:
+This backend was built to demonstrate:
 
-- Clean REST architecture
-- Secure JWT authentication (cookie-based)
-- Role-based authorization (admin / user)
-- Structured routing and middleware layers
-- PostgreSQL integration
-- Safe test environment separation
-- Production-ready deployment setup
+* Clean REST API architecture
+* JWT Authentication
+* Role-based authorization
+* Express middleware design
+* PostgreSQL integration
+* Testable application structure
+* Production deployment practices
 
 ---
 
 ## ⚙️ Tech Stack
 
-- Node.js
-- Express
-- PostgreSQL
-- pg (node-postgres)
-- JWT authentication
-- Helmet (security headers)
-- CORS configuration
-- Vitest (API testing)
-- V8 coverage reporting
+* Node.js
+* Express
+* PostgreSQL
+* Prisma ORM
+* pg (node-postgres)
+* JWT Authentication
+* Helmet
+* CORS
+* Cookie Parser
+* Vitest
+* Supertest
 
 ---
 
@@ -54,33 +58,43 @@ The API was built to demonstrate:
 
 ### Layered Structure
 
-- src/
-- controllers/
-- routes/
-- middleware/
-- db.js
-- app.js
-- server.js
+* src/
+* controllers/
+* routes/
+* middleware/
+* db/
+* prisma/
+* tests/
 
 ### Responsibility Breakdown
 
-- **server.js**  
-  Entry point. Starts HTTP server.
+#### server.js
 
-- **app.js**  
-  Express configuration and middleware setup.
+Application bootstrap and HTTP server startup.
 
-- **routes/**  
-  Route definitions grouped by feature.
+#### app.js
 
-- **controllers/**  
-  Business logic layer.
+Express configuration, middleware registration, and route mounting.
 
-- **middleware/**  
-  Authentication & authorization guards.
+#### routes/
 
-- **db.js**  
-  PostgreSQL connection layer with test safety.
+Feature-based route definitions.
+
+#### controllers/
+
+Business logic and request handling.
+
+#### middleware/
+
+Authentication and authorization guards.
+
+#### db/
+
+Database access and Prisma configuration.
+
+#### prisma/
+
+Database schema and migrations.
 
 ---
 
@@ -88,15 +102,15 @@ The API was built to demonstrate:
 
 ### Authentication
 
-- JWT stored in HTTP-only cookies
-- `requireAuth` middleware
-- Secure cookie-based sessions
+* JWT Tokens
+* HTTP-only Cookies
+* Session Validation Middleware
 
 ### Authorization
 
-- `requireAdmin` middleware
-- Role-based access control
-- Admin routes protected under `/api/admin/*`
+* Role-Based Access Control
+* Admin Route Protection
+* Route Guard Middleware
 
 ---
 
@@ -104,50 +118,76 @@ The API was built to demonstrate:
 
 ### Public Routes
 
-- GET /api/health
-- GET /api/ranges
-- GET /api/peaks
-- GET /api/peaks/:slug
-- POST /api/messages
+* GET /api/health
+* GET /api/ranges
+* GET /api/peaks
+* GET /api/peaks/:slug
+* POST /api/messages
 
-### Auth Routes
+### Authentication Routes
 
-- GET /api/admin/messages
-- PATCH /api/admin/messages/:id/status
-- GET /api/admin/peaks
-- POST /api/admin/peaks
-- PUT /api/admin/peaks/:id
-- DELETE /api/admin/peaks/:id
-- PATCH /api/admin/users/:id/admin
+* POST /api/auth/register
+* POST /api/auth/login
+* POST /api/auth/logout
+* GET /api/auth/me
+
+### Admin Routes
+
+* GET /api/admin/messages
+
+* PATCH /api/admin/messages/:id/status
+
+* DELETE /api/admin/messages/:id
+
+* GET /api/admin/peaks
+
+* POST /api/admin/peaks
+
+* PUT /api/admin/peaks/:id
+
+* DELETE /api/admin/peaks/:id
+
+* GET /api/admin/users
+
+* PATCH /api/admin/users/:id/admin
+
+* DELETE /api/admin/users/:id
 
 ---
 
-## 🗄 Database
+## 🗄 Database Design
 
-- PostgreSQL
-- Normalized schema
-- Foreign keys
-- Indexes for performance
-- i18n-ready tables
-- Test database isolation
+Features demonstrated:
+
+* PostgreSQL relational schema
+* Prisma ORM integration
+* Database migrations
+* Foreign key relationships
+* Internationalization tables (i18n)
+* Geographic data support
+* Test database isolation
 
 ### Environment Variables
 
+```env
 DATABASE_URL=
 DATABASE_URL_TEST=
 JWT_SECRET=
 CORS_ORIGIN=
 PORT=
+```
 
 ---
 
 ## 🧪 Testing
 
-- Vitest
-- Supertest
-- Isolated test database
-- Environment-based DB safety
-- Coverage reporting with V8
+Testing stack:
+
+* Vitest
+* Supertest
+* API smoke tests
+* Route guard tests
+* Public endpoint tests
 
 Run tests:
 
@@ -155,7 +195,7 @@ Run tests:
 npm run test
 ```
 
-# Run with coverage:
+Run coverage:
 
 ```bash
 npm run test:cov
@@ -163,25 +203,18 @@ npm run test:cov
 
 ---
 
-## 🧠 What I Learned (Backend)
+## 🧠 What I Learned
 
-- Structuring Express apps properly
-
-- Separating app/server layers
-
-- Implementing JWT cookie authentication
-
-- Role-based route protection
-
-- Writing integration-style API tests
-
-- Preventing accidental production DB wipes in tests
-
-- Configuring environment-aware DB connections
-
-- Building scalable REST architecture
-
-- Handling CORS properly for production deployments
+* Designing scalable Express applications
+* Separating app and server layers
+* Implementing JWT authentication
+* Building role-based authorization systems
+* Writing integration-style API tests
+* Managing environment-specific database configurations
+* Protecting production environments from test operations
+* Structuring maintainable REST APIs
+* Configuring CORS for production deployments
+* Working with PostgreSQL and Prisma ORM
 
 ---
 
@@ -192,40 +225,50 @@ npm install
 npm run dev
 ```
 
-# The API runs on:
+Default local URL:
 
-- http://localhost:5000
+```text
+http://localhost:5000
+```
 
 ---
 
 ## 🛡 Security Features
 
-- Helmet security headers
-
-- CORS allowlist
-
-- HTTP-only cookies
-
-- Role-based route protection
-
-- Environment-based configuration
-
-- Test DB safety guard
+* Helmet Security Headers
+* CORS Allowlist
+* HTTP-only Cookies
+* JWT Authentication
+* Route-Level Authorization
+* Environment-Based Configuration
+* Test Database Safety Guards
 
 ---
 
 ## 📌 Status
 
-# MVP complete.
+### Archived / Reference Project
 
-- Core API functionality is production-ready.
-- Admin and extended hiking features are structured for future expansion.
+This backend successfully powered the original PeakGuide MVP and remains available as a reference implementation.
+
+The current production version of PeakGuide uses:
+
+* Supabase Authentication
+* Supabase PostgreSQL
+* Supabase APIs
 
 ---
 
 ## 👨‍💻 Author
 
-- Przemysław Pietkun
-- Full-Stack Developer Portfolio Project
+**Przemysław Pietkun**
+
+Full-Stack Developer
+
+GitHub: https://github.com/Silentmaster86
+
+LinkedIn: https://www.linkedin.com/in/przemyslaw-pietkun-front-end-dev
+
+Portfolio: https://przemyslawpietkun.co.uk
 
 ---

@@ -2,22 +2,22 @@
 
 This is the **React frontend** for the PeakGuide application.
 
-PeakGuide is a full-stack project for exploring the Crown of Polish Mountains and other mountain peaks, built as a portfolio-grade MVP.
+PeakGuide is a full-stack project for exploring the **Crown of Polish Mountains (Korona Gór Polski)** and other mountain peaks, built as a portfolio-grade MVP.
 
 This repository contains the client-side application responsible for:
 
-- UI rendering
-- Routing
-- Multilingual interface
-- API communication
-- Responsive layout
+* User Interface rendering
+* Routing and navigation
+* Authentication handling
+* Multilingual content presentation
+* Database communication
+* Responsive user experience
 
 ---
 
 ## 🌍 Live Demo
 
 [Frontend](https://peak-guide.netlify.app/)
-[API](https://peakguide-api.onrender.com)
 
 ---
 
@@ -25,23 +25,28 @@ This repository contains the client-side application responsible for:
 
 The frontend was built to demonstrate:
 
-- Clean React architecture
-- Real API integration (no mock data)
-- Multilingual UI handling
-- Responsive production-style layout
-- Reusable UI components
-- Clear routing hierarchy
+* Modern React architecture
+* Real database integration (no mock data)
+* Multilingual UI management
+* Responsive production-style design
+* Reusable component architecture
+* Authentication and role-based rendering
+* Scalable project organization
 
 ---
 
 ## ⚙️ Tech Stack
 
-- React (Vite)
-- React Router
-- Fetch API
-- Custom hooks
-- CSS-based responsive layout
-- ESLint (clean code structure)
+* React
+* Vite
+* React Router
+* Supabase Auth
+* Supabase Database
+* Fetch API
+* Custom Hooks
+* React Leaflet
+* ESLint
+* Responsive CSS
 
 ---
 
@@ -51,101 +56,111 @@ The frontend was built to demonstrate:
 
 ### Folder Structure (Simplified)
 
-- src/
-- components/
-- pages/
-- features/
-- hooks/
-- api/
-- auth/
+* src/
+* components/
+* pages/
+* features/
+* hooks/
+* api/
+* auth/
+* contexts/
+* lib/
 
 ### Key Architectural Decisions
 
-- **Feature-based structure** — separation by responsibility
-- **API layer isolated from UI**
-- **Reusable UI components**
-- **Custom hooks for logic separation**
-- **Multilingual labels abstraction**
-- **Admin panel structure ready for expansion**
+* **Feature-based structure** — separation by responsibility
+* **Authentication isolated from UI**
+* **Reusable UI components**
+* **Custom hooks for logic separation**
+* **Dedicated API layer**
+* **Multilingual content abstraction**
+* **Role-based rendering**
+* **Admin dashboard designed for future expansion**
 
 ---
 
 ## ✨ Core Features
 
-### Public
+### Public Features
 
-- 🌍 Multilingual UI (PL / EN / UA / ZH – UI ready)
-- ⛰️ Peaks list
-- 🏔️ Mountain ranges list
-- 📄 Peak detail pages
-- 🔎 Filtering by range
-- 🧭 Breadcrumb navigation
-- 📱 Fully responsive layout
-- 🖼️ Language-based backgrounds
+* 🌍 Multilingual UI (PL / EN / UA / ZH)
+* ⛰️ Peaks catalogue
+* 🏔️ Mountain ranges catalogue
+* 📄 Detailed peak pages
+* 🔎 Range-based filtering
+* 🧭 Breadcrumb navigation
+* 🗺️ Interactive map integration
+* 📱 Fully responsive design
+* 🖼️ Language-specific themed backgrounds
 
-### Admin (UI structure prepared)
+### Admin Features
 
-- Admin panel layout
-- Section switching (Messages / Peaks / Users / Tools)
-- Role-aware rendering
+* 🔐 Protected admin area
+* 👥 User management
+* 📨 Message management
+* ⛰️ Peak management
+* 🎛️ Role-based interface rendering
+* ⚙️ Expandable admin dashboard architecture
 
 ---
 
-## 🔐 Authentication Handling
+## 🔐 Authentication
 
-- Cookie-based JWT authentication
-- Role-based rendering (admin vs user)
-- Protected admin panel
+Authentication is handled entirely through **Supabase Auth**.
+
+Features include:
+
+* Email / Password Authentication
+* Protected Routes
+* Session Persistence
+* Role-Based Access Control
+* Admin Permissions via Profiles Table
 
 ---
 
 ## 📸 Screenshots
 
-### Home page
+### Home Page
 
 ![Home](/docs/screenshots/front/01-home.png)
 
-### Peaks list page
+### Peaks List Page
 
 ![Peak List](/docs/screenshots/front/02-peaks-list.png)
 
-### Peak details page
+### Peak Details Page
 
-![Peak details](/docs/screenshots/front/03-peak-details.png)
+![Peak Details](/docs/screenshots/front/03-peak-details.png)
 
-### Peak map page
+### Peak Map Page
 
 ![Map](/docs/screenshots/front/04-map.png)
 
-### Admin Panel page
+### Admin Panel
 
 ![Admin Panel](/docs/screenshots/front/05-admin-panel.png)
 
-### Mobile Home page
+### Mobile Home Page
 
 ![Mobile Home](/docs/screenshots/front/06-mobile-home.png)
 
-### Mobile peks list page
+### Mobile Peaks List Page
 
-![Mobile peaks list](/docs/screenshots/front/07-mobile-peaks.png)
+![Mobile Peaks List](/docs/screenshots/front/07-mobile-peaks.png)
 
 ---
 
-## 🧠 What I Learned (Frontend)
+## 🧠 What I Learned
 
-- Structuring a scalable React project
-
-- Separating logic (hooks) from presentation (components)
-
-- Handling multilingual UI state cleanly
-
-- Integrating a real backend API
-
-- Managing role-based rendering
-
-- Designing UI for hierarchical data (Peaks → Ranges → Details)
-
-- Preparing UI for future expansion without rewriting structure
+* Structuring scalable React applications
+* Separating business logic from UI components
+* Building reusable component systems
+* Managing multilingual application state
+* Implementing Supabase Authentication
+* Handling role-based rendering and permissions
+* Integrating geographic data and interactive maps
+* Designing interfaces for hierarchical data structures
+* Preparing applications for future feature expansion
 
 ---
 
@@ -156,26 +171,41 @@ npm install
 npm run dev
 ```
 
-# Environment variables:
+### Environment Variables
 
 ```bash
-VITE_API_URL=http://localhost:5000
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
 ```
 
 ---
 
-### 📌 Status
+## 📌 Status
 
-## MVP complete — actively expanding.
+### MVP Complete — Actively Expanding
 
-- The core browsing experience is stable and production-ready.
-- Next steps include deeper admin functionality and extended hiking features.
+The core browsing experience is stable and production-ready.
+
+Current development focuses on:
+
+* Extended admin tools
+* Hiking routes
+* Trail information
+* User progress tracking
+* Additional mountain datasets
 
 ---
 
-### 👨‍💻 Author
+## 👨‍💻 Author
 
-- Przemysław Pietkun
-- Frontend / Full-Stack Developer Portfolio Project
+**Przemysław Pietkun**
+
+Frontend / Full-Stack Developer
+
+GitHub: https://github.com/Silentmaster86
+
+LinkedIn: https://www.linkedin.com/in/przemyslaw-pietkun-front-end-dev
+
+Portfolio: https://przemyslawpietkun.co.uk
 
 ---
