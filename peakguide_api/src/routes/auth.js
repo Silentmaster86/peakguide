@@ -18,7 +18,7 @@ function setAuthCookie(res, token) {
 	res.cookie("token", token, {
 		httpOnly: true,
 		sameSite: isProd ? "none" : "lax",
-		secure: isProd, // Render/https -> true
+		secure: isProd,
 		maxAge: 7 * 24 * 60 * 60 * 1000,
 	});
 }
@@ -35,7 +35,6 @@ function signToken(user) {
 /**
  * POST /api/auth/register
  * body: { email, password, firstName, lastName }
- * (dopasowane do Twojego frontu)
  */
 router.post("/register", async (req, res) => {
 	try {
@@ -129,7 +128,6 @@ router.post("/logout", async (_req, res) => {
 
 /**
  * GET /api/auth/me
- * (czyta z cookie token)
  */
 router.get("/me", async (req, res) => {
 	try {

@@ -1,18 +1,19 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
+import { fetchRanges } from '../../api/peakguide';
 import {
 	adminCreatePeak,
 	adminDeletePeak,
 	adminFetchPeaks,
 	adminUpdatePeak,
-} from "./api";
+} from './api';
 
-const LANGS = ["pl", "en", "ua", "zh"];
+const LANGS = ['pl', 'en', 'ua', 'zh'];
 
 /* ---------------- helpers ---------------- */
 
 function emptyI18n() {
 	return LANGS.reduce((acc, l) => {
-		acc[l] = { name: "", short_description: "", description: "", tips: "" };
+		acc[l] = { name: '', short_description: '', description: '', tips: '' };
 		return acc;
 	}, {});
 }
@@ -20,20 +21,20 @@ function emptyI18n() {
 // Ensures i18n always has all languages
 function normalizeI18n(i18n) {
 	const base = emptyI18n();
-	if (!i18n || typeof i18n !== "object") return base;
+	if (!i18n || typeof i18n !== 'object') return base;
 	for (const l of LANGS) base[l] = { ...base[l], ...(i18n[l] || {}) };
 	return base;
 }
 
 function cls(...x) {
-	return x.filter(Boolean).join(" ");
+	return x.filter(Boolean).join(' ');
 }
 
 /* ---------------- small UI bits ---------------- */
 
-function Badge({ tone = "neutral", children }) {
+function Badge({ tone = 'neutral', children }) {
 	return (
-		<span className={cls("ap-badge", `ap-badge--${tone}`)}>{children}</span>
+		<span className={cls('ap-badge', `ap-badge--${tone}`)}>{children}</span>
 	);
 }
 
@@ -50,17 +51,17 @@ function Field({ label, hint, children }) {
 }
 
 function TextInput(props) {
-	return <input {...props} className={cls("ap-input", props.className)} />;
+	return <input {...props} className={cls('ap-input', props.className)} />;
 }
 
 function TextArea(props) {
 	return (
-		<textarea {...props} className={cls("ap-textarea", props.className)} />
+		<textarea {...props} className={cls('ap-textarea', props.className)} />
 	);
 }
 
 function Select(props) {
-	return <select {...props} className={cls("ap-input", props.className)} />;
+	return <select {...props} className={cls('ap-input', props.className)} />;
 }
 
 function Toggle({ checked, onChange, label }) {
@@ -77,7 +78,7 @@ function IconBtn({ children, ...props }) {
 	return (
 		<button
 			{...props}
-			className={cls("ap-btn", "ap-btn--ghost", props.className)}
+			className={cls('ap-btn', 'ap-btn--ghost', props.className)}
 		>
 			{children}
 		</button>
@@ -88,7 +89,7 @@ function PrimaryBtn({ children, ...props }) {
 	return (
 		<button
 			{...props}
-			className={cls("ap-btn", "ap-btn--primary", props.className)}
+			className={cls('ap-btn', 'ap-btn--primary', props.className)}
 		>
 			{children}
 		</button>
@@ -99,7 +100,7 @@ function SubtleBtn({ children, ...props }) {
 	return (
 		<button
 			{...props}
-			className={cls("ap-btn", "ap-btn--subtle", props.className)}
+			className={cls('ap-btn', 'ap-btn--subtle', props.className)}
 		>
 			{children}
 		</button>
@@ -110,7 +111,7 @@ function DangerBtn({ children, ...props }) {
 	return (
 		<button
 			{...props}
-			className={cls("ap-btn", "ap-btn--danger", props.className)}
+			className={cls('ap-btn', 'ap-btn--danger', props.className)}
 		>
 			{children}
 		</button>
@@ -119,9 +120,9 @@ function DangerBtn({ children, ...props }) {
 
 /* ---------------- component ---------------- */
 
-export default function AdminPeaksSection({ lang = "pl" }) {
-	const [q, setQ] = useState("");
-	const [status, setStatus] = useState("idle");
+export default function AdminPeaksSection({ lang = 'pl' }) {
+	const [q, setQ] = useState('');
+	const [status, setStatus] = useState('idle');
 	const [error, setError] = useState(null);
 	const [items, setItems] = useState([]);
 
@@ -130,39 +131,39 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 	const [subranges, setSubranges] = useState([]); // [{id, name}] optional
 
 	const [open, setOpen] = useState(false);
-	const [mode, setMode] = useState("create"); // create | edit
+	const [mode, setMode] = useState('create'); // create | edit
 	const [saving, setSaving] = useState(false);
 
 	const [form, setForm] = useState(() => ({
-		slug: "",
-		range_id: "",
-		subrange_id: "",
+		slug: '',
+		range_id: '',
+		subrange_id: '',
 		elevation_m: 0,
-		latitude: "",
-		longitude: "",
-		difficulty: "",
-		best_season: "",
-		cover_image_url: "",
+		latitude: '',
+		longitude: '',
+		difficulty: '',
+		best_season: '',
+		cover_image_url: '',
 		is_korona: true,
 		active: true,
 		i18n: emptyI18n(),
 	}));
 
 	const [editId, setEditId] = useState(null);
-	const [activeLangTab, setActiveLangTab] = useState("pl");
+	const [activeLangTab, setActiveLangTab] = useState('pl');
 
-	const busy = status === "loading";
+	const busy = status === 'loading';
 
 	async function load() {
-		setStatus("loading");
+		setStatus('loading');
 		setError(null);
 		try {
 			const data = await adminFetchPeaks({ lang, q });
 			setItems(Array.isArray(data.items) ? data.items : []);
-			setStatus("success");
+			setStatus('success');
 		} catch (e) {
-			setError(e?.message || "Load failed");
-			setStatus("error");
+			setError(e?.message || 'Load failed');
+			setStatus('error');
 		}
 	}
 
@@ -176,11 +177,10 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 	useEffect(() => {
 		(async () => {
 			try {
-				const res = await fetch(`/api/ranges?lang=${encodeURIComponent(lang)}`);
-				const data = await res.json();
+				const data = await fetchRanges({ lang });
 				setRanges(Array.isArray(data) ? data : []);
 			} catch (e) {
-				console.error("Ranges load failed", e);
+				console.error('Ranges load failed', e);
 				setRanges([]);
 			}
 		})();
@@ -205,7 +205,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 				const data = await res.json();
 				setSubranges(Array.isArray(data) ? data : []);
 			} catch (e) {
-				console.error("Subranges load failed", e);
+				console.error('Subranges load failed', e);
 				setSubranges([]);
 			}
 		})();
@@ -215,47 +215,47 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 
 	function resetFormForCreate() {
 		setForm({
-			slug: "",
-			range_id: "",
-			subrange_id: "",
+			slug: '',
+			range_id: '',
+			subrange_id: '',
 			elevation_m: 0,
-			latitude: "",
-			longitude: "",
-			difficulty: "",
-			best_season: "",
-			cover_image_url: "",
+			latitude: '',
+			longitude: '',
+			difficulty: '',
+			best_season: '',
+			cover_image_url: '',
 			is_korona: true,
 			active: true,
 			i18n: emptyI18n(),
 		});
-		setActiveLangTab("pl");
+		setActiveLangTab('pl');
 	}
 
 	function openCreate() {
-		setMode("create");
+		setMode('create');
 		setEditId(null);
 		resetFormForCreate();
 		setOpen(true);
 	}
 
 	function openEdit(row) {
-		setMode("edit");
+		setMode('edit');
 		setEditId(row.id);
 		setForm({
-			slug: row.slug || "",
-			range_id: row.range_id ? String(row.range_id) : "",
-			subrange_id: row.subrange_id || "",
+			slug: row.slug || '',
+			range_id: row.range_id ? String(row.range_id) : '',
+			subrange_id: row.subrange_id || '',
 			elevation_m: row.elevation_m || 0,
-			latitude: row.latitude ?? "",
-			longitude: row.longitude ?? "",
-			difficulty: row.difficulty ?? "",
-			best_season: row.best_season ?? "",
-			cover_image_url: row.cover_image_url ?? "",
+			latitude: row.latitude ?? '',
+			longitude: row.longitude ?? '',
+			difficulty: row.difficulty ?? '',
+			best_season: row.best_season ?? '',
+			cover_image_url: row.cover_image_url ?? '',
 			is_korona: !!row.is_korona,
 			active: !!row.active,
 			i18n: normalizeI18n(row.i18n),
 		});
-		setActiveLangTab("pl");
+		setActiveLangTab('pl');
 		setOpen(true);
 	}
 
@@ -278,8 +278,8 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 			range_id: String(form.range_id),
 			subrange_id: form.subrange_id ? String(form.subrange_id) : null,
 			elevation_m: Number(form.elevation_m),
-			latitude: form.latitude === "" ? null : Number(form.latitude),
-			longitude: form.longitude === "" ? null : Number(form.longitude),
+			latitude: form.latitude === '' ? null : Number(form.latitude),
+			longitude: form.longitude === '' ? null : Number(form.longitude),
 			cover_image_url: form.cover_image_url?.trim()
 				? form.cover_image_url.trim()
 				: null,
@@ -288,24 +288,24 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 
 		try {
 			setSaving(true);
-			if (mode === "create") await adminCreatePeak(payload);
+			if (mode === 'create') await adminCreatePeak(payload);
 			else await adminUpdatePeak(editId, payload);
 			setOpen(false);
 			await load();
 		} catch (e2) {
-			alert(e2?.message || "Save failed");
+			alert(e2?.message || 'Save failed');
 		} finally {
 			setSaving(false);
 		}
 	}
 
 	async function onDelete(id) {
-		if (!confirm("Delete this peak?")) return;
+		if (!confirm('Delete this peak?')) return;
 		try {
 			await adminDeletePeak(id);
 			await load();
 		} catch (e) {
-			alert(e?.message || "Delete failed");
+			alert(e?.message || 'Delete failed');
 		}
 	}
 
@@ -347,11 +347,11 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 							aria-label='Search peaks'
 						/>
 						<SubtleBtn type='submit' disabled={busy}>
-							{busy ? "Loading…" : "Search"}
+							{busy ? 'Loading…' : 'Search'}
 						</SubtleBtn>
 						<IconBtn
 							type='button'
-							onClick={() => setQ("")}
+							onClick={() => setQ('')}
 							title='Clear'
 							aria-label='Clear search'
 						>
@@ -360,11 +360,11 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 					</div>
 
 					<div className='ap-meta'>
-						{status === "error" ? (
+						{status === 'error' ? (
 							<div className='ap-alert ap-alert--error'>
 								<strong>Error:</strong> {error}
 							</div>
-						) : status === "loading" ? (
+						) : status === 'loading' ? (
 							<div className='ap-alert ap-alert--info'>Loading peaks…</div>
 						) : (
 							<div className='ap-alert ap-alert--ok'>
@@ -396,13 +396,13 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 									r.range_slug ??
 									(r.range_id ? rangeNameById.get(String(r.range_id)) : null) ??
 									r.range_id ??
-									"—";
+									'—';
 
 								return (
 									<tr key={r.id}>
-										<td className='ap-strong'>{r.name || "—"}</td>
+										<td className='ap-strong'>{r.name || '—'}</td>
 										<td className='ap-mono'>{r.slug}</td>
-										<td className='ap-num'>{r.elevation_m ?? "—"}</td>
+										<td className='ap-num'>{r.elevation_m ?? '—'}</td>
 										<td>{rangeLabel}</td>
 										<td>
 											{r.is_korona ? (
@@ -422,7 +422,11 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 											<SubtleBtn type='button' onClick={() => openEdit(r)}>
 												Edit
 											</SubtleBtn>
-											<DangerBtn type='button' onClick={() => onDelete(r.id)}>
+											<DangerBtn
+												style={{ marginLeft: 5 }}
+												type='button'
+												onClick={() => onDelete(r.id)}
+											>
 												Delete
 											</DangerBtn>
 										</td>
@@ -430,7 +434,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 								);
 							})}
 
-							{status === "success" && filtered.length === 0 && (
+							{status === 'success' && filtered.length === 0 && (
 								<tr>
 									<td colSpan={7} className='ap-empty'>
 										No results
@@ -438,10 +442,10 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 								</tr>
 							)}
 
-							{status !== "success" && (
+							{status !== 'success' && (
 								<tr>
 									<td colSpan={7} className='ap-empty'>
-										{status === "loading" ? "Loading…" : "—"}
+										{status === 'loading' ? 'Loading…' : '—'}
 									</td>
 								</tr>
 							)}
@@ -461,7 +465,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 						<div className='ap-modalHead'>
 							<div>
 								<h3 className='ap-modalTitle'>
-									{mode === "create" ? "Add Peak" : "Edit Peak"}
+									{mode === 'create' ? 'Add Peak' : 'Edit Peak'}
 								</h3>
 								<p className='ap-modalSub'>
 									Manage base fields + translations (PL/EN/UA/ZH).
@@ -492,7 +496,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 								<Field label='Range' hint='required'>
 									<select
 										className='ap-input'
-										value={form.range_id ? String(form.range_id) : ""}
+										value={form.range_id ? String(form.range_id) : ''}
 										onChange={(e) =>
 											setForm({ ...form, range_id: e.target.value })
 										}
@@ -512,14 +516,14 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 
 								<Field label='Subrange' hint='optional'>
 									<Select
-										value={form.subrange_id || ""}
+										value={form.subrange_id || ''}
 										onChange={(e) =>
 											setForm({ ...form, subrange_id: e.target.value })
 										}
 										disabled={!subranges.length}
 									>
 										<option value=''>
-											{subranges.length ? "Select subrange…" : "No subranges"}
+											{subranges.length ? 'Select subrange…' : 'No subranges'}
 										</option>
 										{subranges.map((s) => (
 											<option key={s.id} value={String(s.id)}>
@@ -618,7 +622,7 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 									Cancel
 								</SubtleBtn>
 								<PrimaryBtn type='submit' disabled={saving}>
-									{saving ? "Saving…" : mode === "create" ? "Create" : "Save"}
+									{saving ? 'Saving…' : mode === 'create' ? 'Create' : 'Save'}
 								</PrimaryBtn>
 							</div>
 
@@ -641,8 +645,8 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 												key={l}
 												type='button'
 												className={cls(
-													"ap-tab",
-													activeLangTab === l && "is-active",
+													'ap-tab',
+													activeLangTab === l && 'is-active',
 												)}
 												onClick={() => setActiveLangTab(l)}
 												role='tab'
@@ -667,9 +671,9 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 									<div className='ap-grid ap-grid--2'>
 										<Field label='Name'>
 											<TextInput
-												value={form.i18n[activeLangTab]?.name || ""}
+												value={form.i18n[activeLangTab]?.name || ''}
 												onChange={(e) =>
-													setI18nField(activeLangTab, "name", e.target.value)
+													setI18nField(activeLangTab, 'name', e.target.value)
 												}
 												placeholder={`${activeLangTab} name`}
 											/>
@@ -679,12 +683,12 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 											<TextArea
 												rows={3}
 												value={
-													form.i18n[activeLangTab]?.short_description || ""
+													form.i18n[activeLangTab]?.short_description || ''
 												}
 												onChange={(e) =>
 													setI18nField(
 														activeLangTab,
-														"short_description",
+														'short_description',
 														e.target.value,
 													)
 												}
@@ -697,11 +701,11 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 										<Field label='Description'>
 											<TextArea
 												rows={5}
-												value={form.i18n[activeLangTab]?.description || ""}
+												value={form.i18n[activeLangTab]?.description || ''}
 												onChange={(e) =>
 													setI18nField(
 														activeLangTab,
-														"description",
+														'description',
 														e.target.value,
 													)
 												}
@@ -712,9 +716,9 @@ export default function AdminPeaksSection({ lang = "pl" }) {
 										<Field label='Tips'>
 											<TextArea
 												rows={4}
-												value={form.i18n[activeLangTab]?.tips || ""}
+												value={form.i18n[activeLangTab]?.tips || ''}
 												onChange={(e) =>
-													setI18nField(activeLangTab, "tips", e.target.value)
+													setI18nField(activeLangTab, 'tips', e.target.value)
 												}
 												placeholder={`${activeLangTab} tips`}
 											/>
@@ -802,7 +806,7 @@ const css = `
   top: 0;
   background: var(--menu-bg);
   backdrop-filter: blur(10px);
-  text-align:left;
+  text-align:center;
   padding: 12px 12px;
   border-bottom: 1px solid var(--border);
   font-weight: 650;
@@ -831,7 +835,7 @@ html[data-theme="dark"] .ap-table tbody tr:hover{
 }
 
 .ap-num{ text-align:right; font-variant-numeric: tabular-nums; }
-.ap-actions{ text-align:right; white-space:nowrap; }
+.ap-actions{ text-align:center; white-space:nowrap; }
 .ap-strong{ font-weight: 650; }
 .ap-mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 

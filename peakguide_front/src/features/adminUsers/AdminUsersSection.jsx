@@ -13,7 +13,13 @@ export default function AdminUsersSection() {
 	}
 
 	useEffect(() => {
-		load();
+		const fetchUsers = async () => {
+			setLoading(true);
+			const data = await adminFetchUsers();
+			setUsers(data.items || []);
+			setLoading(false);
+		};
+		fetchUsers();
 	}, []);
 
 	async function deleteUser(id, email) {
@@ -36,11 +42,12 @@ export default function AdminUsersSection() {
 			{loading && <p>Loading users…</p>}
 
 			{!loading && (
-				<table style={{ width: "100%", marginTop: 20 }}>
+				<table style={{ width: '100%', marginTop: 20 }}>
 					<thead>
 						<tr>
 							<th>Email</th>
 							<th>Name</th>
+							<th>Created</th>
 							<th>Admin</th>
 							<th>Active</th>
 							<th>Action</th>
@@ -52,22 +59,25 @@ export default function AdminUsersSection() {
 							<tr key={u.id}>
 								<td>{u.email}</td>
 								<td>{u.display_name}</td>
-								<td>{u.is_admin ? "Yes" : "No"}</td>
-								<td>{u.active ? "Yes" : "No"}</td>
+								<td>
+									{u.created_at ? new Date(u.created_at).toLocaleString() : '-'}
+								</td>
+								<td>{u.is_admin ? 'Yes' : 'No'}</td>
+								<td>{u.active ? 'Yes' : 'No'}</td>
 								<td>
 									<button onClick={() => toggleAdmin(u.id)}>
-										{u.is_admin ? "Remove admin" : "Make admin"}
+										{u.is_admin ? 'Remove admin' : 'Make admin'}
 									</button>
-								</td>
-								<td>
+
 									<button
 										onClick={() => deleteUser(u.id, u.email)}
-										disabled={u.is_admin} // opcjonalnie: nie kasuj admina z UI
+										disabled={u.is_admin}
 										title={
 											u.is_admin
-												? "Najpierw zdejmij admina"
-												: "Usuń użytkownika"
+												? 'Najpierw zdejmij admina'
+												: 'Usuń użytkownika'
 										}
+										style={{ marginLeft: 8 }}
 									>
 										Delete
 									</button>
