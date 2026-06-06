@@ -9,8 +9,6 @@ This project was built as a **portfolio-grade MVP**, focusing on clean architect
 ## 🌍 Live Demo
 
 [Frontend](https://peak-guide.netlify.app/)
-[API](https://peakguide-api.onrender.com)
-
 ---
 
 ## 🎯 Project Purpose
