@@ -198,14 +198,14 @@ Current development focuses on:
 
 ## 👨‍💻 Author
 
-**Przemysław Pietkun**
+###Przemysław Pietkun
 
-Frontend / Full-Stack Developer
+**Frontend / Full-Stack Developer**
 
-GitHub: https://github.com/Silentmaster86
+[GitHub](https://github.com/Silentmaster86)
 
-LinkedIn: https://www.linkedin.com/in/przemyslaw-pietkun-front-end-dev
+[LinkedIn](https://www.linkedin.com/in/przemyslaw-pietkun-front-end-dev)
 
-Portfolio: https://przemyslawpietkun.co.uk
+[Portfolio](https://przemyslawpietkun.co.uk)
 
 ---

@@ -261,14 +261,14 @@ The current production version of PeakGuide uses:
 
 ## 👨‍💻 Author
 
-**Przemysław Pietkun**
+###Przemysław Pietkun
 
-Full-Stack Developer
+**Front-end/Full-Stack Developer**
 
-GitHub: https://github.com/Silentmaster86
+- [GitHub](https://github.com/Silentmaster86)
 
-LinkedIn: https://www.linkedin.com/in/przemyslaw-pietkun-front-end-dev
+- [LinkedIn](https://www.linkedin.com/in/przemyslaw-pietkun-front-end-dev)
 
-Portfolio: https://przemyslawpietkun.co.uk
+- [Portfolio](https://przemyslawpietkun.co.uk)
 
 ---

@@ -214,7 +214,7 @@ Current development focuses on:
 
 ### Przemysław Pietkun
 
-- Frontend / Full-Stack Developer Portfolio Project
+**Frontend / Full-Stack Developer**
 
 - [GitHub](https://github.com/Silentmaster86)
 
