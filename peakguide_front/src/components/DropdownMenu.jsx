@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 
 export default function DropdownMenu({
 	open,
@@ -8,42 +8,77 @@ export default function DropdownMenu({
 	minWidth = 200,
 	onSelect,
 }) {
-	const [align, setAlign] = useState("right");
+	const [mode, setMode] = useState('anchor-right');
 
-	// auto align (don’t overflow viewport)
 	useEffect(() => {
 		if (!open) return;
 		if (!wrapRef?.current) return;
 
-		const rect = wrapRef.current.getBoundingClientRect();
-		const approxMenuWidth = minWidth;
-		const spaceRight = window.innerWidth - rect.right;
-		const spaceLeft = rect.left;
+		const updatePosition = () => {
+			const rect = wrapRef.current.getBoundingClientRect();
+			const viewport = window.innerWidth;
+			const menuWidth = Math.min(Math.max(minWidth, 220), viewport - 24);
 
-		// if not enough room on right, flip to left
-		if (spaceRight < approxMenuWidth && spaceLeft > approxMenuWidth)
-			setAlign("left");
-		else setAlign("right");
+			const canOpenRight = rect.left + menuWidth <= viewport - 12;
+			const canOpenLeft = rect.right - menuWidth >= 12;
+
+			if (viewport <= 430) {
+				setMode('fixed');
+			} else if (canOpenRight) {
+				setMode('anchor-left');
+			} else if (canOpenLeft) {
+				setMode('anchor-right');
+			} else {
+				setMode('fixed');
+			}
+		};
+
+		updatePosition();
+
+		window.addEventListener('resize', updatePosition);
+		window.addEventListener('scroll', updatePosition, true);
+
+		return () => {
+			window.removeEventListener('resize', updatePosition);
+			window.removeEventListener('scroll', updatePosition, true);
+		};
 	}, [open, wrapRef, minWidth]);
 
-	const menuStyle = useMemo(
-  () => ({
-    ...styles.menu,
-    minWidth,
-    maxWidth: "min(320px, calc(100vw - 24px))",
-    maxHeight: "min(70vh, 420px)",
-    overflowY: "auto",
-    ...(align === "right" ? styles.right : styles.left),
-  }),
-  [align, minWidth]
-);
+	const menuStyle = useMemo(() => {
+		const base = {
+			...styles.menu,
+			minWidth,
+			width: minWidth,
+		};
+
+		if (mode === 'fixed') {
+			return {
+				...base,
+				...styles.fixed,
+			};
+		}
+
+		if (mode === 'anchor-left') {
+			return {
+				...base,
+				...styles.anchorLeft,
+			};
+		}
+
+		return {
+			...base,
+			...styles.anchorRight,
+		};
+	}, [mode, minWidth]);
 
 	if (!open) return null;
 
 	return (
 		<div style={menuStyle} role='listbox' aria-label={ariaLabel}>
 			{items.map((it) => {
-				if (it.type === "sep") return <div key={it.key} style={styles.sep} />;
+				if (it.type === 'sep') {
+					return <div key={it.key} style={styles.sep} />;
+				}
 
 				const active = !!it.active;
 
@@ -60,13 +95,13 @@ export default function DropdownMenu({
 							...(active ? styles.itemActive : null),
 							...(it.disabled ? styles.itemDisabled : null),
 						}}
-						title={it.tip || ""}
+						title={it.tip || ''}
 					>
 						{it.icon ? <span aria-hidden='true'>{it.icon}</span> : null}
 
 						{it.badge ? <span style={styles.badge}>{it.badge}</span> : null}
 
-						<span style={{ fontWeight: 900 }}>{it.label}</span>
+						<span style={styles.label}>{it.label}</span>
 
 						{it.sub ? <span style={styles.sub}>{it.sub}</span> : null}
 
@@ -82,87 +117,122 @@ export default function DropdownMenu({
 
 const styles = {
 	menu: {
-		position: "absolute",
-		top: "calc(100% + 8px)",
-		borderRadius: 14,
-		border: "1px solid var(--btn-border)",
-		background: "var(--btn-bg)",
-		boxShadow: "var(--shadow-soft)",
-		overflow: "hidden",
-		backdropFilter: "blur(10px)",
-		padding: 6,
-		zIndex: 50,
+		position: 'absolute',
+		top: 'calc(100% + 8px)',
+		zIndex: 9999,
+		maxWidth: 'calc(100vw - 24px)',
+		maxHeight: 'min(70vh, 420px)',
+		overflowY: 'auto',
+		background: 'var(--menu-bg)',
+		border: '1px solid var(--border)',
+		borderRadius: 16,
+		boxShadow: 'var(--shadow)',
+		padding: 8,
+		backdropFilter: 'blur(14px)',
+		WebkitBackdropFilter: 'blur(14px)',
 	},
 
-	right: { right: 0 },
-	left: { left: 0 },
+	anchorLeft: {
+		left: 0,
+		right: 'auto',
+	},
+
+	anchorRight: {
+		right: 0,
+		left: 'auto',
+	},
+
+	fixed: {
+		position: 'fixed',
+		top: 96,
+		left: 12,
+		right: 12,
+		width: 'auto',
+		minWidth: 'auto',
+		maxWidth: 'none',
+	},
 
 	item: {
-		width: "100%",
-		display: "flex",
-		alignItems: "center",
+		width: '100%',
+		display: 'flex',
+		alignItems: 'center',
 		gap: 10,
-		padding: "10px 10px",
+		padding: '10px 10px',
 		borderRadius: 12,
-		border: "1px solid transparent",
-		background: "transparent",
-		cursor: "pointer",
-		color: "var(--text)",
-		textAlign: "left",
+		border: '1px solid transparent',
+		background: 'transparent',
+		cursor: 'pointer',
+		color: 'var(--text)',
+		textAlign: 'left',
 	},
 
 	itemActive: {
-		border: "1px solid rgba(31,122,79,0.22)",
-		background: "rgba(31,122,79,0.08)",
-		backdropFilter: "blur(50px)",
+		border: '1px solid color-mix(in srgb, var(--primary) 26%, var(--border))',
+		background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
 	},
 
 	itemDisabled: {
-		cursor: "not-allowed",
+		cursor: 'not-allowed',
 		opacity: 0.75,
-		background: "rgba(15,23,42,0.03)",
+		background: 'var(--surface-2)',
 	},
 
 	badge: {
 		minWidth: 44,
 		height: 34,
-		display: "grid",
-		placeItems: "center",
-		textAlign: "center",
+		display: 'grid',
+		placeItems: 'center',
+		textAlign: 'center',
 		fontWeight: 1000,
-		padding: "0 8px",
+		padding: '0 8px',
 		borderRadius: 10,
-		background: "var(--btn-bg)",
-		border: "1px solid var(--btn-border)",
-		color: "var(--text)",
+		background: 'var(--btn-bg)',
+		border: '1px solid var(--btn-border)',
+		color: 'var(--text)',
 		lineHeight: 1,
-		fontSize: 16, // <-- ważne dla flag
+		fontSize: 16,
+		flex: '0 0 auto',
+	},
+
+	label: {
+		fontWeight: 900,
+		minWidth: 0,
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
 	},
 
 	sub: {
-		marginLeft: 8,
+		marginLeft: 'auto',
 		fontSize: 12,
 		opacity: 0.72,
 		lineHeight: 1.1,
+		whiteSpace: 'nowrap',
+		flex: '0 0 auto',
 	},
 
 	pill: {
-		marginLeft: "auto",
+		marginLeft: 'auto',
 		fontSize: 11,
 		fontWeight: 1000,
-		padding: "4px 8px",
+		padding: '4px 8px',
 		borderRadius: 999,
-		border: "1px solid rgba(217,119,6,0.25)",
-		background: "rgba(217,119,6,0.10)",
-		color: "rgba(217,119,6,0.95)",
+		border: '1px solid rgba(217,119,6,0.25)',
+		background: 'rgba(217,119,6,0.10)',
+		color: 'rgba(217,119,6,0.95)',
+		whiteSpace: 'nowrap',
 	},
 
-	check: { marginLeft: 10, opacity: 0.9 },
+	check: {
+		marginLeft: 8,
+		opacity: 0.9,
+		flex: '0 0 auto',
+	},
 
 	sep: {
 		height: 1,
-		background: "rgba(15,23,42,0.12)",
-		margin: "6px 6px",
+		background: 'var(--border)',
+		margin: '6px 6px',
 		borderRadius: 99,
 	},
 };

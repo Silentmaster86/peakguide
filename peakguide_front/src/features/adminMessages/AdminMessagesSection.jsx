@@ -1,28 +1,28 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 import {
 	adminDeleteMessage,
 	adminFetchMessages,
 	adminSetMessageStatus,
-} from "../../api/messages";
+} from '../../api/messages';
 
 export default function AdminMessagesSection() {
 	const [items, setItems] = useState([]);
-	const [status, setStatus] = useState("idle"); // idle | loading | success | error
+	const [status, setStatus] = useState('idle');
 	const [error, setError] = useState(null);
-
-	const [filter, setFilter] = useState("all"); // all | new | archived
+	const [filter, setFilter] = useState('all');
 	const [busyId, setBusyId] = useState(null);
 
 	async function load() {
-		setStatus("loading");
+		setStatus('loading');
 		setError(null);
+
 		try {
 			const data = await adminFetchMessages();
 			setItems(Array.isArray(data.items) ? data.items : []);
-			setStatus("success");
+			setStatus('success');
 		} catch (e) {
-			setError(e?.message || "Load failed");
-			setStatus("error");
+			setError(e?.message || 'Load failed');
+			setStatus('error');
 		}
 	}
 
@@ -31,7 +31,7 @@ export default function AdminMessagesSection() {
 	}, []);
 
 	const filtered = useMemo(() => {
-		if (filter === "all") return items;
+		if (filter === 'all') return items;
 		return items.filter((m) => m.status === filter);
 	}, [items, filter]);
 
@@ -46,7 +46,8 @@ export default function AdminMessagesSection() {
 	}
 
 	async function onDelete(id) {
-		if (!confirm("Delete this message permanently?")) return;
+		if (!confirm('Delete this message permanently?')) return;
+
 		try {
 			setBusyId(id);
 			await adminDeleteMessage(id);
@@ -57,83 +58,91 @@ export default function AdminMessagesSection() {
 	}
 
 	return (
-		<section>
-			<div style={headRow}>
-				<h2 style={{ margin: 0 }}>Admin • Messages</h2>
+		<section className='am-wrap'>
+			<style>{css}</style>
 
-				<div style={filtersRow}>
-					<FilterBtn active={filter === "all"} onClick={() => setFilter("all")}>
+			<header className='am-head'>
+				<h2>Admin • Messages</h2>
+
+				<div className='am-filters'>
+					<FilterBtn active={filter === 'all'} onClick={() => setFilter('all')}>
 						All
 					</FilterBtn>
-					<FilterBtn active={filter === "new"} onClick={() => setFilter("new")}>
+
+					<FilterBtn active={filter === 'new'} onClick={() => setFilter('new')}>
 						New
 					</FilterBtn>
+
 					<FilterBtn
-						active={filter === "archived"}
-						onClick={() => setFilter("archived")}
+						active={filter === 'archived'}
+						onClick={() => setFilter('archived')}
 					>
 						Archived
 					</FilterBtn>
 
-					<span style={countPill}>{filtered.length}</span>
+					<span className='am-count'>{filtered.length}</span>
 				</div>
-			</div>
+			</header>
 
-			{status === "loading" && <div style={note}>Loading…</div>}
-			{status === "error" && <div style={errBox}>{error}</div>}
+			{status === 'loading' && (
+				<div className='am-note'>Loading messages...</div>
+			)}
+			{status === 'error' && <div className='am-error'>{error}</div>}
 
-			{status === "success" && filtered.length === 0 && (
-				<div style={note}>No messages.</div>
+			{status === 'success' && filtered.length === 0 && (
+				<div className='am-note'>No messages.</div>
 			)}
 
-			{status === "success" && filtered.length > 0 && (
-				<div style={{ display: "grid", gap: 10 }}>
+			{status === 'success' && filtered.length > 0 && (
+				<div className='am-list'>
 					{filtered.map((m) => {
 						const isBusy = busyId === m.id;
 						const dateLabel = m.created_at
 							? new Date(m.created_at).toLocaleString()
-							: "—";
+							: '—';
 
 						return (
-							<div key={m.id} style={card}>
-								<div style={metaRow}>
-									<div style={{ fontWeight: 1000 }}>{m.email}</div>
-									<div style={muted}>{dateLabel}</div>
-									<div style={{ marginLeft: "auto" }}>
-										<span
-											style={m.status === "archived" ? pillArchived : pillNew}
-										>
-											{m.status}
-										</span>
-									</div>
+							<article key={m.id} className='am-card'>
+								<div className='am-top'>
+									<div className='am-email'>{m.email}</div>
+
+									<span
+										className={
+											m.status === 'archived'
+												? 'am-pill am-pill--archived'
+												: 'am-pill am-pill--new'
+										}
+									>
+										{m.status}
+									</span>
 								</div>
 
-								<div style={body}>{m.message}</div>
+								<div className='am-date'>{dateLabel}</div>
 
-								<div style={actionsRow}>
-									{m.status !== "archived" ? (
+								<p className='am-message'>{m.message}</p>
+
+								<div className='am-actions'>
+									{m.status !== 'archived' ? (
 										<ActionBtn
 											disabled={isBusy}
-											onClick={() => setMsgStatus(m.id, "archived")}
+											onClick={() => setMsgStatus(m.id, 'archived')}
 										>
-											{isBusy ? "…" : "Archive"}
+											{isBusy ? '...' : 'Archive'}
 										</ActionBtn>
 									) : (
 										<ActionBtn
 											disabled={isBusy}
-											onClick={() => setMsgStatus(m.id, "new")}
+											onClick={() => setMsgStatus(m.id, 'new')}
 										>
-											{isBusy ? "…" : "Mark as new"}
+											{isBusy ? '...' : 'Mark as new'}
 										</ActionBtn>
 									)}
 
-									<div style={{ flex: 1 }} />
-
 									<DangerBtn disabled={isBusy} onClick={() => onDelete(m.id)}>
-										{isBusy ? "…" : "Delete"}
+										{isBusy ? '...' : 'Delete'}
 									</DangerBtn>
 								</div>
-							</div>
+							</article>
 						);
 					})}
 				</div>
@@ -142,17 +151,12 @@ export default function AdminMessagesSection() {
 	);
 }
 
-/* ---------- tiny UI bits ---------- */
-
 function FilterBtn({ active, children, ...props }) {
 	return (
 		<button
 			type='button'
 			{...props}
-			style={{
-				...btn,
-				...(active ? btnActive : null),
-			}}
+			className={active ? 'am-btn am-btn--active' : 'am-btn'}
 		>
 			{children}
 		</button>
@@ -161,7 +165,7 @@ function FilterBtn({ active, children, ...props }) {
 
 function ActionBtn({ children, ...props }) {
 	return (
-		<button type='button' {...props} style={btn}>
+		<button type='button' {...props} className='am-btn'>
 			{children}
 		</button>
 	);
@@ -169,127 +173,189 @@ function ActionBtn({ children, ...props }) {
 
 function DangerBtn({ children, ...props }) {
 	return (
-		<button
-			type='button'
-			{...props}
-			style={{
-				...btn,
-				borderColor: "rgba(239,68,68,0.35)",
-				background: "rgba(239,68,68,0.10)",
-			}}
-		>
+		<button type='button' {...props} className='am-btn am-btn--danger'>
 			{children}
 		</button>
 	);
 }
 
-/* ---------- styles ---------- */
+const css = `
+.am-wrap {
+	display: grid;
+	gap: 12px;
+	color: var(--text);
+}
 
-const headRow = {
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
-	gap: 12,
-	flexWrap: "wrap",
-	marginBottom: 12,
-};
+.am-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+}
 
-const filtersRow = {
-	display: "flex",
-	alignItems: "center",
-	gap: 8,
-	flexWrap: "wrap",
-};
+.am-head h2 {
+	margin: 0;
+	font-size: 20px;
+	letter-spacing: -0.3px;
+}
 
-const countPill = {
-	display: "inline-flex",
-	alignItems: "center",
-	justifyContent: "center",
-	minWidth: 34,
-	height: 28,
-	padding: "0 10px",
-	borderRadius: 999,
-	border: "1px solid var(--border)",
-	background: "color-mix(in srgb, var(--menu-bg) 70%, transparent)",
-	fontWeight: 1000,
-};
+.am-filters {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex-wrap: wrap;
+}
 
-const note = {
-	color: "var(--muted)",
-	fontWeight: 800,
-	padding: "6px 0",
-};
+.am-count {
+	min-width: 34px;
+	height: 32px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	border-radius: 999px;
+	border: 1px solid var(--border);
+	background: color-mix(in srgb, var(--menu-bg) 80%, transparent);
+	font-weight: 1000;
+	box-shadow: var(--shadow-soft);
+}
 
-const errBox = {
-	padding: 12,
-	borderRadius: 14,
-	border: "1px solid rgba(255,99,71,0.35)",
-	background: "rgba(255,99,71,0.10)",
-	fontWeight: 900,
-};
+.am-list {
+	display: grid;
+	gap: 12px;
+}
 
-const card = {
-	border: "1px solid var(--border)",
-	borderRadius: 16,
-	padding: 12,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
-};
+.am-card {
+	border: 1px solid var(--border);
+	border-radius: 18px;
+	padding: 14px;
+	background: color-mix(in srgb, var(--menu-bg) 88%, transparent);
+	box-shadow: var(--shadow-soft);
+	display: grid;
+	gap: 8px;
+	overflow: hidden;
+}
 
-const metaRow = {
-	display: "flex",
-	gap: 10,
-	flexWrap: "wrap",
-	alignItems: "center",
-};
+.am-top {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 10px;
+}
 
-const muted = { color: "var(--muted)", fontWeight: 800 };
+.am-email {
+	font-weight: 1000;
+	word-break: break-word;
+	line-height: 1.35;
+	min-width: 0;
+}
 
-const body = { marginTop: 8, lineHeight: 1.6 };
+.am-date {
+	color: var(--muted);
+	font-size: 12px;
+	font-weight: 850;
+}
 
-const actionsRow = {
-	marginTop: 10,
-	display: "flex",
-	gap: 10,
-	alignItems: "center",
-};
+.am-message {
+	margin: 0;
+	line-height: 1.6;
+	color: var(--text);
+	word-break: break-word;
+}
 
-const pillBase = {
-	display: "inline-flex",
-	alignItems: "center",
-	padding: "4px 10px",
-	borderRadius: 999,
-	borderWidth: 1,
-	borderStyle: "solid",
-	fontWeight: 1000,
-	fontSize: 12,
-};
+.am-actions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 4px;
+}
 
-const pillNew = {
-	...pillBase,
-	borderColor: "rgba(34,197,94,0.35)",
-	background: "rgba(34,197,94,0.10)",
-};
+.am-btn {
+	border: 1px solid var(--border);
+	background: var(--btn-bg);
+	color: var(--text);
+	padding: 9px 12px;
+	border-radius: 12px;
+	cursor: pointer;
+	font-weight: 900;
+	box-shadow: var(--shadow-soft);
+}
 
-const pillArchived = {
-	...pillBase,
-	borderColor: "rgba(148,163,184,0.35)",
-	background: "rgba(148,163,184,0.10)",
-};
+.am-btn--active {
+	background: color-mix(in srgb, var(--primary) 18%, transparent);
+	border-color: color-mix(in srgb, var(--primary) 38%, var(--border));
+}
 
-const btn = {
-	borderWidth: 1,
-	borderStyle: "solid",
-	borderColor: "var(--border)",
-	background: "var(--btn-bg)",
-	color: "var(--text)",
-	padding: "9px 12px",
-	borderRadius: 12,
-	cursor: "pointer",
-	fontWeight: 900,
-};
+.am-btn--danger {
+	border-color: rgba(239,68,68,0.35);
+	background: rgba(239,68,68,0.10);
+}
 
-const btnActive = {
-	background: "color-mix(in srgb, var(--primary) 18%, transparent)",
-	borderColor: "color-mix(in srgb, var(--primary) 30%, var(--border))",
-};
+.am-pill {
+	display: inline-flex;
+	align-items: center;
+	padding: 5px 9px;
+	border-radius: 999px;
+	border: 1px solid var(--border);
+	font-size: 12px;
+	font-weight: 1000;
+	white-space: nowrap;
+}
+
+.am-pill--new {
+	border-color: rgba(34,197,94,0.35);
+	background: rgba(34,197,94,0.12);
+	color: var(--primary);
+}
+
+.am-pill--archived {
+	border-color: rgba(148,163,184,0.35);
+	background: rgba(148,163,184,0.12);
+	color: var(--muted);
+}
+
+.am-note {
+	color: var(--muted);
+	font-weight: 900;
+	padding: 8px 0;
+}
+
+.am-error {
+	padding: 12px;
+	border-radius: 14px;
+	border: 1px solid rgba(239,68,68,0.35);
+	background: rgba(239,68,68,0.10);
+	font-weight: 900;
+}
+
+button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+@media (max-width: 425px) {
+	.am-head {
+		align-items: flex-start;
+	}
+
+	.am-head h2 {
+		font-size: 18px;
+	}
+
+	.am-card {
+		padding: 12px;
+		border-radius: 16px;
+	}
+
+	.am-actions {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.am-btn {
+		width: 100%;
+	}
+}
+`;

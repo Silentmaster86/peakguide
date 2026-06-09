@@ -99,6 +99,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	}, [lang, slug]);
 
 	useEffect(() => {
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setTab("overview");
 	}, [slug]);
 

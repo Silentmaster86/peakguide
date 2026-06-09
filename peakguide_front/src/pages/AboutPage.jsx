@@ -123,15 +123,28 @@ function getLabels(lang) {
 
 /* ----------------------------- styles ----------------------------- */
 
-const wrap = { display: "grid", gap: 14 };
+const wrap = {
+	display: 'grid',
+	gap: 14,
+	width: '100%',
+	maxWidth: '100%',
+	minWidth: 0,
+	overflow: 'hidden',
+};
+
 
 const card = {
-	border: "1px solid var(--border)",
+	width: '100%',
+	maxWidth: '100%',
+	minWidth: 0,
+	overflow: 'hidden',
+	border: '1px solid color-mix(in srgb, var(--primary) 14%, var(--border))',
 	borderRadius: 22,
 	padding: 16,
 	background:
-		"radial-gradient(900px 340px at 20% 0%, rgba(31,122,79,0.10), transparent 60%), radial-gradient(700px 340px at 90% 20%, rgba(217,119,6,0.08), transparent 55%), var(--surface)",
-	boxShadow: "var(--shadow-soft)",
+		'radial-gradient(900px 340px at 20% 0%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 60%), radial-gradient(700px 340px at 90% 20%, rgba(217,119,6,0.08), transparent 55%), var(--surface)',
+	boxShadow: 'var(--shadow-soft)',
+	color: 'var(--text)',
 };
 
 const kicker = {
@@ -150,42 +163,54 @@ const title = {
 };
 
 const lead = {
-	margin: "10px 0 0",
-	opacity: 0.88,
+	margin: '10px 0 0',
+	color: 'var(--muted)',
 	lineHeight: 1.7,
 	maxWidth: 940,
 };
 
 const grid = {
 	marginTop: 14,
-	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+	display: 'grid',
+	gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
 	gap: 12,
+	width: '100%',
+	minWidth: 0,
 };
 
 const box = {
-	border: "1px solid rgba(15,23,42,0.10)",
+	minWidth: 0,
+	border: '1px solid color-mix(in srgb, var(--primary) 14%, var(--border))',
 	borderRadius: 18,
 	padding: 14,
-	background: "rgba(255,255,255,0.55)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--surface-2)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
-const boxTitle = { fontWeight: 1100, letterSpacing: "-0.2px" };
+const boxTitle = {
+	fontWeight: 1100, letterSpacing: "-0.2px"
+};
 
 const p = {
-	margin: "8px 0 0",
-	opacity: 0.82,
+	margin: '8px 0 0',
+	color: 'var(--muted)',
 	lineHeight: 1.65,
 };
 
 const note = {
 	marginTop: 14,
-	border: "1px solid rgba(31,122,79,0.18)",
+	border: '1px solid color-mix(in srgb, var(--primary) 22%, var(--border))',
 	borderRadius: 18,
 	padding: 14,
-	background: "rgba(31,122,79,0.06)",
+	background: 'color-mix(in srgb, var(--primary) 8%, var(--surface-2))',
 };
 
-const noteTitle = { fontWeight: 1100, letterSpacing: "-0.2px" };
-const noteBody = { marginTop: 6, opacity: 0.85, lineHeight: 1.6 };
+const noteTitle = {
+	fontWeight: 1100, letterSpacing: "-0.2px"
+};
+
+const noteBody = {
+	marginTop: 6,
+	color: 'var(--muted)',
+	lineHeight: 1.6,
+};

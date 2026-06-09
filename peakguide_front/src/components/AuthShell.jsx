@@ -32,25 +32,52 @@ export default function AuthShell({
 }
 
 const wrap = {
+	width: '100%',
 	maxWidth: 520,
-	margin: "44px auto",
+	minWidth: 0,
+	margin: '44px auto',
 	padding: 16,
+	boxSizing: 'border-box',
+	overflow: 'hidden',
 };
 
 const card = {
-	border: "1px solid var(--border)",
+	width: '100%',
+	maxWidth: '100%',
+	minWidth: 0,
+	boxSizing: 'border-box',
+	overflow: 'hidden',
+	border: '1px solid color-mix(in srgb, var(--primary) 14%, var(--border))',
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--surface)',
+	color: 'var(--text)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
-const h1 = { margin: 0, letterSpacing: "-0.4px" };
+const h1 = {
+	margin: 0,
+	letterSpacing: '-0.4px',
+	lineHeight: 1.1,
+};
+
 const sub = {
 	marginTop: 6,
-	color: "var(--muted)",
+	color: 'var(--muted)',
 	fontWeight: 800,
 	lineHeight: 1.5,
+};
+
+const footerRow = {
+	marginTop: 12,
+	color: 'var(--muted)',
+	fontWeight: 800,
+	lineHeight: 1.5,
+};
+
+const backRow = {
+	marginTop: 12,
+	textAlign: 'center',
 };
 
 const errorBox = {
@@ -62,9 +89,6 @@ const errorBox = {
 	fontWeight: 900,
 };
 
-const footerRow = { marginTop: 12, color: "var(--muted)", fontWeight: 800 };
-
-const backRow = { marginTop: 12, textAlign: "center" };
 const backLink = {
 	color: "var(--muted)",
 	textDecoration: "none",

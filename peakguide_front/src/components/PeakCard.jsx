@@ -42,31 +42,48 @@ export default function PeakCard({ peak, lang }) {
 }
 
 const card = {
-	border: "1px solid rgba(15,23,42,0.10)",
+	display: "flex",
+	flexDirection: "column",
+	justifyContent: "space-between",
+
+	minHeight: 90,
+	height: "100%",
+	border: '1px solid color-mix(in srgb, var(--primary) 18%, var(--border))',
 	borderRadius: 18,
 	padding: 14,
-	background: "var(--btn-bg)",
-	boxShadow: "var(--shadow-soft)",
-	transition: "transform 140ms ease, box-shadow 140ms ease",
+	background: 'color-mix(in srgb, var(--surface-2) 92%, transparent)',
+	boxShadow: 'var(--shadow-soft)',
+	transition:
+		'transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease',
 };
 
 const cardTop = {
-	display: "flex",
-	justifyContent: "space-between",
-	alignItems: "flex-start",
-	gap: 12,
+	display: 'grid',
+	gridTemplateColumns: '1fr auto',
+	gap: 10,
+	alignItems: 'start',
 };
 
-const title = { margin: 0, fontSize: 18, letterSpacing: "-0.2px" };
-const sub = { color: "var(--text)", fontSize: 13, marginTop: 4 };
+const title = {
+	margin: 0,
+	fontSize: 16,
+	lineHeight: 1.2,
+	wordBreak: 'break-word',
+};
+
+const sub = {
+	color: 'var(--muted)',
+	fontSize: 13,
+	marginTop: 4,
+};
 
 const badge = {
-	border: "1px solid rgba(31,122,79,0.28)",
+	border: '1px solid color-mix(in srgb, var(--primary) 34%, var(--border))',
 	borderRadius: 999,
-	padding: "7px 10px",
+	padding: '6px 8px',
 	fontWeight: 900,
-	fontSize: 13,
-	whiteSpace: "nowrap",
-	color: "var(--primary)",
-	background: "rgba(31,122,79,0.09)",
+	fontSize: 12,
+	whiteSpace: 'nowrap',
+	color: 'var(--primary)',
+	background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
 };

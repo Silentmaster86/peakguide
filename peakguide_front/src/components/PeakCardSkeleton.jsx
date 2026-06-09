@@ -24,19 +24,21 @@ export default function PeakCardSkeleton() {
 }
 
 const card = {
-	border: "1px solid rgba(255,255,255,0.10)",
+	border: '1px solid color-mix(in srgb, var(--primary) 14%, var(--border))',
 	borderRadius: 18,
 	padding: 14,
-	background: "rgba(255, 255, 255, 0.62)",
-	boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
+	background: 'var(--surface-2)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
-const row = { display: "flex", justifyContent: "space-between", gap: 12 };
+const row = {
+	display: 'flex', justifyContent: 'space-between', gap: 12
+};
 
 const shimmer = {
 	background:
-		"linear-gradient(90deg, rgba(222, 54, 54, 0.72), rgba(143, 108, 108, 0.82), rgba(210, 194, 194, 0.87))",
-	backgroundSize: "200% 100%",
-	animation: "shimmer 1.2s infinite",
+		'linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 80%, transparent), color-mix(in srgb, var(--primary) 12%, var(--surface-2)), color-mix(in srgb, var(--surface-2) 80%, transparent))',
+	backgroundSize: '200% 100%',
+	animation: 'shimmer 1.2s infinite',
 	borderRadius: 10,
 };

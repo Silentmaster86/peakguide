@@ -123,5 +123,6 @@ const main = {
 	margin: "0 auto",
 	width: "100%",
 	padding: "10px 0 24px",
-	flex: 1, // <-- this is the key for sticky footer
+	flex: 1,
+	paddingBottom: 24,
 };

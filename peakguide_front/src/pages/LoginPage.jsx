@@ -55,7 +55,7 @@ export default function LoginPage({ lang = "pl" }) {
 				</>
 			}
 		>
-			<form onSubmit={onSubmit} style={{ display: "grid", gap: 10 }}>
+			<form onSubmit={onSubmit} style={formStyle}>
 				<Field label={t.email}>
 					<TextInput
 						value={email}
@@ -162,3 +162,13 @@ function getLabels(lang) {
 
 	return dict[lang] || dict.pl;
 }
+
+//-------------------styles--------------//
+
+const formStyle = {
+	display: "grid",
+	gap: 12,
+	width: "100%",
+	maxWidth: "100%",
+	minWidth: 0,
+};

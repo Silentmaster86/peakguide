@@ -227,37 +227,48 @@ export default function PeaksPage({ lang }) {
 const page = {
 	display: "grid",
 	gap: 14,
+	width: "100%",
+	maxWidth: "100%",
+	minWidth: 0,
+	overflow: "hidden",
 };
 
 const toolbarBox = {
-	display: "flex",
-	justifyContent: "space-between",
+	display: 'flex',
+	justifyContent: 'space-between',
 	gap: 12,
-	alignItems: "flex-end",
-	flexWrap: "wrap",
-	border: "1px solid var(--border)",
+	alignItems: 'flex-end',
+	flexWrap: 'wrap',
+	width: '100%',
+	maxWidth: '100%',
+	minWidth: 0,
+	overflow: 'hidden',
+	border: '1px solid color-mix(in srgb, var(--primary) 12%, var(--border))',
 	borderRadius: 18,
 	padding: 12,
-	background: "var(--menu-bg)",
-	color: "var(--toolbar-text)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--surface)',
+	color: 'var(--text)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
 const rightBox = {
-	display: "flex",
+	display: 'flex',
 	gap: 10,
 	alignItems: "center",
 	flexWrap: "wrap",
 };
 
 const counter = {
-	border: "1px solid var(--border)",
+	border: '1px solid color-mix(in srgb, var(--primary) 18%, var(--border))',
 	borderRadius: 999,
-	padding: "8px 10px",
-	background: "var(--pill-bg)",
-	fontSize: 12.5,
-	boxShadow: "var(--shadow-soft)",
+	marginBottom: 3,
+	padding: '8px 12px',
+	background: 'var(--pill-bg)',
+	color: 'var(--muted)',
+	fontSize: 13,
+	boxShadow: 'var(--shadow-soft)',
 };
+
 
 const errorBox = {
 	border: "1px solid rgba(185,28,28,0.25)",
@@ -277,39 +288,44 @@ const retryBtn = {
 };
 
 const grid = {
-	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-	gap: 10,
-	paddingTop: 6,
+	display: 'grid',
+	gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+	gap: 12,
+	paddingTop: 8,
+	width: '100%',
+	minWidth: 0,
 };
 
 const emptyBox = {
-	border: "1px dashed var(--border)",
+	border: '1px dashed color-mix(in srgb, var(--primary) 18%, var(--border))',
 	borderRadius: 18,
 	padding: 14,
-	background: "rgba(15,23,42,0.02)",
-	color: "var(--muted)",
+	background: 'var(--surface-2)',
+	color: 'var(--muted)',
 	fontWeight: 900,
 };
 
 /*-------KGP + nearby----------*/
 
 const sectionHead = {
-	display: "flex",
-	alignItems: "baseline",
-	justifyContent: "space-between",
+	display: 'flex',
+	alignItems: 'baseline',
+	justifyContent: 'space-between',
 	gap: 10,
+	marginTop: 4,
+	padding: '0 2px',
 };
 
 const sectionTitle = {
 	margin: 0,
 	fontSize: 16,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 	fontWeight: 1000,
+	color: 'var(--text)',
 };
 
 const sectionCount = {
-	color: "var(--muted)",
+	color: 'var(--muted)',
 	fontWeight: 1000,
 	fontSize: 13,
 };

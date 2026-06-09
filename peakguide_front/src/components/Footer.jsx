@@ -1,51 +1,53 @@
-import { NavLink } from "react-router-dom";
-import { useMedia } from "../hooks/useMedia";
+import { NavLink } from 'react-router-dom';
+import { useMedia } from '../hooks/useMedia';
 
-export default function Footer({ lang = "pl" }) {
+export default function Footer({ lang = 'pl' }) {
 	const t = getLabels(lang);
-	const isMobile = useMedia("(max-width: 759px)");
+	const isMobile = useMedia('(max-width: 759px)');
+
 	return (
 		<footer
 			style={{
-				...wrap,
-				...(isMobile
-					? { flexDirection: "column", alignItems: "stretch", gap: 10 }
-					: null),
+				...styles.wrap,
+				...(isMobile ? styles.wrapMobile : null),
 			}}
 			aria-label='Footer'
 		>
-			<div style={{ ...left, ...(isMobile ? { minWidth: 0 } : null) }}>
-				<div style={brandRow}>
-					<span style={brandBadge} aria-hidden='true'>
+			<div style={styles.left}>
+				<div style={styles.brandRow}>
+					<span style={styles.brandBadge} aria-hidden='true'>
 						⛰️
 					</span>
-					<div style={{ lineHeight: 1.1 }}>
-						<div style={brandTitle}>PeakGuide</div>
-						<div style={brandSub}>{t.tagline}</div>
+
+					<div style={styles.brandText}>
+						<div style={styles.brandTitle}>PeakGuide</div>
+						<div style={styles.brandSub}>{t.tagline}</div>
 					</div>
 				</div>
 
-				<div style={metaLine}>
-					<span style={metaMuted}>© {new Date().getFullYear()} PeakGuide</span>
-					<span style={dot}>•</span>
-					<span style={metaMuted}>{t.note}</span>
+				<div style={styles.metaLine}>
+					<span>© {new Date().getFullYear()} PeakGuide</span>
+					<span style={styles.dot}>•</span>
+					<span>{t.note}</span>
 				</div>
 			</div>
 
 			<nav
 				style={{
-					...right,
-					...(isMobile ? { justifyContent: "flex-start" } : null),
+					...styles.right,
+					...(isMobile ? styles.rightMobile : null),
 				}}
 				aria-label='Footer links'
 			>
-				<NavLink to='/peaks' style={footLink}>
+				<NavLink to='/peaks' style={styles.footLink}>
 					{t.peaks}
 				</NavLink>
-				<NavLink to='/ranges' style={footLink}>
+
+				<NavLink to='/ranges' style={styles.footLink}>
 					{t.ranges}
 				</NavLink>
-				<NavLink to='/about' style={footLink}>
+
+				<NavLink to='/about' style={styles.footLink}>
 					{t.about}
 				</NavLink>
 			</nav>
@@ -53,104 +55,169 @@ export default function Footer({ lang = "pl" }) {
 	);
 }
 
-/* ----------------------------- labels ------------------------------ */
-
 function getLabels(lang) {
 	const dict = {
 		pl: {
-			tagline: "Korona Gór Polski i nie tylko",
-			note: "Praktyczny przewodnik po szczytach",
-			peaks: "Szczyty",
-			ranges: "Pasma",
-			about: "O projekcie",
+			tagline: 'Korona Gór Polski i nie tylko',
+			note: 'Praktyczny przewodnik po szczytach',
+			peaks: 'Szczyty',
+			ranges: 'Pasma',
+			about: 'O projekcie',
 		},
 		en: {
-			tagline: "Crown of Polish Mountains & more",
-			note: "A practical guide to peaks",
-			peaks: "Peaks",
-			ranges: "Ranges",
-			about: "About",
+			tagline: 'Crown of Polish Mountains & more',
+			note: 'A practical guide to peaks',
+			peaks: 'Peaks',
+			ranges: 'Ranges',
+			about: 'About',
 		},
 		ua: {
-			tagline: "Корона польських гір і не тільки",
-			note: "Практичний путівник по вершинах",
-			peaks: "Вершини",
-			ranges: "Хребти",
-			about: "Про проєкт",
+			tagline: 'Корона польських гір і не тільки',
+			note: 'Практичний путівник по вершинах',
+			peaks: 'Вершини',
+			ranges: 'Хребти',
+			about: 'Про проєкт',
 		},
 		zh: {
-			tagline: "波兰山峰王冠及更多",
-			note: "实用的登山指南",
-			peaks: "山峰",
-			ranges: "山脉",
-			about: "关于",
+			tagline: '波兰山峰王冠及更多',
+			note: '实用的登山指南',
+			peaks: '山峰',
+			ranges: '山脉',
+			about: '关于',
 		},
 	};
 
 	return dict[lang] || dict.pl;
 }
 
-/* ----------------------------- styles ------------------------------ */
-
-const wrap = {
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
-	gap: 12,
-
-	// lighter + smaller than your old footer
-	marginTop: 16,
-	padding: "10px 12px",
-
-	border: "1px solid rgba(15, 23, 42, 0.12)",
-	borderRadius: 16,
-	background: "rgba(255,255,255,0.60)", // less contrast than 0.88
-	boxShadow: "var(--shadow-soft)",
-};
-
-const left = { display: "grid", gap: 8, minWidth: 240 };
-
-const right = {
-	display: "flex",
-	gap: 8,
-	flexWrap: "wrap",
-	justifyContent: "flex-end",
-};
-
-const brandRow = { display: "flex", alignItems: "center", gap: 10 };
-
-const brandBadge = {
-	width: 32,
-	height: 32,
-	borderRadius: 12,
-	display: "grid",
-	placeItems: "center",
-	border: "1px solid rgba(31,122,79,0.18)",
-	background: "rgba(31,122,79,0.06)",
-	fontWeight: 1100,
-};
-
-const brandTitle = { fontWeight: 1100, letterSpacing: "-0.3px" };
-const brandSub = { fontSize: 12, opacity: 0.8, marginTop: 2 };
-
-const metaLine = {
-	display: "flex",
-	alignItems: "center",
-	gap: 8,
-	flexWrap: "wrap",
-};
-
-const dot = { opacity: 0.5 };
-const metaMuted = { fontSize: 12, fontWeight: 850, opacity: 0.72 };
-
-const footLink = ({ isActive }) => ({
-	textDecoration: "none",
-	fontWeight: 950,
-	fontSize: 12,
-	padding: "8px 10px",
+const pillBase = {
+	textDecoration: 'none',
+	fontWeight: 900,
+	height: 'var(--nav-pill-h)',
+	padding: '0 var(--nav-pill-px)',
+	display: 'inline-flex',
+	alignItems: 'center',
+	justifyContent: 'center',
 	borderRadius: 999,
-	border: "1px solid rgba(15, 23, 42, 0.12)",
-	background: isActive ? "rgba(31,122,79,0.08)" : "rgba(255,255,255,0.45)",
-	color: "var(--text)",
-	boxShadow: "none",
-});
+	border: '1px solid var(--border)',
+	fontSize: 'var(--nav-pill-fs)',
+	background: 'var(--btn-bg)',
+	color: 'var(--text)',
+	boxShadow: 'var(--shadow-soft)',
+	whiteSpace: 'nowrap',
+	lineHeight: 1,
+};
+
+const activePill = {
+	background: 'color-mix(in srgb, var(--primary) 18%, transparent)',
+	border: '1px solid color-mix(in srgb, var(--primary) 45%, var(--border))',
+	color: 'var(--text)',
+};
+
+const styles = {
+	wrap: {
+		width: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		gap: 12,
+
+		backdropFilter: 'blur(14px)',
+		WebkitBackdropFilter: 'blur(14px)',
+
+		marginTop: 22,
+		padding: 12,
+
+		border: '1px solid var(--border)',
+		borderRadius: 18,
+		background: 'var(--menu-bg)',
+		boxShadow: 'var(--shadow-soft)',
+		color: 'var(--text)',
+	},
+
+	wrapMobile: {
+		flexDirection: 'column',
+		alignItems: 'stretch',
+		gap: 12,
+	},
+
+	left: {
+		display: 'grid',
+		gap: 8,
+		minWidth: 0,
+	},
+
+	right: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		gap: 'var(--nav-gap)',
+		flexWrap: 'wrap',
+	},
+
+	rightMobile: {
+		justifyContent: 'flex-start',
+	},
+
+	brandRow: {
+		display: 'flex',
+		alignItems: 'center',
+		gap: 10,
+		minWidth: 0,
+	},
+
+	brandBadge: {
+		width: 40,
+		height: 40,
+		borderRadius: 12,
+		display: 'grid',
+		placeItems: 'center',
+		border: '1px solid color-mix(in srgb, var(--primary) 35%, var(--border))',
+		background: 'var(--primary)',
+		fontWeight: 1000,
+		flex: '0 0 auto',
+		boxShadow: 'var(--shadow-soft)',
+	},
+
+	brandText: {
+		minWidth: 0,
+		overflow: 'hidden',
+	},
+
+	brandTitle: {
+		fontWeight: 1000,
+		letterSpacing: '-0.3px',
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
+	},
+
+	brandSub: {
+		fontSize: 12,
+		color: 'var(--muted)',
+		marginTop: 2,
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
+		maxWidth: 260,
+	},
+
+	metaLine: {
+		display: 'flex',
+		alignItems: 'center',
+		gap: 8,
+		flexWrap: 'wrap',
+		color: 'var(--muted)',
+		fontSize: 12,
+		fontWeight: 850,
+	},
+
+	dot: {
+		opacity: 0.55,
+	},
+
+	footLink: ({ isActive }) => ({
+		...pillBase,
+		...(isActive ? activePill : null),
+	}),
+};

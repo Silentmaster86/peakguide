@@ -23,24 +23,42 @@ export function PrimaryBtn({ children, ...props }) {
 	);
 }
 
-const field = { display: "grid", gap: 6 };
-const lab = { fontWeight: 1000, fontSize: 13, color: "var(--muted)" };
+const field = {
+	display: 'grid',
+	gap: 6,
+	width: '100%',
+	minWidth: 0,
+};
+
+const lab = {
+	fontWeight: 1000,
+	fontSize: 13,
+	color: 'var(--muted)',
+};
 
 const input = {
-	border: "1px solid var(--border)",
-	background: "var(--btn-bg)",
-	color: "var(--text)",
+	width: '100%',
+	maxWidth: '100%',
+	minWidth: 0,
+	boxSizing: 'border-box',
+	border: '1px solid var(--border)',
+	background: 'var(--btn-bg)',
+	color: 'var(--text)',
 	borderRadius: 12,
-	padding: "10px 12px",
-	outline: "none",
+	padding: '10px 12px',
+	outline: 'none',
+	font: 'inherit',
 };
 
 const btn = {
-	border: "1px solid var(--btn-border)",
-	background: "var(--btn-bg)",
-	color: "var(--text)",
-	padding: "10px 12px",
+	width: '100%',
+	boxSizing: 'border-box',
+	border: '1px solid var(--btn-border)',
+	background: 'var(--btn-bg)',
+	color: 'var(--text)',
+	padding: '10px 12px',
 	borderRadius: 12,
-	cursor: "pointer",
+	cursor: 'pointer',
 	fontWeight: 1000,
+	font: 'inherit',
 };

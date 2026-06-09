@@ -1,3 +1,5 @@
+// src/admin/components/AdminPeaksSection.jsx
+
 import { useEffect, useMemo, useState } from 'react';
 import { fetchRanges } from '../../api/peakguide';
 import {
@@ -9,8 +11,6 @@ import {
 
 const LANGS = ['pl', 'en', 'ua', 'zh'];
 
-/* ---------------- helpers ---------------- */
-
 function emptyI18n() {
 	return LANGS.reduce((acc, l) => {
 		acc[l] = { name: '', short_description: '', description: '', tips: '' };
@@ -18,7 +18,6 @@ function emptyI18n() {
 	}, {});
 }
 
-// Ensures i18n always has all languages
 function normalizeI18n(i18n) {
 	const base = emptyI18n();
 	if (!i18n || typeof i18n !== 'object') return base;
@@ -29,8 +28,6 @@ function normalizeI18n(i18n) {
 function cls(...x) {
 	return x.filter(Boolean).join(' ');
 }
-
-/* ---------------- small UI bits ---------------- */
 
 function Badge({ tone = 'neutral', children }) {
 	return (
@@ -74,65 +71,30 @@ function Toggle({ checked, onChange, label }) {
 	);
 }
 
-function IconBtn({ children, ...props }) {
+function Button({ children, variant = 'ghost', ...props }) {
 	return (
 		<button
 			{...props}
-			className={cls('ap-btn', 'ap-btn--ghost', props.className)}
+			className={cls('ap-btn', `ap-btn--${variant}`, props.className)}
 		>
 			{children}
 		</button>
 	);
 }
-
-function PrimaryBtn({ children, ...props }) {
-	return (
-		<button
-			{...props}
-			className={cls('ap-btn', 'ap-btn--primary', props.className)}
-		>
-			{children}
-		</button>
-	);
-}
-
-function SubtleBtn({ children, ...props }) {
-	return (
-		<button
-			{...props}
-			className={cls('ap-btn', 'ap-btn--subtle', props.className)}
-		>
-			{children}
-		</button>
-	);
-}
-
-function DangerBtn({ children, ...props }) {
-	return (
-		<button
-			{...props}
-			className={cls('ap-btn', 'ap-btn--danger', props.className)}
-		>
-			{children}
-		</button>
-	);
-}
-
-/* ---------------- component ---------------- */
 
 export default function AdminPeaksSection({ lang = 'pl' }) {
 	const [q, setQ] = useState('');
 	const [status, setStatus] = useState('idle');
 	const [error, setError] = useState(null);
 	const [items, setItems] = useState([]);
-
-	// ranges/subranges (dropdown)
-	const [ranges, setRanges] = useState([]); // [{id, slug, name}]
-	const [subranges, setSubranges] = useState([]); // [{id, name}] optional
+	const [ranges, setRanges] = useState([]);
+	const [subranges, setSubranges] = useState([]);
 
 	const [open, setOpen] = useState(false);
-	const [mode, setMode] = useState('create'); // create | edit
+	const [mode, setMode] = useState('create');
 	const [saving, setSaving] = useState(false);
+	const [editId, setEditId] = useState(null);
+	const [activeLangTab, setActiveLangTab] = useState('pl');
 
 	const [form, setForm] = useState(() => ({
 		slug: '',
@@ -149,14 +111,12 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		i18n: emptyI18n(),
 	}));
 
-	const [editId, setEditId] = useState(null);
-	const [activeLangTab, setActiveLangTab] = useState('pl');
-
 	const busy = status === 'loading';
 
 	async function load() {
 		setStatus('loading');
 		setError(null);
+
 		try {
 			const data = await adminFetchPeaks({ lang, q });
 			setItems(Array.isArray(data.items) ? data.items : []);
@@ -167,51 +127,67 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		}
 	}
 
-	// load peaks on lang change
 	useEffect(() => {
 		load();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [lang]);
 
-	// load ranges for dropdown (needs id from backend!)
 	useEffect(() => {
 		(async () => {
 			try {
 				const data = await fetchRanges({ lang });
 				setRanges(Array.isArray(data) ? data : []);
-			} catch (e) {
-				console.error('Ranges load failed', e);
+			} catch {
 				setRanges([]);
 			}
 		})();
 	}, [lang]);
 
-	// OPTIONAL: load subranges when range changes
-	// If you don't have /api/subranges endpoint yet, this will just stay empty.
 	useEffect(() => {
 		(async () => {
 			if (!form.range_id) {
 				setSubranges([]);
 				return;
 			}
+
 			try {
 				const res = await fetch(
 					`/api/subranges?range_id=${encodeURIComponent(form.range_id)}&lang=${encodeURIComponent(lang)}`,
 				);
+
 				if (!res.ok) {
 					setSubranges([]);
 					return;
 				}
+
 				const data = await res.json();
 				setSubranges(Array.isArray(data) ? data : []);
-			} catch (e) {
-				console.error('Subranges load failed', e);
+			} catch {
 				setSubranges([]);
 			}
 		})();
 	}, [form.range_id, lang]);
 
 	const filtered = useMemo(() => items, [items]);
+
+	const rangeNameById = useMemo(() => {
+		const map = new Map();
+		for (const r of ranges) {
+			if (r?.id != null)
+				map.set(String(r.id), r.name || r.slug || String(r.id));
+		}
+		return map;
+	}, [ranges]);
+
+	function getRangeLabel(r) {
+		return (
+			r.range_name ??
+			r.range_slug ??
+			(r.range_id ? rangeNameById.get(String(r.range_id)) : null) ??
+			r.range_id ??
+			'—'
+		);
+	}
 
 	function resetFormForCreate() {
 		setForm({
@@ -241,6 +217,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 	function openEdit(row) {
 		setMode('edit');
 		setEditId(row.id);
+
 		setForm({
 			slug: row.slug || '',
 			range_id: row.range_id ? String(row.range_id) : '',
@@ -255,6 +232,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			active: !!row.active,
 			i18n: normalizeI18n(row.i18n),
 		});
+
 		setActiveLangTab('pl');
 		setOpen(true);
 	}
@@ -280,16 +258,16 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			elevation_m: Number(form.elevation_m),
 			latitude: form.latitude === '' ? null : Number(form.latitude),
 			longitude: form.longitude === '' ? null : Number(form.longitude),
-			cover_image_url: form.cover_image_url?.trim()
-				? form.cover_image_url.trim()
-				: null,
+			cover_image_url: form.cover_image_url?.trim() || null,
 			i18n: normalizeI18n(form.i18n),
 		};
 
 		try {
 			setSaving(true);
+
 			if (mode === 'create') await adminCreatePeak(payload);
 			else await adminUpdatePeak(editId, payload);
+
 			setOpen(false);
 			await load();
 		} catch (e2) {
@@ -301,6 +279,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 
 	async function onDelete(id) {
 		if (!confirm('Delete this peak?')) return;
+
 		try {
 			await adminDeletePeak(id);
 			await load();
@@ -309,16 +288,6 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		}
 	}
 
-	// For display: map range_id -> range name (if backend doesn't return range_name)
-	const rangeNameById = useMemo(() => {
-		const map = new Map();
-		for (const r of ranges) {
-			if (r?.id != null)
-				map.set(String(r.id), r.name || r.slug || String(r.id));
-		}
-		return map;
-	}, [ranges]);
-
 	return (
 		<section className='ap-wrap'>
 			<style>{css}</style>
@@ -326,10 +295,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			<header className='ap-head'>
 				<div className='ap-titleRow'>
 					<h2 className='ap-title'>Admin • Peaks</h2>
-					<div className='ap-spacer' />
-					<PrimaryBtn type='button' onClick={openCreate}>
+
+					<Button type='button' variant='primary' onClick={openCreate}>
 						+ Add peak
-					</PrimaryBtn>
+					</Button>
 				</div>
 
 				<form
@@ -343,20 +312,23 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 						<TextInput
 							value={q}
 							onChange={(e) => setQ(e.target.value)}
-							placeholder='Search slug/name…'
+							placeholder='Search slug/name...'
 							aria-label='Search peaks'
 						/>
-						<SubtleBtn type='submit' disabled={busy}>
-							{busy ? 'Loading…' : 'Search'}
-						</SubtleBtn>
-						<IconBtn
+
+						<Button type='submit' variant='subtle' disabled={busy}>
+							{busy ? 'Loading...' : 'Search'}
+						</Button>
+
+						<Button
 							type='button'
+							variant='ghost'
 							onClick={() => setQ('')}
 							title='Clear'
 							aria-label='Clear search'
 						>
 							✕
-						</IconBtn>
+						</Button>
 					</div>
 
 					<div className='ap-meta'>
@@ -365,7 +337,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 								<strong>Error:</strong> {error}
 							</div>
 						) : status === 'loading' ? (
-							<div className='ap-alert ap-alert--info'>Loading peaks…</div>
+							<div className='ap-alert ap-alert--info'>Loading peaks...</div>
 						) : (
 							<div className='ap-alert ap-alert--ok'>
 								Showing <strong>{filtered.length}</strong> result(s)
@@ -376,81 +348,120 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			</header>
 
 			<div className='ap-card'>
-				<div className='ap-tableWrap'>
-					<table className='ap-table'>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Slug</th>
-								<th className='ap-num'>Elev</th>
-								<th>Range</th>
-								<th>Korona</th>
-								<th>Active</th>
-								<th className='ap-actions'>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							{filtered.map((r) => {
-								const rangeLabel =
-									r.range_name ??
-									r.range_slug ??
-									(r.range_id ? rangeNameById.get(String(r.range_id)) : null) ??
-									r.range_id ??
-									'—';
+				<div className='ap-desktopTable'>
+					<div className='ap-tableWrap'>
+						<table className='ap-table'>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Slug</th>
+									<th>Elev</th>
+									<th>Range</th>
+									<th>Korona</th>
+									<th>Active</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
 
-								return (
+							<tbody>
+								{filtered.map((r) => (
 									<tr key={r.id}>
 										<td className='ap-strong'>{r.name || '—'}</td>
 										<td className='ap-mono'>{r.slug}</td>
-										<td className='ap-num'>{r.elevation_m ?? '—'}</td>
-										<td>{rangeLabel}</td>
+										<td>{r.elevation_m ?? '—'}</td>
+										<td>{getRangeLabel(r)}</td>
 										<td>
-											{r.is_korona ? (
-												<Badge tone='brand'>Yes</Badge>
-											) : (
-												<Badge tone='neutral'>No</Badge>
-											)}
+											<Badge tone={r.is_korona ? 'brand' : 'neutral'}>
+												{r.is_korona ? 'Yes' : 'No'}
+											</Badge>
 										</td>
 										<td>
-											{r.active ? (
-												<Badge tone='ok'>Yes</Badge>
-											) : (
-												<Badge tone='warn'>No</Badge>
-											)}
+											<Badge tone={r.active ? 'ok' : 'warn'}>
+												{r.active ? 'Yes' : 'No'}
+											</Badge>
 										</td>
 										<td className='ap-actions'>
-											<SubtleBtn type='button' onClick={() => openEdit(r)}>
-												Edit
-											</SubtleBtn>
-											<DangerBtn
-												style={{ marginLeft: 5 }}
+											<Button
 												type='button'
+												variant='subtle'
+												onClick={() => openEdit(r)}
+											>
+												Edit
+											</Button>
+											<Button
+												type='button'
+												variant='danger'
 												onClick={() => onDelete(r.id)}
 											>
 												Delete
-											</DangerBtn>
+											</Button>
 										</td>
 									</tr>
-								);
-							})}
+								))}
 
-							{status === 'success' && filtered.length === 0 && (
-								<tr>
-									<td colSpan={7} className='ap-empty'>
-										No results
-									</td>
-								</tr>
-							)}
+								{status === 'success' && filtered.length === 0 && (
+									<tr>
+										<td colSpan={7} className='ap-empty'>
+											No results
+										</td>
+									</tr>
+								)}
+							</tbody>
+						</table>
+					</div>
+				</div>
 
-							{status !== 'success' && (
-								<tr>
-									<td colSpan={7} className='ap-empty'>
-										{status === 'loading' ? 'Loading…' : '—'}
-									</td>
-								</tr>
-							)}
-						</tbody>
-					</table>
+				<div className='ap-mobileCards'>
+					{filtered.map((r) => (
+						<article key={r.id} className='ap-mobileCard'>
+							<div className='ap-mobileTop'>
+								<div>
+									<h3>{r.name || '—'}</h3>
+									<p>{getRangeLabel(r)}</p>
+								</div>
+
+								{r.elevation_m ? (
+									<span className='ap-height'>⛰️ {r.elevation_m} m</span>
+								) : null}
+							</div>
+
+							<div className='ap-mobileInfo'>
+								<span>
+									<strong>Slug:</strong> {r.slug}
+								</span>
+							</div>
+
+							<div className='ap-mobileBadges'>
+								<Badge tone={r.is_korona ? 'brand' : 'neutral'}>
+									{r.is_korona ? 'Korona' : 'Not Korona'}
+								</Badge>
+								<Badge tone={r.active ? 'ok' : 'warn'}>
+									{r.active ? 'Active' : 'Inactive'}
+								</Badge>
+							</div>
+
+							<div className='ap-mobileActions'>
+								<Button
+									type='button'
+									variant='subtle'
+									onClick={() => openEdit(r)}
+								>
+									Edit
+								</Button>
+								<Button
+									type='button'
+									variant='danger'
+									onClick={() => onDelete(r.id)}
+								>
+									Delete
+								</Button>
+							</div>
+						</article>
+					))}
+
+					{status === 'success' && filtered.length === 0 ? (
+						<div className='ap-empty'>No results</div>
+					) : null}
 				</div>
 			</div>
 
@@ -468,18 +479,13 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									{mode === 'create' ? 'Add Peak' : 'Edit Peak'}
 								</h3>
 								<p className='ap-modalSub'>
-									Manage base fields + translations (PL/EN/UA/ZH).
+									Manage base fields + translations.
 								</p>
 							</div>
 
-							<IconBtn
-								type='button'
-								onClick={() => !saving && setOpen(false)}
-								aria-label='Close modal'
-								title='Close'
-							>
+							<Button type='button' onClick={() => !saving && setOpen(false)}>
 								✕
-							</IconBtn>
+							</Button>
 						</div>
 
 						<form onSubmit={onSave} className='ap-form'>
@@ -488,14 +494,12 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									<TextInput
 										value={form.slug}
 										onChange={(e) => setForm({ ...form, slug: e.target.value })}
-										placeholder='e.g. rysy'
 										required
 									/>
 								</Field>
 
 								<Field label='Range' hint='required'>
-									<select
-										className='ap-input'
+									<Select
 										value={form.range_id ? String(form.range_id) : ''}
 										onChange={(e) =>
 											setForm({ ...form, range_id: e.target.value })
@@ -511,7 +515,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 												{r.name}
 											</option>
 										))}
-									</select>
+									</Select>
 								</Field>
 
 								<Field label='Subrange' hint='optional'>
@@ -523,8 +527,9 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										disabled={!subranges.length}
 									>
 										<option value=''>
-											{subranges.length ? 'Select subrange…' : 'No subranges'}
+											{subranges.length ? 'Select subrange...' : 'No subranges'}
 										</option>
+
 										{subranges.map((s) => (
 											<option key={s.id} value={String(s.id)}>
 												{s.name}
@@ -533,35 +538,31 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									</Select>
 								</Field>
 
-								<Field label='Elevation (m)'>
+								<Field label='Elevation'>
 									<TextInput
 										type='number'
 										value={form.elevation_m}
 										onChange={(e) =>
 											setForm({ ...form, elevation_m: e.target.value })
 										}
-										placeholder='e.g. 2499'
-										min={0}
 									/>
 								</Field>
 
-								<Field label='Latitude' hint='optional'>
+								<Field label='Latitude'>
 									<TextInput
 										value={form.latitude}
 										onChange={(e) =>
 											setForm({ ...form, latitude: e.target.value })
 										}
-										placeholder='e.g. 49.1794'
 									/>
 								</Field>
 
-								<Field label='Longitude' hint='optional'>
+								<Field label='Longitude'>
 									<TextInput
 										value={form.longitude}
 										onChange={(e) =>
 											setForm({ ...form, longitude: e.target.value })
 										}
-										placeholder='e.g. 20.0881'
 									/>
 								</Field>
 							</div>
@@ -573,7 +574,6 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										onChange={(e) =>
 											setForm({ ...form, difficulty: e.target.value })
 										}
-										placeholder='easy | moderate | hard'
 									/>
 								</Field>
 
@@ -583,7 +583,6 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										onChange={(e) =>
 											setForm({ ...form, best_season: e.target.value })
 										}
-										placeholder='spring/summer/autumn/winter'
 									/>
 								</Field>
 
@@ -593,7 +592,6 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										onChange={(e) =>
 											setForm({ ...form, cover_image_url: e.target.value })
 										}
-										placeholder='https://…'
 									/>
 								</Field>
 							</div>
@@ -606,6 +604,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									}
 									label='Korona'
 								/>
+
 								<Toggle
 									checked={form.active}
 									onChange={(e) =>
@@ -613,118 +612,89 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									}
 									label='Active'
 								/>
+
 								<div className='ap-spacer' />
-								<SubtleBtn
+
+								<Button
 									type='button'
 									onClick={() => setOpen(false)}
 									disabled={saving}
 								>
 									Cancel
-								</SubtleBtn>
-								<PrimaryBtn type='submit' disabled={saving}>
-									{saving ? 'Saving…' : mode === 'create' ? 'Create' : 'Save'}
-								</PrimaryBtn>
+								</Button>
+
+								<Button type='submit' variant='primary' disabled={saving}>
+									{saving ? 'Saving...' : mode === 'create' ? 'Create' : 'Save'}
+								</Button>
 							</div>
 
 							<div className='ap-divider' />
 
-							<div className='ap-translations'>
-								<div className='ap-tabs'>
-									<div className='ap-tabsLeft'>
-										<h4 className='ap-h4'>Translations</h4>
-										<span className='ap-pill'>PL / EN / UA / ZH</span>
-									</div>
+							<div className='ap-tabs'>
+								<h4>Translations</h4>
 
-									<div
-										className='ap-tabRow'
-										role='tablist'
-										aria-label='Language tabs'
-									>
-										{LANGS.map((l) => (
-											<button
-												key={l}
-												type='button'
-												className={cls(
-													'ap-tab',
-													activeLangTab === l && 'is-active',
-												)}
-												onClick={() => setActiveLangTab(l)}
-												role='tab'
-												aria-selected={activeLangTab === l}
-											>
-												{l.toUpperCase()}
-											</button>
-										))}
-									</div>
+								<div className='ap-tabRow'>
+									{LANGS.map((l) => (
+										<button
+											key={l}
+											type='button'
+											className={cls(
+												'ap-tab',
+												activeLangTab === l && 'is-active',
+											)}
+											onClick={() => setActiveLangTab(l)}
+										>
+											{l.toUpperCase()}
+										</button>
+									))}
+								</div>
+							</div>
+
+							<div className='ap-i18nCard'>
+								<div className='ap-grid ap-grid--2'>
+									<Field label='Name'>
+										<TextInput
+											value={form.i18n[activeLangTab]?.name || ''}
+											onChange={(e) =>
+												setI18nField(activeLangTab, 'name', e.target.value)
+											}
+										/>
+									</Field>
+
+									<Field label='Short description'>
+										<TextArea
+											rows={3}
+											value={form.i18n[activeLangTab]?.short_description || ''}
+											onChange={(e) =>
+												setI18nField(
+													activeLangTab,
+													'short_description',
+													e.target.value,
+												)
+											}
+										/>
+									</Field>
 								</div>
 
-								<div className='ap-i18nCard'>
-									<div className='ap-i18nHeader'>
-										<span className='ap-i18nTitle'>
-											{activeLangTab.toUpperCase()} content
-										</span>
-										<span className='ap-i18nHint'>
-											Fill at least “name” for this language.
-										</span>
-									</div>
+								<Field label='Description'>
+									<TextArea
+										rows={5}
+										value={form.i18n[activeLangTab]?.description || ''}
+										onChange={(e) =>
+											setI18nField(activeLangTab, 'description', e.target.value)
+										}
+									/>
+								</Field>
 
-									<div className='ap-grid ap-grid--2'>
-										<Field label='Name'>
-											<TextInput
-												value={form.i18n[activeLangTab]?.name || ''}
-												onChange={(e) =>
-													setI18nField(activeLangTab, 'name', e.target.value)
-												}
-												placeholder={`${activeLangTab} name`}
-											/>
-										</Field>
-
-										<Field label='Short description'>
-											<TextArea
-												rows={3}
-												value={
-													form.i18n[activeLangTab]?.short_description || ''
-												}
-												onChange={(e) =>
-													setI18nField(
-														activeLangTab,
-														'short_description',
-														e.target.value,
-													)
-												}
-												placeholder={`${activeLangTab} short_description`}
-											/>
-										</Field>
-									</div>
-
-									<div className='ap-grid ap-grid--1'>
-										<Field label='Description'>
-											<TextArea
-												rows={5}
-												value={form.i18n[activeLangTab]?.description || ''}
-												onChange={(e) =>
-													setI18nField(
-														activeLangTab,
-														'description',
-														e.target.value,
-													)
-												}
-												placeholder={`${activeLangTab} description`}
-											/>
-										</Field>
-
-										<Field label='Tips'>
-											<TextArea
-												rows={4}
-												value={form.i18n[activeLangTab]?.tips || ''}
-												onChange={(e) =>
-													setI18nField(activeLangTab, 'tips', e.target.value)
-												}
-												placeholder={`${activeLangTab} tips`}
-											/>
-										</Field>
-									</div>
-								</div>
+								<Field label='Tips'>
+									<TextArea
+										rows={4}
+										value={form.i18n[activeLangTab]?.tips || ''}
+										onChange={(e) =>
+											setI18nField(activeLangTab, 'tips', e.target.value)
+										}
+									/>
+								</Field>
 							</div>
 						</form>
 					</div>
@@ -734,343 +704,511 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 	);
 }
 
-/*-----------------------------styles-----------------------------*/
 const css = `
-/* ====== Theme-ish tokens (works with light/dark/system) ====== */
-.ap-wrap{
-  display:grid;
-  gap:12px;
-  color: var(--text);
+.ap-wrap {
+	display: grid;
+	gap: 12px;
+	color: var(--text);
 }
 
-.ap-head{ display:grid; gap:10px; }
-
-.ap-titleRow{ display:flex; align-items:center; gap:12px; }
-.ap-title{ margin:0; font-size: 18px; letter-spacing: .2px; }
-.ap-spacer{ flex:1; }
-
-.ap-toolbar{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap;
+.ap-head {
+	display: grid;
+	gap: 10px;
 }
 
-.ap-search{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-
-.ap-meta{ margin-left:auto; min-width: 240px; }
-
-.ap-alert{
-  border: 1px solid var(--border);
-  background: var(--menu-bg);
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 13px;
-  box-shadow: var(--shadow-soft);
-}
-.ap-alert--error{
-  border-color: rgba(185,28,28,.28);
-  background: rgba(185,28,28,.10);
-}
-.ap-alert--info{
-  border-color: rgba(59,130,246,.28);
-  background: rgba(59,130,246,.10);
-}
-.ap-alert--ok{
-  border-color: rgba(34,197,94,.28);
-  background: rgba(34,197,94,.10);
+.ap-titleRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
 }
 
-/* ====== Table card ====== */
-.ap-card{
-  border:1px solid var(--border);
-  background: var(--btn-bg);
-  border-radius: 16px;
-  overflow:hidden;
-  box-shadow: var(--shadow-soft);
-  isolation: isolate;
-}
-.ap-tableWrap{ overflow:auto; }
-
-.ap-table{
-  width:100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 13px;
-  min-width: 820px;
-  background: transparent;
+.ap-title {
+	margin: 0;
+	font-size: 20px;
+	letter-spacing: -0.3px;
 }
 
-.ap-table thead th{
-  position: sticky;
-  top: 0;
-  background: var(--menu-bg);
-  backdrop-filter: blur(10px);
-  text-align:center;
-  padding: 12px 12px;
-  border-bottom: 1px solid var(--border);
-  font-weight: 650;
-  z-index: 2;
+.ap-spacer {
+	flex: 1;
 }
 
-.ap-table tbody td{
-  padding: 12px 12px;
-  border-bottom: 1px solid rgba(15,23,42,.10);
-  vertical-align: middle;
+.ap-toolbar {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 10px;
+	align-items: center;
 }
 
-/* delikatne paski – zależne od theme */
-.ap-table tbody tr:nth-child(odd){
-  background: rgba(15,23,42,.03);
-}
-html[data-theme="dark"] .ap-table tbody tr:nth-child(odd){
-  background: rgba(226,232,240,.04);
-}
-
-.ap-table tbody tr:hover{
-  background: rgba(15,23,42,.05);
-}
-html[data-theme="dark"] .ap-table tbody tr:hover{
-  background: rgba(226,232,240,.06);
+.ap-search {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex-wrap: wrap;
+	min-width: 0;
 }
 
-.ap-num{ text-align:right; font-variant-numeric: tabular-nums; }
-.ap-actions{ text-align:center; white-space:nowrap; }
-.ap-strong{ font-weight: 650; }
-.ap-mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-.ap-empty{
-  padding: 18px 12px !important;
-  opacity: .75;
-  text-align:center;
-  color: var(--muted);
+.ap-search .ap-input {
+	max-width: 280px;
 }
 
-/* ====== Buttons ====== */
-.ap-btn{
-  border: 1px solid var(--border);
-  background: var(--btn-bg);
-  color: var(--text);
-  border-radius: 12px;
-  padding: 9px 12px;
-  cursor:pointer;
-  transition: transform .05s ease, background .15s ease, border-color .15s ease;
-  font-size: 13px;
-  box-shadow: var(--shadow-soft);
-}
-.ap-btn:hover{
-  background: rgba(31,122,79,.10);
-  border-color: rgba(31,122,79,.22);
-}
-.ap-btn:active{ transform: translateY(1px); }
-.ap-btn:disabled{ opacity: .55; cursor:not-allowed; }
-
-.ap-btn--primary{
-  background: rgba(34,197,94,.14);
-  border-color: rgba(34,197,94,.26);
-}
-.ap-btn--primary:hover{
-  background: rgba(34,197,94,.20);
-  border-color: rgba(34,197,94,.34);
+.ap-meta {
+	min-width: 180px;
 }
 
-.ap-btn--subtle{
-  background: rgba(59,130,246,.12);
-  border-color: rgba(59,130,246,.22);
-}
-.ap-btn--subtle:hover{
-  background: rgba(59,130,246,.18);
-  border-color: rgba(59,130,246,.30);
-}
-
-.ap-btn--danger{
-  background: rgba(185,28,28,.10);
-  border-color: rgba(185,28,28,.22);
-}
-.ap-btn--danger:hover{
-  background: rgba(185,28,28,.16);
-  border-color: rgba(185,28,28,.30);
+.ap-alert {
+	border: 1px solid var(--border);
+	background: var(--menu-bg);
+	border-radius: 12px;
+	padding: 9px 12px;
+	font-size: 13px;
+	box-shadow: var(--shadow-soft);
 }
 
-.ap-btn--ghost{ padding: 9px 10px; }
-
-/* ====== Inputs ====== */
-.ap-input, .ap-textarea{
-  width:100%;
-  border: 1px solid var(--border);
-  background: var(--btn-bg);
-  color: var(--text);
-  border-radius: 12px;
-  padding: 10px 12px;
-  outline: none;
-  transition: border-color .15s ease, background .15s ease;
-  font-size: 13px;
-}
-.ap-input:focus, .ap-textarea:focus{
-  border-color: rgba(59,130,246,.38);
-  background: rgba(255,255,255,.92);
-}
-html[data-theme="dark"] .ap-input:focus,
-html[data-theme="dark"] .ap-textarea:focus{
-  background: rgba(15,23,42,.86);
+.ap-alert--error {
+	border-color: rgba(239,68,68,.35);
+	background: rgba(239,68,68,.10);
 }
 
-.ap-field{ display:grid; gap: 6px; }
-.ap-label{
-  font-size: 12px;
-  opacity: .86;
-  display:flex;
-  gap: 8px;
-  align-items: baseline;
-}
-.ap-hint{ color: var(--muted); font-weight: 500; font-size: 11px; }
-
-/* ====== Badges ====== */
-.ap-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 12px;
-  border: 1px solid var(--border);
-  background: rgba(15,23,42,.04);
-}
-html[data-theme="dark"] .ap-badge{
-  background: rgba(226,232,240,.06);
+.ap-alert--info {
+	border-color: rgba(59,130,246,.28);
+	background: rgba(59,130,246,.10);
 }
 
-.ap-badge--brand{ border-color: rgba(59,130,246,.26); background: rgba(59,130,246,.10); }
-.ap-badge--ok{ border-color: rgba(34,197,94,.22); background: rgba(34,197,94,.10); }
-.ap-badge--warn{ border-color: rgba(245,158,11,.22); background: rgba(245,158,11,.10); }
-.ap-badge--neutral{ border-color: var(--border); }
-
-/* ====== Modal ====== */
-.ap-backdrop{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.55);
-  backdrop-filter: blur(4px);
-  display: grid;
-  place-items: center;
-  padding: 16px;
-  z-index: 1000;
-}
-.ap-modal{
-  width: min(980px, 100%);
-  max-height: min(86vh, 920px);
-  overflow: auto;
-  background: var(--menu-bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
-  box-shadow: var(--shadow);
-  z-index: 1001;
-}
-.ap-modalHead{
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: var(--menu-bg);
-  padding-bottom: 10px;
+.ap-alert--ok {
+	border-color: rgba(34,197,94,.28);
+	background: rgba(34,197,94,.10);
 }
 
-.ap-modalTitle{ margin:0; font-size: 18px; }
-.ap-modalSub{ margin:4px 0 0; color: var(--muted); font-size: 13px; }
-
-.ap-form{ display:grid; gap: 12px; }
-
-.ap-grid{ display:grid; gap: 10px; }
-.ap-grid--3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.ap-grid--2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.ap-grid--1{ grid-template-columns: 1fr; }
-
-@media (max-width: 900px){
-  .ap-grid--3{ grid-template-columns: 1fr; }
-  .ap-grid--2{ grid-template-columns: 1fr; }
+.ap-card {
+	border: 1px solid var(--border);
+	background: color-mix(in srgb, var(--menu-bg) 88%, transparent);
+	border-radius: 18px;
+	overflow: hidden;
+	box-shadow: var(--shadow-soft);
 }
 
-.ap-row{ display:flex; gap: 12px; align-items:center; flex-wrap: wrap; }
-
-.ap-divider{
-  height:1px;
-  background: var(--border);
-  margin: 6px 0;
+.ap-tableWrap {
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
-/* ====== Toggle ====== */
-.ap-toggle{ display:inline-flex; align-items:center; gap: 10px; user-select:none; cursor:pointer; font-size: 13px; }
-.ap-toggle input{ display:none; }
-.ap-toggle__ui{
-  width: 42px;
-  height: 24px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(15,23,42,.06);
-  position: relative;
-  transition: background .15s ease, border-color .15s ease;
-}
-html[data-theme="dark"] .ap-toggle__ui{ background: rgba(226,232,240,.08); }
-
-.ap-toggle__ui::after{
-  content:"";
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.92);
-  position: absolute;
-  top: 50%;
-  left: 3px;
-  transform: translateY(-50%);
-  transition: left .15s ease;
-}
-.ap-toggle input:checked + .ap-toggle__ui{
-  background: rgba(34,197,94,.16);
-  border-color: rgba(34,197,94,.30);
-}
-.ap-toggle input:checked + .ap-toggle__ui::after{ left: 21px; }
-
-/* ====== Tabs / i18n ====== */
-.ap-translations{ display:grid; gap: 10px; }
-.ap-tabs{ display:flex; align-items:center; gap: 12px; flex-wrap: wrap; }
-.ap-tabsLeft{ display:flex; align-items:center; gap: 10px; }
-.ap-h4{ margin:0; font-size: 14px; }
-
-.ap-pill{
-  font-size: 12px;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(15,23,42,.04);
-}
-html[data-theme="dark"] .ap-pill{ background: rgba(226,232,240,.06); }
-
-.ap-tabRow{ margin-left:auto; display:flex; gap: 8px; flex-wrap: wrap; }
-.ap-tab{
-  border: 1px solid var(--border);
-  background: var(--btn-bg);
-  color: var(--text);
-  border-radius: 999px;
-  padding: 7px 10px;
-  cursor: pointer;
-  font-size: 12px;
-}
-.ap-tab.is-active{
-  background: rgba(59,130,246,.14);
-  border-color: rgba(59,130,246,.28);
+.ap-table {
+	width: 100%;
+	min-width: 820px;
+	border-collapse: separate;
+	border-spacing: 0;
+	font-size: 13px;
 }
 
-.ap-i18nCard{
-  border: 1px solid var(--border);
-  background: rgba(15,23,42,.03);
-  border-radius: 16px;
-  padding: 12px;
+.ap-table th,
+.ap-table td {
+	padding: 12px;
+	border-bottom: 1px solid var(--border);
+	vertical-align: middle;
 }
-html[data-theme="dark"] .ap-i18nCard{ background: rgba(226,232,240,.05); }
 
-.ap-i18nHeader{ display:flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-.ap-i18nTitle{ font-weight: 700; }
-.ap-i18nHint{ color: var(--muted); font-size: 12px; }
+.ap-table th {
+	background: color-mix(in srgb, var(--btn-bg) 78%, transparent);
+	font-weight: 1000;
+	text-align: left;
+}
+
+.ap-table tbody tr:nth-child(odd) {
+	background: color-mix(in srgb, var(--surface-2) 60%, transparent);
+}
+
+.ap-actions {
+	display: flex;
+	gap: 8px;
+	white-space: nowrap;
+}
+
+.ap-strong {
+	font-weight: 950;
+}
+
+.ap-mono {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	font-size: 12px;
+}
+
+.ap-empty {
+	padding: 18px !important;
+	text-align: center;
+	color: var(--muted);
+	font-weight: 900;
+}
+
+.ap-mobileCards {
+	display: none;
+}
+
+.ap-mobileCard {
+	border: 1px solid var(--border);
+	background: color-mix(in srgb, var(--btn-bg) 82%, transparent);
+	border-radius: 16px;
+	padding: 12px;
+	display: grid;
+	gap: 10px;
+	box-shadow: var(--shadow-soft);
+}
+
+.ap-mobileTop {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.ap-mobileTop h3 {
+	margin: 0;
+	font-size: 16px;
+	line-height: 1.2;
+}
+
+.ap-mobileTop p {
+	margin: 5px 0 0;
+	color: var(--muted);
+	font-size: 13px;
+}
+
+.ap-height {
+	border: 1px solid rgba(34,197,94,.35);
+	background: rgba(34,197,94,.12);
+	color: var(--primary);
+	border-radius: 999px;
+	padding: 6px 9px;
+	font-weight: 1000;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+.ap-mobileInfo {
+	font-size: 13px;
+	color: var(--muted);
+	word-break: break-word;
+}
+
+.ap-mobileBadges,
+.ap-mobileActions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.ap-btn {
+	border: 1px solid var(--border);
+	background: var(--btn-bg);
+	color: var(--text);
+	border-radius: 12px;
+	padding: 9px 12px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 900;
+	box-shadow: var(--shadow-soft);
+}
+
+.ap-btn--primary {
+	background: rgba(34,197,94,.14);
+	border-color: rgba(34,197,94,.32);
+}
+
+.ap-btn--subtle {
+	background: rgba(59,130,246,.12);
+	border-color: rgba(59,130,246,.25);
+}
+
+.ap-btn--danger {
+	background: rgba(239,68,68,.10);
+	border-color: rgba(239,68,68,.28);
+}
+
+.ap-input,
+.ap-textarea {
+	width: 100%;
+	border: 1px solid var(--border);
+	background: var(--btn-bg);
+	color: var(--text);
+	border-radius: 12px;
+	padding: 10px 12px;
+	outline: none;
+	font-size: 13px;
+}
+
+.ap-field {
+	display: grid;
+	gap: 6px;
+}
+
+.ap-label {
+	font-size: 12px;
+	font-weight: 900;
+	color: var(--muted);
+	display: flex;
+	gap: 8px;
+}
+
+.ap-hint {
+	opacity: .75;
+	font-weight: 700;
+}
+
+.ap-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 8px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 900;
+	border: 1px solid var(--border);
+	background: rgba(148,163,184,.10);
+}
+
+.ap-badge--brand {
+	border-color: rgba(59,130,246,.32);
+	background: rgba(59,130,246,.12);
+}
+
+.ap-badge--ok {
+	border-color: rgba(34,197,94,.32);
+	background: rgba(34,197,94,.12);
+}
+
+.ap-badge--warn {
+	border-color: rgba(245,158,11,.32);
+	background: rgba(245,158,11,.12);
+}
+
+.ap-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,.55);
+	backdrop-filter: blur(5px);
+	display: grid;
+	place-items: center;
+	padding: 14px;
+	z-index: 1000;
+}
+
+.ap-modal {
+	width: min(980px, 100%);
+	max-height: min(86vh, 920px);
+	overflow: auto;
+	background: var(--menu-bg);
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: 18px;
+	padding: 16px;
+	box-shadow: var(--shadow);
+}
+
+.ap-modalHead {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	align-items: flex-start;
+	margin-bottom: 14px;
+}
+
+.ap-modalTitle {
+	margin: 0;
+	font-size: 20px;
+}
+
+.ap-modalSub {
+	margin: 4px 0 0;
+	color: var(--muted);
+	font-size: 13px;
+}
+
+.ap-form {
+	display: grid;
+	gap: 12px;
+}
+
+.ap-grid {
+	display: grid;
+	gap: 10px;
+}
+
+.ap-grid--3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ap-grid--2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ap-row {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.ap-divider {
+	height: 1px;
+	background: var(--border);
+	margin: 6px 0;
+}
+
+.ap-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 900;
+}
+
+.ap-toggle input {
+	display: none;
+}
+
+.ap-toggle__ui {
+	width: 42px;
+	height: 24px;
+	border-radius: 999px;
+	border: 1px solid var(--border);
+	background: rgba(148,163,184,.16);
+	position: relative;
+}
+
+.ap-toggle__ui::after {
+	content: "";
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: white;
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	transform: translateY(-50%);
+	transition: left .15s ease;
+}
+
+.ap-toggle input:checked + .ap-toggle__ui {
+	background: rgba(34,197,94,.22);
+	border-color: rgba(34,197,94,.38);
+}
+
+.ap-toggle input:checked + .ap-toggle__ui::after {
+	left: 21px;
+}
+
+.ap-tabs {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.ap-tabs h4 {
+	margin: 0;
+}
+
+.ap-tabRow {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.ap-tab {
+	border: 1px solid var(--border);
+	background: var(--btn-bg);
+	color: var(--text);
+	border-radius: 999px;
+	padding: 7px 10px;
+	cursor: pointer;
+	font-weight: 900;
+}
+
+.ap-tab.is-active {
+	background: rgba(34,197,94,.14);
+	border-color: rgba(34,197,94,.32);
+}
+
+.ap-i18nCard {
+	border: 1px solid var(--border);
+	background: color-mix(in srgb, var(--btn-bg) 80%, transparent);
+	border-radius: 16px;
+	padding: 12px;
+	display: grid;
+	gap: 10px;
+}
+
+@media (max-width: 900px) {
+	.ap-grid--3,
+	.ap-grid--2 {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 768px) {
+	.ap-toolbar {
+		grid-template-columns: 1fr;
+	}
+
+	.ap-search .ap-input {
+		max-width: none;
+	}
+
+	.ap-meta {
+		min-width: 0;
+	}
+
+	.ap-desktopTable {
+		display: none;
+	}
+
+	.ap-mobileCards {
+		display: grid;
+		gap: 12px;
+		padding: 12px;
+	}
+
+	.ap-card {
+		background: transparent;
+		border: none;
+		box-shadow: none;
+		overflow: visible;
+	}
+}
+
+@media (max-width: 425px) {
+	.ap-titleRow {
+		align-items: flex-start;
+	}
+
+	.ap-title {
+		font-size: 18px;
+		max-width: 145px;
+	}
+
+	.ap-btn {
+		padding: 8px 10px;
+		font-size: 12px;
+	}
+
+	.ap-mobileTop {
+		display: grid;
+	}
+
+	.ap-height {
+		width: fit-content;
+	}
+
+	.ap-modal {
+		padding: 12px;
+		border-radius: 16px;
+	}
+
+	.ap-backdrop {
+		padding: 8px;
+	}
+}
 `;

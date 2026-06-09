@@ -116,28 +116,28 @@ const wrap = {
 	alignItems: "end",
 	justifyContent: "flex-start",
 	flex: "1 1 520px",
-	minWidth: 280,
+	minWidth: 200,
 };
 
 const field = {
 	display: "grid",
 	gap: 6,
-	minWidth: 220,
-	flex: "1 1 260px",
+	minWidth: 200,
+	flex: "1 1 200px",
 };
 
 const fieldSmall = {
 	display: "grid",
 	gap: 6,
-	minWidth: 180,
-	flex: "0 1 200px",
+	minWidth: 200,
+	flex: "0 1 260px",
 };
 
 const label = {
 	fontSize: 12,
 	color: "var(--text)",
 	fontWeight: 800,
-	letterSpacing: "0.2px",
+	letterSpacing: "0.8px",
 };
 
 const inputWrap = {

@@ -1,91 +1,107 @@
-/* ---- base reset (important for layout) ---- */
+/* =========================
+   RESET
+   ========================= */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+* {
+  min-width: 0;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
-
 /* =========================
-   THEME TOKENS (default: light)
+   THEME TOKENS
+   default: light
    ========================= */
 
 :root {
   --bg: #e2eaf3;
-  --surface: rgba(255, 255, 255, 0.69);
-  --surface-2: rgba(241, 245, 249, 0.28);
+
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(241, 245, 249, 0.36);
+
   --border: rgba(15, 23, 42, 0.16);
+
   --shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
   --shadow-soft: 0 10px 22px rgba(15, 23, 42, 0.14);
+
   --text: #0f172a;
-  --muted: rgba(15, 23, 42, 0.70);
+  --muted: rgba(15, 23, 42, 0.7);
+
   --primary: rgb(31, 122, 79);
+  --primary-hover: rgb(21, 97, 62);
+
   --menu-bg: rgba(255, 255, 255, 0.92);
   --menu-text: var(--text);
-  --ink: rgba(15, 23, 42, 0.10);
-  /* default overlay ink */
+
+  --btn-bg: rgba(255, 255, 255, 0.86);
+  --btn-border: rgba(15, 23, 42, 0.14);
+
+  --ink: rgba(15, 23, 42, 0.1);
   --wash: rgba(15, 23, 42, 0.04);
-  /* delicate overlay wash */
   --pill-bg: rgba(15, 23, 42, 0.03);
-  /* pill background */
-  --btn-bg: rgba(255, 255, 255, 0.85);
-  /* light button background */
+
   --toolbar-text: var(--text);
-  --nav-pill-h: 36px;
-  /* height of nav pills */
-  --nav-pill-px: 12px;
-  /* horizontal padding of nav pills */
-  --nav-pill-fs: 13px;
-  /* font size of nav pills */
-  --nav-gap: 10px;
-  /* gap between nav pills */
 
-
-  /* overlay used for body background */
   --bg-overlay-from: rgba(255, 255, 255, 0.62);
-  --bg-overlay-to: rgba(255, 255, 255, 0.65);
+  --bg-overlay-to: rgba(255, 255, 255, 0.68);
+
+  --nav-pill-h: 36px;
+  --nav-pill-px: 12px;
+  --nav-pill-fs: 13px;
+  --nav-gap: 10px;
 
   color-scheme: light;
 }
 
-/* Explicit light mode (optional but nice to have) */
-html[data-theme="light"] {
-  color-scheme: light;
-}
+/* =========================
+   DARK THEME
+   ========================= */
 
-/* Explicit dark mode */
 html[data-theme="dark"] {
   --bg: #0b1220;
-  --surface: rgba(15, 23, 42, 0.72);
-  --surface-2: rgba(15, 23, 42, 0.50);
-  --border: rgba(226, 232, 240, 0.14);
-  --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
-  --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
 
-  --text: rgba(226, 232, 240, 0.92);
-  --muted: rgba(148, 163, 184, 0.75);
+  --surface: rgba(15, 23, 42, 0.82);
+  --surface-2: rgba(30, 41, 59, 0.82);
+  --border: rgba(148, 163, 184, 0.28);
 
-  --btn-bg: rgba(15, 23, 42, 0.72);
-  --btn-border: rgba(226, 232, 240, 0.14);
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.36);
 
-  --menu-bg: rgba(15, 23, 42, 0.72);
-  --menu-text: var(--text);
-
-  --ink: rgba(226, 232, 240, 0.10);
-  --wash: rgba(226, 232, 240, 0.06);
-  --pill-bg: rgba(226, 232, 240, 0.06);
+  --text: #f8fafc;
+  --muted: rgba(203, 213, 225, 0.82);
 
   --primary: rgb(34, 197, 94);
+  --primary-hover: rgb(22, 163, 74);
+
+  --menu-bg: rgba(15, 23, 42, 0.92);
+  --menu-text: var(--text);
+
+  --btn-bg: rgba(15, 23, 42, 0.9);
+  --btn-border: rgba(148, 163, 184, 0.3);
+
+  --ink: rgba(226, 232, 240, 0.12);
+  --wash: rgba(226, 232, 240, 0.07);
+  --pill-bg: rgba(226, 232, 240, 0.08);
+
   --toolbar-text: var(--text);
 
   --bg-overlay-from: rgba(2, 6, 23, 0.62);
-  --bg-overlay-to: rgba(2, 6, 23, 0.70);
+  --bg-overlay-to: rgba(2, 6, 23, 0.72);
 
   color-scheme: dark;
 }
@@ -93,34 +109,39 @@ html[data-theme="dark"] {
 /* System dark when no explicit data-theme */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme]) {
-  --bg: #0b1220;
-  --surface: rgba(15, 23, 42, 0.72);
-  --surface-2: rgba(15, 23, 42, 0.50);
-  --border: rgba(226, 232, 240, 0.14);
-  --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
-  --shadow-soft: 0 10px 22px rgba(0, 0, 0, 0.35);
+    --bg: #0b1220;
 
-  --text: rgba(226, 232, 240, 0.92);
-  --muted: rgba(148, 163, 184, 0.75);
+    --surface: rgba(17, 24, 39, 0.86);
+    --surface-2: rgba(23, 32, 51, 0.82);
 
-  --btn-bg: rgba(15, 23, 42, 0.72);
-  --btn-border: rgba(226, 232, 240, 0.14);
+    --border: rgba(148, 163, 184, 0.22);
 
-  --menu-bg: rgba(15, 23, 42, 0.72);
-  --menu-text: var(--text);
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.36);
 
-  --ink: rgba(226, 232, 240, 0.10);
-  --wash: rgba(226, 232, 240, 0.06);
-  --pill-bg: rgba(226, 232, 240, 0.06);
+    --text: #f8fafc;
+    --muted: rgba(203, 213, 225, 0.78);
 
-  --primary: rgb(34, 197, 94);
-  --toolbar-text: var(--text);
+    --primary: rgb(34, 197, 94);
+    --primary-hover: rgb(22, 163, 74);
 
-  --bg-overlay-from: rgba(2, 6, 23, 0.62);
-  --bg-overlay-to: rgba(2, 6, 23, 0.70);
+    --menu-bg: rgba(11, 18, 32, 0.88);
+    --menu-text: var(--text);
 
-  color-scheme: dark;
-    }
+    --btn-bg: rgba(17, 24, 39, 0.82);
+    --btn-border: rgba(148, 163, 184, 0.22);
+
+    --ink: rgba(226, 232, 240, 0.12);
+    --wash: rgba(226, 232, 240, 0.07);
+    --pill-bg: rgba(226, 232, 240, 0.08);
+
+    --toolbar-text: var(--text);
+
+    --bg-overlay-from: rgba(2, 6, 23, 0.72);
+    --bg-overlay-to: rgba(2, 6, 23, 0.82);
+
+    color-scheme: dark;
+  }
 }
 
 /* =========================
@@ -148,42 +169,56 @@ body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
     var(--bg);
-  transition: background-image 300ms ease, color 200ms ease;
+
+  transition:
+    background 300ms ease,
+    color 200ms ease;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  color: inherit;
 }
 
 a {
   color: var(--primary);
 }
 
+a:hover {
+  color: var(--primary-hover);
+}
+
 /* =========================
    LANGUAGE BACKGROUNDS
-   (keeps your images, overlay adapts to theme)
    ========================= */
 
-/* PL */
 html[data-lang="pl"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
     url("/bg/bg_pl.png") center / cover no-repeat fixed;
 }
 
-/* EN */
 html[data-lang="en"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
     url("/bg/bg_en.png") center / cover no-repeat fixed;
 }
 
-/* UA */
 html[data-lang="ua"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
     url("/bg/bg_ua.png") center / cover no-repeat fixed;
 }
 
-/* ZH */
 html[data-lang="zh"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
@@ -191,9 +226,8 @@ html[data-lang="zh"] body {
 }
 
 /* =========================
-    RESPONSIVE TOKENS
+   RESPONSIVE TOKENS
    ========================= */
-
 
 @media (max-width: 1024px) {
   :root {
@@ -205,12 +239,14 @@ html[data-lang="zh"] body {
 }
 
 @media (max-width: 760px) {
+
   html[data-lang="pl"] body,
-    html[data-lang="en"] body,
-    html[data-lang="ua"] body,
-    html[data-lang="zh"] body {
-      background-attachment: scroll;
-    }
+  html[data-lang="en"] body,
+  html[data-lang="ua"] body,
+  html[data-lang="zh"] body {
+    background-attachment: scroll;
+  }
+
   :root {
     --nav-pill-h: 32px;
     --nav-pill-px: 10px;
@@ -227,6 +263,10 @@ html[data-lang="zh"] body {
     --nav-gap: 7px;
   }
 }
+
+/* =========================
+   ANIMATIONS
+   ========================= */
 
 @keyframes shimmer {
   0% {

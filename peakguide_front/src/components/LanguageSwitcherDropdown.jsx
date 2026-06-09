@@ -1,18 +1,18 @@
-import { useMemo } from "react";
-import { useDropdown } from "../hooks/useDropdown";
-import DropdownMenu from "./DropdownMenu";
+import { useMemo } from 'react';
+import { useDropdown } from '../hooks/useDropdown';
+import DropdownMenu from './DropdownMenu';
 
 const OPTIONS = [
-	{ value: "pl", label: "PL", name: "Polski", flag: "🇵🇱" },
-	{ value: "en", label: "EN", name: "English", flag: "🇬🇧" },
-	{ value: "ua", label: "UA", name: "Українська", flag: "🇺🇦" },
-	{ value: "zh", label: "ZH", name: "中文", flag: "🇨🇳" },
+	{ value: 'pl', label: 'PL', name: 'Polski', flag: '🇵🇱' },
+	{ value: 'en', label: 'EN', name: 'English', flag: '🇬🇧' },
+	{ value: 'ua', label: 'UA', name: 'Українська', flag: '🇺🇦' },
+	{ value: 'zh', label: 'ZH', name: '中文', flag: '🇨🇳' },
 ];
 
 export default function LanguageSwitcherDropdown({
-	lang = "pl", // current lang
+	lang = 'pl',
 	setLang,
-	compact = false, // compact mode (show less text)
+	compact = false,
 }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
 	const { open, setOpen, wrapRef } = useDropdown();
@@ -20,11 +20,11 @@ export default function LanguageSwitcherDropdown({
 	const current = OPTIONS.find((o) => o.value === lang) || OPTIONS[0];
 
 	const items = OPTIONS.map((o) => ({
-		key: o.value, // value to set
-		label: o.name, // full name in menu
-		badge: o.flag, // flag icon in menu
-		sub: o.label, // short label in menu
-		active: o.value === lang, // highlight current lang
+		key: o.value,
+		label: o.name,
+		badge: o.flag,
+		sub: o.label,
+		active: o.value === lang,
 	}));
 
 	return (
@@ -37,11 +37,13 @@ export default function LanguageSwitcherDropdown({
 				aria-expanded={open}
 				aria-label={t.aria}
 			>
-				<span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-					<span aria-hidden='true' style={{ fontSize: 16, lineHeight: 1 }}>
+				<span style={styles.btnInner}>
+					<span aria-hidden='true' style={styles.flag}>
 						{current.flag}
 					</span>
+
 					<span style={styles.btnText}>{current.label}</span>
+
 					{!compact ? (
 						<span style={{ ...styles.btnText, opacity: 0.8 }}>
 							{current.name}
@@ -58,7 +60,7 @@ export default function LanguageSwitcherDropdown({
 				open={open}
 				wrapRef={wrapRef}
 				ariaLabel={t.aria}
-				minWidth={220}
+				minWidth={compact ? 190 : 220}
 				items={items}
 				onSelect={(it) => {
 					setLang(it.key);
@@ -71,37 +73,55 @@ export default function LanguageSwitcherDropdown({
 
 function getLabels(lang) {
 	const dict = {
-		pl: { aria: "Język" },
-		en: { aria: "Language" },
-		ua: { aria: "Мова" },
-		zh: { aria: "语言" },
+		pl: { aria: 'Język' },
+		en: { aria: 'Language' },
+		ua: { aria: 'Мова' },
+		zh: { aria: '语言' },
 	};
 	return dict[lang] || dict.pl;
 }
 
-/* ---------- styles ---------- */
-
 const styles = {
 	wrap: {
-		position: "relative",
+		position: 'relative',
+		display: 'inline-flex',
+		minWidth: 0,
 	},
 
 	btn: {
-		display: "inline-flex",
-		alignItems: "center",
-		justifyContent: "center",
-		gap: 10,
-		height: "var(--nav-pill-h)",
-		padding: "0 var(--nav-pill-px)",
+		display: 'inline-flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		gap: 8,
+		height: 'var(--nav-pill-h)',
+		padding: '0 var(--nav-pill-px)',
 		borderRadius: 999,
-		border: "1px solid var(--border)",
-		fontSize: "var(--nav-pill-fs)",
-		background: "var(--tollbar-bg)",
-		color: "var(--text)",
-		boxShadow: "var(--shadow-soft)",
+		border: '1px solid var(--border)',
+		fontSize: 'var(--nav-pill-fs)',
+		background: 'var(--btn-bg)',
+		color: 'var(--text)',
+		boxShadow: 'var(--shadow-soft)',
 		fontWeight: 900,
-		cursor: "pointer",
+		cursor: 'pointer',
+		whiteSpace: 'nowrap',
+		maxWidth: '100%',
 	},
 
-	btnText: { fontSize: 13, opacity: 0.9 },
+	btnInner: {
+		display: 'inline-flex',
+		alignItems: 'center',
+		gap: 6,
+		minWidth: 0,
+	},
+
+	flag: {
+		fontSize: 16,
+		lineHeight: 1,
+	},
+
+	btnText: {
+		fontSize: 'var(--nav-pill-fs)',
+		opacity: 0.9,
+		lineHeight: 1,
+	},
 };
