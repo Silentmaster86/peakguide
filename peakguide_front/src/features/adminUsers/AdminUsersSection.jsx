@@ -123,7 +123,6 @@ export default function AdminUsersSection() {
 													? 'Najpierw zdejmij admina'
 													: 'Usuń użytkownika'
 											}
-											style={{ marginLeft: 8 }}
 										>
 											Delete
 										</button>
