@@ -5,10 +5,17 @@ async function getProfile(userId) {
 		.from('profiles')
 		.select('id, email, display_name, role, is_admin')
 		.eq('id', userId)
-		.single();
+		.maybeSingle();
 
-	if (error) return null;
+	if (error) throw new Error(`Could not load user profile: ${error.message}`);
 	return data;
+}
+
+function isMissingSessionError(error) {
+	return (
+		error?.name === 'AuthSessionMissingError' ||
+		String(error?.message || '').toLowerCase().includes('auth session missing')
+	);
 }
 
 async function mapUser(user) {
@@ -29,7 +36,12 @@ async function mapUser(user) {
 export async function me() {
 	const { data, error } = await supabase.auth.getUser();
 
-	if (error || !data?.user) return null;
+	if (error) {
+		if (isMissingSessionError(error)) return null;
+		throw new Error(`Could not verify the current session: ${error.message}`);
+	}
+
+	if (!data?.user) return null;
 
 	return await mapUser(data.user);
 }

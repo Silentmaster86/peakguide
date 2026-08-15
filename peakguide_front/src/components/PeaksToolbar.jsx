@@ -3,17 +3,32 @@ import { useEffect, useState } from "react";
 export default function PeaksToolbar({
 	q,
 	setQ,
+	country,
+	setCountry,
+	region,
+	setRegion,
 	range,
 	setRange,
 	sort,
 	setSort,
 	ranges,
+	countries,
 	lang,
 }) {
 	const [localQ, setLocalQ] = useState(q || "");
+	const t = getLabels(lang);
+	const selectedCountry = (countries || []).find((item) => item.code === country);
+	const regions = selectedCountry?.regions || [];
+	const visibleRanges = (ranges || []).filter((item) => {
+		if (country !== "all" && item.country_code !== country) return false;
+		if (region !== "all" && item.region_slug !== region) return false;
+		return true;
+	});
 
 	// Keep local input in sync when URL changes (e.g. back/forward)
 	useEffect(() => {
+		// This state mirrors an external URL value after browser navigation.
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setLocalQ(q || "");
 	}, [q]);
 
@@ -34,14 +49,14 @@ export default function PeaksToolbar({
 		<div style={wrap}>
 			{/* Search */}
 			<label style={field}>
-				<span style={label}>{lang === "pl" ? "Szukaj" : "Search"}</span>
+				<span style={label}>{t.search}</span>
 
 				<div style={inputWrap}>
 					<input
 						value={localQ}
 						onChange={(e) => setLocalQ(e.target.value)}
 						placeholder={
-							lang === "pl" ? "np. Rysy, Tarnica..." : "e.g. Rysy, Tarnica..."
+							t.placeholder
 						}
 						style={input}
 					/>
@@ -62,18 +77,54 @@ export default function PeaksToolbar({
 				</div>
 			</label>
 
+			{/* Country */}
+			<label style={fieldSmall}>
+				<span style={label}>{t.country}</span>
+				<select
+					value={country}
+					onChange={(e) => setCountry(e.target.value)}
+					style={select}
+				>
+					<option value='all'>{t.allCountries}</option>
+					{(countries || []).map((item) => (
+						<option key={item.code} value={item.code}>
+							{item.flag_emoji} {item.name}
+						</option>
+					))}
+				</select>
+			</label>
+
+			{/* Region */}
+			{regions.length > 0 ? (
+				<label style={fieldSmall}>
+					<span style={label}>{t.region}</span>
+					<select
+						value={region}
+						onChange={(e) => setRegion(e.target.value)}
+						style={select}
+					>
+						<option value='all'>{t.allRegions}</option>
+						{regions.map((item) => (
+							<option key={item.slug} value={item.slug}>
+								{item.name}
+							</option>
+						))}
+					</select>
+				</label>
+			) : null}
+
 			{/* Range */}
 			<label style={field}>
-				<span style={label}>{lang === "pl" ? "Pasma" : "Ranges"}</span>
+				<span style={label}>{t.ranges}</span>
 				<select
 					value={range}
 					onChange={(e) => setRange(e.target.value)}
 					style={select}
 				>
 					<option value='all'>
-						{lang === "pl" ? "Wszystkie pasma" : "All ranges"}
+						{t.allRanges}
 					</option>
-					{(ranges || []).map((r) => (
+					{visibleRanges.map((r) => (
 						<option key={r.slug} value={r.slug}>
 							{r.name}
 						</option>
@@ -83,7 +134,7 @@ export default function PeaksToolbar({
 
 			{/* Sort */}
 			<label style={fieldSmall}>
-				<span style={label}>{lang === "pl" ? "Sortuj" : "Sort"}</span>
+				<span style={label}>{t.sort}</span>
 				<select
 					value={sort}
 					onChange={(e) => setSort(e.target.value)}
@@ -105,6 +156,57 @@ export default function PeaksToolbar({
 			</label>
 		</div>
 	);
+}
+
+function getLabels(lang) {
+	const labels = {
+		pl: {
+			search: "Szukaj",
+			placeholder: "np. Rysy, Ben Nevis...",
+			country: "Kraj",
+			allCountries: "Wszystkie kraje",
+			region: "Region",
+			allRegions: "Wszystkie regiony",
+			ranges: "Pasma",
+			allRanges: "Wszystkie pasma",
+			sort: "Sortuj",
+		},
+		en: {
+			search: "Search",
+			placeholder: "e.g. Rysy, Ben Nevis...",
+			country: "Country",
+			allCountries: "All countries",
+			region: "Region",
+			allRegions: "All regions",
+			ranges: "Ranges",
+			allRanges: "All ranges",
+			sort: "Sort",
+		},
+		ua: {
+			search: "Пошук",
+			placeholder: "напр. Риси, Бен-Невіс...",
+			country: "Країна",
+			allCountries: "Усі країни",
+			region: "Регіон",
+			allRegions: "Усі регіони",
+			ranges: "Хребти",
+			allRanges: "Усі хребти",
+			sort: "Сортувати",
+		},
+		zh: {
+			search: "搜索",
+			placeholder: "例如：里西山、本尼维斯山...",
+			country: "国家",
+			allCountries: "所有国家",
+			region: "地区",
+			allRegions: "所有地区",
+			ranges: "山脉",
+			allRanges: "所有山脉",
+			sort: "排序",
+		},
+	};
+
+	return labels[lang] || labels.pl;
 }
 
 /* ----------------------------- styles ------------------------------ */

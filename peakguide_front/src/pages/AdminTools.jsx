@@ -1,4 +1,4 @@
-export default function AdminTools({ t, onAddNearby, onAddTrail, onAddPoi }) {
+export default function AdminTools({ t, onAddTrail, onAddPoi }) {
 	return (
 		<section style={wrap}>
 			<div style={head}>

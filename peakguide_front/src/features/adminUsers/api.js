@@ -43,9 +43,12 @@ export async function adminToggleAdmin(id) {
 }
 
 export async function adminDeleteUser(id) {
-	const { error } = await supabase.from('profiles').delete().eq('id', id);
+	const { data, error } = await supabase.functions.invoke('admin-delete-user', {
+		body: { userId: id },
+	});
 
 	if (error) throw new Error(error.message);
+	if (data?.error) throw new Error(data.error);
 
 	return { ok: true };
 }

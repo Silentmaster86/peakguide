@@ -100,7 +100,7 @@ export default function DesktopThemeSwitcher({ lang = "pl", compact = false }) {
 function safeStorageGet(key) {
 	try {
 		return localStorage.getItem(key);
-	} catch (e) {
+	} catch {
 		// ignore (storage might be blocked)
 		return null;
 	}
@@ -109,7 +109,7 @@ function safeStorageGet(key) {
 function safeStorageSet(key, value) {
 	try {
 		localStorage.setItem(key, value);
-	} catch (e) {
+	} catch {
 		// ignore (storage might be blocked)
 	}
 }

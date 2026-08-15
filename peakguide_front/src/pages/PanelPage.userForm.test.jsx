@@ -10,6 +10,10 @@ vi.mock("../auth/AuthContext", () => ({
 	}),
 }));
 
+vi.mock("../api/messages", () => ({
+	sendMessage: vi.fn(),
+}));
+
 // mock children sections (żeby nie odpalać fetchy)
 vi.mock("../features/adminMessages/AdminMessagesSection", () => ({
 	default: () => <div>AdminMessagesSection</div>,
@@ -28,7 +32,7 @@ describe("PanelPage (admin)", () => {
 	it("shows tabs and switches content", async () => {
 		const { default: PanelPage } = await import("./PanelPage");
 
-		render(<PanelPage lang='pl' />);
+		render(<PanelPage lang='en' />);
 
 		expect(screen.getByText("AdminMessagesSection")).toBeInTheDocument();
 
