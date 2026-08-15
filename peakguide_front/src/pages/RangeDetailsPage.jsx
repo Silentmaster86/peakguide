@@ -122,6 +122,28 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 				<Link to='/ranges' style={crumbLink}>
 					{labels.ranges}
 				</Link>
+				{range.country_name ? (
+					<>
+						<span style={crumbSep}>›</span>
+						<Link
+							to={`/ranges?country=${encodeURIComponent(range.country_code)}`}
+							style={crumbLink}
+						>
+							{range.country_flag} {range.country_name}
+						</Link>
+					</>
+				) : null}
+				{range.region_name ? (
+					<>
+						<span style={crumbSep}>›</span>
+						<Link
+							to={`/ranges?country=${encodeURIComponent(range.country_code)}&region=${encodeURIComponent(range.region_slug)}`}
+							style={crumbLink}
+						>
+							{range.region_name}
+						</Link>
+					</>
+				) : null}
 				<span style={crumbSep}>›</span>
 				<span style={crumbCurrent}>{range.name || range.slug}</span>
 			</nav>
@@ -129,7 +151,9 @@ export default function RangeDetailsPage({ lang = "pl" }) {
 			{/* Hero */}
 			<section style={heroCard}>
 				<div style={heroTopRow}>
-					<div style={pill}>{labels.section}</div>
+					<div style={pill}>
+						{range.country_flag} {range.region_name || range.country_name || labels.section}
+					</div>
 				</div>
 
 				<h1 style={heroTitle(isMobile)}>{range.name || range.slug}</h1>

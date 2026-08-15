@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabaseClient';
  */
 
 const cache = {
+	countries: new Map(),
 	peaks: new Map(),
 	ranges: new Map(),
 	peakBySlug: new Map(),
@@ -23,6 +24,84 @@ function apiLang(lang) {
 
 function first(arr) {
 	return Array.isArray(arr) ? arr[0] : arr;
+}
+
+function translation(rows, lang) {
+	return (rows || []).find((row) => row.lang === lang);
+}
+
+/* ------------------------------------------------------------------ */
+/* Countries and regions                                               */
+/* ------------------------------------------------------------------ */
+
+export async function fetchCountries({ lang = 'pl' } = {}) {
+	const safeLang = apiLang(lang);
+
+	if (cache.countries.has(safeLang)) return cache.countries.get(safeLang);
+
+	const { data, error } = await supabase
+		.from('countries')
+		.select(
+			`
+      id,
+      code,
+      slug,
+      flag_emoji,
+      sort_order,
+      countries_i18n (
+        name,
+        description,
+        lang
+      ),
+      regions (
+        id,
+        slug,
+        sort_order,
+        active,
+        regions_i18n (
+          name,
+          description,
+          lang
+        )
+      )
+    `,
+		)
+		.eq('active', true)
+		.order('sort_order', { ascending: true });
+
+	if (error) throw error;
+
+	const mapped = (data || []).map((country) => {
+		const i18n = translation(country.countries_i18n, safeLang);
+		const regions = (country.regions || [])
+			.filter((region) => region.active)
+			.map((region) => {
+				const regionI18n = translation(region.regions_i18n, safeLang);
+
+				return {
+					id: region.id,
+					slug: region.slug,
+					name: regionI18n?.name || region.slug,
+					description: regionI18n?.description || '',
+					sort_order: region.sort_order,
+				};
+			})
+			.sort((a, b) => a.sort_order - b.sort_order);
+
+		return {
+			id: country.id,
+			code: country.code,
+			slug: country.slug,
+			name: i18n?.name || country.slug,
+			description: i18n?.description || '',
+			flag_emoji: country.flag_emoji || '',
+			sort_order: country.sort_order,
+			regions,
+		};
+	});
+
+	cache.countries.set(safeLang, mapped);
+	return mapped;
 }
 
 /* ------------------------------------------------------------------ */
@@ -60,6 +139,22 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
         mountain_ranges_i18n (
           name,
           lang
+        ),
+        countries (
+          code,
+          slug,
+          flag_emoji,
+          countries_i18n (
+            name,
+            lang
+          )
+        ),
+        regions (
+          slug,
+          regions_i18n (
+            name,
+            lang
+          )
         )
       )
     `,
@@ -81,6 +176,10 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 		const rangeI18n = (p.mountain_ranges?.mountain_ranges_i18n || []).find(
 			(r) => r.lang === safeLang,
 		);
+		const country = p.mountain_ranges?.countries;
+		const region = p.mountain_ranges?.regions;
+		const countryI18n = translation(country?.countries_i18n, safeLang);
+		const regionI18n = translation(region?.regions_i18n, safeLang);
 
 		return {
 			...p,
@@ -90,6 +189,12 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 			description: i18n?.description || '',
 			range_slug: p.mountain_ranges?.slug || '',
 			range_name: rangeI18n?.name || '',
+			country_code: country?.code || '',
+			country_slug: country?.slug || '',
+			country_name: countryI18n?.name || country?.slug || '',
+			country_flag: country?.flag_emoji || '',
+			region_slug: region?.slug || '',
+			region_name: regionI18n?.name || region?.slug || '',
 		};
 	});
 
@@ -112,10 +217,28 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 			`
       id,
       slug,
+      country_id,
+      region_id,
       mountain_ranges_i18n!inner (
         name,
         description,
         lang
+      ),
+      countries (
+        code,
+        slug,
+        flag_emoji,
+        countries_i18n (
+          name,
+          lang
+        )
+      ),
+      regions (
+        slug,
+        regions_i18n (
+          name,
+          lang
+        )
       )
     `,
 		)
@@ -126,12 +249,20 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 
 	const mapped = (data || []).map((r) => {
 		const i18n = first(r.mountain_ranges_i18n);
+		const countryI18n = translation(r.countries?.countries_i18n, safeLang);
+		const regionI18n = translation(r.regions?.regions_i18n, safeLang);
 
 		return {
 			id: r.id,
 			slug: r.slug,
 			name: i18n?.name || r.slug,
 			description: i18n?.description || '',
+			country_code: r.countries?.code || '',
+			country_slug: r.countries?.slug || '',
+			country_name: countryI18n?.name || r.countries?.slug || '',
+			country_flag: r.countries?.flag_emoji || '',
+			region_slug: r.regions?.slug || '',
+			region_name: regionI18n?.name || r.regions?.slug || '',
 		};
 	});
 
@@ -177,6 +308,22 @@ export async function fetchPeakBySlug(lang, slug) {
           name,
           description,
           lang
+        ),
+        countries (
+          code,
+          slug,
+          flag_emoji,
+          countries_i18n (
+            name,
+            lang
+          )
+        ),
+        regions (
+          slug,
+          regions_i18n (
+            name,
+            lang
+          )
         )
       )
     `,
@@ -192,6 +339,10 @@ export async function fetchPeakBySlug(lang, slug) {
 	const rangeI18n = (data.mountain_ranges?.mountain_ranges_i18n || []).find(
 		(r) => r.lang === safeLang,
 	);
+	const country = data.mountain_ranges?.countries;
+	const region = data.mountain_ranges?.regions;
+	const countryI18n = translation(country?.countries_i18n, safeLang);
+	const regionI18n = translation(region?.regions_i18n, safeLang);
 
 	const mapped = {
 		...data,
@@ -203,6 +354,12 @@ export async function fetchPeakBySlug(lang, slug) {
 		range_id: data.mountain_ranges?.id,
 		range_slug: data.mountain_ranges?.slug || '',
 		range_name: rangeI18n?.name || '',
+		country_code: country?.code || '',
+		country_slug: country?.slug || '',
+		country_name: countryI18n?.name || country?.slug || '',
+		country_flag: country?.flag_emoji || '',
+		region_slug: region?.slug || '',
+		region_name: regionI18n?.name || region?.slug || '',
 	};
 
 	cache.peakBySlug.set(key, mapped);
@@ -230,6 +387,22 @@ export async function fetchRangeBySlug(lang, slug) {
         description,
         lang
       ),
+      countries (
+        code,
+        slug,
+        flag_emoji,
+        countries_i18n (
+          name,
+          lang
+        )
+      ),
+      regions (
+        slug,
+        regions_i18n (
+          name,
+          lang
+        )
+      ),
       peaks (
         id,
         slug,
@@ -256,6 +429,8 @@ export async function fetchRangeBySlug(lang, slug) {
 	if (error) throw error;
 
 	const i18n = first(data.mountain_ranges_i18n);
+	const countryI18n = translation(data.countries?.countries_i18n, safeLang);
+	const regionI18n = translation(data.regions?.regions_i18n, safeLang);
 
 	const peaks = (data.peaks || [])
 		.filter((p) => p.active)
@@ -278,6 +453,12 @@ export async function fetchRangeBySlug(lang, slug) {
 		slug: data.slug,
 		name: i18n?.name || data.slug,
 		description: i18n?.description || '',
+		country_code: data.countries?.code || '',
+		country_slug: data.countries?.slug || '',
+		country_name: countryI18n?.name || data.countries?.slug || '',
+		country_flag: data.countries?.flag_emoji || '',
+		region_slug: data.regions?.slug || '',
+		region_name: regionI18n?.name || data.regions?.slug || '',
 		peaks,
 	};
 

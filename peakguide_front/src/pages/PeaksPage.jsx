@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SEO } from "../seo/SEO";
 import { SITE_URL, SITE_NAME } from "../seo/site";
-import { fetchPeaks, fetchRanges } from "../api/peakguide";
+import { fetchCountries, fetchPeaks, fetchRanges } from "../api/peakguide";
 import { useAsync } from "../hooks/useAsync";
 import PeaksToolbar from "../components/PeaksToolbar";
 import PeakCard from "../components/PeakCard";
@@ -14,11 +14,17 @@ export default function PeaksPage({ lang }) {
 
 	// URL params (single source of truth)
 	const q = searchParams.get("q") || "";
+	const country = searchParams.get("country") || "all";
+	const region = searchParams.get("region") || "all";
 	const range = searchParams.get("range") || "all";
 	const sort = searchParams.get("sort") || "elev_desc"; // elev_desc | elev_asc | name_asc | name_desc
 
 	const peaksState = useAsync(() => fetchPeaks({ lang }), [lang, refreshKey]);
 	const rangesState = useAsync(() => fetchRanges({ lang }), [lang, refreshKey]);
+	const countriesState = useAsync(
+		() => fetchCountries({ lang }),
+		[lang, refreshKey],
+	);
 
 	const peaks = useMemo(
 		() => (Array.isArray(peaksState.data) ? peaksState.data : []),
@@ -28,6 +34,11 @@ export default function PeaksPage({ lang }) {
 		() => (Array.isArray(rangesState.data) ? rangesState.data : []),
 		[rangesState.data],
 	);
+	const countriesList = useMemo(
+		() => (Array.isArray(countriesState.data) ? countriesState.data : []),
+		[countriesState.data],
+	);
+	const t = useMemo(() => getLabels(lang), [lang]);
 
 	function updateParam(key, value) {
 		const next = new URLSearchParams(searchParams);
@@ -52,11 +63,36 @@ export default function PeaksPage({ lang }) {
 		setSearchParams(next, { replace: true });
 	}
 
+	function updateCountry(value) {
+		const next = new URLSearchParams(searchParams);
+		if (!value || value === "all") next.delete("country");
+		else next.set("country", value);
+		next.delete("region");
+		next.delete("range");
+		setSearchParams(next, { replace: true });
+	}
+
+	function updateRegion(value) {
+		const next = new URLSearchParams(searchParams);
+		if (!value || value === "all") next.delete("region");
+		else next.set("region", value);
+		next.delete("range");
+		setSearchParams(next, { replace: true });
+	}
+
 	const filteredPeaks = useMemo(() => {
 		const safeQ = q.trim().toLowerCase();
 		let list = peaks;
 
-		// 1) Range filter
+		// 1) Location and range filters
+		if (country !== "all") {
+			list = list.filter((p) => p.country_code === country);
+		}
+
+		if (region !== "all") {
+			list = list.filter((p) => p.region_slug === region);
+		}
+
 		if (range && range !== "all") {
 			list = list.filter((p) => p.range_slug === range);
 		}
@@ -83,7 +119,7 @@ export default function PeaksPage({ lang }) {
 			out.sort((a, b) =>
 				String(a.peak_name || "").localeCompare(
 					String(b.peak_name || ""),
-					"pl",
+						lang,
 				),
 			);
 
@@ -91,25 +127,38 @@ export default function PeaksPage({ lang }) {
 			out.sort((a, b) =>
 				String(b.peak_name || "").localeCompare(
 					String(a.peak_name || ""),
-					"pl",
+						lang,
 				),
 			);
 
 		return out;
-	}, [peaks, range, q, sort]);
+	}, [peaks, country, region, range, q, sort, lang]);
 
-	const [kgpPeaks, nearbyPeaks] = useMemo(() => {
+	const sections = useMemo(() => {
 		const kgp = [];
-		const near = [];
+		const polishOther = [];
+		const ukThreePeaks = [];
+		const other = [];
 		for (const p of filteredPeaks) {
-			if (p.is_korona) kgp.push(p);
-			else near.push(p);
+			if (p.country_code === "PL" && p.is_korona) kgp.push(p);
+			else if (p.country_code === "PL") polishOther.push(p);
+			else if (p.country_code === "GB") ukThreePeaks.push(p);
+			else other.push(p);
 		}
-		return [kgp, near];
-	}, [filteredPeaks]);
+
+		return [
+			{ key: "kgp", title: t.kgp, peaks: kgp },
+			{ key: "pl-other", title: t.polishOther, peaks: polishOther },
+			{ key: "uk-three-peaks", title: t.ukThreePeaks, peaks: ukThreePeaks },
+			{ key: "other", title: t.other, peaks: other },
+		].filter((section) => section.peaks.length > 0);
+	}, [filteredPeaks, t]);
 
 	const isLoading = peaksState.status === "loading";
-	const isError = peaksState.status === "error";
+	const isError =
+		peaksState.status === "error" ||
+		rangesState.status === "error" ||
+		countriesState.status === "error";
 
 	const canonical = `${SITE_URL}/peaks`;
 
@@ -118,8 +167,8 @@ export default function PeaksPage({ lang }) {
 
 	const description =
 		lang === "pl"
-			? "Lista szczytów i Korony Gór Polski. Filtruj po paśmie i sortuj według wysokości."
-			: "Browse Polish mountain peaks and the Crown of Polish Mountains.";
+			? "Szczyty Polski i Wielkiej Brytanii, w tym Korona Gór Polski oraz UK Three Peaks. Filtruj według kraju, regionu i pasma."
+			: "Browse mountain peaks in Poland and the United Kingdom, including the Crown of Polish Mountains and UK Three Peaks.";
 
 	return (
 		<div style={page}>
@@ -131,17 +180,22 @@ export default function PeaksPage({ lang }) {
 				<PeaksToolbar
 					q={q}
 					setQ={(val) => updateParam("q", val)}
+					country={country}
+					setCountry={updateCountry}
+					region={region}
+					setRegion={updateRegion}
 					range={range}
 					setRange={(val) => updateParam("range", val)}
 					sort={sort}
 					setSort={(val) => updateParam("sort", val)}
 					ranges={rangesList}
+					countries={countriesList}
 					lang={lang}
 				/>
 
 				<div style={rightBox}>
 					<div style={counter}>
-						{lang === "pl" ? "Wyniki" : "Results"}:{" "}
+						{t.results}:{" "}
 						<b>{filteredPeaks.length}</b>
 					</div>
 				</div>
@@ -157,7 +211,7 @@ export default function PeaksPage({ lang }) {
 					</div>
 
 					<div style={{ opacity: 0.9, marginBottom: 10 }}>
-						{peaksState.error}
+						{peaksState.error || rangesState.error || countriesState.error}
 					</div>
 
 					<button
@@ -173,40 +227,27 @@ export default function PeaksPage({ lang }) {
 			{/* Grid */}
 			{!isError && (
 				<>
-					{/* KGP */}
-					<div style={sectionHead}>
-						<h2 style={sectionTitle}>
-							{lang === "pl"
-								? "Korona Gór Polski"
-								: "Crown of Polish Mountains"}
-						</h2>
-						<div style={sectionCount}>{kgpPeaks.length}</div>
-					</div>
-
-					<div style={grid}>
-						{isLoading
-							? Array.from({ length: 10 }).map((_, i) => (
-									<PeakCardSkeleton key={`kgp-${i}`} />
-								))
-							: kgpPeaks.map((p) => (
-									<PeakCard key={p.slug} peak={p} lang={lang} />
-								))}
-					</div>
-
-					{/* Nearby */}
-					<div style={{ ...sectionHead, marginTop: 18 }}>
-						<h2 style={sectionTitle}>
-							{lang === "pl" ? "Nearby / dodatkowe szczyty" : "Nearby peaks"}
-						</h2>
-						<div style={sectionCount}>{nearbyPeaks.length}</div>
-					</div>
-
-					<div style={grid}>
-						{!isLoading &&
-							nearbyPeaks.map((p) => (
-								<PeakCard key={p.slug} peak={p} lang={lang} />
+					{isLoading ? (
+						<div style={grid}>
+							{Array.from({ length: 10 }).map((_, i) => (
+								<PeakCardSkeleton key={`peak-${i}`} />
 							))}
-					</div>
+						</div>
+					) : (
+						sections.map((section, index) => (
+							<section key={section.key}>
+								<div style={{ ...sectionHead, marginTop: index ? 18 : 4 }}>
+									<h2 style={sectionTitle}>{section.title}</h2>
+									<div style={sectionCount}>{section.peaks.length}</div>
+								</div>
+								<div style={grid}>
+									{section.peaks.map((peak) => (
+										<PeakCard key={peak.slug} peak={peak} lang={lang} />
+									))}
+								</div>
+							</section>
+						))
+					)}
 				</>
 			)}
 
@@ -220,6 +261,41 @@ export default function PeaksPage({ lang }) {
 			) : null}
 		</div>
 	);
+}
+
+function getLabels(lang) {
+	const labels = {
+		pl: {
+			results: "Wyniki",
+			kgp: "Korona Gór Polski",
+			polishOther: "Dodatkowe szczyty w Polsce",
+			ukThreePeaks: "UK Three Peaks",
+			other: "Pozostałe szczyty",
+		},
+		en: {
+			results: "Results",
+			kgp: "Crown of Polish Mountains",
+			polishOther: "Other peaks in Poland",
+			ukThreePeaks: "UK Three Peaks",
+			other: "Other peaks",
+		},
+		ua: {
+			results: "Результати",
+			kgp: "Корона польських гір",
+			polishOther: "Інші вершини Польщі",
+			ukThreePeaks: "Три вершини Великої Британії",
+			other: "Інші вершини",
+		},
+		zh: {
+			results: "结果",
+			kgp: "波兰山峰王冠",
+			polishOther: "波兰其他山峰",
+			ukThreePeaks: "英国三峰",
+			other: "其他山峰",
+		},
+	};
+
+	return labels[lang] || labels.pl;
 }
 
 /* ----------------------------- styles ------------------------------ */

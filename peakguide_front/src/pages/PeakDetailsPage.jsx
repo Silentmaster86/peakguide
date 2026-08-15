@@ -204,6 +204,8 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 		);
 	}
 
+	const collectionLabel = getCollectionLabel(peak, lang);
+
 	return (
 		<div style={wrap}>
 
@@ -214,6 +216,18 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				<Link to='/peaks' style={crumbLink}>
 					{labels.peaks}
 				</Link>
+
+				{peak.country_name ? (
+					<>
+						<span style={crumbSep}>›</span>
+						<Link
+							to={`/peaks?country=${encodeURIComponent(peak.country_code)}`}
+							style={crumbLink}
+						>
+							{peak.country_flag} {peak.country_name}
+						</Link>
+					</>
+				) : null}
 
 				<span style={crumbSep}>›</span>
 
@@ -251,15 +265,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 			<section style={hero}>
 				{/* Optional small context pill (not duplicating Info) */}
 				<div style={heroTopRow}>
-					<div style={heroPillMuted}>
-						{lang === "pl"
-							? "Korona Gór Polski"
-							: lang === "en"
-								? "Crown of Polish Mountains"
-								: lang === "ua"
-									? "Корона гір Польщі"
-									: "波兰山峰王冠"}
-					</div>
+					<div style={heroPillMuted}>{collectionLabel}</div>
 				</div>
 
 				<h1 style={heroTitle(isMobile)}>{peak.name}</h1>
@@ -335,6 +341,15 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 							<div style={kv}>
 								<div style={k}>{labels.range}</div>
 								<div style={v}>{peak.range_name || "—"}</div>
+							</div>
+
+							<div style={kv}>
+								<div style={k}>{labels.location}</div>
+								<div style={v}>
+									{[peak.region_name, peak.country_name]
+										.filter(Boolean)
+										.join(", ") || "—"}
+								</div>
 							</div>
 
 							<div style={divider} />
@@ -481,6 +496,41 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 /* ----------------------------- helpers ----------------------------- */
 
+function getCollectionLabel(peak, lang) {
+	const labels = {
+		pl: {
+			kgp: "Korona Gór Polski",
+			poland: "Szczyty Polski",
+			uk: "UK Three Peaks",
+			other: "Szczyty górskie",
+		},
+		en: {
+			kgp: "Crown of Polish Mountains",
+			poland: "Peaks of Poland",
+			uk: "UK Three Peaks",
+			other: "Mountain peaks",
+		},
+		ua: {
+			kgp: "Корона польських гір",
+			poland: "Вершини Польщі",
+			uk: "Три вершини Великої Британії",
+			other: "Гірські вершини",
+		},
+		zh: {
+			kgp: "波兰山峰王冠",
+			poland: "波兰山峰",
+			uk: "英国三峰",
+			other: "山峰",
+		},
+	};
+	const t = labels[lang] || labels.pl;
+
+	if (peak.country_code === "PL" && peak.is_korona) return t.kgp;
+	if (peak.country_code === "PL") return t.poland;
+	if (peak.country_code === "GB") return t.uk;
+	return t.other;
+}
+
 function getLabels(lang) {
 	const dict = {
 		pl: {
@@ -490,6 +540,7 @@ function getLabels(lang) {
 			back: "Wróć do listy",
 			elevation: "Wysokość",
 			range: "Pasmo",
+			location: "Lokalizacja",
 			coords: "Współrzędne",
 			openMaps: "Otwórz mapę",
 			copy: "Kopiuj",
@@ -523,6 +574,7 @@ function getLabels(lang) {
 			back: "Back to list",
 			elevation: "Elevation",
 			range: "Range",
+			location: "Location",
 			coords: "Coordinates",
 			openMaps: "Open map",
 			copy: "Copy",
@@ -555,6 +607,7 @@ function getLabels(lang) {
 			back: "Назад до списку",
 			elevation: "Висота",
 			range: "Хребет",
+			location: "Розташування",
 			coords: "Координати",
 			openMaps: "Відкрити мапу",
 			copy: "Копіювати",
@@ -588,6 +641,7 @@ function getLabels(lang) {
 			back: "返回列表",
 			elevation: "海拔",
 			range: "山脉",
+			location: "位置",
 			coords: "坐标",
 			openMaps: "打开地图",
 			copy: "复制",
