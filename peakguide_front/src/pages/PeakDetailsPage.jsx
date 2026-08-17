@@ -446,7 +446,83 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 						{(trails?.length ?? 0) > 0 &&
 							trails.map((t) => (
 								<article key={t.slug} style={itemCard}>
-									{/* cały Twój istniejący kod itemCard */}
+									<div style={itemTop}>
+										<div style={itemTitle}>{t.name}</div>
+										<div style={badgeRow}>
+											{t.difficulty ? (
+												<span style={badge}>
+													{trailOptionLabel(t.difficulty, labels)}
+												</span>
+											) : null}
+											{t.route_type ? (
+												<span style={badgeMuted}>
+													{trailOptionLabel(t.route_type, labels)}
+												</span>
+											) : null}
+										</div>
+									</div>
+
+									{t.description ? <div style={itemText}>{t.description}</div> : null}
+
+									<div style={metaRow}>
+										{t.distance_km != null ? (
+											<span style={metaPill}>
+												🥾 {labels.distance}: {Number(t.distance_km)} km
+											</span>
+										) : null}
+										{t.elevation_gain_m != null ? (
+											<span style={metaPill}>
+												↗ {labels.ascent}: {t.elevation_gain_m} m
+											</span>
+										) : null}
+										{t.time_min != null ? (
+											<span style={metaPill}>
+												⏱ {labels.time}: {formatTrailTime(t.time_min, lang)}
+											</span>
+										) : null}
+									</div>
+
+									{t.start_point_name || t.end_point_name ? (
+										<div style={routePoints}>
+											{t.start_point_name ? (
+												<div>
+													<strong>{labels.start}:</strong> {t.start_point_name}
+												</div>
+											) : null}
+											{t.end_point_name ? (
+												<div>
+													<strong>{labels.finish}:</strong> {t.end_point_name}
+												</div>
+											) : null}
+										</div>
+									) : null}
+
+									{t.notes ? <div style={notesBox}>{t.notes}</div> : null}
+
+									{t.map_url || t.gpx_url ? (
+										<div style={actionsRow}>
+											{t.map_url ? (
+												<a
+													href={t.map_url}
+													target='_blank'
+													rel='noreferrer'
+													style={actionBtn}
+												>
+													🗺️ {labels.openMap}
+												</a>
+											) : null}
+											{t.gpx_url ? (
+												<a
+													href={t.gpx_url}
+													target='_blank'
+													rel='noreferrer'
+													style={actionBtn}
+												>
+													⬇️ {labels.downloadGpx}
+												</a>
+											) : null}
+										</div>
+									) : null}
 								</article>
 							))}
 					</section>
@@ -531,6 +607,26 @@ function getCollectionLabel(peak, lang) {
 	return t.other;
 }
 
+function formatTrailTime(minutes, lang) {
+	const total = Number(minutes);
+	if (!Number.isFinite(total) || total <= 0) return "—";
+
+	const hours = Math.floor(total / 60);
+	const mins = total % 60;
+	const hourUnit = lang === "zh" ? "小时" : "h";
+	const minuteUnit = lang === "zh" ? "分钟" : "min";
+
+	if (!mins) return `${hours} ${hourUnit}`;
+	return `${hours} ${hourUnit} ${mins} ${minuteUnit}`;
+}
+
+function trailOptionLabel(value, labels) {
+	const normalized = String(value || "").toLowerCase();
+	if (normalized === "hard" || normalized === "challenging") return labels.hard;
+	if (normalized === "out-and-back") return labels.outAndBack;
+	return value;
+}
+
 function getLabels(lang) {
 	const dict = {
 		pl: {
@@ -557,6 +653,14 @@ function getLabels(lang) {
 			failedTrails: "Nie udało się wczytać szlaków.",
 			failedPois: "Nie udało się wczytać POI.",
 			openMap: "Otwórz mapę",
+			downloadGpx: "Pobierz GPX",
+			distance: "Dystans",
+			ascent: "Podejście",
+			time: "Czas",
+			start: "Start",
+			finish: "Meta",
+			hard: "Trudna",
+			outAndBack: "Tam i z powrotem",
 			website: "Strona",
 			overview: "Opis",
 			trailsSoonTitle: "Szlaki będą dostępne wkrótce",
@@ -591,6 +695,14 @@ function getLabels(lang) {
 			failedTrails: "Failed to load trails.",
 			failedPois: "Failed to load POIs.",
 			openMap: "Open map",
+			downloadGpx: "Download GPX",
+			distance: "Distance",
+			ascent: "Ascent",
+			time: "Time",
+			start: "Start",
+			finish: "Finish",
+			hard: "Hard",
+			outAndBack: "Out and back",
 			website: "Website",
 			overview: "Overview",
 			trailsSoonTitle: "Hiking trails coming soon",
@@ -624,6 +736,14 @@ function getLabels(lang) {
 			failedTrails: "Не вдалося завантажити маршрути.",
 			failedPois: "Не вдалося завантажити POI.",
 			openMap: "Відкрити мапу",
+			downloadGpx: "Завантажити GPX",
+			distance: "Відстань",
+			ascent: "Набір висоти",
+			time: "Час",
+			start: "Старт",
+			finish: "Фініш",
+			hard: "Складний",
+			outAndBack: "Туди й назад",
 			website: "Вебсайт",
 			overview: "Огляд",
 			trailsSoonTitle: "Маршрути будуть доступні незабаром",
@@ -658,6 +778,14 @@ function getLabels(lang) {
 			failedTrails: "加载路线失败。",
 			failedPois: "加载兴趣点失败。",
 			openMap: "打开地图",
+			downloadGpx: "下载 GPX",
+			distance: "距离",
+			ascent: "累计爬升",
+			time: "时间",
+			start: "起点",
+			finish: "终点",
+			hard: "困难",
+			outAndBack: "往返",
 			website: "网站",
 			overview: "概览",
 			trailsSoonTitle: "登山路线即将上线",
@@ -1003,12 +1131,13 @@ const itemCard = {
 	background: "color-mix(in srgb, var(--menu-bg) 60%, transparent)",
 };
 
-/*------------------Styles for Trails and POIs(future project)---------------*/
+/*------------------Styles for Trails and POIs---------------*/
 
-/*const itemTop = {
+const itemTop = {
 	display: "flex",
+	flexWrap: "wrap",
 	gap: 10,
-	alignItems: "baseline",
+	alignItems: "flex-start",
 	justifyContent: "space-between",
 };
 
@@ -1022,6 +1151,12 @@ const itemText = {
 	opacity: 0.95,
 	lineHeight: 1.6,
 	whiteSpace: "pre-wrap",
+};
+
+const badgeRow = {
+	display: "flex",
+	flexWrap: "wrap",
+	gap: 8,
 };
 
 const metaRow = {
@@ -1074,6 +1209,26 @@ const actionsRow = {
 	marginTop: 12,
 };
 
+const routePoints = {
+	display: "grid",
+	gap: 4,
+	marginTop: 12,
+	fontSize: 13,
+	lineHeight: 1.5,
+	color: "var(--muted)",
+};
+
+const notesBox = {
+	marginTop: 12,
+	padding: 12,
+	borderRadius: 14,
+	border: "1px solid var(--border)",
+	background: "var(--surface-2)",
+	fontSize: 13,
+	lineHeight: 1.55,
+	whiteSpace: "pre-wrap",
+};
+
 const actionBtn = {
 	display: "inline-flex",
 	alignItems: "center",
@@ -1087,7 +1242,7 @@ const actionBtn = {
 	fontWeight: 1000,
 	fontSize: 13,
 	textDecoration: "none",
-};*/
+};
 
 /* ------------------- tabs ------------------- */
 
