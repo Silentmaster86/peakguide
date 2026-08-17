@@ -261,6 +261,20 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 					</Link>
 				</div>
 			)}
+
+			{peak.cover_image_url ? (
+				<figure style={coverFigure(isMobile)}>
+					<img
+						src={peak.cover_image_url}
+						alt={`${peak.name} — ${peak.range_name}`}
+						loading='eager'
+						decoding='async'
+						fetchPriority='high'
+						style={coverImage}
+					/>
+				</figure>
+			) : null}
+
 			{/* Hero */}
 			<section style={hero}>
 				{/* Optional small context pill (not duplicating Info) */}
@@ -1063,6 +1077,24 @@ const miniCard = {
 	background: "var(--surface-2)",
 	boxShadow: "var(--shadow-soft)",
 	transition: "transform 140ms ease, box-shadow 140ms ease",
+};
+
+const coverFigure = (isMobile) => ({
+	margin: '0 0 14px',
+	height: isMobile ? 220 : 380,
+	borderRadius: 22,
+	overflow: 'hidden',
+	border: '1px solid var(--border)',
+	background: 'var(--surface-2)',
+	boxShadow: 'var(--shadow-soft)',
+});
+
+const coverImage = {
+	display: 'block',
+	width: '100%',
+	height: '100%',
+	objectFit: 'cover',
+	objectPosition: 'center',
 };
 
 const miniTitle = {

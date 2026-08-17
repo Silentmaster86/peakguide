@@ -24,18 +24,30 @@ export default function PeakCard({ peak, lang }) {
 					e.currentTarget.style.boxShadow = "var(--shadow-soft)";
 				}}
 			>
-				<header style={cardTop}>
-					<div style={{ minWidth: 0 }}>
-						<h3 style={title} title={peak.peak_name}>
-							{peak.peak_name}
-						</h3>
-						<div style={sub}>{peak.range_name}</div>
-					</div>
+				<div style={cardBody}>
+					{peak.cover_image_url ? (
+						<img
+							src={peak.cover_image_url}
+							alt={`${peak.peak_name} — ${peak.range_name}`}
+							loading='lazy'
+							decoding='async'
+							style={thumbnail}
+						/>
+					) : null}
 
-					<div style={badge} title={heightLabel}>
-						⛰️ {peak.elevation_m} m
-					</div>
-				</header>
+					<header style={cardTop}>
+						<div style={{ minWidth: 0 }}>
+							<h3 style={title} title={peak.peak_name}>
+								{peak.peak_name}
+							</h3>
+							<div style={sub}>{peak.range_name}</div>
+						</div>
+
+						<div style={badge} title={heightLabel}>
+							⛰️ {peak.elevation_m} m
+						</div>
+					</header>
+				</div>
 			</article>
 		</Link>
 	);
@@ -62,6 +74,26 @@ const cardTop = {
 	gridTemplateColumns: '1fr auto',
 	gap: 10,
 	alignItems: 'start',
+	flex: '1 1 auto',
+	minWidth: 0,
+};
+
+const cardBody = {
+	display: 'flex',
+	alignItems: 'center',
+	gap: 12,
+	minWidth: 0,
+};
+
+const thumbnail = {
+	width: 112,
+	height: 70,
+	flex: '0 0 112px',
+	borderRadius: 12,
+	border: '1px solid var(--border)',
+	objectFit: 'cover',
+	objectPosition: 'center',
+	background: 'var(--surface-2)',
 };
 
 const title = {
