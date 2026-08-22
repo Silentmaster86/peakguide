@@ -292,6 +292,10 @@ export async function fetchPeakBySlug(lang, slug) {
       difficulty,
       best_season,
       cover_image_url,
+      cover_image_author,
+      cover_image_source_url,
+      cover_image_license,
+      cover_image_license_url,
       is_korona,
       active,
       peaks_i18n!inner (

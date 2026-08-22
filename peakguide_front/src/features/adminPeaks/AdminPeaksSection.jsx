@@ -106,6 +106,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		difficulty: '',
 		best_season: '',
 		cover_image_url: '',
+		cover_image_author: '',
+		cover_image_source_url: '',
+		cover_image_license: '',
+		cover_image_license_url: '',
 		is_korona: true,
 		active: true,
 		i18n: emptyI18n(),
@@ -200,6 +204,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			difficulty: '',
 			best_season: '',
 			cover_image_url: '',
+			cover_image_author: '',
+			cover_image_source_url: '',
+			cover_image_license: '',
+			cover_image_license_url: '',
 			is_korona: true,
 			active: true,
 			i18n: emptyI18n(),
@@ -228,6 +236,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			difficulty: row.difficulty ?? '',
 			best_season: row.best_season ?? '',
 			cover_image_url: row.cover_image_url ?? '',
+			cover_image_author: row.cover_image_author ?? '',
+			cover_image_source_url: row.cover_image_source_url ?? '',
+			cover_image_license: row.cover_image_license ?? '',
+			cover_image_license_url: row.cover_image_license_url ?? '',
 			is_korona: !!row.is_korona,
 			active: !!row.active,
 			i18n: normalizeI18n(row.i18n),
@@ -259,6 +271,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			latitude: form.latitude === '' ? null : Number(form.latitude),
 			longitude: form.longitude === '' ? null : Number(form.longitude),
 			cover_image_url: form.cover_image_url?.trim() || null,
+			cover_image_author: form.cover_image_author?.trim() || null,
+			cover_image_source_url: form.cover_image_source_url?.trim() || null,
+			cover_image_license: form.cover_image_license?.trim() || null,
+			cover_image_license_url: form.cover_image_license_url?.trim() || null,
 			i18n: normalizeI18n(form.i18n),
 		};
 
@@ -562,6 +578,44 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										value={form.longitude}
 										onChange={(e) =>
 											setForm({ ...form, longitude: e.target.value })
+										}
+									/>
+								</Field>
+							</div>
+
+							<div className='ap-grid ap-grid--2'>
+								<Field label='Cover image author'>
+									<TextInput
+										value={form.cover_image_author}
+										onChange={(e) =>
+											setForm({ ...form, cover_image_author: e.target.value })
+										}
+									/>
+								</Field>
+
+								<Field label='Cover image source URL'>
+									<TextInput
+										value={form.cover_image_source_url}
+										onChange={(e) =>
+											setForm({ ...form, cover_image_source_url: e.target.value })
+										}
+									/>
+								</Field>
+
+								<Field label='Cover image license'>
+									<TextInput
+										value={form.cover_image_license}
+										onChange={(e) =>
+											setForm({ ...form, cover_image_license: e.target.value })
+										}
+									/>
+								</Field>
+
+								<Field label='Cover image license URL'>
+									<TextInput
+										value={form.cover_image_license_url}
+										onChange={(e) =>
+											setForm({ ...form, cover_image_license_url: e.target.value })
 										}
 									/>
 								</Field>

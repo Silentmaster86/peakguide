@@ -208,7 +208,6 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 	return (
 		<div style={wrap}>
-
 			{/* SEO */}
 			<PeakSEO peak={peak} lang={lang} />
 			{/* Breadcrumbs */}
@@ -253,25 +252,67 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				<span style={crumbCurrent}>{peak.name}</span>
 			</nav>
 
-			{/* Back link */}
-			{isMobile && (
-				<div style={{ marginBottom: 10 }}>
-					<Link to='/peaks' style={backLink}>
-						← {labels.back}
-					</Link>
-				</div>
-			)}
+			{/* Keep the return action available at every viewport width. */}
+			<div style={backRow}>
+				<Link to='/peaks' style={backLink}>
+					← {labels.back}
+				</Link>
+			</div>
 
 			{peak.cover_image_url ? (
-				<figure style={coverFigure(isMobile)}>
-					<img
-						src={peak.cover_image_url}
-						alt={`${peak.name} — ${peak.range_name}`}
-						loading='eager'
-						decoding='async'
-						fetchPriority='high'
-						style={coverImage}
-					/>
+				<figure style={coverFigure}>
+					<div style={coverMedia}>
+						<img
+							src={peak.cover_image_url}
+							alt={`${peak.name} — ${peak.range_name}`}
+							loading='eager'
+							decoding='async'
+							fetchPriority='high'
+							style={coverImage}
+						/>
+					</div>
+
+					{peak.cover_image_author ? (
+						<figcaption style={coverCaption}>
+							<span>
+								{labels.photo}: {peak.cover_image_author}
+							</span>
+
+							{peak.cover_image_source_url ? (
+								<>
+									<span aria-hidden='true'>•</span>
+									<a
+										href={peak.cover_image_source_url}
+										target='_blank'
+										rel='noreferrer'
+										style={creditLink}
+									>
+										{labels.photoSource}
+									</a>
+								</>
+							) : null}
+
+							{peak.cover_image_license ? (
+								<>
+									<span aria-hidden='true'>•</span>
+									{peak.cover_image_license_url ? (
+										<a
+											href={peak.cover_image_license_url}
+											target='_blank'
+											rel='noreferrer'
+											style={creditLink}
+										>
+											{peak.cover_image_license}
+										</a>
+									) : (
+										<span>{peak.cover_image_license}</span>
+									)}
+								</>
+							) : null}
+
+							<span>— {labels.cropped}</span>
+						</figcaption>
+					) : null}
 				</figure>
 			) : null}
 
@@ -656,6 +697,9 @@ function getLabels(lang) {
 			copy: "Kopiuj",
 			description: "Opis",
 			notFound: "Nie znaleziono szczytu",
+			photo: "Zdjęcie",
+			photoSource: "Źródło",
+			cropped: "wykadrowane",
 
 			/* ------------------- trails and pois PL ------------------- */
 
@@ -698,6 +742,9 @@ function getLabels(lang) {
 			copy: "Copy",
 			description: "Description",
 			notFound: "Peak not found",
+			photo: "Photo",
+			photoSource: "Source",
+			cropped: "cropped",
 
 			/* ------------------- trails and pois EN ------------------- */
 
@@ -739,6 +786,9 @@ function getLabels(lang) {
 			copy: "Копіювати",
 			description: "Опис",
 			notFound: "Вершину не знайдено",
+			photo: "Фото",
+			photoSource: "Джерело",
+			cropped: "обрізано",
 
 			/* ------------------- trails and pois UA------------------- */
 
@@ -781,6 +831,9 @@ function getLabels(lang) {
 			copy: "复制",
 			description: "介绍",
 			notFound: "未找到该山峰",
+			photo: "照片",
+			photoSource: "来源",
+			cropped: "已裁剪",
 
 			/* ------------------- trails and pois ZH ------------------- */
 
@@ -826,8 +879,10 @@ const wrap = {
 const crumbs = {
 	display: "flex",
 	alignItems: "center",
+	flexWrap: "wrap",
 	gap: 8,
-	marginBottom: 10,
+	rowGap: 6,
+	marginBottom: 8,
 	color: "var(--muted)",
 	fontSize: 13,
 };
@@ -1005,6 +1060,12 @@ const backLink = {
 	display: "inline-flex",
 };
 
+const backRow = {
+	display: "flex",
+	alignItems: "center",
+	marginBottom: 12,
+};
+
 const errorBox = {
 	border: "1px solid rgba(239,68,68,0.25)",
 	borderRadius: 22,
@@ -1079,22 +1140,44 @@ const miniCard = {
 	transition: "transform 140ms ease, box-shadow 140ms ease",
 };
 
-const coverFigure = (isMobile) => ({
-	margin: '0 0 14px',
-	height: isMobile ? 220 : 380,
+const coverFigure = {
+	margin: "0 0 14px",
+};
+
+const coverMedia = {
+	aspectRatio: "1235 / 571",
 	borderRadius: 22,
-	overflow: 'hidden',
-	border: '1px solid var(--border)',
-	background: 'var(--surface-2)',
-	boxShadow: 'var(--shadow-soft)',
-});
+	overflow: "hidden",
+	border: "1px solid var(--border)",
+	background: "var(--surface-2)",
+	boxShadow: "var(--shadow-soft)",
+};
 
 const coverImage = {
-	display: 'block',
-	width: '100%',
-	height: '100%',
-	objectFit: 'cover',
-	objectPosition: 'center',
+	display: "block",
+	width: "100%",
+	height: "100%",
+	objectFit: "cover",
+	objectPosition: "center 42%",
+};
+
+const coverCaption = {
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "flex-end",
+	flexWrap: "wrap",
+	gap: "4px 7px",
+	padding: "7px 4px 0",
+	color: "var(--muted)",
+	fontSize: 11,
+	lineHeight: 1.4,
+};
+
+const creditLink = {
+	color: "inherit",
+	fontWeight: 800,
+	textDecoration: "underline",
+	textUnderlineOffset: 2,
 };
 
 const miniTitle = {
