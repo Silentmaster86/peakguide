@@ -73,6 +73,8 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 		async function loadExtras() {
 			setTrailsStatus("loading");
 			setPoisStatus("loading");
+			setPois([]);
+			setTrails([]);
 
 			try {
 				const [t, p] = await Promise.all([
@@ -380,6 +382,8 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 									name={peak.name}
 									lat={peak.latitude}
 									lon={peak.longitude}
+                                    pois={poisStatus === "success" ? pois : []}
+                                    lang={lang}
 								/>
 							</div>
 						</section>
@@ -590,7 +594,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				<>
 					<section style={block}>
 						<div style={blockHead}>
-							<h2 style={blockTitle}>{labels.pois}</h2>
+							<h2 style={blockTitle}>{labels.pois.id}</h2>
 							<span style={countPill}>{pois.length}</span>
 						</div>
 
@@ -615,7 +619,20 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 						{(pois?.length ?? 0) > 0 &&
 							pois.map((poi) => (
 								<article key={poi.id} style={itemCard}>
-									{/* cały Twój istniejący kod itemCard */}
+									<div style={itemTop}>
+                                        <div style={itemTitle}>{poi.name || poi.type_name || labels.pois.id}</div>
+                                        {poi.type_name && <span style={badge}>{poi.type_name}</span>}
+                                    </div>
+                                    {poi.description && <div style={itemText}>{poi.description}</div>}
+                                    {poi.tips && <div style={notesBox}>{poi.tips}</div>}
+                                    <div style={actionsRow}>
+                                        {safeExternalUrl(poi.google_maps_url) && (
+                                            <a href={safeExternalUrl(poi.google_maps_url)} target="_blank" rel="noopener noreferrer" style={actionBtn}>{labels.openMap}</a>
+                                        )}
+                                        {safeExternalUrl(poi.website_url) && (
+                                            <a href={safeExternalUrl(poi.website_url)} target="_blank" rel="noopener noreferrer" style={actionBtn}>{labels.website}</a>
+                                        )}
+                                    </div>
 								</article>
 							))}
 					</section>
@@ -626,6 +643,13 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 }
 
 /* ----------------------------- helpers ----------------------------- */
+
+function safeExternalUrl(value) {
+    try {
+        const url = new URL(value);
+        return ["https:", "http:"].includes(url.protocol) ? url.href : null;
+    } catch { return null; }
+}
 
 function getCollectionLabel(peak, lang) {
 	const labels = {
