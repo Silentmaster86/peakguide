@@ -9,6 +9,7 @@ import {
 } from "../api/peakguide";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import PeakMap from "../components/PeakMap";
+import TrailPracticalCard from "../components/TrailPracticalCard";
 import ComingSoonBox from "../components/ComingSoonBox";
 
 export default function PeakDetailsPage({ lang = "pl" }) {
@@ -557,6 +558,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 									) : null}
 
 									{t.notes ? <div style={notesBox}>{t.notes}</div> : null}
+                                    <TrailPracticalCard trailId={t.id} lang={lang} />
 
 									{t.map_url || t.gpx_url ? (
 										<div style={actionsRow}>
@@ -594,7 +596,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				<>
 					<section style={block}>
 						<div style={blockHead}>
-							<h2 style={blockTitle}>{labels.pois.id}</h2>
+							<h2 style={blockTitle}>{labels.pois}</h2>
 							<span style={countPill}>{pois.length}</span>
 						</div>
 
@@ -620,7 +622,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 							pois.map((poi) => (
 								<article key={poi.id} style={itemCard}>
 									<div style={itemTop}>
-                                        <div style={itemTitle}>{poi.name || poi.type_name || labels.pois.id}</div>
+                                        <div style={itemTitle}>{poi.name || poi.type_name || labels.pois}</div>
                                         {poi.type_name && <span style={badge}>{poi.type_name}</span>}
                                     </div>
                                     {poi.description && <div style={itemText}>{poi.description}</div>}
@@ -1386,44 +1388,58 @@ const actionBtn = {
 /* ------------------- tabs ------------------- */
 
 const tabsWrap = {
-	position: "sticky",
+	position: 'sticky',
 	top: 10,
 	zIndex: 5,
-	display: "flex",
+	display: 'flex',
+	flexWrap: 'wrap',
+	alignItems: 'center',
 	gap: 8,
 	padding: 10,
 	marginBottom: 14,
 	borderRadius: 18,
-	border: "1px solid var(--border)",
-	background: "color-mix(in srgb, var(--menu-bg) 85%, transparent)",
-	backdropFilter: "blur(8px)",
+	border: '1px solid var(--border)',
+	background: 'var(--menu-bg)',
+	boxSizing: 'border-box',
+	width: '100%',
 };
 
 const tabBtn = (active) => ({
-	display: "inline-flex",
-	alignItems: "center",
+	display: 'inline-flex',
+	flex: '0 0 auto',
+	alignItems: 'center',
+	justifyContent: 'center',
 	gap: 8,
-	padding: "10px 12px",
-	borderRadius: 999,
-	border: active ? "1px solid var(--btn-border)" : "1px solid var(--border)",
+	minHeight: 44,
+	padding: '10px 12px',
+	boxSizing: 'border-box',
+	borderRadius: 12,
+	border: active ? '1px solid var(--btn-border)' : '1px solid var(--border)',
 	background: active
-		? "color-mix(in srgb, var(--primary) 16%, transparent)"
-		: "var(--btn-bg)",
-	color: "var(--text)",
-	fontWeight: 1000,
-	cursor: "pointer",
+		? 'color-mix(in srgb, var(--primary) 16%, transparent)'
+		: 'var(--btn-bg)',
+	color: 'var(--text)',
+	fontFamily: 'inherit',
+	fontSize: 14,
+	fontWeight: 700,
+	lineHeight: 1.2,
+	whiteSpace: 'nowrap',
+	cursor: 'pointer',
 });
 
 const tabCount = {
-	display: "inline-flex",
-	alignItems: "center",
-	justifyContent: "center",
+	display: 'inline-flex',
+	flexShrink: 0,
+	alignItems: 'center',
+	justifyContent: 'center',
 	minWidth: 22,
-	height: 20,
-	padding: "0 8px",
+	height: 22,
+	padding: '0 6px',
+	boxSizing: 'border-box',
 	borderRadius: 999,
-	border: "1px solid rgba(255,255,255,0.14)",
-	color: "var(--muted)",
+	border: '1px solid var(--border)',
+	color: 'var(--muted)',
 	fontSize: 12,
-	fontWeight: 1000,
+	fontWeight: 700,
+	lineHeight: 1,
 };
