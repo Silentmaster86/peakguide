@@ -1,42 +1,43 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { PeakSEO } from "../seo/SEO";
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { PeakSEO } from '../seo/SEO';
 import {
 	fetchPeakBySlug,
 	fetchPeakPoisBySlug,
 	fetchPeakTrailsBySlug,
 	fetchNearbyPeaksBySlug,
-} from "../api/peakguide";
-import { useMediaQuery } from "../hooks/useMediaQuery";
-import PeakMap from "../components/PeakMap";
-import TrailPracticalCard from "../components/TrailPracticalCard";
-import ComingSoonBox from "../components/ComingSoonBox";
+} from '../api/peakguide';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import PeakMap from '../components/PeakMap';
+import TrailPracticalCard from '../components/TrailPracticalCard';
+import ComingSoonBox from '../components/ComingSoonBox';
+import { safeUrl } from '../utils/practical.mjs';
 
-export default function PeakDetailsPage({ lang = "pl" }) {
+export default function PeakDetailsPage({ lang = 'pl' }) {
 	const { slug } = useParams();
-	const isMobile = useMediaQuery("(max-width: 900px)");
+	const isMobile = useMediaQuery('(max-width: 900px)');
 
-	const [status, setStatus] = useState("loading"); // loading | success | error
+	const [status, setStatus] = useState('loading'); // loading | success | error
 	const [error, setError] = useState(null);
 	const [peak, setPeak] = useState(null);
 
-	const [trailsStatus, setTrailsStatus] = useState("idle"); // idle
+	const [trailsStatus, setTrailsStatus] = useState('idle'); // idle
 	const [trails, setTrails] = useState([]);
-	const [poisStatus, setPoisStatus] = useState("idle"); // idle
+	const [poisStatus, setPoisStatus] = useState('idle'); // idle
 	const [pois, setPois] = useState([]);
-	const [tab, setTab] = useState("overview"); // overview | trails | pois
+	const [tab, setTab] = useState('overview'); // overview | trails | pois
 
-	const [nearbyStatus, setNearbyStatus] = useState("idle"); // idle | loading | success | error
+	const [nearbyStatus, setNearbyStatus] = useState('idle'); // idle | loading | success | error
 	const [nearbyPeaks, setNearbyPeaks] = useState([]);
 
 	const labels = useMemo(() => getLabels(lang), [lang]);
 
 	const gridStyle = useMemo(
 		() => ({
-			display: "grid",
-			gridTemplateColumns: isMobile ? "1fr" : "1.6fr 0.9fr",
+			display: 'grid',
+			gridTemplateColumns: isMobile ? '1fr' : '1.6fr 0.9fr',
 			gap: 14,
-			alignItems: "start",
+			alignItems: 'start',
 		}),
 		[isMobile],
 	);
@@ -46,7 +47,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 		(async () => {
 			try {
-				setStatus("loading");
+				setStatus('loading');
 				setError(null);
 				setPeak(null);
 
@@ -55,11 +56,11 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 				if (!alive) return;
 				setPeak(data);
-				setStatus("success");
+				setStatus('success');
 			} catch (e) {
 				if (!alive) return;
-				setError(e?.message || "Failed to load peak");
-				setStatus("error");
+				setError(e?.message || 'Failed to load peak');
+				setStatus('error');
 			}
 		})();
 
@@ -72,8 +73,8 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 		let cancelled = false;
 
 		async function loadExtras() {
-			setTrailsStatus("loading");
-			setPoisStatus("loading");
+			setTrailsStatus('loading');
+			setPoisStatus('loading');
 			setPois([]);
 			setTrails([]);
 
@@ -86,12 +87,12 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				if (cancelled) return;
 				setTrails(Array.isArray(t) ? t : []);
 				setPois(Array.isArray(p) ? p : []);
-				setTrailsStatus("success");
-				setPoisStatus("success");
+				setTrailsStatus('success');
+				setPoisStatus('success');
 			} catch {
 				if (cancelled) return;
-				setTrailsStatus("error");
-				setPoisStatus("error");
+				setTrailsStatus('error');
+				setPoisStatus('error');
 			}
 		}
 
@@ -103,7 +104,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/set-state-in-effect
-		setTab("overview");
+		setTab('overview');
 	}, [slug]);
 
 	useEffect(() => {
@@ -111,17 +112,17 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 		async function loadNearby() {
 			if (!slug) return;
-			setNearbyStatus("loading");
+			setNearbyStatus('loading');
 			setNearbyPeaks([]);
 
 			try {
 				const items = await fetchNearbyPeaksBySlug(lang, slug);
 				if (cancelled) return;
 				setNearbyPeaks(items);
-				setNearbyStatus("success");
+				setNearbyStatus('success');
 			} catch {
 				if (cancelled) return;
-				setNearbyStatus("error");
+				setNearbyStatus('error');
 			}
 		}
 
@@ -143,11 +144,11 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	}, [peak]);
 
 	const coordsText = useMemo(() => {
-		if (!peak) return "";
+		if (!peak) return '';
 
 		const lat = Number(peak.latitude);
 		const lon = Number(peak.longitude);
-		if (!Number.isFinite(lat) || !Number.isFinite(lon)) return "";
+		if (!Number.isFinite(lat) || !Number.isFinite(lon)) return '';
 
 		return `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
 	}, [peak]);
@@ -162,7 +163,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	}
 
 	// Loading state
-	if (status === "loading") {
+	if (status === 'loading') {
 		return (
 			<div style={wrap}>
 				<div style={skeletonHero} />
@@ -175,7 +176,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 	}
 
 	// Error state
-	if (status === "error") {
+	if (status === 'error') {
 		return (
 			<div style={wrap}>
 				<div style={errorBox}>
@@ -248,7 +249,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 						{peak.range_name || peak.range_slug}
 					</Link>
 				) : (
-					<span style={crumbCurrent}>{peak.range_name || "—"}</span>
+					<span style={crumbCurrent}>{peak.range_name || '—'}</span>
 				)}
 
 				<span style={crumbSep}>›</span>
@@ -331,7 +332,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				{peak.short_description ? (
 					<p style={heroSubtitle}>{peak.short_description}</p>
 				) : (
-					<p style={heroSubtitle}>{lang === "pl" ? "—" : "—"}</p>
+					<p style={heroSubtitle}>{lang === 'pl' ? '—' : '—'}</p>
 				)}
 			</section>
 
@@ -340,16 +341,16 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 			<nav style={tabsWrap} aria-label='Sections'>
 				<button
 					type='button'
-					onClick={() => setTab("overview")}
-					style={tabBtn(tab === "overview")}
+					onClick={() => setTab('overview')}
+					style={tabBtn(tab === 'overview')}
 				>
 					{labels.overview}
 				</button>
 
 				<button
 					type='button'
-					onClick={() => setTab("trails")}
-					style={tabBtn(tab === "trails")}
+					onClick={() => setTab('trails')}
+					style={tabBtn(tab === 'trails')}
 				>
 					{labels.trails}
 					<span style={tabCount}>{trails.length}</span>
@@ -357,14 +358,14 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 				<button
 					type='button'
-					onClick={() => setTab("pois")}
-					style={tabBtn(tab === "pois")}
+					onClick={() => setTab('pois')}
+					style={tabBtn(tab === 'pois')}
 				>
 					{labels.pois}
 					<span style={tabCount}>{pois.length}</span>
 				</button>
 			</nav>
-			{tab === "overview" && (
+			{tab === 'overview' && (
 				<>
 					{/* Main content */}
 					<div style={gridStyle}>
@@ -383,8 +384,8 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 									name={peak.name}
 									lat={peak.latitude}
 									lon={peak.longitude}
-                                    pois={poisStatus === "success" ? pois : []}
-                                    lang={lang}
+									pois={poisStatus === 'success' ? pois : []}
+									lang={lang}
 								/>
 							</div>
 						</section>
@@ -400,7 +401,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 							<div style={kv}>
 								<div style={k}>{labels.range}</div>
-								<div style={v}>{peak.range_name || "—"}</div>
+								<div style={v}>{peak.range_name || '—'}</div>
 							</div>
 
 							<div style={kv}>
@@ -408,7 +409,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 								<div style={v}>
 									{[peak.region_name, peak.country_name]
 										.filter(Boolean)
-										.join(", ") || "—"}
+										.join(', ') || '—'}
 								</div>
 							</div>
 
@@ -430,7 +431,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 											</button>
 										</div>
 									) : (
-										"—"
+										'—'
 									)}
 								</div>
 							</div>
@@ -446,24 +447,24 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 					{/* Peaks in the same range */}
 					<section style={rangeSection}>
 						<h3 style={rangeTitle}>
-							{lang === "pl" ? "W pobliżu warto zdobyć" : "Nearby worth hiking"}
+							{lang === 'pl' ? 'W pobliżu warto zdobyć' : 'Nearby worth hiking'}
 						</h3>
 
-						{nearbyStatus === "loading" && <div style={muted}>Loading…</div>}
-						{nearbyStatus === "error" && (
+						{nearbyStatus === 'loading' && <div style={muted}>Loading…</div>}
+						{nearbyStatus === 'error' && (
 							<div style={muted}>Could not load nearby peaks.</div>
 						)}
-						{nearbyStatus === "success" && nearbyPeaks.length === 0 && (
+						{nearbyStatus === 'success' && nearbyPeaks.length === 0 && (
 							<div style={muted}>—</div>
 						)}
 
-						{nearbyStatus === "success" && nearbyPeaks.length > 0 && (
+						{nearbyStatus === 'success' && nearbyPeaks.length > 0 && (
 							<div style={rangeGrid}>
 								{nearbyPeaks.map((p) => (
 									<Link
 										key={p.slug}
 										to={`/peaks/${p.slug}`}
-										style={{ textDecoration: "none", color: "inherit" }}
+										style={{ textDecoration: 'none', color: 'inherit' }}
 									>
 										<article style={miniCard}>
 											<div style={miniTitle}>{p.name || p.slug}</div>
@@ -479,7 +480,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 				</>
 			)}
 			{/* Trails sections */}
-			{tab === "trails" && (
+			{tab === 'trails' && (
 				<>
 					<section style={block}>
 						<div style={blockHead}>
@@ -487,18 +488,18 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 							<span style={countPill}>{trails.length}</span>
 						</div>
 
-						{trailsStatus === "loading" && (
+						{trailsStatus === 'loading' && (
 							<div style={mutedRow}>{labels.loading}</div>
 						)}
-						{trailsStatus === "error" && (
+						{trailsStatus === 'error' && (
 							<div style={mutedRow}>{labels.failedTrails}</div>
 						)}
-						{trailsStatus === "success" && (trails?.length ?? 0) === 0 ? (
+						{trailsStatus === 'success' && (trails?.length ?? 0) === 0 ? (
 							<ComingSoonBox
-								title={labels.trailsSoonTitle || "Szlaki będą dostępne wkrótce"}
+								title={labels.trailsSoonTitle || 'Szlaki będą dostępne wkrótce'}
 								text={
 									labels.trailsSoonText ||
-									"Dodajemy realne trasy, czasy przejść i linki do map. Wróć tu niedługo 🙂"
+									'Dodajemy realne trasy, czasy przejść i linki do map. Wróć tu niedługo 🙂'
 								}
 							/>
 						) : null}
@@ -522,23 +523,40 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 										</div>
 									</div>
 
-									{t.description ? <div style={itemText}>{t.description}</div> : null}
+									{t.description ? (
+										<div style={itemText}>{t.description}</div>
+									) : null}
 
-									<div style={metaRow}>
+									<div style={trailMetricsGrid}>
 										{t.distance_km != null ? (
-											<span style={metaPill}>
-												🥾 {labels.distance}: {Number(t.distance_km)} km
-											</span>
+											<TrailMetric
+												label={labels.distance}
+												value={`${Number(t.distance_km)} km`}
+												sourceUrl={t.distance_source_url}
+												verifiedAt={t.distance_verified_at}
+												lang={lang}
+												labels={labels}
+											/>
 										) : null}
 										{t.elevation_gain_m != null ? (
-											<span style={metaPill}>
-												↗ {labels.ascent}: {t.elevation_gain_m} m
-											</span>
+											<TrailMetric
+												label={labels.ascent}
+												value={`${t.elevation_gain_m} m`}
+												sourceUrl={t.elevation_gain_source_url}
+												verifiedAt={t.elevation_gain_verified_at}
+												lang={lang}
+												labels={labels}
+											/>
 										) : null}
 										{t.time_min != null ? (
-											<span style={metaPill}>
-												⏱ {labels.time}: {formatTrailTime(t.time_min, lang)}
-											</span>
+											<TrailMetric
+												label={labels.time}
+												value={formatTrailTime(t.time_min, lang)}
+												sourceUrl={t.time_source_url}
+												verifiedAt={t.time_verified_at}
+												lang={lang}
+												labels={labels}
+											/>
 										) : null}
 									</div>
 
@@ -558,7 +576,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 									) : null}
 
 									{t.notes ? <div style={notesBox}>{t.notes}</div> : null}
-                                    <TrailPracticalCard trailId={t.id} lang={lang} />
+									<TrailPracticalCard trailId={t.id} lang={lang} />
 
 									{t.map_url || t.gpx_url ? (
 										<div style={actionsRow}>
@@ -592,7 +610,7 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 
 			{/* POIs section */}
 
-			{tab === "pois" && (
+			{tab === 'pois' && (
 				<>
 					<section style={block}>
 						<div style={blockHead}>
@@ -600,20 +618,20 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 							<span style={countPill}>{pois.length}</span>
 						</div>
 
-						{poisStatus === "loading" && (
+						{poisStatus === 'loading' && (
 							<div style={mutedRow}>{labels.loading}</div>
 						)}
-						{poisStatus === "error" && (
+						{poisStatus === 'error' && (
 							<div style={mutedRow}>{labels.failedPois}</div>
 						)}
-						{poisStatus === "success" && (pois?.length ?? 0) === 0 ? (
+						{poisStatus === 'success' && (pois?.length ?? 0) === 0 ? (
 							<ComingSoonBox
 								title={
-									labels.poisSoonTitle || "Punkty POI będą dostępne wkrótce"
+									labels.poisSoonTitle || 'Punkty POI będą dostępne wkrótce'
 								}
 								text={
 									labels.poisSoonText ||
-									"Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych update’ach."
+									'Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych update’ach.'
 								}
 							/>
 						) : null}
@@ -622,19 +640,39 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 							pois.map((poi) => (
 								<article key={poi.id} style={itemCard}>
 									<div style={itemTop}>
-                                        <div style={itemTitle}>{poi.name || poi.type_name || labels.pois}</div>
-                                        {poi.type_name && <span style={badge}>{poi.type_name}</span>}
-                                    </div>
-                                    {poi.description && <div style={itemText}>{poi.description}</div>}
-                                    {poi.tips && <div style={notesBox}>{poi.tips}</div>}
-                                    <div style={actionsRow}>
-                                        {safeExternalUrl(poi.google_maps_url) && (
-                                            <a href={safeExternalUrl(poi.google_maps_url)} target="_blank" rel="noopener noreferrer" style={actionBtn}>{labels.openMap}</a>
-                                        )}
-                                        {safeExternalUrl(poi.website_url) && (
-                                            <a href={safeExternalUrl(poi.website_url)} target="_blank" rel="noopener noreferrer" style={actionBtn}>{labels.website}</a>
-                                        )}
-                                    </div>
+										<div style={itemTitle}>
+											{poi.name || poi.type_name || labels.pois}
+										</div>
+										{poi.type_name && (
+											<span style={badge}>{poi.type_name}</span>
+										)}
+									</div>
+									{poi.description && (
+										<div style={itemText}>{poi.description}</div>
+									)}
+									{poi.tips && <div style={notesBox}>{poi.tips}</div>}
+									<div style={actionsRow}>
+										{safeExternalUrl(poi.google_maps_url) && (
+											<a
+												href={safeExternalUrl(poi.google_maps_url)}
+												target='_blank'
+												rel='noopener noreferrer'
+												style={actionBtn}
+											>
+												{labels.openMap}
+											</a>
+										)}
+										{safeExternalUrl(poi.website_url) && (
+											<a
+												href={safeExternalUrl(poi.website_url)}
+												target='_blank'
+												rel='noopener noreferrer'
+												style={actionBtn}
+											>
+												{labels.website}
+											</a>
+										)}
+									</div>
 								</article>
 							))}
 					</section>
@@ -647,247 +685,261 @@ export default function PeakDetailsPage({ lang = "pl" }) {
 /* ----------------------------- helpers ----------------------------- */
 
 function safeExternalUrl(value) {
-    try {
-        const url = new URL(value);
-        return ["https:", "http:"].includes(url.protocol) ? url.href : null;
-    } catch { return null; }
+	try {
+		const url = new URL(value);
+		return ['https:', 'http:'].includes(url.protocol) ? url.href : null;
+	} catch {
+		return null;
+	}
 }
 
 function getCollectionLabel(peak, lang) {
 	const labels = {
 		pl: {
-			kgp: "Korona Gór Polski",
-			poland: "Szczyty Polski",
-			uk: "UK Three Peaks",
-			other: "Szczyty górskie",
+			kgp: 'Korona Gór Polski',
+			poland: 'Szczyty Polski',
+			uk: 'UK Three Peaks',
+			other: 'Szczyty górskie',
 		},
 		en: {
-			kgp: "Crown of Polish Mountains",
-			poland: "Peaks of Poland",
-			uk: "UK Three Peaks",
-			other: "Mountain peaks",
+			kgp: 'Crown of Polish Mountains',
+			poland: 'Peaks of Poland',
+			uk: 'UK Three Peaks',
+			other: 'Mountain peaks',
 		},
 		ua: {
-			kgp: "Корона польських гір",
-			poland: "Вершини Польщі",
-			uk: "Три вершини Великої Британії",
-			other: "Гірські вершини",
+			kgp: 'Корона польських гір',
+			poland: 'Вершини Польщі',
+			uk: 'Три вершини Великої Британії',
+			other: 'Гірські вершини',
 		},
 		zh: {
-			kgp: "波兰山峰王冠",
-			poland: "波兰山峰",
-			uk: "英国三峰",
-			other: "山峰",
+			kgp: '波兰山峰王冠',
+			poland: '波兰山峰',
+			uk: '英国三峰',
+			other: '山峰',
 		},
 	};
 	const t = labels[lang] || labels.pl;
 
-	if (peak.country_code === "PL" && peak.is_korona) return t.kgp;
-	if (peak.country_code === "PL") return t.poland;
-	if (peak.country_code === "GB") return t.uk;
+	if (peak.country_code === 'PL' && peak.is_korona) return t.kgp;
+	if (peak.country_code === 'PL') return t.poland;
+	if (peak.country_code === 'GB') return t.uk;
 	return t.other;
 }
 
 function formatTrailTime(minutes, lang) {
 	const total = Number(minutes);
-	if (!Number.isFinite(total) || total <= 0) return "—";
+	if (!Number.isFinite(total) || total <= 0) return '—';
 
 	const hours = Math.floor(total / 60);
 	const mins = total % 60;
-	const hourUnit = lang === "zh" ? "小时" : "h";
-	const minuteUnit = lang === "zh" ? "分钟" : "min";
+	const hourUnit = lang === 'zh' ? '小时' : 'h';
+	const minuteUnit = lang === 'zh' ? '分钟' : 'min';
 
 	if (!mins) return `${hours} ${hourUnit}`;
 	return `${hours} ${hourUnit} ${mins} ${minuteUnit}`;
 }
 
 function trailOptionLabel(value, labels) {
-	const normalized = String(value || "").toLowerCase();
-	if (normalized === "hard" || normalized === "challenging") return labels.hard;
-	if (normalized === "out-and-back") return labels.outAndBack;
+	const normalized = String(value || '').toLowerCase();
+	if (normalized === 'hard' || normalized === 'challenging') return labels.hard;
+	if (normalized === 'out-and-back') return labels.outAndBack;
 	return value;
 }
 
 function getLabels(lang) {
 	const dict = {
 		pl: {
-			peaks: "Szczyty",
-			ranges: "Pasma",
-			inRange: "W tym paśmie",
-			back: "Wróć do listy",
-			elevation: "Wysokość",
-			range: "Pasmo",
-			location: "Lokalizacja",
-			coords: "Współrzędne",
-			openMaps: "Otwórz mapę",
-			copy: "Kopiuj",
-			description: "Opis",
-			notFound: "Nie znaleziono szczytu",
-			photo: "Zdjęcie",
-			photoSource: "Źródło",
-			cropped: "wykadrowane",
+			metricSource: 'Źródło',
+			metricVerified: 'Zweryfikowano',
+			metricUnconfirmed: 'Brak potwierdzenia',
+			peaks: 'Szczyty',
+			ranges: 'Pasma',
+			inRange: 'W tym paśmie',
+			back: 'Wróć do listy',
+			elevation: 'Wysokość',
+			range: 'Pasmo',
+			location: 'Lokalizacja',
+			coords: 'Współrzędne',
+			openMaps: 'Otwórz mapę',
+			copy: 'Kopiuj',
+			description: 'Opis',
+			notFound: 'Nie znaleziono szczytu',
+			photo: 'Zdjęcie',
+			photoSource: 'Źródło',
+			cropped: 'wykadrowane',
 
 			/* ------------------- trails and pois PL ------------------- */
 
-			trails: "Szlaki",
-			pois: "Punkty (POI)",
-			loading: "Ładowanie…",
-			noTrails: "Brak szlaków.",
-			noPois: "Brak punktów POI.",
-			failedTrails: "Nie udało się wczytać szlaków.",
-			failedPois: "Nie udało się wczytać POI.",
-			openMap: "Otwórz mapę",
-			downloadGpx: "Pobierz GPX",
-			distance: "Dystans",
-			ascent: "Podejście",
-			time: "Czas",
-			start: "Start",
-			finish: "Meta",
-			hard: "Trudna",
-			outAndBack: "Tam i z powrotem",
-			website: "Strona",
-			overview: "Opis",
-			trailsSoonTitle: "Szlaki będą dostępne wkrótce",
+			trails: 'Szlaki',
+			pois: 'Punkty (POI)',
+			loading: 'Ładowanie…',
+			noTrails: 'Brak szlaków.',
+			noPois: 'Brak punktów POI.',
+			failedTrails: 'Nie udało się wczytać szlaków.',
+			failedPois: 'Nie udało się wczytać POI.',
+			openMap: 'Otwórz mapę',
+			downloadGpx: 'Pobierz GPX',
+			distance: 'Dystans',
+			ascent: 'Podejście',
+			time: 'Czas',
+			start: 'Start',
+			finish: 'Meta',
+			hard: 'Trudna',
+			outAndBack: 'Tam i z powrotem',
+			website: 'Strona',
+			overview: 'Opis',
+			trailsSoonTitle: 'Szlaki będą dostępne wkrótce',
 			trailsSoonText:
-				"Dodajemy realne trasy, czasy przejść i linki do map. Wróć tu niedługo 🙂",
+				'Dodajemy realne trasy, czasy przejść i linki do map. Wróć tu niedługo 🙂',
 
-			poisSoonTitle: "Punkty POI będą dostępne wkrótce",
+			poisSoonTitle: 'Punkty POI będą dostępne wkrótce',
 			poisSoonText:
-				"Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych aktualizacjach.",
+				'Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych aktualizacjach.',
 		},
 		en: {
-			peaks: "Peaks",
-			ranges: "Ranges",
-			inRange: "In this range",
-			back: "Back to list",
-			elevation: "Elevation",
-			range: "Range",
-			location: "Location",
-			coords: "Coordinates",
-			openMaps: "Open map",
-			copy: "Copy",
-			description: "Description",
-			notFound: "Peak not found",
-			photo: "Photo",
-			photoSource: "Source",
-			cropped: "cropped",
+			metricSource: 'Source',
+			metricVerified: 'Verified',
+			metricUnconfirmed: 'Not confirmed',
+			peaks: 'Peaks',
+			ranges: 'Ranges',
+			inRange: 'In this range',
+			back: 'Back to list',
+			elevation: 'Elevation',
+			range: 'Range',
+			location: 'Location',
+			coords: 'Coordinates',
+			openMaps: 'Open map',
+			copy: 'Copy',
+			description: 'Description',
+			notFound: 'Peak not found',
+			photo: 'Photo',
+			photoSource: 'Source',
+			cropped: 'cropped',
 
 			/* ------------------- trails and pois EN ------------------- */
 
-			trails: "Trails",
-			pois: "Points (POI)",
-			loading: "Loading…",
-			noTrails: "No trails yet.",
-			noPois: "No POIs yet.",
-			failedTrails: "Failed to load trails.",
-			failedPois: "Failed to load POIs.",
-			openMap: "Open map",
-			downloadGpx: "Download GPX",
-			distance: "Distance",
-			ascent: "Ascent",
-			time: "Time",
-			start: "Start",
-			finish: "Finish",
-			hard: "Hard",
-			outAndBack: "Out and back",
-			website: "Website",
-			overview: "Overview",
-			trailsSoonTitle: "Hiking trails coming soon",
+			trails: 'Trails',
+			pois: 'Points (POI)',
+			loading: 'Loading…',
+			noTrails: 'No trails yet.',
+			noPois: 'No POIs yet.',
+			failedTrails: 'Failed to load trails.',
+			failedPois: 'Failed to load POIs.',
+			openMap: 'Open map',
+			downloadGpx: 'Download GPX',
+			distance: 'Distance',
+			ascent: 'Ascent',
+			time: 'Time',
+			start: 'Start',
+			finish: 'Finish',
+			hard: 'Hard',
+			outAndBack: 'Out and back',
+			website: 'Website',
+			overview: 'Overview',
+			trailsSoonTitle: 'Hiking trails coming soon',
 			trailsSoonText:
-				"We are adding real hiking routes with distances, time estimates, and map links. Check back soon 🙂",
-			poisSoonTitle: "Points of interest coming soon",
+				'We are adding real hiking routes with distances, time estimates, and map links. Check back soon 🙂',
+			poisSoonTitle: 'Points of interest coming soon',
 			poisSoonText:
-				"Parking areas, mountain huts, viewpoints, and other useful locations will be added in upcoming updates.",
+				'Parking areas, mountain huts, viewpoints, and other useful locations will be added in upcoming updates.',
 		},
 		ua: {
-			peaks: "Вершини",
-			ranges: "Хребти",
-			inRange: "У цьому хребті",
-			back: "Назад до списку",
-			elevation: "Висота",
-			range: "Хребет",
-			location: "Розташування",
-			coords: "Координати",
-			openMaps: "Відкрити мапу",
-			copy: "Копіювати",
-			description: "Опис",
-			notFound: "Вершину не знайдено",
-			photo: "Фото",
-			photoSource: "Джерело",
-			cropped: "обрізано",
+			metricSource: 'Джерело',
+			metricVerified: 'Перевірено',
+			metricUnconfirmed: 'Не підтверджено',
+			peaks: 'Вершини',
+			ranges: 'Хребти',
+			inRange: 'У цьому хребті',
+			back: 'Назад до списку',
+			elevation: 'Висота',
+			range: 'Хребет',
+			location: 'Розташування',
+			coords: 'Координати',
+			openMaps: 'Відкрити мапу',
+			copy: 'Копіювати',
+			description: 'Опис',
+			notFound: 'Вершину не знайдено',
+			photo: 'Фото',
+			photoSource: 'Джерело',
+			cropped: 'обрізано',
 
 			/* ------------------- trails and pois UA------------------- */
 
-			trails: "Маршрути",
-			pois: "Пункти (POI)",
-			loading: "Завантаження…",
-			noTrails: "Немає маршрутів.",
-			noPois: "Немає POI.",
-			failedTrails: "Не вдалося завантажити маршрути.",
-			failedPois: "Не вдалося завантажити POI.",
-			openMap: "Відкрити мапу",
-			downloadGpx: "Завантажити GPX",
-			distance: "Відстань",
-			ascent: "Набір висоти",
-			time: "Час",
-			start: "Старт",
-			finish: "Фініш",
-			hard: "Складний",
-			outAndBack: "Туди й назад",
-			website: "Вебсайт",
-			overview: "Огляд",
-			trailsSoonTitle: "Маршрути будуть доступні незабаром",
+			trails: 'Маршрути',
+			pois: 'Пункти (POI)',
+			loading: 'Завантаження…',
+			noTrails: 'Немає маршрутів.',
+			noPois: 'Немає POI.',
+			failedTrails: 'Не вдалося завантажити маршрути.',
+			failedPois: 'Не вдалося завантажити POI.',
+			openMap: 'Відкрити мапу',
+			downloadGpx: 'Завантажити GPX',
+			distance: 'Відстань',
+			ascent: 'Набір висоти',
+			time: 'Час',
+			start: 'Старт',
+			finish: 'Фініш',
+			hard: 'Складний',
+			outAndBack: 'Туди й назад',
+			website: 'Вебсайт',
+			overview: 'Огляд',
+			trailsSoonTitle: 'Маршрути будуть доступні незабаром',
 			trailsSoonText:
-				"Ми додаємо реальні пішохідні маршрути з довжиною, часом проходження та посиланнями на карти. Завітайте знову трохи пізніше 🙂",
+				'Ми додаємо реальні пішохідні маршрути з довжиною, часом проходження та посиланнями на карти. Завітайте знову трохи пізніше 🙂',
 
-			poisSoonTitle: "Корисні точки зʼявляться незабаром",
+			poisSoonTitle: 'Корисні точки зʼявляться незабаром',
 			poisSoonText:
-				"Парковки, гірські притулки, оглядові точки та інші корисні місця будуть додані в наступних оновленнях.",
+				'Парковки, гірські притулки, оглядові точки та інші корисні місця будуть додані в наступних оновленнях.',
 		},
 		zh: {
-			peaks: "山峰",
-			ranges: "山脉",
-			inRange: "同一山脉",
-			back: "返回列表",
-			elevation: "海拔",
-			range: "山脉",
-			location: "位置",
-			coords: "坐标",
-			openMaps: "打开地图",
-			copy: "复制",
-			description: "介绍",
-			notFound: "未找到该山峰",
-			photo: "照片",
-			photoSource: "来源",
-			cropped: "已裁剪",
+			metricSource: '来源',
+			metricVerified: '核实日期',
+			metricUnconfirmed: '未确认',
+			peaks: '山峰',
+			ranges: '山脉',
+			inRange: '同一山脉',
+			back: '返回列表',
+			elevation: '海拔',
+			range: '山脉',
+			location: '位置',
+			coords: '坐标',
+			openMaps: '打开地图',
+			copy: '复制',
+			description: '介绍',
+			notFound: '未找到该山峰',
+			photo: '照片',
+			photoSource: '来源',
+			cropped: '已裁剪',
 
 			/* ------------------- trails and pois ZH ------------------- */
 
-			trails: "路线",
-			pois: "兴趣点 (POI)",
-			loading: "加载中…",
-			noTrails: "暂无路线。",
-			noPois: "暂无兴趣点。",
-			failedTrails: "加载路线失败。",
-			failedPois: "加载兴趣点失败。",
-			openMap: "打开地图",
-			downloadGpx: "下载 GPX",
-			distance: "距离",
-			ascent: "累计爬升",
-			time: "时间",
-			start: "起点",
-			finish: "终点",
-			hard: "困难",
-			outAndBack: "往返",
-			website: "网站",
-			overview: "概览",
-			trailsSoonTitle: "登山路线即将上线",
+			trails: '路线',
+			pois: '兴趣点 (POI)',
+			loading: '加载中…',
+			noTrails: '暂无路线。',
+			noPois: '暂无兴趣点。',
+			failedTrails: '加载路线失败。',
+			failedPois: '加载兴趣点失败。',
+			openMap: '打开地图',
+			downloadGpx: '下载 GPX',
+			distance: '距离',
+			ascent: '累计爬升',
+			time: '时间',
+			start: '起点',
+			finish: '终点',
+			hard: '困难',
+			outAndBack: '往返',
+			website: '网站',
+			overview: '概览',
+			trailsSoonTitle: '登山路线即将上线',
 			trailsSoonText:
-				"我们正在添加真实的登山路线，包括距离、预计时间和地图链接。欢迎稍后再来查看 🙂",
+				'我们正在添加真实的登山路线，包括距离、预计时间和地图链接。欢迎稍后再来查看 🙂',
 
-			poisSoonTitle: "兴趣点即将上线",
+			poisSoonTitle: '兴趣点即将上线',
 			poisSoonText:
-				"停车场、山间小屋、观景点以及其他实用地点将在后续更新中加入。",
+				'停车场、山间小屋、观景点以及其他实用地点将在后续更新中加入。',
 		},
 	};
 
@@ -898,60 +950,60 @@ function getLabels(lang) {
 
 const wrap = {
 	maxWidth: 1140,
-	margin: "0 auto",
-	padding: "8px 0 20px",
+	margin: '0 auto',
+	padding: '8px 0 20px',
 };
 
 const crumbs = {
-	display: "flex",
-	alignItems: "center",
-	flexWrap: "wrap",
+	display: 'flex',
+	alignItems: 'center',
+	flexWrap: 'wrap',
 	gap: 8,
 	rowGap: 6,
 	marginBottom: 8,
-	color: "var(--muted)",
+	color: 'var(--muted)',
 	fontSize: 13,
 };
 
 const crumbLink = {
-	color: "var(--muted)",
-	textDecoration: "none",
+	color: 'var(--muted)',
+	textDecoration: 'none',
 	fontWeight: 900,
-	borderBottom: "1px dashed var(--ink)",
+	borderBottom: '1px dashed var(--ink)',
 };
 
 const crumbSep = { opacity: 0.6 };
 
 const crumbCurrent = {
-	color: "var(--muted)",
+	color: 'var(--muted)',
 	fontWeight: 900,
 };
 
 const hero = {
-	border: "1px solid var(--border)",
+	border: '1px solid var(--border)',
 	borderRadius: 22,
 	padding: 18,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--menu-bg)',
+	boxShadow: 'var(--shadow-soft)',
 	marginBottom: 14,
 };
 
 const heroTopRow = {
-	display: "flex",
+	display: 'flex',
 	gap: 10,
-	alignItems: "center",
-	flexWrap: "wrap",
+	alignItems: 'center',
+	flexWrap: 'wrap',
 	marginBottom: 10,
 };
 
 const heroPillMuted = {
-	display: "inline-flex",
-	alignItems: "center",
-	padding: "8px 12px",
+	display: 'inline-flex',
+	alignItems: 'center',
+	padding: '8px 12px',
 	borderRadius: 999,
-	border: "1px solid var(--border)",
-	background: "var(--pill-bg)",
-	color: "var(--muted)",
+	border: '1px solid var(--border)',
+	background: 'var(--pill-bg)',
+	color: 'var(--muted)',
 	fontWeight: 900,
 	fontSize: 12,
 };
@@ -959,261 +1011,261 @@ const heroPillMuted = {
 const heroTitle = (isMobile) => ({
 	margin: 0,
 	fontSize: isMobile ? 28 : 34,
-	letterSpacing: "-0.8px",
+	letterSpacing: '-0.8px',
 	lineHeight: 1.1,
 });
 
 const heroSubtitle = {
-	margin: "10px 0 0",
-	color: "var(--muted)",
+	margin: '10px 0 0',
+	color: 'var(--muted)',
 	maxWidth: 860,
 	lineHeight: 1.6,
 };
 
 const panel = {
-	border: "1px solid var(--border)",
+	border: '1px solid var(--border)',
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--menu-bg)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
 const h2 = {
 	margin: 0,
 	fontSize: 16,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 };
 
 const textBlock = {
 	marginTop: 10,
 	lineHeight: 1.7,
-	whiteSpace: "pre-wrap",
+	whiteSpace: 'pre-wrap',
 };
 
 const muted = {
 	marginTop: 10,
-	color: "var(--text)",
+	color: 'var(--text)',
 };
 
 const sideStyle = (isMobile) => ({
 	// Keep sidebar sticky only on desktop
-	position: isMobile ? "static" : "sticky",
+	position: isMobile ? 'static' : 'sticky',
 	top: 14,
-	border: "1px solid var(--border)",
+	border: '1px solid var(--border)',
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--menu-bg)',
+	boxShadow: 'var(--shadow-soft)',
 });
 
 const sideTitle = {
 	fontWeight: 1000,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 	marginBottom: 12,
-	overflow: "hidden",
+	overflow: 'hidden',
 };
 
 const kv = {
-	display: "grid",
-	gridTemplateColumns: "120px 1fr",
+	display: 'grid',
+	gridTemplateColumns: '120px 1fr',
 	gap: 10,
-	padding: "8px 0",
+	padding: '8px 0',
 };
 
-const k = { color: "var(--muted)", fontSize: 13 };
+const k = { color: 'var(--muted)', fontSize: 13 };
 const v = { fontWeight: 900 };
 
 const divider = {
 	height: 1,
-	background: "var(--border)",
-	margin: "10px 0",
+	background: 'var(--border)',
+	margin: '10px 0',
 };
 
 const coordsRow = {
-	display: "flex",
+	display: 'flex',
 	gap: 8,
-	alignItems: "center",
-	flexWrap: "wrap",
+	alignItems: 'center',
+	flexWrap: 'wrap',
 };
 
 const cta = {
-	display: "inline-flex",
-	width: "100%",
-	justifyContent: "center",
-	alignItems: "center",
+	display: 'inline-flex',
+	width: '100%',
+	justifyContent: 'center',
+	alignItems: 'center',
 	gap: 8,
 	marginTop: 12,
-	padding: "10px 12px",
+	padding: '10px 12px',
 	borderRadius: 12,
-	border: "1px solid var(--btn-border)",
-	background: "color-mix(in srgb, var(--primary) 14%, transparent)",
-	color: "var(--text)",
+	border: '1px solid var(--btn-border)',
+	background: 'color-mix(in srgb, var(--primary) 14%, transparent)',
+	color: 'var(--text)',
 	fontWeight: 1000,
 	fontSize: 13,
-	textDecoration: "none",
+	textDecoration: 'none',
 };
 
 const code = {
 	fontFamily:
-		"ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+		'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 	fontSize: 12,
-	padding: "5px 8px",
+	padding: '5px 8px',
 	borderRadius: 10,
-	border: "1px solid var(--ink)",
-	background: "var(--btn-bg)",
-	color: "var(--text)",
+	border: '1px solid var(--ink)',
+	background: 'var(--btn-bg)',
+	color: 'var(--text)',
 };
 
 const miniBtn = {
-	border: "1px solid var(--ink)",
-	background: "var(--btn-bg)",
-	color: "var(--text)",
-	padding: "6px 10px",
+	border: '1px solid var(--ink)',
+	background: 'var(--btn-bg)',
+	color: 'var(--text)',
+	padding: '6px 10px',
 	borderRadius: 12,
-	cursor: "pointer",
+	cursor: 'pointer',
 	fontWeight: 900,
 	fontSize: 12,
 };
 
 const backLink = {
-	textDecoration: "none",
-	color: "var(--text)",
+	textDecoration: 'none',
+	color: 'var(--text)',
 	fontWeight: 1000,
-	border: "1px solid var(--border)",
-	background: "var(--btn-bg)",
-	padding: "8px 10px",
+	border: '1px solid var(--border)',
+	background: 'var(--btn-bg)',
+	padding: '8px 10px',
 	borderRadius: 14,
-	display: "inline-flex",
+	display: 'inline-flex',
 };
 
 const backRow = {
-	display: "flex",
-	alignItems: "center",
+	display: 'flex',
+	alignItems: 'center',
 	marginBottom: 12,
 };
 
 const errorBox = {
-	border: "1px solid rgba(239,68,68,0.25)",
+	border: '1px solid rgba(239,68,68,0.25)',
 	borderRadius: 22,
 	padding: 16,
-	background: "rgba(239,68,68,0.06)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'rgba(239,68,68,0.06)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
 const skeletonHero = {
 	height: 160,
 	borderRadius: 22,
-	border: "1px solid var(--border)",
-	boxShadow: "var(--shadow-soft)",
+	border: '1px solid var(--border)',
+	boxShadow: 'var(--shadow-soft)',
 	background:
-		"linear-gradient(90deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.10) 50%, rgba(15,23,42,0.06) 100%)",
-	backgroundSize: "200% 100%",
-	animation: "shimmer 1.2s infinite",
+		'linear-gradient(90deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.10) 50%, rgba(15,23,42,0.06) 100%)',
+	backgroundSize: '200% 100%',
+	animation: 'shimmer 1.2s infinite',
 	marginBottom: 14,
 };
 
 const skeletonBody = {
 	height: 340,
 	borderRadius: 22,
-	border: "1px solid var(--border)",
-	boxShadow: "var(--shadow-soft)",
+	border: '1px solid var(--border)',
+	boxShadow: 'var(--shadow-soft)',
 	background:
-		"linear-gradient(90deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.10) 50%, rgba(15,23,42,0.06) 100%)",
-	backgroundSize: "200% 100%",
-	animation: "shimmer 1.2s infinite",
+		'linear-gradient(90deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.10) 50%, rgba(15,23,42,0.06) 100%)',
+	backgroundSize: '200% 100%',
+	animation: 'shimmer 1.2s infinite',
 };
 
 const skeletonSide = {
 	height: 240,
 	borderRadius: 22,
-	border: "1px solid var(--border)",
-	boxShadow: "var(--shadow-soft)",
+	border: '1px solid var(--border)',
+	boxShadow: 'var(--shadow-soft)',
 	background:
-		"linear-gradient(90deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.10) 50%, rgba(15,23,42,0.06) 100%)",
-	backgroundSize: "200% 100%",
-	animation: "shimmer 1.2s infinite",
+		'linear-gradient(90deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.10) 50%, rgba(15,23,42,0.06) 100%)',
+	backgroundSize: '200% 100%',
+	animation: 'shimmer 1.2s infinite',
 };
 
 const rangeSection = {
 	marginTop: 14,
-	border: "1px solid var(--border)",
+	border: '1px solid var(--border)',
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--menu-bg)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
 const rangeTitle = {
 	margin: 0,
 	fontSize: 15,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 	fontWeight: 1000,
 };
 
 const rangeGrid = {
 	marginTop: 12,
-	display: "grid",
-	gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+	display: 'grid',
+	gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
 	gap: 10,
 };
 
 const miniCard = {
-	border: "1px solid var(--ink)",
+	border: '1px solid var(--ink)',
 	borderRadius: 18,
 	padding: 12,
-	background: "var(--surface-2)",
-	boxShadow: "var(--shadow-soft)",
-	transition: "transform 140ms ease, box-shadow 140ms ease",
+	background: 'var(--surface-2)',
+	boxShadow: 'var(--shadow-soft)',
+	transition: 'transform 140ms ease, box-shadow 140ms ease',
 };
 
 const coverFigure = {
-	margin: "0 0 14px",
+	margin: '0 0 14px',
 };
 
 const coverMedia = {
-	aspectRatio: "1235 / 571",
+	aspectRatio: '1235 / 571',
 	borderRadius: 22,
-	overflow: "hidden",
-	border: "1px solid var(--border)",
-	background: "var(--surface-2)",
-	boxShadow: "var(--shadow-soft)",
+	overflow: 'hidden',
+	border: '1px solid var(--border)',
+	background: 'var(--surface-2)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
 const coverImage = {
-	display: "block",
-	width: "100%",
-	height: "100%",
-	objectFit: "cover",
-	objectPosition: "center 42%",
+	display: 'block',
+	width: '100%',
+	height: '100%',
+	objectFit: 'cover',
+	objectPosition: 'center 42%',
 };
 
 const coverCaption = {
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "flex-end",
-	flexWrap: "wrap",
-	gap: "4px 7px",
-	padding: "7px 4px 0",
-	color: "var(--muted)",
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'flex-end',
+	flexWrap: 'wrap',
+	gap: '4px 7px',
+	padding: '7px 4px 0',
+	color: 'var(--muted)',
 	fontSize: 11,
 	lineHeight: 1.4,
 };
 
 const creditLink = {
-	color: "inherit",
+	color: 'inherit',
 	fontWeight: 800,
-	textDecoration: "underline",
+	textDecoration: 'underline',
 	textUnderlineOffset: 2,
 };
 
 const miniTitle = {
 	fontWeight: 1000,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 };
 
 const miniMeta = {
 	marginTop: 6,
-	color: "var(--muted)",
+	color: 'var(--muted)',
 	fontSize: 12,
 	fontWeight: 900,
 };
@@ -1222,17 +1274,17 @@ const miniMeta = {
 
 const block = {
 	marginTop: 14,
-	border: "1px solid var(--border)",
+	border: '1px solid var(--border)',
 	borderRadius: 22,
 	padding: 16,
-	background: "var(--menu-bg)",
-	boxShadow: "var(--shadow-soft)",
+	background: 'var(--menu-bg)',
+	boxShadow: 'var(--shadow-soft)',
 };
 
 const blockHead = {
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'space-between',
 	gap: 10,
 	marginBottom: 10,
 };
@@ -1240,149 +1292,149 @@ const blockHead = {
 const blockTitle = {
 	margin: 0,
 	fontSize: 16,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 };
 
 const countPill = {
-	display: "inline-flex",
-	alignItems: "center",
-	justifyContent: "center",
+	display: 'inline-flex',
+	alignItems: 'center',
+	justifyContent: 'center',
 	minWidth: 34,
 	height: 28,
-	padding: "0 10px",
+	padding: '0 10px',
 	borderRadius: 999,
-	border: "1px solid var(--border)",
-	background: "var(--pill-bg)",
-	color: "var(--muted)",
+	border: '1px solid var(--border)',
+	background: 'var(--pill-bg)',
+	color: 'var(--muted)',
 	fontWeight: 1000,
 	fontSize: 12,
 };
 
 const mutedRow = {
-	color: "var(--muted)",
-	padding: "8px 0",
+	color: 'var(--muted)',
+	padding: '8px 0',
 	fontWeight: 800,
 };
 
 const itemCard = {
-	border: "1px solid rgba(255,255,255,0.12)",
+	border: '1px solid rgba(255,255,255,0.12)',
 	borderRadius: 18,
 	padding: 14,
 	marginTop: 10,
-	background: "color-mix(in srgb, var(--menu-bg) 60%, transparent)",
+	background: 'color-mix(in srgb, var(--menu-bg) 60%, transparent)',
 };
 
 /*------------------Styles for Trails and POIs---------------*/
 
 const itemTop = {
-	display: "flex",
-	flexWrap: "wrap",
+	display: 'flex',
+	flexWrap: 'wrap',
 	gap: 10,
-	alignItems: "flex-start",
-	justifyContent: "space-between",
+	alignItems: 'flex-start',
+	justifyContent: 'space-between',
 };
 
 const itemTitle = {
 	fontWeight: 1000,
-	letterSpacing: "-0.2px",
+	letterSpacing: '-0.2px',
 };
 
 const itemText = {
 	marginTop: 8,
 	opacity: 0.95,
 	lineHeight: 1.6,
-	whiteSpace: "pre-wrap",
+	whiteSpace: 'pre-wrap',
 };
 
 const badgeRow = {
-	display: "flex",
-	flexWrap: "wrap",
+	display: 'flex',
+	flexWrap: 'wrap',
 	gap: 8,
 };
 
 const metaRow = {
-	display: "flex",
-	flexWrap: "wrap",
+	display: 'flex',
+	flexWrap: 'wrap',
 	gap: 8,
 	marginTop: 10,
 };
 
 const metaPill = {
-	display: "inline-flex",
-	alignItems: "center",
+	display: 'inline-flex',
+	alignItems: 'center',
 	gap: 6,
-	padding: "6px 10px",
+	padding: '6px 10px',
 	borderRadius: 999,
-	border: "1px solid rgba(255,255,255,0.12)",
-	background: "rgba(255,255,255,0.04)",
+	border: '1px solid rgba(255,255,255,0.12)',
+	background: 'rgba(255,255,255,0.04)',
 	fontWeight: 900,
 	fontSize: 12,
-	color: "var(--muted)",
+	color: 'var(--muted)',
 };
 
 const badge = {
-	display: "inline-flex",
-	alignItems: "center",
-	padding: "6px 10px",
+	display: 'inline-flex',
+	alignItems: 'center',
+	padding: '6px 10px',
 	borderRadius: 999,
-	border: "1px solid var(--btn-border)",
-	background: "color-mix(in srgb, var(--primary) 14%, transparent)",
+	border: '1px solid var(--btn-border)',
+	background: 'color-mix(in srgb, var(--primary) 14%, transparent)',
 	fontWeight: 1000,
 	fontSize: 12,
 };
 
 const badgeMuted = {
-	display: "inline-flex",
-	alignItems: "center",
-	padding: "6px 10px",
+	display: 'inline-flex',
+	alignItems: 'center',
+	padding: '6px 10px',
 	borderRadius: 999,
-	border: "1px solid rgba(255,255,255,0.12)",
-	background: "rgba(255,255,255,0.03)",
-	color: "var(--muted)",
+	border: '1px solid rgba(255,255,255,0.12)',
+	background: 'rgba(255,255,255,0.03)',
+	color: 'var(--muted)',
 	fontWeight: 1000,
 	fontSize: 12,
 };
 
 const actionsRow = {
-	display: "flex",
-	flexWrap: "wrap",
+	display: 'flex',
+	flexWrap: 'wrap',
 	gap: 10,
 	marginTop: 12,
 };
 
 const routePoints = {
-	display: "grid",
+	display: 'grid',
 	gap: 4,
 	marginTop: 12,
 	fontSize: 13,
 	lineHeight: 1.5,
-	color: "var(--muted)",
+	color: 'var(--muted)',
 };
 
 const notesBox = {
 	marginTop: 12,
 	padding: 12,
 	borderRadius: 14,
-	border: "1px solid var(--border)",
-	background: "var(--surface-2)",
+	border: '1px solid var(--border)',
+	background: 'var(--surface-2)',
 	fontSize: 13,
 	lineHeight: 1.55,
-	whiteSpace: "pre-wrap",
+	whiteSpace: 'pre-wrap',
 };
 
 const actionBtn = {
-	display: "inline-flex",
-	alignItems: "center",
-	justifyContent: "center",
+	display: 'inline-flex',
+	alignItems: 'center',
+	justifyContent: 'center',
 	gap: 8,
-	padding: "9px 12px",
+	padding: '9px 12px',
 	borderRadius: 12,
-	border: "1px solid var(--btn-border)",
-	background: "var(--btn-bg)",
-	color: "var(--text)",
+	border: '1px solid var(--btn-border)',
+	background: 'var(--btn-bg)',
+	color: 'var(--text)',
 	fontWeight: 1000,
 	fontSize: 13,
-	textDecoration: "none",
+	textDecoration: 'none',
 };
 
 /* ------------------- tabs ------------------- */
@@ -1442,4 +1494,89 @@ const tabCount = {
 	fontSize: 12,
 	fontWeight: 700,
 	lineHeight: 1,
+};
+
+// Use only the source and date assigned to this specific metric.
+function TrailMetric({ label, value, sourceUrl, verifiedAt, lang, labels }) {
+	const href = safeUrl(sourceUrl);
+	const date =
+		typeof verifiedAt === 'string' && verifiedAt.trim()
+			? new Date(verifiedAt)
+			: null;
+	const hasDate = date !== null && Number.isFinite(date.getTime());
+	const locale =
+		{ pl: 'pl-PL', en: 'en-GB', ua: 'uk-UA', zh: 'zh-CN' }[lang] || 'pl-PL';
+	return (
+		<div style={trailMetricCard}>
+			<div style={trailMetricLabel}>{label}</div>
+			<div style={trailMetricValue}>{value}</div>
+			<div style={trailMetricDetails}>
+				{href ? (
+					<a
+						href={href}
+						target='_blank'
+						rel='noopener noreferrer'
+						style={trailSourceLink}
+					>
+						{labels.metricSource}
+					</a>
+				) : (
+					<span>
+						{labels.metricSource}: {labels.metricUnconfirmed}
+					</span>
+				)}
+				<span>
+					{labels.metricVerified}:{' '}
+					{href && hasDate ? (
+						<time dateTime={date.toISOString()}>
+							{new Intl.DateTimeFormat(locale, {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+								timeZone: 'UTC',
+							}).format(date)}
+						</time>
+					) : (
+						labels.metricUnconfirmed
+					)}
+				</span>
+			</div>
+		</div>
+	);
+}
+
+const trailMetricsGrid = {
+	display: 'grid',
+	gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 190px), 1fr))',
+	gap: 10,
+	marginTop: 12,
+};
+const trailMetricCard = {
+	minWidth: 0,
+	padding: 12,
+	borderRadius: 14,
+	border: '1px solid var(--border)',
+	background: 'var(--surface)',
+	overflowWrap: 'anywhere',
+};
+const trailMetricLabel = {
+	fontSize: 12,
+	color: 'var(--muted)',
+	fontWeight: 700,
+};
+const trailMetricValue = { marginTop: 6, fontSize: 18, fontWeight: 800 };
+const trailMetricDetails = {
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'flex-start',
+	gap: 6,
+	marginTop: 10,
+	fontSize: 12,
+	lineHeight: 1.5,
+	color: 'var(--muted)',
+};
+const trailSourceLink = {
+	color: 'var(--text)',
+	textDecoration: 'underline',
+	textUnderlineOffset: 3,
 };
