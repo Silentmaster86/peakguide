@@ -551,7 +551,18 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 										{t.time_min != null ? (
 											<TrailMetric
 												label={labels.time}
-												value={formatTrailTime(t.time_min, lang)}
+												value={
+													t.slug === 'ben-nevis-mountain-track'
+														? `${formatTrailTime(t.time_min, lang)} (${
+																{
+																	pl: 'szacunkowo',
+																	en: 'estimated',
+																	ua: 'орієнтовно',
+																	zh: '估计',
+																}[lang] || 'estimated'
+															})`
+														: formatTrailTime(t.time_min, lang)
+												}
 												sourceUrl={t.time_source_url}
 												verifiedAt={t.time_verified_at}
 												lang={lang}
