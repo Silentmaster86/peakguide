@@ -67,7 +67,7 @@ export default function HomePage({ lang = 'pl' }) {
 	}, [peaks]);
 
 	return (
-		<div style={styles.wrap}>
+		<div className='home-page' style={styles.wrap}>
 			<Hero
 				t={t}
 				peaksCount={peaks.length}
@@ -156,38 +156,45 @@ function getFeaturedPeaks(peaks, count = 4) {
 
 function Hero({ t, peaksCount, trailsCount, countriesCount }) {
 	return (
-		<section style={styles.hero} aria-label='Welcome'>
-			<div style={styles.kicker}>{t.kicker}</div>
+		<section className='home-hero' style={styles.hero} aria-label='Welcome'>
+			<div style={styles.heroOverlay} />
 
-			<h1 style={styles.h1}>{t.title}</h1>
+			<div className='home-hero-content' style={styles.heroContent}>
+				<div style={styles.kicker}>{t.kicker}</div>
 
-			<p style={styles.lead}>{t.subtitle}</p>
+				<h1 className='home-hero-title' style={styles.h1}>
+					{t.title}
+				</h1>
 
-			<div style={styles.heroActions}>
-				<Link to='/peaks' style={styles.primaryCta}>
-					{t.explorePeaks}
-					<span aria-hidden='true'> →</span>
-				</Link>{' '}
-				<Link to='/trails' style={styles.secondaryCta}>
-					{t.exploreTrails}
-					<span aria-hidden='true'> →</span>
-				</Link>
-			</div>
+				<p style={styles.lead}>{t.subtitle}</p>
 
-			<div style={styles.heroStats}>
-				<div style={styles.heroStat}>
-					<strong style={styles.heroStatValue}>{peaksCount}</strong>
-					<span style={styles.heroStatLabel}>{t.peaksLabel}</span>
+				<div className='home-hero-actions' style={styles.heroActions}>
+					<Link to='/peaks' style={styles.primaryCta}>
+						{t.explorePeaks}
+						<span aria-hidden='true'>→</span>
+					</Link>
+
+					<Link to='/trails' style={styles.secondaryCta}>
+						{t.exploreTrails}
+						<span aria-hidden='true'>→</span>
+					</Link>
 				</div>
 
-				<div style={styles.heroStat}>
-					<strong style={styles.heroStatValue}>{trailsCount}</strong>
-					<span style={styles.heroStatLabel}>{t.trailsLabel}</span>
-				</div>
+				<div className='home-hero-stats' style={styles.heroStats}>
+					<div style={styles.heroStat}>
+						<strong style={styles.heroStatValue}>{peaksCount}</strong>
+						<span style={styles.heroStatLabel}>{t.peaksLabel}</span>
+					</div>
 
-				<div style={styles.heroStat}>
-					<strong style={styles.heroStatValue}>{countriesCount}</strong>
-					<span style={styles.heroStatLabel}>{t.countriesLabel}</span>
+					<div style={styles.heroStat}>
+						<strong style={styles.heroStatValue}>{trailsCount}</strong>
+						<span style={styles.heroStatLabel}>{t.trailsLabel}</span>
+					</div>
+
+					<div style={styles.heroStat}>
+						<strong style={styles.heroStatValue}>{countriesCount}</strong>
+						<span style={styles.heroStatLabel}>{t.countriesLabel}</span>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -742,96 +749,176 @@ const styles = {
 	wrap: { display: 'grid', gap: 14 },
 
 	hero: {
-		border: '1px solid color-mix(in srgb, var(--primary) 12%, var(--border))',
-		borderRadius: 22,
-		padding: 16,
-		background: 'var(--surface)',
-		color: 'var(--text)',
+		position: 'relative',
+		minHeight: 'clamp(520px, 72vh, 760px)',
+		display: 'flex',
+		alignItems: 'center',
+		overflow: 'hidden',
+
+		border: '1px solid color-mix(in srgb, var(--primary) 18%, transparent)',
+		borderRadius: 28,
+
+		backgroundImage: "url('/images/home/hero.png')",
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		backgroundRepeat: 'no-repeat',
+
 		boxShadow: 'var(--shadow-soft)',
+		isolation: 'isolate',
+	},
+
+	heroOverlay: {
+		position: 'absolute',
+		inset: 0,
+		zIndex: 0,
+
+		background: `
+    linear-gradient(
+      90deg,
+      rgba(5, 10, 8, 0.88) 0%,
+      rgba(5, 10, 8, 0.72) 36%,
+      rgba(5, 10, 8, 0.34) 68%,
+      rgba(5, 10, 8, 0.12) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(5, 10, 8, 0.45) 0%,
+      transparent 45%
+    )
+  `,
+	},
+
+	heroContent: {
+		position: 'relative',
+		zIndex: 1,
+
+		width: 'min(820px, 100%)',
+		padding: 'clamp(28px, 5vw, 72px)',
+
+		color: '#fff',
 	},
 
 	heroActions: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		gap: 10,
-		marginTop: 18,
+		gap: 12,
+		marginTop: 28,
 	},
 
 	primaryCta: {
 		display: 'inline-flex',
 		alignItems: 'center',
-		gap: 8,
-		padding: '10px 16px',
-		borderRadius: 10,
+		justifyContent: 'center',
+		gap: 10,
+
+		padding: '12px 18px',
+		borderRadius: 12,
+
 		background: 'var(--primary)',
 		color: '#06130d',
-		fontWeight: 800,
+
+		fontWeight: 850,
 		textDecoration: 'none',
+
+		boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
 	},
 
 	secondaryCta: {
 		display: 'inline-flex',
 		alignItems: 'center',
-		gap: 8,
-		padding: '10px 16px',
-		borderRadius: 10,
-		border: '1px solid var(--border)',
-		color: 'var(--text)',
-		fontWeight: 800,
+		justifyContent: 'center',
+		gap: 10,
+
+		padding: '12px 18px',
+		borderRadius: 12,
+
+		border: '1px solid rgba(255, 255, 255, 0.28)',
+		background: 'rgba(10, 16, 13, 0.28)',
+		backdropFilter: 'blur(10px)',
+
+		color: '#fff',
+		fontWeight: 850,
 		textDecoration: 'none',
 	},
 
 	heroStats: {
 		display: 'flex',
 		alignItems: 'stretch',
-		gap: 10,
-		marginTop: 20,
 		flexWrap: 'wrap',
+
+		gap: 1,
+		marginTop: 38,
+
+		width: 'fit-content',
+		maxWidth: '100%',
+
+		overflow: 'hidden',
+
+		border: '1px solid rgba(255, 255, 255, 0.18)',
+		borderRadius: 16,
+
+		background: 'rgba(7, 12, 10, 0.34)',
+		backdropFilter: 'blur(12px)',
 	},
 
 	heroStat: {
 		display: 'flex',
 		flexDirection: 'column',
-		minWidth: 100,
-		padding: '10px 14px',
-		border: '1px solid var(--border)',
-		borderRadius: 10,
-		background: 'var(--pill-bg)',
+		justifyContent: 'center',
+
+		minWidth: 120,
+
+		padding: '14px 20px',
+
+		background: 'rgba(255, 255, 255, 0.035)',
 	},
 
 	heroStatValue: {
-		fontSize: 20,
+		fontSize: 24,
 		lineHeight: 1,
-		color: 'var(--primary)',
+		color: '#fff',
+		fontWeight: 900,
 	},
 
 	heroStatLabel: {
-		marginTop: 5,
-		fontSize: 12,
-		color: 'var(--muted)',
-		fontWeight: 700,
+		marginTop: 7,
+
+		fontSize: 11,
+		fontWeight: 800,
+
+		letterSpacing: '0.08em',
+		textTransform: 'uppercase',
+
+		color: 'rgba(255, 255, 255, 0.62)',
 	},
 
 	kicker: {
 		fontSize: 12,
-		fontWeight: 950,
-		opacity: 0.8,
-		letterSpacing: '0.2px',
+		fontWeight: 900,
+		letterSpacing: '0.18em',
 		textTransform: 'uppercase',
+		color: 'rgba(255, 255, 255, 0.76)',
 	},
 
 	h1: {
-		margin: '6px 0 0',
-		fontSize: 26,
-		letterSpacing: '-0.7px',
-		lineHeight: 1.1,
+		margin: '14px 0 0',
+		fontSize: 'clamp(36px, 4.2vw, 60px)',
+		lineHeight: 1.02,
+		letterSpacing: '-0.035em',
+		fontWeight: 900,
+		maxWidth: 760,
+		color: '#fff',
 	},
 
 	lead: {
-		margin: '10px 0 0',
-		color: 'var(--muted)',
-		lineHeight: 1.7,
-		maxWidth: 900,
+		margin: '22px 0 0',
+
+		maxWidth: 580,
+
+		fontSize: 'clamp(15px, 1.4vw, 18px)',
+		lineHeight: 1.65,
+
+		color: 'rgba(255, 255, 255, 0.78)',
 	},
 
 	para: {
