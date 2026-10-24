@@ -21,8 +21,9 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 	const moreItems = [
 		...(isTablet
 			? [
-					{ key: 'peaks', href: '/peaks', label: t.peaks },
-					{ key: 'ranges', href: '/ranges', label: t.ranges },
+				{ key: 'peaks', href: '/peaks', label: t.peaks },
+				{ key: 'ranges', href: '/ranges', label: t.ranges },
+				{ key: 'routes', href: '/trails', label: t.routes },
 					{ key: 'sep-main', type: 'sep' },
 				]
 			: []),
@@ -36,14 +37,7 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 					{ key: 'sep-home', type: 'sep' },
 				]
 			: []),
-
-		{
-			key: 'routes',
-			label: t.routes,
-			disabled: true,
-			pill: t.soon,
-			tip: t.soonTip,
-		},
+			
 		{
 			key: 'trailheads',
 			label: t.trailheads,
@@ -86,10 +80,10 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 				<NavLink to='/' style={styles.homeLink}>
 					<span style={styles.brandBadge}>⛰️</span>
 
-						<div style={styles.brandText}>
-							<div style={styles.brandTitle}>PeakGuide</div>
-							<div style={styles.brandSub}>{t.tagline}</div>
-						</div>
+					<div style={styles.brandText}>
+						<div style={styles.brandTitle}>PeakGuide</div>
+						<div style={styles.brandSub}>{t.tagline}</div>
+					</div>
 				</NavLink>
 			</div>
 
@@ -167,6 +161,10 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 						<NavLink to='/ranges' style={styles.navLink}>
 							{t.ranges}
 						</NavLink>
+
+						<NavLink to='/trails' style={styles.navLink}>
+							{t.routes}
+						</NavLink>
 					</>
 				)}
 
@@ -201,7 +199,7 @@ function getLabels(lang) {
 			tagline: 'Crown of Polish Mountains & more',
 			peaks: 'Peaks',
 			ranges: 'Ranges',
-			routes: 'Routes',
+			routes: 'Trails',
 			trailheads: 'Trailheads',
 			soon: 'soon',
 			soonTip: 'This section is coming soon.',

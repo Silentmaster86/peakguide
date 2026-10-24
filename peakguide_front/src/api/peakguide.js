@@ -9,6 +9,7 @@ const cache = {
 	countries: new Map(),
 	peaks: new Map(),
 	ranges: new Map(),
+	trails: new Map(),
 	peakBySlug: new Map(),
 	trailsBySlug: new Map(),
 	poisBySlug: new Map(),
@@ -267,6 +268,125 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 	});
 
 	cache.ranges.set(safeLang, mapped);
+	return mapped;
+}
+
+/* ------------------------------------------------------------------ */
+/* Trails list                                                         */
+/* ------------------------------------------------------------------ */
+
+export async function fetchTrails({ lang = 'pl' } = {}) {
+	const safeLang = apiLang(lang);
+	const cacheKey = safeLang;
+
+	if (cache.trails.has(cacheKey)) return cache.trails.get(cacheKey);
+
+	const { data, error } = await supabase
+		.from('trails')
+		.select(
+			`
+	  id,
+	  peak_id,
+	  slug,
+	  start_point_name,
+	  end_point_name,
+	  distance_km,
+	  elevation_gain_m,
+	  time_min,
+	  difficulty,
+	  route_type,
+	  gpx_url,
+	  map_url,
+	  active,
+
+	  peaks (
+	  	id,
+		slug,
+		elevation_m,
+		peaks_i18n (
+			name,
+			lang
+		),
+
+	  mountain_ranges (
+		id,
+		slug,
+		mountain_ranges_i18n (
+			name,
+			lang
+		),
+
+	  countries (
+		code,
+		slug,
+		flag_emoji,
+		countries_i18n (
+			name,
+			lang
+		)
+	  ),
+
+	  regions (
+		slug,
+		regions_i18n (
+			name,
+			lang
+		)
+		)
+		)
+	  ),
+	  
+	  trails_i18n (
+		name,
+		description,
+		notes,
+		lang
+	  )
+	`,
+		)
+		.eq('active', true);
+
+	if (error) throw error;
+
+	const mapped = (data || []).map((t) => {
+		const i18n = (t.trails_i18n || []).find((x) => x.lang === safeLang);
+
+		const peak = t.peaks;
+		const peakI18n = translation(peak?.peaks_i18n, safeLang);
+
+		const range = peak?.mountain_ranges;
+		const rangeI18n = translation(range?.mountain_ranges_i18n, safeLang);
+
+		const country = range?.countries;
+		const countryI18n = translation(country?.countries_i18n, safeLang);
+
+		const region = range?.regions;
+		const regionI18n = translation(region?.regions_i18n, safeLang);
+
+		return {
+			...t,
+			name: i18n?.name || t.slug,
+			description: i18n?.description || '',
+			notes: i18n?.notes || '',
+
+			peak_slug: peak?.slug || '',
+			peak_name: peakI18n?.name || peak?.slug || '',
+			peak_elevation_m: peak?.elevation_m ?? null,
+
+			range_slug: range?.slug || '',
+			range_name: rangeI18n?.name || range?.slug || '',
+
+			country_code: country?.code || '',
+			country_slug: country?.slug || '',
+			country_name: countryI18n?.name || country?.slug || '',
+			country_flag: country?.flag_emoji || '',
+
+			region_slug: region?.slug || '',
+			region_name: regionI18n?.name || region?.slug || '',
+		};
+	});
+
+	cache.trails.set(cacheKey, mapped);
 	return mapped;
 }
 

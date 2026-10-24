@@ -198,6 +198,36 @@ a:hover {
 }
 
 /* =========================
+   LAYOUT
+   ========================= */
+
+     .trails-results-bar {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       gap: 12px;
+       margin: -4px 0 16px;
+       color: var(--muted);
+       font-size: 13px;
+     }
+  
+     .trails-clear-btn {
+       border: 1px solid var(--border);
+       border-radius: 999px;
+       padding: 6px 10px;
+       background: var(--pill-bg);
+       color: var(--text);
+       font-size: 12px;
+       font-weight: 700;
+       cursor: pointer;
+     }
+  
+     .trails-clear-btn:hover {
+       border-color: var(--primary);
+       color: var(--primary);
+     }
+
+/* =========================
    LANGUAGE BACKGROUNDS
    ========================= */
 
@@ -277,3 +307,28 @@ html[data-lang="zh"] body {
     background-position: -200% 0;
   }
 }
+
+/* =========================
+   TRAILS TOOLBAR
+   ========================= */
+
+@media (max-width: 600px) {
+  .trails-toolbar {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .trails-toolbar input {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 400px) {
+  .trails-toolbar {
+    grid-template-columns: 1fr !important;
+  }
+
+  .trails-toolbar input {
+    grid-column: auto;
+  }
+}
+

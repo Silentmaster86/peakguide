@@ -1,37 +1,38 @@
-import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import Navbar from "../components/Navbar";
+import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+import Navbar from '../components/Navbar';
 
-import PeaksPage from "../pages/PeaksPage";
-import PeakDetailsPage from "../pages/PeakDetailsPage";
-import RangesPage from "../pages/RangesPage";
-import RangeDetailsPage from "../pages/RangeDetailsPage";
+import PeaksPage from '../pages/PeaksPage';
+import PeakDetailsPage from '../pages/PeakDetailsPage';
+import RangesPage from '../pages/RangesPage';
+import RangeDetailsPage from '../pages/RangeDetailsPage';
+import TrailsPage from '../pages/TrailsPage';
 
-import Footer from "../components/Footer";
-import AboutPage from "../pages/AboutPage";
+import Footer from '../components/Footer';
+import AboutPage from '../pages/AboutPage';
 
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import PanelPage from "../pages/PanelPage";
-import { ProtectedRoute } from "../auth/ProtectedRoute";
-import AdminTools from "../pages/AdminTools";
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
+import PanelPage from '../pages/PanelPage';
+import { ProtectedRoute } from '../auth/ProtectedRoute';
+import AdminTools from '../pages/AdminTools';
 
 export default function App() {
 	const [lang, setLang] = useState(
-		() => localStorage.getItem("peakguide_lang") || "pl",
+		() => localStorage.getItem('peakguide_lang') || 'pl',
 	);
 
 	// Supported UI languages (even if DB doesn't have all translations yet)
-	const SUPPORTED_LANGS = new Set(["pl", "en", "ua", "zh"]);
-	const safeLang = SUPPORTED_LANGS.has(lang) ? lang : "pl";
+	const SUPPORTED_LANGS = new Set(['pl', 'en', 'ua', 'zh']);
+	const safeLang = SUPPORTED_LANGS.has(lang) ? lang : 'pl';
 
 	useEffect(() => {
 		const titles = {
-			pl: "Korona Gór Polski i nie tylko — Przewodnik",
+			pl: 'Korona Gór Polski i nie tylko — Przewodnik',
 			en: "Crown of Poland's Mountains & more — PeakGuide",
-			ua: "Корона гір Польщі та більше — Путівник",
-			zh: "波兰山峰王冠及更多 — 高峰指南",
+			ua: 'Корона гір Польщі та більше — Путівник',
+			zh: '波兰山峰王冠及更多 — 高峰指南',
 		};
 
 		document.title = titles[safeLang] || titles.pl;
@@ -39,7 +40,7 @@ export default function App() {
 		document.documentElement.dataset.lang = safeLang;
 
 		// Persist user's choice (save the raw UI choice)
-		localStorage.setItem("peakguide_lang", lang);
+		localStorage.setItem('peakguide_lang', lang);
 	}, [lang, safeLang]);
 
 	return (
@@ -58,6 +59,8 @@ export default function App() {
 								path='/peaks/:slug'
 								element={<PeakDetailsPage lang={safeLang} />}
 							/>
+
+							<Route path='/trails' element={<TrailsPage lang={safeLang} />} />
 
 							<Route path='/ranges' element={<RangesPage lang={safeLang} />} />
 							<Route
@@ -90,39 +93,39 @@ export default function App() {
 }
 
 const layout = {
-	minHeight: "95vh",
+	minHeight: '95vh',
 	padding: 14,
-	background: "transparent",
-	color: "var(--text)",
-	fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-	display: "flex",
+	background: 'transparent',
+	color: 'var(--text)',
+	fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif',
+	display: 'flex',
 };
 
 const page = {
-	width: "100%",
+	width: '100%',
 	maxWidth: 1140,
-	margin: "0 auto",
-	background: "var(--surface)",
-	border: "1px solid var(--border)",
+	margin: '0 auto',
+	background: 'var(--surface)',
+	border: '1px solid var(--border)',
 	borderRadius: 22,
 	padding: 18, // extra space for box shadow
-	boxShadow: "var(--shadow)",
-	display: "flex",
-	flexDirection: "column",
-	minHeight: "calc(95vh - 36px)", // 36px = padding 18px top + 18px bottom
+	boxShadow: 'var(--shadow)',
+	display: 'flex',
+	flexDirection: 'column',
+	minHeight: 'calc(95vh - 36px)', // 36px = padding 18px top + 18px bottom
 };
 
 const contentCol = {
-	display: "flex",
-	flexDirection: "column",
+	display: 'flex',
+	flexDirection: 'column',
 	flex: 1,
 };
 
 const main = {
 	maxWidth: 1040,
-	margin: "0 auto",
-	width: "100%",
-	padding: "10px 0 24px",
+	margin: '0 auto',
+	width: '100%',
+	padding: '10px 0 24px',
 	flex: 1,
 	paddingBottom: 24,
 };
