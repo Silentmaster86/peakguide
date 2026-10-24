@@ -102,11 +102,10 @@ const layout = {
 };
 
 const page = {
-	width: '100%',
-	maxWidth: 1140,
+	width: '85vw',
 	margin: '0 auto',
-	background: 'var(--surface)',
-	border: '1px solid var(--border)',
+	background: 'var(--shadow)',
+	border: '2px solid var(--border)',
 	borderRadius: 22,
 	padding: 18, // extra space for box shadow
 	boxShadow: 'var(--shadow)',
@@ -122,10 +121,7 @@ const contentCol = {
 };
 
 const main = {
-	maxWidth: 1040,
-	margin: '0 auto',
 	width: '100%',
 	padding: '10px 0 24px',
 	flex: 1,
-	paddingBottom: 24,
 };
