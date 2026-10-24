@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { fetchPeaks } from '../api/peakguide';
+import { fetchPeaks, fetchTrails } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
 
 export default function HomePage({ lang = 'pl' }) {
@@ -14,11 +14,52 @@ export default function HomePage({ lang = 'pl' }) {
 
 	// featured peaks
 	const peaksState = useAsync(() => fetchPeaks({ lang }), [lang]);
+	// featured trails
+	const trailsState = useAsync(() => fetchTrails({ lang }), [lang]);
 
 	// keep a stable "peaks" array derived from async state
 	const peaks = useMemo(() => {
 		return Array.isArray(peaksState?.data) ? peaksState.data : [];
 	}, [peaksState]);
+
+	// featured countries
+	const countriesCount = useMemo(() => {
+		const countries = new Set(
+			peaks.map((peak) => peak.country_slug).filter(Boolean),
+		);
+
+		return countries.size;
+	}, [peaks]);
+
+	const countries = useMemo(() => {
+		const grouped = new Map();
+
+		peaks.forEach((peak) => {
+			if (!peak.country_slug) return;
+
+			if (!grouped.has(peak.country_slug)) {
+				grouped.set(peak.country_slug, {
+					slug: peak.country_slug,
+					name: peak.country_name,
+					peaksCount: 0,
+					ranges: new Set(),
+				});
+			}
+
+			const country = grouped.get(peak.country_slug);
+
+			country.peaksCount += 1;
+
+			if (peak.range_name) {
+				country.ranges.add(peak.range_name);
+			}
+		});
+
+		return Array.from(grouped.values()).map((country) => ({
+			...country,
+			rangesCount: country.ranges.size,
+		}));
+	}, [peaks]);
 
 	// compute featured peaks in a memo-safe way (no eslint deps warning)
 	const featured = useMemo(() => {
@@ -27,7 +68,16 @@ export default function HomePage({ lang = 'pl' }) {
 
 	return (
 		<div style={styles.wrap}>
-			<Hero t={t} />
+			<Hero
+				t={t}
+				peaksCount={peaks.length}
+				trailsCount={
+					Array.isArray(trailsState?.data) ? trailsState.data.length : 0
+				}
+				countriesCount={countriesCount}
+			/>
+
+			<ExploreCountries countries={countries} />
 
 			<Why t={t} />
 			<How t={t} />
@@ -67,17 +117,84 @@ function getFeaturedPeaks(peaks, count = 4) {
 
 /* ---------------- sections ---------------- */
 
-function Hero({ t }) {
+function Hero({ t, peaksCount, trailsCount, countriesCount }) {
 	return (
 		<section style={styles.hero} aria-label='Welcome'>
 			<div style={styles.kicker}>{t.kicker}</div>
+
 			<h1 style={styles.h1}>{t.title}</h1>
 
 			<p style={styles.lead}>{t.subtitle}</p>
-			<p style={styles.para}>{t.p1}</p>
-			<p style={styles.para}>{t.p2}</p>
-			<p style={styles.para}>{t.p3}</p>
-			<p style={styles.para}>{t.p4}</p>
+
+			<div style={styles.heroActions}>
+				<Link to='/peaks' style={styles.primaryCta}>
+					Explore Peaks
+					<span aria-hidden='true'> →</span>
+				</Link>{' '}
+				<Link to='/trails' style={styles.secondaryCta}>
+					Explore Trails
+					<span aria-hidden='true'> →</span>
+				</Link>
+			</div>
+
+			<div style={styles.heroStats}>
+				<div style={styles.heroStat}>
+					<strong style={styles.heroStatValue}>{peaksCount}</strong>
+					<span style={styles.heroStatLabel}>Peaks</span>
+				</div>
+
+				<div style={styles.heroStat}>
+					<strong style={styles.heroStatValue}>{trailsCount}</strong>
+					<span style={styles.heroStatLabel}>Trails</span>
+				</div>
+
+				<div style={styles.heroStat}>
+					<strong style={styles.heroStatValue}>{countriesCount}</strong>
+					<span style={styles.heroStatLabel}>Countries</span>
+				</div>
+			</div>
+		</section>
+	);
+}
+
+const countryFlags = {
+	poland: '🇵🇱',
+	'united-kingdom': '🇬🇧',
+};
+
+function ExploreCountries({ countries }) {
+	return (
+		<section style={styles.section}>
+			<div style={styles.sectionHead}>
+				<div>
+					<h2 style={styles.sectionTitle}>Explore by country</h2>
+					<p style={styles.sectionSubtitle}>
+						Discover mountains and peaks across different regions.
+					</p>
+				</div>
+			</div>
+
+			<div style={styles.countryGrid}>
+				{countries.map((country) => (
+					<Link
+						key={country.slug}
+						to={`/peaks?country=${country.slug}`}
+						style={styles.countryCard}
+					>
+						<strong>
+							{countryFlags[country.slug]} {country.name}
+						</strong>
+
+						<div>
+							{country.peaksCount ?? '🏔️'} peaks · {country.rangesCount} ranges
+						</div>
+
+						<span style={{ color: 'var(--primary)', fontWeight: 800 }}>
+							Explore →
+						</span>
+					</Link>
+				))}
+			</div>
 		</section>
 	);
 }
@@ -241,10 +358,10 @@ function Section({ id, title, hint, right, ariaLabel, children }) {
 function getLabels(lang) {
 	const dict = {
 		pl: {
-			kicker: 'Witaj',
-			title: 'PeakGuide',
+			kicker: 'Eksploruj • Zdobywaj • Odkrywaj',
+			title: 'Znajdź swoją następną górską przygodę',
 			subtitle:
-				'Przewodnik po Koronie Gór Polski, który ma być po prostu użyteczny: szybko znajdziesz szczyt, sprawdzisz pasmo i wejdziesz w detale.',
+				'Odkrywaj szczyty, szlaki i praktyczne informacje górskie w całej Europie i nie tylko.',
 			p1: 'Na górze masz nawigację do listy szczytów i pasm. Tam możesz przeglądać, filtrować i wybierać kolejne miejsca.',
 			p2: 'Projekt będzie rozwijany o praktyczne informacje (start, dojazd, parking, wskazówki) — bez zbędnych ozdobników.',
 			p3: 'Jeśli masz ciekawy pomysł jak rozbudować tą bazę lub coś innego, wejdź w panel i wypełnij formularz.',
@@ -317,10 +434,10 @@ function getLabels(lang) {
 		},
 
 		en: {
-			kicker: 'Welcome',
-			title: 'PeakGuide',
+			kicker: 'EXPLORE • CLIMB • DISCOVER',
+			title: 'Find your next mountain adventure',
 			subtitle:
-				'Guide to the Crown of Polish Mountains designed to be simply useful: quickly find a peak, check the range, and dive into details.',
+				'Discover peaks, hiking trails and practical mountain information across Europe and beyond.',
 			p1: 'At the top, you have navigation to the peaks and ranges list. There, you can browse, filter, and select your next destinations.',
 			p2: 'The project will be developed with practical information (start point, access, parking, tips) — without unnecessary embellishments.',
 			p3: 'If you have an interesting idea on how to expand this database or anything else, go to the panel and fill out the form.',
@@ -550,6 +667,68 @@ const styles = {
 		boxShadow: 'var(--shadow-soft)',
 	},
 
+	heroActions: {
+		display: 'flex',
+		flexWrap: 'wrap',
+		gap: 10,
+		marginTop: 18,
+	},
+
+	primaryCta: {
+		display: 'inline-flex',
+		alignItems: 'center',
+		gap: 8,
+		padding: '10px 16px',
+		borderRadius: 10,
+		background: 'var(--primary)',
+		color: '#06130d',
+		fontWeight: 800,
+		textDecoration: 'none',
+	},
+
+	secondaryCta: {
+		display: 'inline-flex',
+		alignItems: 'center',
+		gap: 8,
+		padding: '10px 16px',
+		borderRadius: 10,
+		border: '1px solid var(--border)',
+		color: 'var(--text)',
+		fontWeight: 800,
+		textDecoration: 'none',
+	},
+
+	heroStats: {
+		display: 'flex',
+		alignItems: 'stretch',
+		gap: 10,
+		marginTop: 20,
+		flexWrap: 'wrap',
+	},
+
+	heroStat: {
+		display: 'flex',
+		flexDirection: 'column',
+		minWidth: 100,
+		padding: '10px 14px',
+		border: '1px solid var(--border)',
+		borderRadius: 10,
+		background: 'var(--pill-bg)',
+	},
+
+	heroStatValue: {
+		fontSize: 20,
+		lineHeight: 1,
+		color: 'var(--primary)',
+	},
+
+	heroStatLabel: {
+		marginTop: 5,
+		fontSize: 12,
+		color: 'var(--muted)',
+		fontWeight: 700,
+	},
+
 	kicker: {
 		fontSize: 12,
 		fontWeight: 950,
@@ -776,6 +955,24 @@ const styles = {
 		borderRadius: 18,
 		padding: 14,
 		background: 'rgba(185,28,28,0.06)',
+	},
+
+	countryGrid: {
+		display: 'grid',
+		gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+		gap: 12,
+	},
+
+	countryCard: {
+		display: 'flex',
+		flexDirection: 'column',
+		gap: 6,
+		padding: 16,
+		border: '1px solid var(--border)',
+		borderRadius: 14,
+		background: 'var(--surface-2)',
+		color: 'var(--text)',
+		textDecoration: 'none',
 	},
 
 	faqGrid: {
