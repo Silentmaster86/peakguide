@@ -50,8 +50,8 @@ export default function HomePage({ lang = 'pl' }) {
 
 			country.peaksCount += 1;
 
-			if (peak.range_name) {
-				country.ranges.add(peak.range_name);
+			if (peak.range_slug) {
+				country.ranges.add(peak.range_slug);
 			}
 		});
 
@@ -77,7 +77,7 @@ export default function HomePage({ lang = 'pl' }) {
 				countriesCount={countriesCount}
 			/>
 
-			<ExploreCountries countries={countries} />
+			<ExploreCountries countries={countries} t={t} />
 
 			<Why t={t} />
 			<How t={t} />
@@ -109,10 +109,47 @@ function scrollToHash(hash) {
 }
 
 function getFeaturedPeaks(peaks, count = 4) {
-	const sorted = [...peaks].sort(
-		(a, b) => (b.elevation_m || 0) - (a.elevation_m || 0),
+	const byCountry = new Map();
+
+	peaks.forEach((peak) => {
+		if (!peak.country_slug) return;
+
+		if (!byCountry.has(peak.country_slug)) {
+			byCountry.set(peak.country_slug, []);
+		}
+
+		byCountry.get(peak.country_slug).push(peak);
+	});
+
+	const countryPeaks = Array.from(byCountry.values()).map((countryPeaks) =>
+		[...countryPeaks].sort(
+			(a, b) => (b.elevation_m || 0) - (a.elevation_m || 0),
+		),
 	);
-	return sorted.slice(0, count);
+
+	const featured = [];
+	let index = 0;
+
+	while (featured.length < count) {
+		let added = false;
+
+		for (const peaks of countryPeaks) {
+			if (peaks[index]) {
+				featured.push(peaks[index]);
+				added = true;
+
+				if (featured.length === count) {
+					break;
+				}
+			}
+		}
+
+		if (!added) break;
+
+		index += 1;
+	}
+
+	return featured;
 }
 
 /* ---------------- sections ---------------- */
@@ -128,11 +165,11 @@ function Hero({ t, peaksCount, trailsCount, countriesCount }) {
 
 			<div style={styles.heroActions}>
 				<Link to='/peaks' style={styles.primaryCta}>
-					Explore Peaks
+					{t.explorePeaks}
 					<span aria-hidden='true'> →</span>
 				</Link>{' '}
 				<Link to='/trails' style={styles.secondaryCta}>
-					Explore Trails
+					{t.exploreTrails}
 					<span aria-hidden='true'> →</span>
 				</Link>
 			</div>
@@ -140,17 +177,17 @@ function Hero({ t, peaksCount, trailsCount, countriesCount }) {
 			<div style={styles.heroStats}>
 				<div style={styles.heroStat}>
 					<strong style={styles.heroStatValue}>{peaksCount}</strong>
-					<span style={styles.heroStatLabel}>Peaks</span>
+					<span style={styles.heroStatLabel}>{t.peaksLabel}</span>
 				</div>
 
 				<div style={styles.heroStat}>
 					<strong style={styles.heroStatValue}>{trailsCount}</strong>
-					<span style={styles.heroStatLabel}>Trails</span>
+					<span style={styles.heroStatLabel}>{t.trailsLabel}</span>
 				</div>
 
 				<div style={styles.heroStat}>
 					<strong style={styles.heroStatValue}>{countriesCount}</strong>
-					<span style={styles.heroStatLabel}>Countries</span>
+					<span style={styles.heroStatLabel}>{t.countriesLabel}</span>
 				</div>
 			</div>
 		</section>
@@ -162,14 +199,14 @@ const countryFlags = {
 	'united-kingdom': '🇬🇧',
 };
 
-function ExploreCountries({ countries }) {
+function ExploreCountries({ countries, t}) {
 	return (
 		<section style={styles.section}>
 			<div style={styles.sectionHead}>
 				<div>
-					<h2 style={styles.sectionTitle}>Explore by country</h2>
+					<h2 style={styles.sectionTitle}>{t.countriesTitle}</h2>
 					<p style={styles.sectionSubtitle}>
-						Discover mountains and peaks across different regions.
+						{t.countriesSubtitle}
 					</p>
 				</div>
 			</div>
@@ -182,15 +219,16 @@ function ExploreCountries({ countries }) {
 						style={styles.countryCard}
 					>
 						<strong>
-							{countryFlags[country.slug]} {country.name}
+							{countryFlags[country.slug] ?? '🏔️'} {country.name}
 						</strong>
 
 						<div>
-							{country.peaksCount ?? '🏔️'} peaks · {country.rangesCount} ranges
+							{country.peaksCount} {t.countryPeaks} · {country.rangesCount} {' '}
+							{t.countryRanges}
 						</div>
 
 						<span style={{ color: 'var(--primary)', fontWeight: 800 }}>
-							Explore →
+							{t.exploreCountry} →
 						</span>
 					</Link>
 				))}
@@ -264,7 +302,10 @@ function Featured({ t, peaksState, featured }) {
 										<div style={styles.peakTitle} title={p.peak_name || p.name}>
 											{p.peak_name || p.name}
 										</div>
-										<div style={styles.peakSub}>{p.range_name || '—'}</div>
+										<div style={styles.peakSub}>
+											{p.country_name || '-'} • {p.range_name || '—'}
+
+										</div>
 									</div>
 
 									<div style={styles.elevBadge}>{p.elevation_m} m</div>
@@ -358,29 +399,38 @@ function Section({ id, title, hint, right, ariaLabel, children }) {
 function getLabels(lang) {
 	const dict = {
 		pl: {
+			explorePeaks: 'Odkrywaj szczyty',
+			exploreTrails: 'Odkrywaj trasy',
+			peaksLabel: 'Szczyty',
+			trailsLabel: 'Trasy',
+			countriesLabel: 'Kraje',
+
+			countriesTitle: 'Odkrywaj według kraju',
+			countriesSubtitle:
+				'Poznawaj góry, szczyty i trasy w różnych częściach świata.',
+			countryPeaks: 'szczytów',
+			countryRanges: 'pasm',
+			exploreCountry: 'Odkrywaj',
+
 			kicker: 'Eksploruj • Zdobywaj • Odkrywaj',
 			title: 'Znajdź swoją następną górską przygodę',
 			subtitle:
 				'Odkrywaj szczyty, szlaki i praktyczne informacje górskie w całej Europie i nie tylko.',
-			p1: 'Na górze masz nawigację do listy szczytów i pasm. Tam możesz przeglądać, filtrować i wybierać kolejne miejsca.',
-			p2: 'Projekt będzie rozwijany o praktyczne informacje (start, dojazd, parking, wskazówki) — bez zbędnych ozdobników.',
-			p3: 'Jeśli masz ciekawy pomysł jak rozbudować tą bazę lub coś innego, wejdź w panel i wypełnij formularz.',
-			p4: 'Mam nadzieję, że znajdziesz tu wszystko czego szukasz.',
 
 			whyTitle: 'Dlaczego PeakGuide',
 			whyHint: 'po co ta strona istnieje',
 			whyCards: [
 				{
 					title: 'Szybko i czytelnie',
-					body: 'Minimum chaosu. Najważniejsze informacje pod ręką.',
+					body: 'Najważniejsze informacje o szczytach i trasach w jednym miejscu.',
 				},
 				{
-					title: 'Realny przewodnik',
-					body: 'Ma pomagać w planowaniu wyjść, a nie tylko wyglądać.',
+					title: 'Praktyczne planowanie',
+					body: 'Trasy, punkty startowe, parking, dostęp i informacje przydatne przed wyjściem.',
 				},
 				{
-					title: 'Rozwój w stronę praktyki',
-					body: 'Start/dojazd, parking, tipy i linki do map.',
+					title: 'Jedna rosnąca baza',
+					body: 'Kolejne kraje, regiony, szczyty i trasy będą stopniowo dodawane do PeakGuide.',
 				},
 			],
 
@@ -389,18 +439,18 @@ function getLabels(lang) {
 			steps: [
 				{
 					n: '1',
-					title: 'Wybierz szczyt',
-					body: 'Wejdź w listę i kliknij kartę szczytu.',
+					title: 'Odkrywaj',
+					body: 'Przeglądaj kraje, pasma, szczyty i dostępne trasy.',
 				},
 				{
 					n: '2',
-					title: 'Sprawdź detale',
-					body: 'Zobacz pasmo, wysokość i kluczowe informacje.',
+					title: 'Sprawdź szczegóły',
+					body: 'Poznaj wysokość, położenie, trasę i dostępne informacje praktyczne.',
 				},
 				{
 					n: '3',
 					title: 'Zaplanuj wyjście',
-					body: 'W kolejnych wersjach: start, dojazd i parking.',
+					body: 'Wykorzystaj informacje o trasie, starcie, dostępie i parkingu podczas planowania.',
 				},
 			],
 
@@ -410,145 +460,148 @@ function getLabels(lang) {
 			featuredEmpty: 'Brak danych — dodaj szczyty do bazy lub uruchom API.',
 			featuredErrorTitle: 'Nie udało się pobrać szczytów',
 			featuredErrorBody: 'Sprawdź API / proxy w Vite.',
-
 			faqTitle: 'FAQ',
 			faqHint: 'krótkie odpowiedzi',
 			faq: [
 				{
-					q: 'Czy to tylko Korona Gór Polski?',
-					a: 'Na start tak — potem można rozszerzać bazę.',
+					q: 'Jakie kraje obejmuje PeakGuide?',
+					a: 'Obecnie baza obejmuje Polskę i Wielką Brytanię. W planach są kolejne kraje i regiony.',
 				},
 				{
-					q: 'Czy będą trasy i GPX?',
-					a: 'Tak — najpierw start/parking/linki, potem GPX.',
+					q: 'Czy PeakGuide zawiera trasy?',
+					a: 'Tak. Dostępne trasy mogą zawierać dystans, przewyższenie, czas przejścia, poziom trudności oraz informacje praktyczne.',
 				},
 				{
 					q: 'Skąd pochodzą dane?',
-					a: 'Baza jest rozwijana i będzie uzupełniana o źródła/linki.',
+					a: 'Dane są gromadzone i rozwijane na podstawie sprawdzanych źródeł. Projekt będzie również rozwijany o dokładniejsze informacje o źródłach i aktualności danych.',
 				},
 				{
-					q: 'Czy będzie „Ulubione”?',
-					a: 'Tak — najpierw lokalnie, potem konto / synchronizacja.',
+					q: 'Czy będą dodawane nowe funkcje?',
+					a: 'Tak. Planowany jest dalszy rozwój map, pogody, danych terenowych, punktów POI, kolekcji i funkcji użytkownika.',
 				},
 			],
 		},
 
 		en: {
+			explorePeaks: 'Explore Peaks',
+			exploreTrails: 'Explore Trails',
+			peaksLabel: 'Peaks',
+			trailsLabel: 'Trails',
+			countriesLabel: 'Countries',
+
+			countriesTitle: 'Explore by country',
+			countriesSubtitle:
+				'Discover mountains, peaks and trails across different parts of the world.',
+			countryPeaks: 'peaks',
+			countryRanges: 'ranges',
+			exploreCountry: 'Explore',
+
 			kicker: 'EXPLORE • CLIMB • DISCOVER',
 			title: 'Find your next mountain adventure',
 			subtitle:
 				'Discover peaks, hiking trails and practical mountain information across Europe and beyond.',
-			p1: 'At the top, you have navigation to the peaks and ranges list. There, you can browse, filter, and select your next destinations.',
-			p2: 'The project will be developed with practical information (start point, access, parking, tips) — without unnecessary embellishments.',
-			p3: 'If you have an interesting idea on how to expand this database or anything else, go to the panel and fill out the form.',
-			p4: 'I hope you will find everything you are looking for here.',
+
 			whyTitle: 'Why PeakGuide',
 			whyHint: 'the purpose of this site',
 			whyCards: [
 				{
 					title: 'Fast and clear',
-					body: 'Minimal chaos. The most important information at your fingertips.',
+					body: 'The most important information about peaks and trails in one place.',
 				},
 				{
-					title: 'A real guide',
-					body: "It's meant to help plan outings, not just look good.",
+					title: 'Practical planning',
+					body: 'Trails, start points, parking, access and useful information before your outing.',
 				},
 				{
-					title: 'Development towards practicality',
-					body: 'Start/access, parking, tips, and map links.',
+					title: 'One growing database',
+					body: 'More countries, regions, peaks and trails will gradually be added to PeakGuide.',
 				},
 			],
-			howTitle: 'How it works',
-			howHint: '3 simple steps',
-			steps: [
-				{
-					n: '1',
-					title: 'Choose a peak',
-					body: 'Go to the list and click on a peak card.',
-				},
-				{
-					n: '2',
-					title: 'Check the details',
-					body: 'See the range, elevation, and key information.',
-				},
-				{
-					n: '3',
-					title: 'Plan your outing',
-					body: 'In future versions: start point, access, and parking.',
-				},
-			],
+
 			featuredTitle: 'Featured',
 			seeAll: 'See all',
 			openDetails: 'Open details',
 			featuredEmpty: 'No data — add peaks to the database or start the API.',
 			featuredErrorTitle: 'Failed to fetch peaks',
 			featuredErrorBody: 'Check the API / proxy in Vite.',
+			howTitle: 'How it works',
+			howHint: '3 simple steps',
+			steps: [
+				{
+					n: '1',
+					title: 'Explore',
+					body: 'Browse countries, mountain ranges, peaks and available trails.',
+				},
+				{
+					n: '2',
+					title: 'Check the details',
+					body: 'See elevation, location, trail information and available practical details.',
+				},
+				{
+					n: '3',
+					title: 'Plan your outing',
+					body: 'Use trail, start point, access and parking information to help plan your adventure.',
+				},
+			],
+
 			faqTitle: 'FAQ',
 			faqHint: 'brief answers',
 			faq: [
 				{
-					q: 'Is it only the Crown of Polish Mountains?',
-					a: 'For now, yes — the database can be expanded later.',
+					q: 'Which countries does PeakGuide cover?',
+					a: 'The database currently covers Poland and the United Kingdom, with more countries and regions planned.',
 				},
 				{
-					q: 'Will there be routes and GPX?',
-					a: 'Yes — first start/parking/links, then GPX.',
+					q: 'Does PeakGuide include hiking trails?',
+					a: 'Yes. Available trails can include distance, elevation gain, estimated time, difficulty and practical information.',
 				},
 				{
-					q: 'Where do the data come from?',
-					a: 'The database is being developed and will be supplemented with sources/links.',
+					q: 'Where does the data come from?',
+					a: 'Data is collected and developed using verified sources. The project will also provide clearer information about sources and data freshness.',
 				},
 				{
-					q: "Will there be 'Favorites'?",
-					a: 'Yes — first locally, then with an account / synchronization.',
+					q: 'Are more features planned?',
+					a: 'Yes. Future development includes maps, weather, terrain data, POIs, collections and user features.',
 				},
 			],
 		},
 
 		ua: {
-			kicker: 'Ласкаво просимо',
-			title: 'PeakGuide',
+			explorePeaks: 'Досліджувати вершини',
+			exploreTrails: 'Досліджувати маршрути',
+			peaksLabel: 'Вершини',
+			trailsLabel: 'Маршрути',
+			countriesLabel: 'Країни',
+
+			countriesTitle: 'Досліджуйте за країною',
+			countriesSubtitle:
+				'Відкривайте гори, вершини та маршрути в різних куточках світу.',
+			countryPeaks: 'вершин',
+			countryRanges: 'гірських масивів',
+			exploreCountry: 'Досліджувати',
+
+			kicker: 'ДОСЛІДЖУЙ • ПІДКОРЮЙ • ВІДКРИВАЙ',
+			title: 'Знайди свою наступну гірську пригоду',
 			subtitle:
-				'Гід по Короні гір Польщі, створений, щоб бути просто корисним: швидко знайдіть вершину, перевірте хребет і заглибтеся в деталі.',
-			p1: 'Угорі у вас є навігація до списку вершин і хребтів. Там ви можете переглядати, фільтрувати та вибирати свої наступні напрямки.',
-			p2: 'Проект буде розвиватися з практичною інформацією (стартова точка, доступ, паркування, поради) — без зайвих прикрас.',
-			p3: 'Якщо у вас є цікава ідея, як розширити цю базу даних або додати щось інше, перейдіть до панелі та заповніть форму.',
-			p4: 'Сподіваюся, що тут ви знайдете все, що шукаєте.',
+				'Відкривай вершини, туристичні маршрути та практичну інформацію про гори в Європі та за її межами.',
+
 			whyTitle: 'Чому PeakGuide',
 			whyHint: 'мета цього сайту',
 			whyCards: [
 				{
-					title: 'Швидко і чітко',
-					body: 'Мінімум хаосу. Найважливіша інформація під рукою.',
+					title: 'Швидко і зрозуміло',
+					body: 'Найважливіша інформація про вершини та маршрути в одному місці.',
 				},
 				{
-					title: 'Справжній гід',
-					body: 'Він призначений для допомоги у плануванні виходів, а не просто для гарного вигляду.',
+					title: 'Практичне планування',
+					body: 'Маршрути, точки старту, паркування, доступ та корисна інформація перед походом.',
 				},
 				{
-					title: 'Розвиток у бік практичності',
-					body: 'Старт/доступ, паркування, поради та посилання на карти.',
+					title: 'Єдина база, що зростає',
+					body: 'До PeakGuide поступово додаватимуться нові країни, регіони, вершини та маршрути.',
 				},
 			],
-			howTitle: 'Як це працює',
-			howHint: '3 прості кроки',
-			steps: [
-				{
-					n: '1',
-					title: 'Виберіть вершину',
-					body: 'Перейдіть до списку та натисніть на картку вершини.',
-				},
-				{
-					n: '2',
-					title: 'Перевірте деталі',
-					body: 'Перегляньте хребет, висоту та ключову інформацію.',
-				},
-				{
-					n: '3',
-					title: 'Сплануйте свій вихід',
-					body: 'У майбутніх версіях: стартова точка, доступ і паркування.',
-				},
-			],
+
 			featuredTitle: 'Рекомендовані',
 			seeAll: 'Переглянути всі',
 			openDetails: 'Відкрити деталі',
@@ -556,95 +609,125 @@ function getLabels(lang) {
 				'Немає даних — додайте вершини до бази даних або запустіть API.',
 			featuredErrorTitle: 'Не вдалося отримати вершини',
 			featuredErrorBody: 'Перевірте API / проксі у Vite.',
+			howTitle: 'Як це працює',
+			howHint: '3 прості кроки',
+			steps: [
+				{
+					n: '1',
+					title: 'Досліджуйте',
+					body: 'Переглядайте країни, гірські хребти, вершини та доступні маршрути.',
+				},
+				{
+					n: '2',
+					title: 'Перевірте деталі',
+					body: 'Перегляньте висоту, розташування, маршрут і доступну практичну інформацію.',
+				},
+				{
+					n: '3',
+					title: 'Сплануйте похід',
+					body: 'Використовуйте інформацію про маршрут, точку старту, доступ і паркування для планування.',
+				},
+			],
+
 			faqTitle: 'FAQ',
 			faqHint: 'короткі відповіді',
 			faq: [
 				{
-					q: 'Чи це лише Корона гір Польщі?',
-					a: 'Поки що так — базу даних можна розширити пізніше.',
+					q: 'Які країни охоплює PeakGuide?',
+					a: 'Наразі база охоплює Польщу та Велику Британію. У майбутньому планується додавання нових країн і регіонів.',
 				},
 				{
-					q: 'Чи будуть маршрути та GPX?',
-					a: 'Так — спочатку старт/паркування/посилання, потім GPX.',
+					q: 'Чи містить PeakGuide туристичні маршрути?',
+					a: 'Так. Доступні маршрути можуть містити відстань, набір висоти, орієнтовний час, рівень складності та практичну інформацію.',
 				},
 				{
-					q: 'Звідки беруться дані?',
-					a: 'База даних розробляється і буде доповнюватися джерелами/посиланнями.',
+					q: 'Звідки походять дані?',
+					a: 'Дані збираються та розвиваються на основі перевірених джерел. Також планується чіткіше відображення джерел та актуальності даних.',
 				},
 				{
-					q: "Чи буде 'Вибране'?",
-					a: 'Так — спочатку локально, потім з обліковим записом / синхронізацією.',
+					q: 'Чи плануються нові функції?',
+					a: 'Так. Планується подальший розвиток карт, погоди, даних про рельєф, POI, колекцій і функцій користувача.',
 				},
 			],
 		},
 		zh: {
-			kicker: '欢迎',
-			title: 'PeakGuide',
-			subtitle:
-				'波兰山峰之冠指南，旨在提供实用功能：快速查找山峰，查看山脉，并深入了解详情。',
-			p1: '顶部有导航链接到山峰和山脉列表。在那里，您可以浏览、筛选并选择下一个目的地。',
-			p2: '该项目将开发实用信息（起点、通道、停车场、提示）——没有不必要的装饰。',
-			p3: '如果你有关于如何扩展这个数据库或添加其他内容的有趣想法，请进入面板并填写表单。',
-			p4: '希望你能在这里找到你想要的一切。',
+			explorePeaks: '探索山峰',
+			exploreTrails: '探索路线',
+			peaksLabel: '山峰',
+			trailsLabel: '路线',
+			countriesLabel: '国家',
+
+			countriesTitle: '按国家探索',
+			countriesSubtitle: '探索世界不同地区的山脉、山峰和徒步路线。',
+			countryPeaks: '座山峰',
+			countryRanges: '个山脉',
+			exploreCountry: '探索',
+
+			kicker: '探索 • 攀登 • 发现',
+			title: '寻找你的下一次山地探险',
+			subtitle: '探索欧洲及世界各地的山峰、徒步路线和实用山地信息。',
+
 			whyTitle: '为什么选择 PeakGuide',
 			whyHint: '本网站的目的',
 			whyCards: [
 				{
 					title: '快速且清晰',
-					body: '最小的混乱。最重要的信息触手可及。',
+					body: '在一个地方查看有关山峰和路线的最重要信息。',
 				},
 				{
-					title: '真正的指南',
-					body: '它旨在帮助规划出行，而不仅仅是好看。',
+					title: '实用的行程规划',
+					body: '提供路线、起点、停车、通行方式以及出发前需要了解的实用信息。',
 				},
 				{
-					title: '朝实用性发展',
-					body: '起点/通道、停车场、提示和地图链接。',
+					title: '不断扩展的数据库',
+					body: 'PeakGuide 将逐步加入更多国家、地区、山峰和徒步路线。',
 				},
 			],
-			howTitle: '它是如何运作的',
-			howHint: '3 个简单步骤',
-			steps: [
-				{
-					n: '1',
-					title: '选择一个山峰',
-					body: '进入列表并点击山峰卡片。',
-				},
-				{
-					n: '2',
-					title: '查看详情',
-					body: '查看山脉、海拔和关键信息。',
-				},
-				{
-					n: '3',
-					title: '规划您的出行',
-					body: '在未来的版本中：起点、通道和停车场。',
-				},
-			],
+
 			featuredTitle: '精选推荐',
 			seeAll: '查看全部',
 			openDetails: '打开详情',
 			featuredEmpty: '无数据——将山峰添加到数据库或启动 API。',
 			featuredErrorTitle: '获取山峰失败',
 			featuredErrorBody: '检查 Vite 中的 API / 代理。',
+			howTitle: '如何使用',
+			howHint: '3 个简单步骤',
+			steps: [
+				{
+					n: '1',
+					title: '探索',
+					body: '浏览国家、山脉、山峰和可用的徒步路线。',
+				},
+				{
+					n: '2',
+					title: '查看详情',
+					body: '查看海拔、位置、路线以及可用的实用信息。',
+				},
+				{
+					n: '3',
+					title: '规划行程',
+					body: '利用路线、起点、通行方式和停车信息规划您的山地行程。',
+				},
+			],
+
 			faqTitle: '常见问题',
 			faqHint: '简短回答',
 			faq: [
 				{
-					q: '这只是波兰山峰之冠吗？',
-					a: '目前是的——数据库以后可以扩展。',
+					q: 'PeakGuide 目前覆盖哪些国家？',
+					a: '目前数据库包括波兰和英国，未来计划加入更多国家和地区。',
 				},
 				{
-					q: '会有路线和 GPX 吗？',
-					a: '会的——首先是起点/停车场/链接，然后是 GPX。',
+					q: 'PeakGuide 是否包含徒步路线？',
+					a: '是的。可用路线可以包含距离、累计爬升、预计时间、难度和实用信息。',
 				},
 				{
 					q: '数据来自哪里？',
-					a: '数据库正在开发中，将补充来源/链接。',
+					a: '数据基于经过核实的来源进行收集和完善。项目还将进一步提供更清晰的数据来源和更新时间信息。',
 				},
 				{
-					q: '会有“收藏夹”吗？',
-					a: '会的——首先是本地的，然后是账户/同步。',
+					q: '未来还会增加新功能吗？',
+					a: '会。未来计划继续开发地图、天气、地形数据、POI、路线集合以及用户功能。',
 				},
 			],
 		},
@@ -906,6 +989,7 @@ const styles = {
 		whiteSpace: 'nowrap',
 		color: 'var(--primary)',
 		background: 'rgba(31,122,79,0.08)',
+		flexShrink: 0,
 	},
 
 	peakBottom: {

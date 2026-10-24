@@ -270,6 +270,16 @@ function getLabels(lang) {
 			send: 'Надіслати',
 			sentOk: 'Дякую! Повідомлення надіслано ✅',
 			contactNote: 'Повідомлення надходить до панелі адміністратора.',
+
+			tabs: {
+				messages: 'Повідомлення',
+				peaks: 'Вершини',
+				users: 'Користувачі',
+				tools: 'Інструменти',
+			},
+			emailError: 'Будь ласка, введіть дійсну адресу електронної пошти.',
+			messageError: 'Повідомлення не може бути порожнім.',
+			sending: 'Надсилання...',
 		},
 
 		zh: {
@@ -295,6 +305,16 @@ function getLabels(lang) {
 			send: '发送',
 			sentOk: '谢谢！消息已发送 ✅',
 			contactNote: '你的消息会发送到管理员面板。',
+
+			tabs: {
+				messages: '消息',
+				peaks: '山峰',
+				users: '用户',
+				tools: '工具',
+			},
+			emailError: '请输入有效的电子邮箱地址。',
+			messageError: '消息不能为空。',
+			sending: '发送中...',
 		},
 	};
 
