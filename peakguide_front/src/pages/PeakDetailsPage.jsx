@@ -224,7 +224,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 					<>
 						<span style={crumbSep}>›</span>
 						<Link
-							to={`/peaks?country=${encodeURIComponent(peak.country_code)}`}
+							to={`/peaks?country=${encodeURIComponent(peak.country_slug)}`}
 							style={crumbLink}
 						>
 							{peak.country_flag} {peak.country_name}

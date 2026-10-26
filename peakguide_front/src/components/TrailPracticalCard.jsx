@@ -258,7 +258,13 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
 								<h4 style={{ margin: 0 }}>
 									{t.name || labels.parking}
 									{p.is_primary ? ` · ${labels.primary}` : ''}
-								</h4>
+                                </h4>
+                                {p.address && (
+                                    <p style={paragraph}>
+                                        {p.address}
+                                        {p.postcode ? `, ${p.postcode}` : ''}
+                                    </p>
+                                )}
 								{!t.name && <p>{labels.missing}</p>}
 								{t.description && <p style={paragraph}>{t.description}</p>}
 								<p>
