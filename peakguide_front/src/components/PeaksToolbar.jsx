@@ -17,10 +17,10 @@ export default function PeaksToolbar({
 }) {
 	const [localQ, setLocalQ] = useState(q || "");
 	const t = getLabels(lang);
-	const selectedCountry = (countries || []).find((item) => item.code === country);
+	const selectedCountry = (countries || []).find((item) => item.slug === country);
 	const regions = selectedCountry?.regions || [];
 	const visibleRanges = (ranges || []).filter((item) => {
-		if (country !== "all" && item.country_code !== country) return false;
+		if (country !== "all" && item.country_slug !== country) return false;
 		if (region !== "all" && item.region_slug !== region) return false;
 		return true;
 	});
@@ -87,7 +87,7 @@ export default function PeaksToolbar({
 				>
 					<option value='all'>{t.allCountries}</option>
 					{(countries || []).map((item) => (
-						<option key={item.code} value={item.code}>
+						<option key={item.slug} value={item.slug}>
 							{item.flag_emoji} {item.name}
 						</option>
 					))}

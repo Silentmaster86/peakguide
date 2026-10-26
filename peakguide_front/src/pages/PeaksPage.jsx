@@ -86,7 +86,7 @@ export default function PeaksPage({ lang }) {
 
 		// 1) Location and range filters
 		if (country !== "all") {
-			list = list.filter((p) => p.country_code === country);
+			list = list.filter((p) => p.country_slug === country);
 		}
 
 		if (region !== "all") {
