@@ -57,7 +57,7 @@ body {
 
   --toolbar-text: var(--text);
 
-  --bg-overlay-from: rgba(255, 255, 255, 0.62);
+  --bg-overlay-from: rgba(255, 255, 255, 0.965);
   --bg-overlay-to: rgba(255, 255, 255, 0.68);
 
   --nav-pill-h: 36px;
@@ -100,8 +100,8 @@ html[data-theme="dark"] {
 
   --toolbar-text: var(--text);
 
-  --bg-overlay-from: rgba(2, 6, 23, 0.62);
-  --bg-overlay-to: rgba(2, 6, 23, 0.72);
+  --bg-overlay-from: rgba(10, 10, 22, 0.978);
+  --bg-overlay-to: rgba(2, 6, 23, 0.922);
 
   color-scheme: dark;
 }
@@ -137,8 +137,8 @@ html[data-theme="dark"] {
 
     --toolbar-text: var(--text);
 
-    --bg-overlay-from: rgba(2, 6, 23, 0.72);
-    --bg-overlay-to: rgba(2, 6, 23, 0.82);
+  --bg-overlay-from: rgba(10, 10, 22, 0.978);
+    --bg-overlay-to: rgba(2, 6, 23, 0.922);
 
     color-scheme: dark;
   }
