@@ -57,35 +57,35 @@ export default function Footer({ lang = 'pl' }) {
 
 function getLabels(lang) {
 	const dict = {
-		pl: {
-			tagline: 'Korona Gór Polski i nie tylko',
-			note: 'Praktyczny przewodnik po szczytach',
-			peaks: 'Szczyty',
-			ranges: 'Pasma',
-			about: 'O projekcie',
-		},
-		en: {
-			tagline: 'Crown of Polish Mountains & more',
-			note: 'A practical guide to peaks',
-			peaks: 'Peaks',
-			ranges: 'Ranges',
-			about: 'About',
-		},
-		ua: {
-			tagline: 'Корона польських гір і не тільки',
-			note: 'Практичний путівник по вершинах',
-			peaks: 'Вершини',
-			ranges: 'Хребти',
-			about: 'Про проєкт',
-		},
-		zh: {
-			tagline: '波兰山峰王冠及更多',
-			note: '实用的登山指南',
-			peaks: '山峰',
-			ranges: '山脉',
-			about: '关于',
-		},
-	};
+    pl: {
+      tagline: 'Twój przewodnik po górach',
+      note: 'Szczyty • trasy • praktyczne informacje',
+      peaks: 'Szczyty',
+      ranges: 'Pasma',
+      about: 'O projekcie',
+    },
+    en: {
+      tagline: 'Your mountain guide',
+      note: 'Peaks • trails • practical information',
+      peaks: 'Peaks',
+      ranges: 'Ranges',
+      about: 'About',
+    },
+    ua: {
+      tagline: 'Твій путівник по горах',
+      note: 'Вершини • маршрути • практична інформація',
+      peaks: 'Вершини',
+      ranges: 'Хребти',
+      about: 'Про проєкт',
+    },
+    zh: {
+      tagline: '你的登山指南',
+      note: '山峰 • 路线 • 实用信息',
+      peaks: '山峰',
+      ranges: '山脉',
+      about: '关于',
+    },
+  };
 
 	return dict[lang] || dict.pl;
 }

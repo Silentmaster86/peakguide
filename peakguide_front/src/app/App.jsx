@@ -29,11 +29,11 @@ export default function App() {
 
 	useEffect(() => {
 		const titles = {
-			pl: 'Korona Gór Polski i nie tylko — Przewodnik',
-			en: "Crown of Poland's Mountains & more — PeakGuide",
-			ua: 'Корона гір Польщі та більше — Путівник',
-			zh: '波兰山峰王冠及更多 — 高峰指南',
-		};
+      pl: 'PeakGuide — Twój przewodnik po górach',
+      en: 'PeakGuide — Your mountain guide',
+      ua: 'PeakGuide — Твій путівник по горах',
+      zh: 'PeakGuide — 你的登山指南',
+    };
 
 		document.title = titles[safeLang] || titles.pl;
 		document.documentElement.lang = safeLang;
