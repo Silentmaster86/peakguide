@@ -337,7 +337,7 @@ html[data-lang="zh"] body {
    ========================================================= */
 
 .home-page {
-  width: 100%;
+  width: 90%;
   margin-inline: auto;
   padding-bottom: 80px;
 }
@@ -1382,7 +1382,7 @@ a.country-showcase-card:hover {
 
 @media (max-width: 600px) {
   .home-page {
-    width: 100%;
+    width: 90%;
     padding-bottom: 24px;
   }
 

@@ -316,35 +316,12 @@ function QuickExploreContent({ item }) {
    COUNTRIES
    ========================================================= */
 
-const futureCountries = [
-	{
-		slug: 'ukraine',
-		name: 'Ukraine',
-	},
-	{
-		slug: 'china',
-		name: 'China',
-	},
-];
 
 function ExploreCountries({ countries, t }) {
-	const availableCountries = countries.map((country) => ({
+	const allCountries = countries.map((country) => ({
 		...country,
 		available: true,
 	}));
-
-	const existingSlugs = new Set(
-		availableCountries.map((country) => country.slug),
-	);
-
-	const future = futureCountries
-		.filter((country) => !existingSlugs.has(country.slug))
-		.map((country) => ({
-			...country,
-			available: false,
-		}));
-
-	const allCountries = [...availableCountries, ...future];
 
 	return (
 		<section className='home-section'>
