@@ -196,8 +196,9 @@ function getLabels(lang) {
       sessionLoading: 'Ładowanie sesji...',
     },
     en: {
-      tagline: 'Your mountain guide',
-      ranges: 'Ranges',
+  tagline: 'Your mountain guide',
+  peaks: 'Peaks',
+  ranges: 'Ranges',
       routes: 'Trails',
       trailheads: 'Trailheads',
       soon: 'soon',
