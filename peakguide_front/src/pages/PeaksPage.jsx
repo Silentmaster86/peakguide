@@ -8,6 +8,13 @@ import PeaksToolbar from '../components/PeaksToolbar';
 import PeakCard from '../components/PeakCard';
 import PeakCardSkeleton from '../components/PeakCardSkeleton';
 
+
+const UK_THREE_PEAKS_SLUGS = new Set([
+  'ben-nevis',
+  'scafell-pike',
+  'yr-wyddfa'
+]);
+
 export default function PeaksPage({ lang }) {
   const [refreshKey, setRefreshKey] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +24,8 @@ export default function PeaksPage({ lang }) {
   const country = searchParams.get('country') || 'all';
   const region = searchParams.get('region') || 'all';
   const range = searchParams.get('range') || 'all';
-  const sort = searchParams.get('sort') || 'elev_desc'; // elev_desc | elev_asc | name_asc | name_desc
+  const sort = searchParams.get('sort') || 'elev_desc';// elev_desc | elev_asc | name_asc | name_desc
+  const collection = searchParams.get('collection') || 'all';
 
   const peaksState = useAsync(() => fetchPeaks({ lang }), [lang, refreshKey]);
   const rangesState = useAsync(() => fetchRanges({ lang }), [lang, refreshKey]);
@@ -94,6 +102,14 @@ export default function PeaksPage({ lang }) {
       list = list.filter((p) => p.range_slug === range);
     }
 
+    if (collection === 'kgp') {
+      list = list.filter((p) => p.is_korona === true);
+    }
+
+    if (collection === 'three-peaks') {
+      list = list.filter((p) => UK_THREE_PEAKS_SLUGS.has(p.slug));
+    }
+
     // 2) Search
     if (safeQ) {
       list = list.filter((p) => {
@@ -117,7 +133,7 @@ export default function PeaksPage({ lang }) {
       out.sort((a, b) => String(b.peak_name || '').localeCompare(String(a.peak_name || ''), lang));
 
     return out;
-  }, [peaks, country, region, range, q, sort, lang]);
+  }, [peaks, country, region, range, collection, q, sort, lang]);
 
   const sections = useMemo(() => {
     const kgp = [];
@@ -125,10 +141,15 @@ export default function PeaksPage({ lang }) {
     const ukThreePeaks = [];
     const other = [];
     for (const p of filteredPeaks) {
-      if (p.country_code === 'PL' && p.is_korona) kgp.push(p);
-      else if (p.country_code === 'PL') polishOther.push(p);
-      else if (p.country_code === 'GB') ukThreePeaks.push(p);
-      else other.push(p);
+      if (p.country_code === 'PL' && p.is_korona) {
+        kgp.push(p);
+      } else if (p.country_code === 'PL') {
+        polishOther.push(p);
+      } else if (UK_THREE_PEAKS_SLUGS.has(p.slug)) {
+        ukThreePeaks.push(p);
+      } else {
+        other.push(p);
+      }
     }
 
     return [

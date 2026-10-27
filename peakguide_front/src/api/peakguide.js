@@ -23,12 +23,22 @@ function apiLang(lang) {
 	return 'pl';
 }
 
-function first(arr) {
-	return Array.isArray(arr) ? arr[0] : arr;
-}
+function translation(rows, lang, fallbackLangs = ['pl', 'en']) {
+  const translations = Array.isArray(rows) ? rows : [];
 
-function translation(rows, lang) {
-	return (rows || []).find((row) => row.lang === lang);
+  const preferred = translations.find((row) => row.lang === lang);
+
+  if (preferred) return preferred;
+
+  for (const fallbackLang of fallbackLangs) {
+    if (fallbackLang === lang) continue;
+
+    const fallback = translations.find((row) => row.lang === fallbackLang);
+
+    if (fallback) return fallback;
+  }
+
+  return translations[0] || null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -129,7 +139,7 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
       cover_image_url,
       is_korona,
       active,
-      peaks_i18n!inner (
+      peaks_i18n (
         name,
         short_description,
         description,
@@ -160,8 +170,7 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
       )
     `,
 		)
-		.eq('active', true)
-		.eq('peaks_i18n.lang', safeLang);
+		.eq('active', true);
 
 	if (only === 'korona') query = query.eq('is_korona', true);
 	if (only === 'nearby') query = query.eq('is_korona', false);
@@ -173,10 +182,8 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 	if (error) throw error;
 
 	const mapped = (data || []).map((p) => {
-		const i18n = first(p.peaks_i18n);
-		const rangeI18n = (p.mountain_ranges?.mountain_ranges_i18n || []).find(
-			(r) => r.lang === safeLang,
-		);
+		const i18n = translation(p.peaks_i18n, safeLang);
+		const rangeI18n = translation(p.mountain_ranges?.mountain_ranges_i18n, safeLang);
 		const country = p.mountain_ranges?.countries;
 		const region = p.mountain_ranges?.regions;
 		const countryI18n = translation(country?.countries_i18n, safeLang);
@@ -189,7 +196,7 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 			short_description: i18n?.short_description || '',
 			description: i18n?.description || '',
 			range_slug: p.mountain_ranges?.slug || '',
-			range_name: rangeI18n?.name || '',
+			range_name: rangeI18n?.name || p.mountain_range?.slug || '',
 			country_code: country?.code || '',
 			country_slug: country?.slug || '',
 			country_name: countryI18n?.name || country?.slug || '',
@@ -220,7 +227,7 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
       slug,
       country_id,
       region_id,
-      mountain_ranges_i18n!inner (
+      mountain_ranges_i18n (
         name,
         description,
         lang
@@ -243,13 +250,12 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
       )
     `,
 		)
-		.eq('mountain_ranges_i18n.lang', safeLang)
 		.order('slug', { ascending: true });
 
 	if (error) throw error;
 
 	const mapped = (data || []).map((r) => {
-		const i18n = first(r.mountain_ranges_i18n);
+		const i18n = translation(r.mountain_ranges_i18n, safeLang);
 		const countryI18n = translation(r.countries?.countries_i18n, safeLang);
 		const regionI18n = translation(r.regions?.regions_i18n, safeLang);
 
@@ -418,7 +424,7 @@ export async function fetchPeakBySlug(lang, slug) {
       cover_image_license_url,
       is_korona,
       active,
-      peaks_i18n!inner (
+      peaks_i18n (
         name,
         short_description,
         description,
@@ -454,14 +460,12 @@ export async function fetchPeakBySlug(lang, slug) {
 		)
 		.eq('slug', slug)
 		.eq('active', true)
-		.eq('peaks_i18n.lang', safeLang)
 		.single();
 
 	if (error) throw error;
 
-	const i18n = first(data.peaks_i18n);
-	const rangeI18n = (data.mountain_ranges?.mountain_ranges_i18n || []).find(
-		(r) => r.lang === safeLang,
+	const i18n = translation(data.peaks_i18n, safeLang);
+	const rangeI18n = translation(data.mountain_ranges?.mountain_ranges_i18n, safeLang
 	);
 	const country = data.mountain_ranges?.countries;
 	const region = data.mountain_ranges?.regions;
@@ -506,7 +510,7 @@ export async function fetchRangeBySlug(lang, slug) {
 			`
       id,
       slug,
-      mountain_ranges_i18n!inner (
+      mountain_ranges_i18n (
         name,
         description,
         lang
@@ -547,19 +551,18 @@ export async function fetchRangeBySlug(lang, slug) {
     `,
 		)
 		.eq('slug', slug)
-		.eq('mountain_ranges_i18n.lang', safeLang)
 		.single();
 
 	if (error) throw error;
 
-	const i18n = first(data.mountain_ranges_i18n);
+	const i18n = translation(data.mountain_ranges_i18n, safeLang);
 	const countryI18n = translation(data.countries?.countries_i18n, safeLang);
 	const regionI18n = translation(data.regions?.regions_i18n, safeLang);
 
 	const peaks = (data.peaks || [])
 		.filter((p) => p.active)
 		.map((p) => {
-			const pi = (p.peaks_i18n || []).find((x) => x.lang === safeLang);
+			const pi = translation(p.peaks_i18n, safeLang);
 
 			return {
 				...p,
