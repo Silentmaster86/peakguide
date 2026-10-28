@@ -1298,12 +1298,6 @@ function getLabels(lang) {
 	return dict[lang] || dict.pl;
 }
 
-/* =========================================================
-   HERO INLINE STYLES
-
-   Hero zostawiamy tutaj, ponieważ jest już sprawdzony.
-   Reszta HomePage będzie stylowana w CSS.
-   ========================================================= */
 
 const styles = {
 	hero: {
@@ -1316,7 +1310,7 @@ const styles = {
 		border: '1px solid color-mix(in srgb, var(--primary) 18%, transparent)',
 		borderRadius: 28,
 
-		backgroundImage: "url('/images/home/hero.png')",
+		backgroundImage: "url('/images/home/hero2.png')",
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 		backgroundRepeat: 'no-repeat',

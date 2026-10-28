@@ -57,8 +57,8 @@ body {
 
   --toolbar-text: var(--text);
 
-  --bg-overlay-from: rgba(255, 255, 255, 0.965);
-  --bg-overlay-to: rgba(255, 255, 255, 0.68);
+  --bg-overlay-from: rgba(255, 255, 255, 0.133);
+  --bg-overlay-to: rgba(204, 212, 215, 0.14);
 
   --nav-pill-h: 36px;
   --nav-pill-px: 12px;
@@ -100,7 +100,7 @@ html[data-theme="dark"] {
 
   --toolbar-text: var(--text);
 
-  --bg-overlay-from: rgba(10, 10, 22, 0.978);
+  --bg-overlay-from: rgba(21, 21, 22, 0.826);
   --bg-overlay-to: rgba(2, 6, 23, 0.922);
 
   color-scheme: dark;
@@ -137,7 +137,7 @@ html[data-theme="dark"] {
 
     --toolbar-text: var(--text);
 
-  --bg-overlay-from: rgba(10, 10, 22, 0.978);
+  --bg-overlay-from: rgba(21, 21, 22, 0.826);
     --bg-overlay-to: rgba(2, 6, 23, 0.922);
 
     color-scheme: dark;
@@ -1082,7 +1082,7 @@ a.country-showcase-card:hover {
 
   border-radius: 26px;
 
-  background-image: url('/images/home/hero.png');
+  background-image: url('/images/home/map-teaser3.png');
   background-position: center 55%;
   background-size: cover;
 

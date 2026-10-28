@@ -104,8 +104,8 @@ const layout = {
 const page = {
 	width: '90vw',
 	margin: '0 auto',
-	background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
-	border: '2px solid var(--border)',
+	background: 'color-mix(in srgb, var(--menu-bg) 70%, transparent)',
+	border: 'none',
 	borderRadius: 22,
 	padding: 18, // extra space for box shadow
 	boxShadow: 'var(--shadow)',
