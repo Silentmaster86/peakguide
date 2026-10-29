@@ -891,6 +891,7 @@ a.country-showcase-card:hover {
 
 .collection-card-2 {
   background-position: 70% center;
+  background-image: url('/images/collections/three_peaks.png');
 }
 
 .collection-card-3 {
