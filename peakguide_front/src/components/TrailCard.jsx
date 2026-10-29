@@ -56,7 +56,7 @@ export default function TrailCard({ trail, lang }) {
 
 	return (
 		<Link
-			to={`/peaks/${trail.peak_slug}`}
+			to={`/peaks/${trail.peak_slug}?tab=trails`}
 			style={{
 				display: 'block',
 				textDecoration: 'none',

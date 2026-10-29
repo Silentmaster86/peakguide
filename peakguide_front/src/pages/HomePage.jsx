@@ -624,7 +624,7 @@ function FeaturedTrails({ t, trails }) {
 				{featuredTrails.map((trail) => (
 					<Link
 						key={trail.id}
-						to={`/peaks/${trail.peak_slug}`}
+						to={`/peaks/${trail.peak_slug}?tab=trails`}
 						className='home-trail-card'
 					>
 						<div className='home-trail-top'>
