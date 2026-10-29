@@ -12,6 +12,7 @@ import PeakMap from '../components/PeakMap';
 import TrailPracticalCard from '../components/TrailPracticalCard';
 import ComingSoonBox from '../components/ComingSoonBox';
 import { safeUrl } from '../utils/practical.mjs';
+import { parseCoordinates } from '../utils/coordinates';
 
 export default function PeakDetailsPage({ lang = 'pl' }) {
   const { slug } = useParams();
@@ -93,28 +94,35 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
     async function loadExtras() {
       setTrailsStatus('loading');
       setPoisStatus('loading');
-      setPois([]);
       setTrails([]);
+      setPois([]);
 
-      try {
-        const [t, p] = await Promise.all([
-          fetchPeakTrailsBySlug(lang, slug),
-          fetchPeakPoisBySlug(lang, slug),
-        ]);
+      const [trailsResult, poisResult] = await Promise.allSettled([
+        fetchPeakTrailsBySlug(lang, slug),
+        fetchPeakPoisBySlug(lang, slug),
+      ]);
 
-        if (cancelled) return;
-        setTrails(Array.isArray(t) ? t : []);
-        setPois(Array.isArray(p) ? p : []);
+      if (cancelled) return;
+
+      if (trailsResult.status === 'fulfilled') {
+        setTrails(Array.isArray(trailsResult.value) ? trailsResult.value : []);
         setTrailsStatus('success');
-        setPoisStatus('success');
-      } catch {
-        if (cancelled) return;
+      } else {
+        setTrails([]);
         setTrailsStatus('error');
+      }
+
+      if (poisResult.status === 'fulfilled') {
+        setPois(Array.isArray(poisResult.value) ? poisResult.value : []);
+        setPoisStatus('success');
+      } else {
+        setPois([]);
         setPoisStatus('error');
       }
     }
 
     loadExtras();
+
     return () => {
       cancelled = true;
     };
@@ -145,26 +153,23 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
     };
   }, [lang, slug, peak?.slug]);
 
-  const mapUrl = useMemo(() => {
+  const coordinates = useMemo(() => {
     if (!peak) return null;
 
-    const lat = Number(peak.latitude);
-    const lon = Number(peak.longitude);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-
-    // Google Maps query URL
-    return `https://www.google.com/maps?q=${lat},${lon}`;
+    return parseCoordinates(peak.latitude, peak.longitude);
   }, [peak]);
+
+  const mapUrl = useMemo(() => {
+    if (!coordinates) return null;
+
+    return `https://www.google.com/maps?q=${coordinates.lat},${coordinates.lon}`;
+  }, [coordinates]);
 
   const coordsText = useMemo(() => {
-    if (!peak) return '';
+    if (!coordinates) return '';
 
-    const lat = Number(peak.latitude);
-    const lon = Number(peak.longitude);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return '';
-
-    return `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
-  }, [peak]);
+    return `${coordinates.lat.toFixed(6)}, ${coordinates.lon.toFixed(6)}`;
+  }, [coordinates]);
 
   async function handleCopy(text) {
     try {
@@ -1322,26 +1327,6 @@ const badgeRow = {
   display: 'flex',
   flexWrap: 'wrap',
   gap: 8,
-};
-
-const metaRow = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: 8,
-  marginTop: 10,
-};
-
-const metaPill = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 6,
-  padding: '6px 10px',
-  borderRadius: 999,
-  border: '1px solid rgba(255,255,255,0.12)',
-  background: 'rgba(255,255,255,0.04)',
-  fontWeight: 900,
-  fontSize: 12,
-  color: 'var(--muted)',
 };
 
 const badge = {

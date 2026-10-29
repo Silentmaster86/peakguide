@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { parseCoordinates } from "../utils/coordinates";
 
 export const SITE_URL = "https://peak-guide.netlify.app";
 export const SITE_NAME = "PeakGuide";
@@ -59,6 +60,8 @@ export function PeakSEO({ peak, lang = "pl" }) {
 			? `Poznaj szczyt ${peak.name}: wysokość, pasmo, współrzędne, mapa i pobliskie szczyty.`
 			: `Explore ${peak.name}: elevation, range, coordinates, map and nearby peaks.`);
 
+	const coordinates = parseCoordinates(peak.latitude, peak.longitude);
+	
 	// Structured data
 	const jsonLd = {
 		"@context": "https://schema.org",
@@ -66,12 +69,11 @@ export function PeakSEO({ peak, lang = "pl" }) {
 		name: peak.name,
 		description,
 		url: canonical,
-		geo:
-			peak.latitude && peak.longitude
+		geo: coordinates
 				? {
 						"@type": "GeoCoordinates",
-						latitude: Number(peak.latitude),
-						longitude: Number(peak.longitude),
+						latitude: coordinates.lat,
+						longitude: coordinates.lon,
 					}
 				: undefined,
 	};

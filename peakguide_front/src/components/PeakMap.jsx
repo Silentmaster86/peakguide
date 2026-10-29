@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { parseCoordinates } from "../utils/coordinates";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import marker2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -15,12 +16,13 @@ const ParkingIcon = L.divIcon({
   html: '<div style="width:30px;height:30px;background:#155bb5;color:white;border:2px solid white;border-radius:7px;text-align:center;font:bold 22px/30px sans-serif;box-shadow:0 2px 5px #0006">P</div>',
   iconSize: [34, 34], iconAnchor: [17, 34], popupAnchor: [0, -34],
 });
+
 function position(lat, lon) {
-  const valid = (v) => (typeof v === "number" || typeof v === "string") && String(v).trim() !== "";
-  if (!valid(lat) || !valid(lon)) return null;
-  const a = Number(lat), b = Number(lon);
-  return Number.isFinite(a) && Number.isFinite(b) && Math.abs(a) <= 90 && Math.abs(b) <= 180 ? [a, b] : null;
+  const coordinates = parseCoordinates(lat, lon);
+
+  return coordinates ? [coordinates.lat, coordinates.lon] : null;
 }
+
 function mapLink(value, coords) {
   try {
     const url = new URL(value);
