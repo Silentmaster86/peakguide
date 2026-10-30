@@ -570,19 +570,28 @@ html[data-lang="zh"] body {
 }
 
 .country-card-1 {
-  background-position: 15% center;
+  background-position: 55% center;
+  background-image: url('/images/destinations/poland.png');
 }
 
 .country-card-2 {
   background-position: 55% center;
+  background-image: url('/images/destinations/slovakia1.png');
 }
 
 .country-card-3 {
-  background-position: 75% center;
+  background-position: 55% center;
+  background-image: url('/images/destinations/ukraine1.png');
 }
 
 .country-card-4 {
-  background-position: 95% center;
+  background-position: 55% center;
+  background-image: url('/images/destinations/china.png');
+}
+
+.country-card-5 {
+  background-position: 43% center;
+  background-image: url('/images/destinations/united-kingdom.png');
 }
 
 a.country-showcase-card:hover {
@@ -889,6 +898,11 @@ a.country-showcase-card:hover {
   isolation: isolate;
 }
 
+.collection-card-1 {
+  background-position: 70% center;
+  background-image: url('/images/collections/kgp.png');
+}
+
 .collection-card-2 {
   background-position: 70% center;
   background-image: url('/images/collections/three_peaks.png');
@@ -896,10 +910,12 @@ a.country-showcase-card:hover {
 
 .collection-card-3 {
   background-position: 30% center;
+  background-image: url('/images/collections/carpathians.png');
 }
 
 .collection-card-4 {
   background-position: 85% center;
+  background-image: url('/images/collections/china.png');
 }
 
 .collection-card-overlay {
@@ -909,7 +925,7 @@ a.country-showcase-card:hover {
 
   background:
     linear-gradient(90deg,
-      rgba(5, 10, 8, 0.9) 0%,
+      rgba(5, 10, 8, 0.767) 0%,
       rgba(5, 10, 8, 0.58) 45%,
       rgba(5, 10, 8, 0.15) 100%);
 }
