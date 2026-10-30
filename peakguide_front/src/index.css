@@ -571,27 +571,27 @@ html[data-lang="zh"] body {
 
 .country-card-1 {
   background-position: 55% center;
-  background-image: url('/images/destinations/poland.png');
+  background-image: url('/images/destinations/poland_bg.png');
 }
 
 .country-card-2 {
   background-position: 55% center;
-  background-image: url('/images/destinations/slovakia1.png');
+  background-image: url('/images/destinations/slovakia_bg.png');
 }
 
 .country-card-3 {
   background-position: 55% center;
-  background-image: url('/images/destinations/ukraine1.png');
+  background-image: url('/images/destinations/ukraine_bg.png');
 }
 
 .country-card-4 {
   background-position: 55% center;
-  background-image: url('/images/destinations/china.png');
+  background-image: url('/images/destinations/china_bg.png');
 }
 
 .country-card-5 {
   background-position: 43% center;
-  background-image: url('/images/destinations/united-kingdom.png');
+  background-image: url('/images/destinations/united-kingdom_bg.png');
 }
 
 a.country-showcase-card:hover {
