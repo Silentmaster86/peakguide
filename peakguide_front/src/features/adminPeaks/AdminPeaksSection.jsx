@@ -1,7 +1,7 @@
 // src/admin/components/AdminPeaksSection.jsx
 
 import { useEffect, useMemo, useState } from 'react';
-import { fetchRanges } from '../../api/peakguide';
+import { fetchRanges, fetchSubranges } from '../../api/peakguide';
 import {
 	adminCreatePeak,
 	adminDeletePeak,
@@ -148,29 +148,36 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 	}, [lang]);
 
 	useEffect(() => {
-		(async () => {
-			if (!form.range_id) {
-				setSubranges([]);
-				return;
-			}
+    let cancelled = false;
 
-			try {
-				const res = await fetch(
-					`/api/subranges?range_id=${encodeURIComponent(form.range_id)}&lang=${encodeURIComponent(lang)}`,
-				);
+    async function loadSubranges() {
+      if (!form.range_id) {
+        setSubranges([]);
+        return;
+      }
 
-				if (!res.ok) {
-					setSubranges([]);
-					return;
-				}
+      try {
+        const data = await fetchSubranges({
+          rangeId: form.range_id,
+          lang,
+        });
 
-				const data = await res.json();
-				setSubranges(Array.isArray(data) ? data : []);
-			} catch {
-				setSubranges([]);
-			}
-		})();
-	}, [form.range_id, lang]);
+        if (!cancelled) {
+          setSubranges(Array.isArray(data) ? data : []);
+        }
+      } catch {
+        if (!cancelled) {
+          setSubranges([]);
+        }
+      }
+    }
+
+    loadSubranges();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [form.range_id, lang]);
 
 	const filtered = useMemo(() => items, [items]);
 

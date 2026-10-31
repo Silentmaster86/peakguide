@@ -17,6 +17,12 @@ const cache = {
 	nearbyBySlug: new Map(),
 };
 
+export function invalidatePeakGuideCache() {
+	Object.values(cache).foreach((store) => {
+		store.clear();
+	});
+}
+
 function apiLang(lang) {
 	const v = (lang || 'pl').toLowerCase();
 	if (['pl', 'en', 'ua', 'zh'].includes(v)) return v;
@@ -278,6 +284,49 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Subranges list                                                         */
+/* ------------------------------------------------------------------ */
+
+export async function fetchSubranges({ rangeId, lang = 'pl' } = {}) {
+  const safeLang = apiLang(lang);
+  const id = Number(rangeId);
+
+  if (!Number.isInteger(id) || id <= 0) {
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from('subranges')
+    .select(
+      `
+      id,
+      slug,
+      range_id,
+      subranges_i18n (
+        lang,
+        name
+      )
+    `
+    )
+    .eq('range_id', id)
+    .order('slug', { ascending: true });
+
+  if (error) throw error;
+
+  return (data || []).map((subrange) => {
+    const i18n = translation(subrange.subranges_i18n, safeLang);
+
+    return {
+      id: subrange.id,
+      slug: subrange.slug,
+      range_id: subrange.range_id,
+      name: i18n?.name || subrange.slug,
+    };
+  });
+}
+
+
+/* ------------------------------------------------------------------ */
 /* Trails list                                                         */
 /* ------------------------------------------------------------------ */
 
@@ -355,7 +404,7 @@ export async function fetchTrails({ lang = 'pl' } = {}) {
 	if (error) throw error;
 
 	const mapped = (data || []).map((t) => {
-		const i18n = (t.trails_i18n || []).find((x) => x.lang === safeLang);
+		const i18n = translation(t.trails_i18n, safeLang);
 
 		const peak = t.peaks;
 		const peakI18n = translation(peak?.peaks_i18n, safeLang);

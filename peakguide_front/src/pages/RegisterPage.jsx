@@ -15,13 +15,13 @@ export default function RegisterPage({ lang = "pl" }) {
 	const nav = useNavigate();
 
 	const busy = status === "loading";
-	const authed = status === "authed";
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [localError, setLocalError] = useState("");
+	const [registrationComplete, setRegistrationComplete] = useState(false);
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -31,15 +31,21 @@ export default function RegisterPage({ lang = "pl" }) {
 		if (!isEmail(email)) return setLocalError(t.errEmail);
 		if (!password || password.length < 6) return setLocalError(t.errPass);
 
-		try {
-			await register({ email, password, firstName, lastName });
-			nav("/", { replace: true });
-		} catch {
-			// handled in context
-		}
-	}
+			const result = await register({
+				email,
+				password,
+				firstName,
+				lastName,
+			});
 
-	if (authed) return <Navigate to='/panel' replace />;
+			if (result.requiresConfirmation) {
+				setRegistrationComplete(true);
+				return;
+			}
+
+			nav("/panel", { replace: true });
+		}
+
 
 	return (
 		<AuthShell
@@ -52,7 +58,20 @@ export default function RegisterPage({ lang = "pl" }) {
 				</>
 			}
 		>
-			<form onSubmit={onSubmit} style={{ display: "grid", gap: 10 }}>
+
+			{registrationComplete && (
+				<div style={successBox}>
+					<strong>{t.checkEmailTitle}</strong>
+					<div>{t.checkEmailText}</div>
+				</div>
+			)}
+
+			<form
+				onSubmit={onSubmit}
+				style={{
+					display: registrationComplete ? "none" : "grid",
+					gap: 10
+				}}>
 				<div style={grid2}>
 					<Field label={t.firstName}>
 						<TextInput
@@ -118,83 +137,94 @@ export default function RegisterPage({ lang = "pl" }) {
 
 function getLabels(lang) {
 	const dict = {
-		pl: {
-			title: "Rejestracja",
-			subtitle: "Utwórz konto i przejdź do panelu.",
-			firstName: "Imię",
-			lastName: "Nazwisko (opcjonalnie)",
-			email: "Email",
-			password: "Hasło",
-			submit: "Utwórz konto",
-			haveAccount: "Masz konto?",
-			login: "Logowanie",
-			backHome: "Powrót",
-			firstPh: "Przemysław",
-			lastPh: "Pietkun",
-			emailPh: "you@example.com",
-			passPh: "••••••••",
-			errFirst: "Imię min. 2 znaki.",
-			errEmail: "Podaj poprawny email.",
-			errPass: "Hasło min. 6 znaków.",
-		},
-		en: {
-			title: "Register",
-			subtitle: "Create an account and go to your panel.",
-			firstName: "First name",
-			lastName: "Last name (optional)",
-			email: "Email",
-			password: "Password",
-			submit: "Create account",
-			haveAccount: "Already have an account?",
-			login: "Sign in",
-			backHome: "Back",
-			firstPh: "John",
-			lastPh: "Smith",
-			emailPh: "you@example.com",
-			passPh: "••••••••",
-			errFirst: "First name must be at least 2 characters.",
-			errEmail: "Enter a valid email.",
-			errPass: "Password must be at least 6 characters.",
-		},
-		ua: {
-			title: "Реєстрація",
-			subtitle: "Створіть акаунт і перейдіть до панелі.",
-			firstName: "Ім'я",
-			lastName: "Прізвище (необов'язково)",
-			email: "Email",
-			password: "Пароль",
-			submit: "Створити акаунт",
-			haveAccount: "Вже є акаунт?",
-			login: "Вхід",
-			backHome: "Назад",
-			firstPh: "Ім'я",
-			lastPh: "Прізвище",
-			emailPh: "you@example.com",
-			passPh: "••••••••",
-			errFirst: "Ім'я мін. 2 символи.",
-			errEmail: "Введіть коректний email.",
-			errPass: "Пароль мін. 6 символів.",
-		},
-		zh: {
-			title: "注册",
-			subtitle: "创建账号并进入面板。",
-			firstName: "名",
-			lastName: "姓（可选）",
-			email: "邮箱",
-			password: "密码",
-			submit: "创建账号",
-			haveAccount: "已有账号？",
-			login: "登录",
-			backHome: "返回",
-			firstPh: "名",
-			lastPh: "姓",
-			emailPh: "you@example.com",
-			passPh: "••••••••",
-			errFirst: "名字至少 2 个字符。",
-			errEmail: "请输入正确的邮箱。",
-			errPass: "密码至少 6 个字符。",
-		},
-	};
+    pl: {
+      title: 'Rejestracja',
+      subtitle: 'Utwórz konto PeakGuide.',
+      firstName: 'Imię',
+      lastName: 'Nazwisko (opcjonalnie)',
+      email: 'Email',
+      password: 'Hasło',
+      submit: 'Utwórz konto',
+      haveAccount: 'Masz konto?',
+      login: 'Logowanie',
+      backHome: 'Powrót',
+      firstPh: 'Przemysław',
+      lastPh: 'Pietkun',
+      emailPh: 'you@example.com',
+      passPh: '••••••••',
+      errFirst: 'Imię min. 2 znaki.',
+      errEmail: 'Podaj poprawny email.',
+      errPass: 'Hasło min. 6 znaków.',
+      checkEmailTitle: 'Sprawdź swoją skrzynkę e-mail',
+      checkEmailText:
+        'Konto zostało utworzone. Kliknij link w wiadomości e-mail, aby potwierdzić konto, a następnie się zaloguj.',
+    },
+    en: {
+      title: 'Register',
+      subtitle: 'Create your PeakGuide account.',
+      firstName: 'First name',
+      lastName: 'Last name (optional)',
+      email: 'Email',
+      password: 'Password',
+      submit: 'Create account',
+      haveAccount: 'Already have an account?',
+      login: 'Sign in',
+      backHome: 'Back',
+      firstPh: 'John',
+      lastPh: 'Smith',
+      emailPh: 'you@example.com',
+      passPh: '••••••••',
+      errFirst: 'First name must be at least 2 characters.',
+      errEmail: 'Enter a valid email.',
+      errPass: 'Password must be at least 6 characters.',
+      checkEmailTitle: 'Check your email',
+      checkEmailText:
+        'Your account has been created. Follow the link in the email to confirm your account, then sign in.',
+    },
+    ua: {
+      title: 'Реєстрація',
+      subtitle: 'Створіть обліковий запис PeakGuide.',
+      firstName: "Ім'я",
+      lastName: "Прізвище (необов'язково)",
+      email: 'Email',
+      password: 'Пароль',
+      submit: 'Створити акаунт',
+      haveAccount: 'Вже є акаунт?',
+      login: 'Вхід',
+      backHome: 'Назад',
+      firstPh: "Ім'я",
+      lastPh: 'Прізвище',
+      emailPh: 'you@example.com',
+      passPh: '••••••••',
+      errFirst: "Ім'я мін. 2 символи.",
+      errEmail: 'Введіть коректний email.',
+      errPass: 'Пароль мін. 6 символів.',
+      checkEmailTitle: 'Перевірте свою електронну пошту',
+      checkEmailText:
+        'Обліковий запис створено. Перейдіть за посиланням у листі, щоб підтвердити його, а потім увійдіть.',
+    },
+    zh: {
+      title: '注册',
+      subtitle: '创建您的 PeakGuide 账号。',
+      firstName: '名',
+      lastName: '姓（可选）',
+      email: '邮箱',
+      password: '密码',
+      submit: '创建账号',
+      haveAccount: '已有账号？',
+      login: '登录',
+      backHome: '返回',
+      firstPh: '名',
+      lastPh: '姓',
+      emailPh: 'you@example.com',
+      passPh: '••••••••',
+      errFirst: '名字至少 2 个字符。',
+      errEmail: '请输入正确的邮箱。',
+      errPass: '密码至少 6 个字符。',
+      checkEmailTitle: '请查看您的邮箱',
+      checkEmailText: '账号已创建。请点击邮件中的链接完成确认，然后登录。',
+    },
+  };
 
 	return dict[lang] || dict.pl;
 }
@@ -205,4 +235,15 @@ const grid2 = {
 	display: "grid",
 	gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
 	gap: 10,
+};
+
+const successBox = {
+  display: 'grid',
+  gap: 8,
+  padding: 14,
+  marginBottom: 12,
+  borderRadius: 14,
+  border: '1px solid var(--border)',
+  background: 'var(--surface-2)',
+  lineHeight: 1.5,
 };

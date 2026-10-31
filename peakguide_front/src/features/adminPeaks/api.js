@@ -1,5 +1,5 @@
 import { supabase } from '../../lib/supabaseClient';
-
+import { invalidatePeakGuideCache } from '../../api/peakguide';
 const LANGS = ['pl', 'en', 'ua', 'zh'];
 
 function normalizeLang(lang) {
@@ -175,6 +175,8 @@ export async function adminCreatePeak(body) {
 
 	if (i18nError) throw new Error(i18nError.message);
 
+	invalidatePeakGuideCache();
+
 	return { item: peak };
 }
 
@@ -219,25 +221,25 @@ export async function adminUpdatePeak(id, body) {
 
 	if (i18nError) throw new Error(i18nError.message);
 
+	invalidatePeakGuideCache();
+
 	return { ok: true };
 }
 
 export async function adminDeletePeak(id) {
-	const peakId = Number(id);
+  const peakId = Number(id);
 
-	const { error: i18nError } = await supabase
-		.from('peaks_i18n')
-		.delete()
-		.eq('peak_id', peakId);
+  if (!Number.isInteger(peakId) || peakId <= 0) {
+    throw new Error('Invalid peak id');
+  }
 
-	if (i18nError) throw new Error(i18nError.message);
+  const { error } = await supabase.rpc('admin_delete_peak', {
+    p_peak_id: peakId,
+  });
 
-	const { error: peakError } = await supabase
-		.from('peaks')
-		.delete()
-		.eq('id', peakId);
+  if (error) throw new Error(error.message);
 
-	if (peakError) throw new Error(peakError.message);
+	invalidatePeakGuideCache();
 
-	return { ok: true };
+  return { ok: true };
 }

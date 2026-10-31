@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import React, {
 	createContext,
 	useCallback,
@@ -69,9 +68,20 @@ export function AuthProvider({ children }) {
 		try {
 			const data = await authApi.register(payload);
 			const u = data?.user ?? data ?? null;
-			setUser(u);
-			setStatus("authed");
-			return u;
+			const hasSession = Boolean(data?.session);
+
+			if (hasSession && u) {
+				setUser(u);
+				setStatus("authed");
+			} else {
+				setUser(null);
+				setStatus("guest");
+			}
+			return {
+				user: u,
+				session: data?.session ?? null,
+				requiresConfirmation: !hasSession,
+			};
 		} catch (e) {
 			setUser(null);
 			setStatus("guest");
