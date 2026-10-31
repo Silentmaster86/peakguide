@@ -18,7 +18,7 @@ const cache = {
 };
 
 export function invalidatePeakGuideCache() {
-	Object.values(cache).foreach((store) => {
+	Object.values(cache).forEach((store) => {
 		store.clear();
 	});
 }
