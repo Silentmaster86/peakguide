@@ -8,12 +8,20 @@ import PeaksToolbar from '../components/PeaksToolbar';
 import PeakCard from '../components/PeakCard';
 import PeakCardSkeleton from '../components/PeakCardSkeleton';
 
+const UK_THREE_PEAKS_SLUGS = new Set(['ben-nevis', 'scafell-pike', 'yr-wyddfa']);
 
-const UK_THREE_PEAKS_SLUGS = new Set([
-  'ben-nevis',
-  'scafell-pike',
-  'yr-wyddfa'
-]);
+function normalizeSearchText(value = '') {
+  return String(value)
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ł/g, 'l');
+}
+
+const PEAK_SEARCH_ALIASES = {
+  'yr-wyddfa': ['snowdon'],
+};
 
 export default function PeaksPage({ lang }) {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -24,7 +32,7 @@ export default function PeaksPage({ lang }) {
   const country = searchParams.get('country') || 'all';
   const region = searchParams.get('region') || 'all';
   const range = searchParams.get('range') || 'all';
-  const sort = searchParams.get('sort') || 'elev_desc';// elev_desc | elev_asc | name_asc | name_desc
+  const sort = searchParams.get('sort') || 'elev_desc'; // elev_desc | elev_asc | name_asc | name_desc
   const collection = searchParams.get('collection') || 'all';
 
   const peaksState = useAsync(() => fetchPeaks({ lang }), [lang, refreshKey]);
@@ -86,7 +94,7 @@ export default function PeaksPage({ lang }) {
   }
 
   const filteredPeaks = useMemo(() => {
-    const safeQ = q.trim().toLowerCase();
+    const safeQ = normalizeSearchText(q);
     let list = peaks;
 
     // 1) Location and range filters
@@ -113,9 +121,14 @@ export default function PeaksPage({ lang }) {
     // 2) Search
     if (safeQ) {
       list = list.filter((p) => {
-        const name = String(p.peak_name || '').toLowerCase();
-        const rname = String(p.range_name || '').toLowerCase();
-        return name.includes(safeQ) || rname.includes(safeQ);
+        const searchableValues = [
+          p.peak_name,
+          p.range_name,
+          p.slug,
+          ...(PEAK_SEARCH_ALIASES[p.slug] || []),
+        ];
+
+        return searchableValues.some((value) => normalizeSearchText(value).includes(safeQ));
       });
     }
 
@@ -172,8 +185,8 @@ export default function PeaksPage({ lang }) {
 
   const description =
     lang === 'pl'
-      ? 'Szczyty Polski i Wielkiej Brytanii, w tym Korona Gór Polski oraz UK Three Peaks. Filtruj według kraju, regionu i pasma.'
-      : 'Browse mountain peaks in Poland and the United Kingdom, including the Crown of Polish Mountains and UK Three Peaks.';
+      ? 'Odkrywaj szczyty, pasma i trasy górskie w wielu krajach. Filtruj według kraju, regionu i pasma.'
+      : 'Explore mountain peaks, ranges and hiking routes across multiple countries. Filter by country, region and mountain range.';
 
   return (
     <div style={page}>
