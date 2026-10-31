@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Navigate, useLocation, useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/useAuth";
 import AuthShell from "../components/AuthShell";
 import { Field, TextInput, PrimaryBtn } from "../components/AuthFormBits";
 

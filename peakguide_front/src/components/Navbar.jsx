@@ -3,7 +3,7 @@ import DesktopThemeSwitcher from './DesktopThemeSwitcher';
 import LanguageSwitcherDropdown from './LanguageSwitcherDropdown';
 import NavDropdown from './NavDropdown';
 import { useMedia } from '../hooks/useMedia';
-import { useAuth } from '../auth/AuthContext';
+import { useAuth } from '../auth/useAuth';
 
 export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 	const t = getLabels(lang);

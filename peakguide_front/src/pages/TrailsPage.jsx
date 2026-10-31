@@ -1,70 +1,71 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchTrails } from '../api/peakguide';
+import { normalizeSearchText } from '../utils/search';
 
 import TrailCard from '../components/TrailCard';
 
 const translations = {
-	pl: {
-		title: 'Trasy',
-		loading: 'Ładowanie tras...',
-		error: 'Nie udało się załadować tras.',
-		empty: 'Brak dostępnych tras.',
-		searchPlaceholder: 'Szukaj trasy...',
-		noResults: 'Nie znaleziono tras spełniających kryteria.',
-		allCountries: 'Wszystkie kraje',
-		allDifficulties: 'Wszystkie poziomy trudności',
-		hard: 'Trudna',
-		easy: 'Łatwa',
-		moderate: 'Średnia',
-		results: 'Liczba tras',
-		clearFilters: 'Wyczyść filtry',
-	},
-	en: {
-		title: 'Trails',
-		loading: 'Loading trails...',
-		error: 'Failed to load trails.',
-		empty: 'No trails available.',
-		searchPlaceholder: 'Search trails...',
-		noResults: 'No trails found matching your criteria.',
-		allCountries: 'All countries',
-		allDifficulties: 'All difficulties',
-		hard: 'Hard',
-		easy: 'Easy',
-		moderate: 'Moderate',
-		results: 'Trails found',
-		clearFilters: 'Clear filters',
-	},
-	ua: {
-		title: 'Маршрути',
-		loading: 'Завантаження маршрутів...',
-		error: 'Не вдалося завантажити маршрути.',
-		empty: 'Немає доступних маршрутів.',
-		searchPlaceholder: 'Пошук маршрутів...',
-		noResults: 'Не знайдено маршрутів, що відповідають вашим критеріям.',
-		allCountries: 'Yсі краї',
-		allDifficulties: 'Yсі рівні складності',
-		hard: 'Складна',
-		easy: 'Легка',
-		moderate: 'Середня',
-		results: 'Знайдено маршрутів',
-		clearFilters: 'Очистити фільтри',
-	},
-	zh: {
-		title: '路线',
-		loading: '正在加载路线...',
-		error: '无法加载路线。',
-		empty: '暂无可用路线。',
-		searchPlaceholder: '搜索路线...',
-		noResults: '未找到符合您条件的路线。',
-		allCountries: '所有国家',
-		allDifficulties: '所有难度',
-		hard: '困难',
-		easy: '简单',
-		moderate: '中等',
-		results: '找到的路线',
-		clearFilters: '清除筛选',
-	},
+  pl: {
+    title: 'Trasy',
+    loading: 'Ładowanie tras...',
+    error: 'Nie udało się załadować tras.',
+    empty: 'Brak dostępnych tras.',
+    searchPlaceholder: 'Szukaj trasy...',
+    noResults: 'Nie znaleziono tras spełniających kryteria.',
+    allCountries: 'Wszystkie kraje',
+    allDifficulties: 'Wszystkie poziomy trudności',
+    hard: 'Trudna',
+    easy: 'Łatwa',
+    moderate: 'Średnia',
+    results: 'Liczba tras',
+    clearFilters: 'Wyczyść filtry',
+  },
+  en: {
+    title: 'Trails',
+    loading: 'Loading trails...',
+    error: 'Failed to load trails.',
+    empty: 'No trails available.',
+    searchPlaceholder: 'Search trails...',
+    noResults: 'No trails found matching your criteria.',
+    allCountries: 'All countries',
+    allDifficulties: 'All difficulties',
+    hard: 'Hard',
+    easy: 'Easy',
+    moderate: 'Moderate',
+    results: 'Trails found',
+    clearFilters: 'Clear filters',
+  },
+  ua: {
+    title: 'Маршрути',
+    loading: 'Завантаження маршрутів...',
+    error: 'Не вдалося завантажити маршрути.',
+    empty: 'Немає доступних маршрутів.',
+    searchPlaceholder: 'Пошук маршрутів...',
+    noResults: 'Не знайдено маршрутів, що відповідають вашим критеріям.',
+    allCountries: 'Усі краї',
+    allDifficulties: 'Усі рівні складності',
+    hard: 'Складна',
+    easy: 'Легка',
+    moderate: 'Середня',
+    results: 'Знайдено маршрутів',
+    clearFilters: 'Очистити фільтри',
+  },
+  zh: {
+    title: '路线',
+    loading: '正在加载路线...',
+    error: '无法加载路线。',
+    empty: '暂无可用路线。',
+    searchPlaceholder: '搜索路线...',
+    noResults: '未找到符合您条件的路线。',
+    allCountries: '所有国家',
+    allDifficulties: '所有难度',
+    hard: '困难',
+    easy: '简单',
+    moderate: '中等',
+    results: '找到的路线',
+    clearFilters: '清除筛选',
+  },
 };
 
 export default function TrailsPage({ lang }) {
@@ -148,17 +149,24 @@ export default function TrailsPage({ lang }) {
 	const difficulties = [
 		...new Set(trails.map((trail) => trail.difficulty).filter(Boolean)),
 	];
+	
+	const search = normalizeSearchText(query);
 
 	const filteredTrails = trails.filter((trail) => {
-		const search = query.trim().toLowerCase();
+
+		const searchableValues = [
+			trail.name,
+			trail.peak_name,
+			trail.range_name,
+			trail.region_name,
+			trail.country_name,
+		];
 
 		const matchesSearch =
 			!search ||
-			trail.name.toLowerCase().includes(search) ||
-			trail.peak_name.toLowerCase().includes(search) ||
-			trail.range_name.toLowerCase().includes(search) ||
-			trail.region_name.toLowerCase().includes(search) ||
-			trail.country_name.toLowerCase().includes(search);
+			searchableValues.some((value) =>
+				normalizeSearchText(value).includes(search)
+			);
 
 		const matchesCountry = !country || trail.country_slug === country;
 		const matchesDifficulty = !difficulty || trail.difficulty === difficulty;

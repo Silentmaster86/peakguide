@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useAuth } from '../auth/AuthContext';
+import { useAuth } from '../auth/useAuth';
 import { sendMessage } from '../api/messages';
 import AdminTools from './AdminTools';
 import AdminPeaksSection from '../features/adminPeaks/AdminPeaksSection';

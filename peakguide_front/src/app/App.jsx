@@ -36,8 +36,10 @@ export default function App() {
     };
 
 		document.title = titles[safeLang] || titles.pl;
-		document.documentElement.lang = safeLang;
-		document.documentElement.dataset.lang = safeLang;
+
+		const htmlLang = safeLang === 'ua' ? 'uk' : safeLang;		
+		document.documentElement.lang = htmlLang;
+		document.documentElement.dataset.lang = htmlLang;
 
 		// Persist user's choice (save the raw UI choice)
 		localStorage.setItem('peakguide_lang', lang);

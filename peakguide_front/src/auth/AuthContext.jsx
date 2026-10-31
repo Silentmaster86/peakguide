@@ -1,14 +1,11 @@
 import React, {
-	createContext,
 	useCallback,
-	useContext,
 	useEffect,
 	useMemo,
 	useState,
 } from "react";
-import * as authApi from "../api/auth"; // <-- fix
-
-const AuthContext = createContext(null);
+import * as authApi from "../api/auth";
+import { AuthContext } from './authContext';
 
 export function AuthProvider({ children }) {
 	const [status, setStatus] = useState("loading"); // loading | authed | guest | error
@@ -107,10 +104,4 @@ export function AuthProvider({ children }) {
 	);
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth() {
-	const ctx = useContext(AuthContext);
-	if (!ctx) throw new Error("useAuth must be used within AuthProvider");
-	return ctx;
 }

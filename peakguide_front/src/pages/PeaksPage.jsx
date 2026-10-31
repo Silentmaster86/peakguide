@@ -4,20 +4,12 @@ import { SEO } from '../seo/SEO';
 import { SITE_URL, SITE_NAME } from '../seo/site';
 import { fetchCountries, fetchPeaks, fetchRanges } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
+import { normalizeSearchText } from '../utils/search';
 import PeaksToolbar from '../components/PeaksToolbar';
 import PeakCard from '../components/PeakCard';
 import PeakCardSkeleton from '../components/PeakCardSkeleton';
 
 const UK_THREE_PEAKS_SLUGS = new Set(['ben-nevis', 'scafell-pike', 'yr-wyddfa']);
-
-function normalizeSearchText(value = '') {
-  return String(value)
-    .trim()
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/ł/g, 'l');
-}
 
 const PEAK_SEARCH_ALIASES = {
   'yr-wyddfa': ['snowdon'],
@@ -185,9 +177,8 @@ export default function PeaksPage({ lang }) {
 
   const description =
     lang === 'pl'
-      ? 'Odkrywaj szczyty, pasma i trasy górskie w wielu krajach. Filtruj według kraju, regionu i pasma.'
-      : 'Explore mountain peaks, ranges and hiking routes across multiple countries. Filter by country, region and mountain range.';
-
+      ? 'Odkrywaj szczyty górskie dostępne w PeakGuide. Filtruj według kraju, regionu i pasma górskiego.'
+      : 'Explore mountain peaks available in PeakGuide. Filter by country, region and mountain range.';
   return (
     <div style={page}>
       {/* Helmet SEO */}

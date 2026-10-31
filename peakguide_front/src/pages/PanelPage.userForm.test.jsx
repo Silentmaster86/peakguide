@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
 // mock AuthContext
-vi.mock("../auth/AuthContext", () => ({
+vi.mock("../auth/useAuth", () => ({
 	useAuth: () => ({
 		status: "authed",
 		user: { email: "admin@test.com", display_name: "Admin", is_admin: true },

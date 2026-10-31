@@ -198,7 +198,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
     return (
       <div style={wrap}>
         <div style={errorBox}>
-          <div style={{ fontWeight: 900, marginBottom: 6 }}>Error</div>
+          <div style={{ fontWeight: 900, marginBottom: 6 }}>{labels.errorTitle}</div>
           <div style={{ opacity: 0.9 }}>{error}</div>
           <div style={{ marginTop: 12 }}>
             <Link to="/peaks" style={backLink}>
@@ -347,7 +347,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
         {peak.short_description ? (
           <p style={heroSubtitle}>{peak.short_description}</p>
         ) : (
-          <p style={heroSubtitle}>{lang === 'pl' ? '—' : '—'}</p>
+          <p style={heroSubtitle}>{labels.descriptionMissing}</p>
         )}
       </section>
 
@@ -383,7 +383,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
               {peak.description ? (
                 <div style={textBlock}>{peak.description}</div>
               ) : (
-                <div style={muted}>—</div>
+                <div style={muted}>{labels.descriptionMissing}</div>
               )}
 
               <div style={{ marginTop: 12 }}>
@@ -399,7 +399,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
             {/* Right info panel */}
             <aside style={sideStyle(isMobile)}>
-              <div style={sideTitle}>Info</div>
+              <div style={sideTitle}>{labels.info}</div>
 
               <div style={kv}>
                 <div style={k}>{labels.elevation}</div>
@@ -430,7 +430,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                         type="button"
                         style={miniBtn}
                         onClick={() => handleCopy(coordsText)}
-                        title="Copy coordinates"
+                        title={labels.copyCoordinates}
                       >
                         {labels.copy}
                       </button>
@@ -451,12 +451,10 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
           {/* Peaks in the same range */}
           <section style={rangeSection}>
-            <h3 style={rangeTitle}>
-              {lang === 'pl' ? 'W pobliżu warto zdobyć' : 'Nearby worth hiking'}
-            </h3>
+            <h3 style={rangeTitle}>{labels.nearbyTitle}</h3>
 
-            {nearbyStatus === 'loading' && <div style={muted}>Loading…</div>}
-            {nearbyStatus === 'error' && <div style={muted}>Could not load nearby peaks.</div>}
+            {nearbyStatus === 'loading' && <div style={muted}>{labels.loading}</div>}
+            {nearbyStatus === 'error' && <div style={muted}>{labels.failedNearby}</div>}
             {nearbyStatus === 'success' && nearbyPeaks.length === 0 && <div style={muted}>—</div>}
 
             {nearbyStatus === 'success' && nearbyPeaks.length > 0 && (
@@ -731,10 +729,13 @@ function trailOptionLabel(value, labels) {
 function getLabels(lang) {
   const dict = {
     pl: {
+      info: 'Informacje o szczycie',
+      copyCoordinates: 'Kopiuj współrzędne',
       metricSource: 'Źródło',
       metricVerified: 'Zweryfikowano',
       metricUnconfirmed: 'Brak potwierdzenia',
       peaks: 'Szczyty',
+      nearbyTitle: 'W pobliżu warto zdobyć',
       ranges: 'Pasma',
       inRange: 'W tym paśmie',
       back: 'Wróć do listy',
@@ -750,11 +751,15 @@ function getLabels(lang) {
       photoSource: 'Źródło',
       cropped: 'wykadrowane',
 
+      errorTitle: 'Błąd',
+      descriptionMissing: 'Opis nie został jeszcze dodany.',
+
       /* ------------------- trails and pois PL ------------------- */
 
       trails: 'Szlaki',
       pois: 'Punkty (POI)',
       loading: 'Ładowanie…',
+      failedNearby: 'Nie udało się załadować pobliskich szczytów.',
       noTrails: 'Brak szlaków.',
       noPois: 'Brak punktów POI.',
       failedTrails: 'Nie udało się wczytać szlaków.',
@@ -778,10 +783,13 @@ function getLabels(lang) {
         'Parking, schroniska, punkty widokowe i inne przydatne miejsca pojawią się w kolejnych aktualizacjach.',
     },
     en: {
+      info: 'Peak information',
+      copyCoordinates: 'Copy coordinates',
       metricSource: 'Source',
       metricVerified: 'Verified',
       metricUnconfirmed: 'Not confirmed',
       peaks: 'Peaks',
+      nearbyTitle: 'Nearby peaks worth hiking',
       ranges: 'Ranges',
       inRange: 'In this range',
       back: 'Back to list',
@@ -797,12 +805,16 @@ function getLabels(lang) {
       photoSource: 'Source',
       cropped: 'cropped',
 
+      errorTitle: 'Error',
+      descriptionMissing: 'Description has not been added yet.',
+
       /* ------------------- trails and pois EN ------------------- */
 
       trails: 'Trails',
       pois: 'Points (POI)',
       loading: 'Loading…',
       noTrails: 'No trails yet.',
+      failedNearby: 'Could not load nearby peaks.',
       noPois: 'No POIs yet.',
       failedTrails: 'Failed to load trails.',
       failedPois: 'Failed to load POIs.',
@@ -825,10 +837,13 @@ function getLabels(lang) {
         'Parking areas, mountain huts, viewpoints, and other useful locations will be added in upcoming updates.',
     },
     ua: {
+      info: 'Інформація про вершину',
+      copyCoordinates: 'Копіювати координати',
       metricSource: 'Джерело',
       metricVerified: 'Перевірено',
       metricUnconfirmed: 'Не підтверджено',
       peaks: 'Вершини',
+      nearbyTitle: 'Вершини поблизу, які варто підкорити',
       ranges: 'Хребти',
       inRange: 'У цьому хребті',
       back: 'Назад до списку',
@@ -844,11 +859,15 @@ function getLabels(lang) {
       photoSource: 'Джерело',
       cropped: 'обрізано',
 
+      errorTitle: 'Помилка',
+      descriptionMissing: 'Опис ще не додано.',
+
       /* ------------------- trails and pois UA------------------- */
 
       trails: 'Маршрути',
       pois: 'Пункти (POI)',
       loading: 'Завантаження…',
+      failedNearby: 'Не вдалося завантажити вершини поблизу.',
       noTrails: 'Немає маршрутів.',
       noPois: 'Немає POI.',
       failedTrails: 'Не вдалося завантажити маршрути.',
@@ -873,10 +892,13 @@ function getLabels(lang) {
         'Парковки, гірські притулки, оглядові точки та інші корисні місця будуть додані в наступних оновленнях.',
     },
     zh: {
+      info: '山峰信息',
+      copyCoordinates: '复制坐标',
       metricSource: '来源',
       metricVerified: '核实日期',
       metricUnconfirmed: '未确认',
       peaks: '山峰',
+      nearbyTitle: '附近值得攀登的山峰',
       ranges: '山脉',
       inRange: '同一山脉',
       back: '返回列表',
@@ -892,11 +914,15 @@ function getLabels(lang) {
       photoSource: '来源',
       cropped: '已裁剪',
 
+      errorTitle: '错误',
+      descriptionMissing: '尚未添加描述。',
+
       /* ------------------- trails and pois ZH ------------------- */
 
       trails: '路线',
       pois: '兴趣点 (POI)',
       loading: '加载中…',
+      failedNearby: '无法加载附近的山峰。',
       noTrails: '暂无路线。',
       noPois: '暂无兴趣点。',
       failedTrails: '加载路线失败。',
