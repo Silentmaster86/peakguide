@@ -213,7 +213,7 @@ export default function PeaksPage({ lang }) {
       {isError && (
         <div style={errorBox}>
           <div style={{ fontWeight: 800, marginBottom: 6 }}>
-            {lang === 'pl' ? 'Nie udało się pobrać danych' : 'Failed to load data'}
+            {t.loadError}
           </div>
 
           <div style={{ opacity: 0.9, marginBottom: 10 }}>
@@ -221,7 +221,7 @@ export default function PeaksPage({ lang }) {
           </div>
 
           <button type="button" style={retryBtn} onClick={() => setRefreshKey((x) => x + 1)}>
-            {lang === 'pl' ? 'Spróbuj ponownie' : 'Retry'}
+            {t.retry}
           </button>
         </div>
       )}
@@ -256,9 +256,7 @@ export default function PeaksPage({ lang }) {
       {/* Optional empty state */}
       {!isError && !isLoading && filteredPeaks.length === 0 ? (
         <div style={emptyBox}>
-          {lang === 'pl'
-            ? 'Brak wyników — spróbuj zmienić filtry.'
-            : 'No results — try changing filters.'}
+          {t.empty}
         </div>
       ) : null}
     </div>
@@ -273,6 +271,9 @@ function getLabels(lang) {
       polishOther: 'Dodatkowe szczyty w Polsce',
       ukThreePeaks: 'UK Three Peaks',
       other: 'Pozostałe szczyty',
+      loadError: 'Nie udało się pobrać danych',
+      retry: 'Spróbuj ponownie',
+      empty: 'Brak wyników — spróbuj zmienić filtry.',
     },
     en: {
       results: 'Results',
@@ -280,6 +281,9 @@ function getLabels(lang) {
       polishOther: 'Other peaks in Poland',
       ukThreePeaks: 'UK Three Peaks',
       other: 'Other peaks',
+      loadError: 'Failed to load data',
+      retry: 'Retry',
+      empty: 'No results — try changing filters.',
     },
     ua: {
       results: 'Результати',
@@ -287,6 +291,9 @@ function getLabels(lang) {
       polishOther: 'Інші вершини Польщі',
       ukThreePeaks: 'Три вершини Великої Британії',
       other: 'Інші вершини',
+      loadError: 'Не вдалося завантажити дані',
+      retry: 'Спробувати ще раз',
+      empty: 'Немає результатів — спробуйте змінити фільтри.',
     },
     zh: {
       results: '结果',
@@ -294,6 +301,9 @@ function getLabels(lang) {
       polishOther: '波兰其他山峰',
       ukThreePeaks: '英国三峰',
       other: '其他山峰',
+      loadError: '无法加载数据',
+      retry: '重试',
+      empty: '没有结果——请尝试更改筛选条件。',
     },
   };
 

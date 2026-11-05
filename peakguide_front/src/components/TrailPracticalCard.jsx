@@ -156,13 +156,14 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
     let cancelled = false;
     async function load() {
       try {
-        const [a, p] = await Promise.all([
+        const [accessResult, parkingResult] = await Promise.allSettled([
           supabase
             .from('trail_access')
             .select('*, trail_access_i18n(*)')
             .eq('trail_id', trailId)
             .eq('active', true)
             .maybeSingle(),
+
           supabase
             .from('trail_parking')
             .select('*, trail_parking_i18n(*)')
@@ -171,15 +172,35 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
             .order('is_primary', { ascending: false })
             .order('id'),
         ]);
-        if (a.error) throw a.error;
-        if (p.error) throw p.error;
-        if (!cancelled)
+
+        if (cancelled) return;
+
+        const accessResponse = accessResult.status === 'fulfilled' ? accessResult.value : null;
+
+        const parkingResponse = parkingResult.status === 'fulfilled' ? parkingResult.value : null;
+
+        const accessFailed = accessResult.status === 'rejected' || Boolean(accessResponse?.error);
+
+        const parkingFailed =
+          parkingResult.status === 'rejected' || Boolean(parkingResponse?.error);
+        
+        if (accessFailed && parkingFailed) {
           setState({
             key,
-            status: 'success',
-            access: a.data,
-            parking: p.data || [],
+            status: 'error',
+            access: null,
+            parking: [],
           });
+          return;
+        }
+
+        setState({
+          key,
+          status: 'success',
+          access: accessFailed ? null : (accessResponse?.data ?? null),
+          parking: parkingFailed ? [] : (parkingResponse?.data ?? []),
+        });
+
       } catch {
         if (!cancelled) setState({ key, status: 'error', access: null, parking: [] });
       }

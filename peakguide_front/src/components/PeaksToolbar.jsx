@@ -64,8 +64,8 @@ export default function PeaksToolbar({
               type="button"
               onClick={clearSearch}
               style={clearX}
-              aria-label={lang === 'pl' ? 'Wyczyść wyszukiwanie' : 'Clear search'}
-              title={lang === 'pl' ? 'Wyczyść' : 'Clear'}
+              aria-label={t.clearSearch}
+              title={t.clear}
             >
               ✕
             </button>
@@ -118,10 +118,10 @@ export default function PeaksToolbar({
       <label style={fieldSmall}>
         <span style={label}>{t.sort}</span>
         <select value={sort} onChange={(e) => setSort(e.target.value)} style={select}>
-          <option value="elev_desc">{lang === 'pl' ? 'Wysokość: ↓' : 'Elevation: ↓'}</option>
-          <option value="elev_asc">{lang === 'pl' ? 'Wysokość: ↑' : 'Elevation: ↑'}</option>
-          <option value="name_asc">{lang === 'pl' ? 'Nazwa: A→Z' : 'Name: A→Z'}</option>
-          <option value="name_desc">{lang === 'pl' ? 'Nazwa: Z→A' : 'Name: Z→A'}</option>
+          <option value="elev_desc">{t.elevationDesc}</option>
+          <option value="elev_asc">{t.elevationAsc}</option>
+          <option value="name_asc">{t.nameAsc}</option>
+          <option value="name_desc">{t.nameDesc}</option>
         </select>
       </label>
     </div>
@@ -137,9 +137,15 @@ function getLabels(lang) {
       allCountries: 'Wszystkie kraje',
       region: 'Region',
       allRegions: 'Wszystkie regiony',
-      ranges: 'Pasma',
-      allRanges: 'Wszystkie pasma',
+      ranges: 'Pasma górskie',
+      allRanges: 'Wszystkie pasma górskie',
       sort: 'Sortuj',
+      clearSearch: 'Wyczyść wyszukiwanie',
+      clear: 'Wyczyść',
+      elevationDesc: 'Wysokość: ↓',
+      elevationAsc: 'Wysokość: ↑',
+      nameAsc: 'Nazwa: A→Z',
+      nameDesc: 'Nazwa: Z→A',
     },
     en: {
       search: 'Search',
@@ -148,9 +154,15 @@ function getLabels(lang) {
       allCountries: 'All countries',
       region: 'Region',
       allRegions: 'All regions',
-      ranges: 'Ranges',
-      allRanges: 'All ranges',
+      ranges: 'Mountain ranges',
+      allRanges: 'All mountain ranges',
       sort: 'Sort',
+      clearSearch: 'Clear search',
+      clear: 'Clear',
+      elevationDesc: 'Elevation: ↓',
+      elevationAsc: 'Elevation: ↑',
+      nameAsc: 'Name: A→Z',
+      nameDesc: 'Name: Z→A',
     },
     ua: {
       search: 'Пошук',
@@ -162,6 +174,12 @@ function getLabels(lang) {
       ranges: 'Хребти',
       allRanges: 'Усі хребти',
       sort: 'Сортувати',
+      clearSearch: 'Очистити пошук',
+      clear: 'Очистити',
+      elevationDesc: 'Висота: ↓',
+      elevationAsc: 'Висота: ↑',
+      nameAsc: 'Назва: A→Z',
+      nameDesc: 'Назва: Z→A',
     },
     zh: {
       search: '搜索',
@@ -173,6 +191,12 @@ function getLabels(lang) {
       ranges: '山脉',
       allRanges: '所有山脉',
       sort: '排序',
+      clearSearch: '清除搜索',
+      clear: '清除',
+      elevationDesc: '海拔：↓',
+      elevationAsc: '海拔：↑',
+      nameAsc: '名称：A→Z',
+      nameDesc: '名称：Z→A',
     },
   };
 
