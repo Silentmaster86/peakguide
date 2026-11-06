@@ -16,6 +16,7 @@ const text = {
     missing: 'Informacje w tym języku nie zostały jeszcze uzupełnione.',
     loading: 'Ładowanie informacji praktycznych…',
     error: 'Nie udało się pobrać informacji praktycznych.',
+    partialError: 'Nie udało się pobrać wszystkich informacji praktycznych.',
     retry: 'Spróbuj ponownie',
     empty: 'Informacje praktyczne nie zostały jeszcze dodane.',
     paid: 'Parking płatny',
@@ -39,6 +40,7 @@ const text = {
     missing: 'Information in this language has not been added yet.',
     loading: 'Loading practical information…',
     error: 'Could not load practical information.',
+    partialError: 'Some practical information could not be loaded.',
     retry: 'Try again',
     empty: 'Practical information has not been added yet.',
     paid: 'Paid parking',
@@ -62,6 +64,7 @@ const text = {
     missing: 'Інформацію цією мовою ще не додано.',
     loading: 'Завантаження практичної інформації…',
     error: 'Не вдалося завантажити практичну інформацію.',
+    partialError: 'Не вдалося завантажити частину практичної інформації.',
     retry: 'Спробувати ще раз',
     empty: 'Практичну інформацію ще не додано.',
     paid: 'Платна парковка',
@@ -85,6 +88,7 @@ const text = {
     missing: '尚未添加此语言的信息。',
     loading: '正在加载实用信息…',
     error: '无法加载实用信息。',
+    partialError: '部分实用信息无法加载。',
     retry: '重试',
     empty: '尚未添加实用信息。',
     paid: '收费停车',
@@ -150,6 +154,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
     status: 'loading',
     access: null,
     parking: [],
+    partialError: false,
   });
   const [retry, setRetry] = useState(0);
   useEffect(() => {
@@ -188,6 +193,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
           setState({
             key,
             status: 'error',
+            partialError: false,
             access: null,
             parking: [],
           });
@@ -199,10 +205,16 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
           status: 'success',
           access: accessFailed ? null : (accessResponse?.data ?? null),
           parking: parkingFailed ? [] : (parkingResponse?.data ?? []),
+          partialError: accessFailed || parkingFailed,
         });
 
       } catch {
-        if (!cancelled) setState({ key, status: 'error', access: null, parking: [] });
+        if (!cancelled) setState({
+          key, status: 'error',
+          access: null,
+          parking: [],
+          partialError: false,
+        });
       }
     }
     load();
@@ -218,6 +230,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
     <section aria-label={labels.title} style={{ marginTop: 16 }}>
       <h3 style={{ margin: '0 0 12px' }}>{labels.title}</h3>
       {status === 'loading' && <p role="status">{labels.loading}</p>}
+      {status === 'success' && state.partialError && <p role="status">{labels.partialError}</p>}
       {status === 'error' && (
         <div role="alert">
           <p>{labels.error}</p>
@@ -240,7 +253,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
             gap: 12,
           }}
         >
-          {!a && !state.parking.length && <p>{labels.empty}</p>}
+          {!a && !state.parking.length && !state.partialError && <p>{labels.empty}</p>}
           {a && (
             <div style={box}>
               <h4 style={{ margin: 0 }}>{labels.start}</h4>

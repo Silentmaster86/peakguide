@@ -52,28 +52,32 @@ function makeParking() {
 	};
 }
 
-// Imituje łańcuch zapytania Supabase, bez połączenia z bazą.
+// Mock database responses for trail access and parking data.
 function mockDatabase({
-	access = makeAccess(),
-	parking = [makeParking()],
-	error = null,
+  access = makeAccess(),
+  parking = [makeParking()],
+  error = null,
+  accessError = error,
+  parkingError = error,
 } = {}) {
-	fromMock.mockImplementation((table) => {
-		const result = {
-			data: table === 'trail_access' ? access : parking,
-			error,
-		};
+  fromMock.mockImplementation((table) => {
+    const isAccess = table === 'trail_access';
 
-		const query = {
-			select: vi.fn().mockReturnThis(),
-			eq: vi.fn().mockReturnThis(),
-			order: vi.fn().mockReturnThis(),
-			maybeSingle: vi.fn(() => Promise.resolve(result)),
-			then: (resolve, reject) => Promise.resolve(result).then(resolve, reject),
-		};
+    const result = {
+      data: isAccess ? access : parking,
+      error: isAccess ? accessError : parkingError,
+    };
 
-		return query;
-	});
+    const query = {
+      select: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnThis(),
+      order: vi.fn().mockReturnThis(),
+      maybeSingle: vi.fn(() => Promise.resolve(result)),
+      then: (resolve, reject) => Promise.resolve(result).then(resolve, reject),
+    };
+
+    return query;
+  });
 }
 
 beforeEach(() => {
@@ -274,4 +278,45 @@ describe('TrailPracticalCard', () => {
 
 		expect(screen.queryByText('directions-pl')).not.toBeInTheDocument();
 	});
+
+	it('pokazuje access, gdy parking nie działa', async () => {
+    mockDatabase({
+      parkingError: { message: 'Parking unavailable' },
+    });
+
+    render(<TrailPracticalCard trailId={6} lang="en" />);
+
+    expect(await screen.findByText('directions-en')).toBeInTheDocument();
+    expect(screen.queryByText('parking-en')).not.toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('pokazuje parking, gdy access nie działa', async () => {
+    mockDatabase({
+      accessError: { message: 'Access unavailable' },
+    });
+
+    render(<TrailPracticalCard trailId={6} lang="en" />);
+
+    expect(await screen.findByText('parking-en · Primary')).toBeInTheDocument();
+    expect(screen.queryByText('directions-en')).not.toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('pokazuje error, gdy oba źródła zawodzą', async () => {
+    mockDatabase({
+      accessError: { message: 'Access unavailable' },
+      parkingError: { message: 'Parking unavailable' },
+    });
+
+    render(<TrailPracticalCard trailId={6} lang="en" />);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Could not load practical information.'
+    );
+
+		expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument();
+		
+		expect(screen.queryByText('Some practical information could not be loaded.')).not.toBeInTheDocument();
+  });
 });
