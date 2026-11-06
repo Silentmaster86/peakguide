@@ -353,21 +353,32 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
       {/* Tab navigation */}
 
-      <nav style={tabsWrap} aria-label="Sections">
+      <nav style={tabsWrap} aria-label={labels.sections}>
         <button
           type="button"
           onClick={() => changeTab('overview')}
+          aria-pressed={tab === 'overview'}
           style={tabBtn(tab === 'overview')}
         >
           {labels.overview}
         </button>
 
-        <button type="button" onClick={() => changeTab('trails')} style={tabBtn(tab === 'trails')}>
+        <button
+          type="button"
+          onClick={() => changeTab('trails')}
+          aria-pressed={tab === 'trails'}
+          style={tabBtn(tab === 'trails')}
+        >
           {labels.trails}
           <span style={tabCount}>{trails.length}</span>
         </button>
 
-        <button type="button" onClick={() => changeTab('pois')} style={tabBtn(tab === 'pois')}>
+        <button
+          type="button"
+          onClick={() => changeTab('pois')}
+          aria-pressed={tab === 'pois'}
+          style={tabBtn(tab === 'pois')}
+        >
           {labels.pois}
           <span style={tabCount}>{pois.length}</span>
         </button>
@@ -730,6 +741,7 @@ function getLabels(lang) {
   const dict = {
     pl: {
       info: 'Informacje o szczycie',
+      sections: 'Sekcje szczytu',
       copyCoordinates: 'Kopiuj współrzędne',
       metricSource: 'Źródło',
       metricVerified: 'Zweryfikowano',
@@ -784,6 +796,7 @@ function getLabels(lang) {
     },
     en: {
       info: 'Peak information',
+      sections: 'Peak sections',
       copyCoordinates: 'Copy coordinates',
       metricSource: 'Source',
       metricVerified: 'Verified',
@@ -838,6 +851,7 @@ function getLabels(lang) {
     },
     ua: {
       info: 'Інформація про вершину',
+      sections: 'Розділи вершини',
       copyCoordinates: 'Копіювати координати',
       metricSource: 'Джерело',
       metricVerified: 'Перевірено',
@@ -893,6 +907,7 @@ function getLabels(lang) {
     },
     zh: {
       info: '山峰信息',
+      sections: '山峰信息栏目',
       copyCoordinates: '复制坐标',
       metricSource: '来源',
       metricVerified: '核实日期',
