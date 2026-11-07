@@ -1,3 +1,5 @@
+import { Helmet } from 'react-helmet-async';
+import { messageValidation } from '../utils/messageValidation';
 import { useMemo, useState } from 'react';
 import { useAuth } from '../auth/useAuth';
 import { sendMessage } from '../api/messages';
@@ -27,7 +29,8 @@ export default function PanelPage({ lang = 'pl' }) {
 			<section style={styles.card}>
 				<div style={styles.headRow}>
 					<div style={styles.userBlock}>
-						<h1 style={styles.title}>{t.panelTitle}</h1>
+						<Helmet><title>{`${t.panelTitle} — PeakGuide`}</title><meta name='robots' content='noindex' /></Helmet>
+            <h1 style={styles.title}>{t.panelTitle}</h1>
 
 						<div style={styles.signedLine}>
 							{t.signedInAs} <b>{displayName}</b>
@@ -68,9 +71,6 @@ export default function PanelPage({ lang = 'pl' }) {
 						{adminTab === 'tools' && (
 							<AdminTools
 								t={t}
-								onAddNearby={() => alert('TODO: Admin form — Add Nearby Peak')}
-								onAddTrail={() => alert('TODO: Admin form — Add Trail')}
-								onAddPoi={() => alert('TODO: Admin form — Add POI')}
 							/>
 						)}
 					</div>
@@ -96,22 +96,16 @@ function UserContactBox({ t, user }) {
 		const cleanEmail = String(email || '').trim();
 		const cleanMsg = String(msg || '').trim();
 
-		if (!cleanEmail || !cleanEmail.includes('@')) {
-			setErr(t.emailError);
-			return;
-		}
-
-		if (!cleanMsg) {
-			setErr(t.messageError);
-			return;
-		}
+		if (loading) return;
+		const validationError = messageValidation({ email: cleanEmail, message: cleanMsg });
+		if (validationError) { setErr(t[validationError]); return; }
 
 		try {
 			setLoading(true);
 			await sendMessage({ email: cleanEmail, message: cleanMsg });
 			setSent(true);
-		} catch (e2) {
-			setErr(e2?.message || 'Send failed');
+		} catch {
+			setErr(t.sendError);
 		} finally {
 			setLoading(false);
 		}
@@ -123,13 +117,13 @@ function UserContactBox({ t, user }) {
 			<p style={styles.p}>{t.contributeText}</p>
 
 			{sent ? (
-				<div style={styles.okBox}>{t.sentOk}</div>
+				<div style={styles.okBox} role="status">{t.sentOk}</div>
 			) : (
 				<form onSubmit={handleSubmit} style={styles.form}>
 					<label style={styles.label}>
 						{t.yourEmail}
 						<input
-							value={email}
+							type='email' maxLength={254} required value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							style={styles.input}
 							placeholder='you@example.com'
@@ -140,7 +134,7 @@ function UserContactBox({ t, user }) {
 					<label style={styles.label}>
 						{t.message}
 						<textarea
-							value={msg}
+							minLength={5} maxLength={5000} required value={msg}
 							onChange={(e) => setMsg(e.target.value)}
 							style={styles.textarea}
 							placeholder={t.messagePh}
@@ -148,7 +142,7 @@ function UserContactBox({ t, user }) {
 						/>
 					</label>
 
-					{err ? <div style={styles.errBox}>{err}</div> : null}
+					{err ? <div style={styles.errBox} role="alert">{err}</div> : null}
 
 					<button
 						type='submit'
@@ -174,6 +168,7 @@ function UserContactBox({ t, user }) {
 function getLabels(lang) {
 	const dict = {
 		pl: {
+      sendError: 'Nie udało się wysłać wiadomości. Spróbuj ponownie.', soon: 'W przygotowaniu',
 			loadingSession: 'Ładowanie sesji…',
 			panelTitle: 'Panel',
 			signedInAs: 'Zalogowano jako:',
@@ -203,15 +198,16 @@ function getLabels(lang) {
 			tabs: {
 				messages: 'Wiadomości',
 				peaks: 'Szczyty',
-				users: 'Użuykownicy',
-				tools: 'Narzedzia',
+				users: 'Użytkownicy',
+				tools: 'Narzędzia',
 			},
 			emailError: 'Podaj poprawny email.',
-			messageError: 'Wiadomość nie może być pusta.',
+			messageError: 'Wiadomość powinna mieć od 5 do 5000 znaków.',
 			sending: 'Wysyłanie...',
 		},
 
 		en: {
+      sendError: 'Could not send your message. Please try again.', soon: 'Coming soon',
 			loadingSession: 'Loading session…',
 			panelTitle: 'Panel',
 			signedInAs: 'Signed in as:',
@@ -242,11 +238,12 @@ function getLabels(lang) {
 				tools: 'Tools',
 			},
 			emailError: 'Please enter a valid email.',
-			messageError: 'Message cannot be empty.',
+			messageError: 'Message must contain 5–5000 characters.',
 			sending: 'Sending...',
 		},
 
 		ua: {
+      sendError: 'Не вдалося надіслати повідомлення. Спробуйте ще раз.', soon: 'Незабаром',
 			loadingSession: 'Завантаження сесії…',
 			panelTitle: 'Панель',
 			signedInAs: 'Ви увійшли як:',
@@ -278,11 +275,12 @@ function getLabels(lang) {
 				tools: 'Інструменти',
 			},
 			emailError: 'Будь ласка, введіть дійсну адресу електронної пошти.',
-			messageError: 'Повідомлення не може бути порожнім.',
+			messageError: 'Повідомлення має містити від 5 до 5000 символів.',
 			sending: 'Надсилання...',
 		},
 
 		zh: {
+      sendError: '无法发送消息，请重试。', soon: '即将推出',
 			loadingSession: '正在加载会话…',
 			panelTitle: '面板',
 			signedInAs: '当前登录：',
@@ -313,7 +311,7 @@ function getLabels(lang) {
 				tools: '工具',
 			},
 			emailError: '请输入有效的电子邮箱地址。',
-			messageError: '消息不能为空。',
+			messageError: '消息应包含5至5000个字符。',
 			sending: '发送中...',
 		},
 	};
@@ -476,7 +474,6 @@ const styles = {
 		color: 'var(--text)',
 		borderRadius: 12,
 		padding: '10px 12px',
-		outline: 'none',
 		font: 'inherit',
 		fontSize: 12,
 	},
@@ -491,7 +488,6 @@ const styles = {
 		color: 'var(--text)',
 		borderRadius: 12,
 		padding: '10px 12px',
-		outline: 'none',
 		font: 'inherit',
 		lineHeight: 1.5,
 	},

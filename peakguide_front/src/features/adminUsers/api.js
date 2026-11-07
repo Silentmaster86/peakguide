@@ -9,10 +9,7 @@ export async function adminFetchUsers() {
 	if (error) throw new Error(error.message);
 
 	return {
-		items: (data || []).map((u) => ({
-			...u,
-			active: true,
-		})),
+		items: data || [],
 	};
 }
 
@@ -35,11 +32,14 @@ export async function adminToggleAdmin(id) {
 			role: nextIsAdmin ? 'admin' : 'user',
 		})
 		.eq('id', id)
+		.eq('is_admin', current.is_admin)
 		.select('id, is_admin, role');
 
 	if (error) throw new Error(error.message);
 
-	return Array.isArray(data) ? data[0] : data;
+	const updated = Array.isArray(data) ? data[0] : data;
+	if (!updated) throw new Error('The user has changed. Refresh and try again.');
+	return updated;
 }
 
 export async function adminDeleteUser(id) {

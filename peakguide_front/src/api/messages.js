@@ -1,3 +1,4 @@
+import { messageValidation } from '../utils/messageValidation';
 import { supabase } from '../lib/supabaseClient';
 
 function normalizeEmail(email) {
@@ -10,27 +11,20 @@ export async function sendMessage({ email, message }) {
 	const cleanEmail = normalizeEmail(email);
 	const cleanMessage = String(message || '').trim();
 
-	if (!cleanEmail || !cleanEmail.includes('@')) {
-		throw new Error('Invalid email');
-	}
+	const validationError = messageValidation({ email: cleanEmail, message: cleanMessage });
+	if (validationError) throw new Error(validationError);
 
-	if (!cleanMessage || cleanMessage.length < 5) {
-		throw new Error('Message too short');
-	}
-
-	const { data, error } = await supabase
+	const { error } = await supabase
 		.from('contact_messages')
 		.insert({
 			email: cleanEmail,
 			message: cleanMessage,
 			status: 'new',
-		})
-		.select('id, email, message, created_at, status')
-		.single();
+		});
 
 	if (error) throw new Error(error.message);
 
-	return { item: data };
+	return { ok: true };
 }
 
 export async function adminFetchMessages() {
