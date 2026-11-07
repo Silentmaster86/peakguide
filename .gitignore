@@ -27,3 +27,7 @@ Thumbs.db
 
 # cookies
 cookies.txt
+# Local validation
+__pycache__/
+test-results/
+playwright-report/
