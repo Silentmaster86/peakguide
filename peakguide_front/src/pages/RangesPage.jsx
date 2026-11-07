@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { SEO } from '../seo/SEO';
-import { SITE_URL, SITE_NAME } from '../seo/site';
+import PageSEO from '../seo/PageSEO';
 import { fetchCountries, fetchRanges } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
 
@@ -33,14 +32,6 @@ export default function RangesPage({ lang = 'pl' }) {
 
   const t = useMemo(() => getLabels(lang), [lang]);
 
-  const canonical = `${SITE_URL}/ranges`;
-
-  const title = lang === 'pl' ? `Pasma górskie — ${SITE_NAME}` : `Mountain ranges — ${SITE_NAME}`;
-
-  const description =
-    lang === 'pl'
-      ? 'Odkrywaj pasma górskie dostępne w PeakGuide. Filtruj według kraju i regionu i poznawaj ich szczyty.'
-      : 'Explore mountain ranges available in PeakGuide. Filter by country and region and discover their peaks.';
 
   function updateCountry(value) {
     const next = new URLSearchParams(searchParams);
@@ -60,7 +51,8 @@ export default function RangesPage({ lang = 'pl' }) {
   return (
     <div style={{ display: 'grid', gap: 14 }}>
       {/* SEO & Social tags */}
-      <SEO title={title} description={description} canonical={canonical} />
+      <h1>{({ pl: 'Pasma górskie', en: 'Mountain ranges', ua: 'Гірські хребти', zh: '山脉' })[lang] || 'Pasma górskie'}</h1>
+      <PageSEO page='ranges' lang={lang} />
       <div style={headerCard}>
         <div style={pill}>🏔️ {t.title}</div>
         <div style={sub}>{t.subtitle}</div>

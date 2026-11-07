@@ -1,3 +1,4 @@
+import TranslationNotice from '../components/TranslationNotice';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { PeakSEO } from '../seo/SEO';
@@ -19,6 +20,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const [retryKey, setRetryKey] = useState(0);
   const [status, setStatus] = useState('loading'); // loading | success | error
   const [error, setError] = useState(null);
   const [peak, setPeak] = useState(null);
@@ -50,6 +52,16 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
       return next;
     });
   }
+
+
+  const selectedTrail = searchParams.get('trail');
+  useEffect(() => {
+    if (status !== 'success' || tab !== 'trails' || trailsStatus !== 'success' || !selectedTrail) return;
+    const article = document.getElementById(`trail-${selectedTrail}`);
+    article?.scrollIntoView?.({ block: 'start' });
+    article?.focus({ preventScroll: true });
+  }, [selectedTrail, tab, trailsStatus, trails, status]);
+  const retryLabel = ({ pl: 'Spróbuj ponownie', en: 'Retry', ua: 'Спробувати ще раз', zh: '重试' })[lang] || 'Retry';
 
   const gridStyle = useMemo(
     () => ({
@@ -86,7 +98,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
     return () => {
       alive = false;
     };
-  }, [lang, slug]);
+  }, [lang, slug, retryKey]);
 
   useEffect(() => {
     let cancelled = false;
@@ -126,7 +138,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
     return () => {
       cancelled = true;
     };
-  }, [lang, slug]);
+  }, [lang, slug, retryKey]);
 
   useEffect(() => {
     let cancelled = false;
@@ -151,7 +163,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
     return () => {
       cancelled = true;
     };
-  }, [lang, slug, peak?.slug]);
+  }, [lang, slug, peak?.slug, retryKey]);
 
   const coordinates = useMemo(() => {
     if (!peak) return null;
@@ -199,7 +211,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
       <div style={wrap}>
         <div style={errorBox}>
           <div style={{ fontWeight: 900, marginBottom: 6 }}>{labels.errorTitle}</div>
-          <div style={{ opacity: 0.9 }}>{error}</div>
+          <div style={{ opacity: 0.9 }}>{error}</div><button type='button' onClick={() => setRetryKey((v) => v + 1)}>{retryLabel}</button>
           <div style={{ marginTop: 12 }}>
             <Link to="/peaks" style={backLink}>
               ← {labels.back}
@@ -343,6 +355,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
         </div>
 
         <h1 style={heroTitle(isMobile)}>{peak.name}</h1>
+          <TranslationNotice contentLang={peak.content_lang} lang={lang} />
 
         {peak.short_description ? (
           <p style={heroSubtitle}>{peak.short_description}</p>
@@ -479,7 +492,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                     <article style={miniCard}>
                       <div style={miniTitle}>{p.name || p.slug}</div>
                       <div style={miniMeta}>
-                        ⛰️ {p.elevation_m} m · 📍 {p.distance_km} km
+                        ⛰️ {p.elevation_m} m {p.distance_km != null && <>· 📍 {p.distance_km} km</>}
                       </div>
                     </article>
                   </Link>
@@ -499,7 +512,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
             </div>
 
             {trailsStatus === 'loading' && <div style={mutedRow}>{labels.loading}</div>}
-            {trailsStatus === 'error' && <div style={mutedRow}>{labels.failedTrails}</div>}
+            {trailsStatus === 'error' && <div style={mutedRow}>{labels.failedTrails} <button type='button' onClick={() => setRetryKey((v) => v + 1)}>{retryLabel}</button></div>}
             {trailsStatus === 'success' && (trails?.length ?? 0) === 0 ? (
               <ComingSoonBox
                 title={labels.trailsSoonTitle || 'Szlaki będą dostępne wkrótce'}
@@ -512,15 +525,15 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
             {(trails?.length ?? 0) > 0 &&
               trails.map((t) => (
-                <article key={t.slug} style={itemCard}>
+                <article key={t.slug} id={`trail-${t.slug}`} tabIndex={-1} style={{ ...itemCard, scrollMarginTop: 120 }}>
                   <div style={itemTop}>
-                    <div style={itemTitle}>{t.name}</div>
+                    <div style={itemTitle}>{t.name}<TranslationNotice contentLang={t.content_lang} lang={lang} /></div>
                     <div style={badgeRow}>
                       {t.difficulty ? (
-                        <span style={badge}>{trailOptionLabel(t.difficulty, labels)}</span>
+                        <span style={badge}>{trailOptionLabel(t.difficulty, labels, lang)}</span>
                       ) : null}
                       {t.route_type ? (
-                        <span style={badgeMuted}>{trailOptionLabel(t.route_type, labels)}</span>
+                        <span style={badgeMuted}>{trailOptionLabel(t.route_type, labels, lang)}</span>
                       ) : null}
                     </div>
                   </div>
@@ -531,7 +544,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                     {t.distance_km != null ? (
                       <TrailMetric
                         label={labels.distance}
-                        value={`${Number(t.distance_km)} km`}
+                        value={`${Number(t.distance_km).toLocaleString(lang === 'ua' ? 'uk-UA' : lang)} km`}
                         sourceUrl={t.distance_source_url}
                         verifiedAt={t.distance_verified_at}
                         lang={lang}
@@ -551,18 +564,8 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                     {t.time_min != null ? (
                       <TrailMetric
                         label={labels.time}
-                        value={
-                          t.slug === 'ben-nevis-mountain-track'
-                            ? `${formatTrailTime(t.time_min, lang)} (${
-                                {
-                                  pl: 'szacunkowo',
-                                  en: 'estimated',
-                                  ua: 'орієнтовно',
-                                  zh: '估计',
-                                }[lang] || 'estimated'
-                              })`
-                            : formatTrailTime(t.time_min, lang)
-                        }
+                        value={`${formatTrailTime(t.time_min, lang)} (${({ pl: 'szacunkowo', en: 'estimated', ua: 'орієнтовно', zh: '估计' })[lang] || 'estimated'})`}
+
                         sourceUrl={t.time_source_url}
                         verifiedAt={t.time_verified_at}
                         lang={lang}
@@ -575,12 +578,12 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                     <div style={routePoints}>
                       {t.start_point_name ? (
                         <div>
-                          <strong>{labels.start}:</strong> {t.start_point_name}
+                          <strong>{t.route_type === 'out-and-back' ? ({ pl: 'Start i powrót', en: 'Start and return', ua: 'Старт і повернення', zh: '起点及返回点' })[lang] : labels.start}:</strong> {t.start_point_name}
                         </div>
                       ) : null}
                       {t.end_point_name ? (
                         <div>
-                          <strong>{labels.finish}:</strong> {t.end_point_name}
+                          <strong>{t.route_type === 'out-and-back' ? ({ pl: 'Punkt docelowy', en: 'Destination', ua: 'Ціль маршруту', zh: '目的地' })[lang] : labels.finish}:</strong> {t.end_point_name}
                         </div>
                       ) : null}
                     </div>
@@ -620,7 +623,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
             </div>
 
             {poisStatus === 'loading' && <div style={mutedRow}>{labels.loading}</div>}
-            {poisStatus === 'error' && <div style={mutedRow}>{labels.failedPois}</div>}
+            {poisStatus === 'error' && <div style={mutedRow}>{labels.failedPois} <button type='button' onClick={() => setRetryKey((v) => v + 1)}>{retryLabel}</button></div>}
             {poisStatus === 'success' && (pois?.length ?? 0) === 0 ? (
               <ComingSoonBox
                 title={labels.poisSoonTitle || 'Punkty POI będą dostępne wkrótce'}
@@ -713,7 +716,7 @@ function getCollectionLabel(peak, lang) {
 
   if (peak.country_code === 'PL' && peak.is_korona) return t.kgp;
   if (peak.country_code === 'PL') return t.poland;
-  if (peak.country_code === 'GB') return t.uk;
+  if (['ben-nevis', 'scafell-pike', 'yr-wyddfa'].includes(peak.slug)) return t.uk;
   return t.other;
 }
 
@@ -730,7 +733,9 @@ function formatTrailTime(minutes, lang) {
   return `${hours} ${hourUnit} ${mins} ${minuteUnit}`;
 }
 
-function trailOptionLabel(value, labels) {
+function trailOptionLabel(value, labels, lang) {
+  const extra = { pl: { easy: 'łatwa', moderate: 'średnia', loop: 'pętla', 'point-to-point': 'z punktu do punktu' }, en: { easy: 'easy', moderate: 'moderate', loop: 'loop', 'point-to-point': 'point to point' }, ua: { easy: 'легкий', moderate: 'середній', loop: 'кільцевий', 'point-to-point': 'між двома точками' }, zh: { easy: '简单', moderate: '中等', loop: '环线', 'point-to-point': '点到点' } };
+  if (extra[lang]?.[value]) return extra[lang][value];
   const normalized = String(value || '').toLowerCase();
   if (normalized === 'hard' || normalized === 'challenging') return labels.hard;
   if (normalized === 'out-and-back') return labels.outAndBack;

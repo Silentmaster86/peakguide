@@ -1,3 +1,4 @@
+import { elevationStats } from '../utils/elevationStats';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { RangeSEO } from '../seo/SEO';
@@ -10,6 +11,7 @@ export default function RangeDetailsPage({ lang = 'pl' }) {
   const { slug } = useParams();
   const isMobile = useMediaQuery('(max-width: 900px)');
 
+  const [retryKey, setRetryKey] = useState(0);
   const [status, setStatus] = useState('loading'); // loading | success | error
   const [error, setError] = useState(null);
   const [range, setRange] = useState(null);
@@ -40,31 +42,14 @@ export default function RangeDetailsPage({ lang = 'pl' }) {
     return () => {
       alive = false;
     };
-  }, [lang, slug]);
+  }, [lang, slug, retryKey]);
 
   const peaks = useMemo(() => {
     const list = range?.peaks;
     return Array.isArray(list) ? list : [];
   }, [range]);
 
-  const stats = useMemo(() => {
-    if (!peaks.length) return { count: 0, maxElev: null, minElev: null };
-
-    let max = -Infinity;
-    let min = Infinity;
-    for (const p of peaks) {
-      const e = Number(p.elevation_m);
-      if (Number.isFinite(e)) {
-        if (e > max) max = e;
-        if (e < min) min = e;
-      }
-    }
-    return {
-      count: peaks.length,
-      maxElev: Number.isFinite(max) ? max : null,
-      minElev: Number.isFinite(min) ? min : null,
-    };
-  }, [peaks]);
+  const stats = useMemo(() => elevationStats(peaks), [peaks]);
 
   // Loading
   if (status === 'loading') {
@@ -86,7 +71,7 @@ export default function RangeDetailsPage({ lang = 'pl' }) {
       <div style={wrap}>
         <div style={errorBox}>
           <div style={{ fontWeight: 900, marginBottom: 6 }}>{labels.errorTitle}</div>
-          <div style={{ opacity: 0.9 }}>{error}</div>
+          <div style={{ opacity: 0.9 }}>{error}</div><button type='button' onClick={() => setRetryKey((v) => v + 1)}>{({ pl: 'Spróbuj ponownie', en: 'Retry', ua: 'Спробувати ще раз', zh: '重试' })[lang]}</button>
           <div style={{ marginTop: 12 }}>
             <Link to="/ranges" style={backLink}>
               ← {labels.backToRanges}

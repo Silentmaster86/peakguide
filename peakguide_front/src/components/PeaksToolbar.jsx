@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
 export default function PeaksToolbar({
+  collection,
+  setCollection,
+  resetFilters,
   q,
   setQ,
   country,
@@ -53,6 +56,7 @@ export default function PeaksToolbar({
 
         <div style={inputWrap}>
           <input
+            aria-label={t.search}
             value={localQ}
             onChange={(e) => setLocalQ(e.target.value)}
             placeholder={t.placeholder}
@@ -114,6 +118,16 @@ export default function PeaksToolbar({
         </select>
       </label>
 
+      <label style={fieldSmall}>
+        <span style={label}>{t.collection}</span>
+        <select value={collection} onChange={(event) => setCollection(event.target.value)} style={select}>
+          <option value='all'>{t.allCollections}</option>
+          <option value='kgp'>Korona Gór Polski</option>
+          <option value='three-peaks'>UK Three Peaks</option>
+          {!['all', 'kgp', 'three-peaks'].includes(collection) && <option value={collection}>{collection}</option>}
+        </select>
+      </label>
+      <button type='button' onClick={resetFilters} style={{ ...select, cursor: 'pointer' }}>{t.resetFilters}</button>
       {/* Sort */}
       <label style={fieldSmall}>
         <span style={label}>{t.sort}</span>
@@ -131,6 +145,7 @@ export default function PeaksToolbar({
 function getLabels(lang) {
   const labels = {
     pl: {
+      collection: 'Kolekcja', allCollections: 'Wszystkie kolekcje', resetFilters: 'Wyczyść wszystkie filtry',
       search: 'Szukaj',
       placeholder: 'np. Rysy, Ben Nevis...',
       country: 'Kraj',
@@ -148,6 +163,7 @@ function getLabels(lang) {
       nameDesc: 'Nazwa: Z→A',
     },
     en: {
+      collection: 'Collection', allCollections: 'All collections', resetFilters: 'Clear all filters',
       search: 'Search',
       placeholder: 'e.g. Rysy, Ben Nevis...',
       country: 'Country',
@@ -165,6 +181,7 @@ function getLabels(lang) {
       nameDesc: 'Name: Z→A',
     },
     ua: {
+      collection: 'Колекція', allCollections: 'Усі колекції', resetFilters: 'Очистити всі фільтри',
       search: 'Пошук',
       placeholder: 'напр. Риси, Бен-Невіс...',
       country: 'Країна',
@@ -182,6 +199,7 @@ function getLabels(lang) {
       nameDesc: 'Назва: Z→A',
     },
     zh: {
+      collection: '合集', allCollections: '所有合集', resetFilters: '清除所有筛选',
       search: '搜索',
       placeholder: '例如：里西山、本尼维斯山...',
       country: '国家',
@@ -250,7 +268,6 @@ const input = {
   color: 'var(--toolbar-text)',
   fontWeight: 900,
   boxShadow: 'var(--shadow-soft)',
-  outline: 'none',
 };
 
 const clearX = {
@@ -277,5 +294,4 @@ const select = {
   background: 'var(--surface)',
   color: 'var(--toolbar-text)',
   boxShadow: 'var(--shadow-soft)',
-  outline: 'none',
 };
