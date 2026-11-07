@@ -145,101 +145,52 @@ function Provenance({ record, labels, lang }) {
     </div>
   );
 }
-export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
-  const language = text[lang] ? lang : 'en';
-  const labels = text[language];
-  const key = `${trailId}:${language}`;
-  const [state, setState] = useState({
-    key: null,
-    status: 'loading',
-    access: null,
-    parking: [],
-    partialError: false,
-  });
-  const [retry, setRetry] = useState(0);
+function usePracticalSource(table, trailId, language) {
+  const [attempt, setAttempt] = useState(0);
+  const key = `${trailId}:${language}:${attempt}`;
+  const [result, setResult] = useState({ key: null, status: 'loading', data: null });
   useEffect(() => {
     let cancelled = false;
     async function load() {
       try {
-        const [accessResult, parkingResult] = await Promise.allSettled([
-          supabase
-            .from('trail_access')
-            .select('*, trail_access_i18n(*)')
-            .eq('trail_id', trailId)
-            .eq('active', true)
-            .maybeSingle(),
-
-          supabase
-            .from('trail_parking')
-            .select('*, trail_parking_i18n(*)')
-            .eq('trail_id', trailId)
-            .eq('active', true)
-            .order('is_primary', { ascending: false })
-            .order('id'),
-        ]);
-
-        if (cancelled) return;
-
-        const accessResponse = accessResult.status === 'fulfilled' ? accessResult.value : null;
-
-        const parkingResponse = parkingResult.status === 'fulfilled' ? parkingResult.value : null;
-
-        const accessFailed = accessResult.status === 'rejected' || Boolean(accessResponse?.error);
-
-        const parkingFailed =
-          parkingResult.status === 'rejected' || Boolean(parkingResponse?.error);
-        
-        if (accessFailed && parkingFailed) {
-          setState({
-            key,
-            status: 'error',
-            partialError: false,
-            access: null,
-            parking: [],
-          });
-          return;
-        }
-
-        setState({
-          key,
-          status: 'success',
-          access: accessFailed ? null : (accessResponse?.data ?? null),
-          parking: parkingFailed ? [] : (parkingResponse?.data ?? []),
-          partialError: accessFailed || parkingFailed,
-        });
-
+        let query = supabase.from(table).select(`*, ${table}_i18n(*)`).eq('trail_id', trailId).eq('active', true);
+        query = table === 'trail_access' ? query.maybeSingle() : query.order('is_primary', { ascending: false }).order('id');
+        const response = await query;
+        if (response.error) throw response.error;
+        if (!cancelled) setResult({ key, status: 'success', data: response.data });
       } catch {
-        if (!cancelled) setState({
-          key, status: 'error',
-          access: null,
-          parking: [],
-          partialError: false,
-        });
+        if (!cancelled) setResult({ key, status: 'error', data: null });
       }
     }
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, [trailId, language, key, retry]);
-  const status = state.key === key ? state.status : 'loading';
-  const a = state.access;
+    void load();
+    return () => { cancelled = true; };
+  }, [table, trailId, language, key]);
+  return { ...(result.key === key ? result : { status: 'loading', data: null }), retry: () => setAttempt((value) => value + 1) };
+}
+export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
+  const language = text[lang] ? lang : 'en';
+  const labels = text[language];
+  const access = usePracticalSource('trail_access', trailId, language);
+  const parking = usePracticalSource('trail_parking', trailId, language);
+  const loading = access.status === 'loading' || parking.status === 'loading';
+  const failed = [access, parking].filter((source) => source.status === 'error');
+  const state = { parking: parking.data || [], partialError: failed.length > 0 };
+  const status = failed.length === 2 ? 'error' : 'success';
+  const retryFailed = () => failed.forEach((source) => source.retry());
+  const a = access.data;
   const at = translation(a?.trail_access_i18n, language);
   const bool = (v) => (v === true ? labels.yes : v === false ? labels.no : labels.unknown);
   return (
     <section aria-label={labels.title} style={{ marginTop: 16 }}>
       <h3 style={{ margin: '0 0 12px' }}>{labels.title}</h3>
-      {status === 'loading' && <p role="status">{labels.loading}</p>}
-      {status === 'success' && state.partialError && <p role="status">{labels.partialError}</p>}
+      {loading && <p role="status">{labels.loading}</p>}
+      {status === 'success' && state.partialError && <p role='status'>{labels.partialError} <button type='button' onClick={retryFailed}>{labels.retry}</button></p>}
       {status === 'error' && (
         <div role="alert">
           <p>{labels.error}</p>
           <button
             type="button"
-            onClick={() => {
-              setState((s) => ({ ...s, status: 'loading' }));
-              setRetry((v) => v + 1);
-            }}
+            onClick={retryFailed}
           >
             {labels.retry}
           </button>
@@ -253,7 +204,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
             gap: 12,
           }}
         >
-          {!a && !state.parking.length && !state.partialError && <p>{labels.empty}</p>}
+          {!loading && !a && !state.parking.length && !state.partialError && <p>{labels.empty}</p>}
           {a && (
             <div style={box}>
               <h4 style={{ margin: 0 }}>{labels.start}</h4>
