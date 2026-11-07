@@ -6,20 +6,8 @@ import "./index.css";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-import icon2x from "leaflet/dist/images/marker-icon-2x.png";
-import icon from "leaflet/dist/images/marker-icon.png";
-import shadow from "leaflet/dist/images/marker-shadow.png";
-
-// ✅ FIX: Leaflet marker icons in Vite/Netlify + SPA routes (/peaks/:slug)
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-	iconRetinaUrl: icon2x,
-	iconUrl: icon,
-	shadowUrl: shadow,
-});
+// React 19 hoists route metadata. Remove only the static HTML fallbacks.
+document.querySelectorAll('[data-static-seo]').forEach((element) => element.remove());
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>

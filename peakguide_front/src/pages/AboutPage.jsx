@@ -1,3 +1,4 @@
+import PageSEO from '../seo/PageSEO';
 import { useMemo } from 'react';
 
 /**
@@ -12,6 +13,7 @@ export default function AboutPage({ lang = 'pl' }) {
 
   return (
     <div style={wrap}>
+      <PageSEO page='about' lang={lang} />
       <section style={card} aria-label="About PeakGuide">
         <div style={kicker}>{t.kicker}</div>
         <h1 style={title}>{t.title}</h1>

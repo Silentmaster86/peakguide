@@ -1,4 +1,6 @@
-import { useEffect, useMemo } from 'react';
+import { countLabel, formatDuration } from '../utils/format';
+import PageSEO from '../seo/PageSEO';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { fetchPeaks, fetchTrails } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
@@ -10,15 +12,16 @@ const UK_THREE_PEAKS_SLUGS = new Set([
 ]);
 
 export default function HomePage({ lang = 'pl' }) {
-	const t = useMemo(() => getLabels(lang), [lang]);
+	const t = useMemo(() => ({ ...getLabels(lang), count: (number, noun) => countLabel(number, noun, lang), duration: (minutes) => formatDuration(minutes, lang), difficulty: (value) => ({ pl: { easy: 'łatwa', moderate: 'średnia', hard: 'trudna' }, en: { easy: 'easy', moderate: 'moderate', hard: 'hard' }, ua: { easy: 'легкий', moderate: 'середній', hard: 'складний' }, zh: { easy: '简单', moderate: '中等', hard: '困难' } })[lang]?.[value] || value }), [lang]);
 	const { hash } = useLocation();
+  const [retryKey, setRetryKey] = useState(0);
 
 	useEffect(() => {
 		scrollToHash(hash);
 	}, [hash]);
 
-	const peaksState = useAsync(() => fetchPeaks({ lang }), [lang]);
-	const trailsState = useAsync(() => fetchTrails({ lang }), [lang]);
+	const peaksState = useAsync(() => fetchPeaks({ lang }), [lang, retryKey]);
+	const trailsState = useAsync(() => fetchTrails({ lang }), [lang, retryKey]);
 
 	const peaks = useMemo(
 		() => (Array.isArray(peaksState?.data) ? peaksState.data : []),
@@ -63,12 +66,14 @@ export default function HomePage({ lang = 'pl' }) {
 	const featuredPeaks = useMemo(() => getFeaturedPeaks(peaks, 8), [peaks]);
 
 	return (
-		<main className='home-page'>
+		<div className='home-page'>
+      <PageSEO page='home' lang={lang} />
+      {(peaksState.status === 'error' || trailsState.status === 'error') && <p role='alert'>{({ pl: 'Nie udało się pobrać części katalogu.', en: 'Some catalogue data could not be loaded.', ua: 'Не вдалося завантажити частину каталогу.', zh: '部分目录数据加载失败。' })[lang]} <button type='button' onClick={() => setRetryKey((v) => v + 1)}>{({ pl: 'Spróbuj ponownie', en: 'Retry', ua: 'Спробувати ще раз', zh: '重试' })[lang]}</button></p>
 			<Hero
 				t={t}
-				peaksCount={peaks.length}
-				trailsCount={trails.length}
-				countriesCount={countries.length}
+				peaksCount={peaksState.status === 'success' ? peaks.length : '—'}
+				trailsCount={trailsState.status === 'success' ? trails.length : '—'}
+				countriesCount={peaksState.status === 'success' ? countries.length : '—'}
 			/>
 
 			<QuickExplore t={t} />
@@ -88,7 +93,7 @@ export default function HomePage({ lang = 'pl' }) {
 			<HowItWorks t={t} />
 
 			<Faq t={t} />
-		</main>
+		</div>
 	);
 }
 
@@ -171,20 +176,6 @@ function getTrailName(trail) {
 	);
 }
 
-function formatTrailTime(minutes) {
-	if (!minutes) return '—';
-
-	const hours = Math.floor(minutes / 60);
-	const mins = minutes % 60;
-
-	if (!mins) return `${hours}h`;
-
-	return `${hours}h ${mins}m`;
-}
-
-/* =========================================================
-   SHARED SECTION HEADING
-   ========================================================= */
 
 function SectionHeading({ eyebrow, title, subtitle, action }) {
 	return (
@@ -338,11 +329,10 @@ function ExploreCountries({ countries, t }) {
 			/>
 
 			<div className='country-showcase'>
-				{allCountries.map((country, index) => (
+				{allCountries.map((country) => (
 					<CountryCard
 						key={country.slug}
 						country={country}
-						index={index}
 						t={t}
 					/>
 				))}
@@ -351,7 +341,7 @@ function ExploreCountries({ countries, t }) {
 	);
 }
 
-function CountryCard({ country, index, t }) {
+function CountryCard({ country, t }) {
 	const content = (
 		<>
 			<div className='country-card-overlay' />
@@ -363,7 +353,7 @@ function CountryCard({ country, index, t }) {
 			<div className='country-card-content'>
 				<span className='country-card-kicker'>
 					{country.available
-						? `${country.peaksCount} ${t.countryPeaks}`
+						? t.count(country.peaksCount, 'peaks')
 						: t.futureDestination}
 				</span>
 
@@ -371,7 +361,7 @@ function CountryCard({ country, index, t }) {
 
 				{country.available ? (
 					<span className='country-card-meta'>
-						{country.rangesCount} {t.countryRanges}
+						{t.count(country.rangesCount, 'ranges')}
 					</span>
 				) : null}
 
@@ -384,7 +374,7 @@ function CountryCard({ country, index, t }) {
 
 	const className = [
 		'country-showcase-card',
-		`country-card-${index + 1}`,
+		`country-card-${country.slug}`,
 		!country.available ? 'is-disabled' : '',
 	]
 		.filter(Boolean)
@@ -624,7 +614,7 @@ function FeaturedTrails({ t, trails }) {
 				{featuredTrails.map((trail) => (
 					<Link
 						key={trail.id}
-						to={`/peaks/${trail.peak_slug}?tab=trails`}
+						to={`/peaks/${trail.peak_slug}?tab=trails&trail=${encodeURIComponent(trail.slug)}`}
 						className='home-trail-card'
 					>
 						<div className='home-trail-top'>
@@ -641,7 +631,7 @@ function FeaturedTrails({ t, trails }) {
 
 							{trail.difficulty ? (
 								<strong className='home-trail-difficulty'>
-									{trail.difficulty}
+									{t.difficulty(trail.difficulty)}
 								</strong>
 							) : null}
 						</div>
@@ -656,7 +646,7 @@ function FeaturedTrails({ t, trails }) {
 							</span>
 
 							<span>
-								<b>{formatTrailTime(trail.time_min)}</b>
+								<b>{t.duration(trail.time_min)}</b>
 							</span>
 						</div>
 
@@ -896,7 +886,7 @@ function getLabels(lang) {
       faq: [
         {
           q: 'Jakie kraje obejmuje PeakGuide?',
-          a: 'Obecnie baza obejmuje Polskę i Wielką Brytanię. W planach są kolejne kraje i regiony.',
+          a: 'Aktualnie dostępne kraje znajdziesz w sekcji „Odkrywaj kraje” i filtrach katalogu. Zakres informacji różni się między regionami.',
         },
         {
           q: 'Czy PeakGuide zawiera trasy?',
@@ -904,7 +894,7 @@ function getLabels(lang) {
         },
         {
           q: 'Skąd pochodzą dane?',
-          a: 'Dane są rozwijane na podstawie sprawdzanych źródeł. Projekt będzie również rozwijany o dokładniejsze informacje o źródłach i aktualności danych.',
+          a: 'Przy dostępnych danych podajemy źródła i daty weryfikacji. Brak potwierdzenia oznacza, że informacja wymaga sprawdzenia przed wyjściem.',
         },
         {
           q: 'Czy będą dodawane nowe funkcje?',
@@ -1025,7 +1015,7 @@ function getLabels(lang) {
       faq: [
         {
           q: 'Which countries does PeakGuide cover?',
-          a: 'The database currently covers Poland and the United Kingdom, with more countries and regions planned.',
+          a: 'See the country cards and catalogue filters for currently available destinations. Coverage varies by region.',
         },
         {
           q: 'Does PeakGuide include hiking trails?',
@@ -1033,7 +1023,7 @@ function getLabels(lang) {
         },
         {
           q: 'Where does the data come from?',
-          a: 'Data is developed using verified sources, with clearer source and freshness information planned.',
+          a: 'Sources and verification dates are shown where available. Unconfirmed information needs checking before your hike.',
         },
         {
           q: 'Are more features planned?',
@@ -1152,7 +1142,7 @@ function getLabels(lang) {
       faq: [
         {
           q: 'Які країни охоплює PeakGuide?',
-          a: 'Наразі база охоплює Польщу та Велику Британію. Планується додавання нових країн і регіонів.',
+          a: 'Доступні країни показано в картках країн і фільтрах каталогу. Обсяг інформації залежить від регіону.',
         },
         {
           q: 'Чи містить PeakGuide туристичні маршрути?',
@@ -1160,7 +1150,7 @@ function getLabels(lang) {
         },
         {
           q: 'Звідки походять дані?',
-          a: 'Дані розвиваються на основі перевірених джерел.',
+          a: 'Джерела й дати перевірки показано за наявності. Непідтверджену інформацію слід перевірити перед походом.',
         },
         {
           q: 'Чи будуть нові функції?',
@@ -1277,7 +1267,7 @@ function getLabels(lang) {
       faq: [
         {
           q: 'PeakGuide 目前覆盖哪些国家？',
-          a: '目前数据库包括波兰和英国，未来计划加入更多国家和地区。',
+          a: '当前可用国家见国家卡片及目录筛选。不同地区的信息完整度有所不同。',
         },
         {
           q: 'PeakGuide 是否包含徒步路线？',
@@ -1285,7 +1275,7 @@ function getLabels(lang) {
         },
         {
           q: '数据来自哪里？',
-          a: '数据基于经过核实的来源进行收集和完善。',
+          a: '如有资料来源及核实日期，会在页面标明。未确认的信息请在出发前核实。',
         },
         {
           q: '未来还会增加新功能吗？',
@@ -1310,7 +1300,7 @@ const styles = {
 		border: '1px solid color-mix(in srgb, var(--primary) 18%, transparent)',
 		borderRadius: 28,
 
-		backgroundImage: "url('/images/home/hero2.png')",
+		backgroundImage: "var(--image-images-home-hero2)",
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 		backgroundRepeat: 'no-repeat',
