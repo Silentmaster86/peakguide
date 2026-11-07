@@ -7,7 +7,11 @@ async function getProfile(userId) {
 		.eq('id', userId)
 		.maybeSingle();
 
-	if (error) throw new Error(`Could not load user profile: ${error.message}`);
+	if (error) {
+		const failure = new Error('Could not load user profile', { cause: error });
+		failure.code = 'profile_unavailable';
+		throw failure;
+	}
 	return data;
 }
 
@@ -52,7 +56,8 @@ export async function login({ email, password }) {
 		password,
 	});
 
-	if (error) throw new Error(error.message);
+	if (error) throw error;
+	if (!data?.session || !data?.user) throw new Error('Missing authenticated session');
 
 	return {
 		user: await mapUser(data.user),
@@ -75,20 +80,46 @@ export async function register({ email, password, firstName, lastName }) {
 		},
 	});
 
-	if (error) throw new Error(error.message);
+	if (error) throw error;
 
 	return {
-		user: await mapUser(data.user),
+		// Confirmation-required signups cannot read protected profiles yet.
+		user: data.session ? await mapUser(data.user) : null,
 		session: data.session,
+		requiresConfirmation: !data.session,
 	};
 }
 
 export async function logout() {
-	const { error } = await supabase.auth.signOut();
-
-	if (error) {
-		console.warn('Supabase logout warning:', error.message);
-	}
-
+	const { error } = await supabase.auth.signOut({ scope: 'local' });
+	if (error) throw error;
 	return { ok: true };
+}
+
+export function subscribeAuth(listener) {
+	const timers = new Set();
+	const { data } = supabase.auth.onAuthStateChange((event) => {
+		// Leave the SDK's auth lock before calling getUser/getProfile.
+		const timer = setTimeout(() => {
+			timers.delete(timer);
+			listener(event);
+		}, 0);
+		timers.add(timer);
+	});
+	return () => {
+		data.subscription.unsubscribe();
+		for (const timer of timers) clearTimeout(timer);
+	};
+}
+
+export async function requestPasswordReset(email) {
+	const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+		redirectTo: new URL('/reset-password', window.location.origin).href,
+	});
+	if (error) throw error;
+}
+
+export async function updatePassword(password) {
+	const { error } = await supabase.auth.updateUser({ password });
+	if (error) throw error;
 }

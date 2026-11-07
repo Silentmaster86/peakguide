@@ -14,6 +14,8 @@ import AboutPage from '../pages/AboutPage';
 
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
 import PanelPage from '../pages/PanelPage';
 import { ProtectedRoute } from '../auth/ProtectedRoute';
 import AdminTools from '../pages/AdminTools';
@@ -73,6 +75,8 @@ export default function App() {
 
 							{/* AUTH */}
 							<Route path='/login' element={<LoginPage lang={safeLang} />} />
+							<Route path='/forgot-password' element={<ForgotPasswordPage lang={safeLang} />} />
+							<Route path='/reset-password' element={<ResetPasswordPage lang={safeLang} />} />
 							<Route
 								path='/register'
 								element={<RegisterPage lang={safeLang} />}

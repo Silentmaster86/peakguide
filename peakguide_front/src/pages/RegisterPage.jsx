@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
+import { authErrorMessage } from '../utils/authErrors';
 import AuthShell from "../components/AuthShell";
 import { Field, TextInput, PrimaryBtn } from "../components/AuthFormBits";
 
@@ -27,10 +28,11 @@ export default function RegisterPage({ lang = "pl" }) {
 		e.preventDefault();
 		setLocalError("");
 
-		if (firstName.trim().length < 2) return setLocalError(t.errFirst);
+		if (!firstName.trim() || firstName.trim().length > 80) return setLocalError(t.errFirst);
 		if (!isEmail(email)) return setLocalError(t.errEmail);
 		if (!password || password.length < 6) return setLocalError(t.errPass);
 
+		try {
 			const result = await register({
 				email,
 				password,
@@ -44,14 +46,18 @@ export default function RegisterPage({ lang = "pl" }) {
 			}
 
 			nav("/panel", { replace: true });
+		} catch (failure) {
+			setLocalError(authErrorMessage(failure, lang));
 		}
+	}
 
+	if (status === 'authed') return <Navigate to='/panel' replace />;
 
 	return (
 		<AuthShell
 			title={t.title}
 			subtitle={t.subtitle}
-			error={localError || error}
+			error={localError || authErrorMessage(error, lang)}
 			footer={
 				<>
 					{t.haveAccount} <Link to='/login'>{t.login}</Link>
@@ -60,7 +66,7 @@ export default function RegisterPage({ lang = "pl" }) {
 		>
 
 			{registrationComplete && (
-				<div style={successBox}>
+				<div style={successBox} role='status'>
 					<strong>{t.checkEmailTitle}</strong>
 					<div>{t.checkEmailText}</div>
 				</div>
@@ -76,6 +82,7 @@ export default function RegisterPage({ lang = "pl" }) {
 					<Field label={t.firstName}>
 						<TextInput
 							value={firstName}
+							maxLength={80}
 							onChange={(e) => setFirstName(e.target.value)}
 							placeholder={t.firstPh}
 							autoComplete='given-name'
@@ -95,6 +102,7 @@ export default function RegisterPage({ lang = "pl" }) {
 				<Field label={t.email}>
 					<TextInput
 						value={email}
+						type='email'
 						onChange={(e) => setEmail(e.target.value)}
 						autoComplete='email'
 						inputMode='email'
@@ -152,7 +160,7 @@ function getLabels(lang) {
       lastPh: 'Pietkun',
       emailPh: 'you@example.com',
       passPh: '••••••••',
-      errFirst: 'Imię min. 2 znaki.',
+      errFirst: 'Podaj imię (maksymalnie 80 znaków).',
       errEmail: 'Podaj poprawny email.',
       errPass: 'Hasło min. 6 znaków.',
       checkEmailTitle: 'Sprawdź swoją skrzynkę e-mail',
@@ -174,7 +182,7 @@ function getLabels(lang) {
       lastPh: 'Smith',
       emailPh: 'you@example.com',
       passPh: '••••••••',
-      errFirst: 'First name must be at least 2 characters.',
+      errFirst: 'Enter your first name (up to 80 characters).',
       errEmail: 'Enter a valid email.',
       errPass: 'Password must be at least 6 characters.',
       checkEmailTitle: 'Check your email',
@@ -196,7 +204,7 @@ function getLabels(lang) {
       lastPh: 'Прізвище',
       emailPh: 'you@example.com',
       passPh: '••••••••',
-      errFirst: "Ім'я мін. 2 символи.",
+      errFirst: "Введіть ім’я (до 80 символів).",
       errEmail: 'Введіть коректний email.',
       errPass: 'Пароль мін. 6 символів.',
       checkEmailTitle: 'Перевірте свою електронну пошту',
@@ -218,7 +226,7 @@ function getLabels(lang) {
       lastPh: '姓',
       emailPh: 'you@example.com',
       passPh: '••••••••',
-      errFirst: '名字至少 2 个字符。',
+      errFirst: '请输入名字（最多80个字符）。',
       errEmail: '请输入正确的邮箱。',
       errPass: '密码至少 6 个字符。',
       checkEmailTitle: '请查看您的邮箱',

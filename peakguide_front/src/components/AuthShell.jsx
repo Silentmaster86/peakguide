@@ -15,7 +15,7 @@ export default function AuthShell({
 					{subtitle ? <div style={sub}>{subtitle}</div> : null}
 				</div>
 
-				{error ? <div style={errorBox}>{error}</div> : null}
+				{error ? <div style={errorBox} role="alert">{error}</div> : null}
 
 				{children}
 

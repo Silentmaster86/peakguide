@@ -32,6 +32,8 @@ vi.mock('../components/PeakMap', () => ({
   default: () => null,
 }));
 
+vi.mock('../components/TrailPracticalCard', () => ({ default: () => null }));
+
 function LocationDisplay() {
   const location = useLocation();
   return <output data-testid="location">{location.pathname + location.search}</output>;
