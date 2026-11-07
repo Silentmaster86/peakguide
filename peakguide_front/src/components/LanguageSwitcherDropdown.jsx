@@ -35,14 +35,14 @@ export default function LanguageSwitcherDropdown({
 				onClick={() => setOpen((v) => !v)}
 				aria-haspopup='listbox'
 				aria-expanded={open}
-				aria-label={t.aria}
+				aria-label={`${t.aria}: ${current.label} ${current.name}`}
 			>
 				<span style={styles.btnInner}>
 					<span aria-hidden='true' style={styles.flag}>
 						{current.flag}
 					</span>
 
-					<span style={styles.btnText}>{current.label}</span>
+					<span style={styles.btnText}>{current.label}</span>{' '}
 
 					{!compact ? (
 						<span style={{ ...styles.btnText, opacity: 0.8 }}>

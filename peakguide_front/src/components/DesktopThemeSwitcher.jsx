@@ -1,37 +1,19 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import DropdownMenu from './DropdownMenu';
+import { useDropdown } from '../hooks/useDropdown';
+import { useEffect, useMemo, useState } from "react";
 
 const STORAGE_KEY = "ui_theme_mode"; // "system" | "light" | "dark"
 
 export default function DesktopThemeSwitcher({ lang = "pl", compact = false }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
-	const [open, setOpen] = useState(false);
+	const { open, setOpen, wrapRef } = useDropdown();
 	const [mode, setMode] = useState(readStoredMode());
-	const wrapRef = useRef(null);
 
 	// apply theme + persist
 	useEffect(() => {
 		applyThemeMode(mode);
 		safeStorageSet(STORAGE_KEY, mode);
 	}, [mode]);
-
-	// close on outside click
-	useEffect(() => {
-		function onDown(e) {
-			if (!wrapRef.current) return;
-			if (!wrapRef.current.contains(e.target)) setOpen(false);
-		}
-		window.addEventListener("pointerdown", onDown);
-		return () => window.removeEventListener("pointerdown", onDown);
-	}, []);
-
-	// close on Escape
-	useEffect(() => {
-		function onKey(e) {
-			if (e.key === "Escape") setOpen(false);
-		}
-		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, []);
 
 	const options = [
 		{ value: "system", label: t.system, icon: "🖥️" },
@@ -49,7 +31,7 @@ export default function DesktopThemeSwitcher({ lang = "pl", compact = false }) {
 				onClick={() => setOpen((v) => !v)}
 				aria-haspopup='listbox'
 				aria-expanded={open}
-				aria-label={t.aria}
+				aria-label={`${t.aria}: ${current.label}`}
 			>
 				<span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
 					<span aria-hidden='true'>{current.icon}</span>
@@ -62,35 +44,10 @@ export default function DesktopThemeSwitcher({ lang = "pl", compact = false }) {
 				</span>
 			</button>
 
-			{open && (
-				<div style={styles.menu} role='listbox' aria-label={t.aria}>
-					{options.map((o) => {
-						const active = o.value === mode;
-						return (
-							<button
-								key={o.value}
-								type='button'
-								role='option'
-								aria-selected={active}
-								onClick={() => {
-									setMode(o.value);
-									setOpen(false);
-								}}
-								style={{
-									...styles.item,
-									...(active ? styles.itemActive : null),
-								}}
-							>
-								<span aria-hidden='true'>{o.icon}</span>
-								<span style={{ fontWeight: 900 }}>{o.label}</span>
-								{active ? (
-									<span style={{ marginLeft: "auto", opacity: 0.85 }}>✓</span>
-								) : null}
-							</button>
-						);
-					})}
-				</div>
-			)}
+      <DropdownMenu open={open} wrapRef={wrapRef} ariaLabel={t.aria}
+        items={options.map((option) => ({ key: option.value, label: option.label, icon: option.icon, active: option.value === mode }))}
+        onSelect={(option) => { setMode(option.key); setOpen(false); }} />
+
 		</div>
 	);
 }
@@ -158,7 +115,7 @@ const styles = {
 		borderRadius: 999,
 		border: "1px solid var(--border)",
 		fontSize: "var(--nav-pill-fs)",
-		background: "var(--tollbar-bg)",
+		background: "var(--menu-bg)",
 		color: "var(--text)",
 		boxShadow: "var(--shadow-soft)",
 		fontWeight: 900,

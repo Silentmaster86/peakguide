@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from "react-router-dom";
 
 export default function AuthShell({
@@ -8,7 +9,7 @@ export default function AuthShell({
 	footer,
 }) {
 	return (
-		<div style={wrap}>
+		<div style={wrap}><Helmet><title>{`${title} — PeakGuide`}</title><meta name='robots' content='noindex' /></Helmet>
 			<section style={card}>
 				<div style={{ marginBottom: 12 }}>
 					<h1 style={h1}>{title}</h1>

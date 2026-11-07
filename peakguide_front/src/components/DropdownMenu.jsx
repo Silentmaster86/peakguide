@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export default function DropdownMenu({
 	open,
@@ -8,6 +8,7 @@ export default function DropdownMenu({
 	minWidth = 200,
 	onSelect,
 }) {
+	const menuRef = useRef(null);
 	const [mode, setMode] = useState('anchor-right');
 
 	useEffect(() => {
@@ -44,6 +45,20 @@ export default function DropdownMenu({
 		};
 	}, [open, wrapRef, minWidth]);
 
+  useEffect(() => {
+    if (open) menuRef.current?.querySelector('[aria-selected="true"]:not(:disabled), button:not(:disabled)')?.focus();
+  }, [open]);
+  function handleKeys(event) {
+    const buttons = [...menuRef.current.querySelectorAll('button:not(:disabled)')];
+    const index = buttons.indexOf(document.activeElement);
+    let next;
+    if (event.key === 'ArrowDown') next = (index + 1) % buttons.length;
+    if (event.key === 'ArrowUp') next = (index - 1 + buttons.length) % buttons.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = buttons.length - 1;
+    if (next !== undefined) { event.preventDefault(); buttons[next]?.focus(); }
+  }
+
 	const menuStyle = useMemo(() => {
 		const base = {
 			...styles.menu,
@@ -74,10 +89,10 @@ export default function DropdownMenu({
 	if (!open) return null;
 
 	return (
-		<div style={menuStyle} role='listbox' aria-label={ariaLabel}>
+		<div ref={menuRef} onKeyDown={handleKeys} style={menuStyle} role='listbox' aria-label={ariaLabel}>
 			{items.map((it) => {
 				if (it.type === 'sep') {
-					return <div key={it.key} style={styles.sep} />;
+					return <div key={it.key} style={styles.sep} role='presentation' />;
 				}
 
 				const active = !!it.active;
@@ -86,9 +101,9 @@ export default function DropdownMenu({
 					<button
 						key={it.key}
 						type='button'
-						role='option'
+						role='option' tabIndex={-1}
 						aria-selected={active}
-						onClick={() => onSelect?.(it)}
+						onClick={() => { onSelect?.(it); wrapRef.current?.querySelector('button')?.focus(); }}
 						disabled={it.disabled}
 						style={{
 							...styles.item,
