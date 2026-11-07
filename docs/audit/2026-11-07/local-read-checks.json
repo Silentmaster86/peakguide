@@ -1,0 +1,226 @@
+[
+  {
+    "width": 1440,
+    "route": "/",
+    "status": 200,
+    "title": "Twój przewodnik po górach — PeakGuide",
+    "h1": [
+      "Znajdź swoją następną górską przygodę"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "EKSPLORUJ • ZDOBYWAJ • ODKRYWAJ\nZnajdź swoją następną górską przygodę\n\nOdkrywaj szczyty, szlaki i praktyczne informacje górskie w całej Europie i nie tylko.\n\nOdkrywaj szczyty\n→\nOdkrywaj trasy\n→\n89\nSZCZYTY\n6\nTRASY\n5\nKRAJE\n△\nSzczyty\nOdkrywaj góry\n→\n↗\nT"
+  },
+  {
+    "width": 1440,
+    "route": "/peaks",
+    "status": 200,
+    "title": "Szczyty — PeakGuide",
+    "h1": [
+      "Szczyty"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Szczyty\nSzukaj\nKraj\nWszystkie kraje\n🇵🇱 Polska\n🇬🇧 Wielka Brytania\n🇺🇦 Ukraina\n🇨🇳 Chiny\n🇸🇰 Słowacja\nPasma górskie\nWszystkie pasma górskie\nBeskid Makowski\nBeskid Mały\nBeskid Niski\nBeskid Sądecki\nBeskid Śląski\nBeskid Wyspowy\nBeskid Żywiecki\nBies"
+  },
+  {
+    "width": 1440,
+    "route": "/peaks/ben-nevis?tab=trails",
+    "status": 200,
+    "title": "Ben Nevis (1345 m) — PeakGuide",
+    "h1": [
+      "Ben Nevis"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Szczyty\n›\n🇬🇧 Wielka Brytania\n›\nPasma\n›\nGóry Grampian\n›\nBen Nevis\n← Wróć do listy\nUK Three Peaks\nBen Nevis\n\nNajwyższy szczyt Szkocji i całej Wielkiej Brytanii, wznoszący się na 1345 m n.p.m.\n\nOpis\nSzlaki\n1\nPunkty (POI)\n1\nSzlaki\n1\nBen Nevis szlakiem "
+  },
+  {
+    "width": 1440,
+    "route": "/trails",
+    "status": 200,
+    "title": "Trasy — PeakGuide",
+    "h1": [
+      "Trasy"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Trasy\nWszystkie kraje\nSłowacja\nUkraina\nWielka Brytania\nChiny\nWszystkie poziomy trudności\nTrudna\nLiczba tras: 6\nKriváň z Tri studničky\n\nSłowacja · Tatry Wysokie · Kraj preszowski\n\n⛰️ Szczyt: Kriváň\n\ntrudna\n↔ Trasa: pętla\n↗️ 1354 m suma podejść\n⏱️ 6 h\n"
+  },
+  {
+    "width": 1440,
+    "route": "/ranges",
+    "status": 200,
+    "title": "Pasma górskie — PeakGuide",
+    "h1": [
+      "Pasma górskie"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Pasma górskie\n🏔️ Pasma\nWybierz pasmo, aby zobaczyć listę szczytów.\nKraj\nWszystkie kraje\n🇵🇱 Polska\n🇬🇧 Wielka Brytania\n🇺🇦 Ukraina\n🇨🇳 Chiny\n🇸🇰 Słowacja\nBeskid Makowski\n🇵🇱 Polska\n→\nBeskid Mały\n🇵🇱 Polska\n→\nBeskid Niski\n🇵🇱 Polska\n→\nBeskid "
+  },
+  {
+    "width": 1440,
+    "route": "/ranges/grampian-mountains",
+    "status": 200,
+    "title": "Góry Grampian — Pasmo górskie | PeakGuide",
+    "h1": [
+      "Góry Grampian"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Pasma górskie\n›\n🇬🇧 Wielka Brytania\n›\nSzkocja\n›\nGóry Grampian\n🇬🇧 Szkocja\nGóry Grampian\nSzczyty w Peakguide\n1\nNajwyższy w Peakguide\n1345 m\nNajniższy w Peakguide\n1345 m\nSzczyty w tym paśmie\n← Wróć do pasm\nBen Nevis\nGóry Grampian\n⛰️ 1345 m"
+  },
+  {
+    "width": 1440,
+    "route": "/about",
+    "status": 200,
+    "title": "O PeakGuide — PeakGuide",
+    "h1": [
+      "PeakGuide"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "O PROJEKCIE\nPeakGuide\n\nPeakGuide to międzynarodowy przewodnik górski, który pomaga odkrywać szczyty, poznawać trasy i znaleźć praktyczne informacje potrzebne do zaplanowania wyjścia w góry.\n\nOdkrywaj góry\n\nPrzeglądaj szczyty z różnych krajów, regionó"
+  },
+  {
+    "width": 1440,
+    "route": "/login",
+    "status": 200,
+    "title": "Logowanie — PeakGuide",
+    "h1": [
+      "Logowanie"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Logowanie\nZaloguj się, aby wejść do panelu.\nEmail\nHasło\nZaloguj\nNie pamiętam hasła\nPowrót\nNie masz konta? Rejestracja\n← PeakGuide"
+  },
+  {
+    "width": 1440,
+    "route": "/register",
+    "status": 200,
+    "title": "Rejestracja — PeakGuide",
+    "h1": [
+      "Rejestracja"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Rejestracja\nUtwórz konto PeakGuide.\nImię\nNazwisko (opcjonalnie)\nEmail\nHasło\nUtwórz konto\nPowrót\nMasz konto? Logowanie\n← PeakGuide"
+  },
+  {
+    "width": 1440,
+    "runtimeErrors": []
+  },
+  {
+    "width": 390,
+    "route": "/",
+    "status": 200,
+    "title": "Twój przewodnik po górach — PeakGuide",
+    "h1": [
+      "Znajdź swoją następną górską przygodę"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "EKSPLORUJ • ZDOBYWAJ • ODKRYWAJ\nZnajdź swoją następną górską przygodę\n\nOdkrywaj szczyty, szlaki i praktyczne informacje górskie w całej Europie i nie tylko.\n\nOdkrywaj szczyty\n→\nOdkrywaj trasy\n→\n89\nSZCZYTY\n6\nTRASY\n5\nKRAJE\n△\nSzczyty\nOdkrywaj góry\n↗\nTra"
+  },
+  {
+    "width": 390,
+    "route": "/peaks",
+    "status": 200,
+    "title": "Szczyty — PeakGuide",
+    "h1": [
+      "Szczyty"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Szczyty\nSzukaj\nKraj\nWszystkie kraje\n🇵🇱 Polska\n🇬🇧 Wielka Brytania\n🇺🇦 Ukraina\n🇨🇳 Chiny\n🇸🇰 Słowacja\nPasma górskie\nWszystkie pasma górskie\nBeskid Makowski\nBeskid Mały\nBeskid Niski\nBeskid Sądecki\nBeskid Śląski\nBeskid Wyspowy\nBeskid Żywiecki\nBies"
+  },
+  {
+    "width": 390,
+    "route": "/peaks/ben-nevis?tab=trails",
+    "status": 200,
+    "title": "Ben Nevis (1345 m) — PeakGuide",
+    "h1": [
+      "Ben Nevis"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Szczyty\n›\n🇬🇧 Wielka Brytania\n›\nPasma\n›\nGóry Grampian\n›\nBen Nevis\n← Wróć do listy\nUK Three Peaks\nBen Nevis\n\nNajwyższy szczyt Szkocji i całej Wielkiej Brytanii, wznoszący się na 1345 m n.p.m.\n\nOpis\nSzlaki\n1\nPunkty (POI)\n1\nSzlaki\n1\nBen Nevis szlakiem "
+  },
+  {
+    "width": 390,
+    "route": "/trails",
+    "status": 200,
+    "title": "Trasy — PeakGuide",
+    "h1": [
+      "Trasy"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Trasy\nWszystkie kraje\nSłowacja\nUkraina\nWielka Brytania\nChiny\nWszystkie poziomy trudności\nTrudna\nLiczba tras: 6\nKriváň z Tri studničky\n\nSłowacja · Tatry Wysokie · Kraj preszowski\n\n⛰️ Szczyt: Kriváň\n\ntrudna\n↔ Trasa: pętla\n↗️ 1354 m suma podejść\n⏱️ 6 h\n"
+  },
+  {
+    "width": 390,
+    "route": "/ranges",
+    "status": 200,
+    "title": "Pasma górskie — PeakGuide",
+    "h1": [
+      "Pasma górskie"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Pasma górskie\n🏔️ Pasma\nWybierz pasmo, aby zobaczyć listę szczytów.\nKraj\nWszystkie kraje\n🇵🇱 Polska\n🇬🇧 Wielka Brytania\n🇺🇦 Ukraina\n🇨🇳 Chiny\n🇸🇰 Słowacja\nBeskid Makowski\n🇵🇱 Polska\n→\nBeskid Mały\n🇵🇱 Polska\n→\nBeskid Niski\n🇵🇱 Polska\n→\nBeskid "
+  },
+  {
+    "width": 390,
+    "route": "/ranges/grampian-mountains",
+    "status": 200,
+    "title": "Góry Grampian — Pasmo górskie | PeakGuide",
+    "h1": [
+      "Góry Grampian"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Pasma górskie\n›\n🇬🇧 Wielka Brytania\n›\nSzkocja\n›\nGóry Grampian\n🇬🇧 Szkocja\nGóry Grampian\nSzczyty w Peakguide\n1\nNajwyższy w Peakguide\n1345 m\nNajniższy w Peakguide\n1345 m\nSzczyty w tym paśmie\n← Wróć do pasm\nBen Nevis\nGóry Grampian\n⛰️ 1345 m"
+  },
+  {
+    "width": 390,
+    "route": "/about",
+    "status": 200,
+    "title": "O PeakGuide — PeakGuide",
+    "h1": [
+      "PeakGuide"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "O PROJEKCIE\nPeakGuide\n\nPeakGuide to międzynarodowy przewodnik górski, który pomaga odkrywać szczyty, poznawać trasy i znaleźć praktyczne informacje potrzebne do zaplanowania wyjścia w góry.\n\nOdkrywaj góry\n\nPrzeglądaj szczyty z różnych krajów, regionó"
+  },
+  {
+    "width": 390,
+    "route": "/login",
+    "status": 200,
+    "title": "Logowanie — PeakGuide",
+    "h1": [
+      "Logowanie"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Logowanie\nZaloguj się, aby wejść do panelu.\nEmail\nHasło\nZaloguj\nNie pamiętam hasła\nPowrót\nNie masz konta? Rejestracja\n← PeakGuide"
+  },
+  {
+    "width": 390,
+    "route": "/register",
+    "status": 200,
+    "title": "Rejestracja — PeakGuide",
+    "h1": [
+      "Rejestracja"
+    ],
+    "mains": 1,
+    "overflow": false,
+    "text": "Rejestracja\nUtwórz konto PeakGuide.\nImię\nNazwisko (opcjonalnie)\nEmail\nHasło\nUtwórz konto\nPowrót\nMasz konto? Logowanie\n← PeakGuide"
+  },
+  {
+    "width": 390,
+    "runtimeErrors": []
+  }
+]

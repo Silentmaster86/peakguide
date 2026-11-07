@@ -1,0 +1,39 @@
+
+> peakguide_front@0.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:15596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 2 workers
+
+(node:15620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15621) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [desktop] › e2e/catalogue.spec.mjs:32:1 › collection is visible, can be reset, and a space survives the search debounce (4.6s)
+  ✓   3 [desktop] › e2e/catalogue.spec.mjs:44:1 › a trail link selects and focuses that specific trail (5.4s)
+  ✓   4 [desktop] › e2e/catalogue.spec.mjs:53:1 › a missing peak uses the not-found state (3.4s)
+  ✓   5 [desktop] › e2e/catalogue.spec.mjs:58:1 › catalogue error can be retried (3.5s)
+  ✓   1 [desktop] › e2e/catalogue.spec.mjs:20:1 › home, catalogue, range, trail, about and account routes render without runtime errors or horizontal overflow (17.4s)
+  ✓   7 [desktop] › e2e/catalogue.spec.mjs:80:1 › language menu supports arrows and Escape with focus restoration (4.5s)
+  ✓   6 [desktop] › e2e/catalogue.spec.mjs:71:1 › four languages set the correct document language (7.6s)
+  ✓   9 [desktop] › e2e/catalogue.spec.mjs:101:1 › theme menu supports keyboard selection and restores focus (5.1s)
+  ✓   8 [desktop] › e2e/catalogue.spec.mjs:92:1 › catalogue and recovery form have no serious accessibility violations (8.1s)
+(node:16285) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [desktop] › e2e/catalogue.spec.mjs:114:1 › main navigation menu supports keyboard focus and Escape (4.1s)
+(node:16464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  12 [mobile] › e2e/catalogue.spec.mjs:32:1 › collection is visible, can be reset, and a space survives the search debounce (4.9s)
+  ✓  13 [mobile] › e2e/catalogue.spec.mjs:44:1 › a trail link selects and focuses that specific trail (3.4s)
+  ✓  14 [mobile] › e2e/catalogue.spec.mjs:53:1 › a missing peak uses the not-found state (2.9s)
+  ✓  11 [mobile] › e2e/catalogue.spec.mjs:20:1 › home, catalogue, range, trail, about and account routes render without runtime errors or horizontal overflow (15.8s)
+  ✓  15 [mobile] › e2e/catalogue.spec.mjs:58:1 › catalogue error can be retried (3.3s)
+  ✓  16 [mobile] › e2e/catalogue.spec.mjs:71:1 › four languages set the correct document language (5.5s)
+  ✓  17 [mobile] › e2e/catalogue.spec.mjs:80:1 › language menu supports arrows and Escape with focus restoration (3.4s)
+  ✓  19 [mobile] › e2e/catalogue.spec.mjs:101:1 › theme menu supports keyboard selection and restores focus (3.7s)
+  ✓  18 [mobile] › e2e/catalogue.spec.mjs:92:1 › catalogue and recovery form have no serious accessibility violations (6.0s)
+  ✓  20 [mobile] › e2e/catalogue.spec.mjs:114:1 › main navigation menu supports keyboard focus and Escape (2.2s)
+
+  20 passed (1.0m)
