@@ -68,7 +68,7 @@ export default function HomePage({ lang = 'pl' }) {
 	return (
 		<div className='home-page'>
       <PageSEO page='home' lang={lang} />
-      {(peaksState.status === 'error' || trailsState.status === 'error') && <p role='alert'>{({ pl: 'Nie udało się pobrać części katalogu.', en: 'Some catalogue data could not be loaded.', ua: 'Не вдалося завантажити частину каталогу.', zh: '部分目录数据加载失败。' })[lang]} <button type='button' onClick={() => setRetryKey((v) => v + 1)}>{({ pl: 'Spróbuj ponownie', en: 'Retry', ua: 'Спробувати ще раз', zh: '重试' })[lang]}</button></p>
+      {(peaksState.status === 'error' || trailsState.status === 'error') && <p role='alert'>{({ pl: 'Nie udało się pobrać części katalogu.', en: 'Some catalogue data could not be loaded.', ua: 'Не вдалося завантажити частину каталогу.', zh: '部分目录数据加载失败。' })[lang]} <button type='button' onClick={() => setRetryKey((v) => v + 1)}>{({ pl: 'Spróbuj ponownie', en: 'Retry', ua: 'Спробувати ще раз', zh: '重试' })[lang]}</button></p>}
 			<Hero
 				t={t}
 				peaksCount={peaksState.status === 'success' ? peaks.length : '—'}
