@@ -31,3 +31,5 @@ cookies.txt
 __pycache__/
 test-results/
 playwright-report/
+# Private database metadata exports for staging preparation
+.audit-private/

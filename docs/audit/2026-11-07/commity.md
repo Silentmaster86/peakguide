@@ -37,6 +37,12 @@ nowego RPC.
 
 Po nich znajduje się commit dokumentacji `docs(audit): record verification, remaining work and rollout steps` z raportem, dowodami odczytu i instrukcją wdrożenia.
 
+12. **`docs(staging): document setup from a production-only Supabase project`**
+    Instrukcja `docs/audit/2026-11-08/staging.md`, publiczny wzór
+    `peakguide_front/.env.example`, ignorowanie prywatnych eksportów i odnośniki
+    w README oraz instrukcji wdrożenia. Ten commit przygotowuje konfigurację;
+    nie tworzy projektu Supabase ani nie uruchamia migracji.
+
 ## Otworzenie gałęzi lokalnie
 
 ```sh

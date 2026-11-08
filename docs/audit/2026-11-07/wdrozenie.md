@@ -34,6 +34,11 @@ Sitemapa wymaga `VITE_SUPABASE_URL` i publicznego `VITE_SUPABASE_ANON_KEY` w śr
 
 ## Baza stagingowa
 
+Jeśli istnieje tylko projekt produkcyjny, zacznij od
+[instrukcji przygotowania stagingu](../2026-11-08/staging.md).
+Podgląd Netlify wymaga osobnych zmiennych Supabase w kontekście Deploy Previews;
+sam adres podglądu nie oznacza odizolowanej bazy.
+
 1. Przygotuj kopię schematu i kontrolowane dane testowe. Zachowaj eksport/backup przed migracją. Nie traktuj `supabase/tests/admin_save_peak.sql` jako bazowego schematu aplikacji: to minimalny fixture testu, zawierający celowo uproszczoną kontrolę roli.
 2. Uruchom odczytowy `supabase/audit_preflight.sql`. Sprawdź kolumny `peaks` i `peaks_i18n`, FK podpasm, typ punktu, uprawnienia do sekwencji, RLS i istniejące `is_peakguide_admin()`. Funkcje `st_setsrid` i `st_makepoint` muszą być dostępne dla funkcji RPC. Jeśli PostGIS jest w innym schemacie niż `public`, dodaj w migracji odpowiednią, jawnie zweryfikowaną kwalifikację nazw.
 3. Uruchom `supabase/migrations/202611070011_admin_save_peak.sql` na stagingu. Migracja jest addytywna, ale nie odbudowuje brakującego schematu i nie nadaje nowych uprawnień do tabel w celu obchodzenia istniejących RLS.
