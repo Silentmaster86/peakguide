@@ -1,0 +1,33 @@
+NOTICE:  extension "postgis" already exists, skipping
+CREATE EXTENSION
+DO
+DO
+CREATE FUNCTION
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE TABLE
+INSERT 0 2
+INSERT 0 2
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+BEGIN
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMIT
+SET
+SET
+NOTICE:  PASS: create, geography with production trigger, integer elevation boundaries, create rollback, update rollback, subrange, coordinates, clearing geom, non-admin
+DO
+RESET
+NOTICE:  PASS: anonymous cannot execute
+DO

@@ -1,0 +1,9 @@
+{
+  "database": "peakguide_role_audit",
+  "self_demotion_blocked": true,
+  "sequential_operations_remaining_admins": 1,
+  "last_admin_trigger_blocks_sequential_demotion": true,
+  "overlapping_transactions_remaining_admins": 0,
+  "race_reproduced": true,
+  "scope": "reported trigger and policies, assumed grants/RLS, auth.uid stub; not production"
+}

@@ -3,6 +3,10 @@
 Data: 7 listopada 2026. Baza zmian: `2d8d57d3340335087c7fe90e773153c8985a0a7a`.
 Gałąź: `fix/audit-completion`. Poprzedni raport: [audyt z 6 listopada](../2026-11-06-baseline.md).
 
+Aktualizacja 9 listopada: [weryfikacja metadanych produkcji, poprawka wysokości
+i odtworzony problem współbieżności administratorów](../2026-11-09/database-findings.md).
+Ta aktualizacja uzupełnia poniższe ustalenia dotyczące bazy; pełny staging nadal nie został odtworzony.
+
 **Poprawki są przygotowane w repozytorium. Produkcyjna baza i główna gałąź nie zostały zmienione przez ten pakiet.** Zapis administratora wymaga nowej funkcji `admin_save_peak`, dlatego najpierw należy sprawdzić migrację na stagingu, a dopiero później wdrożyć powiązany frontend. Szczegóły: [instrukcja wdrożenia](wdrozenie.md).
 
 ## 1. Co udało się rzeczywiście sprawdzić

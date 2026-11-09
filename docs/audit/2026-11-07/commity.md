@@ -45,6 +45,14 @@ Po nich znajduje się commit dokumentacji `docs(audit): record verification, rem
 
 ## Otworzenie gałęzi lokalnie
 
+Kolejne commity po otrzymaniu metadanych od właściciela (9 listopada):
+
+- `fix(admin): align elevation validation with production schema` — walidacja
+  dodatniej całkowitej wysokości, testy i fixture geography z rzeczywistym triggerem.
+- `test(audit): reproduce administrator race from supplied database definitions`
+  — lokalna reprodukcja problemu, wyniki testów, raport i odczytowy przegląd uprawnień.
+  Reprodukcja dokumentuje nadal otwarty problem; nie jest migracją jego naprawy.
+
 ```sh
 git fetch origin
 git switch fix/audit-completion

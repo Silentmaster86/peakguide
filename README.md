@@ -3,6 +3,7 @@
 Aktualny raport i wykonane poprawki: [audyt 7 listopada 2026](docs/audit/2026-11-07/raport.md).
 [Gotowe commity](docs/audit/2026-11-07/commity.md) · [Kolejność wdrożenia](docs/audit/2026-11-07/wdrozenie.md).
 [Masz tylko produkcyjny Supabase? Przygotowanie stagingu](docs/audit/2026-11-08/staging.md).
+[Weryfikacja definicji bazy i test współbieżności — 9 listopada](docs/audit/2026-11-09/database-findings.md).
 
 Testy aktywnego frontendu: `cd peakguide_front && npm ci && npm run check`;
 przeglądarka: `npm run test:e2e`. Testy archiwalnego backendu w `_archive/`
