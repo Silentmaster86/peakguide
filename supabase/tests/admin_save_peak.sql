@@ -9,11 +9,21 @@ create table subranges(id bigint primary key, range_id bigint references mountai
 create table peaks (
  id bigint generated always as identity primary key, slug text unique not null,
  range_id bigint references mountain_ranges, subrange_id bigint references subranges,
- elevation_m integer not null, latitude double precision, longitude double precision,
+ elevation_m integer not null check (elevation_m > 0), latitude numeric, longitude numeric,
  difficulty text, best_season text, cover_image_url text, cover_image_author text,
  cover_image_source_url text, cover_image_license text, cover_image_license_url text,
- is_korona boolean not null, active boolean not null, geom geometry(Point,4326)
+ is_korona boolean not null, active boolean not null, geom geography(Point,4326)
 );
+-- Trigger body supplied by the owner, 2026-11-09. Remaining fixture is minimal.
+create function public.set_peak_geom() returns trigger language plpgsql as $$
+begin
+ if new.latitude is not null and new.longitude is not null then
+  new.geom := st_setsrid(st_makepoint(new.longitude::double precision, new.latitude::double precision),4326)::geography;
+ else new.geom := null; end if;
+ return new;
+end $$;
+create trigger trg_set_peak_geom before insert or update of latitude, longitude on peaks
+for each row execute function public.set_peak_geom();
 create table peaks_i18n(peak_id bigint references peaks on delete cascade, lang text,
  name text not null check (name <> 'FORCE_FAILURE'), short_description text, description text, tips text,
  primary key(peak_id,lang));
@@ -34,9 +44,19 @@ do $$
 declare
  payload jsonb := '{"slug":"test-peak","range_id":1,"subrange_id":10,"elevation_m":1000,"latitude":50,"longitude":20,"active":true,"is_korona":false,"i18n":{"pl":{"name":"Test"}}}';
  test_peak_id bigint;
+ invalid_elevation jsonb;
 begin
  test_peak_id := public.admin_save_peak(null,payload);
- if not exists(select 1 from peaks where peaks.id=test_peak_id and st_x(geom)=20 and st_y(geom)=50) then raise exception 'FAIL geom'; end if;
+ if not exists(select 1 from peaks where peaks.id=test_peak_id and st_x(geom::geometry)=20 and st_y(geom::geometry)=50) then raise exception 'FAIL geom'; end if;
+ for invalid_elevation in select value from jsonb_array_elements('[-500,-1,0,1.5,9001,null,"bad"]') loop
+  begin
+   perform public.admin_save_peak(test_peak_id,jsonb_set(payload,'{elevation_m}',invalid_elevation));
+   raise exception 'FAIL accepted invalid elevation';
+  exception when raise_exception then if sqlerrm <> 'Invalid elevation' then raise; end if; end;
+ end loop;
+ perform public.admin_save_peak(test_peak_id,jsonb_set(payload,'{elevation_m}','1'));
+ perform public.admin_save_peak(test_peak_id,jsonb_set(payload,'{elevation_m}','9000'));
+ perform public.admin_save_peak(test_peak_id,payload);
  begin
    perform public.admin_save_peak(null,jsonb_set(jsonb_set(payload,'{slug}','"failed-create"'),'{i18n,pl,name}','"FORCE_FAILURE"'));
    raise exception 'FAIL expected constraint';
@@ -62,7 +82,7 @@ begin
    perform public.admin_save_peak(null,payload);
    raise exception 'FAIL non-admin accepted';
  exception when raise_exception then if sqlerrm <> 'Admin access required' then raise; end if; end;
- raise notice 'PASS: create, geom, create rollback, update rollback, subrange, coordinates, clearing geom, non-admin';
+ raise notice 'PASS: create, geography with production trigger, integer elevation boundaries, create rollback, update rollback, subrange, coordinates, clearing geom, non-admin';
 end $$;
 reset role;
 do $$ begin

@@ -14,11 +14,14 @@ declare
 begin
   if public.is_peakguide_admin() is not true then raise exception 'Admin access required'; end if;
   if jsonb_typeof(p_body) is distinct from 'object' then raise exception 'Invalid peak payload'; end if;
+  -- Production elevation_m is integer with CHECK (elevation_m > 0).
+  -- Validate before populating the record to give a controlled error for fractions.
+  if coalesce(p_body->>'elevation_m', '') !~ '^[0-9]+$' then raise exception 'Invalid elevation'; end if;
+  if (p_body->>'elevation_m')::numeric not between 1 and 9000 then raise exception 'Invalid elevation'; end if;
   v_peak := jsonb_populate_record(null::public.peaks, p_body);
   if v_peak.slug is null or v_peak.slug !~ '^[a-z0-9]+(-[a-z0-9]+)*$' then raise exception 'Invalid slug'; end if;
   if v_peak.range_id is null or not exists(select 1 from public.mountain_ranges where id = v_peak.range_id) then raise exception 'Invalid range'; end if;
   if v_peak.subrange_id is not null and not exists(select 1 from public.subranges where id = v_peak.subrange_id and range_id = v_peak.range_id) then raise exception 'Subrange does not belong to range'; end if;
-  if v_peak.elevation_m is null or v_peak.elevation_m not between -500 and 9000 then raise exception 'Invalid elevation'; end if;
   if (v_peak.latitude is null) <> (v_peak.longitude is null) or
     (v_peak.latitude is not null and (v_peak.latitude not between -90 and 90 or v_peak.longitude not between -180 and 180)) then raise exception 'Invalid coordinates'; end if;
   if jsonb_typeof(v_i18n) is distinct from 'object' or v_i18n = '{}'::jsonb then raise exception 'Add at least one translation'; end if;

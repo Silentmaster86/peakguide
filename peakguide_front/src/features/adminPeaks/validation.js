@@ -14,7 +14,7 @@ export function preparePeakPayload(body) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error('Slug: use lowercase letters, digits and hyphens.');
   if (!Number.isInteger(range) || range <= 0) throw new Error('Select a mountain range.');
   if (subrange !== null && (!Number.isInteger(subrange) || subrange <= 0)) throw new Error('Invalid subrange.');
-  if (elevation === null || !Number.isFinite(elevation) || elevation < -500 || elevation > 9000) throw new Error('Enter an elevation between -500 and 9000 m.');
+  if (!Number.isInteger(elevation) || elevation < 1 || elevation > 9000) throw new Error('Enter an elevation in whole metres between 1 and 9000 m.');
   if ((latitude === null) !== (longitude === null) || (latitude !== null && (!Number.isFinite(latitude) || !Number.isFinite(longitude) || Math.abs(latitude) > 90 || Math.abs(longitude) > 180))) throw new Error('Enter both valid coordinates, or leave both empty.');
   const i18n = {};
   for (const lang of LANGS) {
