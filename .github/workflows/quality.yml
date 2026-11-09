@@ -49,3 +49,4 @@ jobs:
       - run: python -m unittest discover -s scripts -p 'test_*.py'
       - run: cp supabase/migrations/202611070011_admin_save_peak.sql /tmp/admin_save_peak.sql
       - run: psql -h localhost -U postgres -v ON_ERROR_STOP=1 -f supabase/tests/admin_save_peak.sql
+      - run: python supabase/tests/profile_protection_repro.py --local --verify-fix
