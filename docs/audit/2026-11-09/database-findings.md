@@ -1,5 +1,9 @@
 # Weryfikacja metadanych przekazanych przez właściciela — 9 listopada 2026
 
+**Późniejsza aktualizacja:** [potwierdzone RLS, granty i lokalnie przetestowana
+poprawka współbieżności](access-verification.md). Poniżej zachowano wyniki pierwszej
+reprodukcji; opis „otwarty” odnosi się do stanu przed przygotowaniem migracji 012.
+
 Źródło: wyniki zapytań SQL przekazane w rozmowie, nie bezpośredni dostęp do
 produkcji. Testy wykonano w jednorazowym lokalnym PostgreSQL 16/PostGIS 3.5,
 w kontenerze bez sieci. Produkcja zgłasza PostGIS 3.3.7 w `public`.

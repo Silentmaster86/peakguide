@@ -1,0 +1,142 @@
+{
+  "database": "peakguide_role_audit",
+  "self_demotion_blocked": true,
+  "sequential_operations_remaining_admins": 1,
+  "last_admin_trigger_blocks_sequential_demotion": true,
+  "overlapping_transactions_remaining_admins": 0,
+  "race_reproduced": true,
+  "scope": "reported trigger, policies, grants and RLS; auth.uid and auth.users stubs; not production"
+}
+{
+  "migration_012": "PASS",
+  "concurrent_cases": [
+    {
+      "isolation": "read committed",
+      "operation": "demote",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "read committed",
+      "operation": "demote",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "read committed",
+      "operation": "delete",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "read committed",
+      "operation": "delete",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "read committed",
+      "operation": "auth_cascade",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "read committed",
+      "operation": "auth_cascade",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "repeatable read",
+      "operation": "demote",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "repeatable read",
+      "operation": "demote",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "repeatable read",
+      "operation": "delete",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "repeatable read",
+      "operation": "delete",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "repeatable read",
+      "operation": "auth_cascade",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "repeatable read",
+      "operation": "auth_cascade",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "serializable",
+      "operation": "demote",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "serializable",
+      "operation": "demote",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "serializable",
+      "operation": "delete",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "serializable",
+      "operation": "delete",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    },
+    {
+      "isolation": "serializable",
+      "operation": "auth_cascade",
+      "first_transaction": "commit",
+      "remaining_admins": 1,
+      "second_returncode": 3
+    },
+    {
+      "isolation": "serializable",
+      "operation": "auth_cascade",
+      "first_transaction": "rollback",
+      "remaining_admins": 1,
+      "second_returncode": 0
+    }
+  ],
+  "self_protection_and_bulk_rollback": "PASS",
+  "private_lock_access": "PASS"
+}

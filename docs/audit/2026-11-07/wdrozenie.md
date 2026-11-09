@@ -34,6 +34,12 @@ Sitemapa wymaga `VITE_SUPABASE_URL` i publicznego `VITE_SUPABASE_ANON_KEY` w śr
 
 ## Baza stagingowa
 
+Aktualizacja po odczycie konfiguracji produkcji: [testy uprawnień i poprawka
+ochrony administratorów](../2026-11-09/access-verification.md). Dodano migrację
+`202611090012_serialize_profile_writes.sql`, lokalnie sprawdzoną w 18 scenariuszach
+współbieżności. Nie została zastosowana na produkcji. Nie wymaga nowego projektu
+Supabase do odtworzenia testów; używany jest jednorazowy lokalny PostgreSQL.
+
 Jeśli istnieje tylko projekt produkcyjny, zacznij od
 [instrukcji przygotowania stagingu](../2026-11-08/staging.md).
 Podgląd Netlify wymaga osobnych zmiennych Supabase w kontekście Deploy Previews;
@@ -62,6 +68,9 @@ Drugi adres zastąp istniejącym hostem. Nie dodawaj szerokiego wildcardu tylko 
 
 1. Przejrzyj PR i wyniki CI; najpierw zamknij wymagane testy stagingu.
 2. Zastosuj zweryfikowaną migrację 011 w docelowej bazie.
+   Migrację 012 ochrony administratorów zastosuj osobno po przeglądzie jej skutków
+   dla Auth i sprawdzeniu kodu `admin-delete-user`. Nie pomijaj jej przy uznaniu
+   problemu ostatniego administratora za naprawiony na produkcji.
 3. Wdróż odpowiadający frontend przez normalny przepływ Netlify.
 4. Sprawdź listy, szczegóły, aktywne filtry, konkretną trasę i kontrolowane konto. Zweryfikuj zapis administratora na przeznaczonym do tego rekordzie.
 5. Przy problemie frontendu przywróć poprzedni deploy Netlify. Nową, nieużywaną funkcję RPC można pozostawić — nie trzeba destrukcyjnie usuwać danych. Jeśli problem dotyczy zapisu w bazie, najpierw zatrzymaj używanie tego formularza i ustal stan transakcji przed kolejną migracją.

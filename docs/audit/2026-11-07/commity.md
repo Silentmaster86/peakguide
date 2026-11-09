@@ -45,6 +45,13 @@ Po nich znajduje się commit dokumentacji `docs(audit): record verification, rem
 
 ## Otworzenie gałęzi lokalnie
 
+Po otrzymaniu pełniejszego przeglądu uprawnień:
+
+- `fix(db): serialize profile writes to preserve the last administrator` — migracja
+  012, 18 testów współbieżności i rozszerzony test katalogu z rzeczywistym RLS.
+- `docs(audit): record verified access and administrator protection fix` — wyniki,
+  zakres testów, ograniczenia i aktualna instrukcja wdrożenia.
+
 Kolejne commity po otrzymaniu metadanych od właściciela (9 listopada):
 
 - `fix(admin): align elevation validation with production schema` — walidacja
