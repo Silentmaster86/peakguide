@@ -1,5 +1,10 @@
 # Potwierdzone RLS i przetestowana poprawka ochrony administratorów
 
+Aktualizacja po zrzucie ekranu panelu: projekt nie ma wdrożonej Edge Function.
+Przygotowano jej źródła i testy — [admin-delete-user](edge-function.md).
+Poniższa lista braków opisuje wcześniejszy etap; funkcja nadal wymaga wdrożenia
+i testu rzeczywistego Auth, ale właściciel nie musi szukać nieistniejącego kodu.
+
 Źródło: `audit_access_snapshot` przekazany przez właściciela 9 listopada 2026.
 Testy: lokalny PostgreSQL 16/PostGIS 3.5 w kontenerze bez sieci. Produkcja zgłasza
 PostGIS 3.3.7. Nie połączono się z produkcyjną bazą i nie wykonano w niej zmian.

@@ -5,6 +5,7 @@ Aktualny raport i wykonane poprawki: [audyt 7 listopada 2026](docs/audit/2026-11
 [Masz tylko produkcyjny Supabase? Przygotowanie stagingu](docs/audit/2026-11-08/staging.md).
 [Weryfikacja definicji bazy i test współbieżności — 9 listopada](docs/audit/2026-11-09/database-findings.md).
 [Potwierdzone uprawnienia i poprawka ochrony administratorów](docs/audit/2026-11-09/access-verification.md).
+[Brakująca funkcja usuwania kont — kod, testy i wdrożenie](docs/audit/2026-11-09/edge-function.md).
 
 Testy aktywnego frontendu: `cd peakguide_front && npm ci && npm run check`;
 przeglądarka: `npm run test:e2e`. Testy archiwalnego backendu w `_archive/`

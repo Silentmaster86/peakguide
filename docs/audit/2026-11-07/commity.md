@@ -45,6 +45,13 @@ Po nich znajduje się commit dokumentacji `docs(audit): record verification, rem
 
 ## Otworzenie gałęzi lokalnie
 
+Po potwierdzeniu pustej listy Edge Functions:
+
+- `feat(admin): add authenticated account deletion edge function` — kod Deno,
+  weryfikacja tożsamości i aktualnej roli, testy oraz obsługa błędów frontendu.
+- `docs(audit): document missing edge function and deployment steps` — korekta
+  wcześniejszego założenia o wdrożeniu, wyniki i instrukcja publikacji funkcji.
+
 Po otrzymaniu pełniejszego przeglądu uprawnień:
 
 - `fix(db): serialize profile writes to preserve the last administrator` — migracja

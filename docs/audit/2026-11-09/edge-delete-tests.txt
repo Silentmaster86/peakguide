@@ -1,0 +1,34 @@
+✔ rejects missing token before accessing Auth or database (24.475712ms)
+✔ rejects wrong authentication scheme before accessing Auth or database (0.578906ms)
+✔ rejects untrusted origin before accessing Auth or database (0.469625ms)
+✔ rejects wrong method before accessing Auth or database (0.386201ms)
+✔ rejects wrong content type before accessing Auth or database (0.549744ms)
+✔ rejects malformed JSON before accessing Auth or database (2.518416ms)
+✔ rejects invalid UUID before accessing Auth or database (0.572618ms)
+✔ rejects array payload before accessing Auth or database (1.356548ms)
+✔ rejects null payload before accessing Auth or database (0.487482ms)
+✔ rejects oversized body before accessing Auth or database (0.670742ms)
+✔ preflight is allowed only for the configured origin and never deletes (0.327795ms)
+✔ fails closed for invalid JWT (0.834275ms)
+✔ fails closed for unconfirmed identity (0.359962ms)
+✔ fails closed for ordinary user despite claimed admin payload (0.503565ms)
+✔ fails closed for inconsistent role (0.305562ms)
+✔ fails closed for inconsistent flag (0.257831ms)
+✔ fails closed for missing profile (0.225694ms)
+✔ fails closed for failed profile read (0.450496ms)
+✔ fails closed for missing server configuration (0.443516ms)
+✔ rejects self-deletion including uppercase UUID (0.52721ms)
+✔ verifies identity and current profile before deleting exactly the requested Auth account (0.664032ms)
+✔ never reports success or falls back to deleting profiles when database protection rejects deletion (0.377549ms)
+✔ never reports success or falls back to deleting profiles when missing account (0.481913ms)
+✔ never reports success or falls back to deleting profiles when unconfirmed deletion (0.483556ms)
+✔ never reports success or falls back to deleting profiles when network failure (0.2767ms)
+✔ a non-browser request still requires an authenticated administrator (0.292883ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 55.379012

@@ -2,6 +2,11 @@
 
 ## Przegląd kodu
 
+Po zrzucie ekranu panelu potwierdzono brak wdrożonych Edge Functions.
+Kod `admin-delete-user` jest teraz przygotowany w PR, a [instrukcja jego
+wdrożenia](../2026-11-09/edge-function.md) zastępuje wcześniejsze prośby o eksport
+już wdrożonej funkcji. Sam merge do GitHub nie wdraża jej do Supabase.
+
 Pracuj na `fix/audit-completion`. Nie kopiuj zmian pojedynczymi plikami na `main` — część importów, słowników i testów jest wspólna. Zapis administratora z tej gałęzi **wymaga migracji 011**. Nie należy wdrażać samego frontendu przed przygotowaniem funkcji.
 
 ## Kontrola lokalna
