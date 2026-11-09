@@ -47,8 +47,23 @@ export async function adminDeleteUser(id) {
 		body: { userId: id },
 	});
 
-	if (error) throw new Error(error.message);
-	if (data?.error) throw new Error(data.error);
+	if (error || data?.error) {
+		let code = data?.error;
+		if (error?.context?.json) {
+			try { code = (await error.context.json())?.error; } catch { /* Use a safe fallback. */ }
+		}
+		const messages = {
+			AUTH_REQUIRED: 'Your session has expired. Sign in again.',
+			ADMIN_REQUIRED: 'Administrator permissions are required.',
+			SELF_DELETE_FORBIDDEN: 'You cannot delete your own account.',
+			USER_NOT_FOUND: 'This account no longer exists. Refresh the list.',
+			DELETE_FAILED: 'The account could not be deleted. Database protection or another dependency may be blocking it.',
+		};
+		throw new Error(messages[code] || 'Account deletion failed. Refresh the list before trying again.');
+	}
+	if (data?.ok !== true || data?.userId?.toLowerCase() !== String(id).toLowerCase()) {
+		throw new Error('Account deletion was not confirmed. Refresh the list.');
+	}
 
 	return { ok: true };
 }

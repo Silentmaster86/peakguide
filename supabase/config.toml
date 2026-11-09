@@ -1,0 +1,7 @@
+project_id = "peakguide"
+
+[functions.admin-delete-user]
+# The handler validates the user's Bearer token through Auth getUser() on EVERY
+# POST. Disabling the legacy gateway JWT check supports modern signing keys;
+# this does not make the deletion endpoint anonymous.
+verify_jwt = false
