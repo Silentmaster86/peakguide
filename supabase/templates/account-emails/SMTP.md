@@ -6,10 +6,17 @@ Resend; nie utworzono konta ani nie zakupiono domeny lub planu.
 
 ## Co trzeba ustalić
 
-Potrzebna jest własna domena z dostępem do DNS. `peak-guide.netlify.app` jest
+Dla Resend potrzebna jest własna domena z dostępem do DNS. Właściciel potwierdził,
+że ma obecnie tylko `peak-guide.netlify.app`. Jest to
 adresem hostowanej strony, nie domeną kontrolowaną przez właściciela w DNS do
 weryfikacji nadawcy. Nie można zweryfikować `gmail.com` jako swojej domeny w Resend.
 Strona może nadal działać pod dotychczasowym adresem Netlify.
+
+Alternatywą na małą skalę jest SMTP konta Gmail, o ile konto pozwala utworzyć
+hasło aplikacji przy włączonej weryfikacji dwuetapowej. Nie wymaga własnej domeny,
+ale podlega limitom konta Gmail i wymaga osobnego adaptera wysyłki powitania.
+Nie skonfigurowano połączenia z kontem Gmail. Wybór pomiędzy własną domeną i Resend
+a tymczasowym SMTP Gmail pozostaje po stronie właściciela.
 
 Domyślna poczta Supabase jest przeznaczona do testów i ogranicza odbiorców do
 adresów członków zespołu projektu. Udany test na skrzynce właściciela nie dowodzi
@@ -56,3 +63,5 @@ zmieni automatycznie nagłówki natywnych wiadomości Auth.
 - https://supabase.com/docs/guides/auth/auth-smtp
 - https://resend.com/docs/send-with-supabase-smtp
 - https://resend.com/docs/dashboard/domains/introduction
+- https://support.google.com/accounts/answer/185833?hl=pl
+- https://support.google.com/mail/answer/22839?hl=pl
