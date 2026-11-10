@@ -1,0 +1,13 @@
+PeakGuide — ustaw nowe hasło
+
+Cześć!
+
+Otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta PeakGuide. Aby ustawić nowe hasło, użyj przycisku poniżej.
+
+Link jest jednorazowy. Jeśli wygaśnie, poproś o nowy na stronie logowania.
+
+Zespół PeakGuide
+
+Ustaw nowe hasło: {{ .ConfirmationURL }}
+
+Jeśli to nie Ty wysyłasz tę prośbę, zignoruj wiadomość. Samo jej otrzymanie nie zmienia hasła.

@@ -1,0 +1,78 @@
+{{ $locale := printf "%v" .Data.locale }}
+{{ if eq $locale "en" }}<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PeakGuide — reset your password</title></head>
+<body style="margin:0;padding:0;background:#f2f5f3;color:#182a24;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;">We received a request to reset your account password.</div>
+<table role="presentation" style="width:100%;border-collapse:collapse;"><tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff;">
+<tr><td style="padding:28px 24px;background:#183f32;color:#fff;font-size:24px;font-weight:bold;">PeakGuide</td></tr>
+<tr><td style="padding:28px 24px;font-size:16px;line-height:1.6;">
+<h1 style="margin:0 0 20px;font-size:24px;line-height:1.3;">PeakGuide — reset your password</h1>
+<p>Hi!</p>
+<p>We received a request to reset the password for your PeakGuide account. Use the button below to set a new password.</p>
+<p>This link can only be used once. If it expires, request a new one from the sign-in page.</p>
+<p>The PeakGuide team</p>
+<p style="margin:28px 0;"><a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 22px;background:#246547;color:#fff;text-decoration:none;font-weight:bold;border-radius:6px;">Set a new password</a></p>
+<p style="font-size:14px;color:#475b51;">If you did not request this, ignore this email. Receiving it does not change your password.</p>
+<p style="font-size:13px;overflow-wrap:anywhere;">If the button does not work, copy this address into your browser:<br><a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a></p>
+</td></tr></table></td></tr></table>
+</body></html>
+{{ else if or (eq $locale "uk") (eq $locale "ua") }}<!doctype html>
+<html lang="uk">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PeakGuide — установіть новий пароль</title></head>
+<body style="margin:0;padding:0;background:#f2f5f3;color:#182a24;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;">Ми отримали запит на скидання пароля вашого облікового запису.</div>
+<table role="presentation" style="width:100%;border-collapse:collapse;"><tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff;">
+<tr><td style="padding:28px 24px;background:#183f32;color:#fff;font-size:24px;font-weight:bold;">PeakGuide</td></tr>
+<tr><td style="padding:28px 24px;font-size:16px;line-height:1.6;">
+<h1 style="margin:0 0 20px;font-size:24px;line-height:1.3;">PeakGuide — установіть новий пароль</h1>
+<p>Привіт!</p>
+<p>Ми отримали запит на скидання пароля вашого облікового запису PeakGuide. Натисніть кнопку нижче, щоб установити новий пароль.</p>
+<p>Посилання можна використати лише один раз. Якщо термін його дії мине, запросіть нове на сторінці входу.</p>
+<p>Команда PeakGuide</p>
+<p style="margin:28px 0;"><a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 22px;background:#246547;color:#fff;text-decoration:none;font-weight:bold;border-radius:6px;">Установити новий пароль</a></p>
+<p style="font-size:14px;color:#475b51;">Якщо ви не надсилали цей запит, проігноруйте лист. Саме отримання цього листа не змінює ваш пароль.</p>
+<p style="font-size:13px;overflow-wrap:anywhere;">Якщо кнопка не працює, скопіюйте цю адресу в браузер:<br><a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a></p>
+</td></tr></table></td></tr></table>
+</body></html>
+{{ else if eq $locale "zh" }}<!doctype html>
+<html lang="zh-Hans">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PeakGuide — 重设密码</title></head>
+<body style="margin:0;padding:0;background:#f2f5f3;color:#182a24;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;">我们收到了重设你的账号密码的请求。</div>
+<table role="presentation" style="width:100%;border-collapse:collapse;"><tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff;">
+<tr><td style="padding:28px 24px;background:#183f32;color:#fff;font-size:24px;font-weight:bold;">PeakGuide</td></tr>
+<tr><td style="padding:28px 24px;font-size:16px;line-height:1.6;">
+<h1 style="margin:0 0 20px;font-size:24px;line-height:1.3;">PeakGuide — 重设密码</h1>
+<p>你好！</p>
+<p>我们收到了重设你的 PeakGuide 账号密码的请求。请点击下方按钮设置新密码。</p>
+<p>此链接只能使用一次。如果链接已过期，请在登录页面重新申请。</p>
+<p>PeakGuide 团队</p>
+<p style="margin:28px 0;"><a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 22px;background:#246547;color:#fff;text-decoration:none;font-weight:bold;border-radius:6px;">设置新密码</a></p>
+<p style="font-size:14px;color:#475b51;">如果你没有发起此请求，请忽略这封邮件。收到这封邮件并不会更改你的密码。</p>
+<p style="font-size:13px;overflow-wrap:anywhere;">如果按钮无法使用，请将以下地址复制到浏览器中：<br><a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a></p>
+</td></tr></table></td></tr></table>
+</body></html>
+{{ else }}<!doctype html>
+<html lang="pl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PeakGuide — ustaw nowe hasło</title></head>
+<body style="margin:0;padding:0;background:#f2f5f3;color:#182a24;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;">Otrzymaliśmy prośbę o zmianę hasła do Twojego konta.</div>
+<table role="presentation" style="width:100%;border-collapse:collapse;"><tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff;">
+<tr><td style="padding:28px 24px;background:#183f32;color:#fff;font-size:24px;font-weight:bold;">PeakGuide</td></tr>
+<tr><td style="padding:28px 24px;font-size:16px;line-height:1.6;">
+<h1 style="margin:0 0 20px;font-size:24px;line-height:1.3;">PeakGuide — ustaw nowe hasło</h1>
+<p>Cześć!</p>
+<p>Otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta PeakGuide. Aby ustawić nowe hasło, użyj przycisku poniżej.</p>
+<p>Link jest jednorazowy. Jeśli wygaśnie, poproś o nowy na stronie logowania.</p>
+<p>Zespół PeakGuide</p>
+<p style="margin:28px 0;"><a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 22px;background:#246547;color:#fff;text-decoration:none;font-weight:bold;border-radius:6px;">Ustaw nowe hasło</a></p>
+<p style="font-size:14px;color:#475b51;">Jeśli to nie Ty wysyłasz tę prośbę, zignoruj wiadomość. Samo jej otrzymanie nie zmienia hasła.</p>
+<p style="font-size:13px;overflow-wrap:anywhere;">Jeśli przycisk nie działa, skopiuj ten adres do przeglądarki:<br><a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a></p>
+</td></tr></table></td></tr></table>
+</body></html>
+{{ end }}

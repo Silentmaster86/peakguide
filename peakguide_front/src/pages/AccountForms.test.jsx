@@ -26,6 +26,7 @@ it('accepts a one-character name and explains email confirmation', async () => {
   await user.click(screen.getByRole('button', { name: 'Create account' }));
   expect(await screen.findByRole('status')).toHaveTextContent('Check your email');
   expect(register).toHaveBeenCalledOnce();
+  expect(register).toHaveBeenCalledWith(expect.objectContaining({ lang: 'en' }));
 });
 it('shows a translated registration failure without leaking server details', async () => {
   register.mockRejectedValue(new Error('internal SQL error'));

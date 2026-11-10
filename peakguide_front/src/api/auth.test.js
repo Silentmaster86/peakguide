@@ -13,6 +13,13 @@ beforeEach(() => {
 });
 
 describe('account API', () => {
+  it.each([['pl', 'pl'], ['en', 'en'], ['ua', 'uk'], ['uk', 'uk'], ['zh', 'zh'], ['unknown', 'pl'], [undefined, 'pl']])('stores the signup language %s as %s for account emails', async (lang, locale) => {
+    auth.signUp.mockResolvedValue({ data: { user: { id: 'new' }, session: null }, error: null });
+    await register({ email: 'test@example.com', password: 'secret', firstName: 'Test', lang });
+    expect(auth.signUp).toHaveBeenCalledWith(expect.objectContaining({
+      options: { data: { first_name: 'Test', last_name: '', display_name: 'Test', locale } },
+    }));
+  });
   it('does not query protected profiles before email confirmation', async () => {
     auth.signUp.mockResolvedValue({ data: { user: { id: 'new' }, session: null }, error: null });
     expect(await register({ email: 'test@example.com', firstName: '明', password: 'secret' })).toEqual({ user: null, session: null, requiresConfirmation: true });

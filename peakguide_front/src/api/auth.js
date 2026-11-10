@@ -65,8 +65,10 @@ export async function login({ email, password }) {
 	};
 }
 
-export async function register({ email, password, firstName, lastName }) {
+export async function register({ email, password, firstName, lastName, lang = 'pl' }) {
 	const displayName = `${firstName || ''} ${lastName || ''}`.trim();
+	// The UI uses "ua"; email metadata uses the ISO language code "uk".
+	const locale = lang === 'ua' ? 'uk' : ['pl', 'en', 'uk', 'zh'].includes(lang) ? lang : 'pl';
 
 	const { data, error } = await supabase.auth.signUp({
 		email,
@@ -76,6 +78,7 @@ export async function register({ email, password, firstName, lastName }) {
 				first_name: firstName || '',
 				last_name: lastName || '',
 				display_name: displayName || email,
+				locale,
 			},
 		},
 	});
