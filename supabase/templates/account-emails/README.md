@@ -1,6 +1,7 @@
 # Wiadomości konta PeakGuide
 
-Przygotowane treści i wybór języka; wysyłka powitania nie jest jeszcze podłączona.
+Przygotowane treści, wybór języka i kolejka wysyłki przez Gmail; wdrożenie oraz
+test rzeczywistej dostawy pozostają do wykonania.
 Zmiana plików w repozytorium **nie zmienia ustawień produkcyjnego Supabase**.
 
 ## Język i adres odpowiedzi
@@ -57,25 +58,24 @@ Reset zachowuje `{{ .ConfirmationURL }}`. Powiadomienie o zmianie hasła nie zaw
 tokena resetowania ani obietnicy zakończenia wszystkich sesji. Wysyła je Supabase
 po zmianie hasła; frontend nie uruchamia drugiej wysyłki tego powiadomienia.
 
-## Powitanie — pozostałe podłączenie
+## Powitanie przez Gmail
 
-Projekt obecnie automatycznie zatwierdza rejestrację. „Confirm sign up” nie zastępuje
-osobnego powitania. Nie zmieniamy obowiązku potwierdzania kont w tej zmianie.
-Do uruchomienia powitania potrzebny jest dostawca wysyłki / SMTP i zweryfikowany
-nadawca. Właściciel potwierdził, że `Enable Custom SMTP` jest wyłączone.
-Przygotowana propozycja podłączenia: [SMTP.md](SMTP.md). Właściciel ma obecnie tylko
-adres Netlify, bez własnej domeny. Dostawca pozostaje do wyboru. Nie wysyłaj haseł w czacie.
+Właściciel wybrał Gmail. [SMTP.md](SMTP.md) zawiera dokładne ustawienia poczty Auth,
+sekrety, migrację kolejki i wdrożenie funkcji `welcome-email` z harmonogramem.
+Samo włączenie Custom SMTP nie uruchamia powitania.
 
-Po wybraniu dostawcy należy podłączyć zdarzenie utworzenia konta po stronie serwera,
-trwałą kolejkę z deduplikacją po ID użytkownika i ponawianiem wysyłki. Awaria poczty
-nie może cofać rejestracji. Odbiorca musi pochodzić z konta Auth, nie z dowolnego
-adresu przekazanego przez przeglądarkę. Jeśli później włączone zostanie potwierdzanie
-adresów, powitanie powinno czekać na potwierdzenie. `Send Email Hook` zastępuje
-istniejącą pocztę Auth; sam nie tworzy powitania przy autoconfirm.
+Migracja `202611100013_welcome_email_queue.sql` dodaje zadania tylko dla nowych
+kont. Worker sprawdza potwierdzenie adresu i pobiera odbiorcę z Auth; nie przyjmuje
+adresu ani treści od przeglądarki. Prywatna kolejka chroni przed równoległą obsługą
+tego samego zadania. Ponowienia są ograniczone, a niejednoznaczny wynik SMTP
+wymaga sprawdzenia zamiast automatycznej ponownej wysyłki.
 
-Przed uruchomieniem sprawdź jedno powitanie na konto mimo ponowienia zdarzenia,
-język, rzeczywisty nagłówek Reply-To i odpowiedź trafiającą do właściciela.
-**W tej zmianie nie dodano kolejki, zdarzenia ani dostawcy wysyłki.**
+`GMAIL_APP_PASSWORD` jest sekretem serwerowym. Adres nadawcy to Gmail właściciela;
+odpowiedzi na powitanie kieruje prawdziwy nagłówek Reply-To. Nie zmieniamy obowiązku
+potwierdzania kont ani nie wysyłamy powitań do historycznych użytkowników.
+
+Kod jest przygotowany i przetestowany lokalnie. **Nie wdrożono migracji, funkcji,
+harmonogramu ani sekretów na produkcji. Nie wysłano rzeczywistych maili.**
 
 Źródła:
 - https://supabase.com/docs/guides/auth/auth-email-templates

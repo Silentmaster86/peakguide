@@ -18,7 +18,13 @@ jobs:
           go-version: '1.25.3'
           cache: false
       - run: node --test --test-isolation=none supabase/tests/account_emails.test.mjs
+      - run: node --test --test-isolation=none supabase/tests/welcome_email.test.mjs
       - run: go run supabase/tests/account_email_templates.go
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: deno check supabase/functions/welcome-email/index.ts
+      - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_email_mime.test.ts
   frontend:
     runs-on: ubuntu-latest
     defaults:
@@ -64,3 +70,5 @@ jobs:
       - run: cp supabase/migrations/202611070011_admin_save_peak.sql /tmp/admin_save_peak.sql
       - run: psql -h localhost -U postgres -v ON_ERROR_STOP=1 -f supabase/tests/admin_save_peak.sql
       - run: python supabase/tests/profile_protection_repro.py --local --verify-fix
+      - run: createdb -h localhost -U postgres welcome_email_test
+      - run: psql -h localhost -U postgres -d welcome_email_test -v ON_ERROR_STOP=1 -f supabase/tests/welcome_email_queue.sql
