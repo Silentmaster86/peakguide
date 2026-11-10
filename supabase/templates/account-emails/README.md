@@ -62,8 +62,9 @@ po zmianie hasła; frontend nie uruchamia drugiej wysyłki tego powiadomienia.
 Projekt obecnie automatycznie zatwierdza rejestrację. „Confirm sign up” nie zastępuje
 osobnego powitania. Nie zmieniamy obowiązku potwierdzania kont w tej zmianie.
 Do uruchomienia powitania potrzebny jest dostawca wysyłki / SMTP i zweryfikowany
-nadawca. Sprawdź `Enable Custom SMTP` w panelu; nazwa nadawcy „Supabase” nie dowodzi,
-jaka konfiguracja jest aktywna. Nie wysyłaj haseł w czacie.
+nadawca. Właściciel potwierdził, że `Enable Custom SMTP` jest wyłączone.
+Przygotowana propozycja podłączenia: [SMTP.md](SMTP.md). Własna domena i dostawca
+nie zostały jeszcze potwierdzone. Nie wysyłaj haseł w czacie.
 
 Po wybraniu dostawcy należy podłączyć zdarzenie utworzenia konta po stronie serwera,
 trwałą kolejkę z deduplikacją po ID użytkownika i ponawianiem wysyłki. Awaria poczty
