@@ -54,6 +54,20 @@ sekret przy każdym POST. `SUPABASE_URL` i `SUPABASE_SERVICE_ROLE_KEY` zapewnia
 
 ## 3. Baza i funkcja
 
+Na telefonie można najpierw wdrożyć **wyłączoną** funkcję:
+
+1. Otwórz `supabase/dashboard/welcome-email.ts` w tym PR, wybierz Raw i skopiuj
+   całą zawartość. Jest to wygenerowany kompletny plik z tłumaczeniami, bez sekretów.
+2. W Supabase → Edge Functions → Deploy a new function → Via Editor zastąp
+   całą przykładową treść `index.ts` skopiowanym kodem.
+3. W polu Function name wpisz dokładnie `welcome-email` i wybierz Deploy function.
+4. W Settings tej funkcji wyłącz `Verify JWT with legacy secret` i zapisz.
+   Weryfikacja sekretu zadania odbywa się w kodzie przy każdym POST.
+5. Zostaw `WELCOME_EMAIL_ENABLED=false` do zakończenia dalszych kroków.
+
+Plik dashboardowy generuje `node scripts/build_welcome_dashboard.mjs` po
+`npm ci` w `peakguide_front`. CI sprawdza zgodność pliku ze źródłami.
+
 Najpierw wdroż frontend zapisujący język rejestracji (`locale`) z tego PR.
 Zachowaj kopię bazy przed migracją. W SQL Editor wykonaj
 `supabase/migrations/202611100013_welcome_email_queue.sql` **jeden raz**.
@@ -61,7 +75,7 @@ Migracja dodaje prywatną kolejkę i trigger rejestracji. Nie wysyła powitań d
 starych kont. Dla nowych kont czeka na `email_confirmed_at`, więc działa również
 po ewentualnym włączeniu obowiązku potwierdzenia adresu. Nie zmienia zasad Auth.
 
-Z katalogu repozytorium zawierającego kod tego PR uruchom:
+Alternatywnie, zamiast edytora, na komputerze z katalogu repozytorium uruchom:
 
 ```sh
 npx supabase login

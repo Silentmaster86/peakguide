@@ -25,6 +25,7 @@ jobs:
           deno-version: v2.x
       - run: deno check supabase/functions/welcome-email/index.ts
       - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_email_mime.test.ts
+      - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_dashboard.test.ts
   frontend:
     runs-on: ubuntu-latest
     defaults:
@@ -41,6 +42,7 @@ jobs:
           cache: npm
           cache-dependency-path: peakguide_front/package-lock.json
       - run: npm ci
+      - run: node ../scripts/build_welcome_dashboard.mjs --check
       - run: npm run check
       - run: node --test --test-isolation=none ../supabase/tests/admin_delete_user.test.mjs
       - run: npx playwright install --with-deps chromium
