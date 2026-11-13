@@ -1,0 +1,22 @@
+{
+  "pl": {
+    "welcome": "Witaj w PeakGuide!",
+    "recovery": "PeakGuide — ustaw nowe hasło",
+    "password_changed": "PeakGuide — Twoje hasło zostało zmienione"
+  },
+  "en": {
+    "welcome": "Welcome to PeakGuide!",
+    "recovery": "PeakGuide — reset your password",
+    "password_changed": "PeakGuide — your password has been changed"
+  },
+  "uk": {
+    "welcome": "Ласкаво просимо до PeakGuide!",
+    "recovery": "PeakGuide — установіть новий пароль",
+    "password_changed": "PeakGuide — ваш пароль змінено"
+  },
+  "zh": {
+    "welcome": "欢迎加入 PeakGuide！",
+    "recovery": "PeakGuide — 重设密码",
+    "password_changed": "PeakGuide — 你的密码已更改"
+  }
+}

@@ -6,6 +6,26 @@ on:
 permissions:
   contents: read
 jobs:
+  account-emails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.3'
+          cache: false
+      - run: node --test --test-isolation=none supabase/tests/account_emails.test.mjs
+      - run: node --test --test-isolation=none supabase/tests/welcome_email.test.mjs
+      - run: go run supabase/tests/account_email_templates.go
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: deno check supabase/functions/welcome-email/index.ts
+      - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_email_mime.test.ts
+      - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_dashboard.test.ts
   frontend:
     runs-on: ubuntu-latest
     defaults:
@@ -22,6 +42,7 @@ jobs:
           cache: npm
           cache-dependency-path: peakguide_front/package-lock.json
       - run: npm ci
+      - run: node ../scripts/build_welcome_dashboard.mjs --check
       - run: npm run check
       - run: node --test --test-isolation=none ../supabase/tests/admin_delete_user.test.mjs
       - run: npx playwright install --with-deps chromium
@@ -51,3 +72,5 @@ jobs:
       - run: cp supabase/migrations/202611070011_admin_save_peak.sql /tmp/admin_save_peak.sql
       - run: psql -h localhost -U postgres -v ON_ERROR_STOP=1 -f supabase/tests/admin_save_peak.sql
       - run: python supabase/tests/profile_protection_repro.py --local --verify-fix
+      - run: createdb -h localhost -U postgres welcome_email_test
+      - run: psql -h localhost -U postgres -d welcome_email_test -v ON_ERROR_STOP=1 -f supabase/tests/welcome_email_queue.sql

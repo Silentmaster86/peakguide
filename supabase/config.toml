@@ -5,3 +5,8 @@ project_id = "peakguide"
 # POST. Disabling the legacy gateway JWT check supports modern signing keys;
 # this does not make the deletion endpoint anonymous.
 verify_jwt = false
+
+[functions.welcome-email]
+# Server-only scheduled worker. Every request verifies WELCOME_WORKER_SECRET.
+# The anon key and normal user JWTs cannot authorize email sending.
+verify_jwt = false

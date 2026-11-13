@@ -38,6 +38,7 @@ export default function RegisterPage({ lang = "pl" }) {
 				password,
 				firstName,
 				lastName,
+				lang,
 			});
 
 			if (result.requiresConfirmation) {
