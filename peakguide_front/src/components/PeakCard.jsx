@@ -1,3 +1,4 @@
+import TranslationNotice from './TranslationNotice';
 import { Link } from "react-router-dom";
 
 export default function PeakCard({ peak, lang }) {
@@ -6,14 +7,13 @@ export default function PeakCard({ peak, lang }) {
 	return (
 		<Link
 			to={`/peaks/${peak.slug}`}
-			aria-label={`Open details for ${peak.peak_name}`}
 			style={{
 				textDecoration: "none",
 				color: "inherit",
 				display: "block",
 			}}
 		>
-			<article
+			<div
 				style={card}
 				onMouseEnter={(e) => {
 					e.currentTarget.style.transform = "translateY(-2px)";
@@ -40,6 +40,7 @@ export default function PeakCard({ peak, lang }) {
 							<h3 style={title} title={peak.peak_name}>
 								{peak.peak_name}
 							</h3>
+        <TranslationNotice contentLang={peak.content_lang} lang={lang} />
 							<div style={sub}>{peak.range_name}</div>
 						</div>
 
@@ -48,7 +49,7 @@ export default function PeakCard({ peak, lang }) {
 						</div>
 					</header>
 				</div>
-			</article>
+			</div>
 		</Link>
 	);
 }

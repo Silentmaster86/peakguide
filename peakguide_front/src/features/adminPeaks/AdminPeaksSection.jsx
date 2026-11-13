@@ -1,3 +1,4 @@
+import { preparePeakPayload } from './validation';
 // src/admin/components/AdminPeaksSection.jsx
 
 import { useEffect, useMemo, useState } from 'react';
@@ -87,7 +88,12 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 	const [status, setStatus] = useState('idle');
 	const [error, setError] = useState(null);
 	const [items, setItems] = useState([]);
+	const [rangeError, setRangeError] = useState(false);
+	const [rangeRetry, setRangeRetry] = useState(0);
 	const [ranges, setRanges] = useState([]);
+	const [subrangeStatus, setSubrangeStatus] = useState('idle');
+	const [subrangeRetry, setSubrangeRetry] = useState(0);
+	const [saveError, setSaveError] = useState(null);
 	const [subranges, setSubranges] = useState([]);
 
 	const [open, setOpen] = useState(false);
@@ -100,7 +106,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		slug: '',
 		range_id: '',
 		subrange_id: '',
-		elevation_m: 0,
+		elevation_m: '',
 		latitude: '',
 		longitude: '',
 		difficulty: '',
@@ -140,17 +146,21 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		(async () => {
 			try {
 				const data = await fetchRanges({ lang });
+				setRangeError(false);
 				setRanges(Array.isArray(data) ? data : []);
 			} catch {
 				setRanges([]);
+				setRangeError(true);
 			}
 		})();
-	}, [lang]);
+	}, [lang, rangeRetry]);
 
 	useEffect(() => {
     let cancelled = false;
 
     async function loadSubranges() {
+      setSubranges([]);
+      setSubrangeStatus(form.range_id ? 'loading' : 'idle');
       if (!form.range_id) {
         setSubranges([]);
         return;
@@ -164,9 +174,11 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 
         if (!cancelled) {
           setSubranges(Array.isArray(data) ? data : []);
+          setSubrangeStatus('success');
         }
       } catch {
         if (!cancelled) {
+          setSubrangeStatus('error');
           setSubranges([]);
         }
       }
@@ -177,7 +189,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
     return () => {
       cancelled = true;
     };
-  }, [form.range_id, lang]);
+  }, [form.range_id, lang, subrangeRetry]);
 
 	const filtered = useMemo(() => items, [items]);
 
@@ -205,7 +217,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			slug: '',
 			range_id: '',
 			subrange_id: '',
-			elevation_m: 0,
+			elevation_m: '',
 			latitude: '',
 			longitude: '',
 			difficulty: '',
@@ -226,6 +238,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		setMode('create');
 		setEditId(null);
 		resetFormForCreate();
+		setSaveError(null);
 		setOpen(true);
 	}
 
@@ -237,7 +250,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			slug: row.slug || '',
 			range_id: row.range_id ? String(row.range_id) : '',
 			subrange_id: row.subrange_id || '',
-			elevation_m: row.elevation_m || 0,
+			elevation_m: row.elevation_m ?? '',
 			latitude: row.latitude ?? '',
 			longitude: row.longitude ?? '',
 			difficulty: row.difficulty ?? '',
@@ -253,6 +266,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		});
 
 		setActiveLangTab('pl');
+		setSaveError(null);
 		setOpen(true);
 	}
 
@@ -270,23 +284,12 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 		e.preventDefault();
 		if (saving) return;
 
-		const payload = {
-			...form,
-			range_id: String(form.range_id),
-			subrange_id: form.subrange_id ? String(form.subrange_id) : null,
-			elevation_m: Number(form.elevation_m),
-			latitude: form.latitude === '' ? null : Number(form.latitude),
-			longitude: form.longitude === '' ? null : Number(form.longitude),
-			cover_image_url: form.cover_image_url?.trim() || null,
-			cover_image_author: form.cover_image_author?.trim() || null,
-			cover_image_source_url: form.cover_image_source_url?.trim() || null,
-			cover_image_license: form.cover_image_license?.trim() || null,
-			cover_image_license_url: form.cover_image_license_url?.trim() || null,
-			i18n: normalizeI18n(form.i18n),
-		};
-
-		try {
-			setSaving(true);
+    try {
+      setSaveError(null);
+      if (subrangeStatus === 'loading' || subrangeStatus === 'error') throw new Error('Wait for subranges to load, or retry.');
+      const payload = preparePeakPayload(form);
+      if (payload.subrange_id !== null && !subranges.some((item) => Number(item.id) === payload.subrange_id)) throw new Error('Select a subrange from the current range.');
+      setSaving(true);
 
 			if (mode === 'create') await adminCreatePeak(payload);
 			else await adminUpdatePeak(editId, payload);
@@ -294,7 +297,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			setOpen(false);
 			await load();
 		} catch (e2) {
-			alert(e2?.message || 'Save failed');
+			setSaveError(e2?.message || 'Save failed');
 		} finally {
 			setSaving(false);
 		}
@@ -512,6 +515,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 						</div>
 
 						<form onSubmit={onSave} className='ap-form'>
+              {saveError && <p role='alert'>{saveError}</p>}
+              {rangeError && <p role='alert'>Could not load mountain ranges. <button type='button' onClick={() => setRangeRetry((v) => v + 1)}>Retry</button></p>}
+              {subrangeStatus === 'error' && <p role='alert'>Could not load subranges. <button type='button' onClick={() => setSubrangeRetry((v) => v + 1)}>Retry</button></p>}
+              {subrangeStatus === 'loading' && <p role='status'>Loading subranges…</p>}
 							<div className='ap-grid ap-grid--3'>
 								<Field label='Slug'>
 									<TextInput
@@ -525,7 +532,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									<Select
 										value={form.range_id ? String(form.range_id) : ''}
 										onChange={(e) =>
-											setForm({ ...form, range_id: e.target.value })
+											setForm({ ...form, range_id: e.target.value, subrange_id: '' })
 										}
 										required
 									>
@@ -547,7 +554,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										onChange={(e) =>
 											setForm({ ...form, subrange_id: e.target.value })
 										}
-										disabled={!subranges.length}
+										disabled={subrangeStatus !== 'success' || !subranges.length}
 									>
 										<option value=''>
 											{subranges.length ? 'Select subrange...' : 'No subranges'}

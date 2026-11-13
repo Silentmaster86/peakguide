@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { accountLabels } from '../i18n/account';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import DesktopThemeSwitcher from './DesktopThemeSwitcher';
 import LanguageSwitcherDropdown from './LanguageSwitcherDropdown';
@@ -7,6 +9,14 @@ import { useAuth } from '../auth/useAuth';
 
 export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 	const t = getLabels(lang);
+	const [signingOut, setSigningOut] = useState(false);
+	const [logoutError, setLogoutError] = useState(false);
+	async function signOut() {
+		if (signingOut) return;
+		setSigningOut(true);
+		setLogoutError(!(await logout()));
+		setSigningOut(false);
+	}
 	const { pathname } = useLocation();
 	const isHome = pathname === '/';
 
@@ -99,20 +109,21 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 					</span>
 				) : authed ? (
 					<>
-						<NavLink to='/panel' style={styles.authLink}>
+						<NavLink to='/panel' style={styles.authLink} aria-label={t.panel}>
 							{isMobile ? '👤' : t.panel}
 						</NavLink>
 
-						<button type='button' onClick={logout} style={styles.logoutBtn}>
+						<button type='button' onClick={signOut} disabled={signingOut} aria-label={t.logout} style={styles.logoutBtn}>
 							{isMobile ? '⎋' : t.logout}
 						</button>
 					</>
 				) : (
-					<NavLink to='/login' style={styles.authLink}>
+					<NavLink to='/login' style={styles.authLink} aria-label={t.login}>
 						{isMobile ? '🔐' : t.login}
 					</NavLink>
 				)}
 
+				{logoutError && <span role='alert'>{accountLabels(lang).logoutFailed}</span>}
 				<DesktopThemeSwitcher lang={uiLang} compact={isTablet} />
 
 				{!isTiny && (

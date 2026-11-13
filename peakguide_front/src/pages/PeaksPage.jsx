@@ -1,7 +1,7 @@
+import { localeFor } from '../utils/format';
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { SEO } from '../seo/SEO';
-import { SITE_URL, SITE_NAME } from '../seo/site';
+import PageSEO from '../seo/PageSEO';
 import { fetchCountries, fetchPeaks, fetchRanges } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
 import { normalizeSearchText } from '../utils/search';
@@ -51,9 +51,8 @@ export default function PeaksPage({ lang }) {
 
     // normalize empty
     if (key === 'q') {
-      const trimmed = v.trim();
-      if (!trimmed) next.delete('q');
-      else next.set('q', trimmed);
+      if (!v) next.delete('q');
+      else next.set('q', v);
     } else if (key === 'range') {
       if (!v || v === 'all') next.delete('range');
       else next.set('range', v);
@@ -72,6 +71,8 @@ export default function PeaksPage({ lang }) {
     const next = new URLSearchParams(searchParams);
     if (!value || value === 'all') next.delete('country');
     else next.set('country', value);
+    if ((collection === 'kgp' && value !== 'all' && value !== 'poland') ||
+        (collection === 'three-peaks' && value !== 'all' && value !== 'united-kingdom')) next.delete('collection');
     next.delete('region');
     next.delete('range');
     setSearchParams(next, { replace: true });
@@ -130,12 +131,11 @@ export default function PeaksPage({ lang }) {
     if (sort === 'elev_desc') out.sort((a, b) => (b.elevation_m || 0) - (a.elevation_m || 0));
     if (sort === 'elev_asc') out.sort((a, b) => (a.elevation_m || 0) - (b.elevation_m || 0));
 
-    // Note: locale "pl" is okay even for other langs; if you prefer, swap to lang.
     if (sort === 'name_asc')
-      out.sort((a, b) => String(a.peak_name || '').localeCompare(String(b.peak_name || ''), lang));
+      out.sort((a, b) => String(a.peak_name || '').localeCompare(String(b.peak_name || ''), localeFor(lang)));
 
     if (sort === 'name_desc')
-      out.sort((a, b) => String(b.peak_name || '').localeCompare(String(a.peak_name || ''), lang));
+      out.sort((a, b) => String(b.peak_name || '').localeCompare(String(a.peak_name || ''), localeFor(lang)));
 
     return out;
   }, [peaks, country, region, range, collection, q, sort, lang]);
@@ -171,22 +171,24 @@ export default function PeaksPage({ lang }) {
     rangesState.status === 'error' ||
     countriesState.status === 'error';
 
-  const canonical = `${SITE_URL}/peaks`;
 
-  const title = lang === 'pl' ? `Szczyty — ${SITE_NAME}` : `Peaks — ${SITE_NAME}`;
-
-  const description =
-    lang === 'pl'
-      ? 'Odkrywaj szczyty górskie dostępne w PeakGuide. Filtruj według kraju, regionu i pasma górskiego.'
-      : 'Explore mountain peaks available in PeakGuide. Filter by country, region and mountain range.';
   return (
     <div style={page}>
       {/* Helmet SEO */}
-      <SEO title={title} description={description} canonical={canonical} />
+      <PageSEO page='peaks' lang={lang} />
 
       {/* Toolbar */}
+      <h1>{({ pl: 'Szczyty', en: 'Peaks', ua: 'Вершини', zh: '山峰' })[lang] || 'Szczyty'}</h1>
       <div style={toolbarBox}>
         <PeaksToolbar
+          collection={collection}
+          setCollection={(value) => {
+            const next = new URLSearchParams(searchParams);
+            if (value === 'all') next.delete('collection'); else next.set('collection', value);
+            next.delete('country'); next.delete('region'); next.delete('range');
+            setSearchParams(next, { replace: true });
+          }}
+          resetFilters={() => setSearchParams({}, { replace: true })}
           q={q}
           setQ={(val) => updateParam('q', val)}
           country={country}

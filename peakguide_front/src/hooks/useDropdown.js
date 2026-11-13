@@ -17,7 +17,10 @@ export function useDropdown() {
 	// close on Escape
 	useEffect(() => {
 		function onKey(e) {
-			if (e.key === "Escape") setOpen(false);
+			if (e.key === 'Escape' && wrapRef.current?.contains(document.activeElement)) {
+        setOpen(false);
+        wrapRef.current.querySelector('button')?.focus();
+      }
 		}
 		window.addEventListener("keydown", onKey);
 		return () => window.removeEventListener("keydown", onKey);

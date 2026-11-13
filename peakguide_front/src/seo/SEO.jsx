@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { parseCoordinates } from "../utils/coordinates";
 
-export const SITE_URL = "https://peak-guide.netlify.app";
-export const SITE_NAME = "PeakGuide";
+import { SITE_URL, SITE_NAME } from './site';
+export { SITE_URL, SITE_NAME } from './site';
 
 /**
  * Generic SEO component

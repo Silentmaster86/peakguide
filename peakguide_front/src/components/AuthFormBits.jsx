@@ -46,7 +46,6 @@ const input = {
 	color: 'var(--text)',
 	borderRadius: 12,
 	padding: '10px 12px',
-	outline: 'none',
 	font: 'inherit',
 };
 

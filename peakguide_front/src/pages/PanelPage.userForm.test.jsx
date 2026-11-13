@@ -1,48 +1,32 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-
-// mock AuthContext
-vi.mock("../auth/useAuth", () => ({
-	useAuth: () => ({
-		status: "authed",
-		user: { email: "admin@test.com", display_name: "Admin", is_admin: true },
-	}),
-}));
-
-vi.mock("../api/messages", () => ({
-	sendMessage: vi.fn(),
-}));
-
-// mock children sections (żeby nie odpalać fetchy)
-vi.mock("../features/adminMessages/AdminMessagesSection", () => ({
-	default: () => <div>AdminMessagesSection</div>,
-}));
-vi.mock("../features/adminPeaks/AdminPeaksSection", () => ({
-	default: () => <div>AdminPeaksSection</div>,
-}));
-vi.mock("../features/adminUsers/AdminUsersSection", () => ({
-	default: () => <div>AdminUsersSection</div>,
-}));
-vi.mock("./AdminTools", () => ({
-	default: () => <div>AdminTools</div>,
-}));
-
-describe("PanelPage (admin)", () => {
-	it("shows tabs and switches content", async () => {
-		const { default: PanelPage } = await import("./PanelPage");
-
-		render(<PanelPage lang='en' />);
-
-		expect(screen.getByText("AdminMessagesSection")).toBeInTheDocument();
-
-		fireEvent.click(screen.getByRole("button", { name: /peaks/i }));
-		expect(screen.getByText("AdminPeaksSection")).toBeInTheDocument();
-
-		fireEvent.click(screen.getByRole("button", { name: /users/i }));
-		expect(screen.getByText("AdminUsersSection")).toBeInTheDocument();
-
-		fireEvent.click(screen.getByRole("button", { name: /tools/i }));
-		expect(screen.getByText("AdminTools")).toBeInTheDocument();
-	});
+import { HelmetProvider } from 'react-helmet-async';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { beforeEach, expect, it, vi } from 'vitest';
+import PanelPage from './PanelPage';
+import { sendMessage } from '../api/messages';
+vi.mock('../auth/useAuth', () => ({ useAuth: () => ({ status: 'authed', user: { email: 'test@example.com', is_admin: false } }) }));
+vi.mock('../api/messages', () => ({ sendMessage: vi.fn() }));
+vi.mock('../features/adminMessages/AdminMessagesSection', () => ({ default: () => null }));
+vi.mock('../features/adminPeaks/AdminPeaksSection', () => ({ default: () => null }));
+vi.mock('../features/adminUsers/AdminUsersSection', () => ({ default: () => null }));
+beforeEach(() => vi.resetAllMocks());
+it('rejects a short trimmed message before sending', async () => {
+  render(<HelmetProvider><PanelPage lang='en' /></HelmetProvider>);
+  const input = screen.getByLabelText('Message');
+  fireEvent.change(input, { target: { value: '  ab  ' } });
+  fireEvent.submit(input.closest('form'));
+  expect(await screen.findByRole('alert')).toHaveTextContent('5–5000');
+  expect(sendMessage).not.toHaveBeenCalled();
+});
+it('keeps the draft after a network error and allows a successful retry', async () => {
+  sendMessage.mockRejectedValueOnce(new Error('internal detail')).mockResolvedValueOnce({ ok: true });
+  render(<HelmetProvider><PanelPage lang='en' /></HelmetProvider>);
+  const user = userEvent.setup();
+  await user.type(screen.getByLabelText('Message'), 'Please verify this trail.');
+  fireEvent.submit(screen.getByLabelText('Message').closest('form'));
+  expect(await screen.findByRole('alert')).toHaveTextContent('Could not send');
+  expect(screen.getByLabelText('Message')).toHaveValue('Please verify this trail.');
+  fireEvent.submit(screen.getByLabelText('Message').closest('form'));
+  expect(await screen.findByRole('status')).toBeVisible();
+  expect(sendMessage).toHaveBeenCalledTimes(2);
 });

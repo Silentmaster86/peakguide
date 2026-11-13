@@ -1,3 +1,4 @@
+import PageSEO from '../seo/PageSEO';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchTrails } from '../api/peakguide';
@@ -43,7 +44,7 @@ const translations = {
     empty: 'Немає доступних маршрутів.',
     searchPlaceholder: 'Пошук маршрутів...',
     noResults: 'Не знайдено маршрутів, що відповідають вашим критеріям.',
-    allCountries: 'Усі краї',
+    allCountries: 'Усі країни',
     allDifficulties: 'Усі рівні складності',
     hard: 'Складна',
     easy: 'Легка',
@@ -77,6 +78,7 @@ export default function TrailsPage({ lang }) {
 	const country = searchParams.get('country') || '';
 	const difficulty = searchParams.get('difficulty') || '';
 
+	const [retryKey, setRetryKey] = useState(0);
 	const [trails, setTrails] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
@@ -85,6 +87,7 @@ export default function TrailsPage({ lang }) {
 		let cancelled = false;
 
 		async function loadTrails() {
+      setLoading(true);
 			try {
 				const data = await fetchTrails({ lang });
 
@@ -107,30 +110,30 @@ export default function TrailsPage({ lang }) {
 		return () => {
 			cancelled = true;
 		};
-	}, [lang]);
+	}, [lang, retryKey]);
 
 	if (loading) {
 		return (
-			<main className='page'>
+			<div className='page'><PageSEO page='trails' lang={lang} />
 				<p>{t.loading}</p>
-			</main>
+			</div>
 		);
 	}
 
 	if (error) {
 		return (
-			<main className='page'>
-				<p>{t.error}</p>
-			</main>
+			<div className='page'><PageSEO page='trails' lang={lang} />
+				<p>{t.error}</p><button type='button' onClick={() => setRetryKey((v) => v + 1)}>{({ pl: 'Spróbuj ponownie', en: 'Retry', ua: 'Спробувати ще раз', zh: '重试' })[lang]}</button>
+			</div>
 		);
 	}
 
 	if (trails.length === 0) {
 		return (
-			<main className='page'>
+			<div className='page'><PageSEO page='trails' lang={lang} />
 				<h1>{t.title}</h1>
 				<p>{t.empty}</p>
-			</main>
+			</div>
 		);
 	}
 
@@ -157,6 +160,7 @@ export default function TrailsPage({ lang }) {
 		const searchableValues = [
 			trail.name,
 			trail.peak_name,
+      trail.peak_slug === 'yr-wyddfa' ? 'Snowdon' : '',
 			trail.range_name,
 			trail.region_name,
 			trail.country_name,
@@ -175,13 +179,13 @@ export default function TrailsPage({ lang }) {
 	});
 
 	return (
-		<main className='page'>
+		<div className='page'><PageSEO page='trails' lang={lang} />
 			<h1>{t.title}</h1>
 
 			<div className='trails-toolbar' style={toolbar}>
 				<input
 					style={control}
-					type='search'
+					type='search' aria-label={t.searchPlaceholder}
 					value={query}
 					placeholder={t.searchPlaceholder}
 					onChange={(e) => {
@@ -201,7 +205,7 @@ export default function TrailsPage({ lang }) {
 
 				<select
 					style={control}
-					value={country}
+					aria-label={t.allCountries} value={country}
 					onChange={(e) => {
 						const value = e.target.value;
 
@@ -227,7 +231,7 @@ export default function TrailsPage({ lang }) {
 
 				<select
 					style={control}
-					value={difficulty}
+					aria-label={t.allDifficulties} value={difficulty}
 					onChange={(e) => {
 						const value = e.target.value;
 
@@ -275,7 +279,7 @@ export default function TrailsPage({ lang }) {
 					<TrailCard key={trail.id} trail={trail} lang={lang} />
 				))
 			)}
-		</main>
+		</div>
 	);
 }
 
@@ -295,5 +299,4 @@ const control = {
 	borderRadius: 12,
 	background: 'var(--btn-bg)',
 	color: 'var(--toolbar-text)',
-	outline: 'none',
 };

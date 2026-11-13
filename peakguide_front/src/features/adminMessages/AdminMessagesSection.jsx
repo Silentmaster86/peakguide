@@ -36,22 +36,30 @@ export default function AdminMessagesSection() {
 	}, [items, filter]);
 
 	async function setMsgStatus(id, nextStatus) {
+		if (busyId !== null) return;
+		setError(null);
 		try {
 			setBusyId(id);
 			await adminSetMessageStatus(id, nextStatus);
 			await load();
+		} catch {
+			setError('Could not save the change. Please try again.');
 		} finally {
 			setBusyId(null);
 		}
 	}
 
 	async function onDelete(id) {
+		if (busyId !== null) return;
+		setError(null);
 		if (!confirm('Delete this message permanently?')) return;
 
 		try {
 			setBusyId(id);
 			await adminDeleteMessage(id);
 			await load();
+		} catch {
+			setError('Could not save the change. Please try again.');
 		} finally {
 			setBusyId(null);
 		}
@@ -87,7 +95,7 @@ export default function AdminMessagesSection() {
 			{status === 'loading' && (
 				<div className='am-note'>Loading messages...</div>
 			)}
-			{status === 'error' && <div className='am-error'>{error}</div>}
+			{error && <div role='alert' className='am-error'>{error}<button type='button' onClick={load}>Retry</button></div>}
 
 			{status === 'success' && filtered.length === 0 && (
 				<div className='am-note'>No messages.</div>
@@ -96,7 +104,7 @@ export default function AdminMessagesSection() {
 			{status === 'success' && filtered.length > 0 && (
 				<div className='am-list'>
 					{filtered.map((m) => {
-						const isBusy = busyId === m.id;
+						const isBusy = busyId !== null;
 						const dateLabel = m.created_at
 							? new Date(m.created_at).toLocaleString()
 							: '—';

@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { Navigate, useLocation, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
+import { authRedirect } from '../utils/authRedirect';
+import { authErrorMessage } from '../utils/authErrors';
+import { accountLabels } from '../i18n/account';
 import AuthShell from "../components/AuthShell";
 import { Field, TextInput, PrimaryBtn } from "../components/AuthFormBits";
 
@@ -10,15 +13,13 @@ function isEmail(v) {
 
 export default function LoginPage({ lang = "pl" }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
+	const account = accountLabels(lang);
 
 	const { login, error, status } = useAuth();
 	const nav = useNavigate();
 	const loc = useLocation();
 
-	const from = useMemo(
-		() => loc.state?.from?.pathname || "/",
-		[loc.state?.from?.pathname],
-	);
+	const from = authRedirect(loc.state?.from);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -37,18 +38,18 @@ export default function LoginPage({ lang = "pl" }) {
 		try {
 			await login({ email, password });
 			nav(from, { replace: true });
-		} catch {
-			// handled in context
+		} catch (failure) {
+			setLocalError(authErrorMessage(failure, lang));
 		}
 	}
 
-	if (authed) return <Navigate to='/' replace />;
+	if (authed) return <Navigate to={from} replace />;
 
 	return (
 		<AuthShell
 			title={t.title}
 			subtitle={t.subtitle}
-			error={localError || error}
+			error={localError || authErrorMessage(error, lang)}
 			footer={
 				<>
 					{t.noAccount} <Link to='/register'>{t.register}</Link>
@@ -59,6 +60,7 @@ export default function LoginPage({ lang = "pl" }) {
 				<Field label={t.email}>
 					<TextInput
 						value={email}
+						type='email'
 						onChange={(e) => setEmail(e.target.value)}
 						autoComplete='email'
 						inputMode='email'
@@ -80,6 +82,7 @@ export default function LoginPage({ lang = "pl" }) {
 					{/* zero kropek i “…” */}
 					{t.submit}
 				</PrimaryBtn>
+				<Link to='/forgot-password'>{account.forgot}</Link>
 
 				<div style={{ marginTop: 6 }}>
 					<Link

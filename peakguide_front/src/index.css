@@ -1,3 +1,4 @@
+@import "./generated-images.css";
 /* =========================
    RESET
    ========================= */
@@ -234,25 +235,25 @@ a:hover {
 html[data-lang="pl"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
-    url("/bg/bg_pl.png") center / cover no-repeat fixed;
+    var(--image-bg-bg-pl) center / cover no-repeat fixed;
 }
 
 html[data-lang="en"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
-    url("/bg/bg_en.png") center / cover no-repeat fixed;
+    var(--image-bg-bg-en) center / cover no-repeat fixed;
 }
 
 html[data-lang="ua"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
-    url("/bg/bg_ua.png") center / cover no-repeat fixed;
+    var(--image-bg-bg-ua) center / cover no-repeat fixed;
 }
 
 html[data-lang="zh"] body {
   background:
     linear-gradient(180deg, var(--bg-overlay-from), var(--bg-overlay-to)),
-    url("/bg/bg_zh.png") center / cover no-repeat fixed;
+    var(--image-bg-bg-zh) center / cover no-repeat fixed;
 }
 
 /* =========================
@@ -555,7 +556,7 @@ html[data-lang="zh"] body {
 
   border-radius: 22px;
 
-  background-image: url('/images/home/hero.png');
+  background-image: var(--image-images-home-hero);
   background-size: cover;
 
   color: white;
@@ -569,29 +570,29 @@ html[data-lang="zh"] body {
     box-shadow 220ms ease;
 }
 
-.country-card-1 {
+.country-card-poland {
   background-position: 55% center;
-  background-image: url('/images/destinations/poland_bg.png');
+  background-image: var(--image-images-destinations-poland-bg);
 }
 
-.country-card-2 {
+.country-card-slovakia {
   background-position: 55% center;
-  background-image: url('/images/destinations/slovakia_bg.png');
+  background-image: var(--image-images-destinations-slovakia-bg);
 }
 
-.country-card-3 {
+.country-card-ukraine {
   background-position: 55% center;
-  background-image: url('/images/destinations/ukraine_bg.png');
+  background-image: var(--image-images-destinations-ukraine-bg);
 }
 
-.country-card-4 {
+.country-card-china {
   background-position: 55% center;
-  background-image: url('/images/destinations/china_bg.png');
+  background-image: var(--image-images-destinations-china-bg);
 }
 
-.country-card-5 {
+.country-card-united-kingdom {
   background-position: 43% center;
-  background-image: url('/images/destinations/united-kingdom_bg.png');
+  background-image: var(--image-images-destinations-united-kingdom-bg);
 }
 
 a.country-showcase-card:hover {
@@ -753,7 +754,7 @@ a.country-showcase-card:hover {
   inset: 0;
   z-index: -2;
 
-  background-image: url('/images/home/hero.png');
+  background-image: var(--image-images-home-hero);
   background-position: center;
   background-size: cover;
 
@@ -889,7 +890,7 @@ a.country-showcase-card:hover {
 
   border-radius: 22px;
 
-  background-image: url('/images/home/hero.png');
+  background-image: var(--image-images-home-hero);
   background-position: center;
   background-size: cover;
 
@@ -900,22 +901,22 @@ a.country-showcase-card:hover {
 
 .collection-card-1 {
   background-position: 70% center;
-  background-image: url('/images/collections/kgp.png');
+  background-image: var(--image-images-collections-kgp);
 }
 
 .collection-card-2 {
   background-position: 70% center;
-  background-image: url('/images/collections/three_peaks.png');
+  background-image: var(--image-images-collections-three-peaks);
 }
 
 .collection-card-3 {
   background-position: 30% center;
-  background-image: url('/images/collections/carpathians.png');
+  background-image: var(--image-images-collections-carpathians);
 }
 
 .collection-card-4 {
   background-position: 85% center;
-  background-image: url('/images/collections/china.png');
+  background-image: var(--image-images-collections-china);
 }
 
 .collection-card-overlay {
@@ -1099,7 +1100,7 @@ a.country-showcase-card:hover {
 
   border-radius: 26px;
 
-  background-image: url('/images/home/map-teaser3.png');
+  background-image: var(--image-images-home-map-teaser3);
   background-position: center 55%;
   background-size: cover;
 
@@ -1726,3 +1727,7 @@ a.country-showcase-card:hover {
     grid-auto-columns: 88%;
   }
 }
+/* A visible keyboard focus indicator across all themes. */
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 10000; padding: 12px; background: var(--surface); color: var(--text); }
+.skip-link:focus { top: 16px; }

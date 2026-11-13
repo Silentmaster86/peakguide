@@ -1,4 +1,4 @@
-export default function AdminTools({ t, onAddTrail, onAddPoi }) {
+export default function AdminTools({ t }) {
 	return (
 		<section style={wrap}>
 			<div style={head}>
@@ -10,34 +10,26 @@ export default function AdminTools({ t, onAddTrail, onAddPoi }) {
 				<ToolCard
 					title={t.addTrailTitle}
 					text={t.addTrailText}
-					cta={t.open}
-					onClick={onAddTrail}
+					cta={t.soon}
 				/>
 				<ToolCard
 					title={t.addPoiTitle}
 					text={t.addPoiText}
-					cta={t.open}
-					onClick={onAddPoi}
+					cta={t.soon}
 				/>
 			</div>
 
-			<div style={soonBox}>
-				<div style={{ fontWeight: 1000, marginBottom: 6 }}>Coming soon</div>
-				<div style={{ color: "var(--muted)", lineHeight: 1.6 }}>
-					Forms CRUD + walidacja + upload zdjęć + powiązania (peak →
-					trails/POI).
-				</div>
-			</div>
+
 		</section>
 	);
 }
 
-function ToolCard({ title, text, cta, onClick }) {
+function ToolCard({ title, text, cta }) {
 	return (
 		<article style={card}>
 			<div style={cardTitle}>{title}</div>
 			<div style={cardText}>{text}</div>
-			<button type='button' onClick={onClick} style={btn}>
+			<button type='button' disabled style={btn}>
 				{cta}
 			</button>
 		</article>
@@ -90,12 +82,4 @@ const btn = {
 	borderRadius: 12,
 	cursor: "pointer",
 	fontWeight: 1000,
-};
-
-const soonBox = {
-	marginTop: 6,
-	border: "1px dashed color-mix(in srgb, var(--border) 70%, transparent)",
-	borderRadius: 18,
-	padding: 14,
-	background: "color-mix(in srgb, var(--menu-bg) 70%, transparent)",
 };

@@ -17,7 +17,10 @@ const cache = {
 	nearbyBySlug: new Map(),
 };
 
+let cacheGeneration = 0;
+
 export function invalidatePeakGuideCache() {
+	cacheGeneration++;
 	Object.values(cache).forEach((store) => {
 		store.clear();
 	});
@@ -30,7 +33,7 @@ function apiLang(lang) {
 }
 
 function translation(rows, lang, fallbackLangs = ['pl', 'en']) {
-  const translations = Array.isArray(rows) ? rows : [];
+  const translations = (Array.isArray(rows) ? rows : []).filter((row) => row?.name?.trim());
 
   const preferred = translations.find((row) => row.lang === lang);
 
@@ -55,6 +58,7 @@ export async function fetchCountries({ lang = 'pl' } = {}) {
 	const safeLang = apiLang(lang);
 
 	if (cache.countries.has(safeLang)) return cache.countries.get(safeLang);
+	const requestGeneration = cacheGeneration;
 
 	const { data, error } = await supabase
 		.from('countries')
@@ -109,6 +113,7 @@ export async function fetchCountries({ lang = 'pl' } = {}) {
 			id: country.id,
 			code: country.code,
 			slug: country.slug,
+			content_lang: i18n?.lang || null,
 			name: i18n?.name || country.slug,
 			description: i18n?.description || '',
 			flag_emoji: country.flag_emoji || '',
@@ -117,7 +122,7 @@ export async function fetchCountries({ lang = 'pl' } = {}) {
 		};
 	});
 
-	cache.countries.set(safeLang, mapped);
+	if (requestGeneration === cacheGeneration) cache.countries.set(safeLang, mapped);
 	return mapped;
 }
 
@@ -130,6 +135,7 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 	const key = `${safeLang}:${only}`;
 
 	if (cache.peaks.has(key)) return cache.peaks.get(key);
+	const requestGeneration = cacheGeneration;
 
 	let query = supabase
 		.from('peaks')
@@ -198,11 +204,12 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 		return {
 			...p,
 			peak_name: i18n?.name || p.slug,
+			content_lang: i18n?.lang || null,
 			name: i18n?.name || p.slug,
 			short_description: i18n?.short_description || '',
 			description: i18n?.description || '',
 			range_slug: p.mountain_ranges?.slug || '',
-			range_name: rangeI18n?.name || p.mountain_range?.slug || '',
+			range_name: rangeI18n?.name || p.mountain_ranges?.slug || '',
 			country_code: country?.code || '',
 			country_slug: country?.slug || '',
 			country_name: countryI18n?.name || country?.slug || '',
@@ -212,7 +219,7 @@ export async function fetchPeaks({ lang = 'pl', only = 'all' } = {}) {
 		};
 	});
 
-	cache.peaks.set(key, mapped);
+	if (requestGeneration === cacheGeneration) cache.peaks.set(key, mapped);
 	return mapped;
 }
 
@@ -224,6 +231,7 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 	const safeLang = apiLang(lang);
 
 	if (cache.ranges.has(safeLang)) return cache.ranges.get(safeLang);
+	const requestGeneration = cacheGeneration;
 
 	const { data, error } = await supabase
 		.from('mountain_ranges')
@@ -268,6 +276,7 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 		return {
 			id: r.id,
 			slug: r.slug,
+			content_lang: i18n?.lang || null,
 			name: i18n?.name || r.slug,
 			description: i18n?.description || '',
 			country_code: r.countries?.code || '',
@@ -279,7 +288,7 @@ export async function fetchRanges({ lang = 'pl' } = {}) {
 		};
 	});
 
-	cache.ranges.set(safeLang, mapped);
+	if (requestGeneration === cacheGeneration) cache.ranges.set(safeLang, mapped);
 	return mapped;
 }
 
@@ -320,7 +329,8 @@ export async function fetchSubranges({ rangeId, lang = 'pl' } = {}) {
       id: subrange.id,
       slug: subrange.slug,
       range_id: subrange.range_id,
-      name: i18n?.name || subrange.slug,
+      content_lang: i18n?.lang || null,
+			name: i18n?.name || subrange.slug,
     };
   });
 }
@@ -335,6 +345,7 @@ export async function fetchTrails({ lang = 'pl' } = {}) {
 	const cacheKey = safeLang;
 
 	if (cache.trails.has(cacheKey)) return cache.trails.get(cacheKey);
+	const requestGeneration = cacheGeneration;
 
 	const { data, error } = await supabase
 		.from('trails')
@@ -420,6 +431,7 @@ export async function fetchTrails({ lang = 'pl' } = {}) {
 
 		return {
 			...t,
+			content_lang: i18n?.lang || null,
 			name: i18n?.name || t.slug,
 			description: i18n?.description || '',
 			notes: i18n?.notes || '',
@@ -441,7 +453,7 @@ export async function fetchTrails({ lang = 'pl' } = {}) {
 		};
 	});
 
-	cache.trails.set(cacheKey, mapped);
+	if (requestGeneration === cacheGeneration) cache.trails.set(cacheKey, mapped);
 	return mapped;
 }
 
@@ -454,6 +466,7 @@ export async function fetchPeakBySlug(lang, slug) {
 	const key = `${safeLang}:${slug}`;
 
 	if (cache.peakBySlug.has(key)) return cache.peakBySlug.get(key);
+	const requestGeneration = cacheGeneration;
 
 	const { data, error } = await supabase
 		.from('peaks')
@@ -509,9 +522,11 @@ export async function fetchPeakBySlug(lang, slug) {
 		)
 		.eq('slug', slug)
 		.eq('active', true)
-		.single();
+		.maybeSingle();
 
 	if (error) throw error;
+
+	if (!data) return null;
 
 	const i18n = translation(data.peaks_i18n, safeLang);
 	const rangeI18n = translation(data.mountain_ranges?.mountain_ranges_i18n, safeLang
@@ -523,7 +538,8 @@ export async function fetchPeakBySlug(lang, slug) {
 
 	const mapped = {
 		...data,
-		name: i18n?.name || data.slug,
+		content_lang: i18n?.lang || null,
+			name: i18n?.name || data.slug,
 		peak_name: i18n?.name || data.slug,
 		short_description: i18n?.short_description || '',
 		description: i18n?.description || '',
@@ -539,7 +555,7 @@ export async function fetchPeakBySlug(lang, slug) {
 		region_name: regionI18n?.name || region?.slug || '',
 	};
 
-	cache.peakBySlug.set(key, mapped);
+	if (requestGeneration === cacheGeneration) cache.peakBySlug.set(key, mapped);
 	return mapped;
 }
 
@@ -552,6 +568,7 @@ export async function fetchRangeBySlug(lang, slug) {
 	const key = `${safeLang}:${slug}`;
 
 	if (cache.rangeBySlug.has(key)) return cache.rangeBySlug.get(key);
+	const requestGeneration = cacheGeneration;
 
 	const { data, error } = await supabase
 		.from('mountain_ranges')
@@ -600,9 +617,11 @@ export async function fetchRangeBySlug(lang, slug) {
     `,
 		)
 		.eq('slug', slug)
-		.single();
+		.maybeSingle();
 
 	if (error) throw error;
+
+	if (!data) return null;
 
 	const i18n = translation(data.mountain_ranges_i18n, safeLang);
 	const countryI18n = translation(data.countries?.countries_i18n, safeLang);
@@ -619,6 +638,7 @@ export async function fetchRangeBySlug(lang, slug) {
 				peak_name: pi?.name || p.slug,
 				short_description: pi?.short_description || '',
 				range_slug: data.slug,
+				content_lang: pi?.lang || null,
 				range_name: i18n?.name || data.slug,
 			};
 		})
@@ -627,7 +647,8 @@ export async function fetchRangeBySlug(lang, slug) {
 	const mapped = {
 		id: data.id,
 		slug: data.slug,
-		name: i18n?.name || data.slug,
+		content_lang: i18n?.lang || null,
+			name: i18n?.name || data.slug,
 		description: i18n?.description || '',
 		country_code: data.countries?.code || '',
 		country_slug: data.countries?.slug || '',
@@ -638,7 +659,7 @@ export async function fetchRangeBySlug(lang, slug) {
 		peaks,
 	};
 
-	cache.rangeBySlug.set(key, mapped);
+	if (requestGeneration === cacheGeneration) cache.rangeBySlug.set(key, mapped);
 	return mapped;
 }
 
@@ -651,8 +672,10 @@ export async function fetchPeakTrailsBySlug(lang, slug) {
 	const key = `${safeLang}:${slug}`;
 
 	if (cache.trailsBySlug.has(key)) return cache.trailsBySlug.get(key);
+	const requestGeneration = cacheGeneration;
 
 	const peak = await fetchPeakBySlug(safeLang, slug);
+	if (!peak) return [];
 
 	const { data, error } = await supabase
 		.from('trails')
@@ -690,17 +713,18 @@ export async function fetchPeakTrailsBySlug(lang, slug) {
 	if (error) throw error;
 
 	const mapped = (data || []).map((t) => {
-		const i18n = (t.trails_i18n || []).find((x) => x.lang === safeLang);
+		const i18n = translation(t.trails_i18n, safeLang);
 
 		return {
 			...t,
+			content_lang: i18n?.lang || null,
 			name: i18n?.name || t.slug,
 			description: i18n?.description || '',
 			notes: i18n?.notes || '',
 		};
 	});
 
-	cache.trailsBySlug.set(key, mapped);
+	if (requestGeneration === cacheGeneration) cache.trailsBySlug.set(key, mapped);
 	return mapped;
 }
 
@@ -713,8 +737,10 @@ export async function fetchPeakPoisBySlug(lang, slug) {
 	const key = `${safeLang}:${slug}`;
 
 	if (cache.poisBySlug.has(key)) return cache.poisBySlug.get(key);
+	const requestGeneration = cacheGeneration;
 
 	const peak = await fetchPeakBySlug(safeLang, slug);
+	if (!peak) return [];
 
 	const { data, error } = await supabase
 		.from('pois')
@@ -747,13 +773,14 @@ export async function fetchPeakPoisBySlug(lang, slug) {
 	if (error) throw error;
 
 	const mapped = (data || []).map((poi) => {
-		const i18n = (poi.pois_i18n || []).find((x) => x.lang === safeLang);
+		const i18n = translation(poi.pois_i18n, safeLang);
 		const typeI18n = (poi.poi_types?.poi_types_i18n || []).find(
 			(x) => x.lang === safeLang,
 		);
 
 		return {
 			...poi,
+			content_lang: i18n?.lang || null,
 			name: i18n?.name || '',
 			description: i18n?.description || '',
 			tips: i18n?.tips || '',
@@ -762,7 +789,7 @@ export async function fetchPeakPoisBySlug(lang, slug) {
 		};
 	});
 
-	cache.poisBySlug.set(key, mapped);
+	if (requestGeneration === cacheGeneration) cache.poisBySlug.set(key, mapped);
 	return mapped;
 }
 
@@ -775,8 +802,10 @@ export async function fetchNearbyPeaksBySlug(lang, slug, limit = 6) {
 	const key = `${safeLang}:${slug}:${limit}`;
 
 	if (cache.nearbyBySlug.has(key)) return cache.nearbyBySlug.get(key);
+	const requestGeneration = cacheGeneration;
 
 	const peak = await fetchPeakBySlug(safeLang, slug);
+	if (!peak) return [];
 
 	const { data, error } = await supabase
 		.from('peak_nearby')
@@ -784,7 +813,7 @@ export async function fetchNearbyPeaksBySlug(lang, slug, limit = 6) {
 			`
       nearby_peak_id,
       note,
-      peaks!peak_nearby_nearby_peak_id_fkey (
+      peaks!peak_nearby_nearby_peak_id_fkey!inner (
         id,
         slug,
         elevation_m,
@@ -799,6 +828,7 @@ export async function fetchNearbyPeaksBySlug(lang, slug, limit = 6) {
     `,
 		)
 		.eq('peak_id', peak.id)
+		.eq('peaks.active', true)
 		.limit(limit);
 
 	if (error) throw error;
@@ -806,26 +836,27 @@ export async function fetchNearbyPeaksBySlug(lang, slug, limit = 6) {
 	const mapped = (data || [])
 		.map((row) => {
 			const p = row.peaks;
-			const i18n = (p?.peaks_i18n || []).find((x) => x.lang === safeLang);
+			const i18n = translation(p?.peaks_i18n, safeLang);
 
 			return {
 				id: p?.id,
 				slug: p?.slug,
-				name: i18n?.name || p?.slug,
+				content_lang: i18n?.lang || null,
+			name: i18n?.name || p?.slug,
 				peak_name: i18n?.name || p?.slug,
 				elevation_m: p?.elevation_m,
 				latitude: p?.latitude,
 				longitude: p?.longitude,
 				note: row.note || '',
-				distance_km: '',
+				distance_km: null,
 			};
 		})
 		.filter((p) => p.slug);
 
-	cache.nearbyBySlug.set(key, mapped);
+	if (requestGeneration === cacheGeneration) cache.nearbyBySlug.set(key, mapped);
 	return mapped;
 }
 
 export function clearApiCache() {
-	Object.values(cache).forEach((map) => map.clear());
+	invalidatePeakGuideCache();
 }

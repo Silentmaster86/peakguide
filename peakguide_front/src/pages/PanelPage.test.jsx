@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
@@ -33,7 +34,7 @@ vi.mock("./AdminTools", () => ({
 
 describe("PanelPage (admin)", () => {
 	it("shows tabs and switches content", () => {
-		render(<PanelPage lang='en' />);
+		render(<HelmetProvider><PanelPage lang='en' /></HelmetProvider>);
 
 		// default: messages
 		expect(screen.getByText("AdminMessagesSection")).toBeInTheDocument();

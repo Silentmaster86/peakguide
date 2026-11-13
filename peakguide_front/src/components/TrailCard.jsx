@@ -1,27 +1,13 @@
+import { formatDuration } from '../utils/format';
+import TranslationNotice from './TranslationNotice';
 import { Link } from 'react-router-dom';
-
-function formatDuration(minutes) {
-	if (minutes == null) return '';
-
-	const hours = Math.floor(minutes / 60);
-	const remainingMinutes = minutes % 60;
-
-	if (hours === 0) {
-		return `${remainingMinutes} min`;
-	}
-	if (remainingMinutes === 0) {
-		return `${hours} h`;
-	}
-
-	return `${hours} h ${remainingMinutes} min`;
-}
 
 const translations = {
   pl: {
     peak: 'Szczyt',
     difficulty: 'Trudność',
     route: 'Trasa',
-    gain: 'przewyższenie',
+    gain: 'suma podejść',
     hard: 'trudna',
     moderate: 'średnia',
     easy: 'łatwa',
@@ -72,7 +58,7 @@ export default function TrailCard({ trail, lang }) {
 
 	return (
     <Link
-      to={`/peaks/${trail.peak_slug}?tab=trails`}
+      to={`/peaks/${trail.peak_slug}?tab=trails&trail=${encodeURIComponent(trail.slug)}`}
       style={{
         display: 'block',
         textDecoration: 'none',
@@ -80,7 +66,7 @@ export default function TrailCard({ trail, lang }) {
         marginBottom: 20,
       }}
     >
-      <article
+      <div
         style={card}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = 'translateY(-2px)';
@@ -92,6 +78,7 @@ export default function TrailCard({ trail, lang }) {
         }}
       >
         <h2 style={title}>{trail.name}</h2>
+        <TranslationNotice contentLang={trail.content_lang} lang={lang} />
 
         <p style={location}>
           {trail.country_name} · {trail.range_name} · {trail.region_name}
@@ -122,11 +109,11 @@ export default function TrailCard({ trail, lang }) {
             )}
 
             {trail.time_min != null && (
-              <span style={stat}>⏱️ {formatDuration(trail.time_min)}</span>
+              <span style={stat}>⏱️ {formatDuration(trail.time_min, lang)}</span>
             )}
           </div>
         )}
-      </article>
+      </div>
     </Link>
   );
 }

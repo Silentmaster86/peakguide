@@ -3,43 +3,37 @@ import { adminDeleteUser, adminFetchUsers, adminToggleAdmin } from './api';
 import { useMedia } from '../../hooks/useMedia';
 
 export default function AdminUsersSection() {
+	const [error, setError] = useState(null);
+	const [busy, setBusy] = useState(false);
 	const [users, setUsers] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const isMobile = useMedia('(max-width: 1000px)');
 
 	async function load() {
-		setLoading(true);
-		const data = await adminFetchUsers();
-		setUsers(data.items || []);
-		setLoading(false);
-	}
-
-	useEffect(() => {
-		const fetchUsers = async () => {
-			setLoading(true);
-			const data = await adminFetchUsers();
-			setUsers(data.items || []);
-			setLoading(false);
-		};
-		fetchUsers();
-	}, []);
-
-	async function deleteUser(id, email) {
-		const ok = window.confirm(`Na pewno usunąć usera?\n\n${email}`);
-		if (!ok) return;
-
-		await adminDeleteUser(id);
-		await load();
-	}
-
-	async function toggleAdmin(id) {
-		await adminToggleAdmin(id);
-		await load();
-	}
+    setLoading(true);
+    setError(null);
+    try { const data = await adminFetchUsers(); setUsers(data.items || []); }
+    catch { setError('Could not load users. Please try again.'); }
+    finally { setLoading(false); }
+  }
+  useEffect(() => { void load(); }, []);
+  async function mutate(operation) {
+    if (busy) return;
+    setBusy(true); setError(null);
+    try { await operation(); await load(); }
+    catch { setError('Could not save the change. Please try again.'); }
+    finally { setBusy(false); }
+  }
+  async function deleteUser(id, email) {
+    if (!window.confirm(`Delete this user? ${email}`)) return;
+    await mutate(() => adminDeleteUser(id));
+  }
+  async function toggleAdmin(id) { await mutate(() => adminToggleAdmin(id)); }
 
 	return (
 		<section style={{ marginTop: 40 }}>
 			<h2>Admin • Users</h2>
+      {error && <p role='alert'>{error} <button type='button' onClick={load}>Retry</button></p>}
 
 			{loading && <p>Loading users…</p>}
 
@@ -52,18 +46,17 @@ export default function AdminUsersSection() {
 
 							<div style={metaGrid}>
 								<span>Admin: {u.is_admin ? 'Yes' : 'No'}</span>
-								<span>Active: {u.active ? 'Yes' : 'No'}</span>
 							</div>
 
 							<div style={cardActions}>
-								<button style={btn} onClick={() => toggleAdmin(u.id)}>
+								<button disabled={busy || loading} style={btn} onClick={() => toggleAdmin(u.id)}>
 									{u.is_admin ? 'Remove admin' : 'Make admin'}
 								</button>
 
 								<button
 									style={btnDanger}
 									onClick={() => deleteUser(u.id, u.email)}
-									disabled={u.is_admin}
+									disabled={busy || loading || u.is_admin}
 								>
 									Delete
 								</button>
@@ -86,8 +79,6 @@ export default function AdminUsersSection() {
 
 								<th style={th}>Admin</th>
 
-								<th style={th}>Active</th>
-
 								<th style={th}>Action</th>
 							</tr>
 						</thead>
@@ -107,17 +98,15 @@ export default function AdminUsersSection() {
 
 									<td style={td}>{u.is_admin ? 'Yes' : 'No'}</td>
 
-									<td style={td}>{u.active ? 'Yes' : 'No'}</td>
-
 									<td style={actionCell}>
-										<button style={btn} onClick={() => toggleAdmin(u.id)}>
+										<button disabled={busy || loading} style={btn} onClick={() => toggleAdmin(u.id)}>
 											{u.is_admin ? 'Remove admin' : 'Make admin'}
 										</button>
 
 										<button
 											style={btn}
 											onClick={() => deleteUser(u.id, u.email)}
-											disabled={u.is_admin}
+											disabled={busy || loading || u.is_admin}
 											title={
 												u.is_admin
 													? 'Najpierw zdejmij admina'

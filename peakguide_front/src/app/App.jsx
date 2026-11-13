@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import Navbar from '../components/Navbar';
 
-import PeaksPage from '../pages/PeaksPage';
-import PeakDetailsPage from '../pages/PeakDetailsPage';
-import RangesPage from '../pages/RangesPage';
-import RangeDetailsPage from '../pages/RangeDetailsPage';
-import TrailsPage from '../pages/TrailsPage';
+const PeaksPage = lazy(() => import('../pages/PeaksPage'));
+const PeakDetailsPage = lazy(() => import('../pages/PeakDetailsPage'));
+const RangesPage = lazy(() => import('../pages/RangesPage'));
+const RangeDetailsPage = lazy(() => import('../pages/RangeDetailsPage'));
+const TrailsPage = lazy(() => import('../pages/TrailsPage'));
 
 import Footer from '../components/Footer';
-import AboutPage from '../pages/AboutPage';
+const AboutPage = lazy(() => import('../pages/AboutPage'));
 
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-import PanelPage from '../pages/PanelPage';
+const LoginPage = lazy(() => import('../pages/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage'));
+const ForgotPasswordPage = lazy(() => import('../pages/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('../pages/ResetPasswordPage'));
+const PanelPage = lazy(() => import('../pages/PanelPage'));
 import { ProtectedRoute } from '../auth/ProtectedRoute';
-import AdminTools from '../pages/AdminTools';
+
 
 export default function App() {
 	const [lang, setLang] = useState(
@@ -28,15 +30,6 @@ export default function App() {
 	const safeLang = SUPPORTED_LANGS.has(lang) ? lang : 'pl';
 
 	useEffect(() => {
-		const titles = {
-      pl: 'PeakGuide — Twój przewodnik po górach',
-      en: 'PeakGuide — Your mountain guide',
-      ua: 'PeakGuide — Твій путівник по горах',
-      zh: 'PeakGuide — 你的登山指南',
-    };
-
-		document.title = titles[safeLang] || titles.pl;
-
 		const htmlLang = safeLang === 'ua' ? 'uk' : safeLang;		
 		document.documentElement.lang = htmlLang;
 		document.documentElement.dataset.lang = safeLang;
@@ -48,11 +41,12 @@ export default function App() {
 	return (
 		<div style={layout}>
 			<div style={page}>
+				<a className='skip-link' href='#main-content'>{({ pl: 'Przejdź do treści', en: 'Skip to content', ua: 'Перейти до вмісту', zh: '跳到正文' })[safeLang]}</a>
 				<Navbar lang={safeLang} uiLang={lang} setUiLang={setLang} />
 
 				{/* This wrapper makes footer stick to the bottom when content is short */}
 				<div style={contentCol}>
-					<main style={main}>
+					<main id='main-content' tabIndex={-1} style={main}><Suspense fallback={<p role='status'>{({ pl: 'Ładowanie…', en: 'Loading…', ua: 'Завантаження…', zh: '加载中…' })[safeLang]}</p>}>
 						<Routes>
 							<Route path='/' element={<HomePage lang={safeLang} />} />
 
@@ -73,6 +67,8 @@ export default function App() {
 
 							{/* AUTH */}
 							<Route path='/login' element={<LoginPage lang={safeLang} />} />
+							<Route path='/forgot-password' element={<ForgotPasswordPage lang={safeLang} />} />
+							<Route path='/reset-password' element={<ResetPasswordPage lang={safeLang} />} />
 							<Route
 								path='/register'
 								element={<RegisterPage lang={safeLang} />}
@@ -86,7 +82,7 @@ export default function App() {
 								element={<div style={{ padding: 16 }}>404</div>}
 							/>
 						</Routes>
-					</main>
+					</Suspense></main>
 					<Footer lang={safeLang} />
 				</div>
 			</div>

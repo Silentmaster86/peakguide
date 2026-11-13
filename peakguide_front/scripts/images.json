@@ -1,0 +1,66 @@
+[
+  {
+    "source": "bg/bg_en.png",
+    "variable": "--image-bg-bg-en"
+  },
+  {
+    "source": "bg/bg_pl.png",
+    "variable": "--image-bg-bg-pl"
+  },
+  {
+    "source": "bg/bg_ua.png",
+    "variable": "--image-bg-bg-ua"
+  },
+  {
+    "source": "bg/bg_zh.png",
+    "variable": "--image-bg-bg-zh"
+  },
+  {
+    "source": "images/collections/carpathians.png",
+    "variable": "--image-images-collections-carpathians"
+  },
+  {
+    "source": "images/collections/china.png",
+    "variable": "--image-images-collections-china"
+  },
+  {
+    "source": "images/collections/kgp.png",
+    "variable": "--image-images-collections-kgp"
+  },
+  {
+    "source": "images/collections/three_peaks.png",
+    "variable": "--image-images-collections-three-peaks"
+  },
+  {
+    "source": "images/destinations/china_bg.png",
+    "variable": "--image-images-destinations-china-bg"
+  },
+  {
+    "source": "images/destinations/poland_bg.png",
+    "variable": "--image-images-destinations-poland-bg"
+  },
+  {
+    "source": "images/destinations/slovakia_bg.png",
+    "variable": "--image-images-destinations-slovakia-bg"
+  },
+  {
+    "source": "images/destinations/ukraine_bg.png",
+    "variable": "--image-images-destinations-ukraine-bg"
+  },
+  {
+    "source": "images/destinations/united-kingdom_bg.png",
+    "variable": "--image-images-destinations-united-kingdom-bg"
+  },
+  {
+    "source": "images/home/hero.png",
+    "variable": "--image-images-home-hero"
+  },
+  {
+    "source": "images/home/hero2.png",
+    "variable": "--image-images-home-hero2"
+  },
+  {
+    "source": "images/home/map-teaser3.png",
+    "variable": "--image-images-home-map-teaser3"
+  }
+]

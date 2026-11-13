@@ -1,28 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDropdown } from '../hooks/useDropdown';
+import { useMedia } from '../hooks/useMedia';
 
 export default function NavDropdown({ label, items, align = 'right' }) {
-	const [open, setOpen] = useState(false);
-	const wrapRef = useRef(null);
-	const isSmall = window.innerWidth <= 529;
-
-	useEffect(() => {
-		function onDown(e) {
-			if (!wrapRef.current) return;
-			if (!wrapRef.current.contains(e.target)) setOpen(false);
-		}
-
-		window.addEventListener('pointerdown', onDown);
-		return () => window.removeEventListener('pointerdown', onDown);
-	}, []);
-
-	useEffect(() => {
-		function onKey(e) {
-			if (e.key === 'Escape') setOpen(false);
-		}
-
-		window.addEventListener('keydown', onKey);
-		return () => window.removeEventListener('keydown', onKey);
-	}, []);
+  const { open, setOpen, wrapRef } = useDropdown();
+  const menuRef = useRef(null);
+  const isSmall = useMedia('(max-width: 529px)');
+  useEffect(() => {
+    if (open) menuRef.current?.querySelector('a')?.focus();
+  }, [open]);
+  function handleKeys(event) {
+    const links = [...menuRef.current.querySelectorAll('a')];
+    const index = links.indexOf(document.activeElement);
+    let next;
+    if (event.key === 'ArrowDown') next = (index + 1) % links.length;
+    if (event.key === 'ArrowUp') next = (index - 1 + links.length) % links.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = links.length - 1;
+    if (next !== undefined) { event.preventDefault(); links[next]?.focus(); }
+  }
 
 	return (
 		<div ref={wrapRef} style={styles.wrap}>
@@ -45,16 +41,16 @@ export default function NavDropdown({ label, items, align = 'right' }) {
 						...styles.menu,
 						...(isSmall ? styles.menuFixed : align === 'left' ? styles.left : styles.right),
 					}}
-					role='menu'
+					ref={menuRef} onKeyDown={handleKeys} role='menu' aria-label={label}
 				>
 					{items.map((it) => {
 						if (it.type === 'sep') {
-							return <div key={it.key} style={styles.sep} />;
+							return <div key={it.key} style={styles.sep} role='separator' />;
 						}
 
 						if (it.disabled) {
 							return (
-								<div key={it.key} style={styles.disabledItem} title={it.tip}>
+								<div key={it.key} role='menuitem' aria-disabled='true' style={styles.disabledItem} title={it.tip}>
 									<span style={styles.itemLabel}>{it.label}</span>
 
 									{it.pill ? <span style={styles.pill}>{it.pill}</span> : null}
@@ -68,7 +64,7 @@ export default function NavDropdown({ label, items, align = 'right' }) {
 								href={it.href}
 								onClick={() => setOpen(false)}
 								style={styles.item}
-								role='menuitem'
+								role='menuitem' tabIndex={-1}
 							>
 								<span style={styles.itemLabel}>{it.label}</span>
 								{it.sub ? <span style={styles.sub}>{it.sub}</span> : null}

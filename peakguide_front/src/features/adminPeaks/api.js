@@ -1,5 +1,6 @@
 import { supabase } from '../../lib/supabaseClient';
 import { invalidatePeakGuideCache } from '../../api/peakguide';
+import { preparePeakPayload } from './validation';
 const LANGS = ['pl', 'en', 'ua', 'zh'];
 
 function normalizeLang(lang) {
@@ -135,95 +136,19 @@ export async function adminFetchPeaks({ lang = 'pl', q = '' }) {
 	return { items };
 }
 
-export async function adminCreatePeak(body) {
-	const { i18n, ...peakData } = body;
-
-	const { data: peak, error: peakError } = await supabase
-		.from('peaks')
-		.insert({
-			slug: peakData.slug,
-			range_id: Number(peakData.range_id),
-			subrange_id: peakData.subrange_id ? Number(peakData.subrange_id) : null,
-			elevation_m: Number(peakData.elevation_m),
-			latitude: peakData.latitude ?? null,
-			longitude: peakData.longitude ?? null,
-			difficulty: peakData.difficulty || null,
-			best_season: peakData.best_season || null,
-			cover_image_url: peakData.cover_image_url || null,
-			cover_image_author: peakData.cover_image_author || null,
-			cover_image_source_url: peakData.cover_image_source_url || null,
-			cover_image_license: peakData.cover_image_license || null,
-			cover_image_license_url: peakData.cover_image_license_url || null,
-			is_korona: !!peakData.is_korona,
-			active: !!peakData.active,
-		})
-		.select('id')
-		.single();
-
-	if (peakError) throw new Error(peakError.message);
-
-	const rows = LANGS.map((lang) => ({
-		peak_id: peak.id,
-		lang,
-		name: i18n?.[lang]?.name || body.slug,
-		short_description: i18n?.[lang]?.short_description || null,
-		description: i18n?.[lang]?.description || null,
-		tips: i18n?.[lang]?.tips || null,
-	}));
-
-	const { error: i18nError } = await supabase.from('peaks_i18n').insert(rows);
-
-	if (i18nError) throw new Error(i18nError.message);
-
-	invalidatePeakGuideCache();
-
-	return { item: peak };
+async function savePeak(id, body) {
+  const payload = preparePeakPayload(body);
+  const { data, error } = await supabase.rpc('admin_save_peak', { p_peak_id: id, p_body: payload });
+  if (error) throw new Error(error.message);
+  invalidatePeakGuideCache();
+  return { item: { id: data }, ok: true };
 }
 
-export async function adminUpdatePeak(id, body) {
-	const { i18n, ...peakData } = body;
-
-	const { error: peakError } = await supabase
-		.from('peaks')
-		.update({
-			slug: peakData.slug,
-			range_id: Number(peakData.range_id),
-			subrange_id: peakData.subrange_id ? Number(peakData.subrange_id) : null,
-			elevation_m: Number(peakData.elevation_m),
-			latitude: peakData.latitude ?? null,
-			longitude: peakData.longitude ?? null,
-			difficulty: peakData.difficulty || null,
-			best_season: peakData.best_season || null,
-			cover_image_url: peakData.cover_image_url || null,
-			cover_image_author: peakData.cover_image_author || null,
-			cover_image_source_url: peakData.cover_image_source_url || null,
-			cover_image_license: peakData.cover_image_license || null,
-			cover_image_license_url: peakData.cover_image_license_url || null,
-			is_korona: !!peakData.is_korona,
-			active: !!peakData.active,
-		})
-		.eq('id', id);
-
-	if (peakError) throw new Error(peakError.message);
-
-	const rows = LANGS.map((lang) => ({
-		peak_id: Number(id),
-		lang,
-		name: i18n?.[lang]?.name || body.slug,
-		short_description: i18n?.[lang]?.short_description || null,
-		description: i18n?.[lang]?.description || null,
-		tips: i18n?.[lang]?.tips || null,
-	}));
-
-	const { error: i18nError } = await supabase.from('peaks_i18n').upsert(rows, {
-		onConflict: 'peak_id,lang',
-	});
-
-	if (i18nError) throw new Error(i18nError.message);
-
-	invalidatePeakGuideCache();
-
-	return { ok: true };
+export function adminCreatePeak(body) { return savePeak(null, body); }
+export function adminUpdatePeak(id, body) {
+  const peakId = Number(id);
+  if (!Number.isInteger(peakId) || peakId <= 0) throw new Error('Invalid peak id');
+  return savePeak(peakId, body);
 }
 
 export async function adminDeletePeak(id) {

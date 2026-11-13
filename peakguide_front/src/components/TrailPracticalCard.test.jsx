@@ -320,3 +320,16 @@ describe('TrailPracticalCard', () => {
 		expect(screen.queryByText('Some practical information could not be loaded.')).not.toBeInTheDocument();
   });
 });
+
+it('retries only a failed source and keeps the successful content visible', async () => {
+  mockDatabase({ parkingError: new Error('offline') });
+  render(<TrailPracticalCard trailId={6} lang='en' />);
+  expect(await screen.findByText('directions-en')).toBeInTheDocument();
+  await screen.findByText('Some practical information could not be loaded.');
+  const before = fromMock.mock.calls.filter(([table]) => table === 'trail_access').length;
+  mockDatabase();
+  await userEvent.click(screen.getByRole('button', { name: 'Try again' }));
+  expect(await screen.findByText('parking-en · Primary')).toBeInTheDocument();
+  expect(screen.getByText('directions-en')).toBeInTheDocument();
+  expect(fromMock.mock.calls.filter(([table]) => table === 'trail_access')).toHaveLength(before);
+});

@@ -1,0 +1,86 @@
+
+> peakguide_front@0.0.0 check
+> npm run lint && npm run test:node && npm run test:run && npm run build
+
+
+> peakguide_front@0.0.0 lint
+> eslint .
+
+
+> peakguide_front@0.0.0 test:node
+> node --test src/test/*.node.mjs
+
+✔ src/test/practical.node.mjs (70.838764ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.128228
+
+> peakguide_front@0.0.0 test:run
+> vitest run
+
+
+ RUN  v4.0.18 /workspace/peakguide/peakguide_front
+
+ ✓ src/pages/PeakDetailsPage.test.jsx (2 tests) 384ms
+     ✓ changes tabs and keeps the URL in sync  333ms
+ ✓ src/pages/PanelPage.userForm.test.jsx (2 tests) 450ms
+ ✓ src/pages/AccountForms.test.jsx (5 tests) 1180ms
+   ✓ accepts a one-character name and explains email confirmation  453ms
+ ✓ src/pages/PanelPage.test.jsx (1 test) 281ms
+ ✓ src/features/adminUsers/AdminUsersSection.test.jsx (2 tests) 314ms
+ ✓ src/components/TrailPracticalCard.test.jsx (18 tests) 567ms
+ ✓ src/auth/AuthContext.test.jsx (3 tests) 123ms
+ ✓ src/api/auth.test.js (6 tests) 9ms
+ ✓ src/utils/format.test.js (2 tests) 15ms
+ ✓ src/features/adminPeaks/api.test.js (2 tests) 7ms
+ ✓ src/features/adminPeaks/validation.test.js (16 tests) 6ms
+ ✓ src/api/peakguide.test.js (6 tests) 9ms
+ ✓ src/utils/messageValidation.test.js (5 tests) 3ms
+ ✓ src/utils/authRedirect.test.js (5 tests) 3ms
+ ✓ src/utils/elevationStats.test.js (2 tests) 3ms
+
+ Test Files  15 passed (15)
+      Tests  77 passed (77)
+   Start at  12:27:36
+   Duration  13.80s (transform 523ms, setup 610ms, import 1.29s, tests 3.35s, environment 6.79s)
+
+
+> peakguide_front@0.0.0 build
+> vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 196 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               0.70 kB │ gzip:   0.46 kB
+dist/assets/PeakDetailsPage-CIGW-MKW.css     15.61 kB │ gzip:   6.46 kB
+dist/assets/index-d7db-SuZ.css               21.89 kB │ gzip:   4.62 kB
+dist/assets/search-B-yeeJK2.js                0.14 kB │ gzip:   0.15 kB
+dist/assets/useMediaQuery-Cxo9nvWx.js         0.37 kB │ gzip:   0.25 kB
+dist/assets/TranslationNotice-D8fdakaI.js     0.48 kB │ gzip:   0.43 kB
+dist/assets/ForgotPasswordPage-ClibjKhq.js    0.83 kB │ gzip:   0.51 kB
+dist/assets/ResetPasswordPage-CuU5MCQK.js     1.36 kB │ gzip:   0.67 kB
+dist/assets/PeakCardSkeleton-Dc2ZmmEb.js      3.17 kB │ gzip:   1.23 kB
+dist/assets/LoginPage-BTE4bFEo.js             3.21 kB │ gzip:   1.68 kB
+dist/assets/AuthFormBits-ByPiS2HP.js          3.57 kB │ gzip:   1.63 kB
+dist/assets/RegisterPage-Dq2dCGJB.js          5.00 kB │ gzip:   2.42 kB
+dist/assets/RangesPage-BWLlZwVk.js            5.89 kB │ gzip:   2.40 kB
+dist/assets/AboutPage-C-gh7WU9.js             7.06 kB │ gzip:   3.34 kB
+dist/assets/RangeDetailsPage-zahdWQms.js      7.42 kB │ gzip:   2.81 kB
+dist/assets/TrailsPage-Bt154UkC.js            8.03 kB │ gzip:   3.32 kB
+dist/assets/PeaksPage-DHBmx4Ya.js            12.55 kB │ gzip:   4.52 kB
+dist/assets/PanelPage-rdFLKvE-.js            47.40 kB │ gzip:  13.43 kB
+dist/assets/PeakDetailsPage-DOvMLIvm.js     200.04 kB │ gzip:  63.24 kB
+dist/assets/index-4BOnuGs6.js               537.51 kB │ gzip: 159.52 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.73s
