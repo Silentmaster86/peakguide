@@ -1733,7 +1733,7 @@ a.country-showcase-card:hover {
 .skip-link:focus { top: 16px; }
 
 /* Opaque help panels in Light; retain the existing mountain background. */
-html[data-theme="light"] :is(.home-faq, .home-how) {
+html[data-theme="light"] :is(.home-section, .home-why, .home-faq, .home-how) {
   --text: #15251d;
   --muted: #475569;
   --border: rgba(30, 64, 45, 0.22);
@@ -1742,15 +1742,15 @@ html[data-theme="light"] :is(.home-faq, .home-how) {
   padding: clamp(16px, 4vw, 40px);
   border: 1px solid var(--border);
   border-radius: 20px;
-  background: #f8faf9;
+  background: #f8fafaa6;
 }
 
-html[data-theme="light"] :is(.home-faq-item, .home-how-step) p {
+html[data-theme="light"] :is(.home-section, .home-why, .home-faq-item, .home-how-step) p {
   font-size: 15px;
 }
 
 @media (prefers-color-scheme: light) {
-  html:not([data-theme]) :is(.home-faq, .home-how) {
+  html:not([data-theme]) :is(.home-section, .home-why, .home-faq, .home-how) {
     --text: #15251d;
     --muted: #475569;
     --border: rgba(30, 64, 45, 0.22);
@@ -1759,10 +1759,10 @@ html[data-theme="light"] :is(.home-faq-item, .home-how-step) p {
     padding: clamp(16px, 4vw, 40px);
     border: 1px solid var(--border);
     border-radius: 20px;
-    background: #f8faf9;
+    background: #f8fafaa6;
   }
 
-  html:not([data-theme]) :is(.home-faq-item, .home-how-step) p {
+  html:not([data-theme]) :is(.home-section, .home-why, .home-faq-item, .home-how-step) p {
     font-size: 15px;
   }
 }
