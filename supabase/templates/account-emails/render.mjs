@@ -43,6 +43,21 @@ ${kind === 'recovery' ? `<p style="font-size:13px;overflow-wrap:anywhere;">${esc
 // printf handles absent or non-string metadata without a template type error.
 // Metadata selects copy only; it must never be used as an authorization check.
 export function nativeTemplate(kind, field = 'html') {
+  if (field === 'subject') {
+    // Supabase validates the SOURCE template against 255 UTF-16 code units,
+    // before rendering. Keep the shared brand outside the language branches.
+    const prefix = 'PeakGuide — ';
+    const suffix = locale => {
+      const subject = renderEmail(kind, locale).subject;
+      if (!subject.startsWith(prefix)) throw new Error('Subject must start with the shared brand');
+      return subject.slice(prefix.length);
+    };
+    return '{{$l:=printf "%v" .Data.locale}}' + prefix
+      + '{{if eq $l "en"}}' + suffix('en')
+      + '{{else if or (eq $l "uk") (eq $l "ua")}}' + suffix('uk')
+      + '{{else if eq $l "zh"}}' + suffix('zh')
+      + '{{else}}' + suffix('pl') + '{{end}}';
+  }
   return '{{ $locale := printf "%v" .Data.locale }}\n'
     + '{{ if eq $locale "en" }}' + renderEmail(kind, 'en')[field]
     + '{{ else if or (eq $locale "uk") (eq $locale "ua") }}' + renderEmail(kind, 'uk')[field]

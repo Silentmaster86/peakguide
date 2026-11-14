@@ -1,7 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { renderEmail, emailLocale } from '../templates/account-emails/render.mjs';
+import { renderEmail, emailLocale, nativeTemplate } from '../templates/account-emails/render.mjs';
+
+for (const kind of ['recovery', 'password_changed']) {
+  test(`${kind}: the complete saved subject template fits the Supabase 255-character limit`, async () => {
+    const raw = await readFile(new URL(`../templates/account-emails/${kind}.subject.txt`, import.meta.url), 'utf8');
+    assert.equal(raw, nativeTemplate(kind, 'subject') + '\n');
+    assert.ok(raw.length <= 255, `Source template has ${raw.length} characters, including its final newline`);
+  });
+}
 
 for (const locale of ['pl', 'en', 'uk', 'zh']) {
   test(`welcome ${locale}: sender identity and reply routing are ready for the mail adapter`, () => {

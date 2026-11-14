@@ -29,6 +29,9 @@ nie oznacza używania Gmail jako nadawcy. Pliki nie zawierają sekretów.
 - `welcome.html`: polski podgląd powitania.
 - `recovery.html`, `password_changed.html`: wielojęzyczne szablony Go dla Supabase.
 - `*.subject.txt`: odpowiadające im wielojęzyczne tematy.
+- Limit tematu w Supabase to 255 znaków całego szablonu, razem z warunkami Go.
+  Generator i testy sprawdzają ten limit przed wdrożeniem; nie dodawaj do pola
+  Subject komentarzy, nazwy pliku ani znaczników bloku kodu.
 - `subjects.json`: tematy w czterech językach.
 - `welcome-delivery.json`: niesekretne ustawienia przyszłej wysyłki powitania.
 
