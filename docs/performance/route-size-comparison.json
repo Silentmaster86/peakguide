@@ -1,0 +1,71 @@
+{
+  "before": {
+    "HomePage": {
+      "bytes": 537380,
+      "gzip": 158342,
+      "files": [
+        "assets/index-BY9mMbXV.js"
+      ]
+    },
+    "PeaksPage": {
+      "bytes": 553715,
+      "gzip": 164591,
+      "files": [
+        "assets/PeakCardSkeleton-CBYxhpi-.js",
+        "assets/PeaksPage-H1478D6W.js",
+        "assets/TranslationNotice-DHwSshfR.js",
+        "assets/index-BY9mMbXV.js",
+        "assets/search-B-yeeJK2.js"
+      ]
+    },
+    "LoginPage": {
+      "bytes": 544158,
+      "gzip": 161612,
+      "files": [
+        "assets/AuthFormBits-DZnI0riB.js",
+        "assets/LoginPage-DFwC30Yo.js",
+        "assets/index-BY9mMbXV.js"
+      ]
+    }
+  },
+  "after": {
+    "HomePage": {
+      "bytes": 538187,
+      "gzip": 160648,
+      "files": [
+        "assets/HomePage-BO_YIccP.js",
+        "assets/PageSEO-BsRyJAXh.js",
+        "assets/SEO-CxnvZldX.js",
+        "assets/format-C-Qt4ovW.js",
+        "assets/index-CVtv5oz8.js",
+        "assets/peakguide-DAd5TQXz.js",
+        "assets/useAsync-BfyXZteL.js"
+      ]
+    },
+    "PeaksPage": {
+      "bytes": 523158,
+      "gzip": 156176,
+      "files": [
+        "assets/PageSEO-BsRyJAXh.js",
+        "assets/PeakCardSkeleton-C3bSFTYs.js",
+        "assets/PeaksPage-CGFPNEYF.js",
+        "assets/SEO-CxnvZldX.js",
+        "assets/TranslationNotice-BO_ju-yA.js",
+        "assets/format-C-Qt4ovW.js",
+        "assets/index-CVtv5oz8.js",
+        "assets/peakguide-DAd5TQXz.js",
+        "assets/search-B-yeeJK2.js",
+        "assets/useAsync-BfyXZteL.js"
+      ]
+    },
+    "LoginPage": {
+      "bytes": 496200,
+      "gzip": 147608,
+      "files": [
+        "assets/AuthFormBits-CfTMN6pA.js",
+        "assets/LoginPage-CBiS7aHE.js",
+        "assets/index-CVtv5oz8.js"
+      ]
+    }
+  }
+}
