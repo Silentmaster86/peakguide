@@ -1,0 +1,252 @@
+{
+  "peaks": [
+    {
+      "id": 10,
+      "slug": "waligora",
+      "range_id": 10,
+      "subrange_id": null,
+      "elevation_m": 936,
+      "latitude": 50.68,
+      "longitude": 16.28,
+      "difficulty": null,
+      "best_season": null,
+      "cover_image_url": null,
+      "is_korona": true,
+      "active": true,
+      "created_at": "2026-01-25T13:16:06.195003+00:00",
+      "geom": "0101000020E610000048E17A14AE473040D7A3703D0A574940",
+      "cover_image_author": null,
+      "cover_image_source_url": null,
+      "cover_image_license": null,
+      "cover_image_license_url": null
+    },
+    {
+      "id": 71,
+      "slug": "lakowa-wyspowy",
+      "range_id": 22,
+      "subrange_id": null,
+      "elevation_m": 900,
+      "latitude": 49.4217,
+      "longitude": 21.1017,
+      "difficulty": null,
+      "best_season": null,
+      "cover_image_url": null,
+      "is_korona": false,
+      "active": true,
+      "created_at": "2026-02-04T16:24:01.735432+00:00",
+      "geom": "0101000020E6100000D200DE02091A3540925CFE43FAB54840",
+      "cover_image_author": null,
+      "cover_image_source_url": null,
+      "cover_image_license": null,
+      "cover_image_license_url": null
+    }
+  ],
+  "peaks_i18n": [
+    {
+      "peak_id": 10,
+      "lang": "pl",
+      "name": "Waligóra",
+      "short_description": "Szczyt Korony Gór Polski",
+      "description": null,
+      "tips": null
+    },
+    {
+      "peak_id": 10,
+      "lang": "en",
+      "name": "Waligóra",
+      "short_description": "Peak from the Crown of Polish Mountains",
+      "description": null,
+      "tips": null
+    },
+    {
+      "peak_id": 10,
+      "lang": "zh",
+      "name": "Waligóra",
+      "short_description": null,
+      "description": null,
+      "tips": null
+    },
+    {
+      "peak_id": 10,
+      "lang": "ua",
+      "name": "Waligóra",
+      "short_description": null,
+      "description": null,
+      "tips": null
+    },
+    {
+      "peak_id": 71,
+      "lang": "en",
+      "name": "Łyżka",
+      "short_description": null,
+      "description": "Łakowa is a quiet, forested Beskid Wyspowy peak, great for a hike away from crowds. The ascent is fairly easy, but navigation helps among forest junctions. Bring a map or GPS and plan with extra time.",
+      "tips": null
+    },
+    {
+      "peak_id": 71,
+      "lang": "pl",
+      "name": "Łyżka",
+      "short_description": null,
+      "description": "Łakowa to spokojny, zalesiony szczyt w Beskidzie Wyspowym, dobry na wycieczkę z dala od tłumów. Podejście jest umiarkowanie łatwe, ale w lesie przydaje się orientacja wśród rozwidleń. Warto zabrać mapę lub GPS i zaplanować trasę z zapasem czasu.",
+      "tips": null
+    },
+    {
+      "peak_id": 71,
+      "lang": "ua",
+      "name": "Łyżka",
+      "short_description": null,
+      "description": "Лакова — тиха лісиста вершина Бескиду Виспового, добра для походу подалі від натовпу. Підйом відносно легкий, але в лісі корисне орієнтування на роздоріжжях. Візьміть карту або GPS та плануйте маршрут із запасом часу.",
+      "tips": null
+    },
+    {
+      "peak_id": 71,
+      "lang": "zh",
+      "name": "Łyżka",
+      "short_description": null,
+      "description": "瓦科瓦峰（Łakowa）是孤峰贝斯基德山脉一座安静的森林山峰，适合远离人群的徒步。上升整体较轻松，但林间岔路较多，导航更稳。建议携带地图或GPS，并预留充裕时间。",
+      "tips": null
+    }
+  ],
+  "trails_i18n": [
+    {
+      "trail_id": 5,
+      "lang": "en",
+      "name": "Ben Nevis via the Mountain Track",
+      "description": "The standard route from Glen Nevis climbs steadily to the summit plateau and returns by the same path. It is the most straightforward ascent of Ben Nevis, but remains a long and demanding mountain day.",
+      "notes": "Times are approximate. Check the mountain forecast and current ground conditions before setting out. Carry suitable clothing, a map and compass, and the skills to navigate in poor visibility. Winter conditions may require specialist equipment and experience."
+    },
+    {
+      "trail_id": 5,
+      "lang": "pl",
+      "name": "Ben Nevis szlakiem Mountain Track",
+      "description": "Standardowa trasa z Glen Nevis prowadzi długim podejściem na płaskowyż szczytowy i wraca tą samą drogą. Jest to najprostsze popularne wejście na Ben Nevis, ale nadal stanowi wymagającą całodzienną wycieczkę górską.",
+      "notes": "Czas jest orientacyjny. Przed wyjściem sprawdź prognozę górską i aktualne warunki. Zabierz odpowiednią odzież, mapę i kompas oraz przygotuj się do nawigacji przy słabej widoczności. Zimą mogą być potrzebne specjalistyczne umiejętności i wyposażenie."
+    },
+    {
+      "trail_id": 5,
+      "lang": "ua",
+      "name": "Бен-Невіс маршрутом Mountain Track",
+      "description": "Стандартний маршрут із Глен-Невіс поступово піднімається на вершинне плато й повертається тією самою стежкою. Це найпростіший популярний підйом на Бен-Невіс, але він усе одно є довгим і складним гірським походом.",
+      "notes": "Час орієнтовний. Перед виходом перевірте гірський прогноз і стан маршруту. Візьміть відповідний одяг, карту й компас та будьте готові орієнтуватися за поганої видимості. Узимку потрібні спеціальні навички й спорядження."
+    },
+    {
+      "trail_id": 5,
+      "lang": "zh",
+      "name": "经 Mountain Track 登本尼维斯山",
+      "description": "这条标准路线从格伦尼维斯出发，持续爬升至山顶高原，并沿原路返回。它是登顶本尼维斯山最直接的常用路线，但仍是漫长且高强度的高山徒步。",
+      "notes": "时间仅供参考。出发前请查看山区天气和地面状况，携带合适衣物、地图和指南针，并具备低能见度下的导航能力。冬季可能需要专业技能和装备。"
+    },
+    {
+      "trail_id": 6,
+      "lang": "en",
+      "name": "Yr Wyddfa via the Llanberis Path",
+      "description": "The longest and most gradual of the six main routes to Yr Wyddfa follows the mountain railway for much of the ascent before reaching the summit and returning the same way.",
+      "notes": "The National Park grades this route Hard/Strenuous. Do not walk on the railway tracks. Check the weather and ground conditions, carry full hill-walking equipment, and be ready to navigate in poor visibility."
+    },
+    {
+      "trail_id": 6,
+      "lang": "pl",
+      "name": "Yr Wyddfa szlakiem Llanberis Path",
+      "description": "Najdłuższa i najbardziej stopniowa z sześciu głównych tras na Yr Wyddfa przez dużą część podejścia biegnie w pobliżu kolejki górskiej, następnie dociera na szczyt i wraca tą samą drogą.",
+      "notes": "Park Narodowy klasyfikuje trasę jako trudną i wymagającą. Nie wchodź na tory kolejki. Sprawdź pogodę i warunki, zabierz pełne wyposażenie górskie i przygotuj się do nawigacji przy słabej widoczności."
+    },
+    {
+      "trail_id": 6,
+      "lang": "ua",
+      "name": "Yr Wyddfa маршрутом Llanberis Path",
+      "description": "Найдовший і найпоступовіший із шести основних маршрутів на Yr Wyddfa значну частину підйому проходить біля гірської залізниці, веде на вершину та повертається тією самою стежкою.",
+      "notes": "Національний парк оцінює маршрут як складний і виснажливий. Не виходьте на залізничні колії. Перевірте погоду й стан маршруту, візьміть повне гірське спорядження та будьте готові до навігації за поганої видимості."
+    },
+    {
+      "trail_id": 6,
+      "lang": "zh",
+      "name": "经 Llanberis Path 登 Yr Wyddfa",
+      "description": "这是通往 Yr Wyddfa 山顶的六条主要路线中最长、坡度最缓的一条。大部分上升路段靠近登山铁路，到达山顶后沿原路返回。",
+      "notes": "国家公园将此路线评为困难且高强度。请勿进入铁路轨道。出发前查看天气和地面状况，携带完整徒步装备，并做好低能见度下导航的准备。"
+    },
+    {
+      "trail_id": 7,
+      "lang": "en",
+      "name": "Scafell Pike via Hollow Stones",
+      "description": "The direct route from Lake Head car park in Wasdale climbs beside Lingmell Gill, crosses rough and rocky ground at Hollow Stones, and reaches the summit before returning by the same line.",
+      "notes": "This is a tough, steep route over rugged terrain. Paths are not reliably waymarked and the summit plateau can be confusing in mist. Bring a detailed map and compass, check the mountain forecast, and turn back if conditions exceed your experience."
+    },
+    {
+      "trail_id": 7,
+      "lang": "pl",
+      "name": "Scafell Pike przez Hollow Stones",
+      "description": "Bezpośrednia trasa z parkingu Lake Head w Wasdale prowadzi obok Lingmell Gill, przez kamienisty teren Hollow Stones, następnie na szczyt i wraca tą samą drogą.",
+      "notes": "To stroma i wymagająca trasa po nierównym, skalistym terenie. Szlaki nie zawsze są oznakowane, a płaskowyż szczytowy łatwo pomylić we mgle. Zabierz dokładną mapę i kompas, sprawdź prognozę górską i zawróć, jeśli warunki przekraczają Twoje doświadczenie."
+    },
+    {
+      "trail_id": 7,
+      "lang": "ua",
+      "name": "Скафелл-Пайк через Hollow Stones",
+      "description": "Прямий маршрут від автостоянки Lake Head у Wasdale піднімається вздовж Lingmell Gill, перетинає кам’янисту місцевість Hollow Stones, виходить на вершину й повертається тим самим шляхом.",
+      "notes": "Це крутий і складний маршрут нерівною скелястою місцевістю. Стежки не всюди позначені, а на вершинному плато легко втратити напрямок у тумані. Візьміть детальну карту й компас, перевірте прогноз і поверніться, якщо умови перевищують ваш досвід."
+    },
+    {
+      "trail_id": 7,
+      "lang": "zh",
+      "name": "经 Hollow Stones 登斯科菲峰",
+      "description": "这条直接路线从沃斯代尔的 Lake Head 停车场出发，沿 Lingmell Gill 上升，穿过 Hollow Stones 的崎岖岩石地形，到达山顶后沿原路返回。",
+      "notes": "路线陡峭且地形崎岖。山路并非处处有标记，雾中山顶高原容易迷失方向。请携带详细地图和指南针，查看山区天气；如果状况超出自身经验，应及时折返。"
+    },
+    {
+      "trail_id": 8,
+      "lang": "pl",
+      "name": "Na Hoverlę",
+      "description": "Oficjalna oznakowana trasa Karpackiego Narodowego Parku Przyrodniczego prowadząca od punktu kontrolnego w uroczysku Zawoje przez dolinę Prutu, okolice bazy Zarosliak i dalej na najwyższy szczyt Ukrainy.",
+      "notes": "Trasa wymaga dobrej kondycji. Park zaleca rozpoczęcie wejścia nie później niż w południe. Należy pozostać na oznakowanym szlaku, sprawdzić pogodę i aktualne warunki przed wyjściem."
+    },
+    {
+      "trail_id": 8,
+      "lang": "en",
+      "name": "Hoverla Mountain Trail",
+      "description": "The official marked Carpathian National Nature Park route starts at the Hoverla checkpoint in the Zavoie tract, follows the Prut valley past the Zarosliak area and continues to the highest summit in Ukraine.",
+      "notes": "A good level of fitness is required. The park recommends beginning the ascent no later than noon. Stay on the marked trail and check the weather and current conditions before setting out."
+    },
+    {
+      "trail_id": 8,
+      "lang": "ua",
+      "name": "На гору Говерла",
+      "description": "Офіційний промаркований маршрут Карпатського національного природного парку починається від контрольно-пропускного пункту в урочищі Завоєві, проходить долиною Пруту через район бази Заросляк і веде на найвищу вершину України.",
+      "notes": "Маршрут потребує доброї фізичної підготовки. Парк рекомендує починати підйом не пізніше полудня. Не сходьте з промаркованого маршруту та перевіряйте погоду й актуальні умови перед виходом."
+    },
+    {
+      "trail_id": 8,
+      "lang": "zh",
+      "name": "霍韦尔拉山徒步路线",
+      "description": "这条由喀尔巴阡国家自然公园标记的官方路线从 Zavoie 地区的霍韦尔拉检查站出发，沿普鲁特河谷经过 Zarosliak 区域，最终到达乌克兰最高峰。",
+      "notes": "该路线需要良好的体能。公园建议最迟在中午前开始登山。请始终沿标记路线行走，并在出发前查看天气和当前山区状况。"
+    },
+    {
+      "trail_id": 10,
+      "lang": "en",
+      "name": "Kriváň from Tri studničky",
+      "description": "A demanding high-mountain loop from Tri studničky to the summit of Kriváň. The route climbs towards Kriváň, reaches the 2,494 m summit and descends via Jamské pleso before returning to Tri studničky.",
+      "notes": "Allow approximately 6 hours. The route gains about 1,354 metres of elevation. There are no refreshment or mountain-hut facilities directly on the route. The upper mountain terrain is steep and rocky. Parts of the trail are subject to TANAP seasonal closure."
+    },
+    {
+      "trail_id": 10,
+      "lang": "pl",
+      "name": "Kriváň z Tri studničky",
+      "description": "Wymagająca wysokogórska pętla z Tri studničky na szczyt Kriváňa. Trasa prowadzi na szczyt o wysokości 2494 m, a następnie schodzi przez Jamské pleso i wraca do Tri studničky.",
+      "notes": "Na trasę należy przeznaczyć około 6 godzin. Przewyższenie wynosi około 1354 m. Bezpośrednio na trasie nie ma schroniska ani możliwości zakupu jedzenia. Górna część szlaku jest stroma i skalista. Część trasy podlega sezonowemu zamknięciu TANAP."
+    },
+    {
+      "trail_id": 10,
+      "lang": "ua",
+      "name": "Кривань з Tri studničky",
+      "description": "Складний високогірний кільцевий маршрут від Tri studničky до вершини Криваня. Маршрут піднімається на вершину висотою 2494 м, а потім спускається через Jamské pleso та повертається до Tri studničky.",
+      "notes": "На маршрут слід передбачити приблизно 6 годин. Набір висоти становить близько 1354 м. Безпосередньо на маршруті немає гірського притулку або місця для придбання їжі. Верхня частина маршруту крута та кам’яниста. Частина маршруту підлягає сезонному закриттю TANAP."
+    },
+    {
+      "trail_id": 10,
+      "lang": "zh",
+      "name": "Tri studničky 至克里万山环线",
+      "description": "一条从 Tri studničky 登上克里万山的高难度高山环线。路线登上海拔2494米的山顶，然后经 Jamské pleso 下山并返回 Tri studničky。",
+      "notes": "全程约需6小时，累计爬升约1354米。路线沿途没有直接提供餐饮服务的山屋。高处路段陡峭且多岩石。部分步道受 TANAP 季节性关闭规定限制。"
+    }
+  ]
+}
