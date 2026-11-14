@@ -1,0 +1,14 @@
+[
+  {
+    "width": 390,
+    "homeAbsentOnLogin": true,
+    "homeLoadedOnNavigation": true,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "homeAbsentOnLogin": true,
+    "homeLoadedOnNavigation": true,
+    "errors": []
+  }
+]

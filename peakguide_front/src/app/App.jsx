@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '../pages/HomePage';
+const HomePage = lazy(() => import('../pages/HomePage'));
 import Navbar from '../components/Navbar';
 
 const PeaksPage = lazy(() => import('../pages/PeaksPage'));
