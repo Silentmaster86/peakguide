@@ -17,7 +17,9 @@ for (const locale of ['pl', 'en', 'uk', 'zh']) {
 for (const kind of ['recovery', 'password_changed']) {
   await writeFile(new URL(`${kind}.html`, root), nativeTemplate(kind));
   // Subject templates are separate from body HTML for the dashboard fields.
-  await writeFile(new URL(`${kind}.subject.txt`, root), nativeTemplate(kind, 'subject').replaceAll('\n', '') + '\n');
+  const subject = nativeTemplate(kind, 'subject') + '\n';
+  if (subject.length > 255) throw new Error(`${kind}: subject template exceeds Supabase's 255-character limit`);
+  await writeFile(new URL(`${kind}.subject.txt`, root), subject);
 }
 await writeFile(new URL('welcome.html', root), renderEmail('welcome', 'pl').html);
 await writeFile(new URL('subjects.json', root), JSON.stringify(subjects, null, 2) + '\n');

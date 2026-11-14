@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"os"
 	"strings"
+	"unicode/utf16"
 )
 
 func must(err error) {
@@ -34,6 +35,9 @@ func main() {
 		must(err)
 		subject, err := os.ReadFile(root + kind + ".subject.txt")
 		must(err)
+		if len(utf16.Encode([]rune(string(subject)))) > 255 {
+			panic("subject source exceeds Supabase's 255-character limit")
+		}
 		ht, err := template.New(kind).Parse(string(body))
 		must(err)
 		st, err := template.New(kind).Parse(string(subject))
