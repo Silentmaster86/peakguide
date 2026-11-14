@@ -1,8 +1,10 @@
+import { adminText, adminLocale } from '../admin/text';
 import { useEffect, useState } from 'react';
 import { adminDeleteUser, adminFetchUsers, adminToggleAdmin } from './api';
 import { useMedia } from '../../hooks/useMedia';
 
-export default function AdminUsersSection() {
+export default function AdminUsersSection({ lang = 'pl' }) {
+  const t = adminText(lang);
 	const [error, setError] = useState(null);
 	const [busy, setBusy] = useState(false);
 	const [users, setUsers] = useState([]);
@@ -25,17 +27,17 @@ export default function AdminUsersSection() {
     finally { setBusy(false); }
   }
   async function deleteUser(id, email) {
-    if (!window.confirm(`Delete this user? ${email}`)) return;
+    if (!window.confirm(`${t('Delete this user?')} ${email}`)) return;
     await mutate(() => adminDeleteUser(id));
   }
   async function toggleAdmin(id) { await mutate(() => adminToggleAdmin(id)); }
 
 	return (
 		<section style={{ marginTop: 40 }}>
-			<h2>Admin • Users</h2>
-      {error && <p role='alert'>{error} <button type='button' onClick={load}>Retry</button></p>}
+			<h2>{t('Admin • Users')}</h2>
+      {error && <p role='alert'>{t(error)} <button type='button' onClick={load}>{t('Retry')}</button></p>}
 
-			{loading && <p>Loading users…</p>}
+			{loading && <p>{t('Loading users…')}</p>}
 
 			{!loading && isMobile && (
 				<div style={cardsList}>
@@ -45,12 +47,12 @@ export default function AdminUsersSection() {
 							<div style={userName}>{u.display_name || '-'}</div>
 
 							<div style={metaGrid}>
-								<span>Admin: {u.is_admin ? 'Yes' : 'No'}</span>
+								<span>{t('Admin')}: {u.is_admin ? t('Yes') : t('No')}</span>
 							</div>
 
 							<div style={cardActions}>
 								<button disabled={busy || loading} style={btn} onClick={() => toggleAdmin(u.id)}>
-									{u.is_admin ? 'Remove admin' : 'Make admin'}
+									{u.is_admin ? t('Remove admin') : t('Make admin')}
 								</button>
 
 								<button
@@ -58,7 +60,7 @@ export default function AdminUsersSection() {
 									onClick={() => deleteUser(u.id, u.email)}
 									disabled={busy || loading || u.is_admin}
 								>
-									Delete
+									{t('Delete')}
 								</button>
 							</div>
 						</div>
@@ -71,15 +73,15 @@ export default function AdminUsersSection() {
 					<table style={table}>
 						<thead>
 							<tr>
-								<th style={th}>Email</th>
+								<th style={th}>{t('Email')}</th>
 
-								<th style={th}>Name</th>
+								<th style={th}>{t('User name')}</th>
 
-								<th style={th}>Created</th>
+								<th style={th}>{t('Created')}</th>
 
-								<th style={th}>Admin</th>
+								<th style={th}>{t('Admin')}</th>
 
-								<th style={th}>Action</th>
+								<th style={th}>{t('Action')}</th>
 							</tr>
 						</thead>
 
@@ -92,15 +94,15 @@ export default function AdminUsersSection() {
 
 									<td style={td}>
 										{u.created_at
-											? new Date(u.created_at).toLocaleString()
+											? new Date(u.created_at).toLocaleString(adminLocale(lang))
 											: '-'}
 									</td>
 
-									<td style={td}>{u.is_admin ? 'Yes' : 'No'}</td>
+									<td style={td}>{u.is_admin ? t('Yes') : t('No')}</td>
 
 									<td style={actionCell}>
 										<button disabled={busy || loading} style={btn} onClick={() => toggleAdmin(u.id)}>
-											{u.is_admin ? 'Remove admin' : 'Make admin'}
+											{u.is_admin ? t('Remove admin') : t('Make admin')}
 										</button>
 
 										<button
@@ -109,11 +111,11 @@ export default function AdminUsersSection() {
 											disabled={busy || loading || u.is_admin}
 											title={
 												u.is_admin
-													? 'Najpierw zdejmij admina'
-													: 'Usuń użytkownika'
+													? t('Remove admin first')
+													: t('Delete user')
 											}
 										>
-											Delete
+											{t('Delete')}
 										</button>
 									</td>
 								</tr>

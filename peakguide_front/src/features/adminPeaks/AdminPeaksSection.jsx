@@ -1,7 +1,8 @@
+import { adminText, adminError } from '../admin/text';
 import { preparePeakPayload } from './validation';
 // src/admin/components/AdminPeaksSection.jsx
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchRanges, fetchSubranges } from '../../api/peakguide';
 import {
 	adminCreatePeak,
@@ -84,6 +85,7 @@ function Button({ children, variant = 'ghost', ...props }) {
 }
 
 export default function AdminPeaksSection({ lang = 'pl' }) {
+  const t = adminText(lang);
 	const [q, setQ] = useState('');
 	const [status, setStatus] = useState('idle');
 	const [error, setError] = useState(null);
@@ -97,6 +99,27 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 	const [subranges, setSubranges] = useState([]);
 
 	const [open, setOpen] = useState(false);
+  const modalRef = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const trigger = document.activeElement;
+    modalRef.current?.querySelector('button, input')?.focus();
+    return () => { if (trigger?.isConnected) trigger.focus(); };
+  }, [open]);
+
+  function onDialogKeyDown(event) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!saving) setOpen(false);
+    }
+    if (event.key !== 'Tab') return;
+    const controls = [...modalRef.current.querySelectorAll('button, input, select, textarea, a[href], [tabindex]')]
+      .filter((element) => !element.disabled && element.tabIndex >= 0 && element.getClientRects().length);
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  }
 	const [mode, setMode] = useState('create');
 	const [saving, setSaving] = useState(false);
 	const [editId, setEditId] = useState(null);
@@ -131,8 +154,8 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 			const data = await adminFetchPeaks({ lang, q });
 			setItems(Array.isArray(data.items) ? data.items : []);
 			setStatus('success');
-		} catch (e) {
-			setError(e?.message || 'Load failed');
+		} catch {
+			setError('Load failed');
 			setStatus('error');
 		}
 	}
@@ -304,13 +327,13 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 	}
 
 	async function onDelete(id) {
-		if (!confirm('Delete this peak?')) return;
+		if (!confirm(t('Delete this peak?'))) return;
 
 		try {
 			await adminDeletePeak(id);
 			await load();
 		} catch (e) {
-			alert(e?.message || 'Delete failed');
+			alert(adminError(e, lang, 'Delete failed'));
 		}
 	}
 
@@ -320,10 +343,10 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 
 			<header className='ap-head'>
 				<div className='ap-titleRow'>
-					<h2 className='ap-title'>Admin • Peaks</h2>
+					<h2 className='ap-title'>{t('Admin • Peaks')}</h2>
 
 					<Button type='button' variant='primary' onClick={openCreate}>
-						+ Add peak
+						{t('+ Add peak')}
 					</Button>
 				</div>
 
@@ -338,20 +361,20 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 						<TextInput
 							value={q}
 							onChange={(e) => setQ(e.target.value)}
-							placeholder='Search slug/name...'
-							aria-label='Search peaks'
+							placeholder={t('Search slug/name...')}
+							aria-label={t('Search peaks')}
 						/>
 
 						<Button type='submit' variant='subtle' disabled={busy}>
-							{busy ? 'Loading...' : 'Search'}
+							{busy ? t('Loading...') : t('Search')}
 						</Button>
 
 						<Button
 							type='button'
 							variant='ghost'
 							onClick={() => setQ('')}
-							title='Clear'
-							aria-label='Clear search'
+							title={t('Clear')}
+							aria-label={t('Clear search')}
 						>
 							✕
 						</Button>
@@ -360,13 +383,13 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 					<div className='ap-meta'>
 						{status === 'error' ? (
 							<div className='ap-alert ap-alert--error'>
-								<strong>Error:</strong> {error}
+								<strong>{t('Error')}:</strong> {t(error)}
 							</div>
 						) : status === 'loading' ? (
-							<div className='ap-alert ap-alert--info'>Loading peaks...</div>
+							<div className='ap-alert ap-alert--info'>{t('Loading peaks...')}</div>
 						) : (
 							<div className='ap-alert ap-alert--ok'>
-								Showing <strong>{filtered.length}</strong> result(s)
+								{t('Results')}: <strong>{filtered.length}</strong>
 							</div>
 						)}
 					</div>
@@ -379,13 +402,13 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 						<table className='ap-table'>
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Slug</th>
-									<th>Elev</th>
-									<th>Range</th>
-									<th>Korona</th>
-									<th>Active</th>
-									<th>Actions</th>
+									<th>{t('Name')}</th>
+									<th>{t('Slug')}</th>
+									<th>{t('Elev')}</th>
+									<th>{t('Range')}</th>
+									<th>{t('Korona')}</th>
+									<th>{t('Active')}</th>
+									<th>{t('Actions')}</th>
 								</tr>
 							</thead>
 
@@ -398,12 +421,12 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										<td>{getRangeLabel(r)}</td>
 										<td>
 											<Badge tone={r.is_korona ? 'brand' : 'neutral'}>
-												{r.is_korona ? 'Yes' : 'No'}
+												{r.is_korona ? t('Yes') : t('No')}
 											</Badge>
 										</td>
 										<td>
 											<Badge tone={r.active ? 'ok' : 'warn'}>
-												{r.active ? 'Yes' : 'No'}
+												{r.active ? t('Yes') : t('No')}
 											</Badge>
 										</td>
 										<td className='ap-actions'>
@@ -412,14 +435,14 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 												variant='subtle'
 												onClick={() => openEdit(r)}
 											>
-												Edit
+												{t('Edit')}
 											</Button>
 											<Button
 												type='button'
 												variant='danger'
 												onClick={() => onDelete(r.id)}
 											>
-												Delete
+												{t('Delete')}
 											</Button>
 										</td>
 									</tr>
@@ -428,7 +451,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 								{status === 'success' && filtered.length === 0 && (
 									<tr>
 										<td colSpan={7} className='ap-empty'>
-											No results
+											{t('No results')}
 										</td>
 									</tr>
 								)}
@@ -453,16 +476,16 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 
 							<div className='ap-mobileInfo'>
 								<span>
-									<strong>Slug:</strong> {r.slug}
+									<strong>{t('Slug')}:</strong> {r.slug}
 								</span>
 							</div>
 
 							<div className='ap-mobileBadges'>
 								<Badge tone={r.is_korona ? 'brand' : 'neutral'}>
-									{r.is_korona ? 'Korona' : 'Not Korona'}
+									{r.is_korona ? t('Korona') : t('Not Korona')}
 								</Badge>
 								<Badge tone={r.active ? 'ok' : 'warn'}>
-									{r.active ? 'Active' : 'Inactive'}
+									{r.active ? t('Active') : t('Inactive')}
 								</Badge>
 							</div>
 
@@ -472,55 +495,58 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									variant='subtle'
 									onClick={() => openEdit(r)}
 								>
-									Edit
+									{t('Edit')}
 								</Button>
 								<Button
 									type='button'
 									variant='danger'
 									onClick={() => onDelete(r.id)}
 								>
-									Delete
+									{t('Delete')}
 								</Button>
 							</div>
 						</article>
 					))}
 
 					{status === 'success' && filtered.length === 0 ? (
-						<div className='ap-empty'>No results</div>
+						<div className='ap-empty'>{t('No results')}</div>
 					) : null}
 				</div>
 			</div>
 
 			{open && (
 				<div
-					role='dialog'
+					ref={modalRef}
+          onKeyDown={onDialogKeyDown}
+          role='dialog'
 					aria-modal='true'
+          aria-labelledby='peak-editor-title'
 					className='ap-backdrop'
 					onClick={() => !saving && setOpen(false)}
 				>
 					<div className='ap-modal' onClick={(e) => e.stopPropagation()}>
 						<div className='ap-modalHead'>
 							<div>
-								<h3 className='ap-modalTitle'>
-									{mode === 'create' ? 'Add Peak' : 'Edit Peak'}
+								<h3 id='peak-editor-title' className='ap-modalTitle'>
+									{mode === 'create' ? t('Add Peak') : t('Edit Peak')}
 								</h3>
 								<p className='ap-modalSub'>
-									Manage base fields + translations.
+									{t('Manage base fields + translations.')}
 								</p>
 							</div>
 
-							<Button type='button' onClick={() => !saving && setOpen(false)}>
+							<Button type='button' aria-label={t('Close')} onClick={() => !saving && setOpen(false)}>
 								✕
 							</Button>
 						</div>
 
 						<form onSubmit={onSave} className='ap-form'>
-              {saveError && <p role='alert'>{saveError}</p>}
-              {rangeError && <p role='alert'>Could not load mountain ranges. <button type='button' onClick={() => setRangeRetry((v) => v + 1)}>Retry</button></p>}
-              {subrangeStatus === 'error' && <p role='alert'>Could not load subranges. <button type='button' onClick={() => setSubrangeRetry((v) => v + 1)}>Retry</button></p>}
-              {subrangeStatus === 'loading' && <p role='status'>Loading subranges…</p>}
+              {saveError && <p role='alert'>{adminError({ message: saveError }, lang)}</p>}
+              {rangeError && <p role='alert'>{t('Could not load mountain ranges.')} <button type='button' onClick={() => setRangeRetry((v) => v + 1)}>{t('Retry')}</button></p>}
+              {subrangeStatus === 'error' && <p role='alert'>{t('Could not load subranges.')} <button type='button' onClick={() => setSubrangeRetry((v) => v + 1)}>{t('Retry')}</button></p>}
+              {subrangeStatus === 'loading' && <p role='status'>{t('Loading subranges…')}</p>}
 							<div className='ap-grid ap-grid--3'>
-								<Field label='Slug'>
+								<Field label={t('Slug')}>
 									<TextInput
 										value={form.slug}
 										onChange={(e) => setForm({ ...form, slug: e.target.value })}
@@ -528,7 +554,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Range' hint='required'>
+								<Field label={t('Range')} hint={t('required')}>
 									<Select
 										value={form.range_id ? String(form.range_id) : ''}
 										onChange={(e) =>
@@ -537,7 +563,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										required
 									>
 										<option value='' disabled>
-											Select range...
+											{t('Select range...')}
 										</option>
 
 										{ranges.map((r) => (
@@ -548,7 +574,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									</Select>
 								</Field>
 
-								<Field label='Subrange' hint='optional'>
+								<Field label={t('Subrange')} hint={t('optional')}>
 									<Select
 										value={form.subrange_id || ''}
 										onChange={(e) =>
@@ -557,7 +583,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										disabled={subrangeStatus !== 'success' || !subranges.length}
 									>
 										<option value=''>
-											{subranges.length ? 'Select subrange...' : 'No subranges'}
+											{subranges.length ? t('Select subrange...') : t('No subranges')}
 										</option>
 
 										{subranges.map((s) => (
@@ -568,7 +594,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									</Select>
 								</Field>
 
-								<Field label='Elevation'>
+								<Field label={t('Elevation')}>
 									<TextInput
 										type='number'
 										value={form.elevation_m}
@@ -578,7 +604,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Latitude'>
+								<Field label={t('Latitude')}>
 									<TextInput
 										value={form.latitude}
 										onChange={(e) =>
@@ -587,7 +613,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Longitude'>
+								<Field label={t('Longitude')}>
 									<TextInput
 										value={form.longitude}
 										onChange={(e) =>
@@ -598,7 +624,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 							</div>
 
 							<div className='ap-grid ap-grid--2'>
-								<Field label='Cover image author'>
+								<Field label={t('Cover image author')}>
 									<TextInput
 										value={form.cover_image_author}
 										onChange={(e) =>
@@ -607,7 +633,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Cover image source URL'>
+								<Field label={t('Cover image source URL')}>
 									<TextInput
 										value={form.cover_image_source_url}
 										onChange={(e) =>
@@ -616,7 +642,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Cover image license'>
+								<Field label={t('Cover image license')}>
 									<TextInput
 										value={form.cover_image_license}
 										onChange={(e) =>
@@ -625,7 +651,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Cover image license URL'>
+								<Field label={t('Cover image license URL')}>
 									<TextInput
 										value={form.cover_image_license_url}
 										onChange={(e) =>
@@ -636,7 +662,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 							</div>
 
 							<div className='ap-grid ap-grid--3'>
-								<Field label='Difficulty'>
+								<Field label={t('Difficulty')}>
 									<TextInput
 										value={form.difficulty}
 										onChange={(e) =>
@@ -645,7 +671,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Best season'>
+								<Field label={t('Best season')}>
 									<TextInput
 										value={form.best_season}
 										onChange={(e) =>
@@ -654,7 +680,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Cover image URL'>
+								<Field label={t('Cover image URL')}>
 									<TextInput
 										value={form.cover_image_url}
 										onChange={(e) =>
@@ -670,7 +696,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									onChange={(e) =>
 										setForm({ ...form, is_korona: e.target.checked })
 									}
-									label='Korona'
+									label={t('Korona')}
 								/>
 
 								<Toggle
@@ -678,7 +704,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									onChange={(e) =>
 										setForm({ ...form, active: e.target.checked })
 									}
-									label='Active'
+									label={t('Active')}
 								/>
 
 								<div className='ap-spacer' />
@@ -688,18 +714,18 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									onClick={() => setOpen(false)}
 									disabled={saving}
 								>
-									Cancel
+									{t('Cancel')}
 								</Button>
 
 								<Button type='submit' variant='primary' disabled={saving}>
-									{saving ? 'Saving...' : mode === 'create' ? 'Create' : 'Save'}
+									{saving ? t('Saving...') : mode === 'create' ? t('Create') : t('Save')}
 								</Button>
 							</div>
 
 							<div className='ap-divider' />
 
 							<div className='ap-tabs'>
-								<h4>Translations</h4>
+								<h4>{t('Translations')}</h4>
 
 								<div className='ap-tabRow'>
 									{LANGS.map((l) => (
@@ -720,7 +746,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 
 							<div className='ap-i18nCard'>
 								<div className='ap-grid ap-grid--2'>
-									<Field label='Name'>
+									<Field label={t('Name')}>
 										<TextInput
 											value={form.i18n[activeLangTab]?.name || ''}
 											onChange={(e) =>
@@ -729,7 +755,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 										/>
 									</Field>
 
-									<Field label='Short description'>
+									<Field label={t('Short description')}>
 										<TextArea
 											rows={3}
 											value={form.i18n[activeLangTab]?.short_description || ''}
@@ -744,7 +770,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									</Field>
 								</div>
 
-								<Field label='Description'>
+								<Field label={t('Description')}>
 									<TextArea
 										rows={5}
 										value={form.i18n[activeLangTab]?.description || ''}
@@ -754,7 +780,7 @@ export default function AdminPeaksSection({ lang = 'pl' }) {
 									/>
 								</Field>
 
-								<Field label='Tips'>
+								<Field label={t('Tips')}>
 									<TextArea
 										rows={4}
 										value={form.i18n[activeLangTab]?.tips || ''}
