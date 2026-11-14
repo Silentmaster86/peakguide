@@ -32,7 +32,7 @@ Frontend: peakguide_front. Języki UI/danych pl/en/ua/zh; poczta pl/en/uk/zh.
    Atrapy API, żadnych zapisów do produkcji.
 3. **PR #7 — utrzymanie.** Odczytowy supabase/operations/email_health.sql oraz
    docs/operations/remaining-work.md. Procedura odtworzenia backupu i zaległe testy.
-4. **Gałąź perf/defer-home-route — optymalizacja.** Osobny PR bazujący na #6.
+4. **PR #8, gałąź perf/defer-home-route — optymalizacja.** Zawiera też commity #6 do czasu ich scalenia.
    HomePage lazy: katalog pobiera ~31 kB mniej JS, login ~48 kB mniej. Strona główna
    ma dodatkowy request i ~2,3 kB więcej gzip. Nie deklarować poprawy LCP/INP.
    docs/performance opisuje pomiar manifestu i test faktycznie pobieranych modułów.
@@ -45,8 +45,8 @@ Frontend: peakguide_front. Języki UI/danych pl/en/ua/zh; poczta pl/en/uk/zh.
    uzgodnione wykonanie apply.sql w SQL Editor. Porównać mapę i cztery języki.
 3. Scalić #6, sprawdzić Netlify i panel na kontrolowanym koncie właściciela.
 4. Scalić dokumentację #7. Uruchomić email_health.sql i ocenić wyniki agregatów.
-5. PR wydajności: po #6 zmienić bazę na main, sprawdzić CI i dopiero wydać.
-   Nie scalać do gałęzi #6 po jej zamknięciu.
+5. PR wydajności #8 już wskazuje main: scalić dopiero po #6 i sprawdzeniu CI.
+   Po scaleniu #6 różnica obejmie tylko optymalizację i jej pomiary.
 
 Właściciel dotąd wykonywał merge i operacje SQL sam. Nowy agent ma sprawdzić
 aktualne polecenie i uprawnienia; ta karta sama nie upoważnia do zapisów produkcji.
