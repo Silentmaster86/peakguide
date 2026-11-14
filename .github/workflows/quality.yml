@@ -26,6 +26,29 @@ jobs:
       - run: deno check supabase/functions/welcome-email/index.ts
       - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_email_mime.test.ts
       - run: deno test --allow-env --allow-read --allow-sys supabase/tests/welcome_dashboard.test.ts
+  cross-browser:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: peakguide_front
+    env:
+      PLAYWRIGHT_CROSS_BROWSER: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: peakguide_front/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps firefox webkit
+      - run: npx playwright test --project=firefox --project=webkit
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cross-browser-report
+          path: peakguide_front/playwright-report
+          retention-days: 7
   frontend:
     runs-on: ubuntu-latest
     defaults:
@@ -74,26 +97,3 @@ jobs:
       - run: python supabase/tests/profile_protection_repro.py --local --verify-fix
       - run: createdb -h localhost -U postgres welcome_email_test
       - run: psql -h localhost -U postgres -d welcome_email_test -v ON_ERROR_STOP=1 -f supabase/tests/welcome_email_queue.sql
-  cross-browser:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: peakguide_front
-    env:
-      PLAYWRIGHT_CROSS_BROWSER: '1'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: peakguide_front/package-lock.json
-      - run: npm ci
-      - run: npx playwright install --with-deps firefox webkit
-      - run: npx playwright test --project=firefox --project=webkit
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: cross-browser-report
-          path: peakguide_front/playwright-report
-          retention-days: 7
