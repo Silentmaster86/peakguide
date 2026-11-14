@@ -1,3 +1,4 @@
+import { adminText, adminLocale } from '../admin/text';
 import { useEffect, useMemo, useState } from 'react';
 import {
 	adminDeleteMessage,
@@ -5,7 +6,8 @@ import {
 	adminSetMessageStatus,
 } from '../../api/messages';
 
-export default function AdminMessagesSection() {
+export default function AdminMessagesSection({ lang = 'pl' }) {
+  const t = adminText(lang);
 	const [items, setItems] = useState([]);
 	const [status, setStatus] = useState('idle');
 	const [error, setError] = useState(null);
@@ -20,8 +22,8 @@ export default function AdminMessagesSection() {
 			const data = await adminFetchMessages();
 			setItems(Array.isArray(data.items) ? data.items : []);
 			setStatus('success');
-		} catch (e) {
-			setError(e?.message || 'Load failed');
+		} catch {
+			setError('Load failed');
 			setStatus('error');
 		}
 	}
@@ -52,7 +54,7 @@ export default function AdminMessagesSection() {
 	async function onDelete(id) {
 		if (busyId !== null) return;
 		setError(null);
-		if (!confirm('Delete this message permanently?')) return;
+		if (!confirm(t('Delete this message permanently?'))) return;
 
 		try {
 			setBusyId(id);
@@ -70,22 +72,22 @@ export default function AdminMessagesSection() {
 			<style>{css}</style>
 
 			<header className='am-head'>
-				<h2>Admin • Messages</h2>
+				<h2>{t('Admin • Messages')}</h2>
 
 				<div className='am-filters'>
 					<FilterBtn active={filter === 'all'} onClick={() => setFilter('all')}>
-						All
+						{t('All')}
 					</FilterBtn>
 
 					<FilterBtn active={filter === 'new'} onClick={() => setFilter('new')}>
-						New
+						{t('New')}
 					</FilterBtn>
 
 					<FilterBtn
 						active={filter === 'archived'}
 						onClick={() => setFilter('archived')}
 					>
-						Archived
+						{t('Archived')}
 					</FilterBtn>
 
 					<span className='am-count'>{filtered.length}</span>
@@ -93,12 +95,12 @@ export default function AdminMessagesSection() {
 			</header>
 
 			{status === 'loading' && (
-				<div className='am-note'>Loading messages...</div>
+				<div className='am-note'>{t('Loading messages...')}</div>
 			)}
-			{error && <div role='alert' className='am-error'>{error}<button type='button' onClick={load}>Retry</button></div>}
+			{error && <div role='alert' className='am-error'>{t(error)}<button type='button' onClick={load}>{t('Retry')}</button></div>}
 
 			{status === 'success' && filtered.length === 0 && (
-				<div className='am-note'>No messages.</div>
+				<div className='am-note'>{t('No messages.')}</div>
 			)}
 
 			{status === 'success' && filtered.length > 0 && (
@@ -106,7 +108,7 @@ export default function AdminMessagesSection() {
 					{filtered.map((m) => {
 						const isBusy = busyId !== null;
 						const dateLabel = m.created_at
-							? new Date(m.created_at).toLocaleString()
+							? new Date(m.created_at).toLocaleString(adminLocale(lang))
 							: '—';
 
 						return (
@@ -121,7 +123,7 @@ export default function AdminMessagesSection() {
 												: 'am-pill am-pill--new'
 										}
 									>
-										{m.status}
+										{t(m.status === 'archived' ? 'Archived' : 'New')}
 									</span>
 								</div>
 
@@ -135,19 +137,19 @@ export default function AdminMessagesSection() {
 											disabled={isBusy}
 											onClick={() => setMsgStatus(m.id, 'archived')}
 										>
-											{isBusy ? '...' : 'Archive'}
+											{isBusy ? '...' : t('Archive')}
 										</ActionBtn>
 									) : (
 										<ActionBtn
 											disabled={isBusy}
 											onClick={() => setMsgStatus(m.id, 'new')}
 										>
-											{isBusy ? '...' : 'Mark as new'}
+											{isBusy ? '...' : t('Mark as new')}
 										</ActionBtn>
 									)}
 
 									<DangerBtn disabled={isBusy} onClick={() => onDelete(m.id)}>
-										{isBusy ? '...' : 'Delete'}
+										{isBusy ? '...' : t('Delete')}
 									</DangerBtn>
 								</div>
 							</article>
