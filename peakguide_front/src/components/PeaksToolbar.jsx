@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function PeaksToolbar({
   collection,
@@ -19,6 +19,7 @@ export default function PeaksToolbar({
   lang,
 }) {
   const [localQ, setLocalQ] = useState(q || '');
+  const searchTimer = useRef(null);
   const t = getLabels(lang);
   const selectedCountry = (countries || []).find((item) => item.slug === country);
   const regions = selectedCountry?.regions || [];
@@ -37,15 +38,23 @@ export default function PeaksToolbar({
 
   // Debounce: push to URL after 300ms
   useEffect(() => {
-    const t = setTimeout(() => {
+    const timer = setTimeout(() => {
       if ((q || '') !== (localQ || '')) setQ(localQ);
     }, 300);
-    return () => clearTimeout(t);
+    searchTimer.current = timer;
+    return () => clearTimeout(timer);
   }, [localQ, q, setQ]);
 
   function clearSearch() {
+    clearTimeout(searchTimer.current);
     setLocalQ('');
     setQ(''); // immediately clears URL param
+  }
+
+  function clearFilters() {
+    clearTimeout(searchTimer.current);
+    setLocalQ('');
+    resetFilters();
   }
 
   return (
@@ -127,7 +136,7 @@ export default function PeaksToolbar({
           {!['all', 'kgp', 'three-peaks'].includes(collection) && <option value={collection}>{collection}</option>}
         </select>
       </label>
-      <button type='button' onClick={resetFilters} style={{ ...select, cursor: 'pointer' }}>{t.resetFilters}</button>
+      <button type='button' onClick={clearFilters} style={{ ...select, cursor: 'pointer' }}>{t.resetFilters}</button>
       {/* Sort */}
       <label style={fieldSmall}>
         <span style={label}>{t.sort}</span>
