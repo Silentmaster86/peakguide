@@ -1,0 +1,404 @@
+[
+  {
+    "table": "peaks",
+    "key": {
+      "id": 71
+    },
+    "before": {
+      "slug": "lakowa-wyspowy",
+      "range_id": 22,
+      "elevation_m": 900,
+      "latitude": 49.4217,
+      "longitude": 21.1017,
+      "active": true
+    },
+    "after": {
+      "slug": "lakowa-wyspowy",
+      "range_id": 22,
+      "elevation_m": 803,
+      "latitude": 49.642726,
+      "longitude": 20.462113,
+      "active": true
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 10,
+      "lang": "pl"
+    },
+    "before": {
+      "name": "Waligóra",
+      "description": null
+    },
+    "after": {
+      "name": "Waligóra",
+      "description": "Waligóra jest najwyższym szczytem Gór Kamiennych, położonym w Górach Suchych. Zalesiony wierzchołek nie oferuje rozległych widoków. Ze schroniska Andrzejówka prowadzi tu krótki, lecz bardzo stromy żółty szlak."
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 10,
+      "lang": "en"
+    },
+    "before": {
+      "name": "Waligóra",
+      "description": null
+    },
+    "after": {
+      "name": "Waligóra",
+      "description": "Waligóra is the highest summit of the Góry Kamienne range, within the Góry Suche. Its wooded summit offers no expansive views. A short but very steep yellow-marked trail leads up from Andrzejówka mountain hut."
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 10,
+      "lang": "zh"
+    },
+    "before": {
+      "name": "Waligóra",
+      "description": null
+    },
+    "after": {
+      "name": "Waligóra",
+      "description": "Waligóra 是石山山脉（Góry Kamienne）的最高峰，位于其苏赫山地（Góry Suche）。山顶树林遮挡了开阔景观。从 Andrzejówka 山屋可沿黄色标记路线登顶，路程虽短，但坡度很陡。"
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 10,
+      "lang": "ua"
+    },
+    "before": {
+      "name": "Waligóra",
+      "description": null
+    },
+    "after": {
+      "name": "Waligóra",
+      "description": "Валіґура — найвища вершина Кам’яних гір, розташована в Сухих горах. Ліс на вершині закриває широкі краєвиди. Від притулку Анджеювка веде коротка, але дуже крута стежка з жовтим маркуванням."
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 71,
+      "lang": "en"
+    },
+    "before": {
+      "name": "Łyżka",
+      "description": "Łakowa is a quiet, forested Beskid Wyspowy peak, great for a hike away from crowds. The ascent is fairly easy, but navigation helps among forest junctions. Bring a map or GPS and plan with extra time."
+    },
+    "after": {
+      "name": "Łyżka",
+      "description": "Łyżka is a wooded summit in the Beskid Wyspowy above Przyszowa. PTTK describes remains of an old fortified settlement here. A marked hiking trail crosses the hill."
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 71,
+      "lang": "pl"
+    },
+    "before": {
+      "name": "Łyżka",
+      "description": "Łakowa to spokojny, zalesiony szczyt w Beskidzie Wyspowym, dobry na wycieczkę z dala od tłumów. Podejście jest umiarkowanie łatwe, ale w lesie przydaje się orientacja wśród rozwidleń. Warto zabrać mapę lub GPS i zaplanować trasę z zapasem czasu."
+    },
+    "after": {
+      "name": "Łyżka",
+      "description": "Łyżka to zalesiony szczyt w Beskidzie Wyspowym nad Przyszową. PTTK opisuje tu pozostałości dawnego grodu. Przez wzniesienie prowadzi znakowany szlak turystyczny."
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 71,
+      "lang": "ua"
+    },
+    "before": {
+      "name": "Łyżka",
+      "description": "Лакова — тиха лісиста вершина Бескиду Виспового, добра для походу подалі від натовпу. Підйом відносно легкий, але в лісі корисне орієнтування на роздоріжжях. Візьміть карту або GPS та плануйте маршрут із запасом часу."
+    },
+    "after": {
+      "name": "Łyżka",
+      "description": "Łyżka — лісиста вершина Бескиду Виспового над селом Пшишова. PTTK описує тут залишки давнього укріпленого поселення. Через гору проходить маркована туристична стежка."
+    }
+  },
+  {
+    "table": "peaks_i18n",
+    "key": {
+      "peak_id": 71,
+      "lang": "zh"
+    },
+    "before": {
+      "name": "Łyżka",
+      "description": "瓦科瓦峰（Łakowa）是孤峰贝斯基德山脉一座安静的森林山峰，适合远离人群的徒步。上升整体较轻松，但林间岔路较多，导航更稳。建议携带地图或GPS，并预留充裕时间。"
+    },
+    "after": {
+      "name": "Łyżka",
+      "description": "Łyżka 是孤峰贝斯基德山脉中位于 Przyszowa 村上方的一座林木覆盖的山峰。PTTK 资料提到这里有古代防御聚落的遗迹。山上有标记徒步路线。"
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 5,
+      "lang": "en"
+    },
+    "before": {
+      "notes": "Times are approximate. Check the mountain forecast and current ground conditions before setting out. Carry suitable clothing, a map and compass, and the skills to navigate in poor visibility. Winter conditions may require specialist equipment and experience."
+    },
+    "after": {
+      "notes": "Times are approximate. Check the mountain forecast and current ground conditions before setting out. Carry suitable clothing, a map and compass, and the skills to navigate in poor visibility. Winter conditions may require specialist equipment and experience.\n\nThe figures cover the ascent and return. The source gives 7–9 hours in summer conditions; the listed 8 hours is an indicative value."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 5,
+      "lang": "pl"
+    },
+    "before": {
+      "notes": "Czas jest orientacyjny. Przed wyjściem sprawdź prognozę górską i aktualne warunki. Zabierz odpowiednią odzież, mapę i kompas oraz przygotuj się do nawigacji przy słabej widoczności. Zimą mogą być potrzebne specjalistyczne umiejętności i wyposażenie."
+    },
+    "after": {
+      "notes": "Czas jest orientacyjny. Przed wyjściem sprawdź prognozę górską i aktualne warunki. Zabierz odpowiednią odzież, mapę i kompas oraz przygotuj się do nawigacji przy słabej widoczności. Zimą mogą być potrzebne specjalistyczne umiejętności i wyposażenie.\n\nPodane parametry obejmują wejście i powrót. Źródło podaje 7–9 godzin w warunkach letnich; 8 godzin w zestawieniu to wartość orientacyjna."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 5,
+      "lang": "ua"
+    },
+    "before": {
+      "notes": "Час орієнтовний. Перед виходом перевірте гірський прогноз і стан маршруту. Візьміть відповідний одяг, карту й компас та будьте готові орієнтуватися за поганої видимості. Узимку потрібні спеціальні навички й спорядження."
+    },
+    "after": {
+      "notes": "Час орієнтовний. Перед виходом перевірте гірський прогноз і стан маршруту. Візьміть відповідний одяг, карту й компас та будьте готові орієнтуватися за поганої видимості. Узимку потрібні спеціальні навички й спорядження.\n\nПараметри охоплюють підйом і повернення. Джерело вказує 7–9 годин у літніх умовах; зазначені 8 годин є орієнтиром."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 5,
+      "lang": "zh"
+    },
+    "before": {
+      "notes": "时间仅供参考。出发前请查看山区天气和地面状况，携带合适衣物、地图和指南针，并具备低能见度下的导航能力。冬季可能需要专业技能和装备。"
+    },
+    "after": {
+      "notes": "时间仅供参考。出发前请查看山区天气和地面状况，携带合适衣物、地图和指南针，并具备低能见度下的导航能力。冬季可能需要专业技能和装备。\n\n所列参数包含登顶与返程。来源给出的夏季用时为7至9小时；列表中的8小时仅为参考值。"
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 6,
+      "lang": "en"
+    },
+    "before": {
+      "notes": "The National Park grades this route Hard/Strenuous. Do not walk on the railway tracks. Check the weather and ground conditions, carry full hill-walking equipment, and be ready to navigate in poor visibility."
+    },
+    "after": {
+      "notes": "The National Park grades this route Hard/Strenuous. Do not walk on the railway tracks. Check the weather and ground conditions, carry full hill-walking equipment, and be ready to navigate in poor visibility.\n\nDistance, time and ascent cover the complete out-and-back walk."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 6,
+      "lang": "pl"
+    },
+    "before": {
+      "notes": "Park Narodowy klasyfikuje trasę jako trudną i wymagającą. Nie wchodź na tory kolejki. Sprawdź pogodę i warunki, zabierz pełne wyposażenie górskie i przygotuj się do nawigacji przy słabej widoczności."
+    },
+    "after": {
+      "notes": "Park Narodowy klasyfikuje trasę jako trudną i wymagającą. Nie wchodź na tory kolejki. Sprawdź pogodę i warunki, zabierz pełne wyposażenie górskie i przygotuj się do nawigacji przy słabej widoczności.\n\nDystans, czas i suma podejść dotyczą całej wycieczki tam i z powrotem."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 6,
+      "lang": "ua"
+    },
+    "before": {
+      "notes": "Національний парк оцінює маршрут як складний і виснажливий. Не виходьте на залізничні колії. Перевірте погоду й стан маршруту, візьміть повне гірське спорядження та будьте готові до навігації за поганої видимості."
+    },
+    "after": {
+      "notes": "Національний парк оцінює маршрут як складний і виснажливий. Не виходьте на залізничні колії. Перевірте погоду й стан маршруту, візьміть повне гірське спорядження та будьте готові до навігації за поганої видимості.\n\nВідстань, час і набір висоти стосуються всього маршруту туди й назад."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 6,
+      "lang": "zh"
+    },
+    "before": {
+      "notes": "国家公园将此路线评为困难且高强度。请勿进入铁路轨道。出发前查看天气和地面状况，携带完整徒步装备，并做好低能见度下导航的准备。"
+    },
+    "after": {
+      "notes": "国家公园将此路线评为困难且高强度。请勿进入铁路轨道。出发前查看天气和地面状况，携带完整徒步装备，并做好低能见度下导航的准备。\n\n距离、用时与累计爬升均指完整往返路线。"
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 7,
+      "lang": "en"
+    },
+    "before": {
+      "notes": "This is a tough, steep route over rugged terrain. Paths are not reliably waymarked and the summit plateau can be confusing in mist. Bring a detailed map and compass, check the mountain forecast, and turn back if conditions exceed your experience."
+    },
+    "after": {
+      "notes": "This is a tough, steep route over rugged terrain. Paths are not reliably waymarked and the summit plateau can be confusing in mist. Bring a detailed map and compass, check the mountain forecast, and turn back if conditions exceed your experience.\n\nDistance and ascent describe the round trip listed by Three Peaks Challenge. That source gives 4–6 hours; 5 hours is indicative and also agrees with the National Trust time estimate."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 7,
+      "lang": "pl"
+    },
+    "before": {
+      "notes": "To stroma i wymagająca trasa po nierównym, skalistym terenie. Szlaki nie zawsze są oznakowane, a płaskowyż szczytowy łatwo pomylić we mgle. Zabierz dokładną mapę i kompas, sprawdź prognozę górską i zawróć, jeśli warunki przekraczają Twoje doświadczenie."
+    },
+    "after": {
+      "notes": "To stroma i wymagająca trasa po nierównym, skalistym terenie. Szlaki nie zawsze są oznakowane, a płaskowyż szczytowy łatwo pomylić we mgle. Zabierz dokładną mapę i kompas, sprawdź prognozę górską i zawróć, jeśli warunki przekraczają Twoje doświadczenie.\n\nDystans i suma podejść dotyczą wycieczki tam i z powrotem według Three Peaks Challenge. To źródło podaje 4–6 godzin; 5 godzin jest wartością orientacyjną, zgodną także z opisem National Trust."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 7,
+      "lang": "ua"
+    },
+    "before": {
+      "notes": "Це крутий і складний маршрут нерівною скелястою місцевістю. Стежки не всюди позначені, а на вершинному плато легко втратити напрямок у тумані. Візьміть детальну карту й компас, перевірте прогноз і поверніться, якщо умови перевищують ваш досвід."
+    },
+    "after": {
+      "notes": "Це крутий і складний маршрут нерівною скелястою місцевістю. Стежки не всюди позначені, а на вершинному плато легко втратити напрямок у тумані. Візьміть детальну карту й компас, перевірте прогноз і поверніться, якщо умови перевищують ваш досвід.\n\nВідстань і набір висоти описують маршрут туди й назад за Three Peaks Challenge. Це джерело вказує 4–6 годин; 5 годин є орієнтиром, який також відповідає оцінці National Trust."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 7,
+      "lang": "zh"
+    },
+    "before": {
+      "notes": "路线陡峭且地形崎岖。山路并非处处有标记，雾中山顶高原容易迷失方向。请携带详细地图和指南针，查看山区天气；如果状况超出自身经验，应及时折返。"
+    },
+    "after": {
+      "notes": "路线陡峭且地形崎岖。山路并非处处有标记，雾中山顶高原容易迷失方向。请携带详细地图和指南针，查看山区天气；如果状况超出自身经验，应及时折返。\n\n距离和累计爬升采用 Three Peaks Challenge 的往返数据。该来源给出4至6小时；5小时仅为参考值，也与 National Trust 的时间估计一致。"
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 8,
+      "lang": "pl"
+    },
+    "before": {
+      "notes": "Trasa wymaga dobrej kondycji. Park zaleca rozpoczęcie wejścia nie później niż w południe. Należy pozostać na oznakowanym szlaku, sprawdzić pogodę i aktualne warunki przed wyjściem."
+    },
+    "after": {
+      "notes": "Trasa wymaga dobrej kondycji. Park zaleca rozpoczęcie wejścia nie później niż w południe. Należy pozostać na oznakowanym szlaku, sprawdzić pogodę i aktualne warunki przed wyjściem.\n\n10,5 km i 5 godzin dotyczą opisanego przez park wejścia od punktu kontrolnego w uroczysku Zawoje na szczyt, bez powrotu. Różnica wysokości punktów nie jest sumą podejść."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 8,
+      "lang": "en"
+    },
+    "before": {
+      "notes": "A good level of fitness is required. The park recommends beginning the ascent no later than noon. Stay on the marked trail and check the weather and current conditions before setting out."
+    },
+    "after": {
+      "notes": "A good level of fitness is required. The park recommends beginning the ascent no later than noon. Stay on the marked trail and check the weather and current conditions before setting out.\n\nThe 10.5 km and 5 hours refer to the park’s ascent from the Zavoie checkpoint to the summit, excluding the return. The difference between endpoint elevations is not cumulative ascent."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 8,
+      "lang": "ua"
+    },
+    "before": {
+      "notes": "Маршрут потребує доброї фізичної підготовки. Парк рекомендує починати підйом не пізніше полудня. Не сходьте з промаркованого маршруту та перевіряйте погоду й актуальні умови перед виходом."
+    },
+    "after": {
+      "notes": "Маршрут потребує доброї фізичної підготовки. Парк рекомендує починати підйом не пізніше полудня. Не сходьте з промаркованого маршруту та перевіряйте погоду й актуальні умови перед виходом.\n\n10,5 км і 5 годин стосуються описаного парком підйому від КПП в урочищі Завоєві до вершини, без повернення. Різниця висот кінцевих точок не є сумарним набором висоти."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 8,
+      "lang": "zh"
+    },
+    "before": {
+      "notes": "该路线需要良好的体能。公园建议最迟在中午前开始登山。请始终沿标记路线行走，并在出发前查看天气和当前山区状况。"
+    },
+    "after": {
+      "notes": "该路线需要良好的体能。公园建议最迟在中午前开始登山。请始终沿标记路线行走，并在出发前查看天气和当前山区状况。\n\n10.5公里和5小时指公园所述从 Zavoie 检查站到山顶的上山行程，不含返程。起终点的海拔差不等于累计爬升。"
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 10,
+      "lang": "en"
+    },
+    "before": {
+      "notes": "Allow approximately 6 hours. The route gains about 1,354 metres of elevation. There are no refreshment or mountain-hut facilities directly on the route. The upper mountain terrain is steep and rocky. Parts of the trail are subject to TANAP seasonal closure."
+    },
+    "after": {
+      "notes": "Allow approximately 6 hours. The route gains about 1,354 metres of elevation. There are no refreshment or mountain-hut facilities directly on the route. The upper mountain terrain is steep and rocky. Parts of the trail are subject to TANAP seasonal closure.\n\nTime and ascent cover the full circuit returning via Jamské pleso. Distance remains unverified."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 10,
+      "lang": "pl"
+    },
+    "before": {
+      "notes": "Na trasę należy przeznaczyć około 6 godzin. Przewyższenie wynosi około 1354 m. Bezpośrednio na trasie nie ma schroniska ani możliwości zakupu jedzenia. Górna część szlaku jest stroma i skalista. Część trasy podlega sezonowemu zamknięciu TANAP."
+    },
+    "after": {
+      "notes": "Na trasę należy przeznaczyć około 6 godzin. Przewyższenie wynosi około 1354 m. Bezpośrednio na trasie nie ma schroniska ani możliwości zakupu jedzenia. Górna część szlaku jest stroma i skalista. Część trasy podlega sezonowemu zamknięciu TANAP.\n\nCzas i suma podejść dotyczą całej pętli z powrotem przez Jamské pleso. Dystans pozostaje niepotwierdzony."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 10,
+      "lang": "ua"
+    },
+    "before": {
+      "notes": "На маршрут слід передбачити приблизно 6 годин. Набір висоти становить близько 1354 м. Безпосередньо на маршруті немає гірського притулку або місця для придбання їжі. Верхня частина маршруту крута та кам’яниста. Частина маршруту підлягає сезонному закриттю TANAP."
+    },
+    "after": {
+      "notes": "На маршрут слід передбачити приблизно 6 годин. Набір висоти становить близько 1354 м. Безпосередньо на маршруті немає гірського притулку або місця для придбання їжі. Верхня частина маршруту крута та кам’яниста. Частина маршруту підлягає сезонному закриттю TANAP.\n\nЧас і набір висоти стосуються всього кільцевого маршруту з поверненням через Ямське Плесо. Відстань залишається непідтвердженою."
+    }
+  },
+  {
+    "table": "trails_i18n",
+    "key": {
+      "trail_id": 10,
+      "lang": "zh"
+    },
+    "before": {
+      "notes": "全程约需6小时，累计爬升约1354米。路线沿途没有直接提供餐饮服务的山屋。高处路段陡峭且多岩石。部分步道受 TANAP 季节性关闭规定限制。"
+    },
+    "after": {
+      "notes": "全程约需6小时，累计爬升约1354米。路线沿途没有直接提供餐饮服务的山屋。高处路段陡峭且多岩石。部分步道受 TANAP 季节性关闭规定限制。\n\n用时和累计爬升指经 Jamské pleso 返回的完整环线。距离尚未核实。"
+    }
+  }
+]
