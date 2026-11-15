@@ -1,6 +1,6 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fetchPeaks } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
@@ -9,6 +9,8 @@ import { normalizeSearchText } from '../utils/search';
 import PageSEO from '../seo/PageSEO';
 import {fetchMapFeatures,overlayPois,overlayTrails} from '../api/mapFeatures';
 import MapOverlays from '../components/MapOverlays';
+import MapTools,{MapViewport} from '../features/map/MapTools';
+import {mapIcon,clusterIcon,mapLabels,poiKind} from '../features/map/presentation';
 import {catalogueLabels} from '../features/adminCatalogue/labels';
 
 const copy = {
@@ -44,7 +46,7 @@ function FitResults({ peaks }) {
  return null;
 }
 
-function Points({ peaks, t }) {
+function Points({ peaks, t, ui }) {
  const map = useMap();
  const [zoom, setZoom] = useState(map.getZoom());
  useMapEvents({zoomend:()=>setZoom(map.getZoom())});
@@ -62,18 +64,35 @@ function Points({ peaks, t }) {
  },[map,peaks,zoom]);
  return groups.map(([key,items])=>{
   const center=items.reduce((a,p)=>[a[0]+p.point[0]/items.length,a[1]+p.point[1]/items.length],[0,0]);
-  return <CircleMarker key={key} center={center} radius={items.length>1?16:8} pathOptions={{color:'#fff',weight:2,fillColor:'#155f3d',fillOpacity:1}}>
-   {items.length>1&&<Tooltip permanent direction="center" className="explore-map-cluster">{items.length}</Tooltip>}
-   <Popup>
-    {items.length>1 && <button type="button" onClick={()=>map.fitBounds(items.map(p=>p.point),{padding:[35,35],maxZoom:Math.max(14,zoom+2),animate:false})}>{t[15]} ({items.length})</button>}
-    <ul>{items.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m</li>)}</ul>
+  return <Marker key={key} position={center} icon={items.length>1?clusterIcon(items.length):mapIcon('peak')} title={items.length>1?`${t[15]} (${items.length})`:items[0].peak_name} alt={items.length>1?`${items.length}`:items[0].peak_name}>
+   <Popup className="pg-map-popup" maxWidth={240} minWidth={140} autoPanPaddingTopLeft={[12,165]} autoPanPaddingBottomRight={[12,48]}>
+    {items.length>1?<><button type="button" onClick={()=>map.fitBounds(items.map(p=>p.point),{padding:[35,35],maxZoom:Math.max(14,zoom+2),animate:false})}>{t[15]} ({items.length})</button><ul>{items.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m</li>)}</ul></>:<>
+     <span className="pg-popup-category">{ui.peak}</span><h3>{items[0].peak_name}</h3><p className="pg-popup-altitude">{items[0].elevation_m} m</p><p>{items[0].range_name}</p><Link className="pg-popup-link" to={`/peaks/${items[0].slug}`}>{ui.details}</Link>
+    </>}
    </Popup>
-  </CircleMarker>;
+  </Marker>;
  });
 }
 
 export default function ExploreMapPage({lang='pl'}) {
  const t=copy[lang]||copy.pl;
+ const ui=mapLabels(lang);
+ const [expanded,setExpanded]=useState(false),[fitRequest,setFitRequest]=useState(0),[layerPanelOpen,setLayerPanelOpen]=useState(false);
+ const expandButton=useRef(null);
+ useEffect(()=>{
+  if(!expanded)return;
+  const previous=document.body.style.overflow;document.body.style.overflow='hidden';
+  function close(e){
+   if(e.key==='Escape'&&!e.defaultPrevented){setExpanded(false);expandButton.current?.querySelector('[aria-pressed]')?.focus();}
+   if(e.key==='Tab'){
+    const controls=[...expandButton.current.querySelectorAll('button,a[href],select,input,[tabindex="0"]')].filter(el=>el.getClientRects().length&&!el.disabled);
+    const first=controls[0],last=controls.at(-1);
+    if(controls.length&&((e.shiftKey&&document.activeElement===first)||(!e.shiftKey&&document.activeElement===last)||!expandButton.current.contains(document.activeElement))){e.preventDefault();(e.shiftKey?last:first).focus();}
+   }
+  }
+  document.addEventListener('keydown',close);
+  return()=>{document.body.style.overflow=previous;document.removeEventListener('keydown',close);};
+ },[expanded]);
  const extra=catalogueLabels(lang);
  const [showPois,setShowPois]=useState(false),[showTrails,setShowTrails]=useState(false),[featureRetry,setFeatureRetry]=useState(0);
  const poiState=useAsync(()=>showPois?fetchMapFeatures('poi',lang):Promise.resolve([]),[showPois,lang,featureRetry]);
@@ -113,24 +132,18 @@ export default function ExploreMapPage({lang='pl'}) {
    <label>{t[1]}<input type="search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
    <label>{t[2]}<select value={country} onChange={e=>{setCountry(e.target.value);setRange('');}}><option value="">{t[3]}</option>{countries.map(([id,name])=><option key={id} value={id}>{name}</option>)}</select></label>
    <label>{t[4]}<select value={range} onChange={e=>setRange(e.target.value)}><option value="">{t[5]}</option>{ranges.map(([id,name])=><option key={id} value={id}>{name}</option>)}</select></label>
-   <label>{layers[0]}<select value={baseLayer} onChange={e=>changeLayer(e.target.value)}>{Object.keys(baseLayers).map((key,i)=><option key={key} value={key}>{layers[i+1]}</option>)}</select></label>
-  </div>
-  <div className="explore-map-overlays">
-   <label><input type="checkbox" checked={showPois} onChange={e=>setShowPois(e.target.checked)}/>{extra.pois}</label>
-   <label><input type="checkbox" checked={showTrails} onChange={e=>setShowTrails(e.target.checked)}/>{extra.routeLayer}</label>
   </div>
   {((showPois&&poiState.status==='error')||(showTrails&&trailState.status==='error'))&&<p role="alert">{extra.error} <button onClick={()=>setFeatureRetry(v=>v+1)}>{t[8]}</button></p>}
-  {showPois&&<p>{extra.pois}: {mapPois.length}</p>}
-  {showTrails&&<p>{extra.trails}: {mapTrails.length} · {extra.geometryHelp}</p>}
   {['idle','loading'].includes(result.status)?<p role="status">{t[6]}</p>:result.status==='error'?<p role="alert">{t[7]} <button onClick={()=>setRetry(v=>v+1)}>{t[8]}</button></p>:<>
-   <p role="status">{t[10]}: {located.length} · {t[13]}: {filtered.length-located.length}</p>
+   <div className="pg-map-summary" role="status"><span>{t[10]}: {located.length} · {t[13]}: {filtered.length-located.length}</span>{showPois&&<span>{extra.pois}: {mapPois.length}</span>}{showTrails&&<span>{extra.routeLayer}: {mapTrails.length}</span>}</div>
    {tileError===layerKey&&<p role="alert">{t[12]} <button onClick={()=>{setTileError(null);setTiles(v=>v+1);}}>{t[8]}</button></p>}
-   {mapPoints.length>0&&<><p>{t[16]}</p><div className="explore-map-canvas" role="region" aria-label={t[0]}>
+   {mapPoints.length>0&&<><div ref={expandButton} className={`explore-map-canvas${expanded?' is-expanded':''}`} role={expanded?'dialog':'region'} aria-modal={expanded||undefined} aria-label={t[0]}>
     <MapContainer center={[49,20]} zoom={5} zoomAnimation={false} markerZoomAnimation={false} fadeAnimation={false} scrollWheelZoom={false} style={{height:'100%',width:'100%'}}>
      <TileLayer key={layerKey} {...layer} maxZoom={22} eventHandlers={{tileerror:()=>setTileError(layerKey)}}/>
-     <FitResults peaks={mapPoints}/><Points peaks={located} t={t}/><MapOverlays pois={mapPois} trails={mapTrails} sourceLabel={extra.source}/>
+     <FitResults peaks={mapPoints}/><MapViewport points={mapPoints} fitRequest={fitRequest} expanded={expanded} onPopupOpen={()=>setLayerPanelOpen(false)}/><Points peaks={located} t={t} ui={ui}/><MapOverlays pois={mapPois} trails={mapTrails} sourceLabel={extra.source} ui={ui}/>
     </MapContainer>
-   </div></>}
+    <MapTools open={layerPanelOpen} onOpen={setLayerPanelOpen} labels={ui} layerLabels={layers} baseLayer={baseLayer} onLayer={changeLayer} showPois={showPois} onPois={setShowPois} showTrails={showTrails} onTrails={setShowTrails} extra={extra} onFit={()=>setFitRequest(v=>v+1)} expanded={expanded} onExpand={()=>setExpanded(v=>!v)} poiKinds={[...new Set(mapPois.map(poiKind))]} hasRoutes={mapTrails.length>0}/>
+   </div><p className="pg-map-hint">{t[16]}{showTrails&&<> {extra.geometryHelp}</>}</p></>}
    {showPois&&<ul className="explore-map-list" aria-label={extra.pois}>{(poiState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=pois`}>{p.name}</Link></li>)}</ul>}
    {showTrails&&<ul className="explore-map-list" aria-label={extra.trails}>{(trailState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=trails&trail=${encodeURIComponent(p.slug)}`}>{p.name}</Link></li>)}</ul>}
    <h2>{t[14]}</h2>
