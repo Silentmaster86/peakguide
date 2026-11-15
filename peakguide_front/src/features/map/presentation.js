@@ -16,15 +16,15 @@ export const poiKind=poi=>{
 export function symbol(kind){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[kind]||icons.poi}</svg>`;}
 const cache=new Map();
 export function mapIcon(kind='peak'){
- if(!cache.has(kind))cache.set(kind,divIcon({className:`pg-map-marker pg-map-marker--${kind}`,html:`<span class="pg-map-pin">${symbol(kind)}</span>`,iconSize:[36,46],iconAnchor:[18,44],popupAnchor:[0,-41],tooltipAnchor:[0,-40]}));
+ if(!cache.has(kind))cache.set(kind,divIcon({className:`pg-map-marker pg-map-marker--${kind}`,html:`<span class="pg-map-pin">${symbol(kind)}</span>`,iconSize:[26,34],iconAnchor:[13,32],popupAnchor:[0,-31],tooltipAnchor:[0,-30]}));
  return cache.get(kind);
 }
-export function clusterIcon(count){return divIcon({className:'pg-map-group',html:`<span>${count}</span>`,iconSize:[44,44],iconAnchor:[22,22],popupAnchor:[0,-22]});}
+export function clusterIcon(count){return divIcon({className:'pg-map-group',html:`<span>${count}</span>`,iconSize:[34,34],iconAnchor:[17,17],popupAnchor:[0,-17]});}
 
 const labels={
- pl:{layers:'Warstwy mapy',fit:'Pokaż wszystkie wyniki',expand:'Powiększ mapę',collapse:'Zamknij powiększoną mapę',legend:'Legenda mapy',peak:'Szczyt',parking:'Parking',shelter:'Schronisko',trailhead:'Początek szlaku',viewpoint:'Punkt widokowy',poi:'Inny punkt POI',route:'Trasa',details:'Zobacz szczegóły'},
- en:{layers:'Map layers',fit:'Show all results',expand:'Expand map',collapse:'Close expanded map',legend:'Map legend',peak:'Peak',parking:'Parking',shelter:'Mountain hut',trailhead:'Trailhead',viewpoint:'Viewpoint',poi:'Other point of interest',route:'Route',details:'View details'},
- ua:{layers:'Шари мапи',fit:'Показати всі результати',expand:'Розгорнути мапу',collapse:'Закрити розгорнуту мапу',legend:'Умовні позначення',peak:'Вершина',parking:'Паркінг',shelter:'Притулок',trailhead:'Початок стежки',viewpoint:'Оглядовий майданчик',poi:'Інша цікава точка',route:'Маршрут',details:'Докладніше'},
- zh:{layers:'地图图层',fit:'显示所有结果',expand:'展开地图',collapse:'关闭展开的地图',legend:'地图图例',peak:'山峰',parking:'停车场',shelter:'山间小屋',trailhead:'步道起点',viewpoint:'观景点',poi:'其他兴趣点',route:'路线',details:'查看详情'},
+ pl:{peaks:'Szczyty',layers:'Warstwy mapy',fit:'Pokaż wszystkie wyniki',expand:'Powiększ mapę',collapse:'Zamknij powiększoną mapę',legend:'Legenda mapy',peak:'Szczyt',parking:'Parking',shelter:'Schronisko',trailhead:'Początek szlaku',viewpoint:'Punkt widokowy',poi:'Inny punkt POI',route:'Trasa',details:'Zobacz szczegóły'},
+ en:{peaks:'Peaks',layers:'Map layers',fit:'Show all results',expand:'Expand map',collapse:'Close expanded map',legend:'Map legend',peak:'Peak',parking:'Parking',shelter:'Mountain hut',trailhead:'Trailhead',viewpoint:'Viewpoint',poi:'Other point of interest',route:'Route',details:'View details'},
+ ua:{peaks:'Вершини',layers:'Шари мапи',fit:'Показати всі результати',expand:'Розгорнути мапу',collapse:'Закрити розгорнуту мапу',legend:'Умовні позначення',peak:'Вершина',parking:'Паркінг',shelter:'Притулок',trailhead:'Початок стежки',viewpoint:'Оглядовий майданчик',poi:'Інша цікава точка',route:'Маршрут',details:'Докладніше'},
+ zh:{peaks:'山峰',layers:'地图图层',fit:'显示所有结果',expand:'展开地图',collapse:'关闭展开的地图',legend:'地图图例',peak:'山峰',parking:'停车场',shelter:'山间小屋',trailhead:'步道起点',viewpoint:'观景点',poi:'其他兴趣点',route:'路线',details:'查看详情'},
 };
 export const mapLabels=lang=>labels[lang]||labels.pl;

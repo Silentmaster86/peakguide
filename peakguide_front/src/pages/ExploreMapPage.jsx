@@ -94,7 +94,7 @@ export default function ExploreMapPage({lang='pl'}) {
   return()=>{document.body.style.overflow=previous;document.removeEventListener('keydown',close);};
  },[expanded]);
  const extra=catalogueLabels(lang);
- const [showPois,setShowPois]=useState(false),[showTrails,setShowTrails]=useState(false),[featureRetry,setFeatureRetry]=useState(0);
+ const [showPeaks,setShowPeaks]=useState(true),[showPois,setShowPois]=useState(false),[showTrails,setShowTrails]=useState(false),[featureRetry,setFeatureRetry]=useState(0);
  const poiState=useAsync(()=>showPois?fetchMapFeatures('poi',lang):Promise.resolve([]),[showPois,lang,featureRetry]);
  const trailState=useAsync(()=>showTrails?fetchMapFeatures('trail',lang):Promise.resolve([]),[showTrails,lang,featureRetry]);
  const layers=layerLabels[lang]||layerLabels.pl;
@@ -117,7 +117,7 @@ export default function ExploreMapPage({lang='pl'}) {
  const mapPois=useMemo(()=>showPois?overlayPois(poiState.data||[],peakIds):[],[showPois,poiState.data,peakIds]);
  const mapTrails=useMemo(()=>showTrails?overlayTrails(trailState.data||[],peakIds):[],[showTrails,trailState.data,peakIds]);
  const mapPoints=useMemo(()=>{
-  const points=[...located,...mapPois.map(p=>({point:[p.coords.lat,p.coords.lon]}))];
+  const points=[...(showPeaks?located:[]),...mapPois.map(p=>({point:[p.coords.lat,p.coords.lon]}))];
   for(const trail of mapTrails){
    const lines=trail.route_geometry.type==='LineString'?[trail.route_geometry.coordinates]:trail.route_geometry.coordinates;
    let minLat=90,minLon=180,maxLat=-90,maxLon=-180;
@@ -125,7 +125,7 @@ export default function ExploreMapPage({lang='pl'}) {
    points.push({point:[minLat,minLon]},{point:[maxLat,maxLon]});
   }
   return points;
- },[located,mapPois,mapTrails]);
+ },[showPeaks,located,mapPois,mapTrails]);
  return <section className="explore-map-page">
   <PageSEO page="map" lang={lang}/><h1>{t[0]}</h1>
   <div className="explore-map-filters">
@@ -135,14 +135,14 @@ export default function ExploreMapPage({lang='pl'}) {
   </div>
   {((showPois&&poiState.status==='error')||(showTrails&&trailState.status==='error'))&&<p role="alert">{extra.error} <button onClick={()=>setFeatureRetry(v=>v+1)}>{t[8]}</button></p>}
   {['idle','loading'].includes(result.status)?<p role="status">{t[6]}</p>:result.status==='error'?<p role="alert">{t[7]} <button onClick={()=>setRetry(v=>v+1)}>{t[8]}</button></p>:<>
-   <div className="pg-map-summary" role="status"><span>{t[10]}: {located.length} · {t[13]}: {filtered.length-located.length}</span>{showPois&&<span>{extra.pois}: {mapPois.length}</span>}{showTrails&&<span>{extra.routeLayer}: {mapTrails.length}</span>}</div>
+   <div className="pg-map-summary" role="status"><span>{t[10]}: {showPeaks?located.length:0} · {t[13]}: {filtered.length-located.length}</span>{showPois&&<span>{extra.pois}: {mapPois.length}</span>}{showTrails&&<span>{extra.routeLayer}: {mapTrails.length}</span>}</div>
    {tileError===layerKey&&<p role="alert">{t[12]} <button onClick={()=>{setTileError(null);setTiles(v=>v+1);}}>{t[8]}</button></p>}
-   {mapPoints.length>0&&<><div ref={expandButton} className={`explore-map-canvas${expanded?' is-expanded':''}`} role={expanded?'dialog':'region'} aria-modal={expanded||undefined} aria-label={t[0]}>
+   {(located.length>0||mapPoints.length>0)&&<><div ref={expandButton} className={`explore-map-canvas${expanded?' is-expanded':''}`} role={expanded?'dialog':'region'} aria-modal={expanded||undefined} aria-label={t[0]}>
     <MapContainer center={[49,20]} zoom={5} zoomAnimation={false} markerZoomAnimation={false} fadeAnimation={false} scrollWheelZoom={false} style={{height:'100%',width:'100%'}}>
      <TileLayer key={layerKey} {...layer} maxZoom={22} eventHandlers={{tileerror:()=>setTileError(layerKey)}}/>
-     <FitResults peaks={mapPoints}/><MapViewport points={mapPoints} fitRequest={fitRequest} expanded={expanded} onPopupOpen={()=>setLayerPanelOpen(false)}/><Points peaks={located} t={t} ui={ui}/><MapOverlays pois={mapPois} trails={mapTrails} sourceLabel={extra.source} ui={ui}/>
+     <FitResults peaks={mapPoints}/><MapViewport points={mapPoints.length?mapPoints:located} fitRequest={fitRequest} expanded={expanded} onPopupOpen={()=>setLayerPanelOpen(false)}/>{showPeaks&&<Points peaks={located} t={t} ui={ui}/>}<MapOverlays pois={mapPois} trails={mapTrails} sourceLabel={extra.source} ui={ui}/>
     </MapContainer>
-    <MapTools open={layerPanelOpen} onOpen={setLayerPanelOpen} labels={ui} layerLabels={layers} baseLayer={baseLayer} onLayer={changeLayer} showPois={showPois} onPois={setShowPois} showTrails={showTrails} onTrails={setShowTrails} extra={extra} onFit={()=>setFitRequest(v=>v+1)} expanded={expanded} onExpand={()=>setExpanded(v=>!v)} poiKinds={[...new Set(mapPois.map(poiKind))]} hasRoutes={mapTrails.length>0}/>
+    <MapTools open={layerPanelOpen} onOpen={setLayerPanelOpen} labels={ui} layerLabels={layers} baseLayer={baseLayer} onLayer={changeLayer} showPeaks={showPeaks} onPeaks={setShowPeaks} showPois={showPois} onPois={setShowPois} showTrails={showTrails} onTrails={setShowTrails} extra={extra} onFit={()=>setFitRequest(v=>v+1)} expanded={expanded} onExpand={()=>setExpanded(v=>!v)} poiKinds={[...new Set(mapPois.map(poiKind))]} hasRoutes={mapTrails.length>0}/>
    </div><p className="pg-map-hint">{t[16]}{showTrails&&<> {extra.geometryHelp}</>}</p></>}
    {showPois&&<ul className="explore-map-list" aria-label={extra.pois}>{(poiState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=pois`}>{p.name}</Link></li>)}</ul>}
    {showTrails&&<ul className="explore-map-list" aria-label={extra.trails}>{(trailState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=trails&trail=${encodeURIComponent(p.slug)}`}>{p.name}</Link></li>)}</ul>}

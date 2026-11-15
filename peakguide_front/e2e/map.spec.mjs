@@ -140,3 +140,23 @@ test('POI pictograms follow their types and names stay plain text',async({page})
  await expect(page.locator('.pg-map-popup').getByRole('heading',{name:literal,exact:true})).toBeVisible();
  await expect(page.locator('.pg-map-popup img')).toHaveCount(0);
 });
+
+test('icon-only layer control can hide and restore the default peak layer',async({page})=>{
+ await page.route('**/rest/v1/pois?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([{id:1,peak_id:1,active:true,latitude:49.64,longitude:20.46,poi_types:{slug:'parking'},pois_i18n:[{lang:'en',name:'Car park'}],peaks:{slug:'lyzka',active:true}}])}));
+ await page.goto('/map');
+ const control=page.getByRole('button',{name:'Map layers',exact:true});
+ await expect(control).toHaveText('');await expect(control.locator('svg')).toBeVisible();
+ await control.click();
+ const peaks=page.getByRole('checkbox',{name:'Peaks',exact:true});
+ await expect(peaks).toBeChecked();
+ await page.getByRole('checkbox',{name:'Points of interest',exact:true}).check();
+ await peaks.uncheck();
+ await expect(page.locator('.pg-map-marker--peak,.pg-map-group')).toHaveCount(0);
+ await expect(page.locator('.pg-map-marker--parking')).toHaveCount(1);
+ await expect(page.getByRole('status')).toContainText('Peaks on map: 0');
+ await page.getByRole('checkbox',{name:'Points of interest',exact:true}).uncheck();
+ await expect(page.locator('.leaflet-container')).toBeVisible();
+ await expect(page.locator('.leaflet-marker-icon')).toHaveCount(0);
+ await peaks.check();await expect(page.locator('.pg-map-marker--peak')).toHaveCount(2);
+ await expect(page.locator('.explore-map-list').getByRole('link',{name:'Unknown location'})).toBeVisible();
+});
