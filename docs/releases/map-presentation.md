@@ -18,3 +18,7 @@ w sesji testowej; inspirację potwierdzono także odczytem jego HTML/JS/CSS.
 
 Po uwadze właściciela: pinezki zmniejszono z 36×46 do 26×34 px, grupy z 44 do
 34 px. Legenda używa zgodnych piktogramów i jest schowana razem z panelem warstw.
+
+Przycisk warstw ma samą ikonę stosu i przetłumaczoną nazwę dla czytników ekranu.
+Szczyty są domyślnie włączone i można je wyłączyć osobno w panelu warstw.
+Wyłączenie wszystkich punktów pozostawia mapę i kontrolki dostępne.

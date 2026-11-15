@@ -1814,9 +1814,9 @@ a:focus-visible > .catalogue-card {
 .pg-map-actions { position: absolute; top: 92px; left: 10px; z-index: 1000; display: grid; gap: 8px; }
 .pg-map-actions button,.pg-map-layers-toggle { background: #fff; color: #152b28; border: 1px solid #bdc9c6; box-shadow: 0 2px 8px #172f2929; cursor: pointer; }
 .pg-map-actions button { width: 36px; height: 36px; padding: 0; border-radius: 9px; font-size: 25px; }
-.pg-map-layers { position: absolute; top: 10px; right: 10px; z-index: 1000; max-width: calc(100% - 72px); }
-.pg-map-layers-toggle { min-height: 40px; padding: 8px 12px; border-radius: 10px; font: inherit; font-weight: 700; }
-.pg-map-layers-toggle span { font-size: 24px; vertical-align: middle; }
+.pg-map-layers { display: flex; flex-direction: column; align-items: flex-end; position: absolute; top: 10px; right: 10px; z-index: 1000; max-width: calc(100% - 72px); }
+.pg-map-layers-toggle { display: grid; place-items: center; width: 40px; height: 40px; padding: 8px; border-radius: 9px; }
+.pg-map-layers-toggle svg { width: 23px; height: 23px; }
 .pg-map-layer-options { margin-top: 8px; width: 236px; max-width: 100%; padding: 14px; border-radius: 12px; background: #fff; color: #152b28; box-shadow: 0 5px 24px #172f2933; }
 .pg-map-layer-options label { display: grid; gap: 7px; font-size: 14px; margin-bottom: 12px; }
 .pg-map-layer-options label:last-child { margin-bottom: 0; }
