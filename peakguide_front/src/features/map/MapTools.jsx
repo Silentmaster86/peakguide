@@ -1,5 +1,6 @@
 import {useEffect,useRef} from 'react';
 import {useMapEvents} from 'react-leaflet';
+import {symbol} from './presentation';
 
 export function MapViewport({points,fitRequest,expanded,onPopupOpen}){
  const map=useMapEvents({popupopen:()=>onPopupOpen(),click:()=>onPopupOpen()});
@@ -27,10 +28,10 @@ export default function MapTools({labels,layerLabels,baseLayer,onLayer,showPois,
     <label>{layerLabels[0]}<select value={baseLayer} onChange={e=>onLayer(e.target.value)}>{['standard','satellite','topo'].map((key,i)=><option key={key} value={key}>{layerLabels[i+1]}</option>)}</select></label>
     <label className="pg-map-check"><input type="checkbox" checked={showPois} onChange={e=>onPois(e.target.checked)}/>{extra.pois}</label>
     <label className="pg-map-check"><input type="checkbox" checked={showTrails} onChange={e=>onTrails(e.target.checked)}/>{extra.routeLayer}</label>
+    <div className="pg-map-legend" role="group" aria-label={labels.legend}>
+     {['peak',...poiKinds,...(hasRoutes?['route']:[])].map(kind=><span key={kind}><i aria-hidden="true" className={`pg-legend-symbol pg-legend-symbol--${kind}`} dangerouslySetInnerHTML={{__html:symbol(kind)}}/>{labels[kind]}</span>)}
+    </div>
    </div>
-  </div>
-  <div className="pg-map-legend" aria-label={labels.legend}>
-   {['peak',...poiKinds,...(hasRoutes?['route']:[])].map(kind=><span key={kind}><i aria-hidden="true" className={`pg-legend-dot pg-legend-dot--${kind}`}/>{labels[kind]}</span>)}
   </div>
  </>;
 }
