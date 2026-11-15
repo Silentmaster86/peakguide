@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted public tourism GPX">
+  <metadata>
+    <name>Rudawiec: z Przełęczy Płoszczyna</name>
+    <desc>Zielony szlak z przełęczy na Rudawiec. Wybrano i odwrócono jeden odcinek długiego śladu PTTK.</desc>
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku" />
+  </metadata>
+  <trk>
+    <name>Rudawiec: z Przełęczy Płoszczyna</name>
+    <trkseg>
+      <trkpt lon="16.92192793" lat="50.22583542" />
+      <trkpt lon="16.92275941" lat="50.2255059" />
+      <trkpt lon="16.92350507" lat="50.22547181" />
+      <trkpt lon="16.92430437" lat="50.22510448" />
+      <trkpt lon="16.92476034" lat="50.22463766" />
+      <trkpt lon="16.92540407" lat="50.22425674" />
+      <trkpt lon="16.92590833" lat="50.22384144" />
+      <trkpt lon="16.92591906" lat="50.22356354" />
+      <trkpt lon="16.92623556" lat="50.22335412" />
+      <trkpt lon="16.92694902" lat="50.22303406" />
+      <trkpt lon="16.9277215" lat="50.22306583" />
+      <trkpt lon="16.92831159" lat="50.22297316" />
+      <trkpt lon="16.92888021" lat="50.22279446" />
+      <trkpt lon="16.92979217" lat="50.22284261" />
+      <trkpt lon="16.93081141" lat="50.22319955" />
+      <trkpt lon="16.93137467" lat="50.22305875" />
+      <trkpt lon="16.93257093" lat="50.22326828" />
+      <trkpt lon="16.93306446" lat="50.2235017" />
+      <trkpt lon="16.9347167" lat="50.22370801" />
+      <trkpt lon="16.93538189" lat="50.22362185" />
+      <trkpt lon="16.93588078" lat="50.22336428" />
+      <trkpt lon="16.93673372" lat="50.2233816" />
+      <trkpt lon="16.93797827" lat="50.22290097" />
+      <trkpt lon="16.93878829" lat="50.22236908" />
+      <trkpt lon="16.93938375" lat="50.22233815" />
+      <trkpt lon="16.93997383" lat="50.22238607" />
+      <trkpt lon="16.94062829" lat="50.22234141" />
+      <trkpt lon="16.94103062" lat="50.22244788" />
+      <trkpt lon="16.94123983" lat="50.22274319" />
+      <trkpt lon="16.941787" lat="50.22294909" />
+      <trkpt lon="16.94240928" lat="50.22289756" />
+      <trkpt lon="16.9437772" lat="50.22293192" />
+      <trkpt lon="16.94419563" lat="50.22302464" />
+      <trkpt lon="16.94475353" lat="50.22300399" />
+      <trkpt lon="16.94598734" lat="50.22268136" />
+      <trkpt lon="16.94661498" lat="50.22241726" />
+      <trkpt lon="16.9498229" lat="50.22131195" />
+      <trkpt lon="16.95054173" lat="50.22162778" />
+      <trkpt lon="16.95167363" lat="50.22162424" />
+      <trkpt lon="16.9522208" lat="50.22170309" />
+      <trkpt lon="16.95291817" lat="50.22195718" />
+      <trkpt lon="16.953578" lat="50.22207387" />
+      <trkpt lon="16.95413589" lat="50.22224558" />
+      <trkpt lon="16.9559437" lat="50.22251994" />
+      <trkpt lon="16.95639431" lat="50.22267746" />
+      <trkpt lon="16.95688784" lat="50.22306205" />
+      <trkpt lon="16.95812166" lat="50.22447289" />
+      <trkpt lon="16.95798218" lat="50.22496362" />
+      <trkpt lon="16.9581753" lat="50.22583913" />
+      <trkpt lon="16.95887804" lat="50.22642507" />
+      <trkpt lon="16.95974708" lat="50.22665898" />
+      <trkpt lon="16.96078241" lat="50.22735562" />
+      <trkpt lon="16.96156025" lat="50.22761288" />
+      <trkpt lon="16.96336806" lat="50.22887997" />
+      <trkpt lon="16.96529925" lat="50.22949732" />
+      <trkpt lon="16.96586251" lat="50.22979206" />
+      <trkpt lon="16.96588933" lat="50.23053344" />
+      <trkpt lon="16.96547627" lat="50.2312576" />
+      <trkpt lon="16.96428537" lat="50.23239712" />
+      <trkpt lon="16.96341097" lat="50.23264731" />
+      <trkpt lon="16.96265996" lat="50.23321365" />
+      <trkpt lon="16.96227103" lat="50.23428314" />
+      <trkpt lon="16.96214497" lat="50.23453721" />
+      <trkpt lon="16.96150124" lat="50.234896" />
+      <trkpt lon="16.96121693" lat="50.23519249" />
+      <trkpt lon="16.96116328" lat="50.23542768" />
+      <trkpt lon="16.96132421" lat="50.23563368" />
+      <trkpt lon="16.9616434" lat="50.23578474" />
+      <trkpt lon="16.96193308" lat="50.23604567" />
+      <trkpt lon="16.96194381" lat="50.2363478" />
+      <trkpt lon="16.96164876" lat="50.23657611" />
+      <trkpt lon="16.96163535" lat="50.23712886" />
+      <trkpt lon="16.96201891" lat="50.23761294" />
+      <trkpt lon="16.96279138" lat="50.23824636" />
+      <trkpt lon="16.96278065" lat="50.23848496" />
+      <trkpt lon="16.96287721" lat="50.23875961" />
+      <trkpt lon="16.96324199" lat="50.23903769" />
+      <trkpt lon="16.96423978" lat="50.23941717" />
+      <trkpt lon="16.96469039" lat="50.23944979" />
+      <trkpt lon="16.96498007" lat="50.23954419" />
+      <trkpt lon="16.96520537" lat="50.23978279" />
+      <trkpt lon="16.96579546" lat="50.24012266" />
+      <trkpt lon="16.96606636" lat="50.24037155" />
+      <trkpt lon="16.96649283" lat="50.24048827" />
+      <trkpt lon="16.96672887" lat="50.24069597" />
+      <trkpt lon="16.96732432" lat="50.24084873" />
+      <trkpt lon="16.96830869" lat="50.24170353" />
+      <trkpt lon="16.96861714" lat="50.24176704" />
+      <trkpt lon="16.96915358" lat="50.2417605" />
+      <trkpt lon="16.96966857" lat="50.24211065" />
+      <trkpt lon="16.97156489" lat="50.24282125" />
+      <trkpt lon="16.97254658" lat="50.24307871" />
+      <trkpt lon="16.97325468" lat="50.24314908" />
+      <trkpt lon="16.97387427" lat="50.24342542" />
+      <trkpt lon="16.97454214" lat="50.24366056" />
+      <trkpt lon="16.97466284" lat="50.24422353" />
+      <trkpt lon="16.97539508" lat="50.24449128" />
+      <trkpt lon="16.97589129" lat="50.24480022" />
+      <trkpt lon="16.9762668" lat="50.24484999" />
+      <trkpt lon="16.97671205" lat="50.24480537" />
+      <trkpt lon="16.97683508" lat="50.24476504" />
+    </trkseg>
+  </trk>
+</gpx>

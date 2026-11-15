@@ -32,23 +32,36 @@ Nie powtarzać importu. Kontrolowany test zapisu przez nowe edytory pozostaje do
 Dokładna kolejność i granice testów: [instrukcja wydania](../releases/catalogue-management.md).
 Źródła, zakresy liczb i cofanie: [partia 01](../catalogue/batch-01/README.md).
 
-## Partia 02 — przygotowana, jeszcze bez importu produkcyjnego
+## Pakiet 20 szczytów — PR #15, przygotowany, bez importu produkcyjnego
 
-Śnieżka, Śnieżnik, Wielka Sowa, Skalnik i Szczeliniec Wielki: pięć tras, pięć POI,
-40 tłumaczeń i pięć przebiegów GPX. [Źródła i wdrożenie](../catalogue/batch-02/README.md).
-Dla Śnieżnika i Skalnika metryki krótkich podejść pozostają niepotwierdzone.
-Śnieżka to wejście z Białego Jaru, z odwróconym GPX i parametrami tego kierunku.
-Szczeliniec opisuje wariant letni, zależny od sezonowych zasad PNGS.
-Najpierw sprawdzić stan PR i wykonać `batch-02/verify.sql`. Po merge (udostępnia
-pliki GPX) można wykonać osobny `apply.sql`. Nie powtarzać migracji 014/partii 01.
-Agent nie wykonywał importu tej partii na produkcji.
+Na prośbę właściciela rozszerzono poprzednią piątkę do 20 szczytów łącznie.
+[Jedna instrukcja i pliki SQL](../catalogue/twenty-peaks/README.md):
+20 tras, 20 POI, 20 GPX i 160 tłumaczeń PL/EN/UA/ZH.
+Zawiera niezmienioną partię 02 (Śnieżka, Śnieżnik, Wielka Sowa, Skalnik,
+Szczeliniec Wielki) oraz partię 03 (Rudawiec, Orlica, Jagodna, Kowadło,
+Kłodzka Góra, Biskupia Kopa, Babia Góra, Tarnica, Turbacz, Radziejowa,
+Lubomir, Mogielica, Czupel, Skrzyczne, Wysoka w Pieninach).
+
+Najpierw `twenty-peaks/verify.sql` (odczyt), potem świeży backup, merge PR
+(udostępnia GPX), osobny `twenty-peaks/apply.sql` i ponowna weryfikacja.
+Wspólny import atomowo obsługuje zarówno pusty katalog, jak i już wdrożoną
+niezmienioną partię 02. Nie wykonywać ponownie migracji 014 ani partii 01.
+Rollback wspólny usuwa obie części; rollback 03 zachowuje wcześniejszą piątkę.
+Wszystkie warianty chronią późniejsze edycje. Agent nie zapisywał produkcji.
+
+Zakres GPX jest jawny: Turbacz kończy się przy schronisku, Orlica nie obejmuje
+odejścia na szczyt, Wysoka kończy się w Uroczysku Zaskalskim. Nie dopisywać
+niezweryfikowanych łączników ani parametrów wyciętych fragmentów. Źródła,
+metryki i ograniczenia: README partii 02/03. Nie zmieniono współrzędnych szczytów.
+Po wdrożeniu partii 01 + wspólnego pakietu dane obejmą 25 szczytów; nie oznacza
+to kompletnego pokrycia całego katalogu ani wszystkich tras na tych szczytach.
 
 ## Kolejność dalszych prac
 
 | Priorytet | Zadanie | Kiedy uznać za skończone |
 |---|---|---|
 | 1 | Sprawdzić nowe edytory tras/POI na kontrolowanym wpisie | Dodanie szkicu, edycja i ukrycie jako admin; odmowa zapisu dla zwykłego konta |
-| 2 | Uzupełniać katalog partiami po pięć szczytów | Źródła i daty, zakres parametrów, PL/EN/UA/ZH, kontrola współrzędnych, import/rollback |
+| 2 | Uzupełniać pozostały katalog zweryfikowanymi partiami | Źródła i daty, zakres parametrów, PL/EN/UA/ZH, kontrola współrzędnych, import/rollback |
 | 3 | Pozyskać brakujące przebiegi tras | Legalnie udostępniony GPX, zachowane segmenty, poprawny start/koniec, atrybucja i widoczność na mapie |
 | 4 | Próbnie odtworzyć świeży backup w izolacji | Log restore bez zignorowanych błędów, porównanie liczników/FK/RLS, test ról i zapisów |
 | 5 | Ustalić odtwarzalny pełny schemat aplikacji | Zweryfikowana baza migracji po odtworzeniu, bez danych osobowych i sekretów |
@@ -76,8 +89,8 @@ Nie rysować przebiegu z samych współrzędnych szczytu i parkingu.
 
 `npm run check` oraz `npm run test:e2e` w peakguide_front. Dodatkowe projekty:
 `PLAYWRIGHT_CROSS_BROWSER=1 npx playwright test --project=firefox --project=webkit`.
-Test nowego pakietu: `python supabase/tests/catalogue_management_test.py` przeciwko
-osobnej bazie **catalogue_management_test**. Skrypt resetuje schematy tylko w tej
+Test wspólnego pakietu: `python supabase/tests/catalogue_twenty_test.py` przeciwko
+osobnej bazie **catalogue_twenty_test**. Regresja edytorów: `catalogue_management_test.py`. Skrypt resetuje schematy tylko w tej
 nazwanej bazie. CI opisuje przygotowanie środowiska PostGIS.
 
 Można rozdzielić badanie kolejnej partii danych, testy UI i SEO między agentów,

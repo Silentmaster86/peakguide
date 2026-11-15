@@ -112,3 +112,9 @@ jobs:
       - run: python supabase/tests/catalogue_batch02_test.py
         env:
           PGHOST: localhost
+      - run: python scripts/build_catalogue_batch01.py --batch 03 --check
+      - run: python scripts/build_catalogue_twenty.py --check
+      - run: createdb -h localhost -U postgres catalogue_twenty_test
+      - run: python supabase/tests/catalogue_twenty_test.py
+        env:
+          PGHOST: localhost
