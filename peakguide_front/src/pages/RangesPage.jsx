@@ -113,10 +113,9 @@ export default function RangesPage({ lang = 'pl' }) {
                 <Link
                   key={r.slug}
                   to={`/ranges/${r.slug}`}
-                  aria-label={r.name}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <article className='catalogue-card'>
+                  <div className='catalogue-card'>
                     <div style={cardTop}>
                       <div>
                         <h3 style={rangeName}>{r.name}</h3>
@@ -126,7 +125,7 @@ export default function RangesPage({ lang = 'pl' }) {
                       </div>
                       <div style={rangeBadge}>→</div>
                     </div>
-                  </article>
+                  </div>
                 </Link>
               ))}
         </div>

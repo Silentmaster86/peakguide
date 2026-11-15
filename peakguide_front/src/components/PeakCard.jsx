@@ -7,14 +7,13 @@ export default function PeakCard({ peak, lang }) {
 	return (
 		<Link
 			to={`/peaks/${peak.slug}`}
-      aria-label={`${peak.peak_name} — ${peak.range_name || ""}`}
 			style={{
 				textDecoration: "none",
 				color: "inherit",
 				display: "block",
 			}}
 		>
-			<article className='catalogue-card'>
+			<div className='catalogue-card'>
 				<div style={cardBody}>
 					{peak.cover_image_url ? (
 						<img
@@ -40,7 +39,7 @@ export default function PeakCard({ peak, lang }) {
 						</div>
 					</header>
 				</div>
-			</article>
+			</div>
 		</Link>
 	);
 }
