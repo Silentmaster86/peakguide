@@ -55,3 +55,28 @@ test('map labels follow all four UI languages',async({page})=>{
   await expect(page.locator('.leaflet-container')).toBeVisible();
  }
 });
+test('base layer switch preserves filters and markers, updates credits and remembers choice',async({page})=>{
+ const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64');
+ for(const pattern of ['**.tile.opentopomap.org/**','https://server.arcgisonline.com/**']) await page.route(pattern,route=>route.fulfill({contentType:'image/png',body:image}));
+ await page.goto('/map');
+ await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('poland');
+ await expect(page.locator('.leaflet-interactive')).toHaveCount(1);
+ const view=page.getByRole('combobox',{name:'Map view',exact:true});
+ for(const [value,source,credit] of [['satellite','server.arcgisonline.com','Esri'],['topo','tile.opentopomap.org','OpenTopoMap'],['standard','tile.openstreetmap.org','OpenStreetMap']]){
+  await view.selectOption(value);
+  await expect(page.locator('.leaflet-tile').first()).toHaveAttribute('src',new RegExp(source.replaceAll('.','\\.')));
+  await expect(page.locator('.leaflet-control-attribution')).toContainText(credit);
+  await expect(page.getByRole('combobox',{name:'Country',exact:true})).toHaveValue('poland');
+  await expect(page.locator('.leaflet-interactive')).toHaveCount(1);
+ }
+ await view.selectOption('satellite');await page.reload();await expect(view).toHaveValue('satellite');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+});
+test('switching away from a failed provider clears its error',async({page})=>{
+ await page.route('https://server.arcgisonline.com/**',route=>route.abort());
+ await page.goto('/map');
+ const view=page.getByRole('combobox',{name:'Map view',exact:true});
+ await view.selectOption('satellite');await expect(page.getByRole('alert')).toBeVisible();
+ await view.selectOption('standard');await expect(page.getByRole('alert')).toHaveCount(0);
+ await expect(page.locator('.leaflet-tile').first()).toHaveAttribute('src',/tile.openstreetmap.org/);
+});

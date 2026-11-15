@@ -15,6 +15,22 @@ const copy = {
  zh: ['山峰地图','搜索山峰','国家','所有国家','山脉','所有山脉','正在加载山峰…','无法加载山峰。','重试','没有符合筛选条件的山峰。','地图上的山峰','查看详情','部分地图图块无法加载，仍可使用山峰列表。','无有效坐标','山峰列表','放大此组','拖动地图并使用 +/− 按钮缩放。点击标记查看山峰。'],
 };
 
+const baseLayers = {
+ standard: {url:'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',maxNativeZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'},
+ satellite: {url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',maxNativeZoom:19,attribution:'Source: <a href="https://goto.arcgisonline.com/maps/World_Imagery">Esri</a>, Vantor, Earthstar Geographics, and the GIS User Community'},
+ topo: {url:'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',maxNativeZoom:17,attribution:'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'},
+};
+const layerLabels = {
+ pl: ['Widok mapy','Standardowy','Satelitarny','Topograficzny'],
+ en: ['Map view','Standard','Satellite','Topographic'],
+ ua: ['Вигляд мапи','Звичайний','Супутниковий','Топографічний'],
+ zh: ['地图视图','标准','卫星','地形'],
+};
+function savedLayer() {
+ try { const value=localStorage.getItem('peakguide_map_layer'); return Object.hasOwn(baseLayers,value)?value:'standard'; }
+ catch { return 'standard'; }
+}
+
 function FitResults({ peaks }) {
  const map = useMap();
  useEffect(() => {
@@ -55,8 +71,16 @@ function Points({ peaks, t }) {
 
 export default function ExploreMapPage({lang='pl'}) {
  const t=copy[lang]||copy.pl;
+ const layers=layerLabels[lang]||layerLabels.pl;
+ const [baseLayer,setBaseLayer]=useState(savedLayer);
+ const layer=baseLayers[baseLayer];
  const [retry,setRetry]=useState(0),[query,setQuery]=useState(''),[country,setCountry]=useState(''),[range,setRange]=useState('');
- const [tileError,setTileError]=useState(false),[tiles,setTiles]=useState(0);
+ const [tileError,setTileError]=useState(null),[tiles,setTiles]=useState(0);
+ const layerKey=`${baseLayer}-${tiles}`;
+ function changeLayer(value) {
+  setBaseLayer(value);setTileError(null);
+  try { localStorage.setItem('peakguide_map_layer',value); } catch { /* Storage is optional. */ }
+ }
  const result=useAsync(()=>fetchPeaks({lang}),[lang,retry]);
  const peaks=useMemo(()=>result.data||[],[result.data]);
  const countries=[...new Map(peaks.map(p=>[p.country_slug,p.country_name])).entries()].filter(([k])=>k);
@@ -69,13 +93,14 @@ export default function ExploreMapPage({lang='pl'}) {
    <label>{t[1]}<input type="search" value={query} onChange={e=>setQuery(e.target.value)}/></label>
    <label>{t[2]}<select value={country} onChange={e=>{setCountry(e.target.value);setRange('');}}><option value="">{t[3]}</option>{countries.map(([id,name])=><option key={id} value={id}>{name}</option>)}</select></label>
    <label>{t[4]}<select value={range} onChange={e=>setRange(e.target.value)}><option value="">{t[5]}</option>{ranges.map(([id,name])=><option key={id} value={id}>{name}</option>)}</select></label>
+   <label>{layers[0]}<select value={baseLayer} onChange={e=>changeLayer(e.target.value)}>{Object.keys(baseLayers).map((key,i)=><option key={key} value={key}>{layers[i+1]}</option>)}</select></label>
   </div>
   {['idle','loading'].includes(result.status)?<p role="status">{t[6]}</p>:result.status==='error'?<p role="alert">{t[7]} <button onClick={()=>setRetry(v=>v+1)}>{t[8]}</button></p>:<>
    <p role="status">{t[10]}: {located.length} · {t[13]}: {filtered.length-located.length}</p>
-   {tileError&&<p role="alert">{t[12]} <button onClick={()=>{setTileError(false);setTiles(v=>v+1);}}>{t[8]}</button></p>}
+   {tileError===layerKey&&<p role="alert">{t[12]} <button onClick={()=>{setTileError(null);setTiles(v=>v+1);}}>{t[8]}</button></p>}
    {located.length>0&&<><p>{t[16]}</p><div className="explore-map-canvas" role="region" aria-label={t[0]}>
     <MapContainer center={[49,20]} zoom={5} zoomAnimation={false} markerZoomAnimation={false} fadeAnimation={false} scrollWheelZoom={false} style={{height:'100%',width:'100%'}}>
-     <TileLayer key={tiles} url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' eventHandlers={{tileerror:()=>setTileError(true)}}/>
+     <TileLayer key={layerKey} {...layer} maxZoom={22} eventHandlers={{tileerror:()=>setTileError(layerKey)}}/>
      <FitResults peaks={located}/><Points peaks={located} t={t}/>
     </MapContainer>
    </div></>}
