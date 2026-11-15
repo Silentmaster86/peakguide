@@ -2,7 +2,7 @@
 
 Zmiana interfejsu na podstawie https://gazetteer.przemyslawpietkun.co.uk/:
 większa mapa, panel warstw w prawym rogu, kolorowe pinezki z ikonami, okrągłe
-liczniki grup szczytów, czytelniejsze dymki, legenda i przyciski przywrócenia
+liczniki grup szczytów, czytelniejsze dymki, legenda w panelu warstw i przyciski przywrócenia
 widoku/powiększenia. Ikony parkingu, schroniska, początku szlaku i punktu widokowego
 wynikają z istniejącego typu POI; brak rozpoznanego typu dostaje ikonę informacji.
 
@@ -15,3 +15,6 @@ Nie wymaga SQL, migracji ani ponownego importu danych. Wystarczy merge i wdroże
 frontendu przez Netlify. Sprawdzić standard/satelitę/topografię, klawiaturę i ekran
 telefonu. W źródłowym Gazetteerze mapa inicjalizowała się, ale preloader nie znikał
 w sesji testowej; inspirację potwierdzono także odczytem jego HTML/JS/CSS.
+
+Po uwadze właściciela: pinezki zmniejszono z 36×46 do 26×34 px, grupy z 44 do
+34 px. Legenda używa zgodnych piktogramów i jest schowana razem z panelem warstw.
