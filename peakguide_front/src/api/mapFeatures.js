@@ -6,7 +6,7 @@ import {translation} from '../utils/practical.mjs';
 export async function fetchMapFeatures(kind,lang){
  const table=kind==='poi'?'pois':kind==='trail'?'trails':null;
  if(!table)throw new Error('Invalid kind');
- const {data,error}=await supabase.from(table).select(`*,${table}_i18n(*),peaks!inner(id,slug,active)`).eq('active',true).eq('peaks.active',true);
+ const {data,error}=await supabase.from(table).select(`*,${table}_i18n(*),${kind==='poi'?'poi_types(slug),':''}peaks!inner(id,slug,active)`).eq('active',true).eq('peaks.active',true);
  if(error)throw error;
  return (data||[]).filter(row=>row.active!==false&&row.peaks?.active!==false).map(row=>({...row,name:translation(row[`${table}_i18n`],lang)?.name||row.slug||'',peak_slug:row.peaks?.slug}));
 }

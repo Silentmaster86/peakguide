@@ -13,7 +13,7 @@ test('map filters, missing coordinates and detail links work',async({page})=>{
  await expect(page.getByRole('status')).toContainText('Without valid coordinates: 1');
  await expect(page.locator('.leaflet-interactive')).toHaveCount(2);
  await page.locator('.leaflet-interactive').first().click();
- await expect(page.locator('.leaflet-popup').getByRole('link',{name:'Łyżka',exact:true})).toHaveAttribute('href','/peaks/lyzka');
+ await expect(page.locator('.leaflet-popup').getByRole('link',{name:'View details',exact:true})).toHaveAttribute('href','/peaks/lyzka');
  await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('poland');
  await expect(page.getByRole('status')).toContainText('Peaks on map: 1');
  await page.getByRole('searchbox',{name:'Search peaks'}).fill('not found');
@@ -43,7 +43,7 @@ test('API failure can be retried and home CTA opens the map',async({page})=>{
 test('nearby peaks form a group with a zoom control',async({page})=>{
  const nearby=[peaks[0],{...peaks[0],id:4,slug:'neighbor',peaks_i18n:[{lang:'en',name:'Neighbor'}],latitude:49.6428}];
  await page.route('**/rest/v1/peaks?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(nearby)}));
- await page.goto('/map');await expect(page.locator('.explore-map-cluster')).toHaveText('2');
+ await page.goto('/map');await expect(page.locator('.pg-map-group')).toHaveText('2');
  await page.locator('.leaflet-interactive').click();
  await page.getByRole('button',{name:'Zoom into group (2)'}).click();
  await expect(page.locator('.leaflet-interactive')).toHaveCount(2);
@@ -61,6 +61,7 @@ test('base layer switch preserves filters and markers, updates credits and remem
  await page.goto('/map');
  await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('poland');
  await expect(page.locator('.leaflet-interactive')).toHaveCount(1);
+ await page.getByRole('button',{name:'Map layers',exact:true}).click();
  const view=page.getByRole('combobox',{name:'Map view',exact:true});
  for(const [value,source,credit] of [['satellite','server.arcgisonline.com','Esri'],['topo','World_Topo_Map','Esri'],['standard','tile.openstreetmap.org','OpenStreetMap']]){
   await view.selectOption(value);
@@ -69,12 +70,13 @@ test('base layer switch preserves filters and markers, updates credits and remem
   await expect(page.getByRole('combobox',{name:'Country',exact:true})).toHaveValue('poland');
   await expect(page.locator('.leaflet-interactive')).toHaveCount(1);
  }
- await view.selectOption('satellite');await page.reload();await expect(view).toHaveValue('satellite');
+ await view.selectOption('satellite');await page.reload();await page.getByRole('button',{name:'Map layers',exact:true}).click();await expect(view).toHaveValue('satellite');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });
 test('switching away from a failed provider clears its error',async({page})=>{
  await page.route('https://server.arcgisonline.com/**',route=>route.abort());
  await page.goto('/map');
+ await page.getByRole('button',{name:'Map layers',exact:true}).click();
  const view=page.getByRole('combobox',{name:'Map view',exact:true});
  await view.selectOption('satellite');await expect(page.getByRole('alert')).toBeVisible();
  await view.selectOption('standard');await expect(page.getByRole('alert')).toHaveCount(0);
@@ -84,15 +86,56 @@ test('optional POI and route layers follow peak filters and survive missing geom
  await page.route('**/rest/v1/pois?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([{id:1,peak_id:1,active:true,latitude:49.64,longitude:20.46,pois_i18n:[{lang:'en',name:'Trailhead'}],peaks:{slug:'lyzka',active:true}}])}));
  await page.route('**/rest/v1/trails?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([{id:8,peak_id:1,slug:'route',active:true,route_geometry:{type:'LineString',coordinates:[[20.46,49.64],[20.462,49.643]]},trails_i18n:[{lang:'en',name:'Stored route'}],peaks:{slug:'lyzka',active:true}},{id:9,peak_id:2,slug:'no-geometry',active:true,trails_i18n:[{lang:'en',name:'No geometry route'}],peaks:{slug:'ben-nevis',active:true}}])}));
  await page.goto('/map');
+ await page.getByRole('button',{name:'Map layers',exact:true}).click();
  await page.getByRole('checkbox',{name:'Points of interest',exact:true}).check();
  await page.getByRole('checkbox',{name:'Route lines',exact:true}).check();
  await expect(page.getByText('Points of interest: 1',{exact:true})).toBeVisible();
  await expect(page.getByRole('link',{name:'No geometry route',exact:true})).toBeVisible();
- await expect(page.locator('.leaflet-overlay-pane path')).toHaveCount(4);
+ await expect(page.locator('.leaflet-overlay-pane path')).toHaveCount(1);
+ await expect(page.locator('.leaflet-marker-icon')).toHaveCount(3);
  await page.screenshot({path:testInfo.outputPath('map-overlays.png'),fullPage:true});
  await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('uk');
  await expect(page.getByText('Points of interest: 0',{exact:true})).toBeVisible();
- await expect(page.locator('.leaflet-overlay-pane path')).toHaveCount(1);
+ await expect(page.locator('.leaflet-overlay-pane path')).toHaveCount(0);
+ await expect(page.locator('.leaflet-marker-icon')).toHaveCount(1);
  await page.getByRole('checkbox',{name:'Route lines',exact:true}).uncheck();
  await expect(page.getByRole('link',{name:'No geometry route',exact:true})).toHaveCount(0);
+});
+
+test('map workspace supports keyboard pins, expand and Escape without losing filters',async({page})=>{
+ await page.goto('/map');
+ await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('poland');
+ const pin=page.locator('.pg-map-marker--peak');
+ await pin.focus();await page.keyboard.press('Enter');
+ await expect(page.locator('.pg-map-popup').getByRole('heading',{name:'Łyżka'})).toBeVisible();
+ await page.getByRole('button',{name:'Expand map',exact:true}).click();
+ await expect(page.locator('.explore-map-canvas')).toHaveClass(/is-expanded/);
+ const dialog=page.getByRole('dialog',{name:'Peak map',exact:true});
+ await expect(dialog).toBeVisible();
+ const focusables=dialog.locator('button,a[href],select,input,[tabindex="0"]').filter({visible:true});
+ await focusables.last().focus();await page.keyboard.press('Tab');await expect(focusables.first()).toBeFocused();
+ await expect.poll(()=>page.locator('.explore-map-canvas').evaluate(e=>Math.round(e.getBoundingClientRect().height))).toBeGreaterThan(500);
+ await page.getByRole('button',{name:'Map layers',exact:true}).click();
+ await page.getByRole('combobox',{name:'Map view',exact:true}).focus();
+ await page.keyboard.press('Escape');
+ await expect(page.getByRole('button',{name:'Map layers',exact:true})).toBeFocused();
+ await expect(page.locator('.explore-map-canvas')).toHaveClass(/is-expanded/);
+ await page.keyboard.press('Escape');
+ await expect(page.locator('.explore-map-canvas')).not.toHaveClass(/is-expanded/);
+ await expect(page.getByRole('combobox',{name:'Country',exact:true})).toHaveValue('poland');
+ await expect(page.getByRole('button',{name:'Expand map',exact:true})).toBeFocused();
+ await page.getByRole('button',{name:'Show all results',exact:true}).click();
+});
+
+test('POI pictograms follow their types and names stay plain text',async({page})=>{
+ const names=['parking','shelter','trailhead','viewpoint','unknown'];
+ const literal='<img src=x onerror=alert(1)>';
+ await page.route('**/rest/v1/pois?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(names.map((slug,i)=>({id:i+1,peak_id:1,active:true,latitude:49.64+i*.08,longitude:20.46+i*.08,poi_types:{slug},pois_i18n:[{lang:'en',name:i?slug:literal}],peaks:{slug:'lyzka',active:true}})))}));
+ await page.goto('/map');
+ await page.getByRole('button',{name:'Map layers',exact:true}).click();
+ await page.getByRole('checkbox',{name:'Points of interest',exact:true}).check();
+ for(const kind of ['parking','shelter','trailhead','viewpoint','poi'])await expect(page.locator(`.pg-map-marker--${kind}`)).toHaveCount(1);
+ await page.locator('.pg-map-marker--parking').focus();await page.keyboard.press('Enter');
+ await expect(page.locator('.pg-map-popup').getByRole('heading',{name:literal,exact:true})).toBeVisible();
+ await expect(page.locator('.pg-map-popup img')).toHaveCount(0);
 });

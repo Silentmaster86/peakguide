@@ -14,7 +14,7 @@ Właściciel potwierdził odbiór powitań również po ukraińsku i chińsku, r
 oraz powiadomienie o zmianie. Korekty katalogu z PR #5 zostały zastosowane.
 Nie powtarzać tych operacji na podstawie starszych kart.
 
-## Pakiet przygotowany na gałęzi feat/trails-poi-management
+## Pakiet tras/POI — PR #12 scalony i wdrożony przez właściciela
 
 1. Edytory tras i POI w Panel → Narzędzia: wersje językowe, publikacja,
    źródła i daty, import GPX; atomowy zapis RPC i wykrywanie nowszych zmian.
@@ -23,8 +23,10 @@ Nie powtarzać tych operacji na podstawie starszych kart.
 3. Pierwsza partia źródłowych danych: Waligóra, Ślęża, Łysica, Skopiec, Chełmiec.
    Pięć tras, pięć POI, cztery języki. Jedna trasa ma rzeczywisty GPX (Łysica).
 
-Ten pakiet wymaga migracji 014 i osobnego importu danych. Przygotowanie plików
-nie oznacza wdrożenia na produkcję. Sprawdzić status PR i stan bazy przed działaniem.
+Właściciel wykonał migrację 014 i import danych. Wynik catalogue_verification
+potwierdził po jednej trasie i POI na każdy z pięciu szczytów, geometrię Łysicy,
+cztery języki oraz oczekiwane RLS/uprawnienia. Potwierdził też wyświetlanie na stronie.
+Nie powtarzać importu. Kontrolowany test zapisu przez nowe edytory pozostaje do wykonania.
 Dokładna kolejność i granice testów: [instrukcja wydania](../releases/catalogue-management.md).
 Źródła, zakresy liczb i cofanie: [partia 01](../catalogue/batch-01/README.md).
 
@@ -32,7 +34,7 @@ Dokładna kolejność i granice testów: [instrukcja wydania](../releases/catalo
 
 | Priorytet | Zadanie | Kiedy uznać za skończone |
 |---|---|---|
-| 1 | Wdrożyć pakiet edytorów i partii 01 według instrukcji | Migracja, kontrolowany test admin/user, import i sprawdzenie pięciu stron/mapy |
+| 1 | Sprawdzić nowe edytory tras/POI na kontrolowanym wpisie | Dodanie szkicu, edycja i ukrycie jako admin; odmowa zapisu dla zwykłego konta |
 | 2 | Uzupełniać katalog partiami po pięć szczytów | Źródła i daty, zakres parametrów, PL/EN/UA/ZH, kontrola współrzędnych, import/rollback |
 | 3 | Pozyskać brakujące przebiegi tras | Legalnie udostępniony GPX, zachowane segmenty, poprawny start/koniec, atrybucja i widoczność na mapie |
 | 4 | Próbnie odtworzyć świeży backup w izolacji | Log restore bez zignorowanych błędów, porównanie liczników/FK/RLS, test ról i zapisów |

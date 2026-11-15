@@ -1807,3 +1807,45 @@ a:focus-visible > .catalogue-card {
 .explore-map-overlays label { display: flex; align-items: center; gap: 8px; }
 
 .explore-map-page > p { margin: 0; padding: 12px 16px; background: var(--menu-bg); border-radius: 12px; }
+
+/* Map workspace: corner controls and pictogram pins, inspired by Gazetteer. */
+.explore-map-canvas { height: clamp(480px,76vh,850px); border: 1px solid var(--border); box-shadow: var(--shadow-soft); }
+.explore-map-canvas.is-expanded { position: fixed; inset: 12px; height: auto; width: auto; z-index: 6000; border-radius: 16px; background: var(--bg); }
+.pg-map-actions { position: absolute; top: 92px; left: 10px; z-index: 1000; display: grid; gap: 8px; }
+.pg-map-actions button,.pg-map-layers-toggle { background: #fff; color: #152b28; border: 1px solid #bdc9c6; box-shadow: 0 2px 8px #172f2929; cursor: pointer; }
+.pg-map-actions button { width: 36px; height: 36px; padding: 0; border-radius: 9px; font-size: 25px; }
+.pg-map-layers { position: absolute; top: 10px; right: 10px; z-index: 1000; max-width: calc(100% - 72px); }
+.pg-map-layers-toggle { min-height: 40px; padding: 8px 12px; border-radius: 10px; font: inherit; font-weight: 700; }
+.pg-map-layers-toggle span { font-size: 24px; vertical-align: middle; }
+.pg-map-layer-options { margin-top: 8px; width: 236px; max-width: 100%; padding: 14px; border-radius: 12px; background: #fff; color: #152b28; box-shadow: 0 5px 24px #172f2933; }
+.pg-map-layer-options label { display: grid; gap: 7px; font-size: 14px; margin-bottom: 12px; }
+.pg-map-layer-options label:last-child { margin-bottom: 0; }
+.pg-map-layer-options select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #b4c3bd; background: #fff; color: #152b28; font: inherit; }
+.pg-map-layer-options label.pg-map-check { display: flex; align-items: center; gap: 8px; }
+.pg-map-check input { width: 18px; height: 18px; accent-color: #1c704d; }
+.pg-map-legend { position: absolute; z-index: 900; bottom: 32px; left: 10px; display: flex; flex-wrap: wrap; gap: 8px 12px; max-width: calc(100% - 20px); padding: 8px 12px; border-radius: 9px; background: #ffffffed; color: #152b28; font-size: 12px; pointer-events: none; }
+.pg-map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.pg-legend-dot { width: 10px; height: 10px; border-radius: 50%; background: #236eac; }
+.pg-map-marker { --pin-color: #236eac; background: transparent; border: 0; }
+.pg-map-marker--peak { --pin-color: #1c704d; }
+.pg-map-marker--shelter { --pin-color: #7950a1; }
+.pg-map-marker--trailhead { --pin-color: #a86408; }
+.pg-map-marker--viewpoint { --pin-color: #bb3d50; }
+.pg-map-pin { position: absolute; width: 34px; height: 34px; left: 1px; top: 1px; border-radius: 50% 50% 50% 0; background: var(--pin-color); border: 2px solid white; transform: rotate(-45deg); box-shadow: -2px 3px 5px #102f3759; }
+.pg-map-pin svg { position: absolute; width: 21px; height: 21px; left: 5px; top: 5px; color: #fff; transform: rotate(45deg); }
+.pg-map-group { display: grid; place-items: center; border-radius: 50%; border: 5px solid #a4d2b8; background: #196342; color: #fff; font-weight: 800; font-size: 15px; box-shadow: 0 2px 6px #102f3740; }
+.pg-map-marker:focus-visible,.pg-map-group:focus-visible { outline: 3px solid #0b419d; outline-offset: 4px; }
+.pg-legend-dot--peak { background: #1c704d; }
+.pg-legend-dot--shelter { background: #7950a1; }
+.pg-legend-dot--trailhead { background: #a86408; }
+.pg-legend-dot--viewpoint { background: #bb3d50; }
+.pg-legend-dot--route { background: #b83f16; border-radius: 0; height: 3px; width: 16px; }
+.pg-map-route { filter: drop-shadow(0 0 1px white); }
+.pg-map-popup .leaflet-popup-content { min-width: 170px; color: #152b28; }
+.pg-map-popup h3 { font-size: 20px; margin: 6px 0; }
+.pg-map-popup .pg-popup-category { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #456159; }
+.pg-map-popup .pg-popup-altitude { margin: 8px 0; font-size: 18px; font-weight: 800; color: #1c704d; }
+.pg-map-popup .pg-popup-link { display: inline-block; padding: 9px 12px; border-radius: 8px; background: #1c704d; color: #fff; text-decoration: none; font-weight: 700; }
+@media (max-width:600px) { .explore-map-canvas { height: 70svh; min-height: 440px; } .explore-map-canvas.is-expanded { inset: 4px; min-height: 0; } .pg-map-layer-options { width: 210px; } }
+
+.pg-map-summary { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 12px 16px; background: var(--menu-bg); border-radius: 12px; font-size: 14px; }
