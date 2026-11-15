@@ -69,9 +69,7 @@ export default function PanelPage({ lang = 'pl' }) {
 						{adminTab === 'peaks' && <AdminPeaksSection lang={safeLang} />}
 						{adminTab === 'users' && <AdminUsersSection lang={safeLang} />}
 						{adminTab === 'tools' && (
-							<AdminTools
-								t={t}
-							/>
+							<AdminTools lang={safeLang}/>
 						)}
 					</div>
 				</section>

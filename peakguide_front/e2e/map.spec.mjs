@@ -80,3 +80,19 @@ test('switching away from a failed provider clears its error',async({page})=>{
  await view.selectOption('standard');await expect(page.getByRole('alert')).toHaveCount(0);
  await expect(page.locator('.leaflet-tile').first()).toHaveAttribute('src',/tile.openstreetmap.org/);
 });
+test('optional POI and route layers follow peak filters and survive missing geometry',async({page},testInfo)=>{
+ await page.route('**/rest/v1/pois?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([{id:1,peak_id:1,active:true,latitude:49.64,longitude:20.46,pois_i18n:[{lang:'en',name:'Trailhead'}],peaks:{slug:'lyzka',active:true}}])}));
+ await page.route('**/rest/v1/trails?**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify([{id:8,peak_id:1,slug:'route',active:true,route_geometry:{type:'LineString',coordinates:[[20.46,49.64],[20.462,49.643]]},trails_i18n:[{lang:'en',name:'Stored route'}],peaks:{slug:'lyzka',active:true}},{id:9,peak_id:2,slug:'no-geometry',active:true,trails_i18n:[{lang:'en',name:'No geometry route'}],peaks:{slug:'ben-nevis',active:true}}])}));
+ await page.goto('/map');
+ await page.getByRole('checkbox',{name:'Points of interest',exact:true}).check();
+ await page.getByRole('checkbox',{name:'Route lines',exact:true}).check();
+ await expect(page.getByText('Points of interest: 1',{exact:true})).toBeVisible();
+ await expect(page.getByRole('link',{name:'No geometry route',exact:true})).toBeVisible();
+ await expect(page.locator('.leaflet-overlay-pane path')).toHaveCount(4);
+ await page.screenshot({path:testInfo.outputPath('map-overlays.png'),fullPage:true});
+ await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('uk');
+ await expect(page.getByText('Points of interest: 0',{exact:true})).toBeVisible();
+ await expect(page.locator('.leaflet-overlay-pane path')).toHaveCount(1);
+ await page.getByRole('checkbox',{name:'Route lines',exact:true}).uncheck();
+ await expect(page.getByRole('link',{name:'No geometry route',exact:true})).toHaveCount(0);
+});

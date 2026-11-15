@@ -14,9 +14,9 @@ przeterminowane rezerwacje i harmonogram. Nie zmienia statusów i nie ponawia po
   masowo: wiadomość z niepewnym wynikiem mogła już dotrzeć.
 - Cron `succeeded` potwierdza wykonanie SQL, nie dostawę SMTP. Porównać ze zmianami
   kolejki i logami funkcji, nie wystarczy sama lista uruchomień.
-- Test właściciela do wykonania: nowe kontrolowane konto w ukraińskim i chińskim,
-  potwierdzenie języka powitania oraz test przycisku „Odpowiedz”. Nie wysyłać testów
-  do cudzych użytkowników i nie wykonywać backfill starych kont.
+- Właściciel potwierdził odbiór powitań po ukraińsku i chińsku. Test przycisku
+  „Odpowiedz” pozostaje osobnym sprawdzeniem, jeśli nie został wykonany. Nie wysyłać
+  testów do cudzych użytkowników i nie wykonywać backfill starych kont.
 
 ## Backup / brak pełnego stagingu
 

@@ -682,6 +682,8 @@ export async function fetchPeakTrailsBySlug(lang, slug) {
 		.select(
 			`
       id,
+      source_url,
+      last_verified_at,
       slug,
       start_point_name,
       end_point_name,
@@ -746,12 +748,7 @@ export async function fetchPeakPoisBySlug(lang, slug) {
 		.from('pois')
 		.select(
 			`
-      id,
-      latitude,
-      longitude,
-      website_url,
-      google_maps_url,
-      active,
+      *,
       pois_i18n (
         name,
         description,

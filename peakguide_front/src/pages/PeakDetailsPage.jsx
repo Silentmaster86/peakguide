@@ -590,6 +590,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                   ) : null}
 
                   {t.notes ? <div style={notesBox}>{t.notes}</div> : null}
+                  <SourceNotice url={t.source_url} date={t.last_verified_at} labels={labels} lang={lang}/>
                   <TrailPracticalCard trailId={t.id} lang={lang} />
 
                   {t.map_url || t.gpx_url ? (
@@ -643,6 +644,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                   </div>
                   {poi.description && <div style={itemText}>{poi.description}</div>}
                   {poi.tips && <div style={notesBox}>{poi.tips}</div>}
+                  <SourceNotice url={poi.source_url} date={poi.last_verified_at} labels={labels} lang={lang}/>
                   <div style={actionsRow}>
                     {safeExternalUrl(poi.google_maps_url) && (
                       <a
@@ -1572,3 +1574,9 @@ const trailSourceLink = {
   textDecoration: 'underline',
   textUnderlineOffset: 3,
 };
+
+function SourceNotice({url,date,labels,lang}){
+ const href=safeUrl(url);if(!href)return null;
+ const verified=new Date(date);
+ return <p><a href={href} target="_blank" rel="noopener noreferrer">{labels.metricSource}</a>{date&&Number.isFinite(verified.getTime())&&<> · {labels.metricVerified}: <time dateTime={verified.toISOString()}>{verified.toLocaleDateString(lang==='ua'?'uk-UA':lang,{timeZone:'UTC'})}</time></>}</p>;
+}
