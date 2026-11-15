@@ -615,7 +615,7 @@ function FeaturedTrails({ t, trails }) {
 					<Link
 						key={trail.id}
 						to={`/peaks/${trail.peak_slug}?tab=trails&trail=${encodeURIComponent(trail.slug)}`}
-						className='home-trail-card'
+						className='home-trail-card catalogue-card'
 					>
 						<div className='home-trail-top'>
 							<div>
