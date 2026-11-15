@@ -29,6 +29,7 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 	const busy = status === 'loading';
 
 	const moreItems = [
+    { key: 'map', href: '/map', label: ({pl:'Mapa',en:'Map',ua:'Мапа',zh:'地图'})[lang] || 'Mapa' },
 		...(isTablet
 			? [
 				{ key: 'peaks', href: '/peaks', label: t.peaks },

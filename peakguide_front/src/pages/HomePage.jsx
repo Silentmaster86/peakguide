@@ -273,7 +273,7 @@ function QuickExplore({ t }) {
 			icon: '⌖',
 			title: t.quickMap,
 			body: t.quickMapBody,
-			to: '#map',
+			to: '/map',
 		},
 	];
 
@@ -674,7 +674,7 @@ function MapTeaser({ t }) {
 
 				<p>{t.mapSubtitle}</p>
 
-				<div className='map-teaser-button'>{t.mapComingSoon}</div>
+				<Link to='/map' className='map-teaser-button'>{t.mapComingSoon}</Link>
 			</div>
 		</section>
 	);
@@ -837,9 +837,8 @@ function getLabels(lang) {
 
       mapEyebrow: 'Odkrywaj wizualnie',
       mapTitle: 'Góry na jednej mapie',
-      mapSubtitle:
-        'Odkrywaj szczyty, trasy, punkty startowe i miejsca warte zobaczenia bezpośrednio na mapie.',
-      mapComingSoon: 'Interaktywna mapa — wkrótce',
+      mapSubtitle: 'Odkrywaj szczyty na mapie, filtruj według kraju i pasma oraz przechodź do szczegółów.',
+      mapComingSoon: 'Otwórz mapę szczytów',
 
       whyEyebrow: 'PeakGuide',
       whyTitle: 'Wszystko, czego potrzebujesz przed wyjściem',
@@ -966,9 +965,8 @@ function getLabels(lang) {
 
       mapEyebrow: 'Explore visually',
       mapTitle: 'Mountains on one map',
-      mapSubtitle:
-        'Discover peaks, trails, starting points and places worth visiting directly on the map.',
-      mapComingSoon: 'Interactive map — coming soon',
+      mapSubtitle: 'Explore peaks on the map, filter by country and range, and open their details.',
+      mapComingSoon: 'Open peak map',
 
       whyEyebrow: 'PeakGuide',
       whyTitle: 'Everything you need before heading out',
@@ -1093,9 +1091,8 @@ function getLabels(lang) {
 
       mapEyebrow: 'Досліджуйте візуально',
       mapTitle: 'Гори на одній карті',
-      mapSubtitle:
-        'Відкривайте вершини, маршрути, стартові точки та цікаві місця безпосередньо на карті.',
-      mapComingSoon: 'Інтерактивна карта — незабаром',
+      mapSubtitle: 'Досліджуйте вершини на мапі, фільтруйте за країною та хребтом і переглядайте подробиці.',
+      mapComingSoon: 'Відкрити мапу вершин',
 
       whyEyebrow: 'PeakGuide',
       whyTitle: 'Усе необхідне перед виходом у гори',
@@ -1219,8 +1216,8 @@ function getLabels(lang) {
 
       mapEyebrow: '视觉探索',
       mapTitle: '一张地图探索群山',
-      mapSubtitle: '直接在地图上探索山峰、路线、起点和值得游览的地点。',
-      mapComingSoon: '互动地图 — 即将推出',
+      mapSubtitle: '在地图上探索山峰，按国家和山脉筛选，并查看详情。',
+      mapComingSoon: '打开山峰地图',
 
       whyEyebrow: 'PeakGuide',
       whyTitle: '出发前所需的一切',
