@@ -44,7 +44,7 @@ begin
  if v.peak_id is null or not exists(select from public.peaks where id=v.peak_id) then raise exception 'Invalid peak'; end if;
  if v.active is null then raise exception 'Active required'; end if;
  if not public.catalogue_validate_url(v.gpx_url) or not public.catalogue_validate_url(v.map_url) or not public.catalogue_validate_url(v.source_url) or not public.catalogue_validate_url(v.distance_source_url) or not public.catalogue_validate_url(v.elevation_gain_source_url) or not public.catalogue_validate_url(v.time_source_url) or not public.catalogue_validate_url(v.geometry_source_url) then raise exception 'Invalid URL'; end if;
- 
+
  if v.slug is null or v.slug !~ '^[a-z0-9]+(-[a-z0-9]+)*$' then raise exception 'Invalid slug'; end if;
  if p_id is not null and exists(select from public.pois where trail_id=p_id and peak_id<>v.peak_id) then raise exception 'Linked POIs belong to another peak'; end if;
  if v.route_type is null or v.route_type not in ('loop','out-and-back','point-to-point') then raise exception 'Invalid route type'; end if;
@@ -110,7 +110,7 @@ begin
  if v.peak_id is null or not exists(select from public.peaks where id=v.peak_id) then raise exception 'Invalid peak'; end if;
  if v.active is null then raise exception 'Active required'; end if;
  if not public.catalogue_validate_url(v.website_url) or not public.catalogue_validate_url(v.google_maps_url) or not public.catalogue_validate_url(v.source_url) then raise exception 'Invalid URL'; end if;
- 
+
  if v.type_id is null or not exists(select from public.poi_types where id=v.type_id) then raise exception 'Invalid POI type'; end if;
  if (v.latitude is null)<>(v.longitude is null) or (v.latitude is not null and (v.latitude not between -90 and 90 or v.longitude not between -180 and 180)) then raise exception 'Invalid coordinates'; end if;
  if v.trail_id is not null and not exists(select from public.trails where id=v.trail_id and peak_id=v.peak_id) then raise exception 'Trail belongs to another peak'; end if;
