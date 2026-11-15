@@ -113,22 +113,13 @@ export default function RangesPage({ lang = 'pl' }) {
                 <Link
                   key={r.slug}
                   to={`/ranges/${r.slug}`}
+                  aria-label={r.name}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <article
-                    style={card}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = 'var(--shadow)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0px)';
-                      e.currentTarget.style.boxShadow = 'var(--shadow-soft)';
-                    }}
-                  >
+                  <article className='catalogue-card'>
                     <div style={cardTop}>
                       <div>
-                        <div style={rangeName}>{r.name}</div>
+                        <h3 style={rangeName}>{r.name}</h3>
                         <div style={locationText}>
                           {r.country_flag} {r.region_name || r.country_name}
                         </div>
@@ -268,15 +259,6 @@ const grid = {
   gap: 10,
 };
 
-const card = {
-  border: '1px solid var(--border)',
-  borderRadius: 18,
-  padding: 12,
-  background: 'var(--btn-bg)',
-  boxShadow: 'var(--shadow-soft)',
-  transition: 'transform 140ms ease, box-shadow 140ms ease',
-};
-
 const cardTop = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -285,7 +267,8 @@ const cardTop = {
 };
 
 const rangeName = {
-  fontWeight: 1000,
+  margin: 0,
+  fontWeight: 800,
   letterSpacing: '-0.2px',
   fontSize: 16,
 };
@@ -293,16 +276,16 @@ const rangeName = {
 const locationText = {
   marginTop: 4,
   color: 'var(--muted)',
-  fontSize: 12,
+  fontSize: 13,
 };
 
 const rangeBadge = {
-  border: '1px solid rgba(31,122,79,0.30)',
+  border: '1px solid color-mix(in srgb, var(--primary) 34%, var(--border))',
   borderRadius: 999,
   padding: '6px 10px',
   fontWeight: 1000,
   color: 'var(--primary)',
-  background: 'rgba(31,122,79,0.10)',
+  background: 'color-mix(in srgb, var(--primary) 12%, transparent)',
 };
 
 const errorBox = {

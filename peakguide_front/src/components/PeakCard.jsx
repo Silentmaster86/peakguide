@@ -2,28 +2,19 @@ import TranslationNotice from './TranslationNotice';
 import { Link } from "react-router-dom";
 
 export default function PeakCard({ peak, lang }) {
-	const heightLabel = lang === "pl" ? "Wysokość" : "Elevation";
+	const heightLabel = ({ pl: "Wysokość", en: "Elevation", ua: "Висота", zh: "海拔" })[lang] || "Wysokość";
 
 	return (
 		<Link
 			to={`/peaks/${peak.slug}`}
+      aria-label={`${peak.peak_name} — ${peak.range_name || ""}`}
 			style={{
 				textDecoration: "none",
 				color: "inherit",
 				display: "block",
 			}}
 		>
-			<div
-				style={card}
-				onMouseEnter={(e) => {
-					e.currentTarget.style.transform = "translateY(-2px)";
-					e.currentTarget.style.boxShadow = "var(--shadow)";
-				}}
-				onMouseLeave={(e) => {
-					e.currentTarget.style.transform = "translateY(0px)";
-					e.currentTarget.style.boxShadow = "var(--shadow-soft)";
-				}}
-			>
+			<article className='catalogue-card'>
 				<div style={cardBody}>
 					{peak.cover_image_url ? (
 						<img
@@ -49,26 +40,10 @@ export default function PeakCard({ peak, lang }) {
 						</div>
 					</header>
 				</div>
-			</div>
+			</article>
 		</Link>
 	);
 }
-
-const card = {
-	display: "flex",
-	flexDirection: "column",
-	justifyContent: "space-between",
-
-	minHeight: 90,
-	height: "100%",
-	border: '1px solid color-mix(in srgb, var(--primary) 18%, var(--border))',
-	borderRadius: 18,
-	padding: 14,
-	background: 'color-mix(in srgb, var(--surface-2) 92%, transparent)',
-	boxShadow: 'var(--shadow-soft)',
-	transition:
-		'transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease',
-};
 
 const cardTop = {
 	display: 'grid',
