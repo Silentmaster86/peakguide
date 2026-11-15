@@ -66,17 +66,7 @@ export default function TrailCard({ trail, lang }) {
         marginBottom: 20,
       }}
     >
-      <div
-        style={card}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = 'var(--shadow)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0px)';
-          e.currentTarget.style.boxShadow = 'var(--shadow-soft)';
-        }}
-      >
+      <div className='catalogue-card catalogue-card--trail'>
         <h2 style={title}>{trail.name}</h2>
         <TranslationNotice contentLang={trail.content_lang} lang={lang} />
 
@@ -117,21 +107,6 @@ export default function TrailCard({ trail, lang }) {
     </Link>
   );
 }
-
-const card = {
-	display: 'flex',
-	flexDirection: 'column',
-	gap: 12,
-
-	height: '100%',
-	border: '1px solid color-mix(in srgb, var(--primary) 18%, var(--border))',
-	borderRadius: 18,
-	padding: 16,
-	background: 'color-mix(in srgb, var(--surface-2) 92%, transparent)',
-	boxShadow: 'var(--shadow-soft)',
-	transition:
-		'transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease',
-};
 
 const title = {
 	margin: 0,
