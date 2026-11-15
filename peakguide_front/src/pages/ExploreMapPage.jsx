@@ -19,7 +19,8 @@ function FitResults({ peaks }) {
  const map = useMap();
  useEffect(() => {
   if (peaks.length) map.fitBounds(peaks.map(p=>p.point), {padding:[35,35],maxZoom:12,animate:false});
-  requestAnimationFrame(()=>map.invalidateSize());
+  const frame=requestAnimationFrame(()=>map.invalidateSize());
+  return ()=>cancelAnimationFrame(frame);
  }, [map, peaks]);
  return null;
 }
@@ -45,7 +46,7 @@ function Points({ peaks, t }) {
   return <CircleMarker key={key} center={center} radius={items.length>1?16:8} pathOptions={{color:'#fff',weight:2,fillColor:'#155f3d',fillOpacity:1}}>
    {items.length>1&&<Tooltip permanent direction="center" className="explore-map-cluster">{items.length}</Tooltip>}
    <Popup>
-    {items.length>1 && <button type="button" onClick={()=>map.fitBounds(items.map(p=>p.point),{padding:[35,35],maxZoom:Math.max(14,zoom+2)})}>{t[15]} ({items.length})</button>}
+    {items.length>1 && <button type="button" onClick={()=>map.fitBounds(items.map(p=>p.point),{padding:[35,35],maxZoom:Math.max(14,zoom+2),animate:false})}>{t[15]} ({items.length})</button>}
     <ul>{items.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m</li>)}</ul>
    </Popup>
   </CircleMarker>;
@@ -73,7 +74,7 @@ export default function ExploreMapPage({lang='pl'}) {
    <p role="status">{t[10]}: {located.length} · {t[13]}: {filtered.length-located.length}</p>
    {tileError&&<p role="alert">{t[12]} <button onClick={()=>{setTileError(false);setTiles(v=>v+1);}}>{t[8]}</button></p>}
    {located.length>0&&<><p>{t[16]}</p><div className="explore-map-canvas" role="region" aria-label={t[0]}>
-    <MapContainer center={[49,20]} zoom={5} scrollWheelZoom={false} style={{height:'100%',width:'100%'}}>
+    <MapContainer center={[49,20]} zoom={5} zoomAnimation={false} markerZoomAnimation={false} fadeAnimation={false} scrollWheelZoom={false} style={{height:'100%',width:'100%'}}>
      <TileLayer key={tiles} url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' eventHandlers={{tileerror:()=>setTileError(true)}}/>
      <FitResults peaks={located}/><Points peaks={located} t={t}/>
     </MapContainer>
