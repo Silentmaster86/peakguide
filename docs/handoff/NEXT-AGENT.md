@@ -13,6 +13,8 @@ ujednolicenie kafelków szczytów/pasm/tras, lokalizację panelu, optymalizację
 Właściciel potwierdził odbiór powitań również po ukraińsku i chińsku, reset hasła
 oraz powiadomienie o zmianie. Korekty katalogu z PR #5 zostały zastosowane.
 Nie powtarzać tych operacji na podstawie starszych kart.
+PR #13 i #14 są scalone: mapa ma mniejsze pinezki, ikonę panelu warstw
+i domyślnie zaznaczoną, wyłączalną warstwę szczytów.
 
 ## Pakiet tras/POI — PR #12 scalony i wdrożony przez właściciela
 
@@ -29,6 +31,17 @@ cztery języki oraz oczekiwane RLS/uprawnienia. Potwierdził też wyświetlanie 
 Nie powtarzać importu. Kontrolowany test zapisu przez nowe edytory pozostaje do wykonania.
 Dokładna kolejność i granice testów: [instrukcja wydania](../releases/catalogue-management.md).
 Źródła, zakresy liczb i cofanie: [partia 01](../catalogue/batch-01/README.md).
+
+## Partia 02 — przygotowana, jeszcze bez importu produkcyjnego
+
+Śnieżka, Śnieżnik, Wielka Sowa, Skalnik i Szczeliniec Wielki: pięć tras, pięć POI,
+40 tłumaczeń i pięć przebiegów GPX. [Źródła i wdrożenie](../catalogue/batch-02/README.md).
+Dla Śnieżnika i Skalnika metryki krótkich podejść pozostają niepotwierdzone.
+Śnieżka to wejście z Białego Jaru, z odwróconym GPX i parametrami tego kierunku.
+Szczeliniec opisuje wariant letni, zależny od sezonowych zasad PNGS.
+Najpierw sprawdzić stan PR i wykonać `batch-02/verify.sql`. Po merge (udostępnia
+pliki GPX) można wykonać osobny `apply.sql`. Nie powtarzać migracji 014/partii 01.
+Agent nie wykonywał importu tej partii na produkcji.
 
 ## Kolejność dalszych prac
 

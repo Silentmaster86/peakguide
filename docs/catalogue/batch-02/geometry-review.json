@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "sniezka-bialy-jar-czarny-wejscie",
+    "source_gpx": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/629",
+    "source_sha256": "aa3a09b10a16abda0130f1c4df487429dc83058969e536205383edc6c0b3131d",
+    "source_segment_count": 9,
+    "selected_segment_count": 9,
+    "points": 150,
+    "first_lon_lat": [
+      15.73866598,
+      50.773586
+    ],
+    "last_lon_lat": [
+      15.73969603,
+      50.73614404
+    ],
+    "geometry_km": 7.3915,
+    "adaptation": "PTTK descent GPX reversed. The source gives 4:15 h in reverse; its 1196 m descent becomes ascent. Zakosy is an uphill route; check current KPN rules and closures: https://kpn.gov.pl/komunikat-turystyczny"
+  },
+  {
+    "slug": "wielka-sowa-sokola-czarny-walimska",
+    "source_gpx": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/796",
+    "source_sha256": "6093e1983701e8df3c8dba88a3e8cd1f9b06c44031a786190f7076431bdbe351",
+    "source_segment_count": 9,
+    "selected_segment_count": 9,
+    "points": 190,
+    "first_lon_lat": [
+      16.46588802,
+      50.662113616667
+    ],
+    "last_lon_lat": [
+      16.48556818,
+      50.680080235
+    ],
+    "geometry_km": 10.309,
+    "adaptation": "PTTK metrics cover the entire one-way black route. All GPX segments are preserved. Plan the return and check current conditions separately."
+  },
+  {
+    "slug": "szczeliniec-letnia-trasa-edukacyjna",
+    "source_gpx": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/515",
+    "source_sha256": "c0f957d5514ad6da2d980f54aeb0323dd098f4dfb9a023baea9a27a8524b955c",
+    "source_segment_count": 1,
+    "selected_segment_count": 1,
+    "points": 104,
+    "first_lon_lat": [
+      16.33752286,
+      50.48349574
+    ],
+    "last_lon_lat": [
+      16.33994222,
+      50.4807638
+    ],
+    "geometry_km": 1.8054,
+    "adaptation": "Metrics describe this PTTK variant. The labyrinth is seasonal and one-way; winter access follows a different itinerary. Check PNGS before departure: https://pngs.gov.pl/komunikat-turystyczny"
+  },
+  {
+    "slug": "snieznik-schronisko-zielony-szczyt",
+    "source_gpx": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/675",
+    "source_sha256": "c52dc3554637922f3f9eacd9ea18743178cb49fa9b74075f88a936d7f51f5f83",
+    "source_segment_count": 28,
+    "selected_segment_count": 1,
+    "points": 19,
+    "first_lon_lat": [
+      16.83248699,
+      50.207941643333
+    ],
+    "last_lon_lat": [
+      16.8473947,
+      50.20743217
+    ],
+    "geometry_km": 1.4139,
+    "adaptation": "Only the last segment of the 55.1 km PTTK GPX was selected and reversed. Separate metrics for this short section are unverified and left blank. The download contains this section only."
+  },
+  {
+    "slug": "skalnik-czarnow-czartak-niebieski",
+    "source_gpx": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/967",
+    "source_sha256": "e712afa07e04acffbe51bf29751955b331fb003ef095a79dee66e88e4ef885d3",
+    "source_segment_count": 32,
+    "selected_segment_count": 3,
+    "points": 52,
+    "first_lon_lat": [
+      15.91031423,
+      50.8010743
+    ],
+    "last_lon_lat": [
+      15.90073544,
+      50.80864531
+    ],
+    "geometry_km": 2.3927,
+    "adaptation": "The section was cut from the 31 km PTTK track and reversed, retaining three original pieces without added connectors. Whole-trail metrics do not describe this ascent and are left blank."
+  }
+]

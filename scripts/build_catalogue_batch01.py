@@ -1,9 +1,14 @@
 """Generate guarded data import/rollback. No database connection."""
 import argparse,json
 from pathlib import Path
-parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');args=parser.parse_args()
-ROOT=Path(__file__).resolve().parents[1];DIR=ROOT/'docs/catalogue/batch-01'
+parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');parser.add_argument('--batch',choices=['01','02'],default='01');args=parser.parse_args()
+ROOT=Path(__file__).resolve().parents[1];DIR=ROOT/f'docs/catalogue/batch-{args.batch}'
+peaks_by_batch={'01':{'waligora':10,'sleza':27,'lysica':28,'skopiec':14,'chelmiec':12},'02':{'sniezka':1,'snieznik':2,'wielka-sowa':6,'szczeliniec-wielki':11,'skalnik':8}}
+peak_case="case body->>'peak_slug' "+' '.join(f"when '{slug}' then {id}" for slug,id in peaks_by_batch[args.batch].items())+' end'
 records=json.loads((DIR/'records.json').read_text())
+if len(records)!=10 or {r['kind'] for r in records}!={'trail','poi'}: raise SystemExit('Expected five trails and five POIs')
+for kind in ['trail','poi']:
+ if sorted(r['body']['peak_slug'] for r in records if r['kind']==kind)!=sorted(peaks_by_batch[args.batch]): raise SystemExit('Unexpected peak set')
 for row in records:
  assert set(row['body']['i18n'])=={'pl','en','ua','zh'}
  assert all(t['name'].strip() for t in row['body']['i18n'].values())
@@ -41,7 +46,7 @@ verify='''
 verify=verify.replace('order by lang','order by i.lang')
 apply=header+' if receipt is not null then\n'+verify+" raise notice 'Batch already applied; records unchanged'; return; end if;\n"
 apply+=" for entry in select value from jsonb_array_elements($records$"+json.dumps(records,ensure_ascii=False)+"$records$::jsonb) loop\n body=entry->'body';\n"
-apply+=''' select id into peak from public.peaks where slug=body->>'peak_slug' and id=(case body->>'peak_slug' when 'waligora' then 10 when 'sleza' then 27 when 'lysica' then 28 when 'skopiec' then 14 when 'chelmiec' then 12 end) and active=true for update;
+apply+=f''' select id into peak from public.peaks where slug=body->>'peak_slug' and id=({peak_case}) and active=true for update;
  if peak is null then raise exception 'Peak missing or changed: %',body->>'peak_slug'; end if;
  body=body||jsonb_build_object('peak_id',peak);
  if entry->>'kind'='trail' then
@@ -81,6 +86,7 @@ end $batch$;
 commit;
 '''
 for name,text in [('apply.sql',apply),('rollback.sql',rollback)]:
+ text=text.replace("'kgp-01'",f"'kgp-{args.batch}'").replace('perform pg_advisory_xact_lock(251115,1);',f'perform pg_advisory_xact_lock(251115,{int(args.batch)});')
  path=DIR/name
  if args.check:
   if not path.exists() or path.read_text()!=text: raise SystemExit(f'Regenerate {path.relative_to(ROOT)}')
