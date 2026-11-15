@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 const HomePage = lazy(() => import('../pages/HomePage'));
 import Navbar from '../components/Navbar';
 
+const ExploreMapPage = lazy(() => import('../pages/ExploreMapPage'));
 const PeaksPage = lazy(() => import('../pages/PeaksPage'));
 const PeakDetailsPage = lazy(() => import('../pages/PeakDetailsPage'));
 const RangesPage = lazy(() => import('../pages/RangesPage'));
@@ -56,6 +57,7 @@ export default function App() {
 								element={<PeakDetailsPage lang={safeLang} />}
 							/>
 
+							<Route path='/map' element={<ExploreMapPage lang={safeLang} />} />
 							<Route path='/trails' element={<TrailsPage lang={safeLang} />} />
 
 							<Route path='/ranges' element={<RangesPage lang={safeLang} />} />

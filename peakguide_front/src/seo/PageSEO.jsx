@@ -1,9 +1,9 @@
 import { SEO, SITE_URL, SITE_NAME } from './SEO';
 const titles = {
-  pl: { peaks: 'Szczyty', ranges: 'Pasma górskie', home: 'Twój przewodnik po górach', trails: 'Trasy', about: 'O PeakGuide' },
-  en: { peaks: 'Peaks', ranges: 'Mountain ranges', home: 'Your mountain guide', trails: 'Trails', about: 'About PeakGuide' },
-  ua: { peaks: 'Вершини', ranges: 'Гірські хребти', home: 'Твій путівник по горах', trails: 'Маршрути', about: 'Про PeakGuide' },
-  zh: { peaks: '山峰', ranges: '山脉', home: '你的登山指南', trails: '路线', about: '关于 PeakGuide' },
+  pl: { map: 'Mapa szczytów', peaks: 'Szczyty', ranges: 'Pasma górskie', home: 'Twój przewodnik po górach', trails: 'Trasy', about: 'O PeakGuide' },
+  en: { map: 'Peak map', peaks: 'Peaks', ranges: 'Mountain ranges', home: 'Your mountain guide', trails: 'Trails', about: 'About PeakGuide' },
+  ua: { map: 'Мапа вершин', peaks: 'Вершини', ranges: 'Гірські хребти', home: 'Твій путівник по горах', trails: 'Маршрути', about: 'Про PeakGuide' },
+  zh: { map: '山峰地图', peaks: '山峰', ranges: '山脉', home: '你的登山指南', trails: '路线', about: '关于 PeakGuide' },
 };
 const descriptions = {
   pl: 'Odkrywaj szczyty, pasma i trasy. Sprawdzaj dostępne mapy, źródła i informacje praktyczne przed wyjściem w góry.',
