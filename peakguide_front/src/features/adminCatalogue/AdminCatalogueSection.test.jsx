@@ -1,0 +1,32 @@
+import {render,screen,waitFor} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import {beforeEach,expect,it,vi} from 'vitest';
+import AdminCatalogueSection from './AdminCatalogueSection';
+import {loadCatalogue,saveCatalogue} from './api';
+vi.mock('./api',()=>({loadCatalogue:vi.fn(),saveCatalogue:vi.fn()}));
+beforeEach(()=>{vi.resetAllMocks();loadCatalogue.mockResolvedValue({items:[],peaks:[{id:1,slug:'peak'}],types:[{id:1,slug:'parking'}],trails:[]});});
+it('keeps draft after failure and sends one atomic trail payload',async()=>{
+ saveCatalogue.mockRejectedValueOnce(new Error('offline')).mockResolvedValueOnce(12);
+ render(<AdminCatalogueSection kind="trail" lang="en"/>);
+ await waitFor(()=>expect(screen.getByRole('button',{name:'Add'})).toBeEnabled());
+ await userEvent.click(screen.getByRole('button',{name:'Add'}));
+ await userEvent.selectOptions(screen.getByRole('combobox',{name:'Peak *'}),'1');
+ await userEvent.type(screen.getByRole('textbox',{name:'URL slug *'}),'test-route');
+ await userEvent.type(screen.getByRole('textbox',{name:'Name (EN)'}),'Test route');
+ await userEvent.click(screen.getByRole('button',{name:'Save',exact:true}));
+ expect(await screen.findByRole('alert')).toHaveTextContent('operation failed');
+ expect(screen.getByRole('textbox',{name:'Name (EN)'})).toHaveValue('Test route');
+ await userEvent.click(screen.getByRole('button',{name:'Save',exact:true}));
+ await waitFor(()=>expect(saveCatalogue).toHaveBeenCalledTimes(2));
+ expect(saveCatalogue.mock.calls[0][2]).toMatchObject({peak_id:1,slug:'test-route',active:false,distance_km:null,i18n:{en:{name:'Test route'}}});
+});
+it('reports a stale revision instead of overwriting newer edits',async()=>{
+ loadCatalogue.mockResolvedValue({items:[{id:4,peak_id:1,updated_at:'2026-11-15T00:00:00Z',active:true,pois_i18n:[{lang:'en',name:'Parking'}]}],peaks:[{id:1,slug:'peak'}],types:[{id:1,slug:'parking'}],trails:[]});
+ saveCatalogue.mockRejectedValue(new Error('Record changed; reload before saving'));
+ render(<AdminCatalogueSection kind="poi" lang="en"/>);
+ await userEvent.click(await screen.findByRole('button',{name:'Edit'}));
+ await userEvent.selectOptions(screen.getByRole('combobox',{name:'POI type *'}),'1');
+ await userEvent.click(screen.getByRole('button',{name:'Save',exact:true}));
+ expect(await screen.findByRole('alert')).toHaveTextContent('record changed');
+ expect(saveCatalogue.mock.calls[0][3]).toBe('2026-11-15T00:00:00Z');
+});

@@ -1,86 +1,70 @@
-# PeakGuide — przekazanie dalszych prac
+# PeakGuide — karta dla kolejnego agenta
 
-Aktualizacja 14 listopada 2026. Repo: Silentmaster86/peakguide.
-Produkcja: https://peak-guide.netlify.app/ — React/Vite + Supabase.
-Frontend: peakguide_front. Języki UI/danych pl/en/ua/zh; poczta pl/en/uk/zh.
+Stan: 15 listopada 2026. Repo: Silentmaster86/peakguide.
+Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
+Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
-## Potwierdzone przez właściciela
+## Co już działa
 
-- PR #1–#3 scalone: naprawy audytu, poczta powitalna, limit tematów Auth.
-- Wdrożone admin-delete-user, migracje 011/012/013, welcome-email i harmonogram.
-- Rejestracja, logowanie, usuwanie konta, reset i odrzucenie starego hasła działają.
-- Dodanie/edycja/usunięcie kontrolnego szczytu działa.
-- Powitania PL/EN, reset i powiadomienie Password changed działają.
-- PR #4 scalony: osobne jasne kafelki FAQ/How, **oryginalne zdjęcie i krycie tła**.
-  Właściciel potwierdził działanie. Nie wracać do wcześniejszego pomysłu
-  rozjaśniania całej fotografii.
+PR #1–#11 są scalone (sprawdzono w GitHub). Obejmują bezpieczeństwo kont i zapis
+szczytu, pocztę, jasne kafelki FAQ/pomocy z zachowaniem oryginalnego tła,
+ujednolicenie kafelków szczytów/pasm/tras, lokalizację panelu, optymalizację
+ładowania oraz mapę `/map` z filtrami i widokami standard/satelita/topografia.
+Właściciel potwierdził odbiór powitań również po ukraińsku i chińsku, reset hasła
+oraz powiadomienie o zmianie. Korekty katalogu z PR #5 zostały zastosowane.
+Nie powtarzać tych operacji na podstawie starszych kart.
 
-## Przygotowane teraz — sprawdź status PR przed dalszą pracą
+## Pakiet przygotowany na gałęzi feat/trails-poi-management
 
-1. **PR #5 — korekty katalogu.** Źródłowy przegląd aktualnych publicznych rekordów.
-   Łyżka: 803 m i 49.642726,20.462113, opis Łyżki zamiast Łakowej. Stary slug
-   zachowany. Osiem opisów Łyżki/Waligóry i dwadzieścia dopisków zakresu metryk tras.
-   Dystans Kriváňa, suma podejść Hoverli i metryki Huangshan pozostają nieznane.
-   docs/audit/2026-11-14 zawiera źródła, before/after, apply.sql i rollback.sql.
-   **Merge nie uruchamia SQL. Produkcja nie została zmieniona.** Pakiet transakcyjny,
-   blokady, warunki na stare wartości, idempotencja, ochrona przed konfliktem.
-   Testy w izolowanym PostGIS oraz CI przeszły.
-2. **PR #6 — panel PL/EN/UA/ZH i klawiatura.** Formularz szczytu, użytkownicy,
-   wiadomości, daty, błędy, focus/Escape. Naprawiono też wyścig: opóźnione
-   wyszukiwanie mogło przywrócić kolekcję po wyczyszczeniu filtrów.
-   101 testów Vitest; Chromium desktop/mobile, Firefox i WebKit w CI.
-   Atrapy API, żadnych zapisów do produkcji.
-3. **PR #7 — utrzymanie.** Odczytowy supabase/operations/email_health.sql oraz
-   docs/operations/remaining-work.md. Procedura odtworzenia backupu i zaległe testy.
-4. **PR #8, gałąź perf/defer-home-route — optymalizacja.** Zawiera też commity #6 do czasu ich scalenia.
-   HomePage lazy: katalog pobiera ~31 kB mniej JS, login ~48 kB mniej. Strona główna
-   ma dodatkowy request i ~2,3 kB więcej gzip. Nie deklarować poprawy LCP/INP.
-   docs/performance opisuje pomiar manifestu i test faktycznie pobieranych modułów.
+1. Edytory tras i POI w Panel → Narzędzia: wersje językowe, publikacja,
+   źródła i daty, import GPX; atomowy zapis RPC i wykrywanie nowszych zmian.
+2. Mapa: osobne przełączniki POI i przebiegów tras. Linie pochodzą z zapisanej
+   geometrii, brak geometrii pozostawia wyłącznie wpis na liście.
+3. Pierwsza partia źródłowych danych: Waligóra, Ślęża, Łysica, Skopiec, Chełmiec.
+   Pięć tras, pięć POI, cztery języki. Jedna trasa ma rzeczywisty GPX (Łysica).
 
-## Kolejność wydania
+Ten pakiet wymaga migracji 014 i osobnego importu danych. Przygotowanie plików
+nie oznacza wdrożenia na produkcję. Sprawdzić status PR i stan bazy przed działaniem.
+Dokładna kolejność i granice testów: [instrukcja wydania](../releases/catalogue-management.md).
+Źródła, zakresy liczb i cofanie: [partia 01](../catalogue/batch-01/README.md).
 
-1. Sprawdzić aktualny status CI i zakres PR #5–#7. Nie opierać się wyłącznie na tej
-   karcie; user mógł już scalić lub wdrożyć część zmian.
-2. Po przeglądzie #5: świeży backup, próba apply/rollback w izolacji, następnie
-   uzgodnione wykonanie apply.sql w SQL Editor. Porównać mapę i cztery języki.
-3. Scalić #6, sprawdzić Netlify i panel na kontrolowanym koncie właściciela.
-4. Scalić dokumentację #7. Uruchomić email_health.sql i ocenić wyniki agregatów.
-5. PR wydajności #8 już wskazuje main: scalić dopiero po #6 i sprawdzeniu CI.
-   Po scaleniu #6 różnica obejmie tylko optymalizację i jej pomiary.
+## Kolejność dalszych prac
 
-Właściciel dotąd wykonywał merge i operacje SQL sam. Nowy agent ma sprawdzić
-aktualne polecenie i uprawnienia; ta karta sama nie upoważnia do zapisów produkcji.
-Przygotować konkretne zmiany przed prośbą o zatwierdzenie. Podawać krótkie kroki
-z linkiem do właściwego pliku; właściciel często używa telefonu.
+| Priorytet | Zadanie | Kiedy uznać za skończone |
+|---|---|---|
+| 1 | Wdrożyć pakiet edytorów i partii 01 według instrukcji | Migracja, kontrolowany test admin/user, import i sprawdzenie pięciu stron/mapy |
+| 2 | Uzupełniać katalog partiami po pięć szczytów | Źródła i daty, zakres parametrów, PL/EN/UA/ZH, kontrola współrzędnych, import/rollback |
+| 3 | Pozyskać brakujące przebiegi tras | Legalnie udostępniony GPX, zachowane segmenty, poprawny start/koniec, atrybucja i widoczność na mapie |
+| 4 | Próbnie odtworzyć świeży backup w izolacji | Log restore bez zignorowanych błędów, porównanie liczników/FK/RLS, test ról i zapisów |
+| 5 | Ustalić odtwarzalny pełny schemat aplikacji | Zweryfikowana baza migracji po odtworzeniu, bez danych osobowych i sekretów |
+| 6 | Językowe URL i prerender SEO | Plan przekierowań, canonical/hreflang/sitemap oraz test publicznych stron bez JS |
+| 7 | Pomiary wydajności i dostępności | Wyniki telefonu i klawiatury/czytnika, poprawki według pomiarów |
 
-## Nadal otwarte / granice weryfikacji
+Nie obiecywać kompletności 89 szczytów po dodaniu pięciu. Nie wpisywać zgadywanych
+metrów, czasów ani kosztów. Trasa jednostronna, powrotna i pętla mają różne zakresy.
+Nie rysować przebiegu z samych współrzędnych szczytu i parkingu.
 
-- Pełny backup produkcji nie został odtworzony. Właściciel ma dump z 9 listopada
-  (997418 B), ale sprawdzono tylko pg_restore --list. Nie prosić o dane osobowe
-  z dumpa w czacie ani nie dodawać go do repo. Potrzebne zgodne izolowane środowisko.
-- Brak kompletnego bazowego schematu produkcji. Nie nazywać testowego fixture
-  pełnym stagingiem. PostgreSQL/PostGIS w testach weryfikuje wskazane kontrakty.
-- Kontrola rzeczywistych uprawnień wszystkich tabel, Storage i Edge Functions
-  wymaga izolowanej kopii lub dostępu administracyjnego. Publiczne API nie wystarczy.
-- Rzeczywisty odbiór powitań UK/ZH i przycisk Odpowiedz wymagają testu właściciela.
-  SMTP sent nie dowodzi dostawy. Nie ponawiać uncertain automatycznie.
-- clever-service: najpierw sprawdzić użycie/logi i zachować źródło. Nie usuwać
-  funkcji tylko dlatego, że nie ma jej wywołania w repo.
-- Braki tras są celowo null, gdy nie ma dostatecznego źródła. Wysokość Waligóry
-  934/936 m wymaga osobnego rozstrzygnięcia. Pełnych 89 szczytów nie zweryfikowano.
-- WebKit CI nie jest testem Safari na fizycznym iPhonie. Pełny audyt czytnikiem
-  ekranu i wszystkie kombinacje stanów wymagają dalszej pracy.
-- SEO: językowe URL/prerender to osobny projekt ze strategią przekierowań,
-  canonical/hreflang i odświeżania danych. Nie zmieniać URL po cichu.
-- Wydajność: nie zebrano reprezentatywnych terenowych LCP/CLS/INP.
+## Blokady i zasady pracy
 
-## Narzędzia i testy
+- Brak dumpa właściciela i administracyjnego połączenia z produkcją. Backup z
+  9 listopada miał tylko odczytany spis archiwum. Fixture PostGIS nie jest pełnym
+  stagingiem Supabase. Szczegóły w `docs/operations/remaining-work.md`.
+- Automatyczne testy używają atrap API lub osobnych baz; nie zapisują produkcji.
+- Właściciel dotąd sam wykonuje merge i SQL, często na telefonie. Podawać krótkie
+  kroki z linkiem do konkretnego pliku. Nie prosić o hasła, dump ani sekrety w czacie.
+- Stara funkcja clever-service: przed usunięciem sprawdzić wdrożenia/logi i zachować
+  źródło. Brak odwołania w repo nie dowodzi braku zewnętrznego klienta.
+- Powitanie przez Gmail: worker obsługuje jedną wiadomość co pięć minut. `sent`
+  oznacza przyjęcie SMTP, nie dowód dostarczenia. Nie ponawiać `uncertain` w ciemno.
 
-- npm ci; npm run check w peakguide_front.
-- npm run test:e2e — Chromium; PLAYWRIGHT_CROSS_BROWSER=1 udostępnia projekty
-  firefox/webkit. Lokalne Chromium: PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium.
-- .github/workflows/quality.yml opisuje testy transakcji, poczty i przeglądarek.
-- Testy katalogu: scripts/build_catalogue_patch.py --check oraz
-  supabase/tests/catalogue_patch_integration.py (osobna baza catalogue_review_test).
-- Preview Netlify może używać produkcyjnego API. Nie wykonywać tam zapisów
-  w automatycznych testach; stosować atrapy API.
+## Testy i współpraca
+
+`npm run check` oraz `npm run test:e2e` w peakguide_front. Dodatkowe projekty:
+`PLAYWRIGHT_CROSS_BROWSER=1 npx playwright test --project=firefox --project=webkit`.
+Test nowego pakietu: `python supabase/tests/catalogue_management_test.py` przeciwko
+osobnej bazie **catalogue_management_test**. Skrypt resetuje schematy tylko w tej
+nazwanej bazie. CI opisuje przygotowanie środowiska PostGIS.
+
+Można rozdzielić badanie kolejnej partii danych, testy UI i SEO między agentów,
+jeśli właściciel zleci delegowanie. Osobne gałęzie/PR, jeden agent integrujący;
+nie edytować równolegle tej samej migracji ani nie wdrażać niezależnych zmian bazy.

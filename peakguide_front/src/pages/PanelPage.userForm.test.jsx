@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import PanelPage from './PanelPage';
 import { sendMessage } from '../api/messages';
+vi.mock('./AdminTools', () => ({ default: () => null }));
+
 vi.mock('../auth/useAuth', () => ({ useAuth: () => ({ status: 'authed', user: { email: 'test@example.com', is_admin: false } }) }));
 vi.mock('../api/messages', () => ({ sendMessage: vi.fn() }));
 vi.mock('../features/adminMessages/AdminMessagesSection', () => ({ default: () => null }));

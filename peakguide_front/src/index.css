@@ -1788,3 +1788,22 @@ a:focus-visible > .catalogue-card {
 
 .explore-map-cluster.leaflet-tooltip { background: transparent; border: 0; box-shadow: none; color: #fff; font-weight: 800; }
 .explore-map-cluster.leaflet-tooltip::before { display: none; }
+
+.catalogue-editor { display: grid; gap: 14px; }
+.catalogue-editor form { display: grid; gap: 16px; padding: 16px; border-radius: 18px; background: var(--menu-bg); }
+.catalogue-editor-fields { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: 14px; }
+.catalogue-editor label { display: grid; gap: 6px; }
+.catalogue-editor input, .catalogue-editor select, .catalogue-editor textarea { width: 100%; color: var(--text); background: var(--btn-bg); padding: 10px; border: 1px solid var(--border); border-radius: 10px; font: inherit; }
+.catalogue-editor label.catalogue-editor-check { display: flex; align-items: center; gap: 8px; }
+.catalogue-editor-check input { width: auto; }
+.catalogue-editor-wide { grid-column: 1/-1; }
+.catalogue-editor-actions, .catalogue-editor-languages { display: flex; flex-wrap: wrap; gap: 10px; }
+.catalogue-editor button, .catalogue-editor-actions button { padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--btn-bg); color: var(--text); cursor: pointer; }
+.catalogue-editor button[aria-pressed="true"], .catalogue-editor-actions button[aria-pressed="true"] { border-color: var(--primary); }
+.catalogue-editor-list { list-style: none; padding: 0; display: grid; gap: 10px; }
+.catalogue-editor-list li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; background: var(--menu-bg); border-radius: 12px; overflow-wrap: anywhere; }
+
+.explore-map-overlays { display: flex; flex-wrap: wrap; gap: 20px; padding: 14px; background: var(--menu-bg); border-radius: 12px; }
+.explore-map-overlays label { display: flex; align-items: center; gap: 8px; }
+
+.explore-map-page > p { margin: 0; padding: 12px 16px; background: var(--menu-bg); border-radius: 12px; }

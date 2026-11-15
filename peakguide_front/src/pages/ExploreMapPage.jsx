@@ -7,6 +7,9 @@ import { useAsync } from '../hooks/useAsync';
 import { parseCoordinates } from '../utils/coordinates';
 import { normalizeSearchText } from '../utils/search';
 import PageSEO from '../seo/PageSEO';
+import {fetchMapFeatures,overlayPois,overlayTrails} from '../api/mapFeatures';
+import MapOverlays from '../components/MapOverlays';
+import {catalogueLabels} from '../features/adminCatalogue/labels';
 
 const copy = {
  pl: ['Mapa szczytów','Szukaj szczytu','Kraj','Wszystkie kraje','Pasmo','Wszystkie pasma','Wczytywanie szczytów…','Nie udało się pobrać szczytów.','Spróbuj ponownie','Brak szczytów dla tych filtrów.','Szczyty na mapie','Zobacz szczegóły','Nie udało się wczytać części mapy. Lista szczytów nadal działa.','Bez poprawnych współrzędnych','Lista szczytów','Przybliż grupę','Przesuwaj mapę i używaj przycisków +/−. Kliknij punkt, aby zobaczyć szczyt.'],
@@ -71,6 +74,10 @@ function Points({ peaks, t }) {
 
 export default function ExploreMapPage({lang='pl'}) {
  const t=copy[lang]||copy.pl;
+ const extra=catalogueLabels(lang);
+ const [showPois,setShowPois]=useState(false),[showTrails,setShowTrails]=useState(false),[featureRetry,setFeatureRetry]=useState(0);
+ const poiState=useAsync(()=>showPois?fetchMapFeatures('poi',lang):Promise.resolve([]),[showPois,lang,featureRetry]);
+ const trailState=useAsync(()=>showTrails?fetchMapFeatures('trail',lang):Promise.resolve([]),[showTrails,lang,featureRetry]);
  const layers=layerLabels[lang]||layerLabels.pl;
  const [baseLayer,setBaseLayer]=useState(savedLayer);
  const layer=baseLayers[baseLayer];
@@ -87,6 +94,19 @@ export default function ExploreMapPage({lang='pl'}) {
  const ranges=[...new Map(peaks.filter(p=>!country||p.country_slug===country).map(p=>[p.range_slug,p.range_name])).entries()].filter(([k])=>k);
  const filtered=useMemo(()=>peaks.filter(p=>(!country||p.country_slug===country)&&(!range||p.range_slug===range)&&normalizeSearchText(`${p.peak_name} ${p.slug} ${p.range_name}`).includes(normalizeSearchText(query))),[peaks,country,range,query]);
  const located=useMemo(()=>filtered.map(p=>{const c=parseCoordinates(p.latitude,p.longitude);return {...p,point:c?[c.lat,c.lon]:null};}).filter(p=>p.point),[filtered]); // Stable results keep user panning intact.
+ const peakIds=useMemo(()=>new Set(filtered.map(p=>Number(p.id))),[filtered]);
+ const mapPois=useMemo(()=>showPois?overlayPois(poiState.data||[],peakIds):[],[showPois,poiState.data,peakIds]);
+ const mapTrails=useMemo(()=>showTrails?overlayTrails(trailState.data||[],peakIds):[],[showTrails,trailState.data,peakIds]);
+ const mapPoints=useMemo(()=>{
+  const points=[...located,...mapPois.map(p=>({point:[p.coords.lat,p.coords.lon]}))];
+  for(const trail of mapTrails){
+   const lines=trail.route_geometry.type==='LineString'?[trail.route_geometry.coordinates]:trail.route_geometry.coordinates;
+   let minLat=90,minLon=180,maxLat=-90,maxLon=-180;
+   for(const line of lines)for(const [lon,lat] of line){minLat=Math.min(minLat,lat);minLon=Math.min(minLon,lon);maxLat=Math.max(maxLat,lat);maxLon=Math.max(maxLon,lon);}
+   points.push({point:[minLat,minLon]},{point:[maxLat,maxLon]});
+  }
+  return points;
+ },[located,mapPois,mapTrails]);
  return <section className="explore-map-page">
   <PageSEO page="map" lang={lang}/><h1>{t[0]}</h1>
   <div className="explore-map-filters">
@@ -95,15 +115,24 @@ export default function ExploreMapPage({lang='pl'}) {
    <label>{t[4]}<select value={range} onChange={e=>setRange(e.target.value)}><option value="">{t[5]}</option>{ranges.map(([id,name])=><option key={id} value={id}>{name}</option>)}</select></label>
    <label>{layers[0]}<select value={baseLayer} onChange={e=>changeLayer(e.target.value)}>{Object.keys(baseLayers).map((key,i)=><option key={key} value={key}>{layers[i+1]}</option>)}</select></label>
   </div>
+  <div className="explore-map-overlays">
+   <label><input type="checkbox" checked={showPois} onChange={e=>setShowPois(e.target.checked)}/>{extra.pois}</label>
+   <label><input type="checkbox" checked={showTrails} onChange={e=>setShowTrails(e.target.checked)}/>{extra.routeLayer}</label>
+  </div>
+  {((showPois&&poiState.status==='error')||(showTrails&&trailState.status==='error'))&&<p role="alert">{extra.error} <button onClick={()=>setFeatureRetry(v=>v+1)}>{t[8]}</button></p>}
+  {showPois&&<p>{extra.pois}: {mapPois.length}</p>}
+  {showTrails&&<p>{extra.trails}: {mapTrails.length} · {extra.geometryHelp}</p>}
   {['idle','loading'].includes(result.status)?<p role="status">{t[6]}</p>:result.status==='error'?<p role="alert">{t[7]} <button onClick={()=>setRetry(v=>v+1)}>{t[8]}</button></p>:<>
    <p role="status">{t[10]}: {located.length} · {t[13]}: {filtered.length-located.length}</p>
    {tileError===layerKey&&<p role="alert">{t[12]} <button onClick={()=>{setTileError(null);setTiles(v=>v+1);}}>{t[8]}</button></p>}
-   {located.length>0&&<><p>{t[16]}</p><div className="explore-map-canvas" role="region" aria-label={t[0]}>
+   {mapPoints.length>0&&<><p>{t[16]}</p><div className="explore-map-canvas" role="region" aria-label={t[0]}>
     <MapContainer center={[49,20]} zoom={5} zoomAnimation={false} markerZoomAnimation={false} fadeAnimation={false} scrollWheelZoom={false} style={{height:'100%',width:'100%'}}>
      <TileLayer key={layerKey} {...layer} maxZoom={22} eventHandlers={{tileerror:()=>setTileError(layerKey)}}/>
-     <FitResults peaks={located}/><Points peaks={located} t={t}/>
+     <FitResults peaks={mapPoints}/><Points peaks={located} t={t}/><MapOverlays pois={mapPois} trails={mapTrails} sourceLabel={extra.source}/>
     </MapContainer>
    </div></>}
+   {showPois&&<ul className="explore-map-list" aria-label={extra.pois}>{(poiState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=pois`}>{p.name}</Link></li>)}</ul>}
+   {showTrails&&<ul className="explore-map-list" aria-label={extra.trails}>{(trailState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=trails&trail=${encodeURIComponent(p.slug)}`}>{p.name}</Link></li>)}</ul>}
    <h2>{t[14]}</h2>
    {!filtered.length?<p>{t[9]}</p>:<ul className="explore-map-list">{filtered.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m · {p.range_name}</li>)}</ul>}
   </>}
