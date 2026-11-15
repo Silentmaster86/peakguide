@@ -1,5 +1,4 @@
 -- Read-only single result for Supabase SQL Editor; no secrets or user records.
-begin read only;
 select jsonb_build_object(
  'columns',(select jsonb_agg(to_jsonb(x)) from (
   select table_name,column_name,data_type,udt_schema,udt_name,is_nullable,column_default
@@ -40,4 +39,3 @@ select jsonb_build_object(
   where n.nspname='public' and not t.tgisinternal and c.relname in ('trails','trails_i18n','pois','pois_i18n') order by c.relname,t.tgname
  ) x)
 ) as catalogue_preflight;
-commit;

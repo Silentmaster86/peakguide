@@ -1,5 +1,4 @@
 -- Read-only single result after migration 014 / optional batch-01 import.
-begin read only;
 select jsonb_build_object(
  'functions',(select jsonb_agg(to_jsonb(x)) from (
   select p.proname as function_name,p.prosecdef as security_definer,
@@ -26,4 +25,3 @@ select jsonb_build_object(
   where t.slug in ('waligora-andrzejowka-zolty','sleza-tapadla-dom-turysty','lysica-czas-w-las-petla','skopiec-rozdroze-komarnicka','chelmiec-boguszow-rosochatka') group by t.slug order by t.slug
  ) x)
 ) as catalogue_verification;
-commit;
