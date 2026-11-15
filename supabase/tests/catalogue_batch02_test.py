@@ -17,6 +17,7 @@ for record in records:
   assert all(len(line)>=2 for line in lines)
   assert all(len(p)==2 and -180<=p[0]<=180 and -90<=p[1]<=90 for line in lines for p in line)
   xml=E.parse(folder/'routes'/f"{b['slug']}.gpx");ns={'g':'http://www.topografix.com/GPX/1/1'}
+  assert [e.tag.split('}')[-1] for e in xml.find('g:metadata',ns)]==['name','desc','link'],'GPX metadata order must match GPX 1.1'
   xml_lines=[[[float(p.attrib['lon']),float(p.attrib['lat'])] for p in s.findall('g:trkpt',ns)] for s in xml.findall('g:trk/g:trkseg',ns)]
   assert lines==xml_lines,'Download and map disagree'
   assert b['geometry_source_url'] and b['geometry_verified_at']
