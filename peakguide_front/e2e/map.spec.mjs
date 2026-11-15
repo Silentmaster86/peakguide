@@ -57,12 +57,12 @@ test('map labels follow all four UI languages',async({page})=>{
 });
 test('base layer switch preserves filters and markers, updates credits and remembers choice',async({page})=>{
  const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64');
- for(const pattern of ['**.tile.opentopomap.org/**','https://server.arcgisonline.com/**']) await page.route(pattern,route=>route.fulfill({contentType:'image/png',body:image}));
+ for(const pattern of ['https://server.arcgisonline.com/**']) await page.route(pattern,route=>route.fulfill({contentType:'image/png',body:image}));
  await page.goto('/map');
  await page.getByRole('combobox',{name:'Country',exact:true}).selectOption('poland');
  await expect(page.locator('.leaflet-interactive')).toHaveCount(1);
  const view=page.getByRole('combobox',{name:'Map view',exact:true});
- for(const [value,source,credit] of [['satellite','server.arcgisonline.com','Esri'],['topo','tile.opentopomap.org','OpenTopoMap'],['standard','tile.openstreetmap.org','OpenStreetMap']]){
+ for(const [value,source,credit] of [['satellite','server.arcgisonline.com','Esri'],['topo','World_Topo_Map','Esri'],['standard','tile.openstreetmap.org','OpenStreetMap']]){
   await view.selectOption(value);
   await expect(page.locator('.leaflet-tile').first()).toHaveAttribute('src',new RegExp(source.replaceAll('.','\\.')));
   await expect(page.locator('.leaflet-control-attribution')).toContainText(credit);
