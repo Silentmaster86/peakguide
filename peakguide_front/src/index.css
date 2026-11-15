@@ -1841,7 +1841,7 @@ a:focus-visible > .catalogue-card {
 .pg-legend-dot--viewpoint { background: #bb3d50; }
 .pg-legend-dot--route { background: #b83f16; border-radius: 0; height: 3px; width: 16px; }
 .pg-map-route { filter: drop-shadow(0 0 1px white); }
-.pg-map-popup .leaflet-popup-content { min-width: 170px; color: #152b28; }
+.pg-map-popup .leaflet-popup-content { min-width: 140px; max-width: min(240px,calc(100vw - 130px)); color: #152b28; }
 .pg-map-popup h3 { font-size: 20px; margin: 6px 0; }
 .pg-map-popup .pg-popup-category { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #456159; }
 .pg-map-popup .pg-popup-altitude { margin: 8px 0; font-size: 18px; font-weight: 800; color: #1c704d; }

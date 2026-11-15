@@ -65,7 +65,7 @@ function Points({ peaks, t, ui }) {
  return groups.map(([key,items])=>{
   const center=items.reduce((a,p)=>[a[0]+p.point[0]/items.length,a[1]+p.point[1]/items.length],[0,0]);
   return <Marker key={key} position={center} icon={items.length>1?clusterIcon(items.length):mapIcon('peak')} title={items.length>1?`${t[15]} (${items.length})`:items[0].peak_name} alt={items.length>1?`${items.length}`:items[0].peak_name}>
-   <Popup className="pg-map-popup">
+   <Popup className="pg-map-popup" maxWidth={240} minWidth={140} autoPanPaddingTopLeft={[12,165]} autoPanPaddingBottomRight={[12,48]}>
     {items.length>1?<><button type="button" onClick={()=>map.fitBounds(items.map(p=>p.point),{padding:[35,35],maxZoom:Math.max(14,zoom+2),animate:false})}>{t[15]} ({items.length})</button><ul>{items.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m</li>)}</ul></>:<>
      <span className="pg-popup-category">{ui.peak}</span><h3>{items[0].peak_name}</h3><p className="pg-popup-altitude">{items[0].elevation_m} m</p><p>{items[0].range_name}</p><Link className="pg-popup-link" to={`/peaks/${items[0].slug}`}>{ui.details}</Link>
     </>}

@@ -108,6 +108,7 @@ test('map workspace supports keyboard pins, expand and Escape without losing fil
  const pin=page.locator('.pg-map-marker--peak');
  await pin.focus();await page.keyboard.press('Enter');
  await expect(page.locator('.pg-map-popup').getByRole('heading',{name:'Łyżka'})).toBeVisible();
+ await expect.poll(()=>page.locator('.explore-map-canvas').evaluate(canvas=>{const c=canvas.getBoundingClientRect(),p=canvas.querySelector('.pg-map-popup').getBoundingClientRect();return p.left>=c.left&&p.right<=c.right&&p.top>=c.top;})).toBe(true);
  await page.getByRole('button',{name:'Expand map',exact:true}).click();
  await expect(page.locator('.explore-map-canvas')).toHaveClass(/is-expanded/);
  const dialog=page.getByRole('dialog',{name:'Peak map',exact:true});
