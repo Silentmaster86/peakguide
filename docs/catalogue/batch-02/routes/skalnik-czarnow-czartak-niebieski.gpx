@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted from PTTK public GPX">
+  <metadata>
+    <name>Skalnik: niebieskim z Czarnowa przy dawnym Czartaku</name>
+    <desc>The section was cut from the 31 km PTTK track and reversed, retaining three original pieces without added connectors. Whole-trail metrics do not describe this ascent and are left blank.</desc>
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/item/gpx/967">
+      <text>Source: Szlaki Dolnego Śląska / PTTK</text>
+    </link>
+  </metadata>
+  <trk>
+    <name>Skalnik: niebieskim z Czarnowa przy dawnym Czartaku</name>
+    <trkseg>
+      <trkpt lat="50.8010743" lon="15.91031423" />
+      <trkpt lat="50.8012156" lon="15.9099508" />
+      <trkpt lat="50.80131565" lon="15.90941448" />
+      <trkpt lat="50.80123956" lon="15.90910392" />
+      <trkpt lat="50.80122838" lon="15.90868202" />
+      <trkpt lat="50.80131017" lon="15.90705366" />
+      <trkpt lat="50.80118801" lon="15.90554585" />
+    </trkseg>
+    <trkseg>
+      <trkpt lat="50.80118801" lon="15.90554585" />
+      <trkpt lat="50.80142449" lon="15.9055753" />
+      <trkpt lat="50.80210672" lon="15.90558091" />
+      <trkpt lat="50.80264782" lon="15.90538171" />
+      <trkpt lat="50.80317372" lon="15.90487919" />
+      <trkpt lat="50.80328494" lon="15.90462951" />
+      <trkpt lat="50.80338488" lon="15.90449328" />
+      <trkpt lat="50.80353817" lon="15.90448314" />
+      <trkpt lat="50.80370055" lon="15.90468092" />
+      <trkpt lat="50.80402674" lon="15.90566812" />
+      <trkpt lat="50.80415849" lon="15.90565377" />
+      <trkpt lat="50.80440674" lon="15.904916" />
+      <trkpt lat="50.80482379" lon="15.90461791" />
+      <trkpt lat="50.80531645" lon="15.90434298" />
+      <trkpt lat="50.80527346" lon="15.90393442" />
+      <trkpt lat="50.80531382" lon="15.90276515" />
+      <trkpt lat="50.80529355" lon="15.9024058" />
+      <trkpt lat="50.80508418" lon="15.90111216" />
+      <trkpt lat="50.80509372" lon="15.89972514" />
+      <trkpt lat="50.80519395" lon="15.89879424" />
+      <trkpt lat="50.80518023" lon="15.89854718" />
+      <trkpt lat="50.80522729" lon="15.89843698" />
+      <trkpt lat="50.80539634" lon="15.89848213" />
+      <trkpt lat="50.80555541" lon="15.89842087" />
+      <trkpt lat="50.80560841" lon="15.89826519" />
+      <trkpt lat="50.80571569" lon="15.89639263" />
+      <trkpt lat="50.80592204" lon="15.89462056" />
+      <trkpt lat="50.80596136" lon="15.89381766" />
+      <trkpt lat="50.80607252" lon="15.89343268" />
+      <trkpt lat="50.80618566" lon="15.89325609" />
+      <trkpt lat="50.80632546" lon="15.89316096" />
+    </trkseg>
+    <trkseg>
+      <trkpt lat="50.80632546" lon="15.89316096" />
+      <trkpt lat="50.80626024" lon="15.89391054" />
+      <trkpt lat="50.806332" lon="15.89459336" />
+      <trkpt lat="50.80650423" lon="15.8948919" />
+      <trkpt lat="50.80662703" lon="15.8953459" />
+      <trkpt lat="50.80691423" lon="15.89567064" />
+      <trkpt lat="50.80703786" lon="15.89588788" />
+      <trkpt lat="50.80712348" lon="15.89615273" />
+      <trkpt lat="50.80720035" lon="15.89649142" />
+      <trkpt lat="50.80729941" lon="15.89779804" />
+      <trkpt lat="50.80744861" lon="15.89884209" />
+      <trkpt lat="50.80801953" lon="15.90003292" />
+      <trkpt lat="50.80825295" lon="15.90034999" />
+      <trkpt lat="50.80864531" lon="15.90073544" />
+    </trkseg>
+  </trk>
+</gpx>

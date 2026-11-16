@@ -1,0 +1,287 @@
+[
+  {
+    "peak_slug": "rudawiec",
+    "peak_id": 4,
+    "source_url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/675",
+    "original_sha256": "c52dc3554637922f3f9eacd9ea18743178cb49fa9b74075f88a936d7f51f5f83",
+    "adaptation": "reverse24",
+    "original_point_count": 720,
+    "point_count": 101,
+    "segment_count": 1,
+    "first": [
+      16.92192793,
+      50.22583542
+    ],
+    "last": [
+      16.97683508,
+      50.24476504
+    ],
+    "geometry_length_km": 6.3409
+  },
+  {
+    "peak_slug": "orlica",
+    "peak_id": 5,
+    "source_url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/935",
+    "original_sha256": "59f81d9693ce45edc431ed8e526f697141dec6f718c2b61a96a8b3d967192e64",
+    "adaptation": "all",
+    "original_point_count": 183,
+    "point_count": 183,
+    "segment_count": 17,
+    "first": [
+      16.40079636,
+      50.34712248
+    ],
+    "last": [
+      16.30015787,
+      50.39646708
+    ],
+    "geometry_length_km": 14.5642
+  },
+  {
+    "peak_slug": "jagodna",
+    "peak_id": 7,
+    "source_url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/500",
+    "original_sha256": "1282bbc1bc7f4cf783260336b0bd35fc56b6465826a0e2f88018f6f81d58af87",
+    "adaptation": "all",
+    "original_point_count": 252,
+    "point_count": 252,
+    "segment_count": 14,
+    "first": [
+      16.53852761,
+      50.27696453
+    ],
+    "last": [
+      16.63241029,
+      50.18367097
+    ],
+    "geometry_length_km": 18.9106
+  },
+  {
+    "peak_slug": "kowadlo",
+    "peak_id": 9,
+    "source_url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/675",
+    "original_sha256": "c52dc3554637922f3f9eacd9ea18743178cb49fa9b74075f88a936d7f51f5f83",
+    "adaptation": "reverse18",
+    "original_point_count": 720,
+    "point_count": 30,
+    "segment_count": 1,
+    "first": [
+      16.99502885,
+      50.2638925
+    ],
+    "last": [
+      17.01327868,
+      50.26432313
+    ],
+    "geometry_length_km": 1.9284
+  },
+  {
+    "peak_slug": "klodzka-gora",
+    "peak_id": 13,
+    "source_url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/893",
+    "original_sha256": "bcacdbf26d677496ceb7608286c34da927fff099e490066bb45dcde13f75a719",
+    "adaptation": "all",
+    "original_point_count": 190,
+    "point_count": 190,
+    "segment_count": 18,
+    "first": [
+      16.6574192,
+      50.43519029
+    ],
+    "last": [
+      16.75486855,
+      50.4525512125
+    ],
+    "geometry_length_km": 9.0501
+  },
+  {
+    "peak_slug": "biskupia-kopa",
+    "peak_id": 15,
+    "source_url": "https://slaskie-opolskie.szlaki.pttk.pl/item/gpx/304",
+    "original_sha256": "f305d10c20ad0efaca29a7f07adef9519db3a6436220ac3eaecbf59f69ee78fc",
+    "adaptation": "all",
+    "original_point_count": 143,
+    "point_count": 143,
+    "segment_count": 15,
+    "first": [
+      17.45091963,
+      50.28629939
+    ],
+    "last": [
+      17.42891907,
+      50.25677547
+    ],
+    "geometry_length_km": 5.8948
+  },
+  {
+    "peak_slug": "babia-gora",
+    "peak_id": 17,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/320",
+    "original_sha256": "aeef13d7566fa2536ed60d3cab38bb42d0c7df87f914e78dcdb8787afb943945",
+    "adaptation": "all",
+    "original_point_count": 80,
+    "point_count": 80,
+    "segment_count": 2,
+    "first": [
+      19.5166607975,
+      49.5873967525
+    ],
+    "last": [
+      19.529658123333,
+      49.573157143333
+    ],
+    "geometry_length_km": 2.9814
+  },
+  {
+    "peak_slug": "tarnica",
+    "peak_id": 18,
+    "source_url": "https://bdpn.gov.pl/uploads/files/657acebcb28fa809508472.gpx",
+    "original_sha256": "157462c2beae6eeb61f89ec96f95aec65086e185e98efedcae413a333da431d1",
+    "adaptation": "all",
+    "original_point_count": 222,
+    "point_count": 222,
+    "segment_count": 1,
+    "first": [
+      22.686245,
+      49.062145
+    ],
+    "last": [
+      22.726319,
+      49.074529
+    ],
+    "geometry_length_km": 4.3291
+  },
+  {
+    "peak_slug": "turbacz",
+    "peak_id": 19,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/33",
+    "original_sha256": "2e469f2bc9e7b43953cfd89016bffec30b6426683d46ebe39c8a1c6ac7458e93",
+    "adaptation": "all",
+    "original_point_count": 205,
+    "point_count": 205,
+    "segment_count": 12,
+    "first": [
+      20.084021,
+      49.583605
+    ],
+    "last": [
+      20.11851821,
+      49.54342629
+    ],
+    "geometry_length_km": 6.5326
+  },
+  {
+    "peak_slug": "radziejowa",
+    "peak_id": 20,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/17",
+    "original_sha256": "0aa9a511d40d50f6a2e68ffc98b3bcd0b0e477823f165b5686789d665aedd762",
+    "adaptation": "all",
+    "original_point_count": 392,
+    "point_count": 392,
+    "segment_count": 21,
+    "first": [
+      20.42890021,
+      49.44138237
+    ],
+    "last": [
+      20.61057475,
+      49.43810937
+    ],
+    "geometry_length_km": 18.6398
+  },
+  {
+    "peak_slug": "lubomir",
+    "peak_id": 21,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/164",
+    "original_sha256": "dacad7ed05320ccbf0d5f86ce1b24e26ce47a86cf36f976afffcc3bf9dd9702b",
+    "adaptation": "prefix",
+    "original_point_count": 399,
+    "point_count": 103,
+    "segment_count": 5,
+    "first": [
+      20.078229,
+      49.748822
+    ],
+    "last": [
+      20.059883,
+      49.766994
+    ],
+    "geometry_length_km": 5.1216
+  },
+  {
+    "peak_slug": "mogielica",
+    "peak_id": 22,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/157",
+    "original_sha256": "823f8811986fd5b2c16a7cc42004b0c86a34441f9d78ec0fa84ea5a04ad5c9d7",
+    "adaptation": "all",
+    "original_point_count": 265,
+    "point_count": 265,
+    "segment_count": 13,
+    "first": [
+      20.3197244,
+      49.73452607
+    ],
+    "last": [
+      20.277257,
+      49.654881
+    ],
+    "geometry_length_km": 11.7236
+  },
+  {
+    "peak_slug": "czupel",
+    "peak_id": 24,
+    "source_url": "https://www.beskidy.slaskie.travel/download/route/gpx/1019739",
+    "original_sha256": "83dcda0162e2f1821159a35e472342398167b25268b1d96cdc9b71129ecc848e",
+    "adaptation": "all",
+    "original_point_count": 563,
+    "point_count": 563,
+    "segment_count": 1,
+    "first": [
+      19.206776,
+      49.750334
+    ],
+    "last": [
+      19.194163,
+      49.786917
+    ],
+    "geometry_length_km": 14.6383
+  },
+  {
+    "peak_slug": "skrzyczne",
+    "peak_id": 25,
+    "source_url": "https://slaskie.travel/download/route/gpx/1020144",
+    "original_sha256": "386fa320753ce82ea15e2b7e6aae68c83bb6b8933ac8d361270fb13804d381a9",
+    "adaptation": "all",
+    "original_point_count": 481,
+    "point_count": 481,
+    "segment_count": 1,
+    "first": [
+      19.075643,
+      49.666522
+    ],
+    "last": [
+      19.075643,
+      49.666522
+    ],
+    "geometry_length_km": 15.591
+  },
+  {
+    "peak_slug": "wysoka-pieniny",
+    "peak_id": 26,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/144",
+    "original_sha256": "11b4a5f1ef4d57d287e7cbcf329add9630e8bef29278a8d1794887c1cf100336",
+    "adaptation": "all",
+    "original_point_count": 121,
+    "point_count": 121,
+    "segment_count": 5,
+    "first": [
+      20.55354,
+      49.406906
+    ],
+    "last": [
+      20.56160091,
+      49.37914298
+    ],
+    "geometry_length_km": 4.2907
+  }
+]

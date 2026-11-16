@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted public tourism GPX">
+  <metadata>
+    <name>Kowadło: z Bielic</name>
+    <desc>Zielony szlak od węzła w Bielicach na Kowadło. Wybrano i odwrócono odcinek śladu PTTK.</desc>
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku" />
+  </metadata>
+  <trk>
+    <name>Kowadło: z Bielic</name>
+    <trkseg>
+      <trkpt lon="16.99502885" lat="50.2638925" />
+      <trkpt lon="16.99596763" lat="50.26374838" />
+      <trkpt lon="16.99633241" lat="50.26335722" />
+      <trkpt lon="16.99636459" lat="50.26309987" />
+      <trkpt lon="16.99671865" lat="50.26187143" />
+      <trkpt lon="16.99745357" lat="50.26143564" />
+      <trkpt lon="16.99830651" lat="50.26072532" />
+      <trkpt lon="16.99864984" lat="50.2605709" />
+      <trkpt lon="16.99927747" lat="50.26040275" />
+      <trkpt lon="17.00052738" lat="50.26019686" />
+      <trkpt lon="17.00130522" lat="50.25998067" />
+      <trkpt lon="17.00179338" lat="50.25999783" />
+      <trkpt lon="17.00247467" lat="50.26020896" />
+      <trkpt lon="17.00303793" lat="50.26050407" />
+      <trkpt lon="17.00356901" lat="50.26084722" />
+      <trkpt lon="17.00416982" lat="50.26112861" />
+      <trkpt lon="17.00452924" lat="50.2610188" />
+      <trkpt lon="17.00562894" lat="50.26087468" />
+      <trkpt lon="17.00912118" lat="50.25993787" />
+      <trkpt lon="17.00960934" lat="50.26015062" />
+      <trkpt lon="17.01015115" lat="50.26047662" />
+      <trkpt lon="17.01062858" lat="50.26105998" />
+      <trkpt lon="17.01138496" lat="50.2618801" />
+      <trkpt lon="17.01146543" lat="50.26271736" />
+      <trkpt lon="17.01142251" lat="50.26327324" />
+      <trkpt lon="17.01155663" lat="50.26343108" />
+      <trkpt lon="17.01224327" lat="50.26351343" />
+      <trkpt lon="17.01261878" lat="50.26370901" />
+      <trkpt lon="17.01292992" lat="50.26402812" />
+      <trkpt lon="17.01327868" lat="50.26432313" />
+    </trkseg>
+  </trk>
+</gpx>

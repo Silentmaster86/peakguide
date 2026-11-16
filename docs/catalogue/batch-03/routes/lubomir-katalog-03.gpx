@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted public tourism GPX">
+  <metadata>
+    <name>Lubomir: z Węglówki do obserwatorium</name>
+    <desc>Początkowy odcinek śladu PTTK z Węglówki, skrócony przy obserwatorium na Lubomirze.</desc>
+    <link href="https://malopolska.szlaki.pttk.pl/164-pttk-malopolska-weglowka-szczyrzyc-cmentarz" />
+  </metadata>
+  <trk>
+    <name>Lubomir: z Węglówki do obserwatorium</name>
+    <trkseg>
+      <trkpt lon="20.078229" lat="49.748822" />
+      <trkpt lon="20.077562" lat="49.749294" />
+      <trkpt lon="20.077311" lat="49.74941" />
+      <trkpt lon="20.077038" lat="49.749478" />
+      <trkpt lon="20.076612" lat="49.749469" />
+      <trkpt lon="20.075762" lat="49.749353" />
+      <trkpt lon="20.075425" lat="49.749342" />
+      <trkpt lon="20.073547" lat="49.749514" />
+      <trkpt lon="20.073217" lat="49.749455" />
+      <trkpt lon="20.072743" lat="49.749197" />
+      <trkpt lon="20.072422" lat="49.749091" />
+      <trkpt lon="20.0705153" lat="49.7488781" />
+      <trkpt lon="20.06968468" lat="49.74864549" />
+      <trkpt lon="20.06925157" lat="49.74860154" />
+      <trkpt lon="20.06871949" lat="49.74860976" />
+      <trkpt lon="20.06728829" lat="49.74826587" />
+      <trkpt lon="20.06696177" lat="49.74824508" />
+      <trkpt lon="20.06655059" lat="49.74813281" />
+      <trkpt lon="20.06569573" lat="49.74801808" />
+      <trkpt lon="20.06409611" lat="49.74811848" />
+      <trkpt lon="20.06360255" lat="49.74806112" />
+      <trkpt lon="20.06312473" lat="49.74805122" />
+      <trkpt lon="20.06013563" lat="49.74805122" />
+      <trkpt lon="20.059471" lat="49.748238" />
+      <trkpt lon="20.05899" lat="49.748445" />
+      <trkpt lon="20.058096" lat="49.748648" />
+      <trkpt lon="20.057461" lat="49.748848" />
+      <trkpt lon="20.057057" lat="49.748919" />
+      <trkpt lon="20.056433" lat="49.74918" />
+      <trkpt lon="20.056127" lat="49.74923" />
+      <trkpt lon="20.055542" lat="49.749437" />
+      <trkpt lon="20.054985" lat="49.749584" />
+      <trkpt lon="20.053555" lat="49.750381" />
+      <trkpt lon="20.051544" lat="49.751229" />
+      <trkpt lon="20.050517" lat="49.752151" />
+      <trkpt lon="20.050341" lat="49.752432" />
+      <trkpt lon="20.050115" lat="49.752664" />
+      <trkpt lon="20.049982" lat="49.753244" />
+      <trkpt lon="20.049897" lat="49.753412" />
+      <trkpt lon="20.049687" lat="49.753685" />
+      <trkpt lon="20.049335" lat="49.753983" />
+      <trkpt lon="20.048997" lat="49.754382" />
+      <trkpt lon="20.048172" lat="49.755121" />
+      <trkpt lon="20.047871623333" lat="49.75545118" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="20.047871623333" lat="49.75545118" />
+      <trkpt lon="20.04735589" lat="49.756415" />
+      <trkpt lon="20.04729152" lat="49.75692791" />
+      <trkpt lon="20.04730225" lat="49.75740615" />
+      <trkpt lon="20.04719496" lat="49.7578844" />
+      <trkpt lon="20.04704475" lat="49.75816857" />
+      <trkpt lon="20.04692674" lat="49.7586676" />
+      <trkpt lon="20.04681945" lat="49.75896563" />
+      <trkpt lon="20.04693747" lat="49.75919434" />
+      <trkpt lon="20.04691601" lat="49.75938841" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="20.04691601" lat="49.75938841" />
+      <trkpt lon="20.04729152" lat="49.75930524" />
+      <trkpt lon="20.04752755" lat="49.7591181" />
+      <trkpt lon="20.04778504" lat="49.75866067" />
+      <trkpt lon="20.04835367" lat="49.75858443" />
+      <trkpt lon="20.0485146" lat="49.75872998" />
+      <trkpt lon="20.04854679" lat="49.75893097" />
+      <trkpt lon="20.04929781" lat="49.75922207" />
+      <trkpt lon="20.04906178" lat="49.75976267" />
+      <trkpt lon="20.04880428" lat="49.76012307" />
+      <trkpt lon="20.04881501" lat="49.76037257" />
+      <trkpt lon="20.04889011" lat="49.76072604" />
+      <trkpt lon="20.04885793" lat="49.76123197" />
+      <trkpt lon="20.04896522" lat="49.76139137" />
+      <trkpt lon="20.04924417" lat="49.76150226" />
+      <trkpt lon="20.04973769" lat="49.76162701" />
+      <trkpt lon="20.05017757" lat="49.76167552" />
+      <trkpt lon="20.05085349" lat="49.76150226" />
+      <trkpt lon="20.05150795" lat="49.76124583" />
+      <trkpt lon="20.05267739" lat="49.76069831" />
+      <trkpt lon="20.05454421" lat="49.76039337" />
+      <trkpt lon="20.05511284" lat="49.76030327" />
+      <trkpt lon="20.05592823" lat="49.76026168" />
+      <trkpt lon="20.05676508" lat="49.75992901" />
+      <trkpt lon="20.05714059" lat="49.76005376" />
+      <trkpt lon="20.05734444" lat="49.76018544" />
+      <trkpt lon="20.05758047" lat="49.76024089" />
+      <trkpt lon="20.05787015" lat="49.76021317" />
+      <trkpt lon="20.05812764" lat="49.76030327" />
+      <trkpt lon="20.05841732" lat="49.76051812" />
+      <trkpt lon="20.0584924" lat="49.76077286" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="20.0584924" lat="49.76077286" />
+      <trkpt lon="20.05842922" lat="49.76081671" />
+      <trkpt lon="20.05845261" lat="49.76089486" />
+      <trkpt lon="20.05854927" lat="49.76096577" />
+      <trkpt lon="20.05889911" lat="49.76108339" />
+      <trkpt lon="20.05902363" lat="49.76119057" />
+      <trkpt lon="20.05908477" lat="49.76133998" />
+      <trkpt lon="20.05888903" lat="49.76170068" />
+      <trkpt lon="20.0588645" lat="49.762125" />
+      <trkpt lon="20.05867539" lat="49.76262268" />
+      <trkpt lon="20.059029" lat="49.763656" />
+      <trkpt lon="20.05908" lat="49.764857" />
+      <trkpt lon="20.059046" lat="49.764942" />
+      <trkpt lon="20.0590999" lat="49.765928" />
+      <trkpt lon="20.0592512" lat="49.76628712" />
+      <trkpt lon="20.059406" lat="49.766914" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="20.059406" lat="49.766914" />
+      <trkpt lon="20.059883" lat="49.766994" />
+    </trkseg>
+  </trk>
+</gpx>

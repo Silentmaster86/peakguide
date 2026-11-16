@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted from PTTK public GPX">
+  <metadata>
+    <name>Śnieżnik: zielonym od schroniska w rejon szczytu</name>
+    <desc>Only the last segment of the 55.1 km PTTK GPX was selected and reversed. Separate metrics for this short section are unverified and left blank. The download contains this section only.</desc>
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/item/gpx/675">
+      <text>Source: Szlaki Dolnego Śląska / PTTK</text>
+    </link>
+  </metadata>
+  <trk>
+    <name>Śnieżnik: zielonym od schroniska w rejon szczytu</name>
+    <trkseg>
+      <trkpt lat="50.207941643333" lon="16.83248699" />
+      <trkpt lat="50.20791219" lon="16.8327418" />
+      <trkpt lat="50.20747563" lon="16.83398366" />
+      <trkpt lat="50.20711492" lon="16.83478832" />
+      <trkpt lat="50.20594688" lon="16.83631718" />
+      <trkpt lat="50.20437685" lon="16.83726132" />
+      <trkpt lat="50.20422912" lon="16.83754563" />
+      <trkpt lat="50.20409022" lon="16.83865607" />
+      <trkpt lat="50.20411771" lon="16.83895648" />
+      <trkpt lat="50.20417611" lon="16.8391335" />
+      <trkpt lat="50.20451623" lon="16.83941245" />
+      <trkpt lat="50.20438912" lon="16.83998644" />
+      <trkpt lat="50.20447844" lon="16.84020638" />
+      <trkpt lat="50.20468114" lon="16.8403244" />
+      <trkpt lat="50.20535794" lon="16.84118807" />
+      <trkpt lat="50.20588357" lon="16.84243798" />
+      <trkpt lat="50.2064195" lon="16.84421897" />
+      <trkpt lat="50.20670807" lon="16.84550107" />
+      <trkpt lat="50.20743217" lon="16.8473947" />
+    </trkseg>
+  </trk>
+</gpx>

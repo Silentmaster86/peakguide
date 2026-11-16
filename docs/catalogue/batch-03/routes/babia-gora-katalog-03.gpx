@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted public tourism GPX">
+  <metadata>
+    <name>Babia Góra: Markowe Szczawiny – Diablak</name>
+    <desc>Czerwony szlak od schroniska przez Przełęcz Brona na Diablak. Nie obejmuje dojścia do schroniska ani Perci Akademików.</desc>
+    <link href="https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki" />
+  </metadata>
+  <trk>
+    <name>Babia Góra: Markowe Szczawiny – Diablak</name>
+    <trkseg>
+      <trkpt lon="19.5166607975" lat="49.5873967525" />
+      <trkpt lon="19.51630568" lat="49.58695326" />
+      <trkpt lon="19.51581906" lat="49.58662727" />
+      <trkpt lon="19.51567903" lat="49.58624599" />
+      <trkpt lon="19.51570904" lat="49.58583997" />
+      <trkpt lon="19.51564467" lat="49.58566581" />
+      <trkpt lon="19.51599621" lat="49.58532144" />
+      <trkpt lon="19.51597053" lat="49.58496923" />
+      <trkpt lon="19.51590678" lat="49.58482668" />
+      <trkpt lon="19.51563881" lat="49.58447967" />
+      <trkpt lon="19.5154068" lat="49.58425068" />
+      <trkpt lon="19.51533998" lat="49.58409302" />
+      <trkpt lon="19.51484425" lat="49.58406605" />
+      <trkpt lon="19.5145793" lat="49.58411509" />
+      <trkpt lon="19.51426299" lat="49.58401565" />
+      <trkpt lon="19.51398752" lat="49.58407219" />
+      <trkpt lon="19.51364688" lat="49.58405947" />
+      <trkpt lon="19.51336553" lat="49.58402912" />
+      <trkpt lon="19.51333898" lat="49.58394175" />
+      <trkpt lon="19.5128097" lat="49.58383465" />
+      <trkpt lon="19.51252294" lat="49.58389781" />
+      <trkpt lon="19.5121926" lat="49.58382072" />
+      <trkpt lon="19.51204283" lat="49.58382025" />
+      <trkpt lon="19.51189237" lat="49.58375831" />
+      <trkpt lon="19.51144537" lat="49.5833673" />
+      <trkpt lon="19.51145598" lat="49.58296699" />
+      <trkpt lon="19.51138695" lat="49.58276556" />
+      <trkpt lon="19.51126667" lat="49.58258178" />
+      <trkpt lon="19.51073951" lat="49.58223774" />
+      <trkpt lon="19.51060658" lat="49.58203026" />
+      <trkpt lon="19.51056162" lat="49.5820323" />
+      <trkpt lon="19.5105227" lat="49.58198724" />
+      <trkpt lon="19.51048102" lat="49.58185173" />
+      <trkpt lon="19.51056642" lat="49.58179065" />
+      <trkpt lon="19.5105996" lat="49.58163696" />
+      <trkpt lon="19.51031534" lat="49.58158822" />
+      <trkpt lon="19.510190876667" lat="49.581527936667" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="19.510190876667" lat="49.581527936667" />
+      <trkpt lon="19.510412" lat="49.581275" />
+      <trkpt lon="19.512303" lat="49.579696" />
+      <trkpt lon="19.512676" lat="49.579323" />
+      <trkpt lon="19.514848" lat="49.577524" />
+      <trkpt lon="19.515123" lat="49.576863" />
+      <trkpt lon="19.515271" lat="49.576412" />
+      <trkpt lon="19.515392" lat="49.576182" />
+      <trkpt lon="19.515449" lat="49.575929" />
+      <trkpt lon="19.515627" lat="49.575487" />
+      <trkpt lon="19.516235" lat="49.574949" />
+      <trkpt lon="19.516508" lat="49.574769" />
+      <trkpt lon="19.516758" lat="49.574423" />
+      <trkpt lon="19.51764" lat="49.573764" />
+      <trkpt lon="19.518234" lat="49.573407" />
+      <trkpt lon="19.518897" lat="49.573213" />
+      <trkpt lon="19.51964" lat="49.573089" />
+      <trkpt lon="19.519882" lat="49.572913" />
+      <trkpt lon="19.52053" lat="49.57281" />
+      <trkpt lon="19.521008" lat="49.572622" />
+      <trkpt lon="19.521172" lat="49.572521" />
+      <trkpt lon="19.52151" lat="49.572277" />
+      <trkpt lon="19.522589" lat="49.572214" />
+      <trkpt lon="19.522935" lat="49.572138" />
+      <trkpt lon="19.52393" lat="49.572189" />
+      <trkpt lon="19.523989" lat="49.572168" />
+      <trkpt lon="19.52403" lat="49.572105" />
+      <trkpt lon="19.524097" lat="49.572099" />
+      <trkpt lon="19.524172" lat="49.572149" />
+      <trkpt lon="19.524592" lat="49.572107" />
+      <trkpt lon="19.525518" lat="49.572173" />
+      <trkpt lon="19.525683" lat="49.572202" />
+      <trkpt lon="19.527324" lat="49.572757" />
+      <trkpt lon="19.527855" lat="49.572896" />
+      <trkpt lon="19.528168" lat="49.572905" />
+      <trkpt lon="19.52833" lat="49.572976" />
+      <trkpt lon="19.528686" lat="49.573007" />
+      <trkpt lon="19.528862" lat="49.573071" />
+      <trkpt lon="19.528892" lat="49.573048" />
+      <trkpt lon="19.528988" lat="49.57307" />
+      <trkpt lon="19.52902" lat="49.572995" />
+      <trkpt lon="19.529095" lat="49.572998" />
+      <trkpt lon="19.529658123333" lat="49.573157143333" />
+    </trkseg>
+  </trk>
+</gpx>
