@@ -13,7 +13,9 @@ changes=json.loads((folder/'changes.json').read_text())
 anchors={'waligora-andrzejowka-zolty':([16.27823,50.68488],[16.278106,50.680983]),'sleza-tapadla-dom-turysty':([16.6986,50.8463],[16.7089,50.8654]),'skopiec-rozdroze-komarnicka':([15.877644,50.939311],[15.884667,50.943972]),'chelmiec-boguszow-rosochatka':([16.20415,50.76141],[16.21077,50.77936])}
 for r in changes:
  ns={'g':'http://www.topografix.com/GPX/1/1'};x=E.parse(folder/'routes'/(r['slug']+'.gpx'));lines=r['after']['route_geometry']['coordinates']
- assert [e.tag.split('}')[-1] for e in x.find('g:metadata',ns)]==['name','desc','link']
+ tags=[e.tag.split('}')[-1] for e in x.find('g:metadata',ns)];assert tags[:2]==['name','desc'] and all(t=='link' for t in tags[2:])
+ audit=next(a for a in json.loads((folder/'geometry-review.json').read_text()) if a['slug']==r['slug'])
+ assert {a['url'] for a in audit['sources']}<={e.attrib['href'] for e in x.findall('g:metadata/g:link',ns)},'Download must retain geometry attribution'
  assert lines==[[[float(p.attrib['lon']),float(p.attrib['lat'])] for p in s.findall('g:trkpt',ns)] for s in x.findall('g:trk/g:trkseg',ns)]
  assert all(a[-1]==b[0] for a,b in zip(lines,lines[1:]))
  for actual,expected in zip([lines[0][0],lines[-1][-1]],anchors[r['slug']]):assert math.hypot((actual[0]-expected[0])*71000,(actual[1]-expected[1])*111000)<100
