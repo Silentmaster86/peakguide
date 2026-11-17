@@ -118,3 +118,8 @@ jobs:
       - run: python supabase/tests/catalogue_twenty_test.py
         env:
           PGHOST: localhost
+      - run: python scripts/build_lysica_review.py --check
+      - run: createdb -h localhost -U postgres lysica_review_test
+      - run: python supabase/tests/lysica_review_test.py
+        env:
+          PGHOST: localhost

@@ -1,0 +1,78 @@
+{
+  "reviewed_at": "2026-11-17",
+  "decision": "unpublish_unverified_record",
+  "before": {
+    "id": 83,
+    "slug": "lysica-skarpowa",
+    "range_id": 28,
+    "subrange_id": null,
+    "elevation_m": 612,
+    "latitude": 50.9,
+    "longitude": 20.9,
+    "difficulty": null,
+    "best_season": null,
+    "cover_image_url": null,
+    "is_korona": false,
+    "active": true,
+    "created_at": "2026-02-04T16:24:01.735432+00:00",
+    "geom": "0101000020E61000006666666666E634403333333333734940",
+    "cover_image_author": null,
+    "cover_image_source_url": null,
+    "cover_image_license": null,
+    "cover_image_license_url": null
+  },
+  "after": {
+    "id": 83,
+    "slug": "lysica-skarpowa",
+    "range_id": 28,
+    "subrange_id": null,
+    "elevation_m": 612,
+    "latitude": 50.9,
+    "longitude": 20.9,
+    "difficulty": null,
+    "best_season": null,
+    "cover_image_url": null,
+    "is_korona": false,
+    "active": false,
+    "created_at": "2026-02-04T16:24:01.735432+00:00",
+    "geom": "0101000020E61000006666666666E634403333333333734940",
+    "cover_image_author": null,
+    "cover_image_source_url": null,
+    "cover_image_license": null,
+    "cover_image_license_url": null
+  },
+  "translations": [
+    {
+      "lang": "en",
+      "name": "Łysica",
+      "tips": null,
+      "peak_id": 83,
+      "description": "Łysica Skarpowa is a modest goal in the Świętokrzyskie Mountains area, great for a short, easy hike. The route is technically simple, through forest and gentle climbs. Choose a dry day and comfortable shoes, as sections can be stony or muddy.",
+      "short_description": null
+    },
+    {
+      "lang": "pl",
+      "name": "Łysica",
+      "tips": null,
+      "peak_id": 83,
+      "description": "Łysica Skarpowa to niewysoki cel w rejonie Gór Świętokrzyskich, dobry na krótką, łatwą wędrówkę. Trasa jest technicznie prosta i prowadzi przez lasy oraz łagodne podejścia. Najlepiej wybrać suchy dzień i wygodne buty, bo miejscami ścieżka bywa kamienista lub błotnista.",
+      "short_description": null
+    },
+    {
+      "lang": "ua",
+      "name": "Łysica",
+      "tips": null,
+      "peak_id": 83,
+      "description": "Лисиця Скарпова — невисока ціль у районі Свєнтокшиських гір, добра для короткого легкого походу. Маршрут технічно простий і проходить лісом та пологими підйомами. Оберіть сухий день і зручне взуття, бо місцями стежка кам’яниста або багниста.",
+      "short_description": null
+    },
+    {
+      "lang": "zh",
+      "name": "Łysica",
+      "tips": null,
+      "peak_id": 83,
+      "description": "斯卡尔波瓦利西察（Łysica Skarpowa）位于圣十字山地区，是一个适合短途轻松徒步的低海拔目标。路线技术难度低，穿越森林并缓坡上行。建议选择干燥天气并穿舒适的鞋，部分路段可能碎石或泥泞。",
+      "short_description": null
+    }
+  ]
+}
