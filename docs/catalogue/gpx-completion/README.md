@@ -42,3 +42,5 @@ To niezależne od oczekującego importu 20 szczytów: aktualizacja GPX wymaga wy
 ## Testy
 
 `python scripts/build_catalogue_gpx_completion.py --check`; test integracyjny `python supabase/tests/catalogue_gpx_completion_test.py` na dedykowanej bazie `catalogue_gpx_completion_test` (lub `--docker NAZWA`). Test sprawdza zgodność 4 GPX z mapą, niezależne punkty końcowe, prawdziwe połączenie na Rosochatce, zmianę tylko pól geometrii i wersji, zachowanie wszystkich opisów/parametrów/POI, idempotencję importu 01 po upgrade, cofanie w odpowiedniej kolejności, ponowny upgrade oraz odmowę nadpisania edycji. Testy i generatory są w CI.
+
+Dodatkowy test importuje wszystkie cztery rzeczywiste partie: po upgrade potwierdza 28 tras z geometrią i 28 POI, a po jego cofnięciu 24 geometrie i niezmienione rejestry wszystkich wcześniejszych partii.

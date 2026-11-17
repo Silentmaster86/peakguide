@@ -52,3 +52,16 @@ reset();sql("update trails_i18n set notes='Owner edit' where trail_id=(select id
 reset();sql(apply);sql("update trails_i18n set notes='Later edit' where trail_id=(select id from trails where slug='skopiec-rozdroze-komarnicka') and lang='en';");stale=snap();sql(rollback,'Upgraded trail changed');sql(apply,'Upgraded trail changed');assert snap()==stale
 reset();sql("delete from peakguide_private.catalogue_batch_receipts where batch_key='kgp-01';");sql(apply,'Batch01 receipt missing')
 print('PASS atomic stale-row rejection, later-edit protection and missing-receipt rejection')
+# Exercise the complete real 28-peak rollout without touching other receipts.
+reset()
+sql("update peaks set slug='sniezka' where id=1;update peaks set slug='snieznik' where id=2;")
+ids={'wysoka-kopa':3,'rudawiec':4,'orlica':5,'wielka-sowa':6,'jagodna':7,'skalnik':8,'kowadlo':9,'szczeliniec-wielki':11,'klodzka-gora':13,'biskupia-kopa':15,'rysy':16,'babia-gora':17,'tarnica':18,'turbacz':19,'radziejowa':20,'lubomir':21,'mogielica':22,'lackowa':23,'czupel':24,'skrzyczne':25,'wysoka-pieniny':26}
+sql('insert into peaks(id,slug,active)values'+','.join(f"({id},'{slug}',true)" for slug,id in ids.items())+";insert into poi_types(id,slug)values(5,'attraction');")
+for batch in ['02','03','04']:sql((base/f'batch-{batch}/apply.sql').read_text())
+sql(apply)
+assert sql('select count(*) from trails where route_geometry is not null')=='28'
+assert sql('select count(*) from trails')=='28';assert sql('select count(*) from pois')=='28'
+sql(rollback)
+for batch in ['01','02','03','04']:sql((base/f'batch-{batch}/apply.sql').read_text())
+assert sql('select count(*) from trails where route_geometry is not null')=='24'
+print('PASS complete real rollout: 28 mapped KGP routes and 28 POIs; upgrade rollback preserves every batch01/02/03/04 receipt')
