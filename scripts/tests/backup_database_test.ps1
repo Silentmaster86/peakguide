@@ -5,10 +5,12 @@ $global:testMode = 'success'
 $global:dumpArguments = $null
 $global:dumpCalls = 0
 $global:restoreCalls = 0
+$global:dumpSslModes = @()
 function global:pg_dump {
     $global:dumpArguments = $args
     $global:dumpCalls++
-    if ($env:PGSSLMODE -ne 'require' -or $env:PGCONNECT_TIMEOUT -ne '20') { throw 'Missing connection settings' }
+    $global:dumpSslModes += $env:PGSSLMODE
+    if ($env:PGSSLMODE -notin @('require', 'verify-ca', 'verify-full') -or $env:PGCONNECT_TIMEOUT -ne '20') { throw 'Missing connection settings' }
     $file = $args[[Array]::IndexOf($args, '--file') + 1]
     if ($global:testMode -ne 'missing') {
         if ($global:testMode -eq 'empty') { [IO.File]::WriteAllText($file, '') }
@@ -38,6 +40,7 @@ try {
     Assert ($info.sha256 -eq (Get-FileHash $result.FullName).Hash) 'Hash mismatch'
     Assert ($info.archive_list_readable -and -not $info.restore_tested) 'Wrong verification claims'
     Assert ($env:PGSSLMODE -eq 'verify-full' -and $env:PGCONNECT_TIMEOUT -eq '7') 'Environment not restored'
+    Assert ($global:dumpSslModes[0] -eq 'verify-full') 'Existing certificate verification was weakened'
     Assert ($global:dumpArguments -contains '--password') 'Native password prompt missing'
     Assert (-not ($global:dumpArguments -match 'postgresql://')) 'Credential URL must not be used'
     $second = & $scriptFile -DbHost 'example.pooler.supabase.com' -DbUser 'postgres.example' -OutputDirectory $testRoot
@@ -62,6 +65,7 @@ try {
     Remove-Item Env:PGSSLMODE, Env:PGCONNECT_TIMEOUT -ErrorAction SilentlyContinue
     $global:testMode = 'success'
     & $scriptFile -DbHost 'example.pooler.supabase.com' -DbUser 'postgres.example' -OutputDirectory $testRoot | Out-Null
+    Assert ($global:dumpSslModes[-1] -eq 'require') 'SSL must be required when no mode was configured'
     Assert ($null -eq [Environment]::GetEnvironmentVariable('PGSSLMODE', 'Process')) 'SSL variable unexpectedly retained'
     Assert ($null -eq [Environment]::GetEnvironmentVariable('PGCONNECT_TIMEOUT', 'Process')) 'Timeout variable unexpectedly retained'
     Write-Host 'PASS backup success, checksum, unique files, native password prompt, five failure modes, input validation and environment cleanup'

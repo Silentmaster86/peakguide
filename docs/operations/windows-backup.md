@@ -37,7 +37,7 @@ Domyślnie pliki trafiają do `PeakGuide-backups` w katalogu użytkownika, np. `
 - `.dump.list.txt`: spis archiwum odczytany przez `pg_restore --list`.
 - `.dump.backup-info.json`: data UTC, rozmiar, SHA-256 oraz jawne `restore_tested: false`.
 
-Plik początkowo ma końcówkę `.partial`; skrypt nadaje docelową nazwę dopiero po udanym eksporcie, sprawdzeniu niepustego pliku i czytelnym spisie. Błąd eksportu lub spisu usuwa tylko pliki tymczasowe z danego wywołania. Wcześniejsze kopie pozostają. SSL jest wymagany, timeout połączenia wynosi 20 s; poprzednie wartości tych dwóch zmiennych środowiskowych są po zakończeniu przywracane.
+Plik początkowo ma końcówkę `.partial`; skrypt nadaje docelową nazwę dopiero po udanym eksporcie, sprawdzeniu niepustego pliku i czytelnym spisie. Błąd eksportu lub spisu usuwa tylko pliki tymczasowe z danego wywołania. Wcześniejsze kopie pozostają. SSL jest wymagany; istniejące `verify-ca`/`verify-full` pozostają zachowane. Timeout połączenia wynosi 20 s; poprzednie wartości tych dwóch zmiennych środowiskowych są po zakończeniu przywracane.
 
 **Czytelny spis i hash nie są testem pełnego odtworzenia.** Hash pozwala później wykryć zmianę/uszkodzenie pliku. Możliwość pełnego restore nadal wymaga osobnej, izolowanej próby; procedura w [remaining-work.md](remaining-work.md). Testy narzędzia używają atrap poleceń i nie potwierdzają backupu produkcji.
 

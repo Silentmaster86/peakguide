@@ -28,7 +28,8 @@ $oldSslMode = [Environment]::GetEnvironmentVariable('PGSSLMODE', 'Process')
 $oldTimeout = [Environment]::GetEnvironmentVariable('PGCONNECT_TIMEOUT', 'Process')
 
 try {
-    $env:PGSSLMODE = 'require'
+    if ($oldSslMode -in @('verify-ca', 'verify-full')) { $env:PGSSLMODE = $oldSslMode }
+    else { $env:PGSSLMODE = 'require' }
     $env:PGCONNECT_TIMEOUT = '20'
     Write-Host 'Enter the DATABASE password when pg_dump asks. Do not paste it into chat.'
     $dumpArgs = @('--host', $DbHost, '--port', "$DbPort", '--username', $DbUser,
