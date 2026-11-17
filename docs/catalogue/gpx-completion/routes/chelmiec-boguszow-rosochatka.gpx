@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted published route data">
+  <metadata>
+    <name>Chełmiec z Boguszowa-Gorc przez Rosochatkę</name>
+    <desc>Podejście od rejonu OSiR zielonym szlakiem do rozstaju, następnie żółtym w stronę szczytu. Nie należy mylić go z dłuższym wariantem zielonym przez Chełmiec Mały. Powrót wymaga osobnego planu.</desc>
+    <link href="https://wycieczkoteka.pl/zwiedzaj-polske/gorki-i-pagorki/chelmiec-najkrotszy-szlak-na-szczyt" />
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/item/gpx/904" />
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/item/gpx/802" />
+  </metadata>
+  <trk>
+    <name>Chełmiec z Boguszowa-Gorc przez Rosochatkę</name>
+    <trkseg>
+      <trkpt lon="16.20448597" lat="50.76119503" />
+      <trkpt lon="16.20475796" lat="50.76138203" />
+      <trkpt lon="16.20514898" lat="50.76176299" />
+      <trkpt lon="16.20527504" lat="50.76208603" />
+      <trkpt lon="16.20529197" lat="50.76237797" />
+      <trkpt lon="16.205441" lat="50.76286596" />
+      <trkpt lon="16.20571098" lat="50.763103" />
+      <trkpt lon="16.20725996" lat="50.76382997" />
+      <trkpt lon="16.20741178" lat="50.76399687" />
+      <trkpt lon="16.207442" lat="50.76415115" />
+      <trkpt lon="16.2071289" lat="50.76477571" />
+      <trkpt lon="16.20718896" lat="50.76497703" />
+      <trkpt lon="16.20820602" lat="50.765561" />
+      <trkpt lon="16.20851398" lat="50.76562797" />
+      <trkpt lon="16.20993596" lat="50.76559402" />
+      <trkpt lon="16.211496" lat="50.76582704" />
+      <trkpt lon="16.21188099" lat="50.76598898" />
+      <trkpt lon="16.212372" lat="50.76658803" />
+      <trkpt lon="16.21212699" lat="50.767101" />
+      <trkpt lon="16.21183203" lat="50.76760501" />
+      <trkpt lon="16.21166297" lat="50.76790097" />
+      <trkpt lon="16.211624" lat="50.76801497" />
+      <trkpt lon="16.21164998" lat="50.76807699" />
+      <trkpt lon="16.21152601" lat="50.76821001" />
+      <trkpt lon="16.211466" lat="50.76833004" />
+      <trkpt lon="16.21144798" lat="50.768798" />
+      <trkpt lon="16.21132401" lat="50.76946998" />
+      <trkpt lon="16.21128403" lat="50.77020398" />
+      <trkpt lon="16.21118504" lat="50.77041898" />
+      <trkpt lon="16.21081296" lat="50.77089197" />
+      <trkpt lon="16.21069402" lat="50.77119498" />
+      <trkpt lon="16.21066997" lat="50.77135096" />
+      <trkpt lon="16.21070802" lat="50.77159203" />
+      <trkpt lon="16.21082302" lat="50.77182697" />
+      <trkpt lon="16.211424" lat="50.77234397" />
+      <trkpt lon="16.21175199" lat="50.77249098" />
+      <trkpt lon="16.21193482" lat="50.77261188" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.21193482" lat="50.77261188" />
+      <trkpt lon="16.21189498" lat="50.772651" />
+      <trkpt lon="16.21189932" lat="50.77278313" />
+      <trkpt lon="16.21200032" lat="50.77309209" />
+      <trkpt lon="16.21190435" lat="50.77342209" />
+      <trkpt lon="16.21184031" lat="50.77386507" />
+      <trkpt lon="16.21120866" lat="50.77416666" />
+      <trkpt lon="16.21056367" lat="50.77455365" />
+      <trkpt lon="16.2100755" lat="50.77500939" />
+      <trkpt lon="16.20985245" lat="50.77532338" />
+      <trkpt lon="16.21021044" lat="50.77576334" />
+      <trkpt lon="16.21041747" lat="50.77609837" />
+      <trkpt lon="16.21062149" lat="50.77627841" />
+      <trkpt lon="16.21131876" lat="50.77675537" />
+      <trkpt lon="16.21140777" lat="50.77690331" />
+      <trkpt lon="16.21142872" lat="50.77721436" />
+      <trkpt lon="16.2114998" lat="50.77736239" />
+      <trkpt lon="16.21155873" lat="50.77762633" />
+      <trkpt lon="16.21155443" lat="50.77787335" />
+      <trkpt lon="16.21168836" lat="50.77830435" />
+      <trkpt lon="16.21240804" lat="50.77898604" />
+      <trkpt lon="16.21243402" lat="50.77917798" />
+      <trkpt lon="16.21225901" lat="50.779367" />
+      <trkpt lon="16.21183628" lat="50.77966931" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.21183628" lat="50.77966931" />
+      <trkpt lon="16.21183712" lat="50.77971995" />
+      <trkpt lon="16.21171112" lat="50.77988387" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.21171112" lat="50.77988387" />
+      <trkpt lon="16.21162299" lat="50.779939" />
+      <trkpt lon="16.21146402" lat="50.7799602" />
+      <trkpt lon="16.2112799" lat="50.7799308" />
+      <trkpt lon="16.21099253" lat="50.77983822" />
+      <trkpt lon="16.21080332" lat="50.77970514" />
+      <trkpt lon="16.21072881" lat="50.7796099" />
+    </trkseg>
+  </trk>
+</gpx>

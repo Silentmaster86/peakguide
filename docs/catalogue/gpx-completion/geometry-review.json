@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "waligora-andrzejowka-zolty",
+    "sources": [
+      {
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/539",
+        "original_sha256": "c928d756134cb1be2ffc21a8bdaae0282a8e23bbc684fb843e57ae2cfd83ce3d"
+      }
+    ],
+    "adaptation": "segments 11–13 (zero-based)",
+    "segment_count": 3,
+    "point_count": 20,
+    "first": [
+      16.27822098,
+      50.68483964
+    ],
+    "last": [
+      16.27805561,
+      50.68083454
+    ],
+    "geometry_length_km": 0.4752
+  },
+  {
+    "slug": "sleza-tapadla-dom-turysty",
+    "sources": [
+      {
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/829",
+        "original_sha256": "57af48284a954449fdfc2905cd9528e9b078910cc6be2625a1716f81a8e2d22d"
+      }
+    ],
+    "adaptation": "all segments, original direction",
+    "segment_count": 5,
+    "point_count": 75,
+    "first": [
+      16.69861794,
+      50.84628248
+    ],
+    "last": [
+      16.708910463333,
+      50.86541234
+    ],
+    "geometry_length_km": 2.9967
+  },
+  {
+    "slug": "skopiec-rozdroze-komarnicka",
+    "sources": [
+      {
+        "url": "https://mapa-turystyczna.pl/route/2965.gpx",
+        "original_sha256": "24724f67534b595dee5dedfc6c987199a0892c7bd0d35348d52f4b4228051f41"
+      }
+    ],
+    "adaptation": "all segments, original direction",
+    "segment_count": 1,
+    "point_count": 59,
+    "first": [
+      15.877644,
+      50.939311
+    ],
+    "last": [
+      15.884706,
+      50.943927
+    ],
+    "geometry_length_km": 0.9192
+  },
+  {
+    "slug": "chelmiec-boguszow-rosochatka",
+    "sources": [
+      {
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/904",
+        "original_sha256": "4e8ef1c269c26ee9a652f8fba42a972e2d89bfc80c1c36ffc4fbf8b7612768b8"
+      },
+      {
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/802",
+        "original_sha256": "7e526575ddcdee4d9cd4be8e1a9e45a9ea7ac0976635020d39ecfd6e3d13060a"
+      }
+    ],
+    "adaptation": "904 segment 32 points 16–52; then 802 segments 17–19",
+    "segment_count": 4,
+    "point_count": 71,
+    "first": [
+      16.20448597,
+      50.76119503
+    ],
+    "last": [
+      16.21072881,
+      50.7796099
+    ],
+    "geometry_length_km": 2.6909
+  }
+]
