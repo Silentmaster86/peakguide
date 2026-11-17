@@ -1,0 +1,27 @@
+name: Backup tools
+on:
+  pull_request:
+    paths:
+      - 'scripts/backup_database.ps1'
+      - 'scripts/tests/backup_database_test.ps1'
+      - 'docs/operations/windows-backup.md'
+      - '.github/workflows/backup-tools.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/backup_database.ps1'
+      - 'scripts/tests/backup_database_test.ps1'
+      - '.github/workflows/backup-tools.yml'
+permissions:
+  contents: read
+jobs:
+  powershell:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test backup failure handling without connecting to a database
+        shell: powershell
+        run: ./scripts/tests/backup_database_test.ps1
+      - name: Test PowerShell 7 compatibility
+        shell: pwsh
+        run: ./scripts/tests/backup_database_test.ps1

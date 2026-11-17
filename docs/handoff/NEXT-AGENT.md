@@ -73,7 +73,7 @@ Cofnięcie przywraca flagę publikacji; sitemap wymaga wtedy osobnego przywróce
 Pakiet 20 szczytów i partia 01 pozostają niezależne. Nie uruchamiać starych importów
 na podstawie samego merge; najpierw sprawdzić aktualny stan w SQL.
 
-## Partia 04 — trzy pozostałe pozycje KGP, przygotowana
+## Partia 04 — PR #17 scalony, SQL oczekuje na backup
 
 [Instrukcja i źródła](../catalogue/batch-04/README.md): Rysy, Lackowa i rejon Wysokiej
 Kopy, 3 trasy/GPX, 3 POI, 24 tłumaczenia. Rysy i Lackowa to wejścia z odwróconych
@@ -83,10 +83,31 @@ wierzchołka. Nie traktować trasy w rejonie masywu jako wejścia na szczyt.
 
 Po backupie: najpierw oczekujący pakiet 20, potem osobny `batch-04/apply.sql`,
 za każdym razem verify. Nie wykonano żadnego z tych importów produkcyjnie.
-Pełne 01+02+03+04 obejmują 28 KGP po jednej trasie/POI, ale tylko 24 GPX. Następne
-uzupełnienie: brakujące przebiegi Chełmca, Skopca, Ślęży i Waligóry z partii 01.
+Pełne 01+02+03+04 obejmują 28 KGP po jednej trasie/POI, ale tylko 24 GPX.
+Uzupełnienie pozostałych czterech przebiegów jest już przygotowane w PR #18 (poniżej).
 Pinezka Lackowej w bazie wymaga osobnego przeglądu — nie dopasowywać do niej
 prawidłowego źródłowego GPX ani nie przesuwać jej bez dowodów.
+
+## Seria przygotowana po PR #17 — nie powtarzać badań ani importów
+
+- [PR #18](https://github.com/Silentmaster86/peakguide/pull/18): cztery brakujące GPX
+  pierwszej partii. Geometry-only upgrade, wymaga `kgp-01` i odświeża snapshoty tych
+  tras; osobny rejestr `kgp-01-gpx`. Cofnięcie całej 01 wymaga najpierw cofnięcia
+  upgrade GPX. Nie edytować pierwotnego `records.json` 01. Test wszystkich rzeczywistych
+  partii potwierdził 28 tras z mapą i 28 POI po pełnym wdrożeniu.
+- [PR #19](https://github.com/Silentmaster86/peakguide/pull/19): poprawki współrzędnych
+  i PostGIS geom Śnieżnika, Rudawca i Lackowej, bez wysokości, tekstów i relacji.
+  Osobny odwracalny SQL, niezależny od rejestrów tras/POI. Nie przygotowywać ich drugi raz.
+- [PR #20](https://github.com/Silentmaster86/peakguide/pull/20): skrypt backupu dla Windows,
+  testy Windows PowerShell 5.1/7 i [jedna kolejność wdrożeń](../operations/pending-rollout.md).
+  Skrypt sprawdza eksport, spis i hash, ale jawnie nie deklaruje pełnego restore.
+
+Agent nie wykonał produkcyjnego backupu, SQL ani merge. Właściciel scalił wcześniej
+15/16/17 i nadal odkłada importy do świeżej kopii. Stan 18/19/20 sprawdzić w GitHub
+przed dalszą pracą; merge także nie dowodzi importu. Właściciel woli kilka małych,
+niezależnych PR i krótkie kroki. Narzędzie backupu nie wymaga hasła w czacie ani w pliku.
+Po wdrożeniu oczekujących danych wykonać publiczne verify/UI/GPX; nie uznawać
+samego zielonego CI za potwierdzenie stanu produkcji.
 
 ## Kolejność dalszych prac
 

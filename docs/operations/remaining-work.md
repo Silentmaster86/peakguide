@@ -1,5 +1,8 @@
 # Utrzymanie PeakGuide — stan i następne czynności
 
+Przygotowane PR-y i jedna kolejność operacji po backupie: [pending-rollout.md](pending-rollout.md).
+Narzędzie dla Windows: [windows-backup.md](windows-backup.md).
+
 ## Poczta
 
 Uruchom `supabase/operations/email_health.sql` w SQL Editor. Skrypt jest odczytowy,
