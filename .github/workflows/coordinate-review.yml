@@ -1,0 +1,37 @@
+name: Coordinate review
+on:
+  pull_request:
+    paths:
+      - 'docs/catalogue/coordinate-review/**'
+      - 'scripts/build_coordinate_review.py'
+      - 'supabase/tests/coordinate_review_test.py'
+      - '.github/workflows/coordinate-review.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/catalogue/coordinate-review/**'
+      - 'scripts/build_coordinate_review.py'
+      - 'supabase/tests/coordinate_review_test.py'
+      - '.github/workflows/coordinate-review.yml'
+permissions:
+  contents: read
+jobs:
+  coordinate-patch:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.5
+        env:
+          POSTGRES_PASSWORD: local-test-only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGPASSWORD: local-test-only
+      PGHOST: localhost
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/build_coordinate_review.py --check
+      - run: createdb -U postgres coordinate_review_test
+      - run: python supabase/tests/coordinate_review_test.py
