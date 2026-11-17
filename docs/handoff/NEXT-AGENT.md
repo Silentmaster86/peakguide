@@ -32,7 +32,7 @@ Nie powtarzać importu. Kontrolowany test zapisu przez nowe edytory pozostaje do
 Dokładna kolejność i granice testów: [instrukcja wydania](../releases/catalogue-management.md).
 Źródła, zakresy liczb i cofanie: [partia 01](../catalogue/batch-01/README.md).
 
-## Pakiet 20 szczytów — PR #15, przygotowany, bez importu produkcyjnego
+## Pakiet 20 szczytów — PR #15 scalony, import oczekuje na backup
 
 Na prośbę właściciela rozszerzono poprzednią piątkę do 20 szczytów łącznie.
 [Jedna instrukcja i pliki SQL](../catalogue/twenty-peaks/README.md):
@@ -55,6 +55,22 @@ niezweryfikowanych łączników ani parametrów wyciętych fragmentów. Źródł
 metryki i ograniczenia: README partii 02/03. Nie zmieniono współrzędnych szczytów.
 Po wdrożeniu partii 01 + wspólnego pakietu dane obejmą 25 szczytów; nie oznacza
 to kompletnego pokrycia całego katalogu ani wszystkich tras na tych szczytach.
+
+## Łysica — odwracalne wycofanie publikacji niepotwierdzonego wpisu
+
+Przegląd produkcji 16 listopada wykazał dwa wpisy „Łysica”. [Ustalenia i korekta](../catalogue/lysica-review/README.md):
+id 28 `lysica` (KGP) ma trasę i POI; id 83 `lysica-skarpowa` nie ma potwierdzonej
+tożsamości i leży około 960 m na północ od punktu PTTK. Nie utożsamiać go ze Skałą
+Agaty ani nie scalać bez dowodów. Przygotowano zmianę wyłącznie `active=false` id 83,
+zachowując rekord i relacje, oraz usunięcie jego URL ze statycznej sitemap.
+
+Agent nie zmienił produkcji. Właściciel jest bez komputera; świeży backup nadal
+blokuje wykonanie SQL. Merge zmienia tylko sitemap, nie flagę w Supabase. Po backupie:
+`lysica-review/verify.sql` → `apply.sql` → ponowne verify i kontrola publicznej mapy.
+Po ukryciu oczekiwane 88 aktywnych szczytów, w Polsce 82, o ile nie było innych zmian.
+Cofnięcie przywraca flagę publikacji; sitemap wymaga wtedy osobnego przywrócenia.
+Pakiet 20 szczytów i partia 01 pozostają niezależne. Nie uruchamiać starych importów
+na podstawie samego merge; najpierw sprawdzić aktualny stan w SQL.
 
 ## Kolejność dalszych prac
 
