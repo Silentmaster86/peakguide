@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted published route data">
+  <metadata>
+    <name>Ślęża: żółty szlak z Tąpadeł do Domu Turysty</name>
+    <desc>Wejście od Przełęczy Tąpadła do Domu Turysty w rejonie szczytu Ślęży. Podane parametry PTTK dotyczą tego odcinka w jedną stronę, bez powrotu i dodatkowych dojść na szczycie.</desc>
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza" />
+  </metadata>
+  <trk>
+    <name>Ślęża: żółty szlak z Tąpadeł do Domu Turysty</name>
+    <trkseg>
+      <trkpt lon="16.69861794" lat="50.84628248" />
+      <trkpt lon="16.69818592" lat="50.84674109" />
+      <trkpt lon="16.697513346667" lat="50.847229356667" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.697513346667" lat="50.847229356667" />
+      <trkpt lon="16.697223" lat="50.848213" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.697223" lat="50.848213" />
+      <trkpt lon="16.69722623" lat="50.84843821" />
+      <trkpt lon="16.69739878" lat="50.84904415" />
+      <trkpt lon="16.69739199" lat="50.84930605" />
+      <trkpt lon="16.69748068" lat="50.84962522" />
+      <trkpt lon="16.69745493" lat="50.84990644" />
+      <trkpt lon="16.6973083" lat="50.85018821" />
+      <trkpt lon="16.6973049" lat="50.85061515" />
+      <trkpt lon="16.69703829" lat="50.85086107" />
+      <trkpt lon="16.69661808" lat="50.85134875" />
+      <trkpt lon="16.69623542" lat="50.85212091" />
+      <trkpt lon="16.69521189" lat="50.85268583" />
+      <trkpt lon="16.69476289" lat="50.852852" />
+      <trkpt lon="16.69420409" lat="50.85299649" />
+      <trkpt lon="16.69404584" lat="50.85310351" />
+      <trkpt lon="16.6937499" lat="50.85371567" />
+      <trkpt lon="16.69392782" lat="50.85428283" />
+      <trkpt lon="16.69394499" lat="50.85468853" />
+      <trkpt lon="16.69390744" lat="50.85496724" />
+      <trkpt lon="16.6936419" lat="50.85559972" />
+      <trkpt lon="16.69336975" lat="50.85591375" />
+      <trkpt lon="16.69316769" lat="50.85631414" />
+      <trkpt lon="16.69314516" lat="50.85666101" />
+      <trkpt lon="16.69328293" lat="50.8572395975" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.69328293" lat="50.8572395975" />
+      <trkpt lon="16.69356304" lat="50.85770682" />
+      <trkpt lon="16.69409108" lat="50.85830641" />
+      <trkpt lon="16.69429332" lat="50.8584763" />
+      <trkpt lon="16.69447231" lat="50.8587052" />
+      <trkpt lon="16.69485301" lat="50.85892045" />
+      <trkpt lon="16.69496638" lat="50.85920962" />
+      <trkpt lon="16.69503593" lat="50.85928164" />
+      <trkpt lon="16.69523907" lat="50.85946043" />
+      <trkpt lon="16.69577873" lat="50.85981991" />
+      <trkpt lon="16.69659305" lat="50.8599454" />
+      <trkpt lon="16.69683445" lat="50.86003477" />
+      <trkpt lon="16.69708657" lat="50.86021759" />
+      <trkpt lon="16.69770044" lat="50.86044274" />
+      <trkpt lon="16.69805467" lat="50.86052491" />
+      <trkpt lon="16.6984731" lat="50.86053259" />
+      <trkpt lon="16.69920248" lat="50.86045798" />
+      <trkpt lon="16.70002663" lat="50.86079244" />
+      <trkpt lon="16.70079553" lat="50.86097142" />
+      <trkpt lon="16.70108163" lat="50.86108926" />
+      <trkpt lon="16.70153832" lat="50.8613975" />
+      <trkpt lon="16.70185143" lat="50.86154129" />
+      <trkpt lon="16.70295238" lat="50.86190596" />
+      <trkpt lon="16.70327014" lat="50.86211916" />
+      <trkpt lon="16.7037701" lat="50.86218259" />
+      <trkpt lon="16.70405442" lat="50.86228688" />
+      <trkpt lon="16.70453918" lat="50.86224997" />
+      <trkpt lon="16.70498872" lat="50.86215389" />
+      <trkpt lon="16.70519561" lat="50.86220021" />
+      <trkpt lon="16.705459" lat="50.86232401" />
+      <trkpt lon="16.7060473" lat="50.86227508" />
+      <trkpt lon="16.70649254" lat="50.86239356" />
+      <trkpt lon="16.70697713" lat="50.86241184" />
+      <trkpt lon="16.70727414" lat="50.86264793" />
+      <trkpt lon="16.70800638" lat="50.86302027" />
+      <trkpt lon="16.7085042" lat="50.8634949" />
+      <trkpt lon="16.70859754" lat="50.86362341" />
+      <trkpt lon="16.70871663" lat="50.86416525" />
+      <trkpt lon="16.70882142" lat="50.8642788" />
+      <trkpt lon="16.708873033333" lat="50.864474043333" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.708873033333" lat="50.864474043333" />
+      <trkpt lon="16.70868033" lat="50.8648291" />
+      <trkpt lon="16.70880353" lat="50.86502479" />
+      <trkpt lon="16.70907015" lat="50.86526361" />
+      <trkpt lon="16.70916384" lat="50.86542081" />
+      <trkpt lon="16.708910463333" lat="50.86541234" />
+    </trkseg>
+  </trk>
+</gpx>

@@ -13,6 +13,7 @@ begin
  if to_regprocedure('public.admin_save_trail(bigint,jsonb,timestamptz)') is null then raise exception 'Apply migration 014 first'; end if;
  perform pg_advisory_xact_lock(251115,1);
  select r.snapshot into receipt from peakguide_private.catalogue_batch_receipts r where batch_key='kgp-01';
+ if exists(select from peakguide_private.catalogue_batch_receipts where batch_key='kgp-01-gpx') then raise exception 'Rollback GPX completion first'; end if;
  if receipt is null then raise notice 'Batch not applied'; return; end if;
 
  for entry in select value from jsonb_array_elements(receipt) loop

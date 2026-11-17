@@ -89,6 +89,8 @@ commit;
 for name,text in [('apply.sql',apply),('rollback.sql',rollback)]:
  text=text.replace("'kgp-01'",f"'kgp-{args.batch}'").replace('perform pg_advisory_xact_lock(251115,1);',f'perform pg_advisory_xact_lock(251115,{int(args.batch)});')
  if args.batch in ['03','04']: text=text.replace('Added 5 trails and 5 POIs',f'Added {expected} trails and {expected} POIs')
+ if args.batch=='01' and name=='rollback.sql':
+  text=text.replace(" if receipt is null then"," if exists(select from peakguide_private.catalogue_batch_receipts where batch_key='kgp-01-gpx') then raise exception 'Rollback GPX completion first'; end if;\n if receipt is null then",1)
  path=DIR/name
  if args.check:
   if not path.exists() or path.read_text()!=text: raise SystemExit(f'Regenerate {path.relative_to(ROOT)}')

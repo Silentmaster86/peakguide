@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted published route data">
+  <metadata>
+    <name>Skopiec od rozdroża przy Przełęczy Komarnickiej</name>
+    <desc>Krótki wariant wskazany na stronie Geoparku Kraina Wygasłych Wulkanów. Końcowe dojście od punktu Pod Skopcem prowadzi ścieżką nieoznaczoną. Parametry dotyczą wejścia, bez powrotu.</desc>
+    <link href="https://mapa-turystyczna.pl/route/2965" />
+  </metadata>
+  <trk>
+    <name>Skopiec od rozdroża przy Przełęczy Komarnickiej</name>
+    <trkseg>
+      <trkpt lon="15.877644" lat="50.939311" />
+      <trkpt lon="15.877616" lat="50.939451" />
+      <trkpt lon="15.877584" lat="50.9396" />
+      <trkpt lon="15.87762" lat="50.939653" />
+      <trkpt lon="15.877673" lat="50.939741" />
+      <trkpt lon="15.877699" lat="50.939798" />
+      <trkpt lon="15.877759" lat="50.939936" />
+      <trkpt lon="15.877825" lat="50.940068" />
+      <trkpt lon="15.877838" lat="50.94011" />
+      <trkpt lon="15.877863" lat="50.940174" />
+      <trkpt lon="15.877905" lat="50.940262" />
+      <trkpt lon="15.87807" lat="50.940509" />
+      <trkpt lon="15.878196" lat="50.94078" />
+      <trkpt lon="15.878365" lat="50.941088" />
+      <trkpt lon="15.878493" lat="50.941294" />
+      <trkpt lon="15.878558" lat="50.9414" />
+      <trkpt lon="15.878613" lat="50.941472" />
+      <trkpt lon="15.878689" lat="50.941553" />
+      <trkpt lon="15.878768" lat="50.941635" />
+      <trkpt lon="15.878924" lat="50.941753" />
+      <trkpt lon="15.879107" lat="50.941869" />
+      <trkpt lon="15.879211" lat="50.941924" />
+      <trkpt lon="15.879404" lat="50.941994" />
+      <trkpt lon="15.87958" lat="50.942034" />
+      <trkpt lon="15.879688" lat="50.942049" />
+      <trkpt lon="15.879826" lat="50.942049" />
+      <trkpt lon="15.879916" lat="50.942044" />
+      <trkpt lon="15.879992" lat="50.942023" />
+      <trkpt lon="15.880328" lat="50.941927" />
+      <trkpt lon="15.880671" lat="50.941818" />
+      <trkpt lon="15.881011" lat="50.941687" />
+      <trkpt lon="15.881394" lat="50.941542" />
+      <trkpt lon="15.881543" lat="50.941469" />
+      <trkpt lon="15.881718" lat="50.941379" />
+      <trkpt lon="15.881814" lat="50.941335" />
+      <trkpt lon="15.88192" lat="50.941307" />
+      <trkpt lon="15.882105" lat="50.941422" />
+      <trkpt lon="15.882315" lat="50.941653" />
+      <trkpt lon="15.882427" lat="50.941823" />
+      <trkpt lon="15.882525" lat="50.942006" />
+      <trkpt lon="15.882675" lat="50.942235" />
+      <trkpt lon="15.882796" lat="50.942386" />
+      <trkpt lon="15.882903" lat="50.942442" />
+      <trkpt lon="15.883026" lat="50.942502" />
+      <trkpt lon="15.883334" lat="50.94267" />
+      <trkpt lon="15.883611" lat="50.942818" />
+      <trkpt lon="15.883778" lat="50.942899" />
+      <trkpt lon="15.883945" lat="50.942934" />
+      <trkpt lon="15.884066" lat="50.942951" />
+      <trkpt lon="15.884178" lat="50.943039" />
+      <trkpt lon="15.884249" lat="50.943115" />
+      <trkpt lon="15.884389" lat="50.94326" />
+      <trkpt lon="15.884548" lat="50.943371" />
+      <trkpt lon="15.884687" lat="50.943472" />
+      <trkpt lon="15.884878" lat="50.943652" />
+      <trkpt lon="15.884978" lat="50.943755" />
+      <trkpt lon="15.884894" lat="50.943845" />
+      <trkpt lon="15.8848" lat="50.943901" />
+      <trkpt lon="15.884706" lat="50.943927" />
+    </trkseg>
+  </trk>
+</gpx>
