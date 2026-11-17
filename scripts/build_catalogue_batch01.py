@@ -1,9 +1,9 @@
 """Generate guarded data import/rollback. No database connection."""
 import argparse,json
 from pathlib import Path
-parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');parser.add_argument('--batch',choices=['01','02','03'],default='01');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');parser.add_argument('--batch',choices=['01','02','03','04'],default='01');args=parser.parse_args()
 ROOT=Path(__file__).resolve().parents[1];DIR=ROOT/f'docs/catalogue/batch-{args.batch}'
-peaks_by_batch={'01':{'waligora':10,'sleza':27,'lysica':28,'skopiec':14,'chelmiec':12},'02':{'sniezka':1,'snieznik':2,'wielka-sowa':6,'szczeliniec-wielki':11,'skalnik':8},'03':{'rudawiec':4,'orlica':5,'jagodna':7,'kowadlo':9,'klodzka-gora':13,'biskupia-kopa':15,'babia-gora':17,'tarnica':18,'turbacz':19,'radziejowa':20,'lubomir':21,'mogielica':22,'czupel':24,'skrzyczne':25,'wysoka-pieniny':26}}
+peaks_by_batch={'01':{'waligora':10,'sleza':27,'lysica':28,'skopiec':14,'chelmiec':12},'02':{'sniezka':1,'snieznik':2,'wielka-sowa':6,'szczeliniec-wielki':11,'skalnik':8},'03':{'rudawiec':4,'orlica':5,'jagodna':7,'kowadlo':9,'klodzka-gora':13,'biskupia-kopa':15,'babia-gora':17,'tarnica':18,'turbacz':19,'radziejowa':20,'lubomir':21,'mogielica':22,'czupel':24,'skrzyczne':25,'wysoka-pieniny':26},'04':{'rysy':16,'lackowa':23,'wysoka-kopa':3}}
 peak_case="case body->>'peak_slug' "+' '.join(f"when '{slug}' then {id}" for slug,id in peaks_by_batch[args.batch].items())+' end'
 records=json.loads((DIR/'records.json').read_text())
 expected=len(peaks_by_batch[args.batch])
@@ -88,7 +88,7 @@ commit;
 '''
 for name,text in [('apply.sql',apply),('rollback.sql',rollback)]:
  text=text.replace("'kgp-01'",f"'kgp-{args.batch}'").replace('perform pg_advisory_xact_lock(251115,1);',f'perform pg_advisory_xact_lock(251115,{int(args.batch)});')
- if args.batch=='03': text=text.replace('Added 5 trails and 5 POIs',f'Added {expected} trails and {expected} POIs')
+ if args.batch in ['03','04']: text=text.replace('Added 5 trails and 5 POIs',f'Added {expected} trails and {expected} POIs')
  path=DIR/name
  if args.check:
   if not path.exists() or path.read_text()!=text: raise SystemExit(f'Regenerate {path.relative_to(ROOT)}')

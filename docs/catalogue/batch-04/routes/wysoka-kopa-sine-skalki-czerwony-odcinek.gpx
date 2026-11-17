@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted PTTK GPX">
+  <metadata>
+    <name>Wysoka Kopa: czerwony szlak do Sinych Skałek — bez wejścia na szczyt</name>
+    <desc>Wybrany odcinek Głównego Szlaku Sudeckiego od Rozdroża pod Izerskimi Garbami do Sinych Skałek, w masywie Wysokiej Kopy. Nie prowadzi na zamknięty wierzchołek Wysokiej Kopy.</desc>
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/693-dolnoslaskie-glowny-szlak-sudecki-im-mieczyslawa-orlowicza" />
+  </metadata>
+  <trk>
+    <name>Wysoka Kopa: czerwony szlak do Sinych Skałek — bez wejścia na szczyt</name>
+    <trkseg>
+      <trkpt lon="15.43484001" lat="50.84650696" />
+      <trkpt lon="15.43475803" lat="50.84665096" />
+      <trkpt lon="15.43461403" lat="50.847131" />
+      <trkpt lon="15.43449098" lat="50.84723904" />
+      <trkpt lon="15.43446097" lat="50.84733903" />
+      <trkpt lon="15.43456198" lat="50.84747097" />
+      <trkpt lon="15.43436299" lat="50.84766299" />
+      <trkpt lon="15.43425797" lat="50.84785804" />
+      <trkpt lon="15.43425" lat="50.84796298" />
+      <trkpt lon="15.43417599" lat="50.84807203" />
+      <trkpt lon="15.43404498" lat="50.84822802" />
+      <trkpt lon="15.43386402" lat="50.84836498" />
+      <trkpt lon="15.43349697" lat="50.84852197" />
+      <trkpt lon="15.43342103" lat="50.84867301" />
+      <trkpt lon="15.43320696" lat="50.84872699" />
+      <trkpt lon="15.43296103" lat="50.84887502" />
+      <trkpt lon="15.43287001" lat="50.849002" />
+      <trkpt lon="15.43270899" lat="50.84909102" />
+      <trkpt lon="15.432552" lat="50.84911902" />
+      <trkpt lon="15.43248603" lat="50.849318" />
+      <trkpt lon="15.43221597" lat="50.849691" />
+      <trkpt lon="15.43205604" lat="50.84982703" />
+      <trkpt lon="15.43186904" lat="50.849907" />
+      <trkpt lon="15.43181104" lat="50.849993" />
+      <trkpt lon="15.431863" lat="50.85008402" />
+      <trkpt lon="15.43175898" lat="50.85022501" />
+      <trkpt lon="15.43162303" lat="50.85027102" />
+      <trkpt lon="15.43128298" lat="50.85053497" />
+      <trkpt lon="15.43064998" lat="50.85082197" />
+      <trkpt lon="15.43041" lat="50.850857" />
+      <trkpt lon="15.429533" lat="50.85110896" />
+      <trkpt lon="15.42925397" lat="50.85115003" />
+      <trkpt lon="15.42891702" lat="50.85116898" />
+      <trkpt lon="15.42852645" lat="50.85138724" />
+      <trkpt lon="15.42898355" lat="50.85175482" />
+      <trkpt lon="15.42701198" lat="50.852022" />
+      <trkpt lon="15.42623598" lat="50.85226801" />
+      <trkpt lon="15.425178" lat="50.85245604" />
+      <trkpt lon="15.42442901" lat="50.85248996" />
+      <trkpt lon="15.42423962" lat="50.85289187" />
+      <trkpt lon="15.42417265" lat="50.85298592" />
+      <trkpt lon="15.42385263" lat="50.85329387" />
+      <trkpt lon="15.4230856" lat="50.85386887" />
+      <trkpt lon="15.42288963" lat="50.85400189" />
+      <trkpt lon="15.42240155" lat="50.8542385" />
+      <trkpt lon="15.42122997" lat="50.85458502" />
+      <trkpt lon="15.42085304" lat="50.85484997" />
+      <trkpt lon="15.42065497" lat="50.85523797" />
+      <trkpt lon="15.42055463" lat="50.85536062" />
+      <trkpt lon="15.41936601" lat="50.85597801" />
+      <trkpt lon="15.41895504" lat="50.85633198" />
+      <trkpt lon="15.41826999" lat="50.85675904" />
+      <trkpt lon="15.41810696" lat="50.856896" />
+      <trkpt lon="15.41781039" lat="50.85722635" />
+      <trkpt lon="15.417495" lat="50.85774802" />
+      <trkpt lon="15.417021" lat="50.85835503" />
+      <trkpt lon="15.41668849" lat="50.85919903" />
+      <trkpt lon="15.41644399" lat="50.85934703" />
+      <trkpt lon="15.41507612" lat="50.85977766" />
+      <trkpt lon="15.41492214" lat="50.85978973" />
+      <trkpt lon="15.41417313" lat="50.85968672" />
+      <trkpt lon="15.41327317" lat="50.85945672" />
+      <trkpt lon="15.41217564" lat="50.85896022" />
+      <trkpt lon="15.41159089" lat="50.85877216" />
+      <trkpt lon="15.40983186" lat="50.85798518" />
+      <trkpt lon="15.4093489" lat="50.85779416" />
+      <trkpt lon="15.40844089" lat="50.85753717" />
+      <trkpt lon="15.40786186" lat="50.85725613" />
+      <trkpt lon="15.4075992" lat="50.85720138" />
+      <trkpt lon="15.40650699" lat="50.85726002" />
+      <trkpt lon="15.40567101" lat="50.85747409" />
+    </trkseg>
+  </trk>
+</gpx>

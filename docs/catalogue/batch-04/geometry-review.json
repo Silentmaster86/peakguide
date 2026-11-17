@@ -1,0 +1,59 @@
+[
+  {
+    "peak_slug": "rysy",
+    "peak_id": 16,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/461",
+    "original_sha256": "a3a21b1f355eeb32e8229ceb0f6ebc5ec35063d8cf76fe0c2c2c443cb8cf7d73",
+    "adaptation": "reverse_all",
+    "original_point_count": 393,
+    "point_count": 393,
+    "segment_count": 8,
+    "first": [
+      20.103020965,
+      49.25466176
+    ],
+    "last": [
+      20.088038,
+      49.179599
+    ],
+    "geometry_length_km": 12.1635
+  },
+  {
+    "peak_slug": "lackowa",
+    "peak_id": 23,
+    "source_url": "https://malopolska.szlaki.pttk.pl/item/gpx/3865",
+    "original_sha256": "3565596b9965bb4b8e8e88f490f58933bb4b7fcbf96a6c2171924560bce30409",
+    "adaptation": "reverse_all",
+    "original_point_count": 60,
+    "point_count": 60,
+    "segment_count": 5,
+    "first": [
+      21.06597856,
+      49.43992669
+    ],
+    "last": [
+      21.102469,
+      49.426524
+    ],
+    "geometry_length_km": 4.8067
+  },
+  {
+    "peak_slug": "wysoka-kopa",
+    "peak_id": 3,
+    "source_url": "https://dolnoslaskie.szlaki.pttk.pl/item/gpx/693",
+    "original_sha256": "3f7f7408e285a3bf9f1d5b750e13512e3c5b92ef57e79a55d3ba8d3bca25834d",
+    "adaptation": "segment_69_points_0_to_70",
+    "original_point_count": 1459,
+    "point_count": 71,
+    "segment_count": 1,
+    "first": [
+      15.43484001,
+      50.84650696
+    ],
+    "last": [
+      15.40567101,
+      50.85747409
+    ],
+    "geometry_length_km": 2.9855
+  }
+]
