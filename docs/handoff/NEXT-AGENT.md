@@ -64,6 +64,7 @@ tożsamości i leży około 960 m na północ od punktu PTTK. Nie utożsamiać g
 Agaty ani nie scalać bez dowodów. Przygotowano zmianę wyłącznie `active=false` id 83,
 zachowując rekord i relacje, oraz usunięcie jego URL ze statycznej sitemap.
 
+PR #16 został scalony; merge zmienił sitemap, SQL nadal oczekuje.
 Agent nie zmienił produkcji. Właściciel jest bez komputera; świeży backup nadal
 blokuje wykonanie SQL. Merge zmienia tylko sitemap, nie flagę w Supabase. Po backupie:
 `lysica-review/verify.sql` → `apply.sql` → ponowne verify i kontrola publicznej mapy.
@@ -71,6 +72,21 @@ Po ukryciu oczekiwane 88 aktywnych szczytów, w Polsce 82, o ile nie było innyc
 Cofnięcie przywraca flagę publikacji; sitemap wymaga wtedy osobnego przywrócenia.
 Pakiet 20 szczytów i partia 01 pozostają niezależne. Nie uruchamiać starych importów
 na podstawie samego merge; najpierw sprawdzić aktualny stan w SQL.
+
+## Partia 04 — trzy pozostałe pozycje KGP, przygotowana
+
+[Instrukcja i źródła](../catalogue/batch-04/README.md): Rysy, Lackowa i rejon Wysokiej
+Kopy, 3 trasy/GPX, 3 POI, 24 tłumaczenia. Rysy i Lackowa to wejścia z odwróconych
+pełnych GPX PTTK, z czasami kierunku przeciwnego i podejściami ze źródłowych zejść.
+Wysoka Kopa: tylko fragment czerwonego szlaku do Sinych Skałek, bez zamkniętego
+wierzchołka. Nie traktować trasy w rejonie masywu jako wejścia na szczyt.
+
+Po backupie: najpierw oczekujący pakiet 20, potem osobny `batch-04/apply.sql`,
+za każdym razem verify. Nie wykonano żadnego z tych importów produkcyjnie.
+Pełne 01+02+03+04 obejmują 28 KGP po jednej trasie/POI, ale tylko 24 GPX. Następne
+uzupełnienie: brakujące przebiegi Chełmca, Skopca, Ślęży i Waligóry z partii 01.
+Pinezka Lackowej w bazie wymaga osobnego przeglądu — nie dopasowywać do niej
+prawidłowego źródłowego GPX ani nie przesuwać jej bez dowodów.
 
 ## Kolejność dalszych prac
 

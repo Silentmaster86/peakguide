@@ -123,3 +123,8 @@ jobs:
       - run: python supabase/tests/lysica_review_test.py
         env:
           PGHOST: localhost
+      - run: python scripts/build_catalogue_batch01.py --batch 04 --check
+      - run: createdb -h localhost -U postgres catalogue_batch04_test
+      - run: python supabase/tests/catalogue_batch04_test.py
+        env:
+          PGHOST: localhost

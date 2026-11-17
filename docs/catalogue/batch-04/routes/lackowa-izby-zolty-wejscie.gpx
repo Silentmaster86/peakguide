@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted PTTK GPX">
+  <metadata>
+    <name>Lackowa: żółtym szlakiem z Izb</name>
+    <desc>Podejście z Izb żółtym szlakiem na Lackową, z końcowym odcinkiem przy szlaku granicznym. GPX obejmuje tylko wejście, bez powrotu.</desc>
+    <link href="https://malopolska.szlaki.pttk.pl/3865-pttk-malopolska-lackowa-izby" />
+  </metadata>
+  <trk>
+    <name>Lackowa: żółtym szlakiem z Izb</name>
+    <trkseg>
+      <trkpt lon="21.06597856" lat="49.43992669" />
+      <trkpt lon="21.06632883" lat="49.43968234" />
+      <trkpt lon="21.06649781" lat="49.43946802" />
+      <trkpt lon="21.066765" lat="49.438995" />
+      <trkpt lon="21.067228" lat="49.438744" />
+      <trkpt lon="21.067622" lat="49.438428" />
+      <trkpt lon="21.06906257" lat="49.43714589" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="21.06906257" lat="49.43714589" />
+      <trkpt lon="21.07056499" lat="49.43584528" />
+      <trkpt lon="21.0718739" lat="49.43391416" />
+      <trkpt lon="21.07271075" lat="49.43288109" />
+      <trkpt lon="21.07326865" lat="49.43149898" />
+      <trkpt lon="21.07371926" lat="49.42935594" />
+      <trkpt lon="21.0741806" lat="49.42740362" />
+      <trkpt lon="21.07442737" lat="49.42586777" />
+      <trkpt lon="21.07473911" lat="49.42544745" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="21.07473911" lat="49.42544745" />
+      <trkpt lon="21.07574701" lat="49.42561049" />
+      <trkpt lon="21.07705593" lat="49.42530341" />
+      <trkpt lon="21.07905149" lat="49.42555465" />
+      <trkpt lon="21.08132601" lat="49.42506613" />
+      <trkpt lon="21.0820663" lat="49.42517779" />
+      <trkpt lon="21.08331084" lat="49.42607807" />
+      <trkpt lon="21.08581066" lat="49.4266922" />
+      <trkpt lon="21.08661801" lat="49.42713357" />
+      <trkpt lon="21.08761579" lat="49.42751739" />
+      <trkpt lon="21.08993322" lat="49.42794308" />
+      <trkpt lon="21.09018397" lat="49.42806894" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="21.09018397" lat="49.42806894" />
+      <trkpt lon="21.08991444" lat="49.42861558" />
+      <trkpt lon="21.08982861" lat="49.42933809" />
+      <trkpt lon="21.08989835" lat="49.42964176" />
+      <trkpt lon="21.08985543" lat="49.429914" />
+      <trkpt lon="21.08958721" lat="49.43056669" />
+      <trkpt lon="21.08994126" lat="49.430996" />
+      <trkpt lon="21.09027386" lat="49.43129858" />
+      <trkpt lon="21.09214067" lat="49.43210133" />
+      <trkpt lon="21.09281123" lat="49.43220603" />
+      <trkpt lon="21.0935837" lat="49.4325376" />
+      <trkpt lon="21.09438837" lat="49.43280634" />
+      <trkpt lon="21.09519303" lat="49.43289359" />
+      <trkpt lon="21.09549344" lat="49.43284124" />
+      <trkpt lon="21.09587967" lat="49.43269466" />
+      <trkpt lon="21.0960567" lat="49.43247478" />
+      <trkpt lon="21.09618545" lat="49.4321816" />
+      <trkpt lon="21.09666824" lat="49.43189192" />
+      <trkpt lon="21.09692574" lat="49.43166505" />
+      <trkpt lon="21.0978806" lat="49.43144284" />
+      <trkpt lon="21.09908938" lat="49.43111127" />
+      <trkpt lon="21.09999061" lat="49.43050047" />
+      <trkpt lon="21.10106528" lat="49.42970351" />
+      <trkpt lon="21.10136032" lat="49.42934401" />
+      <trkpt lon="21.10184312" lat="49.42895308" />
+      <trkpt lon="21.10199332" lat="49.42868083" />
+      <trkpt lon="21.10193431" lat="49.42827943" />
+      <trkpt lon="21.10163569" lat="49.42789432" />
+      <trkpt lon="21.101046293333" lat="49.427302753333" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="21.101046293333" lat="49.427302753333" />
+      <trkpt lon="21.10173225" lat="49.42687202" />
+      <trkpt lon="21.102469" lat="49.426524" />
+    </trkseg>
+  </trk>
+</gpx>
