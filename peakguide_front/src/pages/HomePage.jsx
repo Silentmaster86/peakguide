@@ -1376,7 +1376,7 @@ const styles = {
 		padding: '12px 18px',
 		borderRadius: 12,
 		background: 'var(--primary)',
-		color: '#06130d',
+		color: 'var(--on-primary)',
 		fontWeight: 850,
 		textDecoration: 'none',
 		boxShadow: '0 10px 30px rgba(0,0,0,.2)',
