@@ -68,6 +68,19 @@ Szczegóły izolowanego odtwarzania: `docs/operations/remaining-work.md`.
 - Kafelki FAQ/pomocy i katalogu zachowują oryginalne tło. PR #21 poprawił kontrast
   głównego przycisku w Light i hierarchię nagłówków pasm.
 
+## Dodatkowy przegląd publicznej produkcji (21 listopada)
+
+Odczyt publicznego API: 34 aktywne trasy. Wszystkie 28 dostępnych par
+GPX/geometria dało się pobrać, sparsować i porównać punkt po punkcie — bez
+rozbieżności. Pozostałe 6 aktywnych tras nie ma kompletu geometrii/GPX; dotyczy
+to starszych wpisów, nie braku pokrycia któregoś z 28 szczytów KGP.
+Nie uzupełniać ich przez kopiowanie śladu innej trasy.
+
+Mobilny przegląd `/trails`, `/peaks/rysy?tab=trails`,
+`/peaks/snieznik?tab=pois` oraz `/map` w Light i Dark: brak poziomego
+przewijania i naruszeń Axe w tych ośmiu widokach. To test automatyczny
+wybranego zakresu, nie pełna ocena dostępności/czytnika ani test fizycznego telefonu.
+
 ## Granice danych turystycznych
 
 Nie zgadywać brakujących metrów, czasów, kosztów ani trudności.
