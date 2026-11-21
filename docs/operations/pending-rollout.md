@@ -1,49 +1,48 @@
-# Co jest przygotowane i co wykonać po backupie
+# Stan wdrożeń — dawna lista oczekujących operacji
 
-Stan: 17.11.2026. Nie wykonano przez agenta żadnego z poniższych zapisów produkcyjnych. Właściciel scalił PR #15, #16 i #17; scalanie kolejnych PR też samo nie uruchamia SQL.
+Stan: 21 listopada 2026. Zachowano tę ścieżkę dla istniejących odnośników.
+**Poniższe operacje zostały wykonane przez właściciela i zweryfikowane w SQL.
+Nie ma już oczekujących importów z tej serii. Nie uruchamiać ich ponownie na
+podstawie starszych instrukcji lub samego merge.**
 
-## Teraz, bez komputera
+| Pakiet | Potwierdzony wynik |
+| --- | --- |
+| `twenty-peaks` (02 + 03) | 20 tras i 20 POI, cztery języki, geometria i adresy GPX |
+| `batch-04` | Rysy, Lackowa i rejon Wysokiej Kopy: po trasie z geometrią/GPX i POI, cztery języki |
+| `gpx-completion` | Cztery istniejące trasy partii 01 uzupełnione o rzeczywiste ślady i GPX |
+| `coordinate-review` | Współrzędne i geom Śnieżnika, Rudawca i Lackowej zgodne z poprawką |
+| `lysica-review` | id 28 publiczny, id 83 wyłączony i zachowany w bazie |
+| `utf8-repair` | Wszystkie 46 rekordów kgp-02/03/04 zgodne tekstowo ze źródłami, `remaining_issues=[]` |
 
-Możesz przeglądać i scalać przygotowane PR-y. Kod i statyczne GPX trafiają wtedy do `main`. Dane w Supabase zmienią się dopiero po ręcznym wykonaniu odpowiednich skryptów. Nie uruchamiaj plików `apply.sql` tylko dlatego, że PR został scalony.
+Wszystkie 28 aktywnych szczytów KGP mają co najmniej jedną aktywną trasę
+z geometrią i POI. Nie jest to komplet wszystkich tras ani całego katalogu.
+GPX Wysokiej Kopy prowadzi do Sinych Skałek, bez zamkniętego wierzchołka;
+pozostałe ograniczenia zakresów są w README odpowiednich partii.
 
-## Jedna kolejność po powrocie do komputera
+## Backup i kodowanie
 
-Najpierw pobierz aktualny kod i wykonaj [backup](windows-backup.md). Zachowaj spisy i metadane kopii. Przed każdym etapem wykonaj jego `verify.sql`; jeśli stan różni się od oczekiwanego lub wystąpi konflikt, zatrzymaj ten etap i przejrzyj rekordy, zamiast usuwać zabezpieczenia albo importować ponownie na ślepo.
+Właściciel potwierdził backupy przed i po wdrożeniach. Próbne pełne odtworzenie
+w izolacji nadal nie jest potwierdzone. [Skrypt Windows](windows-backup.md)
+służy przyszłym kopiom; merge go nie uruchamia i nie wymaga ponowienia eksportu.
+Spis archiwum i SHA-256 nie są testem pełnego restore.
 
-| Kolejność | Cel i PR | Co uruchomić w SQL Editor po weryfikacji |
-| --- | --- | --- |
-| 1 | 20 szczytów, [PR #15](https://github.com/Silentmaster86/peakguide/pull/15) | `docs/catalogue/twenty-peaks/apply.sql` — jeden wspólny plik, nie osobno 02 i 03 |
-| 2 | 3 pozostałe pozycje KGP, [PR #17](https://github.com/Silentmaster86/peakguide/pull/17) | `docs/catalogue/batch-04/apply.sql` |
-| 3 | 4 brakujące GPX pierwszej partii, [PR #18](https://github.com/Silentmaster86/peakguide/pull/18) | `docs/catalogue/gpx-completion/apply.sql` — aktualizacja istniejących tras, wymaga rejestru partii 01 |
-| 4 | 3 poprawki pinezek, [PR #19](https://github.com/Silentmaster86/peakguide/pull/19) | `docs/catalogue/coordinate-review/apply.sql` |
-| 5 | Ukrycie niepotwierdzonego wpisu Łysicy, [PR #16](https://github.com/Silentmaster86/peakguide/pull/16) | `docs/catalogue/lysica-review/apply.sql` |
+Przy kopiowaniu plików SQL zawsze stosować jawne UTF-8:
 
-Ścieżki mają sens dopiero po scaleniu odpowiednich PR do `main`. Każdy katalog zawiera własny `verify.sql`, `rollback.sql` oraz README ze źródłami i wyjątkami. Nie powtarzaj już wdrożonej migracji 014 ani pierwszego importu 01. Narzędzie backupu nie uruchamia żadnego SQL ani merge.
+```powershell
+Get-Content .\SCIEZKA\PLIK.sql -Encoding UTF8 -Raw | Set-Clipboard
+```
 
-Etapy 3–5 są niezależne od importu 20; pokazana kolejność ułatwia kontrolę, ale korekta współrzędnych nie zmienia snapshotów tras/POI. Gdyby operacja była już wykonana, jej chronione powtórzenie jest no-op tylko dla niezmienionych rekordów; zawsze zacznij od verify.
+Poprzedni import przez PowerShell bez tego parametru uszkodził teksty.
+Naprawa zachowała identyfikatory i odświeżyła rejestry. Nie usuwać/reimportować
+rekordów w celu naprawy tekstu. Późniejsze edycje administratora celowo blokują
+stare importy i rollbacki; nie wyłączać tych zabezpieczeń.
 
-## Wynik, którego oczekujemy
+## Co dalej
 
-Po etapach 1–3 wszystkie 28 aktywnych pozycji KGP mają po co najmniej jednej trasie, przebiegu mapowym i POI. **Wysoka Kopa to dojście czerwonym szlakiem do Sinych Skałek, bez zamkniętego wierzchołka.** To pokrycie wybranymi trasami, a nie pełny zestaw wszystkich szlaków i atrakcji.
-
-Po etapie 4 Śnieżnik, Rudawiec i Lackowa mają pinezki zgodne ze sprawdzonymi punktami. Po etapie 5 pozostaje jeden publiczny wpis Łysicy; dodatkowy id 83 jest nieaktywny, nie usunięty. Jeśli w międzyczasie nie było innych zmian, publiczny licznik wszystkich szczytów spadnie z 89 do 88, a Polski z 83 do 82.
-
-Końcowa kontrola: mapa z warstwami tras i POI, pobranie GPX, PL/EN/UA/ZH, szczegóły kilku szczytów, zachowanie pierwszych pięciu tras. Nie uznawaj testów na fixture ani zielonego CI za dowód wykonania produkcyjnych importów.
-
-## Cofanie
-
-Cofaj konkretną operację, a nie całą bazę dla pojedynczej poprawki. Najpierw jej aktualny `rollback.sql`, który chroni późniejsze edycje. Dla pełnego cofania obowiązuje odwrotna kolejność zależności:
-
-- uzupełnienie GPX przed cofnięciem całej partii 01;
-- wspólny rollback pakietu 20 usuwa obie części 02 i 03; aby zachować 02, cofaj samą 03;
-- cofnięcie ukrycia Łysicy wymaga także ponownego dodania jej URL do sitemap i wdrożenia strony.
-
-Nie odtwarzaj starej kopii produkcji bez planu: nadpisałaby także inne późniejsze dane. Pełny restore sprawdzamy najpierw w izolacji według [procedury utrzymania](remaining-work.md).
-
-## Co pozostaje poza tą serią
-
-1. Kontrolowany test zapisu edytorów tras/POI na rzeczywistym środowisku stagingowym. Automatyczne testy mają atrapy API i osobne bazy.
-2. Próbne odtworzenie świeżego backupu i odtwarzalny pełny schemat — wymagają prywatnej kopii i zgodnego środowiska; publiczne API nie wystarczy.
-3. Pozostałe szczyty poza KGP, zdjęcia z udokumentowaną licencją, kolejne rzeczywiste trasy/POI. Nie kopiować niezweryfikowanych parametrów ani wymyślać geometrii.
-4. Oddzielny projekt językowych URL/prerender SEO, pomiary wydajności i dostępności. Nie mieszać przebudowy routingu z operacjami danych.
-5. Poczta i stara Edge Function: zdrowie kolejki/logi, bez wysyłania testów do cudzych kont i bez usuwania funkcji na podstawie samego braku odwołań w repo.
+Aktualna [karta kolejnego agenta](../handoff/NEXT-AGENT.md) opisuje ukończone
+prace, granice danych i kolejne priorytety. Pozostają m.in. sześć starszych
+tras zagranicznych bez GPX, kontrolowany test edytorów tras/POI, próbne
+odtworzenie backupu, dalsze dane praktyczne oraz osobny etap SEO.
+Procedura izolowanego odtwarzania i utrzymanie poczty: [remaining-work.md](remaining-work.md).
+Nie przedstawiać testów na fixture ani zielonego CI jako dowodu wykonania
+produkcyjnych operacji. Kolejne zmiany wymagają własnego zakresu i kontroli stanu.

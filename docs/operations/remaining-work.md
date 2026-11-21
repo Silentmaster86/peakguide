@@ -1,6 +1,6 @@
 # Utrzymanie PeakGuide — stan i następne czynności
 
-Przygotowane PR-y i jedna kolejność operacji po backupie: [pending-rollout.md](pending-rollout.md).
+Potwierdzony stan wykonanych wdrożeń: [pending-rollout.md](pending-rollout.md).
 Narzędzie dla Windows: [windows-backup.md](windows-backup.md).
 
 ## Poczta
@@ -23,8 +23,10 @@ przeterminowane rezerwacje i harmonogram. Nie zmienia statusów i nie ponawia po
 
 ## Backup / brak pełnego stagingu
 
-Istniejący dump z 9 listopada przeszedł tylko `pg_restore --list`. Pełne odtworzenie
-nie zostało potwierdzone. Lokalny fixture PostGIS nie zastępuje backupu Supabase.
+21 listopada właściciel potwierdził utworzenie lokalnych backupów przed i po
+wdrożeniach katalogu. Kopia sprzed zmian miała czytelny spis archiwum; pełne
+odtworzenie nadal nie zostało potwierdzone. Lokalny fixture PostGIS nie zastępuje
+backupu Supabase. Aktualny stan wykonanych importów: `docs/handoff/NEXT-AGENT.md`.
 
 Kolejność odtworzenia:
 

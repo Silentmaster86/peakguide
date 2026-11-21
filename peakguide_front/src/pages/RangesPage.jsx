@@ -118,7 +118,7 @@ export default function RangesPage({ lang = 'pl' }) {
                   <div className='catalogue-card'>
                     <div style={cardTop}>
                       <div>
-                        <h3 style={rangeName}>{r.name}</h3>
+                        <h2 style={rangeName}>{r.name}</h2>
                         <div style={locationText}>
                           {r.country_flag} {r.region_name || r.country_name}
                         </div>

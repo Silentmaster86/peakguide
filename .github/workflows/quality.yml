@@ -128,3 +128,13 @@ jobs:
       - run: python supabase/tests/catalogue_batch04_test.py
         env:
           PGHOST: localhost
+      - run: python scripts/build_catalogue_gpx_completion.py --check
+      - run: createdb -h localhost -U postgres catalogue_gpx_completion_test
+      - run: python supabase/tests/catalogue_gpx_completion_test.py
+        env:
+          PGHOST: localhost
+      - run: python scripts/build_catalogue_utf8_repair.py --check
+      - run: createdb -h localhost -U postgres catalogue_utf8_repair_test
+      - run: python supabase/tests/catalogue_utf8_repair_test.py
+        env:
+          PGHOST: localhost

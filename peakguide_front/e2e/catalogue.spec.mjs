@@ -122,3 +122,64 @@ test('main navigation menu supports keyboard focus and Escape', async ({ page })
   await expect(trigger).toBeFocused();
   await expect(page.getByRole('menu')).toHaveCount(0);
 });
+
+for (const lang of ['pl','en','ua','zh']) {
+  test(`home discovery link has readable text in light and dark themes (${lang})`, async ({ page }) => {
+    for (const mode of ['light','dark']) {
+      await page.addInitScript(({lang,mode}) => {
+        localStorage.setItem('peakguide_lang', lang);
+        localStorage.setItem('ui_theme_mode', mode);
+      }, {lang,mode});
+      await page.goto('/');
+      await expect(page.locator('html')).toHaveAttribute('data-theme', mode);
+      const link = page.locator('.home-hero-actions > a[href="/peaks"]');
+      await expect(link).toBeVisible();
+      const contrast = await link.evaluate(element => {
+        const style = getComputedStyle(element);
+        const luminance = color => color.match(/[\d.]+/g).slice(0,3).map(Number)
+          .map(value => value / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+          .reduce((sum,value,index) => sum + value * [.2126,.7152,.0722][index], 0);
+        const a=luminance(style.color),b=luminance(style.backgroundColor);
+        return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+      });
+      expect(contrast, `${lang}/${mode} discovery link contrast`).toBeGreaterThanOrEqual(4.5);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth+1)).toBe(true);
+    }
+  });
+}
+
+test('home discovery link supports system theme and keyboard navigation', async ({ page }) => {
+  await page.addInitScript(() => { localStorage.setItem('peakguide_lang','en'); localStorage.setItem('ui_theme_mode','system'); });
+  for (const colorScheme of ['light','dark']) {
+    await page.emulateMedia({colorScheme});
+    await page.goto('/');
+    await expect(page.locator('.home-hero-actions > a[href="/peaks"]')).toBeVisible();
+    const results=await new AxeBuilder({page}).include('.home-hero-actions').withRules(['color-contrast']).analyze();
+    expect(results.violations).toEqual([]);
+  }
+  const link=page.locator('.home-hero-actions > a[href="/peaks"]');
+  await link.focus();await expect(link).toBeFocused();await page.keyboard.press('Enter');
+  await expect(page).toHaveURL('/peaks');
+});
+
+test('range names follow the page heading without skipping a level', async ({ page }) => {
+  await page.goto('/ranges');
+  await expect(page.getByRole('heading',{level:2,name:'Grampian Mountains',exact:true})).toBeVisible();
+  const results=await new AxeBuilder({page}).include('main').withRules(['heading-order']).analyze();
+  expect(results.violations).toEqual([]);
+});
+
+test('trail cards omit unavailable metadata and retain the trail deep link', async ({ page }) => {
+  await page.route('**/rest/v1/trails?**', route => route.fulfill({
+    json: [{...trails[0],difficulty:null,route_type:null},trails[1]],
+  }));
+  await page.goto('/trails');
+  const card = page.getByRole('link', {name:/Mountain Track/});
+  await expect(card.locator('p').first()).toHaveText('United Kingdom · Grampian Mountains');
+  await expect(card).not.toContainText('Route:');
+  for (const pill of await card.locator('span').all()) await expect(pill).not.toHaveText('');
+  await expect(page.getByRole('link',{name:/Second trail/})).toContainText('hard');
+  await card.click();
+  await expect(page).toHaveURL(/trail=mountain-track/);
+  await expect(page.locator('#trail-mountain-track')).toBeFocused();
+});

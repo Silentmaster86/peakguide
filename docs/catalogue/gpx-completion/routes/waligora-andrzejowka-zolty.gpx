@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="PeakGuide — adapted published route data">
+  <metadata>
+    <name>Waligóra żółtym szlakiem z Andrzejówki</name>
+    <desc>Krótkie, bardzo strome wejście żółtym szlakiem od schroniska na zalesiony wierzchołek. Opis dotyczy samego podejścia; powrót trzeba zaplanować osobno.</desc>
+    <link href="https://e-gory.com/gory-kamienne/waligora-andrzejowka/" />
+    <link href="https://dolnoslaskie.szlaki.pttk.pl/item/gpx/539" />
+  </metadata>
+  <trk>
+    <name>Waligóra żółtym szlakiem z Andrzejówki</name>
+    <trkseg>
+      <trkpt lon="16.27822098" lat="50.68483964" />
+      <trkpt lon="16.278828" lat="50.68377198" />
+      <trkpt lon="16.27893501" lat="50.68341634" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.27893501" lat="50.68341634" />
+      <trkpt lon="16.27895004" lat="50.68325004" />
+      <trkpt lon="16.27890997" lat="50.68315398" />
+      <trkpt lon="16.27892699" lat="50.68300503" />
+      <trkpt lon="16.278885" lat="50.68284301" />
+      <trkpt lon="16.27871401" lat="50.68268199" />
+      <trkpt lon="16.27856296" lat="50.68244403" />
+      <trkpt lon="16.27857302" lat="50.68235703" />
+      <trkpt lon="16.27853698" lat="50.68230296" />
+      <trkpt lon="16.27855718" lat="50.68219076" />
+      <trkpt lon="16.27827287" lat="50.68180327" />
+      <trkpt lon="16.2784633" lat="50.68160783" />
+      <trkpt lon="16.2782836" lat="50.68124073" />
+      <trkpt lon="16.27818435" lat="50.68092971" />
+      <trkpt lon="16.27813339" lat="50.68086853" />
+    </trkseg>
+    <trkseg>
+      <trkpt lon="16.27813339" lat="50.68086853" />
+      <trkpt lon="16.27805561" lat="50.68083454" />
+    </trkseg>
+  </trk>
+</gpx>

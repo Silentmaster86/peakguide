@@ -2,6 +2,13 @@
 
 Gotowy skrypt: [`scripts/backup_database.ps1`](../../scripts/backup_database.ps1). Wymaga `pg_dump` i `pg_restore` w PATH, dostępu do internetu oraz hasła bazy. Node i Docker nie są potrzebne. Użytkownik wcześniej używał PostgreSQL 17.6; jeśli serwer jest nowszy od klienta, `pg_dump` odmówi eksportu — wtedy potrzebny jest klient zgodny z wersją serwera.
 
+## Aktualny stan
+
+Właściciel potwierdził kopie sprzed i po wdrożeniach 21 listopada 2026.
+Nie trzeba wykonywać ich ponownie z powodu scalenia tego PR. Narzędzie służy
+kolejnym eksportom; nie zastępuje istniejących plików i nie uruchamia SQL.
+Pełne próbne odtworzenie pozostaje osobnym, niepotwierdzonym zadaniem.
+
 ## Najkrótsza instrukcja dla właściciela
 
 1. Otwórz PowerShell w lokalnym folderze repozytorium PeakGuide. Sprawdź `git status`; zachowaj własne niezapisane zmiany przed przełączaniem gałęzi.
