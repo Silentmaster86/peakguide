@@ -48,10 +48,12 @@ Pełne próbne odtworzenie nadal nie jest potwierdzone. Dumpy są u właściciel
 agent nie ma połączenia administracyjnego z produkcją. Nie prosić o hasła,
 sekrety ani publikowanie dumpa w czacie/repo.
 
-PR #20 z narzędziem backupu Windows i starszą listą wdrożeń nadal był otwarty
-podczas kontroli GitHub 21 listopada. Nie scalać bez przeglądu: jego lista
-oczekujących importów jest już nieaktualna i wymaga uzgodnienia z tą kartą.
-Szczegóły izolowanego odtwarzania: `docs/operations/remaining-work.md`.
+Narzędzie do przyszłych backupów Windows: `scripts/backup_database.ps1`
+([instrukcja](../operations/windows-backup.md)), przygotowane w PR #20.
+Nie jest potrzebne do potwierdzenia już wykonanych kopii ani importów; merge
+nie uruchamia go automatycznie. [Stan wdrożeń](../operations/pending-rollout.md)
+zastępuje dawną listę oczekujących operacji. Szczegóły izolowanego odtwarzania:
+`docs/operations/remaining-work.md`.
 
 ## Funkcje już działające
 

@@ -33,3 +33,10 @@ test-results/
 playwright-report/
 # Private database metadata exports for staging preparation
 .audit-private/
+# Private database backups: never commit archives or local verification artifacts
+*.dump
+*.dump.partial
+*.dump.list.txt
+*.dump.list.txt.partial
+*.dump.backup-info.json
+PeakGuide-backups/

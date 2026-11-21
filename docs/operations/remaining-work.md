@@ -1,5 +1,8 @@
 # Utrzymanie PeakGuide — stan i następne czynności
 
+Potwierdzony stan wykonanych wdrożeń: [pending-rollout.md](pending-rollout.md).
+Narzędzie dla Windows: [windows-backup.md](windows-backup.md).
+
 ## Poczta
 
 Uruchom `supabase/operations/email_health.sql` w SQL Editor. Skrypt jest odczytowy,
