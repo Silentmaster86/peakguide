@@ -77,6 +77,9 @@ GPX/geometria dało się pobrać, sparsować i porównać punkt po punkcie — b
 rozbieżności. Pozostałe 6 aktywnych tras nie ma kompletu geometrii/GPX; dotyczy
 to starszych wpisów, nie braku pokrycia któregoś z 28 szczytów KGP.
 Nie uzupełniać ich przez kopiowanie śladu innej trasy.
+Wspólny przegląd wszystkich sześciu: [źródła GPX](../catalogue/foreign-gpx-review/README.md).
+Pięć plików kandydujących pobrano i przeanalizowano; nie jest to wdrożenie
+geometrii i żaden z sześciu wpisów nie został przez tę analizę zmieniony.
 
 Mobilny przegląd `/trails`, `/peaks/rysy?tab=trails`,
 `/peaks/snieznik?tab=pois` oraz `/map` w Light i Dark: brak poziomego

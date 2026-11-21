@@ -1,0 +1,217 @@
+{
+  "review_date": "2026-11-21",
+  "scope": "Source review only. No SQL apply, no production writes, no GPX redistribution. Candidate availability is not approval for import.",
+  "routes": [
+    {
+      "slug": "krivan-tri-studnicky-loop",
+      "name": "Kriváň",
+      "peak_id": 150,
+      "current_route_type": "loop",
+      "current_start": "Tri studničky",
+      "current_end": "Tri studničky",
+      "current_map_url": "https://slovakia.travel/en/the-krivan-mt-the-high-tatras",
+      "current_gpx_url": null,
+      "current_geometry_present": false,
+      "status": "matching_loop_candidate",
+      "candidate_page": "https://mapa-turystyczna.pl/route/31p2a",
+      "candidate_gpx_url": "https://mapa-turystyczna.pl/route/31p2a.gpx",
+      "approved_for_database_import": false,
+      "candidate": {
+        "points": 939,
+        "start": [
+          49.139943,
+          19.966308
+        ],
+        "end": [
+          49.139943,
+          19.966308
+        ],
+        "sha256": "670d1fa12edfe387937ee30c94801d466554a805c603b80733c87756b8b26f5c",
+        "creator": "https://mapa-turystyczna.pl",
+        "format_counts": {
+          "trk": 1,
+          "trkseg": 1,
+          "trkpt": 939,
+          "rte": 0,
+          "rtept": 0
+        },
+        "polyline_length_km": 14.901,
+        "max_point_gap_m": 181,
+        "endpoint_separation_m": 0
+      }
+    },
+    {
+      "slug": "hoverla-mountain-trail",
+      "name": "Hoverla",
+      "peak_id": 148,
+      "current_route_type": "point-to-point",
+      "current_start": "Hoverla checkpoint, Zavoie tract",
+      "current_end": "Hoverla summit",
+      "current_map_url": "https://cnnp.if.ua/en/planyourtrip/naturediscoverytrail/20-ecotourism/174-hoverlamountaintrail",
+      "current_gpx_url": null,
+      "current_geometry_present": false,
+      "status": "official_full_ascent_candidate",
+      "candidate_page": "https://karpatskyi-park.in.ua/en/route/hoverla-mount/",
+      "candidate_gpx_url": "https://karpatskyi-park.in.ua/wp-content/uploads/2021/01/Na-horu-Hoverla-1.gpx",
+      "approved_for_database_import": false,
+      "candidate": {
+        "points": 252,
+        "start": [
+          48.2075,
+          24.5916
+        ],
+        "end": [
+          48.1602,
+          24.5
+        ],
+        "sha256": "df4daddce6ee584e1b96b318e654a86ce31b2c60171dcdcd4904e91aff80024b",
+        "creator": "AllTrails.com",
+        "format_counts": {
+          "trk": 1,
+          "trkseg": 1,
+          "trkpt": 252,
+          "rte": 0,
+          "rtept": 0
+        },
+        "polyline_length_km": 10.814,
+        "max_point_gap_m": 74,
+        "endpoint_separation_m": 8590
+      },
+      "discovery": {
+        "method": "Public map viewer settings, the same read-only request as the page uses",
+        "page": "https://karpatskyi-park.in.ua/en/route/hoverla-mount/",
+        "map_name": "[маршрут] На гору Говерла",
+        "original_creator_attribute": "AllTrails.com"
+      }
+    },
+    {
+      "slug": "yr-wyddfa-llanberis-path",
+      "name": "Yr Wyddfa",
+      "peak_id": 146,
+      "current_route_type": "out-and-back",
+      "current_start": "Far end of Victoria Terrace, Llanberis",
+      "current_end": "Yr Wyddfa summit",
+      "current_map_url": "https://eryri.gov.wales/walk/llanberis-path/",
+      "current_gpx_url": null,
+      "current_geometry_present": false,
+      "status": "official_ascent_only_reuse_review",
+      "candidate_page": "https://eryri.gov.wales/walk/llanberis-path/",
+      "candidate_gpx_url": "https://eryri.gov.wales/wp-content/uploads/2022/03/llanberis.gpx",
+      "approved_for_database_import": false,
+      "candidate": {
+        "points": 31,
+        "start": [
+          53.11328083380987,
+          -4.122044130381807
+        ],
+        "end": [
+          53.06848209753676,
+          -4.076222864741456
+        ],
+        "sha256": "d00acea90446d1a4fbcb8486468a745bdb7cc684105963a6e10ebcdcc2e75a52",
+        "creator": "GDAL 3.4.1",
+        "format_counts": {
+          "trk": 1,
+          "trkseg": 1,
+          "trkpt": 31,
+          "rte": 0,
+          "rtept": 0
+        },
+        "polyline_length_km": 6.74,
+        "max_point_gap_m": 651,
+        "endpoint_separation_m": 5846
+      }
+    },
+    {
+      "slug": "scafell-pike-hollow-stones",
+      "name": "Scafell Pike",
+      "peak_id": 145,
+      "current_route_type": "out-and-back",
+      "current_start": "Lake Head National Trust car park, Wasdale",
+      "current_end": "Scafell Pike summit",
+      "current_map_url": "https://www.nationaltrust.org.uk/visit/lake-district/wasdale/scafell-pike-via-hollow-stones-route",
+      "current_gpx_url": null,
+      "current_geometry_present": false,
+      "status": "course_points_need_matching_track",
+      "candidate_page": "https://www.threepeakschallenge.uk/national-three-peaks-challenge/scafell-pike/routes/wasdale-head",
+      "candidate_gpx_url": "https://www.threepeakschallenge.uk/resources/national-three-peaks-challenge/scafell-pike-hollowstones.gpx",
+      "approved_for_database_import": false,
+      "candidate": {
+        "points": 24,
+        "start": [
+          54.4637013097,
+          -3.2562053368
+        ],
+        "end": [
+          54.4545527607,
+          -3.2118745028
+        ],
+        "sha256": "3d81eeaa220b1e3683d7b6e92af83ee6875058bb39bf57c6e4e2aa210f3f0744",
+        "creator": "Three Peaks Challenge Ltd",
+        "format_counts": {
+          "trk": 0,
+          "trkseg": 0,
+          "trkpt": 0,
+          "rte": 1,
+          "rtept": 24
+        },
+        "polyline_length_km": 4.086,
+        "max_point_gap_m": 304,
+        "endpoint_separation_m": 3041
+      }
+    },
+    {
+      "slug": "huangshan-south-gate-guangming-ding",
+      "name": "Huangshan",
+      "peak_id": 149,
+      "current_route_type": "loop",
+      "current_start": "Huangshan South Gate",
+      "current_end": "Huangshan South Gate",
+      "current_map_url": "https://www.huangshan.gov.cn/zwgk/public/6615714/11607391.html",
+      "current_gpx_url": null,
+      "current_geometry_present": false,
+      "status": "multimodal_itinerary_no_matching_track",
+      "candidate_page": "https://www.huangshan.gov.cn/zwgk/public/6615714/11607391.html",
+      "candidate_gpx_url": null,
+      "approved_for_database_import": false
+    },
+    {
+      "slug": "ben-nevis-mountain-track",
+      "name": "Ben Nevis",
+      "peak_id": 147,
+      "current_route_type": "out-and-back",
+      "current_start": "Glen Nevis Visitor Centre",
+      "current_end": "Ben Nevis summit",
+      "current_map_url": "https://www.mountaineering.scot/activities/hillwalking/ben-nevis",
+      "current_gpx_url": null,
+      "current_geometry_present": false,
+      "status": "course_points_need_matching_track",
+      "candidate_page": "https://www.gps-routes.co.uk/routes/home.nsf/RoutesLinksWalks/ben-nevis-mountain-track-walking-route",
+      "candidate_gpx_url": "https://www.gps-routes.co.uk/A55CD9/home.nsf/All/076CE04BA01A4CF680257DC90038F0BF/$FILE/Ben%20Nevis%20Mountain%20Track.gpx",
+      "approved_for_database_import": false,
+      "candidate": {
+        "points": 42,
+        "start": [
+          56.8111703352,
+          -5.0771637624
+        ],
+        "end": [
+          56.7969157629,
+          -5.0037535774
+        ],
+        "sha256": "66a6cbe478a086999a55607b3149fd007e60addc46a6e68358f90ee97cefa129",
+        "creator": "Memory-Map 5.4.2.1089 http://www.memory-map.com",
+        "format_counts": {
+          "trk": 0,
+          "trkseg": 0,
+          "trkpt": 0,
+          "rte": 1,
+          "rtept": 42
+        },
+        "polyline_length_km": 7.958,
+        "max_point_gap_m": 555,
+        "endpoint_separation_m": 4742
+      }
+    }
+  ]
+}
