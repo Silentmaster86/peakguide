@@ -168,3 +168,18 @@ test('range names follow the page heading without skipping a level', async ({ pa
   const results=await new AxeBuilder({page}).include('main').withRules(['heading-order']).analyze();
   expect(results.violations).toEqual([]);
 });
+
+test('trail cards omit unavailable metadata and retain the trail deep link', async ({ page }) => {
+  await page.route('**/rest/v1/trails?**', route => route.fulfill({
+    json: [{...trails[0],difficulty:null,route_type:null},trails[1]],
+  }));
+  await page.goto('/trails');
+  const card = page.getByRole('link', {name:/Mountain Track/});
+  await expect(card.locator('p').first()).toHaveText('United Kingdom · Grampian Mountains');
+  await expect(card).not.toContainText('Route:');
+  for (const pill of await card.locator('span').all()) await expect(pill).not.toHaveText('');
+  await expect(page.getByRole('link',{name:/Second trail/})).toContainText('hard');
+  await card.click();
+  await expect(page).toHaveURL(/trail=mountain-track/);
+  await expect(page.locator('#trail-mountain-track')).toBeFocused();
+});
