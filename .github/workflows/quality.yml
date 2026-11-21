@@ -138,3 +138,8 @@ jobs:
       - run: python supabase/tests/catalogue_utf8_repair_test.py
         env:
           PGHOST: localhost
+      - run: python scripts/build_foreign_gpx_01.py --check
+      - run: createdb -h localhost -U postgres foreign_gpx_01_test
+      - run: python supabase/tests/foreign_gpx_01_test.py
+        env:
+          PGHOST: localhost
