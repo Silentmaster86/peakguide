@@ -55,6 +55,9 @@ const translations = {
 
 export default function TrailCard({ trail, lang }) {
 	const t = translations[lang] || translations.en;
+  const trailLocation = [trail.country_name, trail.range_name, trail.region_name]
+    .filter(value => value?.trim())
+    .join(' · ');
 
 	return (
     <Link
@@ -70,21 +73,22 @@ export default function TrailCard({ trail, lang }) {
         <h2 style={title}>{trail.name}</h2>
         <TranslationNotice contentLang={trail.content_lang} lang={lang} />
 
-        <p style={location}>
-          {trail.country_name} · {trail.range_name} · {trail.region_name}
-        </p>
+        {trailLocation && <p style={location}>{trailLocation}</p>}
 
         <p style={peakName}>
           ⛰️ {t.peak}: {trail.peak_name}
         </p>
 
-        <div style={meta}>
-          <span style={difficultyBadge}>{t[trail.difficulty] || trail.difficulty}</span>
-
-          <span style={routeText}>
-            ↔ {t.route}: {t[trail.route_type] || trail.route_type}
-          </span>
-        </div>
+        {(trail.difficulty || trail.route_type) && (
+          <div style={meta}>
+            {trail.difficulty && <span style={difficultyBadge}>{t[trail.difficulty] || trail.difficulty}</span>}
+            {trail.route_type && (
+              <span style={routeText}>
+                ↔ {t.route}: {t[trail.route_type] || trail.route_type}
+              </span>
+            )}
+          </div>
+        )}
 
         {(trail.distance_km != null ||
           trail.elevation_gain_m != null ||
