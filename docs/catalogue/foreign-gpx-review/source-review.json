@@ -50,10 +50,39 @@
       "current_map_url": "https://cnnp.if.ua/en/planyourtrip/naturediscoverytrail/20-ecotourism/174-hoverlamountaintrail",
       "current_gpx_url": null,
       "current_geometry_present": false,
-      "status": "no_matching_track_found",
+      "status": "official_full_ascent_candidate",
       "candidate_page": "https://karpatskyi-park.in.ua/en/route/hoverla-mount/",
-      "candidate_gpx_url": null,
-      "approved_for_database_import": false
+      "candidate_gpx_url": "https://karpatskyi-park.in.ua/wp-content/uploads/2021/01/Na-horu-Hoverla-1.gpx",
+      "approved_for_database_import": false,
+      "candidate": {
+        "points": 252,
+        "start": [
+          48.2075,
+          24.5916
+        ],
+        "end": [
+          48.1602,
+          24.5
+        ],
+        "sha256": "df4daddce6ee584e1b96b318e654a86ce31b2c60171dcdcd4904e91aff80024b",
+        "creator": "AllTrails.com",
+        "format_counts": {
+          "trk": 1,
+          "trkseg": 1,
+          "trkpt": 252,
+          "rte": 0,
+          "rtept": 0
+        },
+        "polyline_length_km": 10.814,
+        "max_point_gap_m": 74,
+        "endpoint_separation_m": 8590
+      },
+      "discovery": {
+        "method": "Public map viewer settings, the same read-only request as the page uses",
+        "page": "https://karpatskyi-park.in.ua/en/route/hoverla-mount/",
+        "map_name": "[маршрут] На гору Говерла",
+        "original_creator_attribute": "AllTrails.com"
+      }
     },
     {
       "slug": "yr-wyddfa-llanberis-path",

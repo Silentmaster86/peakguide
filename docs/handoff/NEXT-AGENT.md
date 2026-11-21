@@ -78,7 +78,7 @@ rozbieżności. Pozostałe 6 aktywnych tras nie ma kompletu geometrii/GPX; dotyc
 to starszych wpisów, nie braku pokrycia któregoś z 28 szczytów KGP.
 Nie uzupełniać ich przez kopiowanie śladu innej trasy.
 Wspólny przegląd wszystkich sześciu: [źródła GPX](../catalogue/foreign-gpx-review/README.md).
-Cztery pliki kandydujące pobrano i przeanalizowano; nie jest to wdrożenie
+Pięć plików kandydujących pobrano i przeanalizowano; nie jest to wdrożenie
 geometrii i żaden z sześciu wpisów nie został przez tę analizę zmieniony.
 
 Mobilny przegląd `/trails`, `/peaks/rysy?tab=trails`,
