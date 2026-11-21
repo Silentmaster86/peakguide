@@ -86,6 +86,17 @@ Mobilny przegląd `/trails`, `/peaks/rysy?tab=trails`,
 przewijania i naruszeń Axe w tych ośmiu widokach. To test automatyczny
 wybranego zakresu, nie pełna ocena dostępności/czytnika ani test fizycznego telefonu.
 
+## Przygotowany kolejny pakiet: Howerla i Krywań
+
+[foreign-gpx-01](../catalogue/foreign-gpx-01/README.md): geometria-only aktualizacja
+istniejących tras id 8 i 10, bez zmian opisów, parametrów, ID i relacji.
+GPX pozostają hostowane przez park i Mapa Turystyczna; geometria zawiera wszystkie
+1191 punktów źródłowych. Prywatny rejestr chroni ponowienie i rollback.
+Pakiet jest przygotowany/testowany, **nie wykonany produkcyjnie przez agenta**.
+Po merge i sprawdzeniu stanu właściciel uruchamia verify → apply → verify.
+Nie mylić go z raportem źródłowym ani z ukończonymi importami KGP.
+Pozostałe cztery zagraniczne trasy pozostają poza tym patchem.
+
 ## Granice danych turystycznych
 
 Nie zgadywać brakujących metrów, czasów, kosztów ani trudności.
