@@ -62,7 +62,8 @@ zapisem. Ignoruje wyłącznie wcześniejszy `updated_at`, aby ponowienie po nasz
 rollbacku było możliwe; żadne pole treści nie jest ignorowane.
 
 Późniejsze edycje, istniejący GPX/geometria lub niezgodna tożsamość przerywają
-całą transakcję. Rejestr `foreign-gpx-01` zapisuje pełne snapshoty przed/po.
+całą transakcję. Rejestr `foreign-gpx-01` zapisuje pełne snapshoty przed/po. Transakcja lokalnie
+ustawia UTC, aby kontrola dat nie zależała od strefy czasowej sesji SQL.
 Chronione ponowienie jest no-op dla niezmienionych rekordów. Pozostałe
 rejestry katalogu (w tym KGP i naprawa UTF-8) są nietknięte.
 

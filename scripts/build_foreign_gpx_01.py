@@ -41,6 +41,7 @@ READ = """
 HEADER = """-- Geometry only. ASCII-only SQL. Read README.md and keep a backup before applying.
 begin;
 set local lock_timeout='5s';
+set local timezone='UTC';
 do $upgrade$
 declare changes jsonb=$changes$PAYLOAD$changes$::jsonb;
  receipt jsonb; entry jsonb; change jsonb; actual jsonb; expected jsonb; previous jsonb;
@@ -64,7 +65,7 @@ VERIFY_RECEIPT = """
 
 def generate(changes):
     payload = json.dumps(changes, ensure_ascii=True, separators=(',', ':'))
-    assert '$changes$' not in payload
+    assert '$changes$' not in payload and '$upgrade$' not in payload
     header = HEADER.replace('PAYLOAD', payload)
     apply = header + " if receipt is not null then\n" + VERIFY_RECEIPT + """
  raise notice 'Foreign GPX upgrade already applied; unchanged'; return;

@@ -101,9 +101,9 @@ for key in ('trails', 'i18n', 'pois', 'links'):
 assert next(r for r in after['receipts'] if r['batch_key'] == 'unrelated-kgp') == before['receipts'][0]
 rows = [json.loads(line) for line in sql('select row_to_json(v) from (' + verify.rstrip().removesuffix(';') + ') v').splitlines()]
 assert len(rows) == 2 and all(r['geometry_matches_review'] and r['gpx_matches_review'] and r['upgrade_applied'] and r['languages'] == ['en', 'pl', 'ua', 'zh'] for r in rows)
-sql(apply)
+sql("set timezone='Europe/Warsaw';" + apply)
 assert snapshot() == after
-sql(rollback)
+sql("set timezone='America/New_York';" + rollback)
 restored = snapshot()
 assert logical(restored) == logical(before)
 sql(rollback)
