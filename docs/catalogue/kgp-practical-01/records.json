@@ -15,7 +15,7 @@
       "longitude": null,
       "google_maps_url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
       "public_transport_url": null,
-      "source_url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
+      "source_url": "https://www.andrzejowka.eu/godziny-pracy/",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -125,7 +125,7 @@
       "longitude": null,
       "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
       "public_transport_url": "https://www.sleza.sobotka.pl/komunikacja-autobusowa/",
-      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
+      "source_url": "https://www.sleza.sobotka.pl/przelecz-tapadla/",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -240,7 +240,7 @@
       "longitude": null,
       "google_maps_url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
       "public_transport_url": null,
-      "source_url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
+      "source_url": "https://swpn.gov.pl/komunikat-turystyczny",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -403,7 +403,7 @@
       "longitude": null,
       "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
       "public_transport_url": null,
-      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
+      "source_url": "https://kpn.gov.pl/komunikat-turystyczny",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -515,7 +515,7 @@
       "longitude": null,
       "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
       "public_transport_url": null,
-      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
+      "source_url": "https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -1151,7 +1151,7 @@
       "longitude": null,
       "google_maps_url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
       "public_transport_url": null,
-      "source_url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
+      "source_url": "https://bgpn.gov.pl/komunikat-turystyczny",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -1217,7 +1217,7 @@
       "longitude": null,
       "google_maps_url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
       "public_transport_url": null,
-      "source_url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
+      "source_url": "https://bdpn.gov.pl/wejscia-i-parkingi",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -1332,7 +1332,7 @@
       "longitude": null,
       "google_maps_url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
       "public_transport_url": "https://gpn.gov.pl/wejscia-i-parkingi",
-      "source_url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
+      "source_url": "https://gpn.gov.pl/komunikat-turystyczny",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },
@@ -1812,7 +1812,7 @@
       "longitude": null,
       "google_maps_url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
       "public_transport_url": null,
-      "source_url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
+      "source_url": "https://tpn.gov.pl/komunikat-turystyczny",
       "last_verified_at": "2026-11-22T00:00:00Z",
       "active": true
     },

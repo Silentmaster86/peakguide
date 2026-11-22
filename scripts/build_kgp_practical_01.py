@@ -26,6 +26,7 @@ def load():
     for r in rows:
         assert set(r['i18n']) == LANGS
         assert r['access']['active'] is True
+        assert r['access']['source_url'] in {e['url'] for e in r['evidence']}
         assert all(r['access'][k] is None for k in ['address','postcode','latitude','longitude'])
         for lang, v in r['i18n'].items():
             assert all(isinstance(v[k], str) and v[k].strip() for k in ['directions','public_transport','warnings'])
