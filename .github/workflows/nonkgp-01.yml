@@ -1,0 +1,40 @@
+name: Non-KGP batch 01
+on:
+  pull_request:
+    paths:
+      - 'docs/catalogue/nonkgp-01/**'
+      - 'scripts/build_nonkgp_01.py'
+      - 'scripts/test_nonkgp_01.py'
+      - 'supabase/tests/nonkgp_01_test.py'
+      - '.github/workflows/nonkgp-01.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/catalogue/nonkgp-01/**'
+      - 'scripts/build_nonkgp_01.py'
+      - 'scripts/test_nonkgp_01.py'
+      - 'supabase/tests/nonkgp_01_test.py'
+      - '.github/workflows/nonkgp-01.yml'
+permissions:
+  contents: read
+jobs:
+  reviewed-data:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.5
+        env:
+          POSTGRES_PASSWORD: local-test-only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGPASSWORD: local-test-only
+      PGHOST: localhost
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/build_nonkgp_01.py --check
+      - run: python -m unittest discover -s scripts -p 'test_*.py'
+      - run: createdb -U postgres nonkgp_01_test
+      - run: python supabase/tests/nonkgp_01_test.py

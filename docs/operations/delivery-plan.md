@@ -74,3 +74,13 @@ zdjęcia/relacje z moderacją. Nie są częścią obecnych 24 pozycji.
 To trzy niezależne PR-y; punkt 5 planu został podzielony na dwa, żeby lokalne
 obliczenia słońca nie zależały od akceptacji zewnętrznego dostawcy. Liczba 24
 pozostaje budżetem roboczym, nie limitem ani obietnicą zakończenia w jednym wydaniu.
+
+
+## Następny pakiet danych — przygotowany, jeszcze bez wdrożenia SQL
+
+[nonkgp-01](../catalogue/nonkgp-01/README.md): Łysina, Śnieżnica, Góra Żar,
+Leskowiec — 4 trasy z GPX i 4 POI w czterech językach. Śnieżnica otrzymuje poprawne
+pasmo Wyspowy, bez zmian współrzędnych lub opisów szczytu. Właściciel: merge,
+apply.sql, verify.sql. Ostry Wierch z pierwszej piątki ma sprzeczną tożsamość
+w danych; pozostaje osobnym zadaniem, nie został automatycznie podmieniony.
+PR #32/#33/#34 są już scalone; właściciel potwierdził działanie pogody i światła.

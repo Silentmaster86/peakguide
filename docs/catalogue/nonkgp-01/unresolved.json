@@ -1,0 +1,19 @@
+[
+  {
+    "peak_id": 73,
+    "slug": "ostry-wierch",
+    "status": "identity_review_required",
+    "observed": {
+      "range_id": 23,
+      "elevation_m": 851,
+      "latitude": 49.4178,
+      "longitude": 20.4204
+    },
+    "reason": "The stored Beskid Niski range and descriptions conflict with an 851 m height and Pieniny coordinates. PTTK 2311 describes a different Ostry Wierch around 930 m at 49.438424,21.122965. No route, POI or identity correction is applied to id 73 in this package.",
+    "sources": [
+      "https://malopolska.szlaki.pttk.pl/2311-pttk-malopolska-ostry-wierch",
+      "https://www.dioblina.eu/Ostry_Wierch_Szczawnica"
+    ],
+    "next_step": "Review the intended identity using the recorded Beskid Niski relationship and all existing descriptions; verify a summit point and elevation against independent authoritative mapping before preparing a separate guarded correction. Any coordinate repair must also update the weather location allowlist. Do not substitute the Pieniny or Beskid Niski route solely from the ambiguous name."
+  }
+]

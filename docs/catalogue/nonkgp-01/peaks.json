@@ -1,0 +1,42 @@
+[
+  {
+    "id": 70,
+    "slug": "lysina",
+    "active": true,
+    "is_korona": false,
+    "range_id": 21,
+    "latitude": 49.775861,
+    "longitude": 20.048194,
+    "elevation_m": 891
+  },
+  {
+    "id": 69,
+    "slug": "snieznica",
+    "active": true,
+    "is_korona": false,
+    "range_id": 21,
+    "latitude": 49.7158,
+    "longitude": 20.1785,
+    "elevation_m": 1007
+  },
+  {
+    "id": 76,
+    "slug": "gora-zar",
+    "active": true,
+    "is_korona": false,
+    "range_id": 24,
+    "latitude": 49.787239,
+    "longitude": 19.224869,
+    "elevation_m": 761
+  },
+  {
+    "id": 75,
+    "slug": "leskowiec",
+    "active": true,
+    "is_korona": false,
+    "range_id": 24,
+    "latitude": 49.788611,
+    "longitude": 19.443444,
+    "elevation_m": 922
+  }
+]
