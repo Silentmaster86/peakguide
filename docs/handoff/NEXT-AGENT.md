@@ -166,7 +166,31 @@ Trzy nierozstrzygnięte parkingi: Lackowa, Mogielica, Lubomir — patrz unresolv
 
 [Przegląd po wdrożeniach](../reviews/2026-11-22-postrollout.md): 57 widoków produkcji,
 4 interaktywne przeglądy mapy, publiczna kontrola geometrii/tłumaczeń/kompletności.
-Przygotowane poprawki 404 i metadanych UA/ZH w gałęzi `fix/postrollout-review`.
+PR #30 z poprawkami 404 i metadanych UA/ZH jest scalony.
 Oddzielny `krivan-seasonal-01` w `data/krivan-seasonal-warning` aktualizuje ostrzeżenie
-o sezonie zamknięcia 2026/2027; nie jest jeszcze wykonany produkcyjnie przez agenta.
+o sezonie zamknięcia 2026/2027; PR #31 jest scalony, a właściciel wykonał SQL
+i potwierdził 4/4 warning_matches_review=true oraz patch_applied=true.
 Nie zmienia GPX ani zakończonego pakietu `foreign-gpx-01`.
+
+## Nowe zlecenie: autonomiczna realizacja dalszego planu
+
+Właściciel zlecił frontend, backend, testy i przygotowywanie kolejnych PR-ów;
+sam kontroluje i wykonuje merge. [Plan i kolejność](../operations/delivery-plan.md).
+[Świeży audyt](../audit/2026-11-22/README.md): 88 aktywnych szczytów,
+60 spoza KGP (54 PL, 6 zagranicznych). Poza KGP: 54 bez tras, 57 bez POI.
+Raport jest odczytowy, nie importem ani potwierdzeniem jakości istniejących wpisów.
+
+### Przygotowane kolejne PR-y — jeszcze nie są potwierdzeniem produkcji
+
+- #32: raport braków i plan wykonawczy (ten PR), bez SQL.
+- #33: prognoza przy szczycie + backend Netlify + testy. Wdrożenie funkcji w Deploy
+  Preview sprawdzono z usługą wyłączoną (503 not_configured). Dostawca MET wymaga
+  akceptacji warunków przez właściciela; po niej jedna zmienna Netlify Functions
+  `PEAKGUIDE_WEATHER_ENABLED=true` i deploy. Bez SQL i klucza API. Instrukcja jest
+  w tym PR w docs/operations/weather.md. Nie deklarować uruchomienia prognozy.
+- #34: lokalne obliczenia wschodu/zachodu i długości dnia dla daty wycieczki,
+  4 języki, docelowe strefy czasu, stany polarne. Tylko merge, bez konfiguracji.
+
+PR-y są niezależne, bazują na main 397e464. Lokalna próba ich połączenia nie
+wykazała konfliktów. Każdy ma własne testy; status CI sprawdzić na najnowszym SHA.
+Właściciel nadal sam wykonuje merge. Nie utożsamiać przygotowanego kodu z wdrożeniem.

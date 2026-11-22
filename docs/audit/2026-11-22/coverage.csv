@@ -1,0 +1,89 @@
+﻿slug,name,country,range,kgp,trails,mapped_trails,pois,access_cards,parking_cards,gaps
+anielska-kopa,Anielska Kopa,PL,gory-bystrzyckie,False,0,0,0,0,0,trails; pois; access; parking
+babia-gora,Babia Góra,PL,beskid-zywiecki,True,1,1,1,1,1,
+barania-gora,Barania Góra,PL,beskid-slaski,False,0,0,0,0,0,trails; pois; access; parking
+baraniec-kaczawskie,Baraniec,PL,gory-kaczawskie,False,0,0,0,0,0,trails; pois; access; parking
+ben-nevis,Ben Nevis,GB,grampian-mountains,False,1,0,1,1,1,mapped_trail_with_gpx
+biskupia-kopa,Biskupia Kopa,PL,gory-opawskie,True,1,1,1,1,1,
+chelmiec,Chełmiec,PL,gory-walbrzyskie,True,1,1,1,1,1,
+cwilin,Ćwilin,PL,beskid-wyspowy,False,0,0,0,0,0,trails; pois; access; parking
+czarna-gora,Czarna Góra,PL,masyw-snieznika,False,0,0,0,0,0,trails; pois; access; parking
+czupel,Czupel,PL,beskid-maly,True,1,1,1,1,1,
+dzikowiec,Dzikowiec Wielki,PL,gory-walbrzyskie,False,0,0,0,0,0,trails; pois; access; parking
+gora-zar,Góra Żar,PL,beskid-maly,False,0,0,0,0,0,trails; pois; access; parking
+guangming-ding,Guangming Ding,CN,huangshan,False,1,0,0,1,1,pois; mapped_trail_with_gpx
+halicz,Halicz,PL,bieszczady-zachodnie,False,0,0,0,0,0,trails; pois; access; parking
+hoverla,Hoverla,UA,chornohora,False,1,1,0,1,1,pois
+iwinka,Iwinka,PL,gory-bialskie,False,0,0,0,0,0,trails; pois; access; parking
+jagodna,Jagodna,PL,gory-bystrzyckie,True,1,1,1,1,1,
+jaworzyna-kamienicka,Jaworzyna Kamienicka,PL,gorce,False,0,0,0,0,0,trails; pois; access; parking
+jelenia-kopa,Jelenia Kopa,PL,gory-bardzkie,False,0,0,0,0,0,trails; pois; access; parking
+jeleniec-orlickie,Jeleniec,PL,gory-orlickie,False,0,0,0,0,0,trails; pois; access; parking
+kalenica,Kalenica,PL,gory-sowie,False,0,0,0,0,0,trails; pois; access; parking
+klimczok,Klimczok,PL,beskid-slaski,False,0,0,0,0,0,trails; pois; access; parking
+klodzka-gora,Kłodzka Góra,PL,gory-bardzkie,True,1,1,1,1,1,
+kowadlo,Kowadło,PL,gory-zlote,True,1,1,1,1,1,
+kozi-wierch,Kozi Wierch,PL,tatry,False,0,0,0,0,0,trails; pois; access; parking
+krivan,Kriváň,SK,high-tatras,False,1,1,0,1,1,pois
+krzemien,Krzemień,PL,bieszczady-zachodnie,False,0,0,0,0,0,trails; pois; access; parking
+kudlon,Kudłoń,PL,gorce,False,0,0,0,0,0,trails; pois; access; parking
+lackowa,Lackowa,PL,beskid-niski,True,1,1,1,1,0,parking
+lakowa-wyspowy,Łyżka,PL,beskid-wyspowy,False,0,0,0,0,0,trails; pois; access; parking
+lesista-wielka,Lesista Wielka,PL,gory-kamienne,False,0,0,0,0,0,trails; pois; access; parking
+leskowiec,Leskowiec,PL,beskid-maly,False,0,0,0,0,0,trails; pois; access; parking
+lisa-gora,Łysa Góra,PL,gory-swietokrzyskie,False,0,0,0,0,0,trails; pois; access; parking
+lubomir,Lubomir,PL,beskid-makowski,True,1,1,1,1,0,parking
+lysica,Łysica,PL,gory-swietokrzyskie,True,1,1,1,1,1,
+lysina,Łysina,PL,beskid-makowski,False,0,0,0,0,0,trails; pois; access; parking
+maly-babia-gora,Mała Babia Góra,PL,beskid-zywiecki,False,0,0,0,0,0,trails; pois; access; parking
+maly-snieznik,Mały Śnieżnik,PL,masyw-snieznika,False,0,0,0,0,0,trails; pois; access; parking
+mieguszowiecki-szczyt,Mięguszowiecki Szczyt Wielki,PL,tatry,False,0,0,0,0,0,trails; pois; access; parking
+mogielica,Mogielica,PL,beskid-wyspowy,True,1,1,1,1,0,parking
+naroza,Narożnik,PL,gory-stolowe,False,0,0,0,0,0,trails; pois; access; parking
+niemcowa,Niemcowa,PL,beskid-sadecki,False,0,0,0,0,0,trails; pois; access; parking
+orlica,Orlica,PL,gory-orlickie,True,1,1,1,1,1,
+ostry-wierch,Ostry Wierch,PL,beskid-niski,False,0,0,0,0,0,trails; pois; access; parking
+ostrzyca,Ostrzyca Proboszczowicka,PL,gory-kaczawskie,False,0,0,0,0,0,trails; pois; access; parking
+polica,Polica,PL,beskid-zywiecki,False,0,0,0,0,0,trails; pois; access; parking
+postawna,Postawna,PL,gory-bialskie,False,0,0,0,0,0,trails; pois; access; parking
+ptasia-kopa,Ptasia Kopa,PL,gory-walbrzyskie,False,0,0,0,0,0,trails; pois; access; parking
+radunia,Radunia,PL,masyw-slezy,False,0,0,0,0,0,trails; pois; access; parking
+radziejowa,Radziejowa,PL,beskid-sadecki,True,1,1,1,1,1,
+rotunda,Rotunda,PL,beskid-niski,False,0,0,0,0,0,trails; pois; access; parking
+rudawiec,Rudawiec,PL,gory-bialskie,True,1,1,1,1,1,
+rudawiec-zlote,Rudawiec (Złote),PL,gory-zlote,False,0,0,0,0,0,trails; pois; access; parking
+rysy,Rysy,PL,tatry,True,1,1,1,1,1,
+scafell-pike,Scafell Pike,GB,lake-district,False,1,0,1,1,1,mapped_trail_with_gpx
+skalniak,Skalniak,PL,gory-stolowe,False,0,0,0,0,0,trails; pois; access; parking
+skalnik,Skalnik,PL,rudawy-janowickie,True,1,1,1,1,1,
+skopiec,Skopiec,PL,gory-kaczawskie,True,1,1,1,1,1,
+skrzyczne,Skrzyczne,PL,beskid-slaski,True,1,1,1,1,1,
+sleza,Ślęża,PL,masyw-slezy,True,1,1,1,1,1,
+smogornia,Smogornia,PL,karkonosze,False,0,0,0,0,0,trails; pois; access; parking
+sniezka,Śnieżka,PL,karkonosze,True,1,1,1,1,1,
+snieznica,Śnieżnica,PL,beskid-makowski,False,0,0,0,0,0,trails; pois; access; parking
+snieznik,Śnieżnik,PL,masyw-snieznika,True,1,1,1,1,1,
+sokolica,Sokolica,PL,pieniny,False,0,0,0,0,0,trails; pois; access; parking
+sokolik-wielki,Sokolik Wielki,PL,rudawy-janowickie,False,0,0,0,0,0,trails; pois; access; parking
+srebrna-gora,Srebrna Góra,PL,gory-bardzkie,False,0,0,0,0,0,trails; pois; access; parking
+srebrna-kopa,Srebrna Kopa,PL,gory-opawskie,False,0,0,0,0,0,trails; pois; access; parking
+sredniak-sowie,Średniak,PL,gory-sowie,False,0,0,0,0,0,trails; pois; access; parking
+stog-izerski,Stóg Izerski,PL,gory-izerskie,False,0,0,0,0,0,trails; pois; access; parking
+suchawa,Suchawa,PL,gory-kamienne,False,0,0,0,0,0,trails; pois; access; parking
+szczeliniec-wielki,Szczeliniec Wielki,PL,gory-stolowe,True,1,1,1,1,1,
+tarnica,Tarnica,PL,bieszczady-zachodnie,True,1,1,1,1,1,
+trojak-zlote,Trojak,PL,gory-zlote,False,0,0,0,0,0,trails; pois; access; parking
+trzy-korony,Trzy Korony,PL,pieniny,False,0,0,0,0,0,trails; pois; access; parking
+turbacz,Turbacz,PL,gorce,True,1,1,1,1,1,
+waligora,Waligóra,PL,gory-kamienne,True,1,1,1,1,1,
+wielka-sowa,Wielka Sowa,PL,gory-sowie,True,1,1,1,1,1,
+wielki-rogal,Wielki Rogacz,PL,beskid-sadecki,False,0,0,0,0,0,trails; pois; access; parking
+wielki-szyszak,Wielki Szyszak,PL,karkonosze,False,0,0,0,0,0,trails; pois; access; parking
+wiezyca,Wieżyca,PL,masyw-slezy,False,0,0,0,0,0,trails; pois; access; parking
+wolek,Wołek,PL,rudawy-janowickie,False,0,0,0,0,0,trails; pois; access; parking
+wysoka-kopa,Wysoka Kopa,PL,gory-izerskie,True,1,1,1,1,1,
+wysoka-pieniny,Wysoka (Wysokie Skałki),PL,pieniny,True,1,1,1,1,1,
+wysoki-kamien,Wysoki Kamień,PL,gory-izerskie,False,0,0,0,0,0,trails; pois; access; parking
+yr-wyddfa,Yr Wyddfa,GB,eryri-snowdonia,False,1,0,1,1,1,mapped_trail_with_gpx
+zamkowa-gora,Zamkowa Góra,PL,gory-opawskie,False,0,0,0,0,0,trails; pois; access; parking
+zielony-garb,Zielony Garb,PL,gory-orlickie,False,0,0,0,0,0,trails; pois; access; parking
