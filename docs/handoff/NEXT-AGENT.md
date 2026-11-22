@@ -156,16 +156,17 @@ Właściciel sam wykonuje merge i SQL. Dawać krótkie kroki i dokładne ścież
 Agent może przygotować kolejne niezależne PR-y; nie zmieniać produkcji w tle.
 Delegować między agentów tylko po wyraźnym zleceniu właściciela.
 
-## Kolejna zmiana UI: krótsze karty telefonu
+## Potwierdzone: krótsze karty i dalsze parkingi
 
-Gałąź `ui/practical-mobile-details`: przy szerokości do 700 px krótkie wprowadzenie,
-mapa, źródło i data pozostają widoczne; pełny dojazd/transport/bezpieczeństwo oraz
-rozszerzone informacje parkingowe rozwija się przez natywne „Pokaż więcej”.
-Komputer pokazuje pełne treści. Cztery języki, klawiatura Enter/Spacja, czytelny
-fokus. 28 testów komponentu, lint/build i podgląd wszystkich 28 kart/9 parkingów
-w 16 kombinacjach języka/motywu/szerokości przeszły lokalnie. To podgląd kodu
-na fixture, nie potwierdzenie wdrożenia tej zmiany UI. Nie wymaga SQL.
+PR #28 i #29 są scalone. Właściciel wykonał `kgp-parking-02` i przekazał verify-all:
+28 kart dostępu / 112 tekstów, 25 parkingów KGP / 100 tekstów, bez rozbieżności,
+`package_applied=true`. Publiczny przegląd potwierdził widoczne nowe parkingi i
+zwijane karty do 700 px. Nie uruchamiać ponownie starych importów/rollbacków.
+Trzy nierozstrzygnięte parkingi: Lackowa, Mogielica, Lubomir — patrz unresolved.json.
 
-Trwa osobny przegląd parkingów dla pozostałych 19 tras; nie utożsamiać parkingu
-u podnóża z początkiem GPX przy schronisku ani parkingów innych wariantów
-z dojazdem do wybranej trasy. Istniejące dane i rejestry pozostają chronione.
+[Przegląd po wdrożeniach](../reviews/2026-11-22-postrollout.md): 57 widoków produkcji,
+4 interaktywne przeglądy mapy, publiczna kontrola geometrii/tłumaczeń/kompletności.
+Przygotowane poprawki 404 i metadanych UA/ZH w gałęzi `fix/postrollout-review`.
+Oddzielny `krivan-seasonal-01` w `data/krivan-seasonal-warning` aktualizuje ostrzeżenie
+o sezonie zamknięcia 2026/2027; nie jest jeszcze wykonany produkcyjnie przez agenta.
+Nie zmienia GPX ani zakończonego pakietu `foreign-gpx-01`.

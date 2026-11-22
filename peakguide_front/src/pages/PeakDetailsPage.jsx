@@ -1,3 +1,4 @@
+import NotFoundPage from './NotFoundPage';
 import TranslationNotice from '../components/TranslationNotice';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -224,18 +225,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
   // Not found state
   if (!peak) {
-    return (
-      <div style={wrap}>
-        <div style={errorBox}>
-          <div style={{ fontWeight: 900 }}>{labels.notFound}</div>
-          <div style={{ marginTop: 12 }}>
-            <Link to="/peaks" style={backLink}>
-              ← {labels.back}
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
+    return <NotFoundPage lang={lang} kind='peak' />;
   }
 
   const collectionLabel = getCollectionLabel(peak, lang);
