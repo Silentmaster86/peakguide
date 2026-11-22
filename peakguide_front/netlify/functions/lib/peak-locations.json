@@ -1,0 +1,442 @@
+{
+  "anielska-kopa": {
+    "latitude": 50.338892,
+    "longitude": 16.528339,
+    "elevation_m": 879
+  },
+  "babia-gora": {
+    "latitude": 49.573333,
+    "longitude": 19.529444,
+    "elevation_m": 1725
+  },
+  "barania-gora": {
+    "latitude": 49.611389,
+    "longitude": 19.010556,
+    "elevation_m": 1220
+  },
+  "baraniec-kaczawskie": {
+    "latitude": 50.940861,
+    "longitude": 15.884417,
+    "elevation_m": 720
+  },
+  "ben-nevis": {
+    "latitude": 56.79685,
+    "longitude": -5.003508,
+    "elevation_m": 1345
+  },
+  "biskupia-kopa": {
+    "latitude": 50.256667,
+    "longitude": 17.428611,
+    "elevation_m": 890
+  },
+  "chelmiec": {
+    "latitude": 50.779167,
+    "longitude": 16.210278,
+    "elevation_m": 851
+  },
+  "cwilin": {
+    "latitude": 49.688667,
+    "longitude": 20.19175,
+    "elevation_m": 1072
+  },
+  "czarna-gora": {
+    "latitude": 50.251864,
+    "longitude": 16.804889,
+    "elevation_m": 1205
+  },
+  "czupel": {
+    "latitude": 49.767944,
+    "longitude": 19.160639,
+    "elevation_m": 933
+  },
+  "dzikowiec": {
+    "latitude": 50.723889,
+    "longitude": 16.205833,
+    "elevation_m": 836
+  },
+  "gora-zar": {
+    "latitude": 49.787239,
+    "longitude": 19.224869,
+    "elevation_m": 761
+  },
+  "guangming-ding": {
+    "latitude": 30.1347,
+    "longitude": 118.164,
+    "elevation_m": 1840
+  },
+  "halicz": {
+    "latitude": 49.072139,
+    "longitude": 22.768833,
+    "elevation_m": 1333
+  },
+  "hoverla": {
+    "latitude": 48.1603,
+    "longitude": 24.5001,
+    "elevation_m": 2061
+  },
+  "iwinka": {
+    "latitude": 50.23963,
+    "longitude": 16.98216,
+    "elevation_m": 1079
+  },
+  "jagodna": {
+    "latitude": 50.252472,
+    "longitude": 16.564722,
+    "elevation_m": 977
+  },
+  "jaworzyna-kamienicka": {
+    "latitude": 49.54775,
+    "longitude": 20.15718,
+    "elevation_m": 1288
+  },
+  "jelenia-kopa": {
+    "latitude": 50.447817,
+    "longitude": 16.758011,
+    "elevation_m": 747
+  },
+  "jeleniec-orlickie": {
+    "latitude": 50.69015,
+    "longitude": 16.31135,
+    "elevation_m": 902
+  },
+  "kalenica": {
+    "latitude": 50.642778,
+    "longitude": 16.546389,
+    "elevation_m": 964
+  },
+  "klimczok": {
+    "latitude": 49.73983,
+    "longitude": 18.995274,
+    "elevation_m": 1117
+  },
+  "klodzka-gora": {
+    "latitude": 50.451653,
+    "longitude": 16.753211,
+    "elevation_m": 757
+  },
+  "kowadlo": {
+    "latitude": 50.264433,
+    "longitude": 17.013219,
+    "elevation_m": 989
+  },
+  "kozi-wierch": {
+    "latitude": 49.21825,
+    "longitude": 20.0286,
+    "elevation_m": 2291
+  },
+  "krivan": {
+    "latitude": 49.163056,
+    "longitude": 20.001667,
+    "elevation_m": 2494
+  },
+  "krzemien": {
+    "latitude": 49.085833,
+    "longitude": 22.738889,
+    "elevation_m": 1335
+  },
+  "kudlon": {
+    "latitude": 49.5725,
+    "longitude": 20.1762,
+    "elevation_m": 1274
+  },
+  "lackowa": {
+    "latitude": 49.426496,
+    "longitude": 21.102539,
+    "elevation_m": 997
+  },
+  "lakowa-wyspowy": {
+    "latitude": 49.642726,
+    "longitude": 20.462113,
+    "elevation_m": 803
+  },
+  "lesista-wielka": {
+    "latitude": 50.702722,
+    "longitude": 16.190222,
+    "elevation_m": 851
+  },
+  "leskowiec": {
+    "latitude": 49.788611,
+    "longitude": 19.443444,
+    "elevation_m": 922
+  },
+  "lisa-gora": {
+    "latitude": 50.860278,
+    "longitude": 21.046944,
+    "elevation_m": 594
+  },
+  "lubomir": {
+    "latitude": 49.765833,
+    "longitude": 20.060556,
+    "elevation_m": 904
+  },
+  "lysica": {
+    "latitude": 50.891944,
+    "longitude": 20.896111,
+    "elevation_m": 614
+  },
+  "lysina": {
+    "latitude": 49.775861,
+    "longitude": 20.048194,
+    "elevation_m": 891
+  },
+  "maly-babia-gora": {
+    "latitude": 49.5812,
+    "longitude": 19.4996,
+    "elevation_m": 1516
+  },
+  "maly-snieznik": {
+    "latitude": 50.1914,
+    "longitude": 16.8153,
+    "elevation_m": 1327
+  },
+  "mieguszowiecki-szczyt": {
+    "latitude": 49.187222,
+    "longitude": 20.06,
+    "elevation_m": 2438
+  },
+  "mogielica": {
+    "latitude": 49.655,
+    "longitude": 20.276111,
+    "elevation_m": 1171
+  },
+  "naroza": {
+    "latitude": 50.4591,
+    "longitude": 16.3467,
+    "elevation_m": 849
+  },
+  "niemcowa": {
+    "latitude": 49.443917,
+    "longitude": 20.647028,
+    "elevation_m": 1001
+  },
+  "orlica": {
+    "latitude": 50.353186,
+    "longitude": 16.360719,
+    "elevation_m": 1084
+  },
+  "ostry-wierch": {
+    "latitude": 49.4178,
+    "longitude": 20.4204,
+    "elevation_m": 851
+  },
+  "ostrzyca": {
+    "latitude": 51.0565,
+    "longitude": 15.7654,
+    "elevation_m": 501
+  },
+  "polica": {
+    "latitude": 49.623722,
+    "longitude": 19.61925,
+    "elevation_m": 1369
+  },
+  "postawna": {
+    "latitude": 50.2233,
+    "longitude": 17.0117,
+    "elevation_m": 1117
+  },
+  "ptasia-kopa": {
+    "latitude": 50.786944,
+    "longitude": 16.302222,
+    "elevation_m": 590
+  },
+  "radunia": {
+    "latitude": 50.837369,
+    "longitude": 16.710386,
+    "elevation_m": 573
+  },
+  "radziejowa": {
+    "latitude": 49.447222,
+    "longitude": 20.604722,
+    "elevation_m": 1266
+  },
+  "rotunda": {
+    "latitude": 49.4725,
+    "longitude": 21.233889,
+    "elevation_m": 771
+  },
+  "rudawiec": {
+    "latitude": 50.24477,
+    "longitude": 16.976879,
+    "elevation_m": 1112
+  },
+  "rudawiec-zlote": {
+    "latitude": 50.2447,
+    "longitude": 16.9769,
+    "elevation_m": 1107
+  },
+  "rysy": {
+    "latitude": 49.179722,
+    "longitude": 20.088056,
+    "elevation_m": 2499
+  },
+  "scafell-pike": {
+    "latitude": 54.454263,
+    "longitude": -3.211603,
+    "elevation_m": 978
+  },
+  "skalniak": {
+    "latitude": 50.47226,
+    "longitude": 16.31929,
+    "elevation_m": 915
+  },
+  "skalnik": {
+    "latitude": 50.808611,
+    "longitude": 15.9025,
+    "elevation_m": 945
+  },
+  "skopiec": {
+    "latitude": 50.943972,
+    "longitude": 15.884667,
+    "elevation_m": 724
+  },
+  "skrzyczne": {
+    "latitude": 49.684444,
+    "longitude": 19.030278,
+    "elevation_m": 1257
+  },
+  "sleza": {
+    "latitude": 50.865,
+    "longitude": 16.708611,
+    "elevation_m": 718
+  },
+  "smogornia": {
+    "latitude": 50.755,
+    "longitude": 15.676389,
+    "elevation_m": 1490
+  },
+  "sniezka": {
+    "latitude": 50.735833,
+    "longitude": 15.739167,
+    "elevation_m": 1603
+  },
+  "snieznica": {
+    "latitude": 49.7158,
+    "longitude": 20.1785,
+    "elevation_m": 1007
+  },
+  "snieznik": {
+    "latitude": 50.207423,
+    "longitude": 16.847394,
+    "elevation_m": 1425
+  },
+  "sokolica": {
+    "latitude": 49.58434,
+    "longitude": 19.56425,
+    "elevation_m": 1367
+  },
+  "sokolik-wielki": {
+    "latitude": 50.8697,
+    "longitude": 15.8679,
+    "elevation_m": 642
+  },
+  "srebrna-gora": {
+    "latitude": 50.2567,
+    "longitude": 17.4556,
+    "elevation_m": 686
+  },
+  "srebrna-kopa": {
+    "latitude": 50.2567,
+    "longitude": 17.4556,
+    "elevation_m": 785
+  },
+  "sredniak-sowie": {
+    "latitude": 50.6717,
+    "longitude": 16.2353,
+    "elevation_m": 781
+  },
+  "stog-izerski": {
+    "latitude": 50.89058,
+    "longitude": 15.30344,
+    "elevation_m": 1105
+  },
+  "suchawa": {
+    "latitude": 50.680556,
+    "longitude": 16.265556,
+    "elevation_m": 928
+  },
+  "szczeliniec-wielki": {
+    "latitude": 50.484444,
+    "longitude": 16.339444,
+    "elevation_m": 919
+  },
+  "tarnica": {
+    "latitude": 49.074444,
+    "longitude": 22.726944,
+    "elevation_m": 1346
+  },
+  "trojak-zlote": {
+    "latitude": 50.338347,
+    "longitude": 16.911458,
+    "elevation_m": 766
+  },
+  "trzy-korony": {
+    "latitude": 49.4136,
+    "longitude": 20.4144,
+    "elevation_m": 982
+  },
+  "turbacz": {
+    "latitude": 49.543333,
+    "longitude": 20.111944,
+    "elevation_m": 1310
+  },
+  "waligora": {
+    "latitude": 50.68,
+    "longitude": 16.28,
+    "elevation_m": 936
+  },
+  "wielka-sowa": {
+    "latitude": 50.680556,
+    "longitude": 16.485833,
+    "elevation_m": 1015
+  },
+  "wielki-rogal": {
+    "latitude": 49.4399,
+    "longitude": 20.6103,
+    "elevation_m": 1182
+  },
+  "wielki-szyszak": {
+    "latitude": 50.7775,
+    "longitude": 15.5675,
+    "elevation_m": 1510
+  },
+  "wiezyca": {
+    "latitude": 50.886714,
+    "longitude": 16.729119,
+    "elevation_m": 415
+  },
+  "wolek": {
+    "latitude": 50.838024,
+    "longitude": 15.935444,
+    "elevation_m": 878
+  },
+  "wysoka-kopa": {
+    "latitude": 50.850278,
+    "longitude": 15.42,
+    "elevation_m": 1126
+  },
+  "wysoka-pieniny": {
+    "latitude": 49.380278,
+    "longitude": 20.555556,
+    "elevation_m": 1050
+  },
+  "wysoki-kamien": {
+    "latitude": 50.845556,
+    "longitude": 15.491389,
+    "elevation_m": 1058
+  },
+  "yr-wyddfa": {
+    "latitude": 53.06849,
+    "longitude": -4.07628,
+    "elevation_m": 1085
+  },
+  "zamkowa-gora": {
+    "latitude": 50.272778,
+    "longitude": 17.458889,
+    "elevation_m": 571
+  },
+  "zielony-garb": {
+    "latitude": 50.344919,
+    "longitude": 16.369261,
+    "elevation_m": 1034
+  }
+}

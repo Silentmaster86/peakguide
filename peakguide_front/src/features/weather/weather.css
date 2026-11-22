@@ -1,0 +1,17 @@
+.peak-weather { margin-top: 18px; padding: clamp(12px, 3vw, 20px); border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); min-width: 0; }
+.peak-weather h3 { margin: 0 0 10px; }
+.peak-weather p { line-height: 1.6; overflow-wrap: anywhere; }
+.peak-weather button { color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; cursor: pointer; min-height: 44px; font: inherit; }
+.peak-weather :is(button, summary, a, [tabindex]):focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+.peak-weather a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.peak-weather-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.peak-weather-metrics div { border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+.peak-weather-metrics dt { font-size: .9rem; overflow-wrap: anywhere; }
+.peak-weather-metrics dd { margin: 8px 0 0; font-size: 1.25rem; font-weight: 700; }
+.peak-weather summary { cursor: pointer; padding: 12px 0; }
+.peak-weather-scroll { max-width: 100%; overflow: auto; max-height: 420px; }
+.peak-weather table { border-collapse: collapse; font-size: .9rem; width: 100%; }
+.peak-weather th, .peak-weather td { padding: 10px; text-align: start; border-bottom: 1px solid var(--border); }
+.peak-weather th { min-width: 95px; }
+.peak-weather-note, .peak-weather-source { font-size: .9rem; }
+@media (max-width: 360px) { .peak-weather-metrics { grid-template-columns: 1fr; } }
