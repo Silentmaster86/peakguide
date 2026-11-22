@@ -11,6 +11,7 @@ import {
 } from '../api/peakguide';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import PeakMap from '../components/PeakMap';
+import PeakWeatherCard from '../features/weather/PeakWeatherCard';
 import TrailPracticalCard from '../components/TrailPracticalCard';
 import ComingSoonBox from '../components/ComingSoonBox';
 import { safeUrl } from '../utils/practical.mjs';
@@ -410,6 +411,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                   lang={lang}
                 />
               </div>
+              <PeakWeatherCard key={peak.slug} slug={peak.slug} latitude={peak.latitude} longitude={peak.longitude} lang={lang} />
             </section>
 
             {/* Right info panel */}

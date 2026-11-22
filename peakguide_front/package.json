@@ -13,8 +13,9 @@
     "images": "node scripts/optimize-images.mjs",
     "test:node": "node --test src/test/*.node.mjs",
     "test:e2e": "playwright test",
-    "check": "npm run lint && npm run test:node && npm run test:run && npm run build",
-    "sitemap": "node scripts/generate-sitemap.mjs"
+    "check": "npm run lint && npm run test:weather && npm run test:node && npm run test:run && npm run build",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "test:weather": "node --test --test-isolation=none netlify/functions/lib/*.test.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.107.0",
