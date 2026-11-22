@@ -81,15 +81,46 @@ function mockDatabase({
 }
 
 beforeEach(() => {
+  vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
 	fromMock.mockReset();
 	mockDatabase();
 });
 
 afterEach(() => {
 	cleanup();
+  vi.unstubAllGlobals();
 });
 
 describe('TrailPracticalCard', () => {
+  it.each([
+    ['pl', 'Pokaż więcej'], ['en', 'Show more'], ['ua', 'Показати більше'], ['zh', '展开更多'],
+  ])('na telefonie pozwala rozwinąć pełne wskazówki i zachowuje mapy: %s', async (lang, more) => {
+    window.matchMedia.mockReturnValue({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() });
+    const access = makeAccess();
+    access.trail_access_i18n = languages.map(l => ({lang: l, directions: `Start-${l}\nApproach-${l}`, warnings: `warnings-${l}`}));
+    mockDatabase({access});
+    const user = userEvent.setup();
+    render(<TrailPracticalCard trailId={6} lang={lang} />);
+    await screen.findByText(`Start-${lang}`);
+    const disclosure = screen.getAllByText(more)[0].closest('details');
+    expect(disclosure).not.toHaveAttribute('open');
+    expect(within(disclosure).getByText(`Approach-${lang}`)).not.toBeVisible();
+    expect(screen.getAllByRole('link').length).toBeGreaterThanOrEqual(4);
+    await user.click(disclosure.querySelector('summary'));
+    expect(disclosure).toHaveAttribute('open');
+    expect(within(disclosure).getByText(`Approach-${lang}`)).toBeVisible();
+    expect(within(disclosure).getByText(`warnings-${lang}`)).toBeVisible();
+    await user.click(disclosure.querySelector('summary'));
+    expect(disclosure).not.toHaveAttribute('open');
+  });
+
+  it('na komputerze pokazuje pełną treść bez zwijania', async () => {
+    render(<TrailPracticalCard trailId={6} lang='en' />);
+    expect(await screen.findByText('warnings-en')).toBeVisible();
+    expect(screen.getByText('fee-en')).toBeVisible();
+    expect(document.querySelector('details')).toBeNull();
+  });
+
   it.each([
     ['pl', 'Parking', 'Brak potwierdzonych danych'],
     ['en', 'Parking', 'Not confirmed'],

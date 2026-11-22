@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import './TrailPracticalCard.css';
 import { supabase } from '../lib/supabaseClient';
 import { safeUrl, translation, verifiedDate } from '../utils/practical.mjs';
 
 const text = {
   pl: {
+    more: 'Pokaż więcej',
+    less: 'Pokaż mniej',
+    accessDetails: 'Dojazd i bezpieczeństwo',
+    parkingDetails: 'Opłaty i udogodnienia',
     title: 'Przed wyjściem',
     start: 'Start i dojazd',
     parking: 'Parking',
@@ -28,6 +34,10 @@ const text = {
     details: 'Informacje o transporcie',
   },
   en: {
+    more: 'Show more',
+    less: 'Show less',
+    accessDetails: 'Access and safety',
+    parkingDetails: 'Fees and facilities',
     title: 'Before you set off',
     start: 'Start and access',
     parking: 'Parking',
@@ -52,6 +62,10 @@ const text = {
     details: 'Transport information',
   },
   ua: {
+    more: 'Показати більше',
+    less: 'Показати менше',
+    accessDetails: 'Доїзд і безпека',
+    parkingDetails: 'Оплата та зручності',
     title: 'Перед виходом',
     start: 'Старт і доїзд',
     parking: 'Парковка',
@@ -76,6 +90,10 @@ const text = {
     details: 'Інформація про транспорт',
   },
   zh: {
+    more: '展开更多',
+    less: '收起',
+    accessDetails: '交通与安全',
+    parkingDetails: '费用与设施',
     title: '出发前',
     start: '起点与交通',
     parking: '停车场',
@@ -109,6 +127,21 @@ const box = {
   overflowWrap: 'anywhere',
 };
 const paragraph = { whiteSpace: 'pre-wrap', lineHeight: 1.6, margin: '8px 0' };
+function PracticalDetails({ labels, context, children }) {
+  const mobile = useMediaQuery('(max-width: 700px)');
+  if (!mobile) return <>{children}</>;
+  return (
+    <details className='practical-details'>
+      <summary>
+        <span className='practical-details-more'>{labels.more}</span>
+        <span className='practical-details-less'>{labels.less}</span>
+        {': '}{context}
+      </summary>
+      {children}
+    </details>
+  );
+}
+
 function ExternalLink({ url, children }) {
   const href = safeUrl(url);
   return href ? (
@@ -179,6 +212,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
   const retryFailed = () => failed.forEach((source) => source.retry());
   const a = access.data;
   const at = translation(a?.trail_access_i18n, language);
+  const [directionsLead, ...directionsRest] = (at.directions || labels.missing).split(/\n+/);
   const bool = (v) => (v === true ? labels.yes : v === false ? labels.no : labels.unknown);
   return (
     <section aria-label={labels.title} style={{ marginTop: 16 }}>
@@ -214,8 +248,10 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
                   {a.postcode ? `, ${a.postcode}` : ''}
                 </p>
               )}
-              <p style={paragraph}>{at.directions || labels.missing}</p>
+              <p style={paragraph}>{directionsLead}</p>
               <ExternalLink url={a.google_maps_url}>{labels.map}</ExternalLink>
+              <PracticalDetails labels={labels} context={labels.accessDetails}>
+              {directionsRest.length > 0 && <p style={paragraph}>{directionsRest.join('\n')}</p>}
               {(at.public_transport || safeUrl(a.public_transport_url)) && (
                 <>
                   <h4>{labels.transport}</h4>
@@ -225,6 +261,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
               )}
               <h4>{labels.warnings}</h4>
               <p style={paragraph}>{at.warnings || labels.missing}</p>
+              </PracticalDetails>
               <Provenance record={a} labels={labels} lang={language} />
             </div>
           )}
@@ -253,6 +290,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
                 <p>
                   {labels.paid}: {bool(p.paid)}
                 </p>
+                <PracticalDetails labels={labels} context={labels.parkingDetails}>
                 {t.fee_info && <p style={paragraph}>{t.fee_info}</p>}
                 <p>
                   {labels.toilets}: {bool(p.toilets)}
@@ -262,6 +300,7 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
                 </p>
                 {t.opening_info && <p style={paragraph}>{t.opening_info}</p>}
                 {t.notes && <p style={paragraph}>{t.notes}</p>}
+                </PracticalDetails>
                 <ExternalLink url={p.map_url}>{labels.map}</ExternalLink>
                 <Provenance record={p} labels={labels} lang={language} />
               </div>

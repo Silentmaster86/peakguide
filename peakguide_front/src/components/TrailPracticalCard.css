@@ -1,0 +1,25 @@
+.practical-details {
+  margin: 10px 0;
+  border-top: 1px solid var(--border);
+}
+.practical-details > summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 12px 4px;
+  line-height: 1.5;
+  color: var(--text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.practical-details > summary:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.practical-details-less,
+.practical-details[open] > summary .practical-details-more {
+  display: none;
+}
+.practical-details[open] > summary .practical-details-less {
+  display: inline;
+}
