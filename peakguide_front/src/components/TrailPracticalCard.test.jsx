@@ -90,6 +90,28 @@ afterEach(() => {
 });
 
 describe('TrailPracticalCard', () => {
+  it.each([
+    ['pl', 'Parking', 'Brak potwierdzonych danych'],
+    ['en', 'Parking', 'Not confirmed'],
+    ['ua', 'Парковка', 'Не підтверджено'],
+    ['zh', '停车场', '尚未确认'],
+  ])('pokazuje brak danych parkingu bez wymyślania miejsca: %s', async (lang, heading, message) => {
+    mockDatabase({ parking: [] });
+    render(<TrailPracticalCard trailId={6} lang={lang} />);
+    await screen.findByText(`directions-${lang}`);
+    const card = screen.getByRole('heading', { name: heading }).parentElement;
+    expect(within(card).getByText(message)).toBeInTheDocument();
+    expect(within(card).queryByRole('link')).not.toBeInTheDocument();
+  });
+
+  it('nie przedstawia błędu pobrania parkingu jako potwierdzonego braku danych', async () => {
+    mockDatabase({ parking: [], parkingError: { message: 'Offline' } });
+    render(<TrailPracticalCard trailId={6} lang='en' />);
+    await screen.findByText(`directions-en`);
+    expect(screen.getByRole('status')).toHaveTextContent('Some practical information could not be loaded.');
+    expect(screen.queryByRole('heading', { name: 'Parking' })).not.toBeInTheDocument();
+  });
+
 	it.each(languages)('pokazuje właściwe tłumaczenie: %s', async (lang) => {
 		render(<TrailPracticalCard trailId={6} lang={lang} />);
 

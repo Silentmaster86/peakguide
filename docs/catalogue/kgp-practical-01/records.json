@@ -1,0 +1,2016 @@
+[
+  {
+    "peak_slug": "waligora",
+    "expected_trail": {
+      "id": 11,
+      "peak_id": 10,
+      "slug": "waligora-andrzejowka-zolty",
+      "start_point_name": "Schronisko Andrzejówka",
+      "end_point_name": "Waligóra"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
+      "public_transport_url": null,
+      "source_url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Schronisko Andrzejówka. Koniec: Waligóra. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPodejście zaczyna się przy schronisku Andrzejówka; żółty odcinek jest krótki, ale bardzo stromy. Nie wjeżdżaj na teren schroniska ani nie zastawiaj wjazdów.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Schronisko Andrzejówka and ends at Waligóra. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe ascent starts by Andrzejówka hut; the yellow segment is short but very steep. Do not drive into the hut grounds or block entrances.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Schronisko Andrzejówka і закінчується в Waligóra. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nПідйом починається біля притулку Andrzejówka; жовтий відрізок короткий, але дуже крутий. Не заїжджайте на територію притулку й не перекривайте в’їзди.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Schronisko Andrzejówka开始，到Waligóra结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Andrzejówka山屋旁起步，黄色路段虽短但非常陡。请勿驶入山屋院内或堵塞入口。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "vehicle_restrictions",
+        "url": "https://www.andrzejowka.eu/godziny-pracy/",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://www.andrzejowka.eu/godziny-pracy/",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "andrzejowka-przy-schronisku",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Andrzej%C3%B3wka%20%E2%80%93%20parking%20przy%20schronisku",
+          "source_url": "https://www.andrzejowka.eu/godziny-pracy/",
+          "is_primary": true,
+          "paid": false,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Andrzejówka – parking przy schronisku",
+            "description": "Parking przy schronisku, z którego zaczyna się podejście. Nie wjeżdżaj na teren obiektu i nie zastawiaj wjazdów.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Źródło opisuje parking jako bezpłatny; sprawdź oznakowanie na miejscu.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Andrzejówka – parking przy schronisku",
+            "description": "Parking by the hut where the ascent starts. Do not drive into the grounds or obstruct entrances.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "The source describes parking as free; check signs on arrival.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Andrzejówka – parking przy schronisku",
+            "description": "Парковка біля притулку, звідки починається підйом. Не заїжджайте на територію й не перекривайте в’їзди.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Джерело описує парковку як безплатну; перевірте знаки на місці.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Andrzejówka – parking przy schronisku",
+            "description": "停车处在登山起点的山屋旁。请勿驶入山屋院内或堵塞入口。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "来源说明此处免费停车，请以抵达时的现场标志为准。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "sleza",
+    "expected_trail": {
+      "id": 12,
+      "peak_id": 27,
+      "slug": "sleza-tapadla-dom-turysty",
+      "start_point_name": "Przełęcz Tąpadła",
+      "end_point_name": "Ślęża – Górski Dom Turysty PTTK"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
+      "public_transport_url": "https://www.sleza.sobotka.pl/komunikacja-autobusowa/",
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Przełęcz Tąpadła. Koniec: Ślęża – Górski Dom Turysty PTTK. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart na Przełęczy Tąpadła, wejście żółtym szlakiem. W okolicy są różne parkingi, płatne i bezpłatne; sprawdź, na który wjeżdżasz, oraz oznakowanie.",
+        "public_transport": "Gminny informator opisuje linię 512 do Przełęczy Tąpadła w weekendy i święta od maja do października. To połączenie sezonowe; nie zakładaj jego kursowania zimą. Sprawdź rozkład na dzień wyjazdu.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Przełęcz Tąpadła and ends at Ślęża – Górski Dom Turysty PTTK. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart at Przełęcz Tąpadła on the yellow trail. There are different paid and free parking areas nearby; check which one you enter and its signs.",
+        "public_transport": "The municipal guide lists bus 512 to Przełęcz Tąpadła on weekends and public holidays from May to October. It is seasonal; do not assume winter service. Check your travel date timetable.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Przełęcz Tąpadła і закінчується в Ślęża – Górski Dom Turysty PTTK. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт на Przełęcz Tąpadła жовтою стежкою. Поряд є різні платні й безплатні парковки; перевірте, на яку заїжджаєте, та її знаки.",
+        "public_transport": "Муніципальний довідник указує автобус 512 до Przełęcz Tąpadła у вихідні й свята з травня до жовтня. Рейс сезонний; не розраховуйте на нього взимку. Перевірте розклад на день виїзду.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Przełęcz Tąpadła开始，到Ślęża – Górski Dom Turysty PTTK结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Przełęcz Tąpadła沿黄色步道出发。附近有不同的收费及免费停车区，请确认驶入的是哪一处并查看标志。",
+        "public_transport": "市政指南列出512路公交在五月至十月的周末及节假日前往Przełęcz Tąpadła。这是季节性服务，不应假定冬季运营。请核实出行当天的时刻表。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "public_transport",
+        "url": "https://www.sleza.sobotka.pl/komunikacja-autobusowa/",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_context",
+        "url": "https://www.sleza.sobotka.pl/przelecz-tapadla/",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://www.sleza.sobotka.pl/przelecz-tapadla/",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "tapadla-radunia-platny",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Prze%C5%82%C4%99cz%20T%C4%85pad%C5%82a%20%E2%80%93%20parking%20od%20strony%20Raduni",
+          "source_url": "https://www.sleza.sobotka.pl/przelecz-tapadla/",
+          "is_primary": true,
+          "paid": true,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Przełęcz Tąpadła – parking od strony Raduni",
+            "description": "Duży parking od strony Raduni jest płatny. Nie myl go z opisanymi osobno bezpłatnymi parkingami od strony Ślęży; sprawdź tablicę przy wjeździe.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Aktualną taryfę i sposób płatności sprawdź u operatora. Opłata parkingowa nie jest biletem wstępu na szlak.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Przełęcz Tąpadła – parking od strony Raduni",
+            "description": "The large parking area on the Radunia side charges a fee. Do not confuse it with the separately described free areas on the Ślęża side; check the entrance signs.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Check the operator’s current tariff and payment method. Parking payment is not a trail admission ticket.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Przełęcz Tąpadła – parking od strony Raduni",
+            "description": "Велика парковка з боку Radunia платна. Не плутайте її з окремо описаними безплатними місцями з боку Ślęża; перевірте табличку на в’їзді.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Актуальний тариф і спосіб оплати перевірте в оператора. Оплата парковки не є вхідним квитком на стежку.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Przełęcz Tąpadła – parking od strony Raduni",
+            "description": "Radunia一侧的大停车场收费。请勿与Ślęża一侧另行列出的免费停车区混淆，并查看入口标志。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "请向运营方查询现行费率和付款方式。停车费不等于步道门票。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "lysica",
+    "expected_trail": {
+      "id": 13,
+      "peak_id": 28,
+      "slug": "lysica-czas-w-las-petla",
+      "start_point_name": "Święta Katarzyna",
+      "end_point_name": "Święta Katarzyna"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
+      "public_transport_url": null,
+      "source_url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Święta Katarzyna. Koniec: Święta Katarzyna. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPoczątek i koniec w Świętej Katarzynie. To pętla „Czas w las”, a nie inna trasa ze Świętego Krzyża. Sprawdź zasady wstępu ŚPN.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://swpn.gov.pl/komunikat-turystyczny Bilety: https://swpn.gov.pl/informacje-o-biletach"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Święta Katarzyna and ends at Święta Katarzyna. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart and finish in Święta Katarzyna. This is the “Czas w las” loop, not a different trail from Święty Krzyż. Check ŚPN admission rules.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://swpn.gov.pl/komunikat-turystyczny Tickets: https://swpn.gov.pl/informacje-o-biletach"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Święta Katarzyna і закінчується в Święta Katarzyna. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nПочаток і кінець у Święta Katarzyna. Це кільце «Czas w las», а не інший маршрут зі Święty Krzyż. Перевірте правила входу ŚPN.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://swpn.gov.pl/komunikat-turystyczny Квитки: https://swpn.gov.pl/informacje-o-biletach"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Święta Katarzyna开始，到Święta Katarzyna结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起终点均在Święta Katarzyna。这是“Czas w las”环线，并非从Święty Krzyż出发的另一条路线。请查询ŚPN入园规定。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://swpn.gov.pl/komunikat-turystyczny 门票：https://swpn.gov.pl/informacje-o-biletach"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://swpn.gov.pl/komunikat-turystyczny",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://swpn.gov.pl/informacje-o-biletach",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "skopiec",
+    "expected_trail": {
+      "id": 14,
+      "peak_id": 14,
+      "slug": "skopiec-rozdroze-komarnicka",
+      "start_point_name": "Rozdroże przy Przełęczy Komarnickiej",
+      "end_point_name": "Skopiec"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://mapa-turystyczna.pl/route/2965",
+      "public_transport_url": null,
+      "source_url": "https://mapa-turystyczna.pl/route/2965",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Rozdroże przy Przełęczy Komarnickiej. Koniec: Skopiec. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nGPX zaczyna się na rozdrożu przy Przełęczy Komarnickiej. To nie potwierdzenie parkingu na samym rozdrożu; ostatni fragment na szczyt jest nieznakowany.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Rozdroże przy Przełęczy Komarnickiej and ends at Skopiec. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe GPX starts at the junction near Przełęcz Komarnicka. This does not confirm parking at that junction; the final summit section is unmarked.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Rozdroże przy Przełęczy Komarnickiej і закінчується в Skopiec. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nGPX починається на роздоріжжі біля Przełęcz Komarnicka. Це не підтвердження парковки на роздоріжжі; останній відрізок до вершини немаркований.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Rozdroże przy Przełęczy Komarnickiej开始，到Skopiec结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\nGPX起点位于Przełęcz Komarnicka附近的岔路口，这并不代表路口允许停车；最后一段登顶小路没有路线标记。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://mapa-turystyczna.pl/route/2965",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "chelmiec",
+    "expected_trail": {
+      "id": 15,
+      "peak_id": 12,
+      "slug": "chelmiec-boguszow-rosochatka",
+      "start_point_name": "Boguszów-Gorce – OSiR",
+      "end_point_name": "Chełmiec"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://wycieczkoteka.pl/zwiedzaj-polske/gorki-i-pagorki/chelmiec-najkrotszy-szlak-na-szczyt",
+      "public_transport_url": null,
+      "source_url": "https://wycieczkoteka.pl/zwiedzaj-polske/gorki-i-pagorki/chelmiec-najkrotszy-szlak-na-szczyt",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Boguszów-Gorce – OSiR. Koniec: Chełmiec. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPunkt startu jest przy OSiR w Boguszowie-Gorcach. Sprawdź oznakowanie miejsc postojowych; teren obiektu sportowego nie oznacza ogólnodostępnego parkingu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Boguszów-Gorce – OSiR and ends at Chełmiec. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe start is by OSiR in Boguszów-Gorce. Check parking signs; the sports facility grounds do not establish public parking rights.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Boguszów-Gorce – OSiR і закінчується в Chełmiec. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nПочаток біля OSiR у Boguszów-Gorce. Перевірте знаки паркування; територія спортивного закладу не означає загальнодоступну парковку.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Boguszów-Gorce – OSiR开始，到Chełmiec结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起点在Boguszów-Gorce的OSiR体育设施旁。请查看停车标志，体育设施的场地并不等于公共停车场。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://wycieczkoteka.pl/zwiedzaj-polske/gorki-i-pagorki/chelmiec-najkrotszy-szlak-na-szczyt",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "sniezka",
+    "expected_trail": {
+      "id": 16,
+      "peak_id": 1,
+      "slug": "sniezka-bialy-jar-czarny-wejscie",
+      "start_point_name": "Karpacz – Biały Jar",
+      "end_point_name": "Śnieżka"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Karpacz – Biały Jar. Koniec: Śnieżka. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPoczątek w Karpaczu przy Białym Jarze. Zapisany wariant jest pieszym wejściem; dojazd kolejką nie zastępuje tego GPX. Przed wejściem sprawdź komunikat KPN o oblodzeniu i zamknięciach.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://kpn.gov.pl/komunikat-turystyczny Bilety: https://kpn.gov.pl/informacje-o-biletach"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Karpacz – Biały Jar and ends at Śnieżka. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart at Biały Jar in Karpacz. The recorded variant is a walking ascent; taking a lift does not reproduce this GPX. Check the KPN notice for ice and closures before setting off.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://kpn.gov.pl/komunikat-turystyczny Tickets: https://kpn.gov.pl/informacje-o-biletach"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Karpacz – Biały Jar і закінчується в Śnieżka. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт біля Biały Jar у Karpacz. Записаний варіант — піший підйом; канатна дорога не відтворює цей GPX. Перед виходом перевірте повідомлення KPN про обледеніння й закриття.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://kpn.gov.pl/komunikat-turystyczny Квитки: https://kpn.gov.pl/informacje-o-biletach"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Karpacz – Biały Jar开始，到Śnieżka结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Karpacz的Biały Jar出发。所录路线是徒步上山，乘索道不能替代此GPX。出发前请查看KPN关于结冰和封闭的公告。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://kpn.gov.pl/komunikat-turystyczny 门票：https://kpn.gov.pl/informacje-o-biletach"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://kpn.gov.pl/komunikat-turystyczny",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://kpn.gov.pl/informacje-o-biletach",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "wielka-sowa",
+    "expected_trail": {
+      "id": 17,
+      "peak_id": 6,
+      "slug": "wielka-sowa-sokola-czarny-walimska",
+      "start_point_name": "Przełęcz Sokola",
+      "end_point_name": "Wielka Sowa"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/796-dolnoslaskie-przelecz-sokola-wielka-sowa",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/796-dolnoslaskie-przelecz-sokola-wielka-sowa",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Przełęcz Sokola. Koniec: Wielka Sowa. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart na Przełęczy Sokolej. Ten wariant biegnie czarnym szlakiem w stronę Przełęczy Walimskiej; nie wybieraj automatycznie innego wejścia o tej samej nazwie szczytu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Przełęcz Sokola and ends at Wielka Sowa. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart at Przełęcz Sokola. This variant uses the black trail towards Przełęcz Walimska; do not automatically select another ascent with the same summit name.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Przełęcz Sokola і закінчується в Wielka Sowa. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт на Przełęcz Sokola. Цей варіант іде чорною стежкою в бік Przełęcz Walimska; не підміняйте його іншим підйомом на ту саму вершину.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Przełęcz Sokola开始，到Wielka Sowa结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Przełęcz Sokola出发，此路线沿黑色标记步道往Przełęcz Walimska方向行走，请勿因山名相同而选择另一条登山路线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/796-dolnoslaskie-przelecz-sokola-wielka-sowa",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "szczeliniec-wielki",
+    "expected_trail": {
+      "id": 18,
+      "peak_id": 11,
+      "slug": "szczeliniec-letnia-trasa-edukacyjna",
+      "start_point_name": "Przełęcz pod Szczelińcem",
+      "end_point_name": "Szczeliniec – początek schodów"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Przełęcz pod Szczelińcem. Koniec: Szczeliniec – początek schodów. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nTo letnia trasa edukacyjna od Przełęczy pod Szczelińcem. Do początku dochodzi się pieszo; sprawdź sezon i godziny udostępniania labiryntu. Nie stosuj godzin wjazdu na Błędne Skały do tej trasy.\nTo początek wysoko położonego odcinka pieszego. Dojście do niego oraz zejście do miejscowości trzeba doliczyć osobno; nie prowadź nawigacji samochodowej do tego punktu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych Bilety: https://pngs.gov.pl/informacje-o-biletach"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Przełęcz pod Szczelińcem and ends at Szczeliniec – początek schodów. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThis is the summer educational route from Przełęcz pod Szczelińcem. Reach its start on foot; check the maze season and opening hours. The Błędne Skały vehicle timetable does not apply here.\nThis is the start of a mountain walking segment. Add the approach and the descent to a settlement separately; do not use this point as a driving destination.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych Tickets: https://pngs.gov.pl/informacje-o-biletach"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Przełęcz pod Szczelińcem і закінчується в Szczeliniec – początek schodów. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nЦе літня навчальна стежка від Przełęcz pod Szczelińcem. До старту йдуть пішки; перевірте сезон і години роботи лабіринту. Розклад заїздів на Błędne Skały тут не застосовується.\nЦе початок гірського пішого відрізка. Окремо врахуйте підхід і спуск до населеного пункту; не використовуйте цю точку для автомобільної навігації.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych Квитки: https://pngs.gov.pl/informacje-o-biletach"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Przełęcz pod Szczelińcem开始，到Szczeliniec – początek schodów结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n此路线是从Przełęcz pod Szczelińcem出发的夏季教育步道，需步行到达起点。请查询迷宫开放季节和时间，勿套用Błędne Skały的车辆通行时间。\n此处是山中徒步路段的起点。到达起点及下山到村镇的路程需另计，请勿将此点作为驾车目的地。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych 门票：https://pngs.gov.pl/informacje-o-biletach"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://pngs.gov.pl/informacje-o-biletach",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "snieznik",
+    "expected_trail": {
+      "id": 19,
+      "peak_id": 2,
+      "slug": "snieznik-schronisko-zielony-szczyt",
+      "start_point_name": "Schronisko PTTK Na Śnieżniku",
+      "end_point_name": "Śnieżnik – rejon szczytu"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Schronisko PTTK Na Śnieżniku. Koniec: Śnieżnik – rejon szczytu. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nTen GPX obejmuje podejście od schroniska na Hali pod Śnieżnikiem. Dojście z doliny do schroniska nie jest wliczone.\nTo początek wysoko położonego odcinka pieszego. Dojście do niego oraz zejście do miejscowości trzeba doliczyć osobno; nie prowadź nawigacji samochodowej do tego punktu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Schronisko PTTK Na Śnieżniku and ends at Śnieżnik – rejon szczytu. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThis GPX covers the ascent from the hut on Hala pod Śnieżnikiem. The approach from the valley to the hut is not included.\nThis is the start of a mountain walking segment. Add the approach and the descent to a settlement separately; do not use this point as a driving destination.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Schronisko PTTK Na Śnieżniku і закінчується в Śnieżnik – rejon szczytu. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nЦей GPX охоплює підйом від притулку на Hala pod Śnieżnikiem. Підхід із долини до притулку не включено.\nЦе початок гірського пішого відрізка. Окремо врахуйте підхід і спуск до населеного пункту; не використовуйте цю точку для автомобільної навігації.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Schronisko PTTK Na Śnieżniku开始，到Śnieżnik – rejon szczytu结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n此GPX仅包含从Hala pod Śnieżnikiem山屋起步的上山段，不含从山谷前往山屋的路程。\n此处是山中徒步路段的起点。到达起点及下山到村镇的路程需另计，请勿将此点作为驾车目的地。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "skalnik",
+    "expected_trail": {
+      "id": 20,
+      "peak_id": 8,
+      "slug": "skalnik-czarnow-czartak-niebieski",
+      "start_point_name": "Czarnów – węzeł przy dawnym Czartaku",
+      "end_point_name": "Skalnik – rejon szczytu"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/967-dolnoslaskie-przelecz-karpnicka-mianka",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/967-dolnoslaskie-przelecz-karpnicka-mianka",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Czarnów – węzeł przy dawnym Czartaku. Koniec: Skalnik – rejon szczytu. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart w Czarnowie przy węźle dawnego Czartaka. Parking Czarnów Ski i ten węzeł nie są automatycznie tym samym punktem.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Czarnów – węzeł przy dawnym Czartaku and ends at Skalnik – rejon szczytu. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart in Czarnów at the former Czartak junction. The Czarnów Ski parking and this junction are not automatically the same point.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Czarnów – węzeł przy dawnym Czartaku і закінчується в Skalnik – rejon szczytu. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт у Czarnów біля колишнього вузла Czartak. Парковка Czarnów Ski й цей вузол не обов’язково є однією точкою.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Czarnów – węzeł przy dawnym Czartaku开始，到Skalnik – rejon szczytu结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起点在Czarnów原Czartak岔路口。Czarnów Ski停车场与此起点不应被当作同一地点。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/967-dolnoslaskie-przelecz-karpnicka-mianka",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "rudawiec",
+    "expected_trail": {
+      "id": 21,
+      "peak_id": 4,
+      "slug": "rudawiec-katalog-03",
+      "start_point_name": "Przełęcz Płoszczyna",
+      "end_point_name": "Rudawiec"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Przełęcz Płoszczyna. Koniec: Rudawiec. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nTen wariant zaczyna się na Przełęczy Płoszczyna, a nie w Bielicach. Parking w Nowej Morawie nie jest początkiem GPX.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Przełęcz Płoszczyna and ends at Rudawiec. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThis variant starts at Przełęcz Płoszczyna, not Bielice. Parking in Nowa Morawa is not the GPX start.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Przełęcz Płoszczyna і закінчується в Rudawiec. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nЦей варіант починається на Przełęcz Płoszczyna, а не в Bielice. Парковка в Nowa Morawa не є початком GPX.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Przełęcz Płoszczyna开始，到Rudawiec结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n此路线从Przełęcz Płoszczyna出发，而非Bielice。Nowa Morawa的停车点并不是GPX起点。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "orlica",
+    "expected_trail": {
+      "id": 22,
+      "peak_id": 5,
+      "slug": "orlica-katalog-03",
+      "start_point_name": "Torfowisko pod Zieleńcem – parking",
+      "end_point_name": "Lasek Miejski"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Torfowisko pod Zieleńcem – parking. Koniec: Lasek Miejski. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nWybrano szlak od parkingu Torfowisko pod Zieleńcem do Lasku Miejskiego. To nie popularne wejście z Zieleńca; odbicie na sam szczyt nie jest częścią tego GPX.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Torfowisko pod Zieleńcem – parking and ends at Lasek Miejski. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe selected trail runs from the Torfowisko pod Zieleńcem parking to Lasek Miejski. It is not the usual ascent from Zieleniec; the summit spur is outside this GPX.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Torfowisko pod Zieleńcem – parking і закінчується в Lasek Miejski. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nОбрано стежку від парковки Torfowisko pod Zieleńcem до Lasek Miejski. Це не звичайний підйом із Zieleniec; відгалуження на вершину не входить до GPX.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Torfowisko pod Zieleńcem – parking开始，到Lasek Miejski结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n所选路线从Torfowisko pod Zieleńcem停车点通往Lasek Miejski，并非从Zieleniec出发的常见登顶路线；登顶岔路不包含在此GPX中。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "torfowisko-pod-zielencem",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Torfowisko%20pod%20Ziele%C5%84cem%20%E2%80%93%20parking",
+          "source_url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+          "is_primary": true,
+          "paid": null,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Torfowisko pod Zieleńcem – parking",
+            "description": "Miejsce oznaczone jako parking w nazwie początku wybranego zielonego szlaku. To nie parking przy innym wejściu na Orlicę z Zieleńca.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Nie potwierdzono opłat ani godzin działania tego parkingu. Sprawdź oznakowanie i dostępność przed wyjazdem.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Torfowisko pod Zieleńcem – parking",
+            "description": "The place identified as parking in the selected green trail start name. It is not parking for a different Orlica ascent from Zieleniec.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Fees and operating hours for this parking have not been confirmed. Check signs and availability before travelling.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Torfowisko pod Zieleńcem – parking",
+            "description": "Місце, позначене як парковка в назві початку обраної зеленої стежки. Це не парковка для іншого підйому на Orlica із Zieleniec.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Плату й години роботи цієї парковки не підтверджено. Перевірте знаки й доступність перед поїздкою.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Torfowisko pod Zieleńcem – parking",
+            "description": "所选绿色步道起点名称中标注的停车处，并非从Zieleniec出发的其他Orlica登山路线停车点。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "尚未核实此停车区的收费及开放时间，请在出行前确认标志和可用情况。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "jagodna",
+    "expected_trail": {
+      "id": 23,
+      "peak_id": 7,
+      "slug": "jagodna-katalog-03",
+      "start_point_name": "Spalona – schronisko Jagodna",
+      "end_point_name": "Różanka"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/500-dolnoslaskie-spalona-schr-pttk-jagodna-rozanka",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/500-dolnoslaskie-spalona-schr-pttk-jagodna-rozanka",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Spalona – schronisko Jagodna. Koniec: Różanka. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nDojazd do Spalonej, przy schronisku Jagodna. Zapisana trasa kończy się w Różance; nie jest pętlą wracającą do samochodu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Spalona – schronisko Jagodna and ends at Różanka. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nArrive at Spalona by the Jagodna hut. The recorded trail ends in Różanka; it is not a loop returning to your car.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Spalona – schronisko Jagodna і закінчується в Różanka. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nПрибуття до Spalona, біля притулку Jagodna. Записаний маршрут закінчується в Różanka й не повертається кільцем до автомобіля.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Spalona – schronisko Jagodna开始，到Różanka结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n前往Spalona的Jagodna山屋附近。所录路线终点是Różanka，并不是返回停车处的环线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/500-dolnoslaskie-spalona-schr-pttk-jagodna-rozanka",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://pttk.pl/accommodations/schronisko-pttk-jagodna/",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "spalona-jagodna",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Spalona%20%E2%80%93%20schronisko%20Jagodna",
+          "source_url": "https://pttk.pl/accommodations/schronisko-pttk-jagodna/",
+          "is_primary": true,
+          "paid": null,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Spalona – schronisko Jagodna",
+            "description": "PTTK potwierdza dojazd Szosą Sudecką przez Spaloną i możliwość parkowania. Trasa kończy się w Różance; powrót do auta nie jest wliczony.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Nie potwierdzono opłat ani godzin działania tego parkingu. Sprawdź oznakowanie i dostępność przed wyjazdem.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Spalona – schronisko Jagodna",
+            "description": "PTTK confirms road access via Spalona on Szosa Sudecka and parking. The route ends in Różanka; return to the car is not included.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Fees and operating hours for this parking have not been confirmed. Check signs and availability before travelling.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Spalona – schronisko Jagodna",
+            "description": "PTTK підтверджує під’їзд Szosa Sudecka через Spalona й можливість паркування. Маршрут закінчується в Różanka; повернення до авто не включено.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Плату й години роботи цієї парковки не підтверджено. Перевірте знаки й доступність перед поїздкою.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Spalona – schronisko Jagodna",
+            "description": "PTTK确认可经Spalona沿Szosa Sudecka公路抵达并停车。路线终点在Różanka，返回车辆的路程未包括在内。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "尚未核实此停车区的收费及开放时间，请在出行前确认标志和可用情况。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "kowadlo",
+    "expected_trail": {
+      "id": 24,
+      "peak_id": 9,
+      "slug": "kowadlo-katalog-03",
+      "start_point_name": "Bielice – węzeł zielonego szlaku",
+      "end_point_name": "Kowadło"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Bielice – węzeł zielonego szlaku. Koniec: Kowadło. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart w Bielicach przy zielonym szlaku. Oficjalny wykaz gminy opisuje miejsca postojowe za zabudowaniami; sprawdź lokalne znaki i dojście do węzła.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Bielice – węzeł zielonego szlaku and ends at Kowadło. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart at the green trail in Bielice. The municipal list describes parking beyond the buildings; check local signs and the walk to the trail junction.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Bielice – węzeł zielonego szlaku і закінчується в Kowadło. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт біля зеленої стежки в Bielice. Муніципальний перелік описує місця паркування за забудовою; перевірте місцеві знаки й підхід до вузла стежок.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Bielice – węzeł zielonego szlaku开始，到Kowadło结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起点位于Bielice的绿色步道旁。市政资料列出了村屋外的停车点，请核实现场标志及前往步道岔路口的步行路线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_context",
+        "url": "https://stronie.pl/4167/parkingi-wypozyczalnie-i-serwis-nart.html",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://stronie.pl/4167/parkingi-wypozyczalnie-i-serwis-nart.html",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "bielice-za-zabudowaniami",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Bielice%20%E2%80%93%20miejsca%20postojowe%20za%20zabudowaniami",
+          "source_url": "https://stronie.pl/4167/parkingi-wypozyczalnie-i-serwis-nart.html",
+          "is_primary": true,
+          "paid": null,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Bielice – miejsca postojowe za zabudowaniami",
+            "description": "Gmina wskazuje miejsca postojowe około 700 m za ostatnimi zabudowaniami Bielic. Nie są to współrzędne początku zielonego szlaku; dojście do niego trzeba ustalić osobno.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Nie potwierdzono opłat ani godzin działania tego parkingu. Sprawdź oznakowanie i dostępność przed wyjazdem.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Bielice – miejsca postojowe za zabudowaniami",
+            "description": "The municipality lists parking about 700 m beyond the last buildings in Bielice. This is not the green trail start; establish the connecting walk separately.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Fees and operating hours for this parking have not been confirmed. Check signs and availability before travelling.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Bielice – miejsca postojowe za zabudowaniami",
+            "description": "Гміна вказує місця паркування приблизно за 700 м від останніх будинків Bielice. Це не початок зеленої стежки; окремо з’ясуйте піший підхід.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Плату й години роботи цієї парковки не підтверджено. Перевірте знаки й доступність перед поїздкою.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Bielice – miejsca postojowe za zabudowaniami",
+            "description": "市政资料列出的停车区位于Bielice最后一排房屋外约700米处，并非绿色步道起点，请另行确认步行连接路线。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "尚未核实此停车区的收费及开放时间，请在出行前确认标志和可用情况。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "klodzka-gora",
+    "expected_trail": {
+      "id": 25,
+      "peak_id": 13,
+      "slug": "klodzka-gora-katalog-03",
+      "start_point_name": "Kłodzko Miasto",
+      "end_point_name": "Pod Kłodzką Górą"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/893-dolnoslaskie-szlak-im-wladyslawa-biskupa",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/893-dolnoslaskie-szlak-im-wladyslawa-biskupa",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Kłodzko Miasto. Koniec: Pod Kłodzką Górą. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPoczątek to Kłodzko Miasto, nie Przełęcz Kłodzka. Trasa kończy się Pod Kłodzką Górą; dojście na wierzchołek i powrót wymagają osobnego planu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Kłodzko Miasto and ends at Pod Kłodzką Górą. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe start is Kłodzko Miasto, not Przełęcz Kłodzka. The segment ends at Pod Kłodzką Górą; plan the summit link and return separately.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Kłodzko Miasto і закінчується в Pod Kłodzką Górą. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт — Kłodzko Miasto, а не Przełęcz Kłodzka. Відрізок закінчується в Pod Kłodzką Górą; підхід на вершину й повернення плануйте окремо.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Kłodzko Miasto开始，到Pod Kłodzką Górą结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起点为Kłodzko Miasto，而非Przełęcz Kłodzka。路段终止于Pod Kłodzką Górą，登顶连接段及返程需另行安排。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/893-dolnoslaskie-szlak-im-wladyslawa-biskupa",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "biskupia-kopa",
+    "expected_trail": {
+      "id": 26,
+      "peak_id": 15,
+      "slug": "biskupia-kopa-katalog-03",
+      "start_point_name": "Pokrzywna",
+      "end_point_name": "Biskupia Kopa"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://slaskie-opolskie.szlaki.pttk.pl/304-slaskie-opolskie-sciezka-dolina-bystrego-potoku-na-biskupia-kope",
+      "public_transport_url": null,
+      "source_url": "https://slaskie-opolskie.szlaki.pttk.pl/304-slaskie-opolskie-sciezka-dolina-bystrego-potoku-na-biskupia-kope",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Pokrzywna. Koniec: Biskupia Kopa. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nTen wariant zaczyna się w Pokrzywnej i biegnie Doliną Bystrego Potoku. Nie zastępuj go dojazdem do Jarnołtówka.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Pokrzywna and ends at Biskupia Kopa. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThis variant starts in Pokrzywna and follows Dolina Bystrego Potoku. Do not substitute a driving destination in Jarnołtówek.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Pokrzywna і закінчується в Biskupia Kopa. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nЦей варіант починається в Pokrzywna й проходить Dolina Bystrego Potoku. Не підміняйте його під’їздом до Jarnołtówek.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Pokrzywna开始，到Biskupia Kopa结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n此路线从Pokrzywna出发，经Dolina Bystrego Potoku行走，请勿改为导航至Jarnołtówek。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://slaskie-opolskie.szlaki.pttk.pl/304-slaskie-opolskie-sciezka-dolina-bystrego-potoku-na-biskupia-kope",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "babia-gora",
+    "expected_trail": {
+      "id": 27,
+      "peak_id": 17,
+      "slug": "babia-gora-katalog-03",
+      "start_point_name": "Markowe Szczawiny",
+      "end_point_name": "Babia Góra – Diablak"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Markowe Szczawiny. Koniec: Babia Góra – Diablak. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nGPX rozpoczyna się przy schronisku Markowe Szczawiny i prowadzi przez Przełęcz Brona. Nie jest zapisem dojścia od parkingu ani wariantem Percią Akademików.\nTo początek wysoko położonego odcinka pieszego. Dojście do niego oraz zejście do miejscowości trzeba doliczyć osobno; nie prowadź nawigacji samochodowej do tego punktu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://bgpn.gov.pl/komunikat-turystyczny Bilety: https://bgpn.gov.pl/informacje-o-biletach"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Markowe Szczawiny and ends at Babia Góra – Diablak. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe GPX starts at Markowe Szczawiny hut and runs via Przełęcz Brona. It does not record the approach from parking or the Perć Akademików variant.\nThis is the start of a mountain walking segment. Add the approach and the descent to a settlement separately; do not use this point as a driving destination.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://bgpn.gov.pl/komunikat-turystyczny Tickets: https://bgpn.gov.pl/informacje-o-biletach"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Markowe Szczawiny і закінчується в Babia Góra – Diablak. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nGPX починається біля притулку Markowe Szczawiny й веде через Przełęcz Brona. Він не містить підходу від парковки й не є варіантом Perć Akademików.\nЦе початок гірського пішого відрізка. Окремо врахуйте підхід і спуск до населеного пункту; не використовуйте цю точку для автомобільної навігації.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://bgpn.gov.pl/komunikat-turystyczny Квитки: https://bgpn.gov.pl/informacje-o-biletach"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Markowe Szczawiny开始，到Babia Góra – Diablak结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\nGPX从Markowe Szczawiny山屋经Przełęcz Brona通行，不包含从停车场上山屋的路段，也不是Perć Akademików路线。\n此处是山中徒步路段的起点。到达起点及下山到村镇的路程需另计，请勿将此点作为驾车目的地。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://bgpn.gov.pl/komunikat-turystyczny 门票：https://bgpn.gov.pl/informacje-o-biletach"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "brona_variant",
+        "url": "https://bgpn.gov.pl/szlaki-turystyczne/markowe-szczawiny-przelecz-brona-diablak",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://bgpn.gov.pl/komunikat-turystyczny",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://bgpn.gov.pl/informacje-o-biletach",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "tarnica",
+    "expected_trail": {
+      "id": 28,
+      "peak_id": 18,
+      "slug": "tarnica-katalog-03",
+      "start_point_name": "Wołosate",
+      "end_point_name": "Tarnica"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
+      "public_transport_url": null,
+      "source_url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Wołosate. Koniec: Tarnica. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart w Wołosatem. Park podaje sezonową pracę parkingów od połowy kwietnia do połowy listopada; przed przyjazdem sprawdź aktualną dostępność. Nie zakładaj, że parking działa zimą.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://bdpn.gov.pl/wejscia-i-parkingi Bilety: https://bdpn.gov.pl/regulamin-i-oplaty"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Wołosate and ends at Tarnica. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart in Wołosate. The park lists seasonal parking from mid-April to mid-November; check current availability before travelling. Do not assume winter operation.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://bdpn.gov.pl/wejscia-i-parkingi Tickets: https://bdpn.gov.pl/regulamin-i-oplaty"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Wołosate і закінчується в Tarnica. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт у Wołosate. Парк указує сезонну роботу парковок із середини квітня до середини листопада; перед поїздкою перевірте доступність. Не припускайте, що парковка працює взимку.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://bdpn.gov.pl/wejscia-i-parkingi Квитки: https://bdpn.gov.pl/regulamin-i-oplaty"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Wołosate开始，到Tarnica结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Wołosate出发。公园列出的停车场运营季节为四月中旬至十一月中旬，出发前请核实实际开放情况，不应假定冬季照常运营。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://bdpn.gov.pl/wejscia-i-parkingi 门票：https://bdpn.gov.pl/regulamin-i-oplaty"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://bdpn.gov.pl/wejscia-i-parkingi",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://bdpn.gov.pl/regulamin-i-oplaty",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://bdpn.gov.pl/wejscia-i-parkingi",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "wolosate-bdpn",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Wo%C5%82osate%20%E2%80%93%20parking%20BdPN",
+          "source_url": "https://bdpn.gov.pl/wejscia-i-parkingi",
+          "is_primary": true,
+          "paid": true,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Wołosate – parking BdPN",
+            "description": "Parking sezonowy wskazany przez BdPN dla wejścia na Tarnicę. Park podaje pracę od połowy kwietnia do połowy listopada; zweryfikuj dostępność przed przyjazdem, zwłaszcza poza sezonem.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Aktualną taryfę i sposób płatności sprawdź u operatora. Opłata parkingowa nie jest biletem wstępu na szlak.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Wołosate – parking BdPN",
+            "description": "Seasonal parking listed by BdPN for the Tarnica ascent. The park lists operation from mid-April to mid-November; check availability before travelling, especially out of season.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Check the operator’s current tariff and payment method. Parking payment is not a trail admission ticket.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Wołosate – parking BdPN",
+            "description": "Сезонна парковка, указана BdPN для підйому на Tarnica. Парк указує роботу із середини квітня до середини листопада; перевірте доступність перед поїздкою, особливо поза сезоном.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Актуальний тариф і спосіб оплати перевірте в оператора. Оплата парковки не є вхідним квитком на стежку.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Wołosate – parking BdPN",
+            "description": "BdPN列出的Tarnica登山季节性停车场，公园列明运营期为四月中旬至十一月中旬。请在出发前核实，尤其是在非运营季节。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "请向运营方查询现行费率和付款方式。停车费不等于步道门票。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "turbacz",
+    "expected_trail": {
+      "id": 29,
+      "peak_id": 19,
+      "slug": "turbacz-katalog-03",
+      "start_point_name": "Koninki – wejście do GPN",
+      "end_point_name": "Schronisko PTTK na Turbaczu"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
+      "public_transport_url": "https://gpn.gov.pl/wejscia-i-parkingi",
+      "source_url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Koninki – wejście do GPN. Koniec: Schronisko PTTK na Turbaczu. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart w Koninkach przy wejściu do GPN. Parkingi w Koninkach prowadzą lokalni przedsiębiorcy; nie są parkingiem zarządzanym przez GPN na Trusiówce. GPX kończy się przy schronisku, nie jest pętlą.",
+        "public_transport": "GPN opisuje dojazd do Koninek przez Mszanę Dolną, w tym linię dowozową A11. Sprawdź u przewoźnika aktualne kursy i dojście od przystanku do wejścia na szlak.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://gpn.gov.pl/komunikat-turystyczny Bilety: https://gpn.gov.pl/punkty-sprzedazy-biletow"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Koninki – wejście do GPN and ends at Schronisko PTTK na Turbaczu. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart at the GPN entrance in Koninki. Parking in Koninki is operated by local businesses; it is not the GPN-operated Trusiówka parking. The GPX ends at the hut and is not a loop.",
+        "public_transport": "GPN describes access to Koninki via Mszana Dolna, including feeder bus A11. Check current services with the operator and the walk from the stop to the trail entrance.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://gpn.gov.pl/komunikat-turystyczny Tickets: https://gpn.gov.pl/punkty-sprzedazy-biletow"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Koninki – wejście do GPN і закінчується в Schronisko PTTK na Turbaczu. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт біля входу в GPN у Koninki. Місцеві парковки обслуговують приватні підприємці; це не парковка GPN на Trusiówka. GPX закінчується біля притулку й не є кільцем.",
+        "public_transport": "GPN описує доїзд до Koninki через Mszana Dolna, зокрема підвізний автобус A11. Перевірте актуальні рейси у перевізника й підхід від зупинки до стежки.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://gpn.gov.pl/komunikat-turystyczny Квитки: https://gpn.gov.pl/punkty-sprzedazy-biletow"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Koninki – wejście do GPN开始，到Schronisko PTTK na Turbaczu结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Koninki的GPN入口出发。Koninki停车场由当地企业运营，并非GPN管理的Trusiówka停车场。GPX终止于山屋，不是环线。",
+        "public_transport": "GPN介绍了经Mszana Dolna前往Koninki的交通，包括A11接驳公交。请向运营方查询现行班次，并确认从车站步行到步道入口的路程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://gpn.gov.pl/komunikat-turystyczny 门票：https://gpn.gov.pl/punkty-sprzedazy-biletow"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://gpn.gov.pl/komunikat-turystyczny",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://gpn.gov.pl/punkty-sprzedazy-biletow",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "public_transport",
+        "url": "https://gpn.gov.pl/wejscia-i-parkingi",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "radziejowa",
+    "expected_trail": {
+      "id": 30,
+      "peak_id": 20,
+      "slug": "radziejowa-katalog-03",
+      "start_point_name": "Krościenko nad Dunajcem",
+      "end_point_name": "Wielki Rogacz"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/17-pttk-malopolska-glowny-szlak-beskidzki",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/17-pttk-malopolska-glowny-szlak-beskidzki",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Krościenko nad Dunajcem. Koniec: Wielki Rogacz. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPoczątek w Krościenku nad Dunajcem, nie na Obidzy. GPX kończy się na Wielkim Rogaczu; odcinek na Radziejową nie jest w nim zawarty.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Krościenko nad Dunajcem and ends at Wielki Rogacz. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart in Krościenko nad Dunajcem, not Obidza. This GPX ends at Wielki Rogacz and does not include the link to Radziejowa.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Krościenko nad Dunajcem і закінчується в Wielki Rogacz. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nПочаток у Krościenko nad Dunajcem, а не на Obidza. GPX закінчується на Wielki Rogacz і не включає відрізок на Radziejowa.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Krościenko nad Dunajcem开始，到Wielki Rogacz结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起点为Krościenko nad Dunajcem，而非Obidza。此GPX终点是Wielki Rogacz，不包含前往Radziejowa的连接路段。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/17-pttk-malopolska-glowny-szlak-beskidzki",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "lubomir",
+    "expected_trail": {
+      "id": 31,
+      "peak_id": 21,
+      "slug": "lubomir-katalog-03",
+      "start_point_name": "Węglówka",
+      "end_point_name": "Lubomir – obserwatorium"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/164-pttk-malopolska-weglowka-szczyrzyc-cmentarz",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/164-pttk-malopolska-weglowka-szczyrzyc-cmentarz",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Węglówka. Koniec: Lubomir – obserwatorium. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPoczątek w Węglówce, koniec przy obserwatorium na Lubomirze. Opis szlaku nie potwierdza godzin zwiedzania obserwatorium.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Węglówka and ends at Lubomir – obserwatorium. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart in Węglówka and finish by the observatory on Lubomir. The trail description does not confirm observatory visiting hours.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Węglówka і закінчується в Lubomir – obserwatorium. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт у Węglówka, кінець біля обсерваторії на Lubomir. Опис стежки не підтверджує години відвідування обсерваторії.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Węglówka开始，到Lubomir – obserwatorium结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Węglówka出发，到Lubomir天文台附近结束。步道说明并不代表已核实天文台参观时间。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/164-pttk-malopolska-weglowka-szczyrzyc-cmentarz",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "mogielica",
+    "expected_trail": {
+      "id": 32,
+      "peak_id": 22,
+      "slug": "mogielica-katalog-03",
+      "start_point_name": "Tymbark PKP",
+      "end_point_name": "Mogielica"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/157-pttk-malopolska-tymbark-pkp-mogielica",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/157-pttk-malopolska-tymbark-pkp-mogielica",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Tymbark PKP. Koniec: Mogielica. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nTen wariant rozpoczyna się przy Tymbark PKP. Sama nazwa punktu nie potwierdza kursowania pociągów; sprawdź aktualny rozkład i ewentualną komunikację zastępczą.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Tymbark PKP and ends at Mogielica. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThis variant starts at Tymbark PKP. The place name alone does not establish that trains run; check current timetables and any replacement transport.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Tymbark PKP і закінчується в Mogielica. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nЦей варіант починається біля Tymbark PKP. Назва точки не підтверджує руху поїздів; перевірте актуальний розклад і можливий замінний транспорт.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Tymbark PKP开始，到Mogielica结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n此路线从Tymbark PKP出发。地名本身并不证明有列车运行，请核实现行时刻表及替代交通。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/157-pttk-malopolska-tymbark-pkp-mogielica",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "czupel",
+    "expected_trail": {
+      "id": 33,
+      "peak_id": 24,
+      "slug": "czupel-katalog-03",
+      "start_point_name": "Czernichów",
+      "end_point_name": "Międzybrodzie Bialskie"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://www.beskidy.slaskie.travel/route/1019739",
+      "public_transport_url": null,
+      "source_url": "https://www.beskidy.slaskie.travel/route/1019739",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Czernichów. Koniec: Międzybrodzie Bialskie. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart w centrum Czernichowa przy niebieskiej kładce. To wariant z Czernichowa do Międzybrodzia Bialskiego, nie wejście z Przełęczy Przegibek.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Czernichów and ends at Międzybrodzie Bialskie. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart in central Czernichów by the blue footbridge. This is the Czernichów to Międzybrodzie Bialskie variant, not the approach from Przełęcz Przegibek.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Czernichów і закінчується в Międzybrodzie Bialskie. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт у центрі Czernichów біля синього пішохідного містка. Це варіант до Międzybrodzie Bialskie, а не підхід із Przełęcz Przegibek.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Czernichów开始，到Międzybrodzie Bialskie结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n起点在Czernichów中心的蓝色人行桥旁。此路线通往Międzybrodzie Bialskie，并非从Przełęcz Przegibek出发的路线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://www.beskidy.slaskie.travel/route/1019739",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://www.beskidy.slaskie.travel/route/1019739",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "czernichow-niebieska-kladka",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Czernich%C3%B3w%20%E2%80%93%20parking%20przy%20niebieskiej%20k%C5%82adce",
+          "source_url": "https://www.beskidy.slaskie.travel/route/1019739",
+          "is_primary": true,
+          "paid": null,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Czernichów – parking przy niebieskiej kładce",
+            "description": "Regionalny opis trasy wskazuje parking turystyczny w centrum Czernichowa przy niebieskiej kładce. Trasa kończy się w Międzybrodziu Bialskim, poza parkingiem startowym.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Nie potwierdzono opłat ani godzin działania tego parkingu. Sprawdź oznakowanie i dostępność przed wyjazdem.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Czernichów – parking przy niebieskiej kładce",
+            "description": "The regional route guide identifies a visitor parking area in central Czernichów by the blue footbridge. The route ends in Międzybrodzie Bialskie, away from the start parking.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Fees and operating hours for this parking have not been confirmed. Check signs and availability before travelling.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Czernichów – parking przy niebieskiej kładce",
+            "description": "Регіональний опис указує туристичну парковку в центрі Czernichów біля синього містка. Маршрут закінчується в Międzybrodzie Bialskie, не на стартовій парковці.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Плату й години роботи цієї парковки не підтверджено. Перевірте знаки й доступність перед поїздкою.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Czernichów – parking przy niebieskiej kładce",
+            "description": "地区路线说明指出停车区位于Czernichów中心的蓝色人行桥旁。路线终点在Międzybrodzie Bialskie，并不返回起点停车处。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "尚未核实此停车区的收费及开放时间，请在出行前确认标志和可用情况。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "skrzyczne",
+    "expected_trail": {
+      "id": 34,
+      "peak_id": 25,
+      "slug": "skrzyczne-katalog-03",
+      "start_point_name": "Ostre – parking przy ul. Słonecznej",
+      "end_point_name": "Ostre – parking przy ul. Słonecznej"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://slaskie.travel/route/1020144",
+      "public_transport_url": null,
+      "source_url": "https://slaskie.travel/route/1020144",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Ostre – parking przy ul. Słonecznej. Koniec: Ostre – parking przy ul. Słonecznej. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPętla startuje w Ostrem przy ul. Słonecznej, u wylotu Doliny Zimnika, i wraca do Ostrego. Nie pomyl jej z wejściem ze Szczyrku.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Ostre – parking przy ul. Słonecznej and ends at Ostre – parking przy ul. Słonecznej. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe loop starts in Ostre at ul. Słoneczna, at the entrance to Dolina Zimnika, and returns to Ostre. Do not confuse it with an ascent from Szczyrk.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Ostre – parking przy ul. Słonecznej і закінчується в Ostre – parking przy ul. Słonecznej. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nКільце починається в Ostre на ul. Słoneczna біля входу в Dolina Zimnika й повертається до Ostre. Не плутайте його з підйомом зі Szczyrk.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Ostre – parking przy ul. Słonecznej开始，到Ostre – parking przy ul. Słonecznej结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n环线从Ostre的Słoneczna街、Dolina Zimnika入口处出发并返回Ostre，请勿与从Szczyrk出发的路线混淆。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://slaskie.travel/route/1020144",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://slaskie.travel/route/1020144",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "ostre-sloneczna",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=Ostre%20%E2%80%93%20parking%20przy%20ul.%20S%C5%82onecznej",
+          "source_url": "https://slaskie.travel/route/1020144",
+          "is_primary": true,
+          "paid": false,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "Ostre – parking przy ul. Słonecznej",
+            "description": "Regionalny opis trasy wskazuje gminny parking przy ul. Słonecznej u wylotu Doliny Zimnika. To początek i koniec opisanej pętli; liczba miejsc jest ograniczona.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Źródło opisuje parking jako bezpłatny; sprawdź oznakowanie na miejscu.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "Ostre – parking przy ul. Słonecznej",
+            "description": "The regional route guide identifies municipal parking at ul. Słoneczna at the entrance to Dolina Zimnika. This is the recorded loop start and finish; spaces are limited.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "The source describes parking as free; check signs on arrival.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "Ostre – parking przy ul. Słonecznej",
+            "description": "Регіональний опис указує муніципальну парковку на ul. Słoneczna біля входу в Dolina Zimnika. Тут початок і кінець описаного кільця; кількість місць обмежена.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Джерело описує парковку як безплатну; перевірте знаки на місці.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "Ostre – parking przy ul. Słonecznej",
+            "description": "地区路线说明指出市政停车场位于Słoneczna街的Dolina Zimnika入口，是所述环线的起终点，车位有限。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "来源说明此处免费停车，请以抵达时的现场标志为准。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "wysoka-pieniny",
+    "expected_trail": {
+      "id": 35,
+      "peak_id": 26,
+      "slug": "wysoka-pieniny-katalog-03",
+      "start_point_name": "Jaworki",
+      "end_point_name": "Uroczysko Zaskalskie"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/144-pttk-malopolska-jaworki-wysoka",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/144-pttk-malopolska-jaworki-wysoka",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Jaworki. Koniec: Uroczysko Zaskalskie. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nWariant rozpoczyna się w Jaworkach i kończy w Uroczysku Zaskalskim. Nie jest zapisem pętli do parkingu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Jaworki and ends at Uroczysko Zaskalskie. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThis variant starts in Jaworki and ends at Uroczysko Zaskalskie. It is not a recorded loop back to parking.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Jaworki і закінчується в Uroczysko Zaskalskie. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nЦей варіант починається в Jaworki й закінчується в Uroczysko Zaskalskie. Це не запис кільцевого повернення до парковки.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Jaworki开始，到Uroczysko Zaskalskie结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n此路线从Jaworki出发，在Uroczysko Zaskalskie结束，并非返回停车处的环线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/144-pttk-malopolska-jaworki-wysoka",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "rysy",
+    "expected_trail": {
+      "id": 36,
+      "peak_id": 16,
+      "slug": "rysy-palenica-czerwony-wejscie",
+      "start_point_name": "Palenica Białczańska",
+      "end_point_name": "Rysy"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Palenica Białczańska. Koniec: Rysy. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nPoczątek pieszy na Palenicy Białczańskiej. Bilet parkingowy TPN może oznaczać miejsce na Palenicy, przy drodze lub na Łysej Polanie; uwzględnij dodatkowe dojście. To długa, wysokogórska trasa w jedną stronę, nie spacer tylko do Morskiego Oka.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych.\nSprawdź komunikat parku i zasady biletów przed wyjściem. Bilet wstępu na szlak i opłata parkingowa to odrębne sprawy. Informacje parku: https://tpn.gov.pl/komunikat-turystyczny Bilety: https://tpn.gov.pl/bilety"
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Palenica Białczańska and ends at Rysy. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe walking start is at Palenica Białczańska. A TPN parking ticket may place you at Palenica, along the road or at Łysa Polana; allow for the extra walk. This is a long one-way high-mountain route, not just the walk to Morskie Oko.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear.\nCheck the park notice and ticket rules before setting off. A trail entry ticket and parking payment are separate matters. Park information: https://tpn.gov.pl/komunikat-turystyczny Tickets: https://tpn.gov.pl/bilety"
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Palenica Białczańska і закінчується в Rysy. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nПіший старт на Palenica Białczańska. Паркувальний квиток TPN може означати місце на Palenica, вздовж дороги або на Łysa Polana; врахуйте додатковий підхід. Це довгий високогірний маршрут в один бік, а не лише прогулянка до Morskie Oko.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників.\nПеред виходом перевірте повідомлення парку й правила квитків. Вхідний квиток на стежку й оплата парковки — окремі питання. Інформація парку: https://tpn.gov.pl/komunikat-turystyczny Квитки: https://tpn.gov.pl/bilety"
+      },
+      "zh": {
+        "directions": "所列徒步路段从Palenica Białczańska开始，到Rysy结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n徒步起点在Palenica Białczańska。TPN停车票可能安排在Palenica、沿途公路或Łysa Polana，请预留额外步行时间。这是漫长的高山单程路线，并非仅到Morskie Oko的散步路线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。\n出发前请查看公园公告及门票规定。步道门票与停车费是两项不同事项。公园信息：https://tpn.gov.pl/komunikat-turystyczny 门票：https://tpn.gov.pl/bilety"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "park_notice",
+        "url": "https://tpn.gov.pl/komunikat-turystyczny",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "admission",
+        "url": "https://tpn.gov.pl/bilety",
+        "checked_on": "2026-11-22"
+      },
+      {
+        "field": "parking_and_published_fees_only",
+        "url": "https://tpn.gov.pl/parkingi-morskie-oko",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": [
+      {
+        "row": {
+          "slug": "tpn-morskie-oko-strefa",
+          "address": null,
+          "postcode": null,
+          "latitude": null,
+          "longitude": null,
+          "map_url": "https://www.google.com/maps/search/?api=1&query=TPN%20%E2%80%93%20parkingi%20Morskie%20Oko",
+          "source_url": "https://tpn.gov.pl/parkingi-morskie-oko",
+          "is_primary": true,
+          "paid": true,
+          "toilets": null,
+          "overnight_allowed": null,
+          "capacity": null,
+          "last_verified_at": "2026-11-22T00:00:00Z",
+          "active": true
+        },
+        "i18n": {
+          "pl": {
+            "name": "TPN – parkingi Morskie Oko",
+            "description": "To strefa trzech części: Palenica Białczańska, pas drogowy i Łysa Polana. Kolejność przyjazdu decyduje o miejscu; bilet nie gwarantuje parkowania przy samym szlaku. Dolicz dojście od przydzielonego miejsca.",
+            "notes": "Link do mapy wyszukuje nazwę miejsca, nie wskazuje zweryfikowanego stanowiska parkingowego. Toalety, pojemność i możliwość parkowania nocą nie zostały potwierdzone; nocowanie lub biwakowanie to odrębna kwestia.",
+            "fee_info": "Aktualną taryfę i sposób płatności sprawdź u operatora. Opłata parkingowa nie jest biletem wstępu na szlak. Kup bilet wcześniej na właściwą datę; miejsca mogą się wyprzedać, a cena zależy od terminu zakupu. Przy postoju wielodniowym opłać wszystkie dni i uzgodnij go z obsługą.",
+            "opening_info": null
+          },
+          "en": {
+            "name": "TPN – parkingi Morskie Oko",
+            "description": "This parking area has three parts: Palenica Białczańska, the roadside and Łysa Polana. Arrival order determines the location; the ticket does not guarantee a space at the trail entrance. Add the walk from your assigned area.",
+            "notes": "The map link searches the place name rather than a surveyed parking bay. Toilets, capacity and overnight parking have not been confirmed; sleeping or camping is a separate matter.",
+            "fee_info": "Check the operator’s current tariff and payment method. Parking payment is not a trail admission ticket. Buy for the correct date in advance; spaces can sell out and prices depend on when you book. For a multi-day stay, pay for every day and notify staff.",
+            "opening_info": null
+          },
+          "ua": {
+            "name": "TPN – parkingi Morskie Oko",
+            "description": "Зона має три частини: Palenica Białczańska, узбіччя дороги й Łysa Polana. Місце залежить від порядку прибуття; квиток не гарантує місця біля стежки. Додайте підхід від призначеної ділянки.",
+            "notes": "Посилання на мапу шукає назву місця, а не перевірене паркувальне місце. Туалети, місткість і нічне паркування не підтверджено; ночівля чи кемпінг — окреме питання.",
+            "fee_info": "Актуальний тариф і спосіб оплати перевірте в оператора. Оплата парковки не є вхідним квитком на стежку. Заздалегідь купіть квиток на правильну дату; місця можуть закінчитися, а ціна залежить від часу купівлі. За багатоденного паркування оплатіть усі дні й повідомте персонал.",
+            "opening_info": null
+          },
+          "zh": {
+            "name": "TPN – parkingi Morskie Oko",
+            "description": "停车区域分为Palenica Białczańska、沿途公路和Łysa Polana三部分，按抵达顺序分配位置；车票不保证停在步道入口。请计入从分配停车区步行到起点的路程。",
+            "notes": "地图链接按地点名称搜索，并非经测量确认的具体车位。卫生间、容量及夜间停车许可尚未核实；在车内过夜或露营是另一项规定。",
+            "fee_info": "请向运营方查询现行费率和付款方式。停车费不等于步道门票。 请提前购买正确日期的停车票；车位可能售罄，价格随购买时间变化。多日停车需支付所有日期并告知工作人员。",
+            "opening_info": null
+          }
+        }
+      }
+    ]
+  },
+  {
+    "peak_slug": "lackowa",
+    "expected_trail": {
+      "id": 37,
+      "peak_id": 23,
+      "slug": "lackowa-izby-zolty-wejscie",
+      "start_point_name": "Izby",
+      "end_point_name": "Lackowa"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://malopolska.szlaki.pttk.pl/3865-pttk-malopolska-lackowa-izby",
+      "public_transport_url": null,
+      "source_url": "https://malopolska.szlaki.pttk.pl/3865-pttk-malopolska-lackowa-izby",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Izby. Koniec: Lackowa. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nStart w Izbach. Wybierz zapisany żółty wariant; informacje dla innych wejść na Lackową nie muszą dotyczyć tej trasy.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Izby and ends at Lackowa. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nStart in Izby. Use the recorded yellow-trail variant; information for other approaches to Lackowa may not apply to this route.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Izby і закінчується в Lackowa. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nСтарт у Izby. Обирайте записаний жовтий варіант; відомості про інші підходи на Lackowa можуть не стосуватися цього маршруту.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Izby开始，到Lackowa结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\n从Izby出发，请使用所录的黄色路线；其他Łackowa登山路线的信息未必适用于本路线。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://malopolska.szlaki.pttk.pl/3865-pttk-malopolska-lackowa-izby",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  },
+  {
+    "peak_slug": "wysoka-kopa",
+    "expected_trail": {
+      "id": 38,
+      "peak_id": 3,
+      "slug": "wysoka-kopa-sine-skalki-czerwony-odcinek",
+      "start_point_name": "Rozdroże pod Izerskimi Garbami",
+      "end_point_name": "Sine Skałki"
+    },
+    "access": {
+      "address": null,
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": "https://dolnoslaskie.szlaki.pttk.pl/693-dolnoslaskie-glowny-szlak-sudecki-im-mieczyslawa-orlowicza",
+      "public_transport_url": null,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/693-dolnoslaskie-glowny-szlak-sudecki-im-mieczyslawa-orlowicza",
+      "last_verified_at": "2026-11-22T00:00:00Z",
+      "active": true
+    },
+    "i18n": {
+      "pl": {
+        "directions": "Początek opisanego odcinka: Rozdroże pod Izerskimi Garbami. Koniec: Sine Skałki. Link do mapy pokazuje trasę pieszą; nie potwierdza dojazdu samochodem ani legalnego parkingu.\nGPX prowadzi z Rozdroża pod Izerskimi Garbami do Sinych Skałek. Nie utożsamiaj tego punktu z parkingiem Rozdroże Izerskie. Nie opuszczaj znakowanego szlaku w celu wejścia na Wysoką Kopę.\nTo początek wysoko położonego odcinka pieszego. Dojście do niego oraz zejście do miejscowości trzeba doliczyć osobno; nie prowadź nawigacji samochodowej do tego punktu.",
+        "public_transport": "Nie potwierdzono aktualnego połączenia do początku tej trasy. Sprawdź rozkład na dzień wycieczki i zaplanuj powrót.",
+        "warnings": "Sprawdź prognozę, stan szlaku i lokalne zakazy przed wyjściem. Opis nie potwierdza bieżącego otwarcia trasy. Nie blokuj dróg leśnych ani dojazdu służb ratowniczych."
+      },
+      "en": {
+        "directions": "The recorded walking segment starts at Rozdroże pod Izerskimi Garbami and ends at Sine Skałki. The map link shows the hiking route; it does not establish vehicle access or legal parking.\nThe GPX runs from Rozdroże pod Izerskimi Garbami to Sine Skałki. Do not confuse this start with the Rozdroże Izerskie parking. Stay on the marked trail rather than leaving it to reach Wysoka Kopa.\nThis is the start of a mountain walking segment. Add the approach and the descent to a settlement separately; do not use this point as a driving destination.",
+        "public_transport": "A current service to this route start has not been confirmed. Check the timetable for your travel date and plan the return.",
+        "warnings": "Check the weather, trail conditions and local restrictions before setting off. This record does not confirm that the route is currently open. Keep forest roads and emergency access clear."
+      },
+      "ua": {
+        "directions": "Описаний піший відрізок починається в Rozdroże pod Izerskimi Garbami і закінчується в Sine Skałki. Посилання показує піший маршрут, а не підтверджений автомобільний під’їзд чи дозволену парковку.\nGPX веде від Rozdroże pod Izerskimi Garbami до Sine Skałki. Не плутайте старт із парковкою Rozdroże Izerskie. Не сходьте з маркованої стежки заради виходу на Wysoka Kopa.\nЦе початок гірського пішого відрізка. Окремо врахуйте підхід і спуск до населеного пункту; не використовуйте цю точку для автомобільної навігації.",
+        "public_transport": "Актуальне сполучення до початку цього маршруту не підтверджено. Перевірте розклад на день подорожі й сплануйте повернення.",
+        "warnings": "Перед виходом перевірте погоду, стан стежки й місцеві обмеження. Цей опис не підтверджує, що маршрут зараз відкритий. Не перекривайте лісові дороги й проїзд рятувальників."
+      },
+      "zh": {
+        "directions": "所列徒步路段从Rozdroże pod Izerskimi Garbami开始，到Sine Skałki结束。地图链接显示徒步路线，并不代表汽车可到达起点或可合法停车。\nGPX从Rozdroże pod Izerskimi Garbami通往Sine Skałki。请勿将起点与Rozdroże Izerskie停车场混淆，也不要离开标记步道前往Wysoka Kopa。\n此处是山中徒步路段的起点。到达起点及下山到村镇的路程需另计，请勿将此点作为驾车目的地。",
+        "public_transport": "尚未核实前往此路线起点的现行公共交通。请查询出行当天的时刻表，并安排返程。",
+        "warnings": "出发前请查看天气、路况和当地限制。本条目不保证路线当前开放。请勿堵塞林道或救援通道。"
+      }
+    },
+    "evidence": [
+      {
+        "field": "walking_start_and_variant",
+        "url": "https://dolnoslaskie.szlaki.pttk.pl/693-dolnoslaskie-glowny-szlak-sudecki-im-mieczyslawa-orlowicza",
+        "checked_on": "2026-11-22"
+      }
+    ],
+    "parking": []
+  }
+]

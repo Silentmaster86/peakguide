@@ -1,0 +1,338 @@
+[
+  {
+    "url": "https://bdpn.gov.pl/regulamin-i-oplaty",
+    "resolved_url": "https://bdpn.gov.pl/regulamin-i-oplaty",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "36bab42585230c246752c4c675d7f14ffd91071d8685418cf10f5cc2ee821aa4"
+  },
+  {
+    "url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
+    "resolved_url": "https://bdpn.gov.pl/szlaki-turystyczne/sciezka-przyrodniczo-historyczna-wolosate-tarnica",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "8e19dafc015cb088bd0bfa843c97d2b1cacd61217e7db9c4ef93c3aa81a71813"
+  },
+  {
+    "url": "https://bdpn.gov.pl/wejscia-i-parkingi",
+    "resolved_url": "https://bdpn.gov.pl/wejscia-i-parkingi",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "a5c410a7473e26e74728404ff3f5d518d3ed48fa0415df13a549a3fd97c53fa3"
+  },
+  {
+    "url": "https://bgpn.gov.pl/informacje-o-biletach",
+    "resolved_url": "https://bgpn.gov.pl/informacje-o-biletach",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "10653cfc99599df55aedc9e82467311460157b205a899a04ff928da4d48c7f81"
+  },
+  {
+    "url": "https://bgpn.gov.pl/komunikat-turystyczny",
+    "resolved_url": "https://bgpn.gov.pl/komunikat-turystyczny",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "901f15ee0013528020fbccd766cf7c759dac359f46279e9a9c374a94f733a3ec"
+  },
+  {
+    "url": "https://bgpn.gov.pl/szlaki-turystyczne/markowe-szczawiny-przelecz-brona-diablak",
+    "resolved_url": "https://bgpn.gov.pl/szlaki-turystyczne/markowe-szczawiny-przelecz-brona-diablak",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "f31d143e714fce019ed976657f57afe1fd9e4ad0bb6d0f914d93c44185a70e26"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/500-dolnoslaskie-spalona-schr-pttk-jagodna-rozanka",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/500-dolnoslaskie-spalona-schr-pttk-jagodna-rozanka",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "91d7f2482e05bcf7d61557ff9f2d466dd250ebf88dbcf90145957b5f8b4f42a0"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/515-dolnoslaskie-przelecz-pod-szczelincem-szczeliniec-poczatek-schodow",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "28936b61a7b41ebd7011563c2bf14b40f8cdbb2b5a834a45d463d1bead02d4f9"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/629-dolnoslaskie-sniezka-karpacz-bialy-jar",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "26014a5ef5ca15efebc3fe7199fca6efd35e8092fcc9fe0ccb3592f70528ae31"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/675-dolnoslaskie-zloty-stok-rynek-schronisko-pttk-na-sniezniku",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "9f254d7ee3228dd07d05e9c9bfa8cae52ac278ad04ef2f9c70149afd821c51db"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/693-dolnoslaskie-glowny-szlak-sudecki-im-mieczyslawa-orlowicza",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/693-dolnoslaskie-glowny-szlak-sudecki-im-mieczyslawa-orlowicza",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "b31675da51c6bf58f096a2145297d8cc6b48268eb220087e790cdeedaa9341ca"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/796-dolnoslaskie-przelecz-sokola-wielka-sowa",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/796-dolnoslaskie-przelecz-sokola-wielka-sowa",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "29254dfc23ad51106e9603477be126cf8c6a8d12d4501198c6962f63d8ad6a6e"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/829-dolnoslaskie-zolty-przelecz-tapala-sleza",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "fc92f5523fe33d77994d17af539793ae55f9eb94c97730ac9794dbdf4200f72d"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/893-dolnoslaskie-szlak-im-wladyslawa-biskupa",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/893-dolnoslaskie-szlak-im-wladyslawa-biskupa",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "ac7a91a63e1f270bd157adc7afc452c497796ec2611e384f69e67b7f266ab4b6"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/935-dolnoslaskie-torfowisko-pod-zielencem-parking-lasek-miejski",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "a000921fcfda013bda60ffb4e80ce87026501818e744813a8338c628d9160391"
+  },
+  {
+    "url": "https://dolnoslaskie.szlaki.pttk.pl/967-dolnoslaskie-przelecz-karpnicka-mianka",
+    "resolved_url": "https://dolnoslaskie.szlaki.pttk.pl/967-dolnoslaskie-przelecz-karpnicka-mianka",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "5b1add69e4fae102e2f23f955dd15474165652d5ea2d6f196ef5eeb78ab79035"
+  },
+  {
+    "url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
+    "resolved_url": "https://e-gory.com/gory-kamienne/waligora-andrzejowka/",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "6a45522df9946a6ad4abcde24f9f0f6471f670b7d71f3ffbaa8a2fe65ca494d0"
+  },
+  {
+    "url": "https://gpn.gov.pl/komunikat-turystyczny",
+    "resolved_url": "https://gpn.gov.pl/komunikat-turystyczny",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "7246e730087546e78e9895e9c9a1db38f4c88547f801a8fc6eaa67b981c5b8f2"
+  },
+  {
+    "url": "https://gpn.gov.pl/punkty-sprzedazy-biletow",
+    "resolved_url": "https://gpn.gov.pl/punkty-sprzedazy-biletow",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "17f85a209c1a7128ea307c08087ceec628d55673804cd53166b2acaa5eace7b5"
+  },
+  {
+    "url": "https://gpn.gov.pl/wejscia-i-parkingi",
+    "resolved_url": "https://gpn.gov.pl/wejscia-i-parkingi",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "229ce781710d1f86937f3a056e5977aa91e873ca060c257f975f638b7a5c0a05"
+  },
+  {
+    "url": "https://kpn.gov.pl/informacje-o-biletach",
+    "resolved_url": "https://kpn.gov.pl/informacje-o-biletach",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "91e12d295906e6112bfcb7c379b52f5e710d301941c5b3c8384690b3847a7168"
+  },
+  {
+    "url": "https://kpn.gov.pl/komunikat-turystyczny",
+    "resolved_url": "https://kpn.gov.pl/komunikat-turystyczny",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "1fa43eee5cc89fd7c9cc56a221f3658c9ad671d9626e741ec4851ba32b3be98e"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/144-pttk-malopolska-jaworki-wysoka",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/144-pttk-malopolska-jaworki-wysoka",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "fa95d0a7ece08bfab43f7dadd8fe9ddd97b50607c1e9823aed0a85c0a09af418"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/157-pttk-malopolska-tymbark-pkp-mogielica",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/157-pttk-malopolska-tymbark-pkp-mogielica",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "77adc4ba988359601c9305d2a1a251b308caeb6251b11988b9742c7a7c0e68b6"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/164-pttk-malopolska-weglowka-szczyrzyc-cmentarz",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/164-pttk-malopolska-weglowka-szczyrzyc-cmentarz",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "943bcff722a22c6fa1c302a59b03b983980c24c1604c57f9d41ccabc09a5c6d7"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/17-pttk-malopolska-glowny-szlak-beskidzki",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/17-pttk-malopolska-glowny-szlak-beskidzki",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "0b8284c48fc133c1fa82ec49bb69f284908e343e48aee0aa52714cc75e3c8f82"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/320-pttk-malopolska-glowny-szlak-beskidzki",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "a492580b02a3dfb250b3b328d03f3a7a8016cf794d98f2ffdf380f19db478d2e"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/33-pttk-malopolska-koninki-wejscie-do-gpn-schronisko-pttk-na-turbaczu",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "93d395d29556d8daadbb051e5fc326cc53179836dd52f36624f319a9676dd9bc"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/3865-pttk-malopolska-lackowa-izby",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/3865-pttk-malopolska-lackowa-izby",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "9ba42800e28e2a370f3f2da84c426ff73c6471d3bd3291d9637e570c2c7d7fb4"
+  },
+  {
+    "url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
+    "resolved_url": "https://malopolska.szlaki.pttk.pl/461-pttk-malopolska-rysy-polana-palenica",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "f7f2e90f8ae9453c339f2f1eb69cd196f0dd20010ae7dbf7c7d2350c5d30ee15"
+  },
+  {
+    "url": "https://mapa-turystyczna.pl/route/2965",
+    "resolved_url": "https://mapa-turystyczna.pl/route/2965",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "cc34cb242a7e3513a19eefee38e037fb7e8d495cda683cf6eee2c1421602ce01"
+  },
+  {
+    "url": "https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych",
+    "resolved_url": "https://pngs.gov.pl/godziny-udostepniania-tras-turystycznych",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "54b756c3020f05c3ef12ab0a0ccc9daa7d4fcadc437117c0625fbe33d9b17aa9"
+  },
+  {
+    "url": "https://pngs.gov.pl/informacje-o-biletach",
+    "resolved_url": "https://pngs.gov.pl/informacje-o-biletach",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "059f36677a7109cb4a4f69ae4ac2d512e1287653cda81fa781c8a1076fbfb378"
+  },
+  {
+    "url": "https://pttk.pl/accommodations/schronisko-pttk-jagodna/",
+    "resolved_url": "https://pttk.pl/accommodations/schronisko-pttk-jagodna/",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "707322e14d23a9b4ed05c59a5b7b9958b535019e3a98fe92074f84091a9a1fbe"
+  },
+  {
+    "url": "https://slaskie-opolskie.szlaki.pttk.pl/304-slaskie-opolskie-sciezka-dolina-bystrego-potoku-na-biskupia-kope",
+    "resolved_url": "https://slaskie-opolskie.szlaki.pttk.pl/304-slaskie-opolskie-sciezka-dolina-bystrego-potoku-na-biskupia-kope",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "72f88e28e97b005d64cf5b58da7581c6c19ab0d87e8187f689ee6ab56b4aa961"
+  },
+  {
+    "url": "https://slaskie.travel/route/1020144",
+    "resolved_url": "https://slaskie.travel/route/1020144",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "10029baca0b1f782f8999d2c50404d6f88a5630ba97319f90fffba630ab85c7d"
+  },
+  {
+    "url": "https://stronie.pl/4167/parkingi-wypozyczalnie-i-serwis-nart.html",
+    "resolved_url": "https://stronie.pl/4167/parkingi-wypozyczalnie-i-serwis-nart.html",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "72a4f3e7d7d3f7490fff1fe143e96571411fcc05be64b5e37d73ebd592abd97b"
+  },
+  {
+    "url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
+    "resolved_url": "https://swietokrzyskie.szlaki.pttk.pl/1364-swietokrzyskie-na-lysice",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "479912967eb9457d55d131ddcf0a0ad5bc2b4e009ebebad038a6f34d3bc09a3d"
+  },
+  {
+    "url": "https://swpn.gov.pl/informacje-o-biletach",
+    "resolved_url": "https://swpn.gov.pl/informacje-o-biletach",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "cfba4bc2704737695f475479f78572337ec723af28f2192bfa93e2ca97728fda"
+  },
+  {
+    "url": "https://swpn.gov.pl/komunikat-turystyczny",
+    "resolved_url": "https://swpn.gov.pl/komunikat-turystyczny",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "825fab0fd9ebab98c925a3d6582c7d28df1e043b90f702b6850811b83ee86bb1"
+  },
+  {
+    "url": "https://tpn.gov.pl/bilety",
+    "resolved_url": "https://tpn.gov.pl/bilety",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "15fdb4b9c05f12078982a3a3b4c018596f39777557912532bfe00fe0ac0565ad"
+  },
+  {
+    "url": "https://tpn.gov.pl/komunikat-turystyczny",
+    "resolved_url": "https://tpn.gov.pl/komunikat-turystyczny",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "ae426e7a3154477bab353406480f56bc98f5f6fa267937ecbe3e6ee49cbb820e"
+  },
+  {
+    "url": "https://tpn.gov.pl/parkingi-morskie-oko",
+    "resolved_url": "https://tpn.gov.pl/parkingi-morskie-oko",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "442bebc0c8df5c02156e2786cb96fc8b61158828903e24e3b86760f2ca28c25a"
+  },
+  {
+    "url": "https://www.andrzejowka.eu/godziny-pracy/",
+    "resolved_url": "https://www.andrzejowka.eu/godziny-pracy/",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "e1d3241019e93ce81099451575817cf036b28ad85487937e52113bb9996c9c7a"
+  },
+  {
+    "url": "https://www.beskidy.slaskie.travel/route/1019739",
+    "resolved_url": "https://www.beskidy.slaskie.travel/route/1019739",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "fdda8ca22a83c7aa5e2f1f7cf117a47f0e9ca03e4a7091e9fa7216c34fdddb43"
+  },
+  {
+    "url": "https://www.sleza.sobotka.pl/komunikacja-autobusowa/",
+    "resolved_url": "https://www.sleza.sobotka.pl/komunikacja-autobusowa/",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "e09b26e38fc0f472c9e13178e823508307e7db38f030eb6914328b45c7a0cc5a"
+  },
+  {
+    "url": "https://www.sleza.sobotka.pl/przelecz-tapadla/",
+    "resolved_url": "https://www.sleza.sobotka.pl/przelecz-tapadla/",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "b6dc8e68372830d12d2d4318b84bf38c66b26700db4c71d9b1972669e3f6f104"
+  },
+  {
+    "url": "https://wycieczkoteka.pl/zwiedzaj-polske/gorki-i-pagorki/chelmiec-najkrotszy-szlak-na-szczyt",
+    "resolved_url": "https://wycieczkoteka.pl/zwiedzaj-polske/gorki-i-pagorki/chelmiec-najkrotszy-szlak-na-szczyt",
+    "status": 200,
+    "checked_on": "2026-11-22",
+    "sha256": "ebbd994562cf2c98f1f6f8500a8286342e751f64da3ff0f141c351839403c000"
+  }
+]
