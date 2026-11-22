@@ -185,6 +185,8 @@ test('trail cards omit unavailable metadata and retain the trail deep link', asy
 });
 
 test('unknown pages, peaks and ranges have localized recovery and noindex metadata', async ({page}) => {
+  // Four language navigations, accessibility scans and recovery links share this test budget.
+  test.setTimeout(60000);
   for(const [lang,title,home] of [
     ['pl','Nie znaleziono strony','Strona główna'],
     ['en','Page not found','Home'],

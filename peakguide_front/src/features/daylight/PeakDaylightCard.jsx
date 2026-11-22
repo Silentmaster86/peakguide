@@ -13,7 +13,7 @@ export default function PeakDaylightCard({ latitude, longitude, countryCode, lan
   const result = solarTimes(date, latitude, longitude);
   const locale = ({ pl:'pl-PL', en:'en-GB', ua:'uk-UA', zh:'zh-CN' })[lang] || 'en-GB';
   const format = value => new Intl.DateTimeFormat(locale, { timeZone: zone, dateStyle:'medium', timeStyle:'short' }).format(value);
-  return <section className="peak-daylight" aria-labelledby={`${id}-title`}>
+  return <section className="peak-daylight" role="region" aria-labelledby={`${id}-title`}>
     <h3 id={`${id}-title`}>{t.title}</h3>
     {!point ? <p>{t.missing}</p> : <>
       <div className="peak-daylight-controls"><label htmlFor={`${id}-date`}>{t.date}</label>
@@ -21,7 +21,7 @@ export default function PeakDaylightCard({ latitude, longitude, countryCode, lan
         <button type="button" onClick={() => setDate(dateInZone(new Date(), zone))}>{t.today}</button>
       </div>
       <p>{t.zone}: <strong>{zone}</strong>{zone === 'UTC' && <><br />{t.utc}</>}</p>
-      {!result ? <p role="status">{t.invalid}</p> : <div aria-live="polite" aria-atomic="true">
+      {!result ? <p role="status">{t.invalid}</p> : <div role="status" aria-live="polite" aria-atomic="true">
         {result.state !== 'normal' ? <p>{t[result.state]}</p> : <dl>
           {[[t.sunrise,result.sunrise],[t.sunset,result.sunset],[t.dawn,result.dawn],[t.dusk,result.dusk]].filter(([,value]) => value).map(([label,value]) => <div key={label}><dt>{label}</dt><dd><time dateTime={value.toISOString()}>{format(value)}</time></dd></div>)}
         </dl>}

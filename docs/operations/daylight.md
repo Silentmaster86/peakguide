@@ -41,3 +41,8 @@ brak/niepoprawne współrzędne oraz datę docelowej strefy. Testy UI: cztery j�
 wybór daty, powrót do dzisiaj, brak danych. E2E: 16 kombinacji desktop/mobile,
 Light/Dark i czterech języków, klawiatura, brak przepełnienia oraz Axe karty.
 To nie pomiar rzeczywistej widoczności ani certyfikacja dostępności całej strony.
+
+Jawne role regionu i komunikatu pozwalają zachować komplet reguł Axe także
+w Firefoxie. Kafelki mapy w testach są atrapą. Długi istniejący scenariusz 404
+(zmiany języka, wielokrotna nawigacja i audyty) ma 60 s budżetu całego testu,
+bez zmiany czasów/warunków pojedynczych asercji.

@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 const texts={pl:['Światło dzienne','Data wycieczki','Dzisiaj'],en:['Daylight','Trip date','Today'],ua:['Світловий день','Дата походу','Сьогодні'],zh:['日照时间','出行日期','今天']};
 const peak={id:1,slug:'rysy',active:true,is_korona:true,elevation_m:2499,latitude:49.1795,longitude:20.0881,peaks_i18n:Object.keys(texts).map(lang=>({lang,name:'Rysy',description:'Test description'})),mountain_ranges:{slug:'tatry',mountain_ranges_i18n:[{lang:'en',name:'Tatry'}],countries:{code:'PL',countries_i18n:[{lang:'en',name:'Poland'}]}}};
 test.beforeEach(async({page})=>{
+ await page.route('**.tile.openstreetmap.org/**',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64')}));
  await page.route('https://test.supabase.co/**',async route=>{
   const url=new URL(route.request().url());
   await route.fulfill({json:url.pathname.endsWith('/peaks')&&url.searchParams.has('slug')?peak:[]});
