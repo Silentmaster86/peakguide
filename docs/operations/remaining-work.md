@@ -1,5 +1,8 @@
 # Utrzymanie PeakGuide — stan i następne czynności
 
+Aktualny plan dalszych wydań: [delivery-plan.md](delivery-plan.md).
+Raport braków całego katalogu: [audyt 22 listopada](../audit/2026-11-22/README.md).
+
 Potwierdzony stan wykonanych wdrożeń: [pending-rollout.md](pending-rollout.md).
 Narzędzie dla Windows: [windows-backup.md](windows-backup.md).
 
