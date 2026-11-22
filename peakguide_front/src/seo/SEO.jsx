@@ -49,16 +49,14 @@ export function PeakSEO({ peak, lang = "pl" }) {
 
 	const canonical = `${SITE_URL}/peaks/${peak.slug}`;
 
-	const title =
-		lang === "pl"
-			? `${peak.name} (${peak.elevation_m} m) — ${SITE_NAME}`
-			: `${peak.name} (${peak.elevation_m} m) — ${SITE_NAME}`;
-
-	const description =
-		peak.short_description ||
-		(lang === "pl"
-			? `Poznaj szczyt ${peak.name}: wysokość, pasmo, współrzędne, mapa i pobliskie szczyty.`
-			: `Explore ${peak.name}: elevation, range, coordinates, map and nearby peaks.`);
+	const title = `${peak.name} (${peak.elevation_m} m) — ${SITE_NAME}`;
+	const fallbackDescriptions = {
+		pl: `Poznaj szczyt ${peak.name}: wysokość, pasmo, współrzędne, mapa i pobliskie szczyty.`,
+		en: `Explore ${peak.name}: elevation, range, coordinates, map and nearby peaks.`,
+		ua: `Дізнайтеся про вершину ${peak.name}: висота, хребет, координати, мапа та сусідні вершини.`,
+		zh: `了解${peak.name}：海拔、所属山脉、坐标、地图及附近山峰。`,
+	};
+	const description = peak.short_description || fallbackDescriptions[lang] || fallbackDescriptions.pl;
 
 	const coordinates = parseCoordinates(peak.latitude, peak.longitude);
 	
@@ -102,15 +100,16 @@ export function RangeSEO({ range, lang = "pl" }) {
 
 	const canonical = `${SITE_URL}/ranges/${range.slug}`;
 
-	const title =
-		lang === "pl"
-			? `${range.name || range.slug} — Pasmo górskie | ${SITE_NAME}`
-			: `${range.name || range.slug} — Mountain range | ${SITE_NAME}`;
-
-	const description =
-		lang === "pl"
-			? `Lista szczytów w paśmie ${range.name || range.slug}. Sprawdź wysokości i przejdź do szczegółów.`
-			: `Peaks in ${range.name || range.slug}. Check elevations and open details.`;
+	const name = range.name || range.slug;
+	const words = { pl: 'Pasmo górskie', en: 'Mountain range', ua: 'Гірський хребет', zh: '山脉' };
+	const title = `${name} — ${words[lang] || words.pl} | ${SITE_NAME}`;
+	const descriptions = {
+		pl: `Lista szczytów w paśmie ${name}. Sprawdź wysokości i przejdź do szczegółów.`,
+		en: `Peaks in ${name}. Check elevations and open details.`,
+		ua: `Вершини хребта ${name}. Перегляньте висоти та докладну інформацію.`,
+		zh: `${name}的山峰列表。查看海拔并打开详细信息。`,
+	};
+	const description = descriptions[lang] || descriptions.pl;
 
 	return <SEO title={title} description={description} canonical={canonical} />;
 }

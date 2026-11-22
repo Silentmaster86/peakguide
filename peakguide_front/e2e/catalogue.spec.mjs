@@ -183,3 +183,47 @@ test('trail cards omit unavailable metadata and retain the trail deep link', asy
   await expect(page).toHaveURL(/trail=mountain-track/);
   await expect(page.locator('#trail-mountain-track')).toBeFocused();
 });
+
+test('unknown pages, peaks and ranges have localized recovery and noindex metadata', async ({page}) => {
+  for(const [lang,title,home] of [
+    ['pl','Nie znaleziono strony','Strona główna'],
+    ['en','Page not found','Home'],
+    ['ua','Сторінку не знайдено','Головна'],
+    ['zh','未找到页面','首页'],
+  ]) {
+    await page.addInitScript(value=>localStorage.setItem('peakguide_lang',value),lang);
+    await page.goto('/missing-page-review');
+    await expect(page.getByRole('heading',{level:1,name:title})).toBeVisible();
+    await expect(page).toHaveTitle(new RegExp('404'));
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex,follow');
+    const audit=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();
+    expect(audit.violations).toEqual([]);
+    await page.getByRole('link',{name:home,exact:true}).click();
+    await expect(page).toHaveURL('/');
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    await expect(page).not.toHaveTitle(/404/);
+  }
+  await page.addInitScript(()=>localStorage.setItem('peakguide_lang','en'));
+  for(const [route,title,collection] of [
+    ['/peaks/does-not-exist','Peak not found','/peaks'],
+    ['/ranges/does-not-exist','Range not found','/ranges'],
+  ]) {
+    await page.goto(route);
+    await expect(page.getByRole('heading',{level:1,name:title})).toBeVisible();
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex,follow');
+    await page.locator('main').getByRole('link',{name:/Browse/}).click();
+    await expect(page).toHaveURL(collection);
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+  }
+});
+
+
+test('Ukrainian and Chinese detail metadata use the selected language',async({page})=>{
+ for(const [lang,peakMarker,rangeMarker] of [['ua','вершину','Гірський хребет'],['zh','海拔','山脉']]){
+  await page.addInitScript(value=>localStorage.setItem('peakguide_lang',value),lang);
+  await page.goto('/peaks/ben-nevis');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',new RegExp(peakMarker));
+  await page.goto('/ranges/grampian-mountains');
+  await expect(page).toHaveTitle(new RegExp(rangeMarker));
+ }
+});

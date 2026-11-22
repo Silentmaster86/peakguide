@@ -1,3 +1,4 @@
+import NotFoundPage from './NotFoundPage';
 import { elevationStats } from '../utils/elevationStats';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -84,18 +85,7 @@ export default function RangeDetailsPage({ lang = 'pl' }) {
 
   // Not found fallback
   if (!range) {
-    return (
-      <div style={wrap}>
-        <div style={errorBox}>
-          <div style={{ fontWeight: 900 }}>{labels.notFound}</div>
-          <div style={{ marginTop: 12 }}>
-            <Link to="/ranges" style={backLink}>
-              ← {labels.backToRanges}
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
+    return <NotFoundPage lang={lang} kind='range' />;
   }
 
   return (

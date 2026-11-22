@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 const HomePage = lazy(() => import('../pages/HomePage'));
 import Navbar from '../components/Navbar';
 
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 const ExploreMapPage = lazy(() => import('../pages/ExploreMapPage'));
 const PeaksPage = lazy(() => import('../pages/PeaksPage'));
 const PeakDetailsPage = lazy(() => import('../pages/PeakDetailsPage'));
@@ -81,7 +82,7 @@ export default function App() {
 							</Route>
 							<Route
 								path='*'
-								element={<div style={{ padding: 16 }}>404</div>}
+								element={<NotFoundPage lang={safeLang} />}
 							/>
 						</Routes>
 					</Suspense></main>
