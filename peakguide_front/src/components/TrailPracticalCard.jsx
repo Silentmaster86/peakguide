@@ -228,6 +228,12 @@ export default function TrailPracticalCard({ trailId, lang = 'pl' }) {
               <Provenance record={a} labels={labels} lang={language} />
             </div>
           )}
+          {a && parking.status === 'success' && !state.parking.length && (
+            <div style={box}>
+              <h4 style={{ margin: 0 }}>{labels.parking}</h4>
+              <p style={paragraph}>{labels.unknown}</p>
+            </div>
+          )}
           {state.parking.map((p) => {
             const t = translation(p.trail_parking_i18n, language);
             return (

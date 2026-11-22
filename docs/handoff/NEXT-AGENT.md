@@ -1,6 +1,6 @@
 # PeakGuide — karta dla kolejnego agenta
 
-Stan: 21 listopada 2026. Repo: Silentmaster86/peakguide.
+Stan: 22 listopada 2026. Repo: Silentmaster86/peakguide.
 Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
 Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
@@ -96,6 +96,29 @@ Pakiet jest przygotowany/testowany, **nie wykonany produkcyjnie przez agenta**.
 Po merge i sprawdzeniu stanu właściciel uruchamia verify → apply → verify.
 Nie mylić go z raportem źródłowym ani z ukończonymi importami KGP.
 Pozostałe cztery zagraniczne trasy pozostają poza tym patchem.
+
+## Przygotowany pakiet praktyczny dla wszystkich 28 szczytów KGP
+
+Zlecenie właściciela: wszystkie 28 naraz. Pakiet
+[kgp-practical-01](../catalogue/kgp-practical-01/README.md): 28 kart dostępu/dojścia,
+112 tekstów, 9 zweryfikowanych w źródłach parkingów i 36 tekstów parkingowych.
+PL/EN/UA/ZH. Dla 19 tras bez karty parkingu UI jawnie pokazuje brak potwierdzonych danych.
+To nie twierdzenie, że parking nie istnieje. Opłaty, toalety, pojemność i parkowanie
+nocą pozostają niepotwierdzone tam, gdzie nie ma źródła; nie uzupełniać ich domysłami.
+
+**Produkcja niezmieniona przez agenta.** Publiczny odczyt 22 listopada potwierdził
+brak kart praktycznych na tych 28 wybranych trasach oraz sześć istniejących kart
+zagranicznych poza zakresem pakietu. Przygotowano apply/verify/rollback i odczytowy
+preflight. Pełne typy/defaulty/ograniczenia produkcyjnych tabel praktycznych nie są
+jeszcze potwierdzone: anonimowe metadane zwróciły 401. Właściciel ma uruchomić
+`docs/catalogue/kgp-practical-01/preflight.sql` i przekazać schemat przed pierwszym
+apply. Nie prosić o hasła ani klucze administracyjne. Testy fixture nie są restore
+ani dowodem identycznego schematu produkcyjnego.
+
+Import odmawia nadpisania kart (także nieaktywnych), ma własny rejestr i chronione
+cofanie z kontrolą późniejszych edycji/powiązań. Nie zmienia tras, geometrii, POI,
+polityk ani grantów. Nie powtarzać starych importów KGP. Potwierdzenie wykonania
+`foreign-gpx-01` nadal nie zostało przekazane; nie łączyć go z tym pakietem.
 
 ## Granice danych turystycznych
 
