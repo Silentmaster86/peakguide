@@ -86,18 +86,19 @@ Mobilny przegląd `/trails`, `/peaks/rysy?tab=trails`,
 przewijania i naruszeń Axe w tych ośmiu widokach. To test automatyczny
 wybranego zakresu, nie pełna ocena dostępności/czytnika ani test fizycznego telefonu.
 
-## Przygotowany kolejny pakiet: Howerla i Krywań
+## Wdrożony pakiet: Howerla i Krywań
 
 [foreign-gpx-01](../catalogue/foreign-gpx-01/README.md): geometria-only aktualizacja
 istniejących tras id 8 i 10, bez zmian opisów, parametrów, ID i relacji.
 GPX pozostają hostowane przez park i Mapa Turystyczna; geometria zawiera wszystkie
 1191 punktów źródłowych. Prywatny rejestr chroni ponowienie i rollback.
-Pakiet jest przygotowany/testowany, **nie wykonany produkcyjnie przez agenta**.
-Po merge i sprawdzeniu stanu właściciel uruchamia verify → apply → verify.
+Właściciel wykonał apply i przekazał verify 22 listopada 2026: oba rekordy mają
+`has_geometry`, `geometry_matches_review`, `gpx_matches_review` i `upgrade_applied`
+równe true. To potwierdzenie wdrożenia właścicielskiego; nie ponawiać importu.
 Nie mylić go z raportem źródłowym ani z ukończonymi importami KGP.
 Pozostałe cztery zagraniczne trasy pozostają poza tym patchem.
 
-## Przygotowany pakiet praktyczny dla wszystkich 28 szczytów KGP
+## Wdrożony pakiet praktyczny dla wszystkich 28 szczytów KGP
 
 Zlecenie właściciela: wszystkie 28 naraz. Pakiet
 [kgp-practical-01](../catalogue/kgp-practical-01/README.md): 28 kart dostępu/dojścia,
@@ -106,19 +107,19 @@ PL/EN/UA/ZH. Dla 19 tras bez karty parkingu UI jawnie pokazuje brak potwierdzony
 To nie twierdzenie, że parking nie istnieje. Opłaty, toalety, pojemność i parkowanie
 nocą pozostają niepotwierdzone tam, gdzie nie ma źródła; nie uzupełniać ich domysłami.
 
-**Produkcja niezmieniona przez agenta.** Publiczny odczyt 22 listopada potwierdził
-brak kart praktycznych na tych 28 wybranych trasach oraz sześć istniejących kart
-zagranicznych poza zakresem pakietu. Przygotowano apply/verify/rollback i odczytowy
-preflight. Pełne typy/defaulty/ograniczenia produkcyjnych tabel praktycznych nie są
-jeszcze potwierdzone: anonimowe metadane zwróciły 401. Właściciel ma uruchomić
-`docs/catalogue/kgp-practical-01/preflight.sql` i przekazać schemat przed pierwszym
-apply. Nie prosić o hasła ani klucze administracyjne. Testy fixture nie są restore
-ani dowodem identycznego schematu produkcyjnego.
+Właściciel wykonał import i przekazał verify 22 listopada 2026: 28 kart dostępu,
+112 tekstów, 9 kart parkingów, 36 tekstów, wszystkie `route_identity_matches=true`.
+Porównano również pełne 148 tekstów z publicznego API: bez rozbieżności. Przekazane
+41 definicji kolumn/defaultów/identity/RLS sprawdzono w izolowanej bazie; testy
+importu/cofania przeszły. To nie pełne odtworzenie produkcji ani eksport jej FK/polityk.
+Przegląd produkcji w Chromium: Śnieżnik/Rysy/Ślęża/Babia Góra, 390/1440 px,
+Light/Dark, dodatkowo EN/UA/ZH dla pierwszych trzech: 25 przypadków bez błędów
+wykonania/API, brak przepełnienia poziomego, treści zgodne z manifestem.
 
 Import odmawia nadpisania kart (także nieaktywnych), ma własny rejestr i chronione
 cofanie z kontrolą późniejszych edycji/powiązań. Nie zmienia tras, geometrii, POI,
-polityk ani grantów. Nie powtarzać starych importów KGP. Potwierdzenie wykonania
-`foreign-gpx-01` nadal nie zostało przekazane; nie łączyć go z tym pakietem.
+polityk ani grantów. Nie powtarzać starych importów KGP. Wdrożenie
+`foreign-gpx-01` również potwierdzono osobnym wynikiem właściciela.
 
 ## Granice danych turystycznych
 
@@ -154,3 +155,17 @@ w `.github/workflows/quality.yml`. Nie kierować ich na produkcję.
 Właściciel sam wykonuje merge i SQL. Dawać krótkie kroki i dokładne ścieżki.
 Agent może przygotować kolejne niezależne PR-y; nie zmieniać produkcji w tle.
 Delegować między agentów tylko po wyraźnym zleceniu właściciela.
+
+## Kolejna zmiana UI: krótsze karty telefonu
+
+Gałąź `ui/practical-mobile-details`: przy szerokości do 700 px krótkie wprowadzenie,
+mapa, źródło i data pozostają widoczne; pełny dojazd/transport/bezpieczeństwo oraz
+rozszerzone informacje parkingowe rozwija się przez natywne „Pokaż więcej”.
+Komputer pokazuje pełne treści. Cztery języki, klawiatura Enter/Spacja, czytelny
+fokus. 28 testów komponentu, lint/build i podgląd wszystkich 28 kart/9 parkingów
+w 16 kombinacjach języka/motywu/szerokości przeszły lokalnie. To podgląd kodu
+na fixture, nie potwierdzenie wdrożenia tej zmiany UI. Nie wymaga SQL.
+
+Trwa osobny przegląd parkingów dla pozostałych 19 tras; nie utożsamiać parkingu
+u podnóża z początkiem GPX przy schronisku ani parkingów innych wariantów
+z dojazdem do wybranej trasy. Istniejące dane i rejestry pozostają chronione.
