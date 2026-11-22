@@ -1,0 +1,39 @@
+name: Krivan seasonal notice
+on:
+  pull_request:
+    paths:
+      - 'docs/catalogue/krivan-seasonal-01/**'
+      - 'scripts/build_krivan_seasonal_01.py'
+      - 'supabase/tests/kgp_practical_fixture.sql'
+      - 'supabase/tests/krivan_seasonal*'
+      - '.github/workflows/krivan-seasonal-review.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/catalogue/krivan-seasonal-01/**'
+      - 'scripts/build_krivan_seasonal_01.py'
+      - 'supabase/tests/kgp_practical_fixture.sql'
+      - 'supabase/tests/krivan_seasonal*'
+      - '.github/workflows/krivan-seasonal-review.yml'
+permissions:
+  contents: read
+jobs:
+  seasonal-package:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: local-test-only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGPASSWORD: local-test-only
+      PGHOST: localhost
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/build_krivan_seasonal_01.py --check
+      - run: createdb -U postgres krivan_seasonal_01_test
+      - run: python supabase/tests/krivan_seasonal_01_test.py

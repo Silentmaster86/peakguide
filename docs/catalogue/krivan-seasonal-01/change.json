@@ -1,0 +1,81 @@
+{
+  "trail": {
+    "id": 10,
+    "slug": "krivan-tri-studnicky-loop",
+    "peak_id": 150,
+    "peak_slug": "krivan"
+  },
+  "before": {
+    "row": {
+      "id": 6,
+      "trail_id": 10,
+      "address": "Tri studničky, Vysoké Tatry, Slovakia",
+      "postcode": null,
+      "latitude": null,
+      "longitude": null,
+      "google_maps_url": null,
+      "public_transport_url": "https://slovakia.travel/en/the-krivan-mt-the-high-tatras",
+      "source_url": "https://slovakia.travel/en/the-krivan-mt-the-high-tatras",
+      "last_verified_at": "2026-10-26T17:54:20.294368+00:00",
+      "active": true,
+      "created_at": "2026-10-26T17:54:20.294368+00:00"
+    },
+    "i18n": [
+      {
+        "lang": "en",
+        "warnings": "This is a demanding high-mountain route. The restored trail from Tri studničky reopened on 9 October 2026. Check current TANAP notices before travelling because seasonal and temporary closures may apply.",
+        "access_id": 6,
+        "directions": "The route starts at Tri studničky in the High Tatras. The official route description identifies Tri studničky as both the starting and finishing point.",
+        "public_transport": "A bus stop is located at Tri studničky according to the official route information."
+      },
+      {
+        "lang": "pl",
+        "warnings": "Jest to wymagająca trasa wysokogórska. Odnowiony szlak z Tri studničky został ponownie otwarty 9 października 2026. Przed wyjazdem sprawdź aktualne komunikaty TANAP, ponieważ mogą obowiązywać sezonowe lub tymczasowe zamknięcia.",
+        "access_id": 6,
+        "directions": "Trasa rozpoczyna się przy Tri studničky w Tatrach Wysokich. Oficjalny opis wskazuje Tri studničky jako punkt początkowy i końcowy trasy.",
+        "public_transport": "Według oficjalnych informacji o trasie przy Tri studničky znajduje się przystanek autobusowy."
+      },
+      {
+        "lang": "ua",
+        "warnings": "Це складний високогірний маршрут. Відновлену стежку від Tri studničky знову відкрили 9 жовтня 2026 року. Перед поїздкою перевірте актуальні повідомлення TANAP щодо сезонних і тимчасових обмежень.",
+        "access_id": 6,
+        "directions": "Маршрут починається біля Tri studničky у Високих Татрах. Офіційний опис маршруту вказує Tri studničky як початкову та кінцеву точку.",
+        "public_transport": "Згідно з офіційною інформацією про маршрут, біля Tri studničky є автобусна зупинка."
+      },
+      {
+        "lang": "zh",
+        "warnings": "这是一条具有挑战性的高山路线。从 Tri studničky 出发的修复步道已于2026年10月9日重新开放。出行前请查看 TANAP 最新公告，因为可能存在季节性或临时关闭。",
+        "access_id": 6,
+        "directions": "路线从高塔特拉山脉的 Tri studničky 出发。官方路线资料将 Tri studničky 列为路线的起点和终点。",
+        "public_transport": "根据官方路线信息，Tri studničky 设有公交车站。"
+      }
+    ]
+  },
+  "after": {
+    "source_url": "https://www.tanap.sk/od-1-novembra-sa-v-tatranskom-narodnom-parku-zacina-sezonna-uzavera-9441/",
+    "last_verified_at": "2026-11-22T00:00:00Z",
+    "warnings": {
+      "pl": "Zamknięcie dla zwykłej turystyki pieszej: 1 listopada 2026 – 31 maja 2027. Obejmuje wejście z Tri studničky oraz odcinek od Jamského plesa na Krywań. Plik GPX nie oznacza, że szlak jest otwarty. Przed wyjściem sprawdź aktualny komunikat TANAP.",
+      "en": "Closed to ordinary hiking from 1 November 2026 to 31 May 2027, including the Tri studničky ascent and the section from Jamské pleso to Kriváň. A GPX file does not confirm access. Check the latest TANAP notice before setting off.",
+      "ua": "Закрито для звичайних піших походів від 1 листопада 2026 до 31 травня 2027, зокрема підйом із Tri studničky та відрізок від Jamské pleso на Kriváň. Наявність GPX не означає, що стежка відкрита. Перед виходом перевірте актуальне повідомлення TANAP.",
+      "zh": "普通徒步季节性封闭：2026年11月1日至2027年5月31日，包括从Tri studničky上山及从Jamské pleso前往Kriváň的路段。提供GPX文件并不代表路线开放。出发前请查看TANAP最新公告。"
+    }
+  },
+  "sources": [
+    {
+      "kind": "notice",
+      "url": "https://www.tanap.sk/od-1-novembra-sa-v-tatranskom-narodnom-parku-zacina-sezonna-uzavera-9441/",
+      "checked_on": "2026-11-22",
+      "status": 200,
+      "sha256": "169290c638fb232934e4d99228d7fffa68c44e315cc81a264ff016d8ff6a832b"
+    },
+    {
+      "kind": "visitor_rules",
+      "url": "https://www.tanap.sk/wp-content/uploads/navstevny_poriadok_tanapu.pdf",
+      "checked_on": "2026-11-22",
+      "status": 200,
+      "sha256": "09fe064f86ed0544953abb94885691567b2d4760dbf4171e506c1d76a92f855c"
+    }
+  ],
+  "scope": "TANAP visitor rules section 4(2)(b)(1), Annex 3 part A item 17; hiking restrictions for the 2026/2027 season"
+}
