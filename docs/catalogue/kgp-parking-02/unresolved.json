@@ -1,0 +1,26 @@
+[
+  {
+    "peak_slug": "lackowa",
+    "status": "not_published",
+    "reason": "Operator Końskiej Doliny potwierdza parking dla gości. Relacje o ogólnodostępnym poboczu nie dowodzą aktualnego prawa postoju dla turystów spoza ośrodka. Potrzebne potwierdzenie operatora lub zarządcy innego miejsca.",
+    "sources": [
+      "https://konskadolina.pl/"
+    ]
+  },
+  {
+    "peak_slug": "mogielica",
+    "status": "not_published",
+    "reason": "Wariant zaczyna się przy Tymbark PKP. Informacja gminy opisuje budowę Park & Ride, nie aktualny regulamin dla turystów pieszych. Nie zastępujemy go parkingami innych wariantów Mogielicy.",
+    "sources": [
+      "https://samorzad.gov.pl/web/gmina-tymbark/nowy-ciag-komunikacyjny-w-tymbarku--otwarty"
+    ]
+  },
+  {
+    "peak_slug": "lubomir",
+    "status": "not_published",
+    "reason": "Obserwatorium wskazuje parking na podejściu od Przełęczy Jaworzyce. GPX zaczyna się niżej w Węglówce. Bez potwierdzonego łącznika/parkingu dla tego początku nie przypisujemy parkingu innego wariantu.",
+    "sources": [
+      "https://obserwatorium.weglowka.pl/index.php/dojazd"
+    ]
+  }
+]

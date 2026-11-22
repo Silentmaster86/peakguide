@@ -1,0 +1,41 @@
+name: KGP parking follow-up
+on:
+  pull_request:
+    paths:
+      - 'docs/catalogue/kgp-parking-02/**'
+      - 'scripts/build_kgp_parking_02.py'
+      - 'scripts/build_kgp_practical_01.py'
+      - 'supabase/tests/kgp_practical_fixture.sql'
+      - 'supabase/tests/kgp_parking*'
+      - '.github/workflows/kgp-parking-review.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/catalogue/kgp-parking-02/**'
+      - 'scripts/build_kgp_parking_02.py'
+      - 'scripts/build_kgp_practical_01.py'
+      - 'supabase/tests/kgp_practical_fixture.sql'
+      - 'supabase/tests/kgp_parking*'
+      - '.github/workflows/kgp-parking-review.yml'
+permissions:
+  contents: read
+jobs:
+  parking-package:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: local-test-only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGPASSWORD: local-test-only
+      PGHOST: localhost
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/build_kgp_parking_02.py --check
+      - run: createdb -U postgres kgp_parking_02_test
+      - run: python supabase/tests/kgp_parking_02_test.py
