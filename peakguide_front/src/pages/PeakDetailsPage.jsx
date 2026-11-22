@@ -15,6 +15,7 @@ import TrailPracticalCard from '../components/TrailPracticalCard';
 import ComingSoonBox from '../components/ComingSoonBox';
 import { safeUrl } from '../utils/practical.mjs';
 import { parseCoordinates } from '../utils/coordinates';
+import PeakDaylightCard from '../features/daylight/PeakDaylightCard';
 
 export default function PeakDetailsPage({ lang = 'pl' }) {
   const { slug } = useParams();
@@ -460,6 +461,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                   🗺️ {labels.openMaps}
                 </a>
               )}
+              <PeakDaylightCard key={peak.slug} latitude={peak.latitude} longitude={peak.longitude} countryCode={peak.country_code} lang={lang} />
             </aside>
           </div>
 

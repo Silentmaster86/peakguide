@@ -1,0 +1,12 @@
+.peak-daylight { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text); min-width: 0; }
+.peak-daylight h3 { margin: 0 0 12px; }
+.peak-daylight p { line-height: 1.6; overflow-wrap: anywhere; }
+.peak-daylight-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.peak-daylight-controls label { width: 100%; font-weight: 600; }
+.peak-daylight-controls :is(input, button) { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; min-height: 44px; max-width: 100%; }
+.peak-daylight-controls button { cursor: pointer; }
+.peak-daylight :is(button, input, a):focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+.peak-daylight dl { display: grid; gap: 12px; }
+.peak-daylight dd { margin: 4px 0 0; font-weight: 650; overflow-wrap: anywhere; }
+.peak-daylight dt, .peak-daylight-note, .peak-daylight-source { font-size: .9rem; }
+.peak-daylight a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
