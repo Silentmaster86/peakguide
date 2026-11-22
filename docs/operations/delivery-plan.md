@@ -62,3 +62,15 @@ podstawie jej niewidoczności na stronie.
 
 Opcjonalne później: porównywanie tras, eksport karty wycieczki, plan wyjazdu,
 zdjęcia/relacje z moderacją. Nie są częścią obecnych 24 pozycji.
+
+## Pierwsze przygotowane wydania
+
+- [#32 — audyt i kolejka](https://github.com/Silentmaster86/peakguide/pull/32): merge.
+- [#33 — pogoda, frontend i backend](https://github.com/Silentmaster86/peakguide/pull/33):
+  merge; aktywacja dostawcy po przeczytaniu/akceptacji warunków i jednej zmiennej
+  Netlify. Bez SQL. Bez aktywacji dostawca nie jest wywoływany.
+- [#34 — światło dzienne](https://github.com/Silentmaster86/peakguide/pull/34): merge.
+
+To trzy niezależne PR-y; punkt 5 planu został podzielony na dwa, żeby lokalne
+obliczenia słońca nie zależały od akceptacji zewnętrznego dostawcy. Liczba 24
+pozostaje budżetem roboczym, nie limitem ani obietnicą zakończenia w jednym wydaniu.

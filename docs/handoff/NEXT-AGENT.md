@@ -179,3 +179,18 @@ sam kontroluje i wykonuje merge. [Plan i kolejność](../operations/delivery-pla
 [Świeży audyt](../audit/2026-11-22/README.md): 88 aktywnych szczytów,
 60 spoza KGP (54 PL, 6 zagranicznych). Poza KGP: 54 bez tras, 57 bez POI.
 Raport jest odczytowy, nie importem ani potwierdzeniem jakości istniejących wpisów.
+
+### Przygotowane kolejne PR-y — jeszcze nie są potwierdzeniem produkcji
+
+- #32: raport braków i plan wykonawczy (ten PR), bez SQL.
+- #33: prognoza przy szczycie + backend Netlify + testy. Wdrożenie funkcji w Deploy
+  Preview sprawdzono z usługą wyłączoną (503 not_configured). Dostawca MET wymaga
+  akceptacji warunków przez właściciela; po niej jedna zmienna Netlify Functions
+  `PEAKGUIDE_WEATHER_ENABLED=true` i deploy. Bez SQL i klucza API. Instrukcja jest
+  w tym PR w docs/operations/weather.md. Nie deklarować uruchomienia prognozy.
+- #34: lokalne obliczenia wschodu/zachodu i długości dnia dla daty wycieczki,
+  4 języki, docelowe strefy czasu, stany polarne. Tylko merge, bez konfiguracji.
+
+PR-y są niezależne, bazują na main 397e464. Lokalna próba ich połączenia nie
+wykazała konfliktów. Każdy ma własne testy; status CI sprawdzić na najnowszym SHA.
+Właściciel nadal sam wykonuje merge. Nie utożsamiać przygotowanego kodu z wdrożeniem.
