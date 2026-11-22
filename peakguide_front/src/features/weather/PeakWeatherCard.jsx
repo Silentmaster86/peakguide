@@ -18,22 +18,22 @@ export default function PeakWeatherCard({ slug, latitude, longitude, lang = 'pl'
     const timeout = setTimeout(() => controller.abort(), 12000);
     let cancelled = false;
     fetchPeakWeather(slug, controller.signal).then(data => {
-      if (!controller.signal.aborted) setResult({ status: 'success', data });
+      if (!controller.signal.aborted) setResult({ status: 'success', data, checkedAt: Date.now() });
     }).catch(() => {
       // Timeout is a retryable error; unmount cleanup stops the timer first.
       if (!cancelled) setResult({ status: 'error' });
     }).finally(() => clearTimeout(timeout));
     return () => { cancelled = true; clearTimeout(timeout); controller.abort(); };
   }, [slug, attempt]);
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+  const data = result.data;
+  const timeZone = data?.location?.time_zone || 'UTC';
   const formatTime = value => new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeStyle: 'short', timeZone }).format(new Date(value));
   const formatValue = (value, unit) => typeof value === 'number' && Number.isFinite(value)
     ? `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(value)} ${unit}` : t.noValue;
-  const data = result.data;
-  const rows = data?.forecast.filter(step => Date.parse(step.time) >= Date.now() - 60 * 60_000) || [];
-  const first = rows.find(step => Date.parse(step.time) >= Date.now()) || rows[0];
+  const rows = data?.forecast.filter(step => Date.parse(step.time) >= result.checkedAt - 60 * 60_000) || [];
+  const first = rows.find(step => Date.parse(step.time) >= result.checkedAt) || rows[0];
   const load = () => { setResult({ status: 'loading' }); setAttempt(value => value + 1); };
-  return <section className="peak-weather" aria-labelledby={titleId}>
+  return <section className="peak-weather" role="region" aria-labelledby={titleId}>
     <h3 id={titleId}>{t.title}</h3>
     <p>{t.intro}</p>
     {!coords ? <p>{t.missing}</p> : <>
@@ -48,7 +48,7 @@ export default function PeakWeatherCard({ slug, latitude, longitude, lang = 'pl'
         <p>{t.coordinates}: {data.location.latitude.toFixed(4)}, {data.location.longitude.toFixed(4)} · {t.altitude}: {formatValue(data.location.elevation_m, 'm')}</p>
         <p>{t.timezone}: {timeZone}</p>
         <p>{t.updated}: <time dateTime={data.updated_at}>{formatTime(data.updated_at)}</time><br />{t.retrieved}: <time dateTime={data.retrieved_at}>{formatTime(data.retrieved_at)}</time></p>
-        {Date.now() - Date.parse(data.updated_at) > 12 * 60 * 60_000 && <p role="status">{t.stale}</p>}
+        {result.checkedAt - Date.parse(data.updated_at) > 12 * 60 * 60_000 && <p role="status">{t.stale}</p>}
         {data.deprecated && <p role="status">{t.deprecated}</p>}
         <details><summary>{t.hourly}</summary>
           <div className="peak-weather-scroll" role="region" aria-label={t.hourly} tabIndex={0}>

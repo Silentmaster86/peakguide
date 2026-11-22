@@ -4,8 +4,9 @@ const titles = {pl:'Pogoda w rejonie szczytu',en:'Weather near the summit',ua:'�
 const buttons = {pl:'Pokaż prognozę',en:'Show forecast',ua:'Показати прогноз',zh:'查看预报'};
 const languages=['pl','en','ua','zh'];
 const peak={id:1,slug:'rysy',active:true,is_korona:true,elevation_m:2499,latitude:49.1795,longitude:20.0881,peaks_i18n:languages.map(lang=>({lang,name:'Rysy',description:'Test description'})),mountain_ranges:{slug:'tatry',mountain_ranges_i18n:languages.map(lang=>({lang,name:'Tatry'})),countries:{code:'PL',countries_i18n:languages.map(lang=>({lang,name:'Polska'}))}}};
-const data=()=>({peak:'rysy',location:{latitude:49.1795,longitude:20.0881,elevation_m:2499},updated_at:new Date().toISOString(),retrieved_at:new Date().toISOString(),forecast:Array.from({length:25},(_,i)=>({time:new Date(Date.now()+(i+1)*3600_000).toISOString(),temperature_c:-5,wind_kmh:36,gust_kmh:null,precipitation_mm_next_hour:i?null:0}))});
+const data=()=>({peak:'rysy',location:{latitude:49.1795,longitude:20.0881,elevation_m:2499,time_zone:'Europe/Warsaw'},updated_at:new Date().toISOString(),retrieved_at:new Date().toISOString(),forecast:Array.from({length:25},(_,i)=>({time:new Date(Date.now()+(i+1)*3600_000).toISOString(),temperature_c:-5,wind_kmh:36,gust_kmh:null,precipitation_mm_next_hour:i?null:0}))});
 test.beforeEach(async({page})=>{
+ await page.route('**.tile.openstreetmap.org/**',route=>route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64')}));
  await page.route('https://test.supabase.co/**',async route=>{
   const url=new URL(route.request().url()),table=url.pathname.split('/').at(-1);
   await route.fulfill({json:table==='peaks'&&url.searchParams.has('slug')?peak:[]});
@@ -20,6 +21,7 @@ for(const lang of languages)for(const theme of ['light','dark'])test(`${lang} ${
  await expect(card).toBeVisible();expect(requests).toBe(0);
  await card.getByRole('button',{name:buttons[lang]}).click();
  await expect(card.locator('dl')).toBeVisible();
+ await expect(card).toContainText('Europe/Warsaw');
  await card.locator('summary').focus();await page.keyboard.press('Enter');
  await expect(card.getByRole('table')).toBeVisible();
  await expect(card.getByRole('link',{name:/CC BY 4.0/})).toBeVisible();
@@ -38,4 +40,5 @@ test('disabled forecast has a recoverable error and never shows invented weather
  await expect(card.locator('dl')).toHaveCount(0);
  failed=false;await card.getByRole('button',{name:'Retry'}).click();
  await expect(card.locator('dl')).toBeVisible();
+ await expect(card).toContainText('Europe/Warsaw');
 });

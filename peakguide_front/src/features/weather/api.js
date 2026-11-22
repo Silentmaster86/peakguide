@@ -12,5 +12,6 @@ export async function fetchPeakWeather(slug, signal) {
     throw new Error('Invalid forecast');
   }
   if (!body.forecast.some(step => Date.parse(step.time) >= Date.now()) || Date.parse(body.updated_at) < Date.now() - 48 * 3600_000) throw new Error('Expired forecast');
+  try { new Intl.DateTimeFormat('en', { timeZone: body.location.time_zone || 'UTC' }); } catch { throw new Error('Invalid time zone'); }
   return body;
 }

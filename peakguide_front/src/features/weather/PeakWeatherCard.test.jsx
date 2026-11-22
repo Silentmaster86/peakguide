@@ -5,7 +5,7 @@ import PeakWeatherCard from './PeakWeatherCard';
 import { weatherText } from './text';
 
 const payload = () => ({
-  peak: 'rysy', location: { latitude: 49.1795, longitude: 20.0881, elevation_m: 2499 },
+  peak: 'rysy', location: { latitude: 49.1795, longitude: 20.0881, elevation_m: 2499, time_zone: 'Europe/Warsaw' },
   updated_at: new Date().toISOString(), retrieved_at: new Date().toISOString(),
   forecast: [{ time: new Date(Date.now() + 3600_000).toISOString(), temperature_c: -5, wind_kmh: 36, gust_kmh: null, precipitation_mm_next_hour: 0 }],
 });
@@ -21,6 +21,7 @@ it.each(['pl', 'en', 'ua', 'zh'])('loads on demand and labels missing values and
   expect(await screen.findByText(weatherText[lang].gust)).toBeInTheDocument();
   expect(within(document.querySelector('dl')).getByText(weatherText[lang].noValue)).toBeInTheDocument();
   expect(screen.getByText(/2499|2[\s,.]?499/)).toBeInTheDocument();
+  expect(screen.getByText(/Europe\/Warsaw/)).toBeInTheDocument();
   expect(screen.getByRole('link',{name:weatherText[lang].license})).toHaveAttribute('href','https://creativecommons.org/licenses/by/4.0/');
   expect(fetch).toHaveBeenCalledWith('/.netlify/functions/peak-weather?peak=rysy',expect.objectContaining({signal:expect.any(AbortSignal)}));
   await user.click(screen.getByText(weatherText[lang].hourly,{selector:'summary'}));

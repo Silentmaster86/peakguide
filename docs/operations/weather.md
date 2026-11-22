@@ -2,7 +2,7 @@
 
 Zakres: temperatura, wiatr, opcjonalne porywy i opad w następnej godzinie,
 lista terminów do 72 godzin, punkt i wysokość modelu, czas aktualizacji i pobrania.
-PL/EN/UA/ZH; jawna strefa godzin przeglądarki, nie domniemana strefa szczytu.
+PL/EN/UA/ZH; jawna strefa kraju szczytu dla PL/GB/SK/UA/CN, UTC dla nieznanego kraju.
 To prognoza modelowa, nie pomiar ani potwierdzenie dostępności szlaku.
 Nie dodaje temperatury odczuwalnej, widoczności ani burz bez danych źródłowych.
 Światło dzienne jest osobnym zadaniem i nie zależy od uruchomienia dostawcy.
@@ -45,7 +45,7 @@ Dane CC BY 4.0: karta podaje autora, link do licencji i przeliczenie m/s → km/
 Nie używa znaków/logo Yr i nie sugeruje poparcia dostawcy.
 
 Żądanie klienta zawiera wyłącznie slug z wersjonowanej listy. Backend sam wybiera
-koordynaty i wysokość, odrzuca dowolne współrzędne/URL, nie przekazuje do MET
+koordynaty, wysokość i strefę czasu, odrzuca dowolne współrzędne/URL, nie przekazuje do MET
 adresu IP klienta, ciasteczek ani tożsamości konta. Współrzędne są ograniczone
 do 4 miejsc dziesiętnych; wysokość pochodzi z katalogu. Mapa/tereny mogą wymagać
 niezależnej korekty współrzędnych. Prognoza nie opisuje mikroklimatu grani.
@@ -79,6 +79,8 @@ jest potwierdzeniem 88 poprawnych odpowiedzi pogodowych.
 
 `npm run check` zawiera testy adaptera Node oraz UI. `npm run test:e2e` zawiera
 18 przypadków desktop/mobile, Light/Dark, 4 języki, klawiaturę, Axe i błąd/retry.
+Jawne role regionów usuwają awarię analizy ARIA w Firefoxie; żadna reguła Axe
+nie jest wyłączona. Kafelki mapy w testach są atrapą, bez zależności od sieci.
 Testy używają atrap dostawcy i nie potwierdzają produkcyjnej konfiguracji Netlify
 ani bieżących warunków meteorologicznych. Lokalnie również sprawdzono bundlowanie
 funkcji esbuild do ESM. Serwer Vite nie wykonuje funkcji Netlify; do ręcznego testu

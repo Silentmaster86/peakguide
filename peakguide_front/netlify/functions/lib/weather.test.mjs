@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createWeatherHandler, normalizeForecast, PROVIDER } from './weather.mjs';
 const now = Date.parse('2026-11-22T10:15:00Z');
 const MINUTE = 60_000;
-const locations = { rysy: { latitude: 49.179531, longitude: 20.088138, elevation_m: 2499 } };
+const locations = { rysy: { latitude: 49.179531, longitude: 20.088138, elevation_m: 2499, time_zone: 'Europe/Warsaw' } };
 function fixture() { return {
   geometry: { type: 'Point', coordinates: [20.0881, 49.1795, 2499] },
   properties: { meta: { updated_at: '2026-11-22T09:00:00Z', units: { air_temperature: 'celsius', wind_speed: 'm/s', wind_speed_of_gust: 'm/s', precipitation_amount: 'mm' } },
@@ -34,6 +34,7 @@ test('deduplicates requests, rounds units and respects Expires before conditiona
   const responses = await Promise.all([handler(request()),handler(request())]);
   assert.equal(calls,1);
   const payload = await responses[0].json();
+  assert.equal(payload.location.time_zone,'Europe/Warsaw');
   assert.equal(payload.forecast[0].wind_kmh,36);
   assert.equal(payload.forecast[0].gust_kmh,54);
   assert.equal(payload.forecast[0].precipitation_mm_next_hour,0);

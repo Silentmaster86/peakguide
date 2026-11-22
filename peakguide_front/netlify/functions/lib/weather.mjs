@@ -78,7 +78,8 @@ export function createWeatherHandler({ locations, enabled = () => false, fetchIm
       }
       const text = await response.text();
       if (text.length > 1_000_000) throw new Error('Response too large');
-      const body = { ...normalizeForecast(JSON.parse(text), now), peak: slug,
+      const normalized = normalizeForecast(JSON.parse(text), now);
+      const body = { ...normalized, location: { ...normalized.location, time_zone: point.time_zone || 'UTC' }, peak: slug,
         deprecated: response.status === 203,
         source: { name: 'MET Norway', url: 'https://www.met.no/en', license: 'https://creativecommons.org/licenses/by/4.0/' } };
       // Discard expired entries first; the allowlist also bounds possible keys.

@@ -15,7 +15,10 @@ def locations_from_rows(rows):
         if any(not isinstance(v, (int, float)) or isinstance(v, bool) or not math.isfinite(v) for v in (lat, lon, height)):
             continue
         if -90 <= lat <= 90 and -180 <= lon <= 180 and -500 <= height <= 9000:
-            result[row['slug']] = {'latitude': lat, 'longitude': lon, 'elevation_m': height}
+            result[row['slug']] = {'latitude': lat, 'longitude': lon, 'elevation_m': height, 'time_zone': {
+                'PL':'Europe/Warsaw', 'GB':'Europe/London', 'SK':'Europe/Bratislava',
+                'UA':'Europe/Kyiv', 'CN':'Asia/Shanghai',
+            }.get(((row.get('mountain_ranges') or {}).get('countries') or {}).get('code'), 'UTC')}
     if not result:
         raise ValueError('No valid public locations; keep the previous manifest')
     return dict(sorted(result.items()))
@@ -34,7 +37,7 @@ def main():
     rows, offset = [], 0
     try:
         while True:
-            query = urlencode({'select':'slug,latitude,longitude,elevation_m','active':'eq.true','order':'id.asc','limit':500,'offset':offset})
+            query = urlencode({'select':'slug,latitude,longitude,elevation_m,mountain_ranges(countries(code))','active':'eq.true','order':'id.asc','limit':500,'offset':offset})
             req = Request(args.url.rstrip('/') + '/rest/v1/peaks?' + query, headers={'apikey':key})
             with urlopen(req, timeout=40) as response:
                 page = json.load(response)
