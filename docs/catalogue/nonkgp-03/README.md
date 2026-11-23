@@ -1,6 +1,7 @@
 # Poza KGP — partia 03
 
-**Przygotowany import, jeszcze bez wykonania na produkcji.** Ćwilin (72), Łyżka
+**PR #37 scalony; SQL odłożony przez właściciela z powodu niedostępności Supabase.**
+Brak potwierdzenia wykonania apply/verify. [Kolejka wdrożeń](../../operations/pending-rollout.md). Ćwilin (72), Łyżka
 (71, zachowany slug `lakowa-wyspowy`), Mała Babia Góra (61), Polica (62), Halicz
 (64): **5 tras/GPX, 5 POI, 40 tekstów PL/EN/UA/ZH, 1203 punkty źródłowe**.
 Każda trasa to jeden kierunek wejścia. Trasy nie zmieniają rekordów szczytów.

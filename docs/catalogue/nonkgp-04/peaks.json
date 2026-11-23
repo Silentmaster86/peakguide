@@ -1,0 +1,42 @@
+[
+  {
+    "id": 63,
+    "slug": "krzemien",
+    "range_id": 18,
+    "latitude": 49.085833,
+    "longitude": 22.738889,
+    "elevation_m": 1335,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 65,
+    "slug": "kudlon",
+    "range_id": 19,
+    "latitude": 49.5725,
+    "longitude": 20.1762,
+    "elevation_m": 1274,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 66,
+    "slug": "jaworzyna-kamienicka",
+    "range_id": 19,
+    "latitude": 49.54775,
+    "longitude": 20.15718,
+    "elevation_m": 1288,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 141,
+    "slug": "jelenia-kopa",
+    "range_id": 13,
+    "latitude": 50.447817,
+    "longitude": 16.758011,
+    "elevation_m": 747,
+    "active": true,
+    "is_korona": false
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "observed_on": "2026-11-23",
+  "status": "identity_review_no_mutation",
+  "peak_id": 54,
+  "slug": "srebrna-gora",
+  "reviewed_existing": {
+    "id": 54,
+    "slug": "srebrna-gora",
+    "range_id": 13,
+    "elevation_m": 686,
+    "latitude": 50.2567,
+    "longitude": 17.4556,
+    "is_korona": false,
+    "active": true,
+    "peaks_i18n": [
+      {
+        "lang": "en",
+        "name": "Srebrna Góra",
+        "tips": null,
+        "peak_id": 54,
+        "description": "Srebrna Góra is an attractive Sudetes-area destination, known for its historic sites and easy walking routes. The hike is easy to moderate and works well as a shorter outing. Combine the walk with exploring the area for a nice mix of hiking and sightseeing.",
+        "short_description": null
+      },
+      {
+        "lang": "pl",
+        "name": "Srebrna Góra",
+        "tips": null,
+        "peak_id": 54,
+        "description": "Srebrna Góra to atrakcyjny cel w okolicy Sudetów, znany z historycznych miejsc i spacerowych tras. Podejście jest łatwe do umiarkowanego i dobrze sprawdza się na krótszą wycieczkę. Warto połączyć wejście z odkrywaniem okolicy, bo to miejsce świetnie łączy góry i zwiedzanie.",
+        "short_description": null
+      },
+      {
+        "lang": "ua",
+        "name": "Srebrna Góra",
+        "tips": null,
+        "peak_id": 54,
+        "description": "Срібна Гура — приваблива ціль у районі Судетів, відома історичними місцями та прогулянковими маршрутами. Похід легкий або помірний і добре підходить для короткої поїздки. Поєднайте прогулянку з оглядом околиць, адже тут легко поєднати гори та знайомство з місцем.",
+        "short_description": null
+      },
+      {
+        "lang": "zh",
+        "name": "Srebrna Góra",
+        "tips": null,
+        "peak_id": 54,
+        "description": "谢布日纳古拉（Srebrna Góra）是苏台德地区很有吸引力的目的地，附近有历史景点并适合轻松步行。徒步强度从轻松到中等，适合短途行程。建议把登高与周边游览结合起来，体验徒步与观光的组合。",
+        "short_description": null
+      }
+    ]
+  },
+  "source_url": "https://dolnoslaskie.szlaki.pttk.pl/1701-dolnoslaskie-srebrna-gora-historia",
+  "source_place": {
+    "type": "village",
+    "latitude": 50.57547,
+    "longitude": 16.658369
+  },
+  "issue": "The existing tourist overview mentions historical attractions, but its mountain/range/pin cannot be equated to the PTTK village or fortress without reviewing intended identity. No fortress route or POI is imported for this ID.",
+  "next_step": "Review the intended peak/place with independent sources. If location changes, update geography and weather allowlist together, with guarded old values; preserve or redirect existing links deliberately."
+}

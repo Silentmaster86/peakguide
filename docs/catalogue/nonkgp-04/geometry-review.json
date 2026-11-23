@@ -1,0 +1,86 @@
+[
+  {
+    "peak_slug": "krzemien",
+    "source_page": "https://mapa-turystyczna.pl/route?q=49.0621450,22.6862450;49.0865370,22.7375980",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=49.0621450,22.6862450;49.0865370,22.7375980",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "e207021516ef6d14d76eb461dcc2fac181695a84ad6cd574142cd0241e22aa7d",
+    "source_semantic_sha256": "a50c52b3925667e89f85a4807c6c104bcc6ca28e168bf64f5fa73ca443379df6",
+    "points": 339,
+    "segments": 1,
+    "first": [
+      22.686245,
+      49.062145
+    ],
+    "last": [
+      22.737598,
+      49.086537
+    ],
+    "coordinates_sha256": "e7d073466a1b832cdd03fc61818e5580af2980ccb95f4aa206c7612d2e9d9208",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "jaworzyna-kamienicka",
+    "source_page": "https://mapa-turystyczna.pl/route/3n28c",
+    "source_gpx": "https://mapa-turystyczna.pl/route/3n28c.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "00cd3534b4a6785cd071f4684d8d072dd0b681a9b9a95686a7e14f947d06f220",
+    "source_semantic_sha256": "332a227d572a521b91ee38aa1f44c355c406147a3dede231cb4cfbe1a5b3d1be",
+    "points": 161,
+    "segments": 1,
+    "first": [
+      20.117987,
+      49.543379
+    ],
+    "last": [
+      20.158676,
+      49.54965
+    ],
+    "coordinates_sha256": "84fec09516483246bd241f2fe7c9e1fa74d9c27db90782b20da7dafcd7348d8d",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "kudlon",
+    "source_page": "https://mapa-turystyczna.pl/route?q=49.5937260,20.2245920;49.5725870,20.1762270",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=49.5937260,20.2245920;49.5725870,20.1762270",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "28c626fa518436a5158c9c77799bbce84e54b84d8354614089528348eb80994b",
+    "source_semantic_sha256": "b2f9c04394bde7b486b585c50d88a1e283ca87885231099defa49446160c18b3",
+    "points": 242,
+    "segments": 1,
+    "first": [
+      20.2245662,
+      49.5936992
+    ],
+    "last": [
+      20.176227,
+      49.572587
+    ],
+    "coordinates_sha256": "f862b93d12723ec6170642db04effcddc8d046145215c02858d0590d0fd8a6a7",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "jelenia-kopa",
+    "source_page": "https://mapa-turystyczna.pl/route?q=50.4313700,16.7649340;50.4478120,16.7578330",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.4313700,16.7649340;50.4478120,16.7578330",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "f50a1630a1b53ed0d628889849b8be34fc3c48496797f88d1fd1b659bf3bbcdd",
+    "source_semantic_sha256": "8f204d3f550f2486fe696e9967776f76f4f5edec313c4d9acdad6e845a0b041c",
+    "points": 93,
+    "segments": 1,
+    "first": [
+      16.764934,
+      50.43137
+    ],
+    "last": [
+      16.757833,
+      50.447812
+    ],
+    "coordinates_sha256": "e21d25ad74f983741db50f21ca780c6ddc77c361b2b3f3a8d3b01601c8d8c8bc",
+    "verified_at": "2026-11-23T00:00:00Z"
+  }
+]
