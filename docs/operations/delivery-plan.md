@@ -1,6 +1,6 @@
 # Kolejne wydania PeakGuide — plan wykonawczy
 
-Stan: 22 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
+Stan: 23 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
 
@@ -76,11 +76,22 @@ obliczenia słońca nie zależały od akceptacji zewnętrznego dostawcy. Liczba 
 pozostaje budżetem roboczym, nie limitem ani obietnicą zakończenia w jednym wydaniu.
 
 
-## Następny pakiet danych — przygotowany, jeszcze bez wdrożenia SQL
+## Partia nonkgp-01 — wdrożona
 
 [nonkgp-01](../catalogue/nonkgp-01/README.md): Łysina, Śnieżnica, Góra Żar,
 Leskowiec — 4 trasy z GPX i 4 POI w czterech językach. Śnieżnica otrzymuje poprawne
-pasmo Wyspowy, bez zmian współrzędnych lub opisów szczytu. Właściciel: merge,
-apply.sql, verify.sql. Ostry Wierch z pierwszej piątki ma sprzeczną tożsamość
+pasmo Wyspowy, bez zmian współrzędnych lub opisów szczytu. PR #35 scalony;
+właściciel potwierdził SQL wynikiem 4/4 review_matches/package_applied=true
+23 listopada. Nie ponawiać importu. Ostry Wierch z pierwszej piątki ma sprzeczną tożsamość
 w danych; pozostaje osobnym zadaniem, nie został automatycznie podmieniony.
 PR #32/#33/#34 są już scalone; właściciel potwierdził działanie pogody i światła.
+
+
+## Następna partia — nonkgp-02
+
+[Pakiet](../catalogue/nonkgp-02/README.md): Rotunda, Niemcowa, Barania Góra,
+Klimczok — cztery pary trasa/POI, GPX, 32 teksty, bez edycji rekordów szczytów.
+Wymaga merge → osobny apply.sql → verify.sql właściciela. Jeszcze nie wdrożony.
+Wielki Rogal z drugiej piątki pozostaje do kontroli nazwy/tożsamości.
+Pogoda i światło dzienne z #33/#34 są już scalone i zgłoszone jako działające;
+wcześniejsze opisy stanu main 397e464 powyżej są historyczne.

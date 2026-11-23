@@ -1,0 +1,68 @@
+[
+  {
+    "peak_id": 67,
+    "slug": "wielki-rogal",
+    "status": "identity_review",
+    "issue": "Existing name/slug Wielki Rogal vs source Wielki Rogacz (1182 m) in the same range. No route attached until reviewed identity and naming change.",
+    "reviewed_existing": {
+      "id": 67,
+      "slug": "wielki-rogal",
+      "range_id": 20,
+      "elevation_m": 1182,
+      "latitude": 49.4399,
+      "longitude": 20.6103,
+      "peaks_i18n": [
+        {
+          "lang": "en",
+          "name": "Wielki Rogacz",
+          "tips": null,
+          "peak_id": 67,
+          "description": "Wielki Rogal is a quiet, forested Beskid Sądecki peak, great for a longer walk away from crowds. The route is technically simple but can be demanding due to its length. Bring a map and consider a loop, as the area has many forest tracks.",
+          "short_description": null
+        },
+        {
+          "lang": "pl",
+          "name": "Wielki Rogacz",
+          "tips": null,
+          "peak_id": 67,
+          "description": "Wielki Rogal to spokojny, zalesiony szczyt w Beskidzie Sądeckim, dobry na dłuższy marsz bez tłumów. Trasa jest technicznie prosta, ale kondycyjnie może być wymagająca przez długość podejścia. Warto mieć mapę i zaplanować pętlę, bo w okolicy jest sporo dróg leśnych.",
+          "short_description": null
+        },
+        {
+          "lang": "ua",
+          "name": "Wielki Rogacz",
+          "tips": null,
+          "peak_id": 67,
+          "description": "Вєлький Рогаль — тихий лісистий пік у Бескиді Сондецькому, добрий для довшого походу без натовпу. Маршрут технічно простий, але може бути вимогливим через довжину. Візьміть карту та сплануйте петлю, адже навколо багато лісових доріг.",
+          "short_description": null
+        },
+        {
+          "lang": "zh",
+          "name": "Wielki Rogacz",
+          "tips": null,
+          "peak_id": 67,
+          "description": "维尔基罗加尔峰（Wielki Rogal）是松德茨基贝斯基德山脉一座安静的森林山峰，适合远离人群的长距离徒步。路线技术难度低，但因路程长而偏耗体力。建议携带地图并考虑环线行走，因为附近林道较多。",
+          "short_description": null
+        }
+      ]
+    },
+    "source_url": "https://malopolska.szlaki.pttk.pl/2256-pttk-malopolska-wielki-rogacz",
+    "next_step": "Compare authoritative coordinates/names and all current translations; guard any rename; preserve slug links or redirect deliberately."
+  },
+  {
+    "peak_id": 68,
+    "slug": "niemcowa",
+    "status": "existing_description_review",
+    "issue": "Existing Polish overview says Beskid Niski, but range_id=20 is Beskid Sadecki; inspect all four existing overviews separately. New trail descriptions correctly identify Sadecki and the PTTK endpoint.",
+    "source_url": "https://malopolska.szlaki.pttk.pl/2268-pttk-malopolska-niemcowa",
+    "next_step": "Guard the full reviewed texts before making a focused translation correction. Do not move peak coordinates to the trail junction."
+  },
+  {
+    "peak_id": 74,
+    "slug": "rotunda",
+    "status": "coordinate_review",
+    "issue": "Existing pin 49.472500,21.233889 differs from the PTTK cemetery/summit area 49.474487,21.235825. Imported GPX and POI keep independent source coordinates; no parent move.",
+    "source_url": "https://malopolska.szlaki.pttk.pl/1342-pttk-malopolska-cmentarz-wojenny-nr-51-na-rotundzie",
+    "next_step": "Review summit identity from another authoritative source; if corrected update geom and weather allowlist together."
+  }
+]

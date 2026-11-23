@@ -1,6 +1,6 @@
 # PeakGuide — karta dla kolejnego agenta
 
-Stan: 22 listopada 2026. Repo: Silentmaster86/peakguide.
+Stan: 23 listopada 2026. Repo: Silentmaster86/peakguide.
 Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
 Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
@@ -204,8 +204,25 @@ konfiguracji poczty/pogody w ramach kolejnych importów katalogu.
 
 Przygotowany [nonkgp-01](../catalogue/nonkgp-01/README.md): 4 trasy/GPX i 4 POI,
 32 teksty, 530 punktów. Śnieżnica: tylko range_id 21→22, ze źródłem PTTK.
-Jeszcze nie wykonano produkcyjnego SQL. Odczyt publiczny przed pracą nie wykazał
-tras/POI dla tych czterech szczytów. Verify właściciela jest osobnym etapem.
+PR #35 scalony. Właściciel wykonał SQL i 23 listopada przekazał 4/4
+review_matches=true i package_applied=true; trasy/POI/geometrie po 1, wszystkie
+cztery języki. Śnieżnica ma pasmo Wyspowy. Nie ponawiać importu.
 Ostry Wierch id73 ma sprzeczną tożsamość: opis/pasmo Niski kontra wysokość 851
 oraz współrzędne w Pieninach. Nie dołączać szlaku do tego ID bez rozstrzygnięcia.
 Źródła i stan blokady: unresolved.json tej partii. Nie zmieniono tego rekordu.
+
+
+## Następna partia: nonkgp-02
+
+[Pakiet i instrukcja](../catalogue/nonkgp-02/README.md): Niemcowa, Rotunda,
+Barania Góra, Klimczok — 4 trasy, 4 POI, 32 teksty, 805 punktów GPX.
+Przygotowany, **jeszcze bez SQL na produkcji**. Żadnych zmian rekordów szczytów.
+Po merge właściciel wykonuje nonkgp-02/apply.sql i verify.sql, nie starsze pliki.
+Niemcowa: koniec śladu to punkt PTTK/węzeł, nie deklarowany wierzchołek 1001 m.
+Klimczok: schronisko poza GPX; Barania: rezerwat/psy i brak potwierdzenia dostępu
+na wieżę. Wielki Rogal nie został utożsamiony automatycznie z Wielkim Rogaczem.
+Dalszy przegląd danych: unresolved.json (nazwa Rogala, starszy błędny opis Niemcowej,
+odchylenie pinezki Rotundy). Żadnych automatycznych korekt współrzędnych/pogody.
+Publiczny audyt 23 listopada po imporcie nonkgp-01: nadal 88 aktywnych, 60 poza KGP;
+poza KGP 50 bez tras, 53 bez POI, 54 bez kart dostępu i parkingów. Dane przygotowane
+w nonkgp-02 nie są wliczone jako już wdrożone.
