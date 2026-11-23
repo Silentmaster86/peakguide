@@ -1,6 +1,6 @@
 # Poza KGP — partia 02
 
-**Przygotowany import, bez wykonania na produkcji.** Niemcowa (68), Rotunda (74),
+**Wdrożenie potwierdzone przez właściciela 23 listopada 2026.** Niemcowa (68), Rotunda (74),
 Barania Góra (77), Klimczok (78): 4 trasy z geometrią/GPX, 4 POI, 32 teksty
 PL/EN/UA/ZH, **805 punktów źródłowych**. Wszystkie trasy opisują jeden kierunek
 wejścia. Zejścia, dojazdy i dodatkowe dojścia nie są wliczone.
@@ -10,7 +10,11 @@ poczty ani pogody. Właściciel potwierdził wdrożenie poprzedniej partii `nonk
 23 listopada: cztery wiersze z review_matches=true i package_applied=true.
 Nie ponawiać poprzedniego SQL ani nie wykonywać jego rollbacku.
 
-## Po merge
+Właściciel przekazał 4/4 wiersze z review_matches=true i package_applied=true,
+po jednej trasie, POI i geometrii oraz oba zestawy czterech języków. Nie ponawiać
+importu ani nie wykonywać rollbacku.
+
+## Instrukcja po merge (wykonana)
 
 1. Zachowaj aktualną kopię bazy. W Supabase SQL Editor uruchom cały
    `docs/catalogue/nonkgp-02/apply.sql` jako właściciel.
