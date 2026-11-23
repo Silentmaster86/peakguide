@@ -1,0 +1,87 @@
+[
+  {
+    "peak_slug": "lysina",
+    "peak_id": 70,
+    "source_url": "https://malopolska.szlaki.pttk.pl/309-pttk-malopolska-lysina-pcim",
+    "source_gpx": "https://malopolska.szlaki.pttk.pl/item/gpx/309",
+    "download_sha256": "bd96f4625e895baa9311e7842936b79e07c7625a62f62ce4a4e4423762a5b6f1",
+    "geometry_sha256": "32495284d25b9a0fa9416e4051fbdeef9993689168e2b5d7e35b9d6221469216",
+    "adaptation": "reverse_all",
+    "segments": 13,
+    "points": 208,
+    "first": [
+      19.96991604,
+      49.75187023
+    ],
+    "last": [
+      20.04893301,
+      49.776263
+    ],
+    "time_policy": "none",
+    "source_semantic_sha256": "4caa66cd80f7f90f3b6fa1442dc72cc8eb68e291d40ac46bc8d1dc52c61c079e",
+    "adapted_elevations_sha256": "e3eb0b5eeb949c12973c159853cfc04e36aee3125f17f925c378716c3183f5fa"
+  },
+  {
+    "peak_slug": "snieznica",
+    "peak_id": 69,
+    "source_url": "https://mapa-turystyczna.pl/route/yoez",
+    "source_gpx": "https://mapa-turystyczna.pl/route/yoez.gpx",
+    "download_sha256": "e2c57c70bbc0434d8a877ecb5dfa44f4f690530770c79cabe1a807898a76cae6",
+    "geometry_sha256": "d2745f7b39517722f90be172a630413f0a90af29a4e6b5517aa7363ef13381bc",
+    "adaptation": "none",
+    "segments": 1,
+    "points": 100,
+    "first": [
+      20.179843,
+      49.70031
+    ],
+    "last": [
+      20.178111,
+      49.715997
+    ],
+    "time_policy": "mapa_relative_export_times",
+    "source_semantic_sha256": "6e5ea1639d5b2d7ec4ef9e04764f051cf6d5221e925984906cf1dd8aa8d0f91e"
+  },
+  {
+    "peak_slug": "gora-zar",
+    "peak_id": 76,
+    "source_url": "https://mapa-turystyczna.pl/route/3bedx",
+    "source_gpx": "https://mapa-turystyczna.pl/route/3bedx.gpx",
+    "download_sha256": "95a3a0eed042c8a3aed15d9359564f07dfa4ecdc19fc5b1508a22f8703dc0f0a",
+    "geometry_sha256": "528058a3124c504c4d7eecd9060f6105a8f63eb315c2fe5844882a567ce2cbd8",
+    "adaptation": "none",
+    "segments": 1,
+    "points": 121,
+    "first": [
+      19.226587,
+      49.771381
+    ],
+    "last": [
+      19.224802,
+      49.787187
+    ],
+    "time_policy": "mapa_relative_export_times",
+    "source_semantic_sha256": "9b6a67b9e87a56fdeddcb4898212ae31d8fc6141cb31fa0b3f96eebc6b26c459"
+  },
+  {
+    "peak_slug": "leskowiec",
+    "peak_id": 75,
+    "source_url": "https://mapa-turystyczna.pl/route/3npty",
+    "source_gpx": "https://mapa-turystyczna.pl/route/3npty.gpx",
+    "download_sha256": "79c1bf741ea13baa21b9218b7bc9e54677ca59432442f46323ac45219d6ff3f6",
+    "geometry_sha256": "bcf994f85b025a7db33d0c65532f89909254f71314708fc9b05ba813b11ea61a",
+    "adaptation": "none",
+    "segments": 1,
+    "points": 101,
+    "first": [
+      19.423966,
+      49.798389
+    ],
+    "last": [
+      19.443535,
+      49.78858
+    ],
+    "time_policy": "mapa_relative_export_times",
+    "source_semantic_sha256": "6a4338ca58ed92a77e0e0573744c6cd3c7318a12f6f21b11e252c74c5aca12f0"
+  }
+]

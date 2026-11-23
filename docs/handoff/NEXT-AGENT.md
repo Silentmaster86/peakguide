@@ -194,3 +194,18 @@ Raport jest odczytowy, nie importem ani potwierdzeniem jakości istniejących wp
 PR-y są niezależne, bazują na main 397e464. Lokalna próba ich połączenia nie
 wykazała konfliktów. Każdy ma własne testy; status CI sprawdzić na najnowszym SHA.
 Właściciel nadal sam wykonuje merge. Nie utożsamiać przygotowanego kodu z wdrożeniem.
+
+
+## Potwierdzone wdrożenie pogody i światła dziennego; następna partia
+
+PR #32, #34 i #33 są scalone (main b916038). Właściciel zgłosił wykonanie konfiguracji
+oraz widoczność pól pogody i światła dziennego. Nie włączać ponownie ani nie zmieniać
+konfiguracji poczty/pogody w ramach kolejnych importów katalogu.
+
+Przygotowany [nonkgp-01](../catalogue/nonkgp-01/README.md): 4 trasy/GPX i 4 POI,
+32 teksty, 530 punktów. Śnieżnica: tylko range_id 21→22, ze źródłem PTTK.
+Jeszcze nie wykonano produkcyjnego SQL. Odczyt publiczny przed pracą nie wykazał
+tras/POI dla tych czterech szczytów. Verify właściciela jest osobnym etapem.
+Ostry Wierch id73 ma sprzeczną tożsamość: opis/pasmo Niski kontra wysokość 851
+oraz współrzędne w Pieninach. Nie dołączać szlaku do tego ID bez rozstrzygnięcia.
+Źródła i stan blokady: unresolved.json tej partii. Nie zmieniono tego rekordu.
