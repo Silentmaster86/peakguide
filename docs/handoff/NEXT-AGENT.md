@@ -216,8 +216,9 @@ oraz współrzędne w Pieninach. Nie dołączać szlaku do tego ID bez rozstrzyg
 
 [Pakiet i instrukcja](../catalogue/nonkgp-02/README.md): Niemcowa, Rotunda,
 Barania Góra, Klimczok — 4 trasy, 4 POI, 32 teksty, 805 punktów GPX.
-Przygotowany, **jeszcze bez SQL na produkcji**. Żadnych zmian rekordów szczytów.
-Po merge właściciel wykonuje nonkgp-02/apply.sql i verify.sql, nie starsze pliki.
+PR #36 scalony; właściciel wykonał SQL i przekazał 4/4 review_matches=true
+i package_applied=true, trasy/POI/geometrie po 1 i cztery języki. Nie ponawiać
+nonkgp-02. Żadnych zmian rekordów szczytów.
 Niemcowa: koniec śladu to punkt PTTK/węzeł, nie deklarowany wierzchołek 1001 m.
 Klimczok: schronisko poza GPX; Barania: rezerwat/psy i brak potwierdzenia dostępu
 na wieżę. Wielki Rogal nie został utożsamiony automatycznie z Wielkim Rogaczem.
@@ -226,3 +227,21 @@ odchylenie pinezki Rotundy). Żadnych automatycznych korekt współrzędnych/pog
 Publiczny audyt 23 listopada po imporcie nonkgp-01: nadal 88 aktywnych, 60 poza KGP;
 poza KGP 50 bez tras, 53 bez POI, 54 bez kart dostępu i parkingów. Dane przygotowane
 w nonkgp-02 nie są wliczone jako już wdrożone.
+
+
+## Następna partia: nonkgp-03 — przygotowana
+
+[Pakiet i instrukcja](../catalogue/nonkgp-03/README.md): Ćwilin, Łyżka (zachowany
+slug lakowa-wyspowy), Mała Babia Góra (maly-babia-gora), Polica, Halicz.
+5 tras z GPX, 5 POI, 40 tekstów, 1203 punkty; bez zmian rekordów szczytów.
+**Jeszcze bez produkcyjnego SQL.** Po merge: tylko nonkgp-03/apply.sql i verify.sql.
+Wszystkie 5 szczytów potwierdzono w źródłach; nie ma pominiętego rekordu tej piątki.
+Mała Babia: tylko od schroniska przez Bronę, bez doliny. Halicz: konkretny start
+w Wołosatem i czerwony przez Bukowską/Rozsypaniec, bez Tarnicy i powrotu.
+Łyżka: pełny ślad Mapa Turystyczna, nie przedłużony GPX PTTK 129. Źródła GPX
+porównuje się z ich metadanymi, nie tylko linią. Testowano współistnienie/cofanie
+z wcześniej wdrożonym nonkgp-02. Parkowe zasady i datowanie opisano w README.
+Publiczny odczyt 23 listopada po #36: poza KGP 46 bez tras, 49 bez POI, 54 bez
+kart dostępu/parkingów. Nowej partii nie wliczać jako już wdrożonej.
+Kolejna piątka kolejki: krzemien, jaworzyna-kamienicka, kudlon, jelenia-kopa,
+srebrna-gora. Najpierw tożsamość i legalny przebieg, bez zgadywania brakujących danych.

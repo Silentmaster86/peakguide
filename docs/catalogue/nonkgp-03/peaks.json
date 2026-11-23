@@ -1,0 +1,52 @@
+[
+  {
+    "id": 61,
+    "slug": "maly-babia-gora",
+    "range_id": 17,
+    "latitude": 49.5812,
+    "longitude": 19.4996,
+    "elevation_m": 1516,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 62,
+    "slug": "polica",
+    "range_id": 17,
+    "latitude": 49.623722,
+    "longitude": 19.61925,
+    "elevation_m": 1369,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 64,
+    "slug": "halicz",
+    "range_id": 18,
+    "latitude": 49.072139,
+    "longitude": 22.768833,
+    "elevation_m": 1333,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 71,
+    "slug": "lakowa-wyspowy",
+    "range_id": 22,
+    "latitude": 49.642726,
+    "longitude": 20.462113,
+    "elevation_m": 803,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 72,
+    "slug": "cwilin",
+    "range_id": 22,
+    "latitude": 49.688667,
+    "longitude": 20.19175,
+    "elevation_m": 1072,
+    "active": true,
+    "is_korona": false
+  }
+]

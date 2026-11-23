@@ -87,11 +87,22 @@ w danych; pozostaje osobnym zadaniem, nie został automatycznie podmieniony.
 PR #32/#33/#34 są już scalone; właściciel potwierdził działanie pogody i światła.
 
 
-## Następna partia — nonkgp-02
+## Partia nonkgp-02 — wdrożona
 
 [Pakiet](../catalogue/nonkgp-02/README.md): Rotunda, Niemcowa, Barania Góra,
 Klimczok — cztery pary trasa/POI, GPX, 32 teksty, bez edycji rekordów szczytów.
-Wymaga merge → osobny apply.sql → verify.sql właściciela. Jeszcze nie wdrożony.
+PR #36 scalony. Właściciel wykonał SQL i potwierdził 4/4 review_matches oraz
+package_applied=true. Nie ponawiać importu.
 Wielki Rogal z drugiej piątki pozostaje do kontroli nazwy/tożsamości.
 Pogoda i światło dzienne z #33/#34 są już scalone i zgłoszone jako działające;
 wcześniejsze opisy stanu main 397e464 powyżej są historyczne.
+
+
+## Następna partia — nonkgp-03
+
+[Pakiet](../catalogue/nonkgp-03/README.md): Ćwilin, Łyżka, Mała Babia Góra,
+Polica i Halicz. 5 tras/GPX, 5 POI, 40 tekstów, 1203 punkty; wszystkie pięć
+rekordów kolejki objęte. Właściciel: merge → nonkgp-03/apply.sql → verify.sql.
+Jeszcze nie wdrożony. Parametry opisują wyłącznie określone odcinki wejścia,
+bez dolinnego podejścia do Markowych Szczawin i bez zejść. Dalsze karty praktyczne,
+parkingi i brakujące korekty to osobne etapy, nie są domyślnie uznane za ukończone.

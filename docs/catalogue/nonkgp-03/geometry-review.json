@@ -1,0 +1,107 @@
+[
+  {
+    "peak_slug": "cwilin",
+    "source_page": "https://mapa-turystyczna.pl/route/15kp3",
+    "source_gpx": "https://mapa-turystyczna.pl/route/15kp3.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "c45d5bca3c76ab87c0ab03095efaa27376d26738a83e91df7f92b93b3fec339a",
+    "source_semantic_sha256": "3b718020e9cc7e6517f32b9423c5129f7febab9355113bd990792b93e625e4f2",
+    "points": 136,
+    "segments": 1,
+    "first": [
+      20.179843,
+      49.70031
+    ],
+    "last": [
+      20.191205,
+      49.688665
+    ],
+    "coordinates_sha256": "d7ff5fc5fa3b57a514810863134a40758c7c23f1b230b1aa502e3f359042ba56",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "lakowa-wyspowy",
+    "source_page": "https://mapa-turystyczna.pl/route/3vfnn",
+    "source_gpx": "https://mapa-turystyczna.pl/route/3vfnn.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "c870d068ea708b3a9d01ce276d90f7262ad5249e4c0ae7dfdf29f73d78874dea",
+    "source_semantic_sha256": "c83cfb31965b4b101657d73a6d460a4ecb540379c4ae6fd7c1f16df342fcec50",
+    "points": 175,
+    "segments": 1,
+    "first": [
+      20.503526,
+      49.640863
+    ],
+    "last": [
+      20.462198,
+      49.642731
+    ],
+    "coordinates_sha256": "f17c5cee42a26fbf748dbea6eb0aeb3682d22e28bdf590e25e6b13a9afc1b131",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "maly-babia-gora",
+    "source_page": "https://mapa-turystyczna.pl/route/3bm9s",
+    "source_gpx": "https://mapa-turystyczna.pl/route/3bm9s.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "a8347febb119df32bbe2ede8de82bbd867105fabc863164e849dadacebc85169",
+    "source_semantic_sha256": "848ebad634877a7f77c1f480d9b0f156f61730f45e3dab490332681b0314ed6e",
+    "points": 149,
+    "segments": 1,
+    "first": [
+      19.516633,
+      49.587426
+    ],
+    "last": [
+      19.499554,
+      49.581283
+    ],
+    "coordinates_sha256": "bbd8df684cda2fa21dd797bb596b685800d61ae5f82a350861e49d8e08ee3db9",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "polica",
+    "source_page": "https://mapa-turystyczna.pl/route/my5",
+    "source_gpx": "https://mapa-turystyczna.pl/route/my5.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "8169095c14986372606eaf2d098affafad9d80ec1963eaa6a7d2c9aab0d9cd37",
+    "source_semantic_sha256": "14e44990b0177f001b175d62f5a59fe2a244aea798a2a1696ff13de043e5f68a",
+    "points": 225,
+    "segments": 1,
+    "first": [
+      19.581809,
+      49.587811
+    ],
+    "last": [
+      19.619699,
+      49.623355
+    ],
+    "coordinates_sha256": "2775e7a20493638fcd7414a60e9dff6d21b8bb1ad41ceded18b8f689ffcc6bc4",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "halicz",
+    "source_page": "https://mapa-turystyczna.pl/route/fz6f",
+    "source_gpx": "https://mapa-turystyczna.pl/route/fz6f.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "700d56a8ffd741ee026e79b5f53be4191f58047318310ec4a56e0710b1e63eb6",
+    "source_semantic_sha256": "794002ea33e6dcfcce01e338ff85141f9f16d175f3a307bbe463800e331a893e",
+    "points": 518,
+    "segments": 1,
+    "first": [
+      22.680646,
+      49.066051
+    ],
+    "last": [
+      22.768789,
+      49.072082
+    ],
+    "coordinates_sha256": "c0bb746c2c70d6ec76802f70d22bc26b032a22d2029d8ec519cc806e441930b3",
+    "verified_at": "2026-11-23T00:00:00Z"
+  }
+]
