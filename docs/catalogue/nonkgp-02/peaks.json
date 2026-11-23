@@ -1,0 +1,42 @@
+[
+  {
+    "id": 68,
+    "slug": "niemcowa",
+    "range_id": 20,
+    "latitude": 49.443917,
+    "longitude": 20.647028,
+    "elevation_m": 1001,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 74,
+    "slug": "rotunda",
+    "range_id": 23,
+    "latitude": 49.4725,
+    "longitude": 21.233889,
+    "elevation_m": 771,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 77,
+    "slug": "barania-gora",
+    "range_id": 25,
+    "latitude": 49.611389,
+    "longitude": 19.010556,
+    "elevation_m": 1220,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 78,
+    "slug": "klimczok",
+    "range_id": 25,
+    "latitude": 49.73983,
+    "longitude": 18.995274,
+    "elevation_m": 1117,
+    "active": true,
+    "is_korona": false
+  }
+]

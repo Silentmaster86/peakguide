@@ -1,0 +1,86 @@
+[
+  {
+    "peak_slug": "rotunda",
+    "source_page": "https://mapa-turystyczna.pl/route/qjms",
+    "source_gpx": "https://mapa-turystyczna.pl/route/qjms.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "9d2e2fe5c2bab71c0b65316ff60d041776bde4f1500396d12dfdbe08e7cb0ddc",
+    "source_semantic_sha256": "b8b8e00a69ded69c9085aaabacde15008c23b0c0a75d6f75bb5d67300a1f7112",
+    "points": 89,
+    "segments": 1,
+    "first": [
+      21.217916,
+      49.470278
+    ],
+    "last": [
+      21.235743,
+      49.474538
+    ],
+    "coordinates_sha256": "a4503ae73f4131b0d742dfec6f99261352006f8e3ba314308e04ebe9f8b0c4c9",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "niemcowa",
+    "source_page": "https://malopolska.szlaki.pttk.pl/659-pttk-malopolska-piwniczna-zdroj-pkp-niemcowa",
+    "source_gpx": "https://malopolska.szlaki.pttk.pl/item/gpx/659",
+    "adaptation": "none",
+    "time_policy": "none",
+    "source_sha256": "7d1c70e48146da05e3ba2e632619c31b0f52c128bab562fb6579fa35574139ed",
+    "source_semantic_sha256": "eaf8e8069d9d33b1cab1afb1ec6fd29d704c5eb1f8cc5602382e59073fa87e4d",
+    "points": 150,
+    "segments": 8,
+    "first": [
+      20.717189,
+      49.440441
+    ],
+    "last": [
+      20.64650829,
+      49.44531891
+    ],
+    "coordinates_sha256": "4bb16e32bbc00d5dc13e3c7afb4d6f9f67114fb7063ea7355e070260a27eab8e",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "barania-gora",
+    "source_page": "https://mapa-turystyczna.pl/route/p540",
+    "source_gpx": "https://mapa-turystyczna.pl/route/p540.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "1b7122bd14fe6f24f5ac560982f33bff05bdb4d0b783b4b0315b561d5175e9d7",
+    "source_semantic_sha256": "360134ecbdfa4699202713715858e7d8c218a63682196d9443afd8ca4dac4aa8",
+    "points": 295,
+    "segments": 1,
+    "first": [
+      18.939002,
+      49.619933
+    ],
+    "last": [
+      19.01059,
+      49.611443
+    ],
+    "coordinates_sha256": "5a9dc76db3e9bf9c505874c023f0e1a685a9459bc4ff37c4545863635edffbf1",
+    "verified_at": "2026-11-23T00:00:00Z"
+  },
+  {
+    "peak_slug": "klimczok",
+    "source_page": "https://mapa-turystyczna.pl/route/3s6",
+    "source_gpx": "https://mapa-turystyczna.pl/route/3s6.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "4a2446219b73a05326c5da1f9950cb2ea5c665367ff988f98b92ae4529f410ca",
+    "source_semantic_sha256": "79aeff0dda797c6291d12d9e5ab63538265440bb13f524bc067e10bcc925e704",
+    "points": 271,
+    "segments": 1,
+    "first": [
+      19.023124,
+      49.714715
+    ],
+    "last": [
+      18.995272,
+      49.739908
+    ],
+    "coordinates_sha256": "7ef1a6e6d947d74258ecd35628a37e90885ccbf8bc991de20fc937f80f75587c",
+    "verified_at": "2026-11-23T00:00:00Z"
+  }
+]

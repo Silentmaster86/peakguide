@@ -1,6 +1,6 @@
 # Poza KGP — partia 01: cztery sprawdzone szczyty
 
-**Przygotowany import, jeszcze niewykonany na produkcji.** Łysina (70), Śnieżnica
+**Wdrożenie potwierdzone przez właściciela 23 listopada 2026.** Łysina (70), Śnieżnica
 (69), Góra Żar (76), Leskowiec (75): **4 trasy, 4 POI, 32 teksty PL/EN/UA/ZH,
 530 punktów źródłowych GPX**. Poprawia również jedno błędne przypisanie pasma:
 Śnieżnica `range_id` 21 (Beskid Makowski) → 22 (Beskid Wyspowy).
@@ -11,7 +11,11 @@ Niskiego. [Raport blokady](unresolved.json) wskazuje oba miejsca. Nie przypisuje
 mu szlaku innej góry i nie wybieramy arbitralnie, którą z dwóch pozycji miał
 reprezentować. Ta partia nie obejmuje żadnej zmiany id 73.
 
-## Co zrobić po merge
+Właściciel przekazał 4/4 wiersze: po jednej trasie, POI i geometrii, oba zestawy
+4 języków, review_matches=true i package_applied=true. Śnieżnica ma
+range_slug=beskid-wyspowy. Nie ponawiać importu ani nie wykonywać rollbacku.
+
+## Instrukcja wdrożenia (wykonana)
 
 Merge udostępnia pliki, w tym odwrócony GPX Łysiny. **Dane Supabase wymagają SQL**;
 agent nie ma połączenia administracyjnego i nie wykonuje operacji produkcyjnych.
