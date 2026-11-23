@@ -98,11 +98,22 @@ Pogoda i światło dzienne z #33/#34 są już scalone i zgłoszone jako działaj
 wcześniejsze opisy stanu main 397e464 powyżej są historyczne.
 
 
-## Następna partia — nonkgp-03
+## Partia nonkgp-03 — merge wykonany, SQL odłożony
 
 [Pakiet](../catalogue/nonkgp-03/README.md): Ćwilin, Łyżka, Mała Babia Góra,
 Polica i Halicz. 5 tras/GPX, 5 POI, 40 tekstów, 1203 punkty; wszystkie pięć
-rekordów kolejki objęte. Właściciel: merge → nonkgp-03/apply.sql → verify.sql.
-Jeszcze nie wdrożony. Parametry opisują wyłącznie określone odcinki wejścia,
+rekordów kolejki objęte. PR #37 scalony; właściciel zgłosił niedostępność Supabase.
+Do wykonania pozostają nonkgp-03/apply.sql → verify.sql. Brak potwierdzenia importu. Parametry opisują wyłącznie określone odcinki wejścia,
 bez dolinnego podejścia do Markowych Szczawin i bez zejść. Dalsze karty praktyczne,
 parkingi i brakujące korekty to osobne etapy, nie są domyślnie uznane za ukończone.
+
+
+## Następna partia — nonkgp-04 i kontynuacja podczas awarii
+
+[Pakiet](../catalogue/nonkgp-04/README.md): cztery pary tras/POI w Gorcach,
+Bieszczadach i Górach Bardzkich; dokładne odcinki zamiast obietnicy wejścia na
+zamknięty/niedostępny wierzchołek. Srebrna Góra wymaga osobnej kontroli tożsamości.
+Niezależny od produkcyjnego SQL #37; lokalnie sprawdzono obie kolejności importu.
+Merge nowego PR → nonkgp-04/apply.sql → verify.sql, gdy Supabase będzie dostępny.
+[Kolejka wdrożeń](pending-rollout.md) zbiera zaległe kroki. Właściciel polecił
+pozostawiać te instrukcje i kontynuować kolejne niezależne zadania podczas awarii.

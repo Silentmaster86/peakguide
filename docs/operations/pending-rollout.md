@@ -1,48 +1,58 @@
-# Stan wdrożeń — dawna lista oczekujących operacji
+# Kolejka wdrożeń — merge i SQL osobno
 
-Stan: 21 listopada 2026. Zachowano tę ścieżkę dla istniejących odnośników.
-**Poniższe operacje zostały wykonane przez właściciela i zweryfikowane w SQL.
-Nie ma już oczekujących importów z tej serii. Nie uruchamiać ich ponownie na
-podstawie starszych instrukcji lub samego merge.**
+Stan: 23 listopada 2026. Właściciel zgłosił niedostępność Supabase i odłożył SQL.
+Agent kontynuuje niezależne prace, a tutaj pozostawia kolejność i dokładne pliki.
+**Scalony PR oraz zielone CI nie potwierdzają importu danych do produkcji.**
 
-| Pakiet | Potwierdzony wynik |
-| --- | --- |
-| `twenty-peaks` (02 + 03) | 20 tras i 20 POI, cztery języki, geometria i adresy GPX |
-| `batch-04` | Rysy, Lackowa i rejon Wysokiej Kopy: po trasie z geometrią/GPX i POI, cztery języki |
-| `gpx-completion` | Cztery istniejące trasy partii 01 uzupełnione o rzeczywiste ślady i GPX |
-| `coordinate-review` | Współrzędne i geom Śnieżnika, Rudawca i Lackowej zgodne z poprawką |
-| `lysica-review` | id 28 publiczny, id 83 wyłączony i zachowany w bazie |
-| `utf8-repair` | Wszystkie 46 rekordów kgp-02/03/04 zgodne tekstowo ze źródłami, `remaining_issues=[]` |
+## Do wykonania, gdy Supabase wróci
 
-Wszystkie 28 aktywnych szczytów KGP mają co najmniej jedną aktywną trasę
-z geometrią i POI. Nie jest to komplet wszystkich tras ani całego katalogu.
-GPX Wysokiej Kopy prowadzi do Sinych Skałek, bez zamkniętego wierzchołka;
-pozostałe ograniczenia zakresów są w README odpowiednich partii.
+| Kolejność | Pakiet i merge | SQL w Supabase SQL Editor | Oczekiwany wynik verify |
+| --- | --- | --- | --- |
+| 1 | **[#37](https://github.com/Silentmaster86/peakguide/pull/37) scalony**; `nonkgp-03`. SQL odłożony przez właściciela, brak potwierdzenia wykonania. | Cały [apply.sql](../catalogue/nonkgp-03/apply.sql), następnie cały [verify.sql](../catalogue/nonkgp-03/verify.sql). | 5 wierszy: po 1 trasie, POI i geometrii; oba zestawy 4 języków; review_matches=true, package_applied=true. |
+| 2 | `nonkgp-04`, [PR gałęzi data/nonkgp-04](https://github.com/Silentmaster86/peakguide/pulls?q=is%3Apr+head%3Adata%2Fnonkgp-04). Najpierw merge po zielonym CI. **SQL nie jest wykonany.** | Cały [apply.sql](../catalogue/nonkgp-04/apply.sql), następnie cały [verify.sql](../catalogue/nonkgp-04/verify.sql). | 4 wiersze z tymi samymi warunkami. Zakres Krzemienia kończy się na szlaku pod wierzchołkiem; Jaworzyny — na polanie. |
 
-## Backup i kodowanie
+Przy kopiowaniu z GitHuba: otwórz plik → **Raw** → skopiuj całą treść do nowego
+zapytania SQL Editor. Zachowaj aktualny backup. Nie uruchamiaj rollback.sql jako
+kolejnego kroku wdrożenia. Jeśli kontrola konfliktu/edycji zatrzyma import, zachowaj
+komunikat i nie omijaj zabezpieczeń. `Success` bez wyniku verify nie zamyka zadania.
 
-Właściciel potwierdził backupy przed i po wdrożeniach. Próbne pełne odtworzenie
-w izolacji nadal nie jest potwierdzone. [Skrypt Windows](windows-backup.md)
-służy przyszłym kopiom; merge go nie uruchamia i nie wymaga ponowienia eksportu.
-Spis archiwum i SHA-256 nie są testem pełnego restore.
+Pakiety dotyczą różnych rekordów. Lokalnie przetestowano obie kolejności importu
+03/04 oraz cofnięcie wyłącznie nowej partii. Powyższa kolejność służy czytelnemu
+odrabianiu zaległości; brak SQL #37 nie blokuje przygotowania ani merge kolejnego PR.
+Nie oznaczać żadnej z tych partii jako wdrożonej bez wyniku właściciela.
 
-Przy kopiowaniu plików SQL zawsze stosować jawne UTF-8:
+## Potwierdzone — nie ponawiać
+
+- KGP: 28/28 ma trasę z geometrią/GPX i POI w 4 językach; karty dostępu 28/28,
+  parkingi 25/28. To nie komplet wszystkich możliwych tras i usług.
+- `twenty-peaks`, batch-04, gpx-completion, coordinate-review, lysica-review,
+  utf8-repair: właściciel wykonał i zweryfikował wcześniejsze poprawki.
+- `foreign-gpx-01`: Howerla i Krywań — geometria/GPX potwierdzone; ostrzeżenie
+  sezonowe Krywania również potwierdzone osobno.
+- `nonkgp-01` / #35: 4/4 wiersze zgodne, Śnieżnica ma pasmo Wyspowy.
+- `nonkgp-02` / #36: 4/4 wiersze zgodne, komplet tras/POI/geometrii i 4 języków.
+- #33/#34: pogoda i światło dzienne zgłoszone przez właściciela jako działające.
+
+## Przy następnej awarii lub odłożeniu wdrożenia
+
+1. Zapisz numer PR i faktyczny stan merge, osobno stan SQL.
+2. Podaj dokładne ścieżki/linki apply.sql i verify.sql oraz oczekiwany wynik.
+3. Dopisz zależności i kolejność. Zależny kod przygotowuj na wyraźnie oznaczonej
+   gałęzi; niezależne zmiany kontynuuj na aktualnym main.
+4. Kontynuuj frontend, backend, źródła, lokalne testy i kolejne PR-y. Nie kończ
+   pracy tylko dlatego, że właściciel chwilowo nie może wykonać SQL.
+5. Po otrzymaniu verify zaktualizuj tę kolejkę i handoff; nie utożsamiaj merge
+   ani testowej bazy z produkcyjnym wdrożeniem.
+
+Nie proś o hasła ani dump bazy w czacie. Backup/restore:
+[Windows](windows-backup.md), [izolowane odtwarzanie](remaining-work.md).
+SQL nowych partii jest ASCII-only z Unicode JSON. Przy innych plikach zawierających
+znaki narodowe i kopiowaniu z Windows używaj jawnego UTF-8:
 
 ```powershell
 Get-Content .\SCIEZKA\PLIK.sql -Encoding UTF8 -Raw | Set-Clipboard
 ```
 
-Poprzedni import przez PowerShell bez tego parametru uszkodził teksty.
-Naprawa zachowała identyfikatory i odświeżyła rejestry. Nie usuwać/reimportować
-rekordów w celu naprawy tekstu. Późniejsze edycje administratora celowo blokują
-stare importy i rollbacki; nie wyłączać tych zabezpieczeń.
-
-## Co dalej
-
-Aktualna [karta kolejnego agenta](../handoff/NEXT-AGENT.md) opisuje ukończone
-prace, granice danych i kolejne priorytety. Pozostają m.in. sześć starszych
-tras zagranicznych bez GPX, kontrolowany test edytorów tras/POI, próbne
-odtworzenie backupu, dalsze dane praktyczne oraz osobny etap SEO.
-Procedura izolowanego odtwarzania i utrzymanie poczty: [remaining-work.md](remaining-work.md).
-Nie przedstawiać testów na fixture ani zielonego CI jako dowodu wykonania
-produkcyjnych operacji. Kolejne zmiany wymagają własnego zakresu i kontroli stanu.
+Dalsze zadania i źródła: [handoff](../handoff/NEXT-AGENT.md),
+[plan wykonawczy](delivery-plan.md). Pełny restore prywatnego backupu nadal nie jest
+potwierdzony; test na fixture i odczyt spisu archiwum go nie zastępują.

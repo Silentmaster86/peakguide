@@ -229,12 +229,14 @@ poza KGP 50 bez tras, 53 bez POI, 54 bez kart dostępu i parkingów. Dane przygo
 w nonkgp-02 nie są wliczone jako już wdrożone.
 
 
-## Następna partia: nonkgp-03 — przygotowana
+## Partia nonkgp-03 — merge wykonany, SQL odłożony
 
 [Pakiet i instrukcja](../catalogue/nonkgp-03/README.md): Ćwilin, Łyżka (zachowany
 slug lakowa-wyspowy), Mała Babia Góra (maly-babia-gora), Polica, Halicz.
 5 tras z GPX, 5 POI, 40 tekstów, 1203 punkty; bez zmian rekordów szczytów.
-**Jeszcze bez produkcyjnego SQL.** Po merge: tylko nonkgp-03/apply.sql i verify.sql.
+**PR #37 scalony (main 7fdd959), SQL odłożony z powodu niedostępności Supabase.**
+Brak wyniku verify. Do wykonania: nonkgp-03/apply.sql i verify.sql. Nie traktować
+merge jako importu. Kolejka: docs/operations/pending-rollout.md.
 Wszystkie 5 szczytów potwierdzono w źródłach; nie ma pominiętego rekordu tej piątki.
 Mała Babia: tylko od schroniska przez Bronę, bez doliny. Halicz: konkretny start
 w Wołosatem i czerwony przez Bukowską/Rozsypaniec, bez Tarnicy i powrotu.
@@ -245,3 +247,29 @@ Publiczny odczyt 23 listopada po #36: poza KGP 46 bez tras, 49 bez POI, 54 bez
 kart dostępu/parkingów. Nowej partii nie wliczać jako już wdrożonej.
 Kolejna piątka kolejki: krzemien, jaworzyna-kamienicka, kudlon, jelenia-kopa,
 srebrna-gora. Najpierw tożsamość i legalny przebieg, bez zgadywania brakujących danych.
+
+
+## Polecenie właściciela: nie zatrzymywać się przy odłożonym SQL
+
+Przy niedostępności Supabase pozostawić numer/stany PR i merge, dokładne pliki
+apply.sql → verify.sql, oczekiwane wyniki i zależności, a potem kontynuować
+niezależne zadania. Nie kończyć pracy tylko z powodu odłożenia wdrożenia.
+Właściciel nadal wykonuje merge i produkcyjny SQL; nie prosić o hasła i nie
+wykonywać produkcyjnych mutacji w tle. Brak odpowiedzi nie jest dowodem wdrożenia.
+Aktualizować [kolejkę](../operations/pending-rollout.md) po faktycznym verify.
+
+## Następna partia: nonkgp-04 — przygotowana, niezależna od SQL #37
+
+[Pakiet](../catalogue/nonkgp-04/README.md): Krzemień (punkt na szlaku pod szczytem),
+Jaworzyna Kamienicka (polana, nie wierzchołek), Kudłoń, Jelenia Kopa — 4 trasy/GPX,
+4 POI, 32 teksty, 835 punktów. Srebrna Góra id54 wyłączona z pakietu przez konflikt
+tożsamości/pinezki; unresolved.json zawiera odczyt i źródło. Brak zmian rodziców.
+Nowa partia ma osobne apply/verify/rollback; jeszcze nie jest wdrożona. Sprawdzono
+obie kolejności względem nonkgp-03 i zachowanie jego danych/rejestru przy cofaniu 04.
+Dane rodziców są z wcześniejszego odczytu 23 listopada; nie przedstawiać ich jako
+świeżego odczytu podczas awarii. Import kontroluje tożsamości ponownie w transakcji.
+GPN: aktualny odczyt komunikatu zawiera informację 16.11.2026. Część stron parków
+zwracała 503; nie ogłaszać otwarcia na żywo na podstawie GPX.
+Kolejna piątka: iwinka, postawna, anielska-kopa, stog-izerski, wysoki-kamien.
+Starsze nierozstrzygnięte tożsamości i brakujące dane praktyczne nadal są osobnymi
+zadaniami, a nie ukończonymi elementami katalogu.
