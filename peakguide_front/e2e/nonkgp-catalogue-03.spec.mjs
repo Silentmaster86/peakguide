@@ -33,6 +33,10 @@ for(const lang of langs)test(`reviewed non-KGP batch 03 trails and POIs render w
   await expect(page.getByText(trail.i18n[lang].name,{exact:true})).toBeVisible();
   await expect(page.getByText(trail.i18n[lang].description,{exact:true})).toBeVisible();
   await expect(page.getByText(trail.i18n[lang].notes,{exact:true})).toBeVisible();
+  if(peak.slug==='maly-babia-gora'){
+   const duration={pl:'55 min (szacunkowo)',en:'55 min (estimated)',ua:'55 хв (орієнтовно)',zh:'55 分钟 (估计)'}[lang];
+   await expect(page.getByText(duration,{exact:true})).toBeVisible();
+  }
   await expect(page.locator(`a[href="${trail.gpx_url}"]`)).toBeVisible();
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
   await page.goto(`/peaks/${peak.slug}?tab=pois`);
