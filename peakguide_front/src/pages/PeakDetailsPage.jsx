@@ -15,6 +15,7 @@ import PeakWeatherCard from '../features/weather/PeakWeatherCard';
 import TrailPracticalCard from '../components/TrailPracticalCard';
 import ComingSoonBox from '../components/ComingSoonBox';
 import { safeUrl } from '../utils/practical.mjs';
+import { formatDuration } from '../utils/format';
 import { parseCoordinates } from '../utils/coordinates';
 import PeakDaylightCard from '../features/daylight/PeakDaylightCard';
 
@@ -558,7 +559,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                     {t.time_min != null ? (
                       <TrailMetric
                         label={labels.time}
-                        value={`${formatTrailTime(t.time_min, lang)} (${({ pl: 'szacunkowo', en: 'estimated', ua: 'орієнтовно', zh: '估计' })[lang] || 'estimated'})`}
+                        value={`${formatDuration(t.time_min, lang)} (${({ pl: 'szacunkowo', en: 'estimated', ua: 'орієнтовно', zh: '估计' })[lang] || 'estimated'})`}
 
                         sourceUrl={t.time_source_url}
                         verifiedAt={t.time_verified_at}
@@ -714,19 +715,6 @@ function getCollectionLabel(peak, lang) {
   if (peak.country_code === 'PL') return t.poland;
   if (['ben-nevis', 'scafell-pike', 'yr-wyddfa'].includes(peak.slug)) return t.uk;
   return t.other;
-}
-
-function formatTrailTime(minutes, lang) {
-  const total = Number(minutes);
-  if (!Number.isFinite(total) || total <= 0) return '—';
-
-  const hours = Math.floor(total / 60);
-  const mins = total % 60;
-  const hourUnit = lang === 'zh' ? '小时' : 'h';
-  const minuteUnit = lang === 'zh' ? '分钟' : 'min';
-
-  if (!mins) return `${hours} ${hourUnit}`;
-  return `${hours} ${hourUnit} ${mins} ${minuteUnit}`;
 }
 
 function trailOptionLabel(value, labels, lang) {
