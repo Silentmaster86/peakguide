@@ -1,10 +1,18 @@
 # PeakGuide — karta dla kolejnego agenta
 
-Stan: 23 listopada 2026. Repo: Silentmaster86/peakguide.
+Stan: 24 listopada 2026. Repo: Silentmaster86/peakguide.
 Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
 Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
-## Najważniejsze: wdrożenia bazy są zakończone
+## Bieżący stan — najpierw przeczytaj
+
+#37/nonkgp-03 i #38/nonkgp-04 mają potwierdzone wyniki właściciela z 24 listopada
+(zapisane w production-verification.json w folderach pakietów). #39 scalony, bez SQL.
+Nowa partia 05 jest przygotowana, **SQL jeszcze niewykonany**. Właściciel chce
+zbierać więcej gotowych pakietów przed wspólnym wgrywaniem. Nie wstrzymywać
+niezależnej pracy i nie prosić o ponowienie starych importów.
+
+## Wcześniejsze wdrożenia bazy — zakończone
 
 Właściciel wykonał SQL i przekazał wyniki kontroli. Nie traktować merge jako
 potwierdzenia wykonania SQL; poniższy stan opiera się na wynikach produkcyjnych:
@@ -229,14 +237,14 @@ poza KGP 50 bez tras, 53 bez POI, 54 bez kart dostępu i parkingów. Dane przygo
 w nonkgp-02 nie są wliczone jako już wdrożone.
 
 
-## Partia nonkgp-03 — merge wykonany, SQL odłożony
+## Partia nonkgp-03 — wdrożona i zweryfikowana
 
 [Pakiet i instrukcja](../catalogue/nonkgp-03/README.md): Ćwilin, Łyżka (zachowany
 slug lakowa-wyspowy), Mała Babia Góra (maly-babia-gora), Polica, Halicz.
 5 tras z GPX, 5 POI, 40 tekstów, 1203 punkty; bez zmian rekordów szczytów.
-**PR #37 scalony (main 7fdd959), SQL odłożony z powodu niedostępności Supabase.**
-Brak wyniku verify. Do wykonania: nonkgp-03/apply.sql i verify.sql. Nie traktować
-merge jako importu. Kolejka: docs/operations/pending-rollout.md.
+**PR #37 scalony; właściciel przekazał verify 24 listopada: 5/5 zgodnych wierszy,
+trasy/POI/geometrie po 1, cztery języki, review_matches/package_applied=true.**
+Nie ponawiać importu ani nie traktować go jako zaległego SQL.
 Wszystkie 5 szczytów potwierdzono w źródłach; nie ma pominiętego rekordu tej piątki.
 Mała Babia: tylko od schroniska przez Bronę, bez doliny. Halicz: konkretny start
 w Wołosatem i czerwony przez Bukowską/Rozsypaniec, bez Tarnicy i powrotu.
@@ -244,9 +252,9 @@ w Wołosatem i czerwony przez Bukowską/Rozsypaniec, bez Tarnicy i powrotu.
 porównuje się z ich metadanymi, nie tylko linią. Testowano współistnienie/cofanie
 z wcześniej wdrożonym nonkgp-02. Parkowe zasady i datowanie opisano w README.
 Publiczny odczyt 23 listopada po #36: poza KGP 46 bez tras, 49 bez POI, 54 bez
-kart dostępu/parkingów. Nowej partii nie wliczać jako już wdrożonej.
-Kolejna piątka kolejki: krzemien, jaworzyna-kamienicka, kudlon, jelenia-kopa,
-srebrna-gora. Najpierw tożsamość i legalny przebieg, bez zgadywania brakujących danych.
+kart dostępu/parkingów. To historyczny audyt przed wdrożeniami 03/04; nie aktualny stan.
+Krzemień, Jaworzyna Kamienicka, Kudłoń i Jelenia Kopa są już w potwierdzonej partii 04.
+Srebrna Góra nadal ma nierozstrzygniętą tożsamość.
 
 
 ## Polecenie właściciela: nie zatrzymywać się przy odłożonym SQL
@@ -258,18 +266,35 @@ Właściciel nadal wykonuje merge i produkcyjny SQL; nie prosić o hasła i nie
 wykonywać produkcyjnych mutacji w tle. Brak odpowiedzi nie jest dowodem wdrożenia.
 Aktualizować [kolejkę](../operations/pending-rollout.md) po faktycznym verify.
 
-## Następna partia: nonkgp-04 — przygotowana, niezależna od SQL #37
+## Partia nonkgp-04 — wdrożona i zweryfikowana
 
 [Pakiet](../catalogue/nonkgp-04/README.md): Krzemień (punkt na szlaku pod szczytem),
 Jaworzyna Kamienicka (polana, nie wierzchołek), Kudłoń, Jelenia Kopa — 4 trasy/GPX,
 4 POI, 32 teksty, 835 punktów. Srebrna Góra id54 wyłączona z pakietu przez konflikt
 tożsamości/pinezki; unresolved.json zawiera odczyt i źródło. Brak zmian rodziców.
-Nowa partia ma osobne apply/verify/rollback; jeszcze nie jest wdrożona. Sprawdzono
+PR #38 scalony; właściciel przekazał verify 24 listopada: 4/4 zgodne wiersze,
+trasy/POI/geometrie po 1, cztery języki, review_matches/package_applied=true.
+Nie ponawiać SQL. Sprawdzono
 obie kolejności względem nonkgp-03 i zachowanie jego danych/rejestru przy cofaniu 04.
 Dane rodziców są z wcześniejszego odczytu 23 listopada; nie przedstawiać ich jako
 świeżego odczytu podczas awarii. Import kontroluje tożsamości ponownie w transakcji.
 GPN: aktualny odczyt komunikatu zawiera informację 16.11.2026. Część stron parków
 zwracała 503; nie ogłaszać otwarcia na żywo na podstawie GPX.
-Kolejna piątka: iwinka, postawna, anielska-kopa, stog-izerski, wysoki-kamien.
+Następny przegląd pięciu szczytów wykonano w nonkgp-05 — zakres poniżej.
 Starsze nierozstrzygnięte tożsamości i brakujące dane praktyczne nadal są osobnymi
 zadaniami, a nie ukończonymi elementami katalogu.
+
+## Partia nonkgp-05 — przygotowana do zbiorczej kolejki
+
+[Pakiet](../catalogue/nonkgp-05/README.md): Stóg Izerski i Wysoki Kamień,
+2 trasy/GPX, 2 POI, 16 tekstów, 345 punktów. Źródła/tożsamości odczytane
+24 listopada. Bez zmian szczytów, grantów i wcześniejszych danych. SQL niewykonany.
+Iwinka, Postawna i Anielska Kopa nie mają potwierdzonego pełnego wariantu
+i dojścia; unresolved.json przechowuje ograniczenia. Nie fabrykować GPX ani
+wnioskować o zakazie wejścia z samego braku weryfikacji.
+
+Właściciel chce zbierać większą liczbę gotowych pakietów przed wspólnym SQL.
+Kontynuować niezależne prace; nie zatrzymywać na każdym małym imporcie.
+[Kolejka](../operations/pending-rollout.md) rozróżnia merge i SQL. #37/#38 są już
+potwierdzone, #39 scalony i nie wymaga SQL. Kolejne tożsamości wybierać po
+ponownym odczycie publicznego katalogu, nie według nieaktualnych liczników.

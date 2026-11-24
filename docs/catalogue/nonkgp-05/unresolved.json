@@ -1,0 +1,60 @@
+[
+  {
+    "peak": {
+      "id": 36,
+      "slug": "iwinka",
+      "range_id": 4,
+      "latitude": 50.23963,
+      "longitude": 16.98216,
+      "elevation_m": 1079,
+      "active": true,
+      "is_korona": false
+    },
+    "status": "not_imported",
+    "reason": "No reviewed complete marked-route GPX and permitted summit approach confirmed. No invented connector or copied neighbouring route.",
+    "next_step": "Check authoritative identity/access and exact full GPX; a marked approach ending below the summit must be labelled as such.",
+    "reviewed_at": "2026-11-24",
+    "sources": [
+      "https://stronie.pl/2046/nr-2-na-sedlo-peklo-w-kierunku-nyznerowskich-wodospadow.html",
+      "https://www.gov.pl/web/rdos-wroclaw/zarzadzenie-nr-62024-regionalnego-dyrektora-ochrony-srodowiska-we-wroclawiu-z-dnia-23-maja-2024-r-w-sprawie-ustanowienia-zadan-ochronnych-dla-rezerwatu-przyrody-puszcza-snieznej-bialki"
+    ]
+  },
+  {
+    "peak": {
+      "id": 35,
+      "slug": "postawna",
+      "range_id": 4,
+      "latitude": 50.2233,
+      "longitude": 17.0117,
+      "elevation_m": 1117,
+      "active": true,
+      "is_korona": false
+    },
+    "status": "not_imported",
+    "reason": "No reviewed complete marked-route GPX and permitted summit approach confirmed. No invented connector or copied neighbouring route.",
+    "next_step": "Check authoritative identity/access and exact full GPX; a marked approach ending below the summit must be labelled as such.",
+    "reviewed_at": "2026-11-24",
+    "sources": [
+      "https://mapa-turystyczna.pl/map/widget/course/h1l1p0/45743eef.html"
+    ]
+  },
+  {
+    "peak": {
+      "id": 41,
+      "slug": "anielska-kopa",
+      "range_id": 7,
+      "latitude": 50.338892,
+      "longitude": 16.528339,
+      "elevation_m": 879,
+      "active": true,
+      "is_korona": false
+    },
+    "status": "not_imported",
+    "reason": "No reviewed complete marked-route GPX and permitted summit approach confirmed. No invented connector or copied neighbouring route.",
+    "next_step": "Check authoritative identity/access and exact full GPX; a marked approach ending below the summit must be labelled as such.",
+    "reviewed_at": "2026-11-24",
+    "sources": [
+      "https://mapa-turystyczna.pl/map/widget/course/h1l1p0/ccf348c2.html"
+    ]
+  }
+]

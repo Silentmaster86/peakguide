@@ -1,17 +1,17 @@
 # Poza KGP — partia 04
 
-**Przygotowany import, jeszcze bez produkcyjnego SQL.** Krzemień (63), Jaworzyna
+**PR #38 scalony i wdrożony.** Właściciel przekazał verify 24 listopada 2026:
+4/4 zgodne wiersze z trasą/POI/geometrią i PL/EN/UA/ZH, obie kontrole true.
+Nie ponawiać SQL; kroki poniżej zachowano jako procedurę pakietu. Krzemień (63), Jaworzyna
 Kamienicka (66), Kudłoń (65), Jelenia Kopa (141): 4 trasy z GPX/geometrią, 4 POI,
 32 teksty PL/EN/UA/ZH, **835 punktów źródłowych**. Rekordów szczytów nie zmienia.
 Srebrna Góra (54) pozostaje poza importem ze względu na sprzeczną tożsamość.
 
-**#37 jest scalony, ale jego SQL odłożono z powodu niedostępności Supabase.**
-Nie oznaczać nonkgp-03 jako wdrożonego. [Kolejka merge i SQL](../../operations/pending-rollout.md)
-podaje oba pakiety i dokładne pliki. Właściciel polecił kontynuować niezależne
-prace podczas awarii. Niniejszy pakiet nie wymaga wcześniejszego importu 03;
-obie kolejności sprawdzono lokalnie.
+#37/nonkgp-03 również ma potwierdzone verify 5/5. [Aktualna kolejka](../../operations/pending-rollout.md)
+zbiera wyłącznie nowe pakiety do przyszłego wspólnego okna. Obie kolejności 03/04
+sprawdzono lokalnie; nie jest potrzebne powtórzenie ich w produkcji.
 
-## Po merge i powrocie Supabase
+## Procedura pakietu — już wykonana
 
 1. Zachowaj aktualny backup. Uruchom cały `docs/catalogue/nonkgp-04/apply.sql`
    jako właściciel w Supabase SQL Editor.
@@ -20,8 +20,7 @@ obie kolejności sprawdzono lokalnie.
    `[en,pl,ua,zh]`, review_matches=true oraz package_applied=true.
 4. Odśwież stronę i sprawdź trasy/POI/mapę. Dopiero verify potwierdza produkcję.
 
-Kolejka zaleca najpierw zaległe nonkgp-03/apply.sql i verify.sql, potem tę partię.
-To kolejność organizacyjna; pakiety mają rozłączne rekordy i osobne rejestry.
+Oba pakiety zostały już wykonane. Mają rozłączne rekordy i osobne rejestry.
 Merge publikuje pliki, nie wykonuje SQL. Rollback jest narzędziem awaryjnym,
 nie następnym krokiem. SQL jest ASCII-only; teksty mają Unicode JSON.
 
