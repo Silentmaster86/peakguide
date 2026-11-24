@@ -1,8 +1,30 @@
 # Kolejne wydania PeakGuide — plan wykonawczy
 
-Stan: 23 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
+Stan: 24 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
+
+## Bieżący priorytet — pięć PR-ów frontendu
+
+Właściciel zaakceptował makiety. Ten etap ma pierwszeństwo przed następnymi
+importami katalogu, które na razie są odłożone. Pięć PR-ów w kolejności:
+
+| Etap | Zakres | Właściciel |
+| --- | --- | --- |
+| 1 | Sticky navbar także na telefonie; kompaktowe menu; mapa od góry; historia i kotwice | Merge, bez SQL |
+| 2 | Kafelki wyników mapy i spójne markery na dużej i małych mapach | Merge, bez SQL |
+| 3 | Czytelne karty pogody MET i wschodu/zachodu słońca, 4 języki | Merge, bez SQL |
+| 4 | Backend prognozy i geokodowania miast, warunki API, limity/cache/błędy | Merge; konfiguracja tylko jeśli wymagana |
+| 5 | /weather: miasta/szczyty, liczba dni zgodna z API, navbar i sekcja homepage | Merge, bez SQL |
+
+Etap 1 na `fix/sticky-navigation`. Kolejne zależne zmiany bazować po scaleniu
+poprzedniego PR. Open-Meteo jest propozycją dla dłuższej prognozy i geokodowania;
+nie jest jeszcze uruchomione. MET pozostaje działającą integracją. LinkedIn po
+sprawdzeniu wdrożonych widoków; szkice nie są screenami działającej produkcji.
+
+#40 scalony (`bd830f4`), SQL nadal odłożony. Później wyłącznie zbiorcze
+[apply.sql](../catalogue/nonkgp-05-06/apply.sql) → [verify.sql](../catalogue/nonkgp-05-06/verify.sql),
+5 zgodnych wierszy. Nie uruchamiać osobnych 05/06 dodatkowo.
 
 ## Zakończone — nie wykonywać ponownie
 
@@ -54,8 +76,9 @@ Badanie brakującego źródła nie wstrzymuje niezależnych zadań.
 [Parkingi bez wystarczających źródeł](../catalogue/kgp-parking-02/unresolved.json).
 [Odtwarzanie i utrzymanie](remaining-work.md).
 
-Obecny frontend nie zawiera integracji pogodowej, zapisywania/zdobywania szczytów
-ani profilu wysokościowego tras. Istniejące pola elevation_gain_m i dwuwymiarowe
+Historyczny stan przed #33/#34: frontend nie zawierał integracji pogodowej.
+Zapisywania/zdobywania szczytów
+ani profilu wysokościowego tras nadal nie wdrożono. Istniejące pola elevation_gain_m i dwuwymiarowe
 route_geometry nie stanowią same w sobie profilu. Sprawdzenie: aktualny main 397e464,
 przeszukanie źródeł i zależności, bez założenia nieistnienia funkcji tylko na
 podstawie jej niewidoczności na stronie.
@@ -113,14 +136,13 @@ i Anielska Kopa wymagają weryfikacji dokładnego wariantu i dostępu, nie są i
 
 Właściciel chce zbiorczego wgrywania po zebraniu większej liczby pakietów.
 Aktualizować [kolejkę](pending-rollout.md), kontynuować źródła i testy kolejnych
-niezależnych partii. Przy wspólnym oknie: po merge nonkgp-05/apply.sql → verify.sql
-(2 zgodne wiersze). Nie prosić teraz o powtarzanie zamkniętych importów.
+niezależnych partii. Przy wspólnym oknie używać zbiorczego 05-06 opisanego poniżej. Nie prosić teraz o powtarzanie zamkniętych importów.
 
 ## Rozszerzenie #40 — wspólne wgranie 05 + 06
 
 Dodana partia 06: Kalenica, Wieżyca, Czarna Góra. Łącznie z 05 pięć nowych
 par trasa/POI w czterech językach, bez zmian rekordów szczytów. Dzikowiec
 wymaga osobnego przeglądu pasma i tożsamości dwóch wież.
-Po merge #40: nonkgp-05-06/apply.sql → verify.sql, 5 zgodnych wierszy.
+#40 scalony; przy przyszłym imporcie nonkgp-05-06/apply.sql → verify.sql, 5 zgodnych wierszy.
 Wspólny apply jest atomowy. [Instrukcja](../catalogue/nonkgp-05-06/README.md).
 SQL niewykonany; osobnych 05/06 nie uruchamiać jako kolejnych kroków.

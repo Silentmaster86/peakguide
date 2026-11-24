@@ -22,7 +22,6 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 
 	const isTablet = useMedia('(max-width: 999px)');
 	const isMobile = useMedia('(max-width: 699px)');
-	const isTiny = useMedia('(max-width: 400px)');
 
 	const { status, logout } = useAuth();
 	const authed = status === 'authed';
@@ -67,19 +66,9 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 				...(isMobile ? styles.navMobile : null),
 				...(isMobile
 					? {
-							gridTemplateAreas: isTiny
-								? `
-							"left left"
-							"right center"
-							"lang lang"
-						`
-								: `
-							"left left"
-							"right center"
-						`,
+							gridTemplateAreas: `"left left" "right center"`,
 						}
 					: null),
-				...(isMobile ? styles.navNotSticky : null),
 			}}
 		>
 			<div
@@ -93,7 +82,7 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 
 					<div style={styles.brandText}>
 						<div style={styles.brandTitle}>PeakGuide</div>
-						<div style={styles.brandSub}>{t.tagline}</div>
+						{!isMobile && <div style={styles.brandSub}>{t.tagline}</div>}
 					</div>
 				</NavLink>
 			</div>
@@ -127,36 +116,12 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 				{logoutError && <span role='alert'>{accountLabels(lang).logoutFailed}</span>}
 				<DesktopThemeSwitcher lang={uiLang} compact={isTablet} />
 
-				{!isTiny && (
-					<LanguageSwitcherDropdown
-						lang={uiLang}
-						setLang={setUiLang}
-						compact={isTablet}
-					/>
-				)}
+				<LanguageSwitcherDropdown
+					lang={uiLang}
+					setLang={setUiLang}
+					compact={isTablet}
+				/>
 			</div>
-			{isTiny && (
-				<div style={styles.langRow}>
-					{[
-						{ value: 'pl', label: 'PL' },
-						{ value: 'en', label: 'EN' },
-						{ value: 'ua', label: 'UA' },
-						{ value: 'zh', label: 'ZH' },
-					].map((item) => (
-						<button
-							key={item.value}
-							type='button'
-							onClick={() => setUiLang(item.value)}
-							style={{
-								...styles.langBtn,
-								...(uiLang === item.value ? styles.langBtnActive : null),
-							}}
-						>
-							{item.label}
-						</button>
-					))}
-				</div>
-			)}
 			<div
 				style={{
 					...styles.center,
@@ -316,7 +281,7 @@ const styles = {
 		display: 'grid',
 		gridTemplateColumns: '1fr auto',
 		gap: 8,
-		padding: 12,
+		padding: 8,
 		alignItems: 'center',
 		width: '100%',
 	},
@@ -447,30 +412,4 @@ const styles = {
 		background: 'var(--surface-2)',
 	},
 
-	langRow: {
-		gridArea: 'lang',
-		display: 'flex',
-		gap: 6,
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-		flexWrap: 'wrap',
-		paddingTop: 4,
-	},
-
-	langBtn: {
-		...pillBase,
-		height: 28,
-		padding: '0 10px',
-		fontSize: 11,
-		fontWeight: 900,
-		cursor: 'pointer',
-	},
-
-	langBtnActive: {
-		...activePill,
-	},
-
-	navNotSticky: {
-		position: 'relative',
-	},
 };

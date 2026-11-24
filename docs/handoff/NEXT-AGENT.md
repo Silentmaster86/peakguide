@@ -8,9 +8,26 @@ Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
 #37/nonkgp-03 i #38/nonkgp-04 mają potwierdzone wyniki właściciela z 24 listopada
 (zapisane w production-verification.json w folderach pakietów). #39 scalony, bez SQL.
-Partie 05 i 06 są przygotowane w PR #40, **SQL jeszcze niewykonany**. Właściciel chce
+Partie 05 i 06 są scalone w PR #40 (main `bd830f4`), **SQL jeszcze niewykonany**. Właściciel chce
 zbierać więcej gotowych pakietów przed wspólnym wgrywaniem. Nie wstrzymywać
 niezależnej pracy i nie prosić o ponowienie starych importów.
+
+## Zatwierdzony kierunek frontendu — 24 listopada
+
+Właściciel zaakceptował wizualizacje pięciu etapów. Aktualna kolejność PR-ów:
+1. Sticky navbar także na telefonie, kompaktowe menu i język, przewijanie mapy
+   od góry, Wstecz/Dalej i kotwice uwzględniające wysokość nawigacji.
+2. Czytelniejsze kafelki wyników mapy i wspólne markery dużej/małych map.
+3. Karty istniejącej pogody MET oraz „Wschód i zachód słońca” w 4 językach.
+4. Backend prognozy i wyszukiwania miast; weryfikacja warunków dostawcy,
+   limity, walidacja, cache i błędy. Nie aktywować płatnych usług.
+5. Działająca strona /weather, miasta/szczyty, wybór dni zgodny z API,
+   link w navbarze i sekcja pod mapą na homepage.
+
+Etap 1 jest przygotowywany na `fix/sticky-navigation`; nie zmienia bazy ani API.
+Właściciel wykonuje merge; nie wykonywać importów #40 w ramach tych prac.
+Nie dodawać niedziałającego linku Pogoda przed gotową stroną. Publikacja LinkedIn
+(4 języki i rzeczywiste screeny) dopiero po przetestowaniu wdrożonego interfejsu.
 
 ## Wcześniejsze wdrożenia bazy — zakończone
 
