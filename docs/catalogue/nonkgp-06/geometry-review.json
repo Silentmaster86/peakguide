@@ -1,0 +1,65 @@
+[
+  {
+    "peak_slug": "czarna-gora",
+    "source_page": "https://mapa-turystyczna.pl/route/l083",
+    "source_gpx": "https://mapa-turystyczna.pl/route/l083.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "5fc897afde09f8c459c677868c76e22b2c2144271c8299757f594bb160ea3177",
+    "source_semantic_sha256": "b528fe8804f365a260ef05183b57d855129aecc1f5c73a7ace20e05c0d910a96",
+    "points": 264,
+    "segments": 1,
+    "first": [
+      16.765246,
+      50.228595
+    ],
+    "last": [
+      16.805033,
+      50.252191
+    ],
+    "coordinates_sha256": "46a289cdda46d0e7de518db77fd4349f508d356c83dc77f0d61fd16125128941",
+    "verified_at": "2026-11-24T00:00:00Z"
+  },
+  {
+    "peak_slug": "kalenica",
+    "source_page": "https://mapa-turystyczna.pl/route/6vs3",
+    "source_gpx": "https://mapa-turystyczna.pl/route/6vs3.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "64838e8c17735a6170f860b792f877752dbeb738414ae484349bd4298d1c75a0",
+    "source_semantic_sha256": "2c674b479dff626b8d6a02b39b8926021b3e5f8e2a714f4d99db6e334ccf19bc",
+    "points": 113,
+    "segments": 1,
+    "first": [
+      16.526739,
+      50.656125
+    ],
+    "last": [
+      16.546396,
+      50.64279
+    ],
+    "coordinates_sha256": "eabe60743d56f9cbeb1f781bfcc16cf8437858c85df842454c876247f8491bf5",
+    "verified_at": "2026-11-24T00:00:00Z"
+  },
+  {
+    "peak_slug": "wiezyca",
+    "source_page": "https://mapa-turystyczna.pl/route?q=50.8925670,16.7269250;50.8867150,16.7288170",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.8925670,16.7269250;50.8867150,16.7288170",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "bf77605550d9599c8a832c79da5d3e47598c375ab71277521ea3f228584ac074",
+    "source_semantic_sha256": "ee0cf5b0e34be7f198ba85760001d02d2d91202ae0d5ec843d49d5d4e4a845fc",
+    "points": 26,
+    "segments": 1,
+    "first": [
+      16.726925,
+      50.892567
+    ],
+    "last": [
+      16.728817,
+      50.886715
+    ],
+    "coordinates_sha256": "29c7ec0ba3a282020f3f5994ba3a140f2bb4ea234e47baac9312acf6113bd979",
+    "verified_at": "2026-11-24T00:00:00Z"
+  }
+]

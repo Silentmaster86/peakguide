@@ -1,7 +1,10 @@
 # Poza KGP — partia 03
 
-**PR #37 scalony; SQL odłożony przez właściciela z powodu niedostępności Supabase.**
-Brak potwierdzenia wykonania apply/verify. [Kolejka wdrożeń](../../operations/pending-rollout.md). Ćwilin (72), Łyżka
+**PR #37 scalony i wdrożony.** Właściciel przekazał verify 24 listopada 2026:
+5/5 wierszy, po trasie/POI/geometrii, PL/EN/UA/ZH, obie kontrole true. Nie ponawiać
+SQL; poniższe kroki zachowano jako procedurę pakietu. [Stan wdrożeń](../../operations/pending-rollout.md).
+
+Ćwilin (72), Łyżka
 (71, zachowany slug `lakowa-wyspowy`), Mała Babia Góra (61), Polica (62), Halicz
 (64): **5 tras/GPX, 5 POI, 40 tekstów PL/EN/UA/ZH, 1203 punkty źródłowe**.
 Każda trasa to jeden kierunek wejścia. Trasy nie zmieniają rekordów szczytów.
@@ -10,7 +13,7 @@ Poprzednią partię `nonkgp-02` / PR #36 właściciel wdrożył i potwierdził 2
 4/4 review_matches=true oraz package_applied=true, trasy/POI/geometrie po 1,
 cztery języki. Nie uruchamiać ponownie starych importów ani ich rollbacków.
 
-## Wdrożenie po merge
+## Procedura pakietu — już wykonana
 
 1. Zachowaj aktualną kopię bazy. Otwórz Supabase SQL Editor i uruchom cały
    `docs/catalogue/nonkgp-03/apply.sql` jako właściciel.

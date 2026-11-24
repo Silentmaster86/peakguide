@@ -1,0 +1,44 @@
+[
+  {
+    "peak_slug": "stog-izerski",
+    "source_page": "https://mapa-turystyczna.pl/route/mau3",
+    "source_gpx": "https://mapa-turystyczna.pl/route/mau3.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "f3e56bdaf6fc83c1998f7534a0510b69d79226435537bbef990c69760f1ca47a",
+    "source_semantic_sha256": "d097c1dd305251b5607ebebc28421b14bf1fbdaeb355703ef049793347888c16",
+    "points": 186,
+    "segments": 1,
+    "first": [
+      15.334311,
+      50.907326
+    ],
+    "last": [
+      15.303837,
+      50.890964
+    ],
+    "coordinates_sha256": "3ff0a51fa2852f773930750289deb2ff407a92164bb6f4fa89a74f3e070f4c3b",
+    "verified_at": "2026-11-24T00:00:00Z"
+  },
+  {
+    "peak_slug": "wysoki-kamien",
+    "source_page": "https://mapa-turystyczna.pl/route/iv1r",
+    "source_gpx": "https://mapa-turystyczna.pl/route/iv1r.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "187f9cb430558abf6980d8e56d221c88d8f0f62ae133d4de539242338847f395",
+    "source_semantic_sha256": "96a600400083f3b27f661c21a7c7f77ff625ee7fde1eb8430e2a3544535d70f2",
+    "points": 159,
+    "segments": 1,
+    "first": [
+      15.517885,
+      50.829702
+    ],
+    "last": [
+      15.491945,
+      50.845118
+    ],
+    "coordinates_sha256": "73ef1829007f12a65cdbdc03bd62d104cc0e65737d867d2327cfa5163974745d",
+    "verified_at": "2026-11-24T00:00:00Z"
+  }
+]

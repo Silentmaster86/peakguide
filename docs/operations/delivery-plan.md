@@ -98,22 +98,29 @@ Pogoda i światło dzienne z #33/#34 są już scalone i zgłoszone jako działaj
 wcześniejsze opisy stanu main 397e464 powyżej są historyczne.
 
 
-## Partia nonkgp-03 — merge wykonany, SQL odłożony
+## Partie nonkgp-03 i nonkgp-04 — zamknięte
 
-[Pakiet](../catalogue/nonkgp-03/README.md): Ćwilin, Łyżka, Mała Babia Góra,
-Polica i Halicz. 5 tras/GPX, 5 POI, 40 tekstów, 1203 punkty; wszystkie pięć
-rekordów kolejki objęte. PR #37 scalony; właściciel zgłosił niedostępność Supabase.
-Do wykonania pozostają nonkgp-03/apply.sql → verify.sql. Brak potwierdzenia importu. Parametry opisują wyłącznie określone odcinki wejścia,
-bez dolinnego podejścia do Markowych Szczawin i bez zejść. Dalsze karty praktyczne,
-parkingi i brakujące korekty to osobne etapy, nie są domyślnie uznane za ukończone.
+PR #37/#38 scalone. Właściciel przekazał 24 listopada pełne verify: 5/5 i 4/4
+wierszy, po trasie/POI/geometrii, cztery języki, obie kontrole true. Nie ponawiać
+SQL. Srebrna Góra pozostaje poza importem 04 ze względu na tożsamość.
+#39 scalony: spójny czas na kafelkach i w szczegółach, bez SQL.
 
+## Następna partia — nonkgp-05
 
-## Następna partia — nonkgp-04 i kontynuacja podczas awarii
+[Pakiet](../catalogue/nonkgp-05/README.md): Stóg Izerski i Wysoki Kamień,
+2 trasy z GPX, 2 POI, 16 tekstów. Bez edycji szczytów. Iwinka, Postawna
+i Anielska Kopa wymagają weryfikacji dokładnego wariantu i dostępu, nie są importowane.
 
-[Pakiet](../catalogue/nonkgp-04/README.md): cztery pary tras/POI w Gorcach,
-Bieszczadach i Górach Bardzkich; dokładne odcinki zamiast obietnicy wejścia na
-zamknięty/niedostępny wierzchołek. Srebrna Góra wymaga osobnej kontroli tożsamości.
-Niezależny od produkcyjnego SQL #37; lokalnie sprawdzono obie kolejności importu.
-Merge nowego PR → nonkgp-04/apply.sql → verify.sql, gdy Supabase będzie dostępny.
-[Kolejka wdrożeń](pending-rollout.md) zbiera zaległe kroki. Właściciel polecił
-pozostawiać te instrukcje i kontynuować kolejne niezależne zadania podczas awarii.
+Właściciel chce zbiorczego wgrywania po zebraniu większej liczby pakietów.
+Aktualizować [kolejkę](pending-rollout.md), kontynuować źródła i testy kolejnych
+niezależnych partii. Przy wspólnym oknie: po merge nonkgp-05/apply.sql → verify.sql
+(2 zgodne wiersze). Nie prosić teraz o powtarzanie zamkniętych importów.
+
+## Rozszerzenie #40 — wspólne wgranie 05 + 06
+
+Dodana partia 06: Kalenica, Wieżyca, Czarna Góra. Łącznie z 05 pięć nowych
+par trasa/POI w czterech językach, bez zmian rekordów szczytów. Dzikowiec
+wymaga osobnego przeglądu pasma i tożsamości dwóch wież.
+Po merge #40: nonkgp-05-06/apply.sql → verify.sql, 5 zgodnych wierszy.
+Wspólny apply jest atomowy. [Instrukcja](../catalogue/nonkgp-05-06/README.md).
+SQL niewykonany; osobnych 05/06 nie uruchamiać jako kolejnych kroków.

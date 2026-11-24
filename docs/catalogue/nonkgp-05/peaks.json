@@ -1,0 +1,22 @@
+[
+  {
+    "id": 33,
+    "slug": "stog-izerski",
+    "range_id": 3,
+    "latitude": 50.89058,
+    "longitude": 15.30344,
+    "elevation_m": 1105,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 34,
+    "slug": "wysoki-kamien",
+    "range_id": 3,
+    "latitude": 50.845556,
+    "longitude": 15.491389,
+    "elevation_m": 1058,
+    "active": true,
+    "is_korona": false
+  }
+]

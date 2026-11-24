@@ -1,0 +1,91 @@
+{
+  "reported_at": "2026-11-24",
+  "source": "Owner pasted complete production verify result in conversation; not an agent production mutation or fresh administrative query.",
+  "pull_request": 38,
+  "rows": [
+    {
+      "peak_slug": "jaworzyna-kamienicka",
+      "range_slug": "gorce",
+      "trails": 1,
+      "pois": 1,
+      "mapped_trails": 1,
+      "trail_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "poi_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "review_matches": true,
+      "package_applied": true
+    },
+    {
+      "peak_slug": "jelenia-kopa",
+      "range_slug": "gory-bardzkie",
+      "trails": 1,
+      "pois": 1,
+      "mapped_trails": 1,
+      "trail_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "poi_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "review_matches": true,
+      "package_applied": true
+    },
+    {
+      "peak_slug": "krzemien",
+      "range_slug": "bieszczady-zachodnie",
+      "trails": 1,
+      "pois": 1,
+      "mapped_trails": 1,
+      "trail_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "poi_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "review_matches": true,
+      "package_applied": true
+    },
+    {
+      "peak_slug": "kudlon",
+      "range_slug": "gorce",
+      "trails": 1,
+      "pois": 1,
+      "mapped_trails": 1,
+      "trail_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "poi_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "review_matches": true,
+      "package_applied": true
+    }
+  ]
+}
