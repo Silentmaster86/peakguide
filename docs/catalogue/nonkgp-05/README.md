@@ -55,14 +55,12 @@ Mapy odznak dla Postawnej/Anielskiej Kopy służą jako tropy, a nie potwierdzon
 lub zgoda na poruszanie się poza znakowanym szlakiem. Kolejny etap: dokładny
 wariant dojścia i dostęp; ewentualne dojście tylko w rejon musi być tak nazwane.
 
-## Wspólne okno wdrożenia — później
+## Wspólne okno wdrożenia — partie 05 i 06
 
-1. Właściciel scala PR po zielonych testach. Agent nie scala ani nie wykonuje SQL produkcyjnego.
-2. Gdy zbierzemy więcej gotowych pakietów, zachowaj aktualny backup i wklej cały
-   `docs/catalogue/nonkgp-05/apply.sql` do Supabase SQL Editor.
-3. W osobnym zapytaniu uruchom cały `docs/catalogue/nonkgp-05/verify.sql`.
-4. Oczekiwane 2 wiersze: trails=1, pois=1, mapped_trails=1, oba zestawy języków
-   `[en,pl,ua,zh]`, review_matches=true i package_applied=true.
+PR #40 został rozszerzony o Kalenicę, Wieżycę i Czarną Górę. Zalecana procedura:
+[zbiorczy apply i verify](../nonkgp-05-06/README.md) — jedno wklejenie importu,
+jedno kontroli, łącznie pięć zgodnych wierszy. SQL niewykonany. Osobne apply/verify
+05 pozostają alternatywą (2 wiersze), nie kolejnymi krokami po zbiorczym pliku.
 
 `rollback.sql` jest narzędziem awaryjnym, nie kolejnym krokiem. Import jest atomowy,
 ASCII-only, kontroluje pełną tożsamość rodziców i odmawia przy istniejących treściach,

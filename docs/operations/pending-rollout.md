@@ -13,13 +13,18 @@ sam scala PR-y i wykonuje produkcyjny SQL. Nie tworzyć automatycznego harmonogr
 
 | Pakiet / merge | SQL przy wspólnym wdrożeniu | Oczekiwany wynik |
 | --- | --- | --- |
-| `nonkgp-05`, [PR gałęzi data/nonkgp-05](https://github.com/Silentmaster86/peakguide/pulls?q=is%3Apr+head%3Adata%2Fnonkgp-05). Przygotowany; najpierw merge po zielonym CI. **SQL niewykonany; do zbiorczego okna.** | Cały [apply.sql](../catalogue/nonkgp-05/apply.sql), potem [verify.sql](../catalogue/nonkgp-05/verify.sql). | 2 wiersze: Stóg Izerski i Wysoki Kamień; trails/pois/mapped_trails=1, oba zestawy 4 języków, review_matches/package_applied=true. |
+| **[#40](https://github.com/Silentmaster86/peakguide/pull/40)**: partie `nonkgp-05` + `nonkgp-06`. Najpierw merge po zielonym CI. **SQL niewykonany.** | Cały zbiorczy [apply.sql](../catalogue/nonkgp-05-06/apply.sql), potem [verify.sql](../catalogue/nonkgp-05-06/verify.sql). | 5 wierszy: Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. W każdym po trasie/POI/geometrii, 4 języki, obie kontrole true. |
+
+Są już dwie gotowe partie do wspólnego okna: jedna transakcja i jeden plik verify.
+Szczegóły: [instrukcja](../catalogue/nonkgp-05-06/README.md). Osobne pliki 05/06 są
+alternatywą, nie dodatkowymi krokami. Kolejność zaległych #37/#38 nie dotyczy tego
+wdrożenia — oba zakończono. Dzikowiec i trzy niezweryfikowane dojścia z 05 są wyłączone.
 
 Przy kopiowaniu: GitHub → plik → **Raw** → cała treść do nowego zapytania SQL Editor.
 Zachowaj aktualny backup. Nie uruchamiaj rollback.sql jako kolejnego kroku.
 Konfliktu/edycji nie omijaj; zachowaj komunikat. `Success` bez verify nie zamyka zadania.
-Merge i zielone CI nie oznaczają importu do produkcji. Pakiet 05 nie wymaga ponownego
-uruchomienia 04; obie kolejności testowano na lokalnej bazie.
+Merge i zielone CI nie oznaczają importu do produkcji. Wspólny plik zachowuje osobne
+rejestry i wszystkie kontrole; błąd drugiej partii cofa nowe zmiany pierwszej.
 
 ## Potwierdzone — nie ponawiać
 

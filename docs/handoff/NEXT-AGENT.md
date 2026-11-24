@@ -8,7 +8,7 @@ Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
 #37/nonkgp-03 i #38/nonkgp-04 mają potwierdzone wyniki właściciela z 24 listopada
 (zapisane w production-verification.json w folderach pakietów). #39 scalony, bez SQL.
-Nowa partia 05 jest przygotowana, **SQL jeszcze niewykonany**. Właściciel chce
+Partie 05 i 06 są przygotowane w PR #40, **SQL jeszcze niewykonany**. Właściciel chce
 zbierać więcej gotowych pakietów przed wspólnym wgrywaniem. Nie wstrzymywać
 niezależnej pracy i nie prosić o ponowienie starych importów.
 
@@ -298,3 +298,21 @@ Kontynuować niezależne prace; nie zatrzymywać na każdym małym imporcie.
 [Kolejka](../operations/pending-rollout.md) rozróżnia merge i SQL. #37/#38 są już
 potwierdzone, #39 scalony i nie wymaga SQL. Kolejne tożsamości wybierać po
 ponownym odczycie publicznego katalogu, nie według nieaktualnych liczników.
+
+## Rozszerzenie PR #40 — partia 06 i jeden import zbiorczy
+
+[Partia 06](../catalogue/nonkgp-06/README.md): Czarna Góra, Kalenica i Wieżyca,
+3 trasy/GPX, 3 POI, 24 teksty, 403 punkty. W połączeniu z 05: pięć szczytów,
+5 tras, 5 POI, 40 tekstów, 748 punktów. Bez zmian rodziców i polityk.
+
+Zalecane pliki właściciela po merge #40: [nonkgp-05-06/apply.sql](../catalogue/nonkgp-05-06/apply.sql)
+i [verify.sql](../catalogue/nonkgp-05-06/verify.sql), 5 zgodnych wierszy. Jedna
+transakcja, przetestowany błąd w drugiej partii cofa nowe zmiany pierwszej.
+Nie prosić o cztery osobne wklejenia ani ponowienie #37/#38. Import niewykonany.
+
+Dzikowiec id52 wyłączony: istniejące pasmo Wałbrzyskie różni się od klasyfikacji
+gminy/PTTK Kamienne; stara i nowa wieża są osobnymi obiektami. Zachowano rekord
+i zapisano źródła w unresolved.json. Nie naprawiać tożsamości jako efektu ubocznego.
+Kalenica: wariant 6vs3 przez Zimną Polankę, nie Zygmuntówkę. Wieżyca: krótki
+pełny eksport 0,7 km, nie długa karta 3rqa1 przez Ślężę. Czarna Góra: dawna wieża
+została rozebrana, POI nie obiecuje czynnej konstrukcji.

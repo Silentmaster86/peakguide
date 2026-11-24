@@ -1,0 +1,23 @@
+[
+  {
+    "peak": {
+      "id": 52,
+      "slug": "dzikowiec",
+      "range_id": 12,
+      "latitude": 50.723889,
+      "longitude": 16.205833,
+      "elevation_m": 836,
+      "active": true,
+      "is_korona": false
+    },
+    "status": "not_imported",
+    "reason": "Current range_id=12 (gory-walbrzyskie) differs from municipality/PTTK classification in Gory Kamienne. The 2014 slope tower and 2025 summit tower are different objects; old PTTK marker must not silently become the new tower.",
+    "next_step": "Review guarded range-only correction separately, and independently verify exact POI positions and tower identity. Do not change coordinates or weather allowlist by inference.",
+    "sources": [
+      "https://boguszow-gorce.pl/",
+      "https://boguszow-gorce.pl/masyw-dzikowca-i-lesistej-wielkiej.html",
+      "https://dolnoslaskie.szlaki.pttk.pl/1198-dolnoslaskie-dzikowiec-wieza-widokowa"
+    ],
+    "reviewed_at": "2026-11-24"
+  }
+]

@@ -115,3 +115,12 @@ Właściciel chce zbiorczego wgrywania po zebraniu większej liczby pakietów.
 Aktualizować [kolejkę](pending-rollout.md), kontynuować źródła i testy kolejnych
 niezależnych partii. Przy wspólnym oknie: po merge nonkgp-05/apply.sql → verify.sql
 (2 zgodne wiersze). Nie prosić teraz o powtarzanie zamkniętych importów.
+
+## Rozszerzenie #40 — wspólne wgranie 05 + 06
+
+Dodana partia 06: Kalenica, Wieżyca, Czarna Góra. Łącznie z 05 pięć nowych
+par trasa/POI w czterech językach, bez zmian rekordów szczytów. Dzikowiec
+wymaga osobnego przeglądu pasma i tożsamości dwóch wież.
+Po merge #40: nonkgp-05-06/apply.sql → verify.sql, 5 zgodnych wierszy.
+Wspólny apply jest atomowy. [Instrukcja](../catalogue/nonkgp-05-06/README.md).
+SQL niewykonany; osobnych 05/06 nie uruchamiać jako kolejnych kroków.

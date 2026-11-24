@@ -1,0 +1,32 @@
+[
+  {
+    "id": 31,
+    "slug": "czarna-gora",
+    "range_id": 2,
+    "latitude": 50.251864,
+    "longitude": 16.804889,
+    "elevation_m": 1205,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 39,
+    "slug": "kalenica",
+    "range_id": 6,
+    "latitude": 50.642778,
+    "longitude": 16.546389,
+    "elevation_m": 964,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 82,
+    "slug": "wiezyca",
+    "range_id": 27,
+    "latitude": 50.886714,
+    "longitude": 16.729119,
+    "elevation_m": 415,
+    "active": true,
+    "is_korona": false
+  }
+]
