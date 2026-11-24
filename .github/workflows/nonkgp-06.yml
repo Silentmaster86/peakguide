@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'docs/catalogue/nonkgp-06/**'
+      - 'docs/catalogue/nonkgp-05/**'
+      - 'scripts/build_nonkgp_05.py'
       - 'docs/catalogue/nonkgp-05-06/**'
       - 'scripts/build_nonkgp_05_06.py'
       - 'scripts/build_nonkgp_06.py'
@@ -13,6 +15,8 @@ on:
     branches: [main]
     paths:
       - 'docs/catalogue/nonkgp-06/**'
+      - 'docs/catalogue/nonkgp-05/**'
+      - 'scripts/build_nonkgp_05.py'
       - 'docs/catalogue/nonkgp-05-06/**'
       - 'scripts/build_nonkgp_05_06.py'
       - 'scripts/build_nonkgp_06.py'
