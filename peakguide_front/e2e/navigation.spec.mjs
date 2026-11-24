@@ -59,13 +59,19 @@ test('Back restores a scrolled anchor page after catalogue loading', async ({ pa
  await page.addInitScript(() => localStorage.setItem('peakguide_lang', 'en'));
  await page.goto('/#featured');
  await expect(page.locator('.featured-peak-card:not(.featured-peak-skeleton)').first()).toBeVisible();
+ await expect.poll(async () => {
+  const target = await page.locator('#featured').boundingBox();
+  const nav = await page.locator('#main-nav').boundingBox();
+  return Math.abs(target.y - (nav.y + nav.height + 12));
+ }).toBeLessThan(4);
  const anchorTop = await page.evaluate(() => scrollY);
  await page.mouse.wheel(0, 400);
- await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(anchorTop + 200);
+ await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(anchorTop + 390);
  const before = await page.evaluate(() => scrollY);
  await page.locator('#main-nav').getByRole('button', { name: 'More', exact: true }).click();
  await page.getByRole('menuitem', { name: 'Map', exact: true }).click();
  await expect(page).toHaveURL('/map');
+ await expect(page.locator('.explore-map-canvas')).toBeVisible();
  await page.goBack();
  await expect(page).toHaveURL('/#featured');
  await expect(page.locator('.featured-peak-card:not(.featured-peak-skeleton)').first()).toBeVisible();
