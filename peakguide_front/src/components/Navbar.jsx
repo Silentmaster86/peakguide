@@ -30,7 +30,10 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 	const busy = status === 'loading';
 
 	const moreItems = [
-    { key: 'map', href: '/map', label: ({pl:'Mapa',en:'Map',ua:'Мапа',zh:'地图'})[lang] || 'Mapa' },
+		...(isTablet ? [
+      { key: 'map', href: '/map', label: t.map },
+      { key: 'weather', href: '/weather', label: t.weather },
+    ] : []),
 		...(isTablet
 			? [
 				{ key: 'peaks', href: '/peaks', label: t.peaks },
@@ -145,6 +148,8 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 						<NavLink to='/trails' style={styles.navLink}>
 							{t.routes}
 						</NavLink>
+            <NavLink to='/map' style={styles.navLink}>{t.map}</NavLink>
+            <NavLink to='/weather' style={styles.navLink}>{t.weather}</NavLink>
 					</>
 				)}
 
@@ -157,7 +162,7 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 function getLabels(lang) {
 	const dict = {
     pl: {
-      tagline: 'Twój przewodnik po górach',
+      tagline: 'Twój przewodnik po górach', map: 'Mapa', weather: 'Pogoda',
       peaks: 'Szczyty',
       ranges: 'Pasma',
       routes: 'Trasy',
@@ -176,7 +181,7 @@ function getLabels(lang) {
       sessionLoading: 'Ładowanie sesji...',
     },
     en: {
-  tagline: 'Your mountain guide',
+  tagline: 'Your mountain guide', map: 'Map', weather: 'Weather',
   peaks: 'Peaks',
   ranges: 'Ranges',
       routes: 'Trails',
@@ -195,7 +200,7 @@ function getLabels(lang) {
       sessionLoading: 'Loading session...',
     },
     ua: {
-      tagline: 'Твій путівник по горах',
+      tagline: 'Твій путівник по горах', map: 'Мапа', weather: 'Погода',
       peaks: 'Вершини',
       ranges: 'Хребти',
       routes: 'Маршрути',
@@ -214,7 +219,7 @@ function getLabels(lang) {
       sessionLoading: 'Завантаження сесії…',
     },
     zh: {
-      tagline: '你的登山指南',
+      tagline: '你的登山指南', map: '地图', weather: '天气',
       peaks: '山峰',
       ranges: '山脉',
       routes: '路线',

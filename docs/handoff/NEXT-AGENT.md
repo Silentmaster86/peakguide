@@ -25,11 +25,14 @@ Właściciel zaakceptował wizualizacje pięciu etapów. Aktualna kolejność PR
    link w navbarze i sekcja pod mapą na homepage.
 
 Etapy 1 i 2 scalone w #41/#42; właściciel i GitHub potwierdzili 25 listopada.
-Etap 3 na `ui/weather-sun-widgets` (main `b0a8860`): nowe karty istniejącej pogody
-i słońca, bez zmian backendu/API. Etapy 4/5 nadal do wykonania; /weather jeszcze nie ma.
-Właściciel wykonuje merge; nie wykonywać importów #40 w ramach tych prac.
-Nie dodawać niedziałającego linku Pogoda przed gotową stroną. Publikacja LinkedIn
-(4 języki i rzeczywiste screeny) dopiero po przetestowaniu wdrożonego interfejsu.
+Etap 3 scalony w #43; #44 poprawia położenie zakładek i pierwsze wejście do trasy.
+Oba merge potwierdzono przez GitHub. Etapy 4 i 5 połączone w #45 na
+`feat/weather-search-api`, baza main `e500c36`: backend Open-Meteo i gotowa strona
+`/weather`, 4 języki, wyszukiwanie miast i szczytów, 3/5/10/15 dni, navbar oraz
+sekcja pod mapą homepage. Kontrakt i ograniczenia: `docs/operations/weather.md`.
+Właściciel wykonuje tylko merge; istniejąca flaga pogody wystarcza. Nie oznaczać
+#45 jako wdrożonego bez odczytu GitHub/potwierdzenia. SQL #40 pozostaje odłożony.
+Publikacja LinkedIn (4 języki i rzeczywiste screeny) po sprawdzeniu wdrożonego UI.
 
 ## Wcześniejsze wdrożenia bazy — zakończone
 

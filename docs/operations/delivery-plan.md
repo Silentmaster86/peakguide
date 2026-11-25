@@ -4,10 +4,11 @@ Stan: 25 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
 
-## Bieżący priorytet — pięć PR-ów frontendu
+## Bieżący priorytet — pięć etapów frontendu
 
 Właściciel zaakceptował makiety. Ten etap ma pierwszeństwo przed następnymi
-importami katalogu, które na razie są odłożone. Pięć PR-ów w kolejności:
+importami katalogu, które na razie są odłożone. Pięć etapów w kolejności;
+etapy 4 i 5 łączymy w jeden PR #45, aby udostępnić gotową funkcję jednym merge:
 
 | Etap | Zakres | Właściciel |
 | --- | --- | --- |
@@ -19,11 +20,15 @@ importami katalogu, które na razie są odłożone. Pięć PR-ów w kolejności:
 
 Etapy 1 i 2 scalone: [#41](https://github.com/Silentmaster86/peakguide/pull/41)
 i [#42](https://github.com/Silentmaster86/peakguide/pull/42). Właściciel potwierdził
-25 listopada; odczyt GitHub potwierdza merge. Etap 3 na `ui/weather-sun-widgets`,
-na main `b0a8860`: grafika obecnej prognozy MET i obliczeń słońca, bez SQL/zmian API.
-Kolejne zależne zmiany bazować po scaleniu poprzedniego PR. Open-Meteo jest propozycją dla dłuższej prognozy i geokodowania;
-nie jest jeszcze uruchomione. MET pozostaje działającą integracją. LinkedIn po
-sprawdzeniu wdrożonych widoków; szkice nie są screenami działającej produkcji.
+25 listopada; odczyt GitHub potwierdza merge. Etap 3 scalony w #43; w #44
+scalono poprawkę zakładek i linków tras. Merge obu
+potwierdzony przez właściciela i GitHub. Etapy 4 i 5 przygotowane razem w
+[#45](https://github.com/Silentmaster86/peakguide/pull/45), na main `e500c36`:
+backend Open-Meteo i strona `/weather`, szczyty/miasta, 3/5/10/15 dni zależnie od
+rzeczywistych danych, link obok Mapy i sekcja pod mapą homepage. Bez SQL;
+istniejące `PEAKGUIDE_WEATHER_ENABLED=true` wystarcza. MET pozostaje integracją
+krótkiej prognozy w szczegółach szczytu. #45 czeka na merge właściciela.
+LinkedIn po sprawdzeniu wdrożonych widoków; szkice nie są screenami produkcji.
 
 #40 scalony (`bd830f4`), SQL nadal odłożony. Później wyłącznie zbiorcze
 [apply.sql](../catalogue/nonkgp-05-06/apply.sql) → [verify.sql](../catalogue/nonkgp-05-06/verify.sql),

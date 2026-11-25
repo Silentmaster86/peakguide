@@ -15,7 +15,7 @@ async function slugs(table, filter = '') {
   }
 }
 const [peaks, ranges] = await Promise.all([slugs('peaks', '&active=eq.true'), slugs('mountain_ranges')]);
-const paths = ['/', '/map', '/peaks', '/ranges', '/trails', '/about', ...peaks.map((slug) => `/peaks/${slug}`), ...ranges.map((slug) => `/ranges/${slug}`)];
+const paths = ['/', '/map', '/weather', '/peaks', '/ranges', '/trails', '/about', ...peaks.map((slug) => `/peaks/${slug}`), ...ranges.map((slug) => `/ranges/${slug}`)];
 const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...new Set(paths)].map((path) => `  <url><loc>https://peak-guide.netlify.app${path}</loc></url>`).join('\n')}\n</urlset>\n`;
 await writeFile('public/sitemap.xml', xml);
 console.log(`Sitemap: ${new Set(paths).size} URLs (${peaks.length} peaks, ${ranges.length} ranges).`);
