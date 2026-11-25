@@ -1,6 +1,6 @@
 # Kolejne wydania PeakGuide — plan wykonawczy
 
-Stan: 24 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
+Stan: 25 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
 
@@ -17,8 +17,11 @@ importami katalogu, które na razie są odłożone. Pięć PR-ów w kolejności:
 | 4 | Backend prognozy i geokodowania miast, warunki API, limity/cache/błędy | Merge; konfiguracja tylko jeśli wymagana |
 | 5 | /weather: miasta/szczyty, liczba dni zgodna z API, navbar i sekcja homepage | Merge, bez SQL |
 
-Etap 1 na `fix/sticky-navigation`. Kolejne zależne zmiany bazować po scaleniu
-poprzedniego PR. Open-Meteo jest propozycją dla dłuższej prognozy i geokodowania;
+Etapy 1 i 2 scalone: [#41](https://github.com/Silentmaster86/peakguide/pull/41)
+i [#42](https://github.com/Silentmaster86/peakguide/pull/42). Właściciel potwierdził
+25 listopada; odczyt GitHub potwierdza merge. Etap 3 na `ui/weather-sun-widgets`,
+na main `b0a8860`: grafika obecnej prognozy MET i obliczeń słońca, bez SQL/zmian API.
+Kolejne zależne zmiany bazować po scaleniu poprzedniego PR. Open-Meteo jest propozycją dla dłuższej prognozy i geokodowania;
 nie jest jeszcze uruchomione. MET pozostaje działającą integracją. LinkedIn po
 sprawdzeniu wdrożonych widoków; szkice nie są screenami działającej produkcji.
 

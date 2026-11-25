@@ -1,17 +1,38 @@
-.peak-weather { margin-top: 18px; padding: clamp(12px, 3vw, 20px); border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); min-width: 0; }
-.peak-weather h3 { margin: 0 0 10px; }
+.peak-weather {
+  margin-top: 18px;
+  padding: clamp(14px, 3vw, 24px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--menu-bg);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+  min-width: 0;
+}
+.peak-weather-heading { display: flex; gap: 12px; align-items: center; }
+.peak-weather-heading h3 { margin: 0; font-size: 1.2rem; line-height: 1.3; }
+.peak-weather-title-icon { width: 32px; height: 32px; flex: 0 0 32px; color: var(--primary); }
 .peak-weather p { line-height: 1.6; overflow-wrap: anywhere; }
-.peak-weather button { color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; cursor: pointer; min-height: 44px; font: inherit; }
+.peak-weather-intro { color: var(--muted); font-size: .9rem; }
+.peak-weather button { color: var(--on-primary); background: var(--primary); border: 1px solid var(--primary); border-radius: 12px; padding: 11px 18px; cursor: pointer; min-height: 44px; font: inherit; font-weight: 700; }
 .peak-weather :is(button, summary, a, [tabindex]):focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
 .peak-weather a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
-.peak-weather-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.peak-weather-metrics div { border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
-.peak-weather-metrics dt { font-size: .9rem; overflow-wrap: anywhere; }
-.peak-weather-metrics dd { margin: 8px 0 0; font-size: 1.25rem; font-weight: 700; }
-.peak-weather summary { cursor: pointer; padding: 12px 0; }
+.peak-weather-forecast-time { display: grid; gap: 5px; margin-top: 20px; font-size: .85rem; color: var(--muted); }
+.peak-weather-forecast-time strong { color: var(--text); font-size: 1rem; }
+.peak-weather-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0 20px; }
+.peak-weather-metric { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; border: 1px solid var(--border); border-radius: 16px; padding: 16px; background: var(--wash); }
+.peak-weather-metric--temperature { background: color-mix(in srgb,var(--primary) 9%,var(--menu-bg)); border-color: color-mix(in srgb,var(--primary) 30%,var(--border)); }
+.peak-weather-metrics dt { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; font-size: .85rem; line-height: 1.4; overflow-wrap: anywhere; }
+.peak-weather-metrics dt svg { width: 24px; height: 24px; flex: 0 0 24px; color: var(--primary); }
+.peak-weather-metrics dd { margin: 0; font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+.peak-weather-metric--temperature dd { font-size: clamp(1.6rem,4vw,2.2rem); }
+.peak-weather details { border-top: 1px solid var(--border); }
+.peak-weather summary { cursor: pointer; padding: 14px 0; font-size: .9rem; font-weight: 700; overflow-wrap: anywhere; }
+.peak-weather-model-details p { color: var(--muted); font-size: .85rem; }
 .peak-weather-scroll { max-width: 100%; overflow: auto; max-height: 420px; }
 .peak-weather table { border-collapse: collapse; font-size: .9rem; width: 100%; }
 .peak-weather th, .peak-weather td { padding: 10px; text-align: start; border-bottom: 1px solid var(--border); }
 .peak-weather th { min-width: 95px; }
-.peak-weather-note, .peak-weather-source { font-size: .9rem; }
-@media (max-width: 360px) { .peak-weather-metrics { grid-template-columns: 1fr; } }
+.peak-weather-note { padding: 12px; border-radius: 12px; background: var(--wash); font-size: .85rem; }
+.peak-weather-source { color: var(--muted); font-size: .8rem; }
+
+@media (max-width:360px) { .peak-weather-metrics { grid-template-columns: 1fr; } }

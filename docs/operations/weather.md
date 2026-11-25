@@ -85,3 +85,14 @@ Testy używają atrap dostawcy i nie potwierdzają produkcyjnej konfiguracji Net
 ani bieżących warunków meteorologicznych. Lokalnie również sprawdzono bundlowanie
 funkcji esbuild do ESM. Serwer Vite nie wykonuje funkcji Netlify; do ręcznego testu
 całości użyć Netlify Dev lub Deploy Preview po akceptacji warunków.
+
+
+## Odświeżona karta — 25 listopada 2026
+
+Cztery kafelki z piktogramami parametrów i większymi wartościami; termin prognozy
+oraz strefa są widoczne nad nimi. Punkt/wysokość i daty modelu przeniesiono do
+rozwijanych szczegółów. Tabela godzinowa, źródło, licencja, komunikaty braku danych,
+błędów i nieaktualnego modelu pozostają dostępne. Ikony oznaczają parametry,
+nie wymyślone warunki na niebie. Nadal prognoza modelowa, pobierana po kliknięciu.
+Ten etap nie zmienia backendu, dostawcy ani istniejącej konfiguracji Netlify.
+Strona pogody i geokodowanie miast są osobnymi, następnymi etapami (docelowo `/weather`).

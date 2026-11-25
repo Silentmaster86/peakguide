@@ -1,6 +1,6 @@
 # Kolejka wdrożeń — merge i SQL osobno
 
-Stan: 24 listopada 2026. Właściciel potwierdził verify #37 (5/5) i #38 (4/4):
+Stan: 25 listopada 2026. Właściciel potwierdził verify #37 (5/5) i #38 (4/4):
 po 1 trasie, POI i geometrii, PL/EN/UA/ZH, review_matches/package_applied=true.
 **Nie ma już zaległego SQL z #37/#38. Nie powtarzać importów.** #39 scalony, bez SQL.
 
@@ -39,6 +39,7 @@ rejestry i wszystkie kontrole; błąd drugiej partii cofa nowe zmiany pierwszej.
 - `nonkgp-03` / #37: 5/5 wierszy zgodnych, właściciel przekazał verify 24 listopada.
 - `nonkgp-04` / #38: 4/4 wiersze zgodne, właściciel przekazał verify 24 listopada.
 - #39: scalona poprawka formatowania czasu, nie wymaga SQL.
+- #41/#42: navbar, przewijanie, kafelki mapy i spójne markery scalone; bez SQL.
 - #33/#34: pogoda i światło dzienne zgłoszone przez właściciela jako działające.
 
 ## Przy następnej awarii lub odłożeniu wdrożenia
