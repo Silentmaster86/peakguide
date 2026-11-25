@@ -1,11 +1,20 @@
 # Wspólne wgrywanie 05 + 06 — pięć szczytów
 
-**SQL niewykonany.** Dwa rozłączne, przejrzane pakiety w jednym PR: Stóg Izerski,
+**Wdrożenie potwierdzone przez właściciela 25 listopada 2026.**
+Dwa rozłączne, przejrzane pakiety z PR #40: Stóg Izerski,
 Wysoki Kamień, Czarna Góra, Kalenica i Wieżyca. 5 tras/GPX, 5 POI, 40 tekstów
 PL/EN/UA/ZH, 748 punktów źródłowych. Nie zmieniamy szczytów ani uprawnień.
 #37/#38 już zweryfikowane przez właściciela — nie są częścią tego importu.
 
-## Po merge, gdy właściciel będzie gotowy na wspólne wgrywanie
+## Potwierdzony wynik — nie powtarzać
+
+Właściciel przekazał pełne 5/5 wierszy: po 1 trasie, POI i geometrii,
+oba zestawy `[en,pl,ua,zh]`, `review_matches=true` i `package_applied=true`.
+[Zapis wyniku](production-verification.json) jest zgłoszeniem właściciela,
+nie deklaracją administracyjnego odczytu ani mutacji agenta.
+Nie uruchamiać ponownie wspólnego lub osobnych apply 05/06.
+
+## Historia wykonanej procedury (nie jest listą następnych kroków)
 
 1. Zachowaj aktualny backup. GitHub → ten folder → `apply.sql` → **Raw** → skopiuj
    całość do nowego zapytania Supabase SQL Editor i uruchom jako właściciel.

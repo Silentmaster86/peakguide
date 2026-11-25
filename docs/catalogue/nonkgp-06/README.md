@@ -1,13 +1,14 @@
 # Poza KGP — partia 06
 
-**Przygotowana, SQL niewykonany.** Czarna Góra (31), Kalenica (39), Wieżyca (82):
+**Wdrożenie potwierdzone przez właściciela 25 listopada 2026.** Czarna Góra (31), Kalenica (39), Wieżyca (82):
 3 trasy z GPX/geometrią, 3 POI, 24 teksty PL/EN/UA/ZH, 403 punkty źródłowe.
 Nie zmienia rekordów szczytów, uprawnień ani wcześniejszych treści. Dzikowiec
 pozostaje poza importem ze względu na rozbieżność pasma i identyfikację dwóch wież.
 
 Razem z partią 05 daje **5 tras, 5 POI, 40 tekstów i 748 punktów** w jednym PR.
 Właściciel poprosił o większe wspólne wgrywanie. [Pakiet 05–06](../nonkgp-05-06/README.md)
-ma jeden plik apply i jeden verify. Nie wykonywać osobnych i zbiorczego importu
+został wykonany i ma potwierdzone 5/5 wierszy, w tym 3/3 partii 06.
+[Zapis wyniku](production-verification.json). Nie ponawiać osobnych i zbiorczego importu
 jako kolejnych kroków. #37/#38 są już potwierdzone i nie wymagają ponowienia.
 
 ## Dokładne warianty — przegląd 24 listopada 2026
@@ -81,6 +82,6 @@ rollback chroni przyszłe FK CASCADE/SET NULL. Lokalny test zachowuje też wył�
 rekord Dzikowca i uprawnienia. Sprawdza obie kolejności 05/06 oraz wspólną transakcję:
 błąd drugiej partii cofa nowe zmiany pierwszej. Fixture nie jest restore produkcji.
 
-Standardowo użyj [wspólnego importu](../nonkgp-05-06/README.md). Osobne pliki
+Właściciel wykonał [wspólny import](../nonkgp-05-06/README.md); nie ponawiać go. Osobne pliki
 apply/verify tej partii są alternatywą: verify daje 3 wiersze po 1 trasie/POI/geometrii,
 PL/EN/UA/ZH i obie kontrole true. Rollback to awaryjne narzędzie, nie etap wdrożenia.

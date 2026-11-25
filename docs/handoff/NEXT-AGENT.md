@@ -8,9 +8,11 @@ Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
 #37/nonkgp-03 i #38/nonkgp-04 mają potwierdzone wyniki właściciela z 24 listopada
 (zapisane w production-verification.json w folderach pakietów). #39 scalony, bez SQL.
-Partie 05 i 06 są scalone w PR #40 (main `bd830f4`), **SQL jeszcze niewykonany**. Właściciel chce
-zbierać więcej gotowych pakietów przed wspólnym wgrywaniem. Nie wstrzymywać
-niezależnej pracy i nie prosić o ponowienie starych importów.
+Partie 05 i 06 z PR #40 (main `bd830f4`) są **wdrożone i zweryfikowane przez właściciela**.
+25 listopada przekazał 5/5 wierszy: po trasie/POI/geometrii, PL/EN/UA/ZH,
+review_matches/package_applied=true. Wynik: `docs/catalogue/nonkgp-05-06/production-verification.json`.
+Nie ponawiać wspólnego ani osobnych importów. Większe wspólne okna pozostają
+preferencją przyszłych pakietów, nie zaległym zadaniem dla zakończonego #40.
 
 ## Zatwierdzony kierunek frontendu — 24 listopada
 
@@ -30,16 +32,18 @@ Oba merge potwierdzono przez GitHub. Etapy 4 i 5 scalone w #45 25 listopada
 (`9baaaf3`), co potwierdzili właściciel i GitHub. `/weather` i backend działają
 na produkcji: odczyt publiczny zwrócił 200 i 15 dni prognozy Rysów. Kontrakt
 oraz ograniczenia: `docs/operations/weather.md`. Nie ponawiać konfiguracji/merge.
-SQL #40 nadal odłożony.
+SQL #40 zakończony i potwierdzony przez właściciela; nie ponawiać.
 
-Następny PR na `feat/trail-elevation-profile`: profile czterech już wdrożonych
+PR #46 na `feat/trail-elevation-profile`: profile czterech już wdrożonych
 tras nonkgp-01, 530 próbek z GPX. Wysokości i pełne fingerprinty sprawdzono
 25 listopada. Interfejs pokazuje profil tylko po dopasowaniu sluga, peak_id,
 adresu GPX, źródła i każdego punktu geometrii do bieżącego rekordu. Zmiana
 przebiegu ukrywa profil zamiast pokazywać inny wariant. Brak SQL i nowych usług.
 Źródła/próbki: `docs/catalogue/elevation-profiles/review.json`; generator:
 `scripts/build_elevation_profiles.py --check` oraz opcjonalne `--check-sources`.
-Właściciel scala dopiero gotowy PR; nie oznaczać profili jako wdrożonych bez merge.
+Właściciel scala #46; nie oznaczać profili jako wdrożonych bez merge.
+#47 (`fix/map-cluster-zoom`) poprawia grupowanie i przybliżanie markerów. Jest
+niezależny od #46; dowolna kolejność merge, bez SQL.
 LinkedIn (4 języki i rzeczywiste screeny): po kontroli wdrożonego interfejsu,
 publikacja tylko przez właściciela.
 
@@ -315,11 +319,13 @@ Następny przegląd pięciu szczytów wykonano w nonkgp-05 — zakres poniżej.
 Starsze nierozstrzygnięte tożsamości i brakujące dane praktyczne nadal są osobnymi
 zadaniami, a nie ukończonymi elementami katalogu.
 
-## Partia nonkgp-05 — przygotowana do zbiorczej kolejki
+## Partia nonkgp-05 — wdrożona i zweryfikowana
 
 [Pakiet](../catalogue/nonkgp-05/README.md): Stóg Izerski i Wysoki Kamień,
 2 trasy/GPX, 2 POI, 16 tekstów, 345 punktów. Źródła/tożsamości odczytane
-24 listopada. Bez zmian szczytów, grantów i wcześniejszych danych. SQL niewykonany.
+24 listopada. Bez zmian szczytów, grantów i wcześniejszych danych.
+Właściciel potwierdził wdrożenie 25 listopada: 2/2 zgodne wiersze partii 05
+w zbiorczym wyniku #40. Nie ponawiać SQL.
 Iwinka, Postawna i Anielska Kopa nie mają potwierdzonego pełnego wariantu
 i dojścia; unresolved.json przechowuje ograniczenia. Nie fabrykować GPX ani
 wnioskować o zakazie wejścia z samego braku weryfikacji.
@@ -336,10 +342,12 @@ ponownym odczycie publicznego katalogu, nie według nieaktualnych liczników.
 3 trasy/GPX, 3 POI, 24 teksty, 403 punkty. W połączeniu z 05: pięć szczytów,
 5 tras, 5 POI, 40 tekstów, 748 punktów. Bez zmian rodziców i polityk.
 
-Zalecane pliki właściciela po merge #40: [nonkgp-05-06/apply.sql](../catalogue/nonkgp-05-06/apply.sql)
+Historyczne pliki wdrożenia #40: [nonkgp-05-06/apply.sql](../catalogue/nonkgp-05-06/apply.sql)
 i [verify.sql](../catalogue/nonkgp-05-06/verify.sql), 5 zgodnych wierszy. Jedna
 transakcja, przetestowany błąd w drugiej partii cofa nowe zmiany pierwszej.
-Nie prosić o cztery osobne wklejenia ani ponowienie #37/#38. Import niewykonany.
+Właściciel wykonał import i 25 listopada potwierdził 5/5 zgodnych wierszy obu
+partii: po trasie/POI/geometrii, cztery języki i obie kontrole true.
+Nie prosić o ponowienie wspólnego/oddzielnych 05/06 ani zakończonych #37/#38.
 
 Dzikowiec id52 wyłączony: istniejące pasmo Wałbrzyskie różni się od klasyfikacji
 gminy/PTTK Kamienne; stara i nowa wieża są osobnymi obiektami. Zachowano rekord

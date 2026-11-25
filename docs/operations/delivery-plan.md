@@ -20,7 +20,7 @@ MET nadal obsługuje krótką prognozę w szczegółach. Brak SQL dla tych wyda�
 
 ## Teraz — profile wysokościowe, bez SQL
 
-Podejmujemy pozycję 20 poniższego planu, podczas gdy importy są odłożone.
+Podejmujemy pozycję 20 poniższego planu; import #40 jest już zakończony.
 Pierwsza partia obejmuje cztery już wdrożone trasy: Łysina z Pcimia, Śnieżnica
 z Gruszowca, Żar z Za Roztoki i Leskowiec z Rzyk. 530/530 punktów ma wysokości
 w GPX. Źródła porównano 25 listopada ze wcześniejszymi pełnymi fingerprintami;
@@ -46,9 +46,10 @@ nie zatwierdzać wyłącznie ponownym wygenerowaniem hashy — wymagają odczytu
 Przerwy w danych/segmentach nie dostają łączników. Dystans Haversine ze śladu jest
 osobną wartością od opublikowanego dystansu trasy; nie zmienia parametrów w bazie.
 
-#40 scalony (`bd830f4`), SQL nadal odłożony. Później wyłącznie zbiorcze
-[apply.sql](../catalogue/nonkgp-05-06/apply.sql) → [verify.sql](../catalogue/nonkgp-05-06/verify.sql),
-5 zgodnych wierszy. Nie uruchamiać osobnych 05/06 dodatkowo.
+#40 scalony (`bd830f4`), SQL wykonany i potwierdzony przez właściciela
+25 listopada: 5/5 zgodnych wierszy, po trasie/POI/geometrii i cztery języki.
+[Zapis verify](../catalogue/nonkgp-05-06/production-verification.json).
+Nie ponawiać wspólnego ani osobnych importów 05/06.
 
 ## Zakończone — nie wykonywać ponownie
 
@@ -152,7 +153,7 @@ wierszy, po trasie/POI/geometrii, cztery języki, obie kontrole true. Nie ponawi
 SQL. Srebrna Góra pozostaje poza importem 04 ze względu na tożsamość.
 #39 scalony: spójny czas na kafelkach i w szczegółach, bez SQL.
 
-## Następna partia — nonkgp-05
+## Partia nonkgp-05 — wdrożona
 
 [Pakiet](../catalogue/nonkgp-05/README.md): Stóg Izerski i Wysoki Kamień,
 2 trasy z GPX, 2 POI, 16 tekstów. Bez edycji szczytów. Iwinka, Postawna
@@ -160,13 +161,15 @@ i Anielska Kopa wymagają weryfikacji dokładnego wariantu i dostępu, nie są i
 
 Właściciel chce zbiorczego wgrywania po zebraniu większej liczby pakietów.
 Aktualizować [kolejkę](pending-rollout.md), kontynuować źródła i testy kolejnych
-niezależnych partii. Przy wspólnym oknie używać zbiorczego 05-06 opisanego poniżej. Nie prosić teraz o powtarzanie zamkniętych importów.
+niezależnych partii. Wspólne okno 05-06 opisane poniżej jest zakończone;
+nie prosić o jego powtórzenie.
 
-## Rozszerzenie #40 — wspólne wgranie 05 + 06
+## Rozszerzenie #40 — partie 05 + 06 wdrożone
 
 Dodana partia 06: Kalenica, Wieżyca, Czarna Góra. Łącznie z 05 pięć nowych
 par trasa/POI w czterech językach, bez zmian rekordów szczytów. Dzikowiec
 wymaga osobnego przeglądu pasma i tożsamości dwóch wież.
-#40 scalony; przy przyszłym imporcie nonkgp-05-06/apply.sql → verify.sql, 5 zgodnych wierszy.
-Wspólny apply jest atomowy. [Instrukcja](../catalogue/nonkgp-05-06/README.md).
-SQL niewykonany; osobnych 05/06 nie uruchamiać jako kolejnych kroków.
+#40 scalony i wdrożony. Właściciel przekazał 25 listopada 5/5 zgodnych wierszy
+zbiorczego verify: po trasie/POI/geometrii, cztery języki i obie kontrole true.
+[Historia wdrożenia](../catalogue/nonkgp-05-06/README.md).
+Nie ponawiać wspólnego ani osobnych importów 05/06.
