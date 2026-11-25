@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchPeaks, fetchTrails } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
+import WeatherTeaser from '../components/WeatherTeaser';
 
 const UK_THREE_PEAKS_SLUGS = new Set([
 	'ben-nevis',
@@ -82,6 +83,7 @@ export default function HomePage({ lang = 'pl' }) {
 			<FeaturedTrails t={t} trails={trails} />
 
 			<MapTeaser t={t} />
+			<WeatherTeaser lang={lang} />
 
 			<WhyPeakGuide t={t} />
 

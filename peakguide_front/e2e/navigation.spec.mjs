@@ -36,8 +36,9 @@ test('direct anchor respects sticky header and dropdown uses same-document routi
  await expect.poll(async()=>{const target=await page.locator('#featured').boundingBox();const nav=await page.locator('#main-nav').boundingBox();return Math.abs(target.y-(nav.y+nav.height+12));}).toBeLessThan(4);
  // This marker survives SPA navigation, distinguishing it from a full reload.
  await page.evaluate(()=>window.navigationFixture='same-document');
- await page.locator('#main-nav').getByRole('button',{name:'More',exact:true}).click();
- await page.getByRole('menuitem',{name:'Map',exact:true}).click();
+ const directMap=page.locator('#main-nav').getByRole('link',{name:'Map',exact:true});
+ if(await directMap.isVisible())await directMap.click();
+ else {await page.locator('#main-nav').getByRole('button',{name:'More',exact:true}).click();await page.getByRole('menuitem',{name:'Map',exact:true}).click();}
  await expect(page).toHaveURL('/map');await expect(page.locator('.explore-map-canvas')).toBeVisible();
  expect(await page.evaluate(()=>window.navigationFixture)).toBe('same-document');
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBeLessThan(3);
@@ -68,8 +69,9 @@ test('Back restores a scrolled anchor page after catalogue loading', async ({ pa
  await page.mouse.wheel(0, 400);
  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(anchorTop + 390);
  const before = await page.evaluate(() => scrollY);
- await page.locator('#main-nav').getByRole('button', { name: 'More', exact: true }).click();
- await page.getByRole('menuitem', { name: 'Map', exact: true }).click();
+ const directMap=page.locator('#main-nav').getByRole('link',{name:'Map',exact:true});
+ if(await directMap.isVisible())await directMap.click();
+ else {await page.locator('#main-nav').getByRole('button',{name:'More',exact:true}).click();await page.getByRole('menuitem',{name:'Map',exact:true}).click();}
  await expect(page).toHaveURL('/map');
  await expect(page.locator('.explore-map-canvas')).toBeVisible();
  await page.goBack();

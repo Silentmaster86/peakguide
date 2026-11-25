@@ -6,6 +6,7 @@ import NavigationScroll from '../components/NavigationScroll';
 
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 const ExploreMapPage = lazy(() => import('../pages/ExploreMapPage'));
+const WeatherPage = lazy(() => import('../pages/WeatherPage'));
 const PeaksPage = lazy(() => import('../pages/PeaksPage'));
 const PeakDetailsPage = lazy(() => import('../pages/PeakDetailsPage'));
 const RangesPage = lazy(() => import('../pages/RangesPage'));
@@ -60,6 +61,7 @@ export default function App() {
 							/>
 
 							<Route path='/map' element={<ExploreMapPage lang={safeLang} />} />
+							<Route path='/weather' element={<WeatherPage lang={safeLang} />} />
 							<Route path='/trails' element={<TrailsPage lang={safeLang} />} />
 
 							<Route path='/ranges' element={<RangesPage lang={safeLang} />} />

@@ -26,12 +26,13 @@ Właściciel zaakceptował wizualizacje pięciu etapów. Aktualna kolejność PR
 
 Etapy 1 i 2 scalone w #41/#42; właściciel i GitHub potwierdzili 25 listopada.
 Etap 3 scalony w #43; #44 poprawia położenie zakładek i pierwsze wejście do trasy.
-Oba merge potwierdzono przez GitHub. Etap 4 na `feat/weather-search-api` (main
-`e500c36`): wyszukiwanie miast i prognoza dzienna Open-Meteo; kontrakt w
-`docs/operations/weather.md`. Etap 5 nadal do wykonania; /weather jeszcze nie ma.
-Właściciel wykonuje merge; nie wykonywać importów #40 w ramach tych prac.
-Nie dodawać niedziałającego linku Pogoda przed gotową stroną. Publikacja LinkedIn
-(4 języki i rzeczywiste screeny) dopiero po przetestowaniu wdrożonego interfejsu.
+Oba merge potwierdzono przez GitHub. Etapy 4 i 5 połączone w #45 na
+`feat/weather-search-api`, baza main `e500c36`: backend Open-Meteo i gotowa strona
+`/weather`, 4 języki, wyszukiwanie miast i szczytów, 3/5/10/15 dni, navbar oraz
+sekcja pod mapą homepage. Kontrakt i ograniczenia: `docs/operations/weather.md`.
+Właściciel wykonuje tylko merge; istniejąca flaga pogody wystarcza. Nie oznaczać
+#45 jako wdrożonego bez odczytu GitHub/potwierdzenia. SQL #40 pozostaje odłożony.
+Publikacja LinkedIn (4 języki i rzeczywiste screeny) po sprawdzeniu wdrożonego UI.
 
 ## Wcześniejsze wdrożenia bazy — zakończone
 

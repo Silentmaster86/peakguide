@@ -1,0 +1,6 @@
+.home-weather-teaser { display: flex; flex-direction: row; gap: 20px; padding: clamp(20px,4vw,42px); align-items: flex-start; }
+.home-weather-teaser > svg { width: 48px; height: 48px; flex: 0 0 48px; color: var(--primary); }
+.home-weather-teaser h2 { margin: 0; font-size: clamp(1.4rem,3vw,2rem); }
+.home-weather-teaser p { color: var(--muted); max-width: 65ch; line-height: 1.7; }
+.home-weather-teaser a { display: inline-block; background: var(--primary); color: var(--on-primary); padding: 12px 18px; border-radius: 12px; font-weight: 750; text-decoration: none; }
+@media(max-width:400px) { .home-weather-teaser { flex-direction: column; } }

@@ -97,11 +97,12 @@ nie wymyślone warunki na niebie. Nadal prognoza modelowa, pobierana po kliknię
 Ten etap nie zmienia backendu, dostawcy ani istniejącej konfiguracji Netlify.
 Strona pogody i geokodowanie miast są osobnymi, następnymi etapami (docelowo `/weather`).
 
-## Etap 4 — prognoza dzienna i wyszukiwanie miejscowości
+## Etapy 4 i 5 — prognoza dzienna i wyszukiwanie miejscowości
 
 Backend Open-Meteo jest dodatkiem do obecnej karty MET, która nadal korzysta z
-`peak-weather` i ma zakres do 72 godzin. Nowe funkcje są przygotowane dla przyszłej
-strony `/weather`; ten PR nie dodaje jeszcze linku w menu ani nowego widoku.
+`peak-weather` i ma zakres do 72 godzin. Nowe funkcje obsługują widok
+strony `/weather`. PR #45 zawiera backend i widok, link Pogoda obok Mapy
+(na telefonie w menu Więcej) oraz sekcję pod mapą na homepage.
 Nie potrzeba SQL, nowego sekretu, konta dostawcy ani dodatkowej zmiennej Netlify.
 Istniejące `PEAKGUIDE_WEATHER_ENABLED=true` włącza teraz także te dwa endpointy:
 
@@ -114,7 +115,7 @@ Właściciel wykonuje tylko merge; konfiguracja działającej wcześniej pogody 
 Testy funkcji używają atrap. Sprawdzono publiczny format rekordu geokodera i błąd
 nieznanego ID; nie uruchamiano produkcyjnej prognozy ani płatnych usług.
 
-### Kontrakt dla następnego frontendu
+### Kontrakt strony pogody
 
 Wyszukiwanie: `q` 2–80 znaków Unicode, opcjonalny `lang=pl|en|ua|zh`, do 8 wyników.
 Każdy wynik ma `kind:city`, liczbowe `id`, nazwę, `admin1`, kraj, współrzędne,
@@ -171,3 +172,23 @@ Zweryfikowane 25 listopada 2026: [prognoza](https://open-meteo.com/en/docs),
 Bezpłatny endpoint jest dla zastosowań niekomercyjnych; limity dostawcy to poniżej
 10 000/dobę, 5000/godzinę i 600/min. Netlify może trafić na ograniczenie wspólnego IP
 wcześniej. Ta integracja nie zakłada abonamentu i nie używa hostów płatnej usługi.
+
+### Interfejs /weather — PR #45
+
+- Homepage i samo wejście na `/weather` nie pobierają prognozy. Użytkownik wybiera
+  szczyt z katalogu lub szuka miasta przyciskiem; samo pisanie nie odpytuje API.
+- Nazwa, region i kraj rozróżniają wyniki geokodera. Serwer sprawdza ID wybranego
+  miasta. Szczyty wyszukuje się lokalnie w katalogu, bez geokodowania nazw.
+- Zakresy 3/5/10/15 korzystają z jednej odpowiedzi. Przekraczające dostępność
+  przyciski są wyłączone; licznik podaje faktyczną liczbę dni. Domyślnie 5 dni.
+- Linki zachowują `peak` lub `city`, `days` i tryb wyszukiwania. Historia przeglądarki
+  przywraca wybór. Zmiana miejsca/języka anuluje transport starego żądania i ukrywa
+  jego dane. Błędy mają przycisk ponowienia, nie zastępcze wartości.
+- Wschód i zachód mają opis i godzinę w strefie lokalizacji, nie urządzenia.
+  Gdy lokalna data zdarzenia różni się od etykiety okresu, pokazujemy też datę.
+  `Pobrano` określa czas pobrania odpowiedzi, nie aktualizacji modelu.
+- Cztery języki, Light/Dark, responsywne kafelki, klawiatura i etykiety czytników.
+  Testy przeglądarek używają atrap, bez połączenia do dostawcy lub produkcyjnej bazy.
+
+Po merge: sprawdzić na wdrożonym Netlify wyszukiwanie miasta, wybór szczytu i zakres
+oraz retry po błędzie. Nie wykonywać SQL ani ponownie konfigurować działającej flagi.
