@@ -1,4 +1,4 @@
-# Światło dzienne przy szczycie
+# Wschód i zachód słońca przy szczycie
 
 Samodzielny dodatek do strony szczytu: wybrana data wycieczki, wschód i zachód
 słońca, długość dnia oraz świt/zmierzch cywilny. PL/EN/UA/ZH; Light/Dark i telefon.
@@ -13,7 +13,8 @@ Obsługiwane obecne kraje katalogu: PL → Europe/Warsaw, GB → Europe/London,
 UA → Europe/Kyiv, SK → Europe/Bratislava, CN → Asia/Shanghai. Intl uwzględnia
 zmiany czasu według bazy stref przeglądarki. Dla nowego/nieznanego kraju jawnie
 używamy UTC i pokazujemy informację — nie zgadujemy stref państw wielostrefowych.
-Wyświetlamy także datę zdarzenia, więc przesunięcie między dobami jest widoczne.
+Godziny są duże i podane do minut. Wybrana data pozostaje w polu wycieczki;
+jeśli zdarzenie przypada w innej dobie tej strefy, pokazujemy jego datę przy godzinie.
 
 Wybrana data identyfikuje cykl słoneczny w danej długości geograficznej.
 Zakres wejścia: 1900–2100, z kontrolą faktycznej daty (np. 30 lutego jest błędem).
@@ -46,3 +47,12 @@ Jawne role regionu i komunikatu pozwalają zachować komplet reguł Axe także
 w Firefoxie. Kafelki mapy w testach są atrapą. Długi istniejący scenariusz 404
 (zmiany języka, wielokrotna nawigacja i audyty) ma 60 s budżetu całego testu,
 bez zmiany czasów/warunków pojedynczych asercji.
+
+
+## Odświeżone karty — 25 listopada 2026
+
+Tytuł „Wschód i zachód słońca” i odpowiedniki EN/UA/ZH, osobne kafelki czterech
+zdarzeń, piktogramy oraz pasek długości dnia z pełnych 24 godzin. Pasek ma nazwę
+i wartość tekstową dla czytników ekranu. Nie przedstawia aktualnej pozycji słońca.
+Dzień polarny to 1440 minut, noc polarna 0; brak danych/dat nie rysuje paska.
+Obliczenia i strefy nie ulegają zmianie. Bez migracji, nowych bibliotek i API.

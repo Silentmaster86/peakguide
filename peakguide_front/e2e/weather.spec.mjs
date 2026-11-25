@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { weatherText } from '../src/features/weather/text.js';
+import { daylightText } from '../src/features/daylight/text.js';
 const titles = {pl:'Pogoda w rejonie szczytu',en:'Weather near the summit',ua:'Погода поблизу вершини',zh:'山顶附近天气'};
 const buttons = {pl:'Pokaż prognozę',en:'Show forecast',ua:'Показати прогноз',zh:'查看预报'};
 const languages=['pl','en','ua','zh'];
@@ -22,7 +24,7 @@ for(const lang of languages)for(const theme of ['light','dark'])test(`${lang} ${
  await card.getByRole('button',{name:buttons[lang]}).click();
  await expect(card.locator('dl')).toBeVisible();
  await expect(card).toContainText('Europe/Warsaw');
- await card.locator('summary').focus();await page.keyboard.press('Enter');
+ await card.locator('summary').filter({hasText:weatherText[lang].hourly}).focus();await page.keyboard.press('Enter');
  await expect(card.getByRole('table')).toBeVisible();
  await expect(card.getByRole('link',{name:/CC BY 4.0/})).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
@@ -41,4 +43,30 @@ test('disabled forecast has a recoverable error and never shows invented weather
  failed=false;await card.getByRole('button',{name:'Retry'}).click();
  await expect(card.locator('dl')).toBeVisible();
  await expect(card).toContainText('Europe/Warsaw');
+});
+
+for (const lang of ['pl', 'zh']) test(`320px widgets: readable values, dates and keyboard details in ${lang}`, async ({page}) => {
+ await page.setViewportSize({width:320,height:800});
+ await page.addInitScript(lang => {
+  localStorage.setItem('peakguide_lang',lang);
+  localStorage.setItem('ui_theme_mode',lang==='pl'?'light':'dark');
+ },lang);
+ await page.route('**/.netlify/functions/peak-weather?**',route=>route.fulfill({json:data()}));
+ await page.goto('/peaks/rysy');
+ const card=page.getByRole('region',{name:titles[lang],exact:true});
+ await card.getByRole('button',{name:buttons[lang]}).click();
+ await expect(card.locator('dl')).toContainText('0 mm');
+ await card.locator('summary').filter({hasText:weatherText[lang].modelDetails}).focus();
+ await page.keyboard.press('Enter');
+ await expect(card.getByText(/49\.1795, 20\.0881/)).toBeVisible();
+ const sun=page.getByRole('region',{name:daylightText[lang].title,exact:true});
+ await sun.getByLabel(daylightText[lang].date).fill('2026-06-21');
+ await expect(sun.getByRole('meter',{name:daylightText[lang].duration,exact:true})).toBeVisible();
+ const bounds=await sun.boundingBox();
+ for(const time of await sun.locator('time').all()){
+  const box=await time.boundingBox();
+  expect(box.x).toBeGreaterThanOrEqual(bounds.x);
+  expect(box.x+box.width).toBeLessThanOrEqual(bounds.x+bounds.width);
+ }
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });

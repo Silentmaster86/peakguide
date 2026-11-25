@@ -24,6 +24,11 @@ it.each(['pl', 'en', 'ua', 'zh'])('loads on demand and labels missing values and
   expect(screen.getByText(/Europe\/Warsaw/)).toBeInTheDocument();
   expect(screen.getByRole('link',{name:weatherText[lang].license})).toHaveAttribute('href','https://creativecommons.org/licenses/by/4.0/');
   expect(fetch).toHaveBeenCalledWith('/.netlify/functions/peak-weather?peak=rysy',expect.objectContaining({signal:expect.any(AbortSignal)}));
+  const details = screen.getByText(weatherText[lang].modelDetails,{selector:'summary'}).parentElement;
+  expect(details).not.toHaveAttribute('open');
+  await user.click(within(details).getByText(weatherText[lang].modelDetails));
+  expect(details).toHaveAttribute('open');
+  expect(within(details).getByText(/49\.1795, 20\.0881/)).toBeVisible();
   await user.click(screen.getByText(weatherText[lang].hourly,{selector:'summary'}));
   expect(screen.getByRole('table')).toBeInTheDocument();
   expect(screen.getByRole('region',{name:weatherText[lang].hourly})).toHaveAttribute('tabindex','0');

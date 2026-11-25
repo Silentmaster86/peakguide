@@ -1,12 +1,41 @@
-.peak-daylight { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text); min-width: 0; }
-.peak-daylight h3 { margin: 0 0 12px; }
+.peak-daylight {
+  margin-top: 20px;
+  padding: clamp(14px,3vw,20px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--menu-bg);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+  min-width: 0;
+  container-type: inline-size;
+}
+.peak-daylight-heading { display: flex; align-items: center; gap: 10px; }
+.peak-daylight-heading h3 { margin: 0; font-size: 1.2rem; line-height: 1.3; }
+.peak-daylight-heading svg { width: 32px; height: 32px; flex: 0 0 32px; color: var(--primary); }
 .peak-daylight p { line-height: 1.6; overflow-wrap: anywhere; }
-.peak-daylight-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.peak-daylight-controls label { width: 100%; font-weight: 600; }
-.peak-daylight-controls :is(input, button) { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; min-height: 44px; max-width: 100%; }
+.peak-daylight-intro { color: var(--muted); font-size: .9rem; }
+.peak-daylight-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; }
+.peak-daylight-controls label { width: 100%; font-weight: 600; font-size: .9rem; }
+.peak-daylight-controls :is(input, button) { font: inherit; color: var(--text); background: var(--btn-bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px; min-height: 44px; max-width: 100%; }
+.peak-daylight-controls input { min-width: 0; flex: 1 1 145px; width: 100%; }
 .peak-daylight-controls button { cursor: pointer; }
 .peak-daylight :is(button, input, a):focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
-.peak-daylight dl { display: grid; gap: 12px; }
-.peak-daylight dd { margin: 4px 0 0; font-weight: 650; overflow-wrap: anywhere; }
-.peak-daylight dt, .peak-daylight-note, .peak-daylight-source { font-size: .9rem; }
+.peak-daylight-zone { color: var(--muted); font-size: .8rem; }
+.peak-daylight-events { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 18px 0; }
+.peak-daylight-event { padding: 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--wash); }
+.peak-daylight-event--sunrise,.peak-daylight-event--sunset { background: color-mix(in srgb,var(--primary) 7%,var(--menu-bg)); }
+.peak-daylight-event dt { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; line-height: 1.4; font-size: .85rem; overflow-wrap: anywhere; }
+.peak-daylight-event dt svg { width: 26px; height: 26px; color: var(--primary); }
+.peak-daylight-event dd { margin: 8px 0 0; font-size: 1.35rem; font-weight: 700; overflow-wrap: anywhere; }
+.peak-daylight-event--sunrise dd,.peak-daylight-event--sunset dd { font-size: 1.75rem; font-weight: 800; }
+.peak-daylight-duration { padding: 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--wash); }
+.peak-daylight-duration p { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin: 0 0 10px; font-size: .9rem; }
+.peak-daylight-duration small { display: block; margin-top: 8px; color: var(--muted); font-size: .75rem; line-height: 1.5; }
+.peak-daylight-track { height: 10px; border-radius: 99px; overflow: hidden; background: var(--border); }
+.peak-daylight-track > span { display: block; height: 100%; border-radius: inherit; background: var(--primary); }
+.peak-daylight-note { color: var(--muted); font-size: .85rem; }
+.peak-daylight-source { color: var(--muted); font-size: .8rem; }
 .peak-daylight a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+
+@container (max-width:250px) { .peak-daylight-events { grid-template-columns: 1fr; } }
+.peak-daylight-event-date { display: block; margin-top: 4px; color: var(--muted); font-size: .75rem; font-weight: 500; }

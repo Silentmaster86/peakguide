@@ -1,6 +1,6 @@
 # PeakGuide — karta dla kolejnego agenta
 
-Stan: 24 listopada 2026. Repo: Silentmaster86/peakguide.
+Stan: 25 listopada 2026. Repo: Silentmaster86/peakguide.
 Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
 Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
@@ -24,7 +24,9 @@ Właściciel zaakceptował wizualizacje pięciu etapów. Aktualna kolejność PR
 5. Działająca strona /weather, miasta/szczyty, wybór dni zgodny z API,
    link w navbarze i sekcja pod mapą na homepage.
 
-Etap 1 jest przygotowywany na `fix/sticky-navigation`; nie zmienia bazy ani API.
+Etapy 1 i 2 scalone w #41/#42; właściciel i GitHub potwierdzili 25 listopada.
+Etap 3 na `ui/weather-sun-widgets` (main `b0a8860`): nowe karty istniejącej pogody
+i słońca, bez zmian backendu/API. Etapy 4/5 nadal do wykonania; /weather jeszcze nie ma.
 Właściciel wykonuje merge; nie wykonywać importów #40 w ramach tych prac.
 Nie dodawać niedziałającego linku Pogoda przed gotową stroną. Publikacja LinkedIn
 (4 języki i rzeczywiste screeny) dopiero po przetestowaniu wdrożonego interfejsu.
