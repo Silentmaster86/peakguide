@@ -682,6 +682,9 @@ export async function fetchPeakTrailsBySlug(lang, slug) {
 		.select(
 			`
       id,
+      peak_id,
+      route_geometry,
+      geometry_source_url,
       source_url,
       last_verified_at,
       slug,

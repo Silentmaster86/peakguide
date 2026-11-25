@@ -1,0 +1,51 @@
+{
+  "reported_at": "2026-11-25",
+  "source": "Owner pasted the complete production verify result in conversation; not an agent production mutation or a fresh administrative query.",
+  "pull_request": 40,
+  "rows": [
+    {
+      "batch_key": "nonkgp-05",
+      "peak_slug": "stog-izerski",
+      "range_slug": "gory-izerskie",
+      "trails": 1,
+      "pois": 1,
+      "mapped_trails": 1,
+      "trail_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "poi_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "review_matches": true,
+      "package_applied": true
+    },
+    {
+      "batch_key": "nonkgp-05",
+      "peak_slug": "wysoki-kamien",
+      "range_slug": "gory-izerskie",
+      "trails": 1,
+      "pois": 1,
+      "mapped_trails": 1,
+      "trail_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "poi_languages": [
+        "en",
+        "pl",
+        "ua",
+        "zh"
+      ],
+      "review_matches": true,
+      "package_applied": true
+    }
+  ]
+}

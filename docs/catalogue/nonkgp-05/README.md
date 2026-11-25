@@ -1,13 +1,14 @@
 # Poza KGP — partia 05: Góry Izerskie
 
-**Przygotowana, bez produkcyjnego SQL.** Dwie trasy z pełnym GPX/geometrią,
+**Wdrożenie potwierdzone przez właściciela 25 listopada 2026.** Dwie trasy z pełnym GPX/geometrią,
 dwa POI, 16 tekstów PL/EN/UA/ZH i 345 punktów źródłowych. Stóg Izerski (33)
 i Wysoki Kamień (34). Nie zmienia szczytów, uprawnień ani istniejących importów.
 
 Właściciel 24 listopada potwierdził pełne wyniki verify dla #37 i #38 (5/5 i 4/4).
 **Nie są już zaległymi importami.** Poprosił też o zbieranie kolejnych pakietów
-przed wspólnym wgrywaniem. Ten pakiet trafia do [kolejki](../../operations/pending-rollout.md);
-merge publikuje pliki, nie uruchamia SQL. Nie wymaga od razu działania właściciela.
+przed wspólnym wgrywaniem. Ten pakiet jest już wdrożony: właściciel przekazał
+2/2 zgodne wiersze w zbiorczym verify #40. [Zapis](production-verification.json).
+Nie ponawiać importu; sam wcześniejszy merge nie był dowodem wykonania SQL.
 
 ## Źródła i zakres — 24 listopada 2026
 
@@ -57,10 +58,10 @@ wariant dojścia i dostęp; ewentualne dojście tylko w rejon musi być tak nazw
 
 ## Wspólne okno wdrożenia — partie 05 i 06
 
-PR #40 został rozszerzony o Kalenicę, Wieżycę i Czarną Górę. Zalecana procedura:
-[zbiorczy apply i verify](../nonkgp-05-06/README.md) — jedno wklejenie importu,
-jedno kontroli, łącznie pięć zgodnych wierszy. SQL niewykonany. Osobne apply/verify
-05 pozostają alternatywą (2 wiersze), nie kolejnymi krokami po zbiorczym pliku.
+PR #40 objął również Kalenicę, Wieżycę i Czarną Górę. Właściciel zakończył
+[zbiorcze wdrożenie](../nonkgp-05-06/README.md) i przekazał pięć zgodnych wierszy.
+Partia 05 ma 2/2, partia 06 ma 3/3. Osobne pliki 05 pozostają historyczną
+alternatywą, nie kolejnymi krokami. Nie ponawiać importu.
 
 `rollback.sql` jest narzędziem awaryjnym, nie kolejnym krokiem. Import jest atomowy,
 ASCII-only, kontroluje pełną tożsamość rodziców i odmawia przy istniejących treściach,

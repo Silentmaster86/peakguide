@@ -1,0 +1,22 @@
+{
+  "lysina-pcim-kudlacze-wejscie": {
+    "peak_id": 70,
+    "gpx_url": "https://raw.githubusercontent.com/Silentmaster86/peakguide/main/docs/catalogue/nonkgp-01/routes/lysina-pcim-kudlacze-wejscie.gpx",
+    "geometry_source_url": "https://malopolska.szlaki.pttk.pl/309-pttk-malopolska-lysina-pcim"
+  },
+  "snieznica-gruszowiec-wejscie": {
+    "peak_id": 69,
+    "gpx_url": "https://mapa-turystyczna.pl/route/yoez.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/yoez"
+  },
+  "zar-za-roztoki-czarny-wejscie": {
+    "peak_id": 76,
+    "gpx_url": "https://mapa-turystyczna.pl/route/3bedx.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/3bedx"
+  },
+  "leskowiec-rzyki-mydlarze-wejscie": {
+    "peak_id": 75,
+    "gpx_url": "https://mapa-turystyczna.pl/route/3npty.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/3npty"
+  }
+}

@@ -4,35 +4,30 @@ Stan: 25 listopada 2026. Właściciel potwierdził verify #37 (5/5) i #38 (4/4):
 po 1 trasie, POI i geometrii, PL/EN/UA/ZH, review_matches/package_applied=true.
 **Nie ma już zaległego SQL z #37/#38. Nie powtarzać importów.** #39 scalony, bez SQL.
 
-## Kolejne pakiety — zbieramy do wspólnego wgrywania
+## Import #40 — zakończony
 
-Właściciel poprosił o kontynuację i informację o wgrywaniu dopiero po zebraniu
-większej liczby gotowych pakietów. Nie prosić o SQL przy każdej małej partii.
-Agent przygotowuje kolejne PR-y/testy i aktualizuje tę tabelę; właściciel nadal
-sam scala PR-y i wykonuje produkcyjny SQL. Nie tworzyć automatycznego harmonogramu.
+Właściciel przekazał 25 listopada pełny wynik zbiorczego verify: **5/5 wierszy**.
+Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica i Wieżyca mają po jednej trasie,
+POI i geometrii, oba zestawy języków `[en,pl,ua,zh]`, `review_matches=true` oraz
+`package_applied=true`. [Zapis wyniku](../catalogue/nonkgp-05-06/production-verification.json).
 
-| Pakiet / merge | SQL przy wspólnym wdrożeniu | Oczekiwany wynik |
-| --- | --- | --- |
-| **[#40](https://github.com/Silentmaster86/peakguide/pull/40)**: partie `nonkgp-05` + `nonkgp-06`. Scalony do main (`bd830f4`). **SQL niewykonany, odłożony na prośbę właściciela.** | Cały zbiorczy [apply.sql](../catalogue/nonkgp-05-06/apply.sql), potem [verify.sql](../catalogue/nonkgp-05-06/verify.sql). | 5 wierszy: Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. W każdym po trasie/POI/geometrii, 4 języki, obie kontrole true. |
+**Nie ma zaległego SQL dla partii 05/06. Nie ponawiać wspólnego ani osobnych importów.**
+`apply.sql`, `verify.sql` i rollbacki pozostają dokumentacją/narzędziami utrzymania,
+a nie kolejnymi zadaniami właściciela. #37/#38 również są już zamknięte.
 
-Są już dwie gotowe partie do wspólnego okna: jedna transakcja i jeden plik verify.
-Szczegóły: [instrukcja](../catalogue/nonkgp-05-06/README.md). Osobne pliki 05/06 są
-alternatywą, nie dodatkowymi krokami. Kolejność zaległych #37/#38 nie dotyczy tego
-wdrożenia — oba zakończono. Dzikowiec i trzy niezweryfikowane dojścia z 05 są wyłączone.
+Przyszłe pakiety nadal zbieramy do wspólnego okna. Agent przygotowuje źródła,
+kod, testy i PR-y; właściciel scala oraz wykonuje ewentualny nowy produkcyjny SQL.
+Zakończenie #40 nie oznacza uruchomienia następnych importów w tle.
 
-Przy kopiowaniu: GitHub → plik → **Raw** → cała treść do nowego zapytania SQL Editor.
-Zachowaj aktualny backup. Nie uruchamiaj rollback.sql jako kolejnego kroku.
-Konfliktu/edycji nie omijaj; zachowaj komunikat. `Success` bez verify nie zamyka zadania.
-Merge i zielone CI nie oznaczają importu do produkcji. Wspólny plik zachowuje osobne
-rejestry i wszystkie kontrole; błąd drugiej partii cofa nowe zmiany pierwszej.
+## Kolejny frontend — profile wysokościowe
 
-## Frontend — jeden merge, bez importów
-
-[#45](https://github.com/Silentmaster86/peakguide/pull/45): backend i `/weather`,
-wyszukiwanie miast/szczytów, 3/5/10/15 dni, navbar i sekcja homepage. Etapy 4 i 5
-połączone, nie trzeba oddzielnie wdrażać backendu. Właściciel wykonuje merge po
-zielonym CI, potem sprawdza wdrożoną stronę. Bez SQL/sekretów; istniejąca flaga
-pogody w Netlify wystarcza. #40 nadal odłożony.
+#45 scalony; pogoda jest na produkcji (publiczny odczyt 25 listopada: 15 dni
+Rysów). [#46](https://github.com/Silentmaster86/peakguide/pull/46) przygotowuje cztery profile istniejących tras nonkgp-01:
+Łysina, Śnieżnica, Żar, Leskowiec. Będzie wymagał wyłącznie merge po testach.
+Bez SQL, sekretów, nowego API i ponowienia wcześniejszych importów. To cztery
+sprawdzone ślady, nie komplet profili wszystkich tras.
+[#47](https://github.com/Silentmaster86/peakguide/pull/47) poprawia początkowe grupowanie
+i przybliżanie markerów. Oba PR-y czekają na merge, w dowolnej kolejności; bez SQL.
 
 ## Potwierdzone — nie ponawiać
 
@@ -46,9 +41,11 @@ pogody w Netlify wystarcza. #40 nadal odłożony.
 - `nonkgp-02` / #36: 4/4 wiersze zgodne, komplet tras/POI/geometrii i 4 języków.
 - `nonkgp-03` / #37: 5/5 wierszy zgodnych, właściciel przekazał verify 24 listopada.
 - `nonkgp-04` / #38: 4/4 wiersze zgodne, właściciel przekazał verify 24 listopada.
+- `nonkgp-05` + `nonkgp-06` / #40: właściciel potwierdził 25 listopada 5/5 zgodnych wierszy.
 - #39: scalona poprawka formatowania czasu, nie wymaga SQL.
 - #41/#42: navbar, przewijanie, kafelki mapy i spójne markery scalone; bez SQL.
 - #43/#44: nowe karty pogody/słońca i poprawka zakładek scalone; bez SQL.
+- #45: pełna strona /weather i backend scalone 25 listopada; publiczna prognoza działa.
 - #33/#34: pogoda i światło dzienne zgłoszone przez właściciela jako działające.
 
 ## Przy następnej awarii lub odłożeniu wdrożenia

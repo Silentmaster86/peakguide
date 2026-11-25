@@ -192,3 +192,16 @@ wcześniej. Ta integracja nie zakłada abonamentu i nie używa hostów płatnej 
 
 Po merge: sprawdzić na wdrożonym Netlify wyszukiwanie miasta, wybór szczytu i zakres
 oraz retry po błędzie. Nie wykonywać SQL ani ponownie konfigurować działającej flagi.
+
+### Wdrożenie #45 — potwierdzone 25 listopada 2026
+
+Właściciel zgłosił merge; GitHub potwierdził commit `9baaaf3` na main.
+Publiczny odczyt `https://peak-guide.netlify.app/weather` zwrócił HTTP 200,
+`weather-search?q=x` — HTTP 400 JSON `invalid_query`, a
+`weather-forecast?peak=rysy&lang=pl` — HTTP 200, `available_days=15`, właściwy slug
+oraz źródło Open-Meteo. Odpowiedź miała `retrieved_at=2026-11-25T12:38:11.014Z`.
+To kontrola publicznego wdrożenia, bez zapisu w bazie i bez zmiany konfiguracji.
+
+Dodatkowy test rzeczywistego UI: wyszukano Zakopane, wybrano wynik miejscowości
+oraz zmieniono zakres 5 → 15 dni. Produkcja poprawnie wyświetliła prognozę i nazwę
+miasta. Nie jest to test wysyłki poczty ani zapisów konta/katalogu.
