@@ -13,7 +13,7 @@ sam scala PR-y i wykonuje produkcyjny SQL. Nie tworzyć automatycznego harmonogr
 
 | Pakiet / merge | SQL przy wspólnym wdrożeniu | Oczekiwany wynik |
 | --- | --- | --- |
-| **[#40](https://github.com/Silentmaster86/peakguide/pull/40)**: partie `nonkgp-05` + `nonkgp-06`. Najpierw merge po zielonym CI. **SQL niewykonany.** | Cały zbiorczy [apply.sql](../catalogue/nonkgp-05-06/apply.sql), potem [verify.sql](../catalogue/nonkgp-05-06/verify.sql). | 5 wierszy: Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. W każdym po trasie/POI/geometrii, 4 języki, obie kontrole true. |
+| **[#40](https://github.com/Silentmaster86/peakguide/pull/40)**: partie `nonkgp-05` + `nonkgp-06`. Scalony do main (`bd830f4`). **SQL niewykonany, odłożony na prośbę właściciela.** | Cały zbiorczy [apply.sql](../catalogue/nonkgp-05-06/apply.sql), potem [verify.sql](../catalogue/nonkgp-05-06/verify.sql). | 5 wierszy: Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. W każdym po trasie/POI/geometrii, 4 języki, obie kontrole true. |
 
 Są już dwie gotowe partie do wspólnego okna: jedna transakcja i jeden plik verify.
 Szczegóły: [instrukcja](../catalogue/nonkgp-05-06/README.md). Osobne pliki 05/06 są

@@ -21,7 +21,8 @@ body {
 
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  /* Clip horizontal overflow without creating a scroll container for sticky navigation. */
+  overflow-x: clip;
 }
 
 /* =========================

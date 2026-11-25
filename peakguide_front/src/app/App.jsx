@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 const HomePage = lazy(() => import('../pages/HomePage'));
 import Navbar from '../components/Navbar';
+import NavigationScroll from '../components/NavigationScroll';
 
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 const ExploreMapPage = lazy(() => import('../pages/ExploreMapPage'));
@@ -85,6 +86,7 @@ export default function App() {
 								element={<NotFoundPage lang={safeLang} />}
 							/>
 						</Routes>
+						<NavigationScroll />
 					</Suspense></main>
 					<Footer lang={safeLang} />
 				</div>

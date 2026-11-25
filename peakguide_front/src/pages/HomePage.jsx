@@ -1,7 +1,7 @@
 import { countLabel, formatDuration } from '../utils/format';
 import PageSEO from '../seo/PageSEO';
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchPeaks, fetchTrails } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
 
@@ -13,12 +13,7 @@ const UK_THREE_PEAKS_SLUGS = new Set([
 
 export default function HomePage({ lang = 'pl' }) {
 	const t = useMemo(() => ({ ...getLabels(lang), count: (number, noun) => countLabel(number, noun, lang), duration: (minutes) => formatDuration(minutes, lang), difficulty: (value) => ({ pl: { easy: 'łatwa', moderate: 'średnia', hard: 'trudna' }, en: { easy: 'easy', moderate: 'moderate', hard: 'hard' }, ua: { easy: 'легкий', moderate: 'середній', hard: 'складний' }, zh: { easy: '简单', moderate: '中等', hard: '困难' } })[lang]?.[value] || value }), [lang]);
-	const { hash } = useLocation();
   const [retryKey, setRetryKey] = useState(0);
-
-	useEffect(() => {
-		scrollToHash(hash);
-	}, [hash]);
 
 	const peaksState = useAsync(() => fetchPeaks({ lang }), [lang, retryKey]);
 	const trailsState = useAsync(() => fetchTrails({ lang }), [lang, retryKey]);
@@ -100,29 +95,6 @@ export default function HomePage({ lang = 'pl' }) {
 /* =========================================================
    HELPERS
    ========================================================= */
-
-function getNavOffset() {
-	const nav = document.getElementById('main-nav');
-	return nav ? nav.getBoundingClientRect().height + 12 : 140;
-}
-
-function scrollToHash(hash) {
-	if (!hash) return;
-
-	requestAnimationFrame(() => {
-		const element = document.querySelector(hash);
-
-		if (!element) return;
-
-		const y =
-			element.getBoundingClientRect().top + window.scrollY - getNavOffset();
-
-		window.scrollTo({
-			top: y,
-			behavior: 'smooth',
-		});
-	});
-}
 
 function getFeaturedPeaks(peaks, count = 8) {
 	const byCountry = new Map();

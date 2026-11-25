@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useDropdown } from '../hooks/useDropdown';
 import { useMedia } from '../hooks/useMedia';
 
@@ -59,16 +60,16 @@ export default function NavDropdown({ label, items, align = 'right' }) {
 						}
 
 						return (
-							<a
+							<Link
 								key={it.key}
-								href={it.href}
+								to={it.href}
 								onClick={() => setOpen(false)}
 								style={styles.item}
 								role='menuitem' tabIndex={-1}
 							>
 								<span style={styles.itemLabel}>{it.label}</span>
 								{it.sub ? <span style={styles.sub}>{it.sub}</span> : null}
-							</a>
+							</Link>
 						);
 					})}
 				</div>
