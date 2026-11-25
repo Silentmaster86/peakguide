@@ -26,13 +26,13 @@ Konfliktu/edycji nie omijaj; zachowaj komunikat. `Success` bez verify nie zamyka
 Merge i zielone CI nie oznaczają importu do produkcji. Wspólny plik zachowuje osobne
 rejestry i wszystkie kontrole; błąd drugiej partii cofa nowe zmiany pierwszej.
 
-## Frontend — jeden merge, bez importów
+## Kolejny frontend — profile wysokościowe
 
-[#45](https://github.com/Silentmaster86/peakguide/pull/45): backend i `/weather`,
-wyszukiwanie miast/szczytów, 3/5/10/15 dni, navbar i sekcja homepage. Etapy 4 i 5
-połączone, nie trzeba oddzielnie wdrażać backendu. Właściciel wykonuje merge po
-zielonym CI, potem sprawdza wdrożoną stronę. Bez SQL/sekretów; istniejąca flaga
-pogody w Netlify wystarcza. #40 nadal odłożony.
+#45 scalony; pogoda jest na produkcji (publiczny odczyt 25 listopada: 15 dni
+Rysów). Następny PR przygotowuje cztery profile istniejących tras nonkgp-01:
+Łysina, Śnieżnica, Żar, Leskowiec. Będzie wymagał wyłącznie merge po testach.
+Bez SQL, sekretów, nowego API i ponowienia wcześniejszych importów. To cztery
+sprawdzone ślady, nie komplet profili wszystkich tras. #40 nadal odłożony.
 
 ## Potwierdzone — nie ponawiać
 
@@ -49,6 +49,7 @@ pogody w Netlify wystarcza. #40 nadal odłożony.
 - #39: scalona poprawka formatowania czasu, nie wymaga SQL.
 - #41/#42: navbar, przewijanie, kafelki mapy i spójne markery scalone; bez SQL.
 - #43/#44: nowe karty pogody/słońca i poprawka zakładek scalone; bez SQL.
+- #45: pełna strona /weather i backend scalone 25 listopada; publiczna prognoza działa.
 - #33/#34: pogoda i światło dzienne zgłoszone przez właściciela jako działające.
 
 ## Przy następnej awarii lub odłożeniu wdrożenia

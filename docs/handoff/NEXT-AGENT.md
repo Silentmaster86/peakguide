@@ -26,13 +26,22 @@ Właściciel zaakceptował wizualizacje pięciu etapów. Aktualna kolejność PR
 
 Etapy 1 i 2 scalone w #41/#42; właściciel i GitHub potwierdzili 25 listopada.
 Etap 3 scalony w #43; #44 poprawia położenie zakładek i pierwsze wejście do trasy.
-Oba merge potwierdzono przez GitHub. Etapy 4 i 5 połączone w #45 na
-`feat/weather-search-api`, baza main `e500c36`: backend Open-Meteo i gotowa strona
-`/weather`, 4 języki, wyszukiwanie miast i szczytów, 3/5/10/15 dni, navbar oraz
-sekcja pod mapą homepage. Kontrakt i ograniczenia: `docs/operations/weather.md`.
-Właściciel wykonuje tylko merge; istniejąca flaga pogody wystarcza. Nie oznaczać
-#45 jako wdrożonego bez odczytu GitHub/potwierdzenia. SQL #40 pozostaje odłożony.
-Publikacja LinkedIn (4 języki i rzeczywiste screeny) po sprawdzeniu wdrożonego UI.
+Oba merge potwierdzono przez GitHub. Etapy 4 i 5 scalone w #45 25 listopada
+(`9baaaf3`), co potwierdzili właściciel i GitHub. `/weather` i backend działają
+na produkcji: odczyt publiczny zwrócił 200 i 15 dni prognozy Rysów. Kontrakt
+oraz ograniczenia: `docs/operations/weather.md`. Nie ponawiać konfiguracji/merge.
+SQL #40 nadal odłożony.
+
+Następny PR na `feat/trail-elevation-profile`: profile czterech już wdrożonych
+tras nonkgp-01, 530 próbek z GPX. Wysokości i pełne fingerprinty sprawdzono
+25 listopada. Interfejs pokazuje profil tylko po dopasowaniu sluga, peak_id,
+adresu GPX, źródła i każdego punktu geometrii do bieżącego rekordu. Zmiana
+przebiegu ukrywa profil zamiast pokazywać inny wariant. Brak SQL i nowych usług.
+Źródła/próbki: `docs/catalogue/elevation-profiles/review.json`; generator:
+`scripts/build_elevation_profiles.py --check` oraz opcjonalne `--check-sources`.
+Właściciel scala dopiero gotowy PR; nie oznaczać profili jako wdrożonych bez merge.
+LinkedIn (4 języki i rzeczywiste screeny): po kontroli wdrożonego interfejsu,
+publikacja tylko przez właściciela.
 
 ## Wcześniejsze wdrożenia bazy — zakończone
 

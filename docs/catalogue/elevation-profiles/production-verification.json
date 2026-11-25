@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-11-25T12:51:11.179Z",
+  "method": "Public read-only catalogue API",
+  "production_writes": false,
+  "scope": "Identity, source URLs and every 2D geometry point; elevation UI not deployed yet",
+  "checks": [
+    {
+      "trail_slug": "lysina-pcim-kudlacze-wejscie",
+      "peak_id": 70,
+      "public_route_id": 39,
+      "review_matches": true
+    },
+    {
+      "trail_slug": "snieznica-gruszowiec-wejscie",
+      "peak_id": 69,
+      "public_route_id": 40,
+      "review_matches": true
+    },
+    {
+      "trail_slug": "zar-za-roztoki-czarny-wejscie",
+      "peak_id": 76,
+      "public_route_id": 41,
+      "review_matches": true
+    },
+    {
+      "trail_slug": "leskowiec-rzyki-mydlarze-wejscie",
+      "peak_id": 75,
+      "public_route_id": 42,
+      "review_matches": true
+    }
+  ]
+}

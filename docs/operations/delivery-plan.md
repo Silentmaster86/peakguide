@@ -4,31 +4,47 @@ Stan: 25 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
 
-## Bieżący priorytet — pięć etapów frontendu
+## Pięć etapów frontendu — ukończone
 
-Właściciel zaakceptował makiety. Ten etap ma pierwszeństwo przed następnymi
-importami katalogu, które na razie są odłożone. Pięć etapów w kolejności;
-etapy 4 i 5 łączymy w jeden PR #45, aby udostępnić gotową funkcję jednym merge:
-
-| Etap | Zakres | Właściciel |
+| Etap | Zakres | Stan |
 | --- | --- | --- |
-| 1 | Sticky navbar także na telefonie; kompaktowe menu; mapa od góry; historia i kotwice | Merge, bez SQL |
-| 2 | Kafelki wyników mapy i spójne markery na dużej i małych mapach | Merge, bez SQL |
-| 3 | Czytelne karty pogody MET i wschodu/zachodu słońca, 4 języki | Merge, bez SQL |
-| 4 | Backend prognozy i geokodowania miast, warunki API, limity/cache/błędy | Merge; konfiguracja tylko jeśli wymagana |
-| 5 | /weather: miasta/szczyty, liczba dni zgodna z API, navbar i sekcja homepage | Merge, bez SQL |
+| 1 | Sticky navbar, telefon, mapa od góry, historia i kotwice | #41 scalony |
+| 2 | Spójne kafelki i markery map | #42 scalony |
+| 3 | Karty pogody MET i wschodu/zachodu słońca w 4 językach | #43 scalony; #44 poprawia zakładki/linki tras |
+| 4 + 5 | Backend Open-Meteo oraz /weather: miasta/szczyty, zakres dni, navbar i homepage | #45 scalony 25 listopada, main `9baaaf3` |
 
-Etapy 1 i 2 scalone: [#41](https://github.com/Silentmaster86/peakguide/pull/41)
-i [#42](https://github.com/Silentmaster86/peakguide/pull/42). Właściciel potwierdził
-25 listopada; odczyt GitHub potwierdza merge. Etap 3 scalony w #43; w #44
-scalono poprawkę zakładek i linków tras. Merge obu
-potwierdzony przez właściciela i GitHub. Etapy 4 i 5 przygotowane razem w
-[#45](https://github.com/Silentmaster86/peakguide/pull/45), na main `e500c36`:
-backend Open-Meteo i strona `/weather`, szczyty/miasta, 3/5/10/15 dni zależnie od
-rzeczywistych danych, link obok Mapy i sekcja pod mapą homepage. Bez SQL;
-istniejące `PEAKGUIDE_WEATHER_ENABLED=true` wystarcza. MET pozostaje integracją
-krótkiej prognozy w szczegółach szczytu. #45 czeka na merge właściciela.
-LinkedIn po sprawdzeniu wdrożonych widoków; szkice nie są screenami produkcji.
+Merge #45 potwierdzony przez właściciela i GitHub. Publiczny odczyt produkcji
+25 listopada: `/weather` odpowiada 200, walidacja wyszukiwania zwraca JSON 400,
+a prognoza Rysów zwraca 15 dni z Open-Meteo. Istniejąca flaga pogody wystarcza;
+MET nadal obsługuje krótką prognozę w szczegółach. Brak SQL dla tych wydań.
+
+## Teraz — profile wysokościowe, bez SQL
+
+Podejmujemy pozycję 20 poniższego planu, podczas gdy importy są odłożone.
+Pierwsza partia obejmuje cztery już wdrożone trasy: Łysina z Pcimia, Śnieżnica
+z Gruszowca, Żar z Za Roztoki i Leskowiec z Rzyk. 530/530 punktów ma wysokości
+w GPX. Źródła porównano 25 listopada ze wcześniejszymi pełnymi fingerprintami;
+przebieg i kierunek są zgodne z istniejącymi rekordami nonkgp-01. Publiczny odczyt
+Supabase potwierdził 4/4 zgodnych geometrii i adresów źródeł; wynik zapisano w
+`docs/catalogue/elevation-profiles/production-verification.json`. To potwierdza
+przygotowanie danych, nie wdrożenie interfejsu profili.
+
+- Agent: generuje profile z rzeczywistych próbek, implementuje wykres/suwak/tabelę,
+  cztery języki, Light/Dark i testy. Nie wylicza wykresu z sumy podejść.
+- Właściciel: merge gotowego PR po CI. Bez SQL, sekretów i zmian konfiguracji.
+- Pozostałe trasy: dopiero po weryfikacji właściwych GPX i wysokości; nie obiecujemy
+  jeszcze profilu całego katalogu. Znaczniki mapy i dane szczytów bez zmian.
+- LinkedIn: można przygotować materiały z wdrożonego frontendu po kontroli strony.
+  Publikacja pozostaje działaniem właściciela; nie publikować w tle.
+
+Utrzymanie profili: `python scripts/build_elevation_profiles.py --check` sprawdza
+artefakty i tożsamości względem nonkgp-01. `--check --check-sources` dodatkowo
+czyta cztery publiczne GPX i odmawia po zmianie pełnego fingerprintu lub próbek.
+`docs/catalogue/elevation-profiles/review.json` zawiera sprawdzone wysokości;
+`peakguide_front/src/features/elevation/data/` to generowane pliki. Zmian wysokości
+nie zatwierdzać wyłącznie ponownym wygenerowaniem hashy — wymagają odczytu źródła.
+Przerwy w danych/segmentach nie dostają łączników. Dystans Haversine ze śladu jest
+osobną wartością od opublikowanego dystansu trasy; nie zmienia parametrów w bazie.
 
 #40 scalony (`bd830f4`), SQL nadal odłożony. Później wyłącznie zbiorcze
 [apply.sql](../catalogue/nonkgp-05-06/apply.sql) → [verify.sql](../catalogue/nonkgp-05-06/verify.sql),
@@ -85,8 +101,8 @@ Badanie brakującego źródła nie wstrzymuje niezależnych zadań.
 [Odtwarzanie i utrzymanie](remaining-work.md).
 
 Historyczny stan przed #33/#34: frontend nie zawierał integracji pogodowej.
-Zapisywania/zdobywania szczytów
-ani profilu wysokościowego tras nadal nie wdrożono. Istniejące pola elevation_gain_m i dwuwymiarowe
+Zapisywania/zdobywania szczytów nadal nie wdrożono. Profile wysokościowe są
+w przygotowaniu jako oddzielny PR; nie są jeszcze na produkcji. Istniejące pola elevation_gain_m i dwuwymiarowe
 route_geometry nie stanowią same w sobie profilu. Sprawdzenie: aktualny main 397e464,
 przeszukanie źródeł i zależności, bez założenia nieistnienia funkcji tylko na
 podstawie jej niewidoczności na stronie.

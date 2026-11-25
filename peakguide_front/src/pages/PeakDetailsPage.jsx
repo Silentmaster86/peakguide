@@ -13,6 +13,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
 import PeakMap from '../components/PeakMap';
 import PeakWeatherCard from '../features/weather/PeakWeatherCard';
 import TrailPracticalCard from '../components/TrailPracticalCard';
+import TrailElevationProfile from '../features/elevation/TrailElevationProfile';
 import ComingSoonBox from '../components/ComingSoonBox';
 import { safeUrl } from '../utils/practical.mjs';
 import { formatDuration } from '../utils/format';
@@ -589,6 +590,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
                   {t.notes ? <div style={notesBox}>{t.notes}</div> : null}
                   <SourceNotice url={t.source_url} date={t.last_verified_at} labels={labels} lang={lang}/>
                   <TrailPracticalCard trailId={t.id} lang={lang} />
+                  <TrailElevationProfile trail={t} lang={lang} />
 
                   {t.map_url || t.gpx_url ? (
                     <div style={actionsRow}>
