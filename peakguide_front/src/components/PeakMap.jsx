@@ -1,21 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { parseCoordinates } from "../utils/coordinates";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import marker2x from "leaflet/dist/images/marker-icon-2x.png";
-import marker1x from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-
-const DefaultIcon = L.icon({
-  iconRetinaUrl: marker2x, iconUrl: marker1x, shadowUrl: markerShadow,
-  iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
-});
-const ParkingIcon = L.divIcon({
-  className: "peakguide-parking-marker",
-  html: '<div style="width:30px;height:30px;background:#155bb5;color:white;border:2px solid white;border-radius:7px;text-align:center;font:bold 22px/30px sans-serif;box-shadow:0 2px 5px #0006">P</div>',
-  iconSize: [34, 34], iconAnchor: [17, 34], popupAnchor: [0, -34],
-});
+import { mapIcon, mapLabels, poiKind } from "../features/map/presentation";
 
 function position(lat, lon) {
   const coordinates = parseCoordinates(lat, lon);
@@ -46,18 +33,19 @@ export default function PeakMap({ name, lat, lon, pois = [], lang = "pl" }) {
     .filter((poi) => poi.position), [pois]);
   const points = useMemo(() => [peakPosition, ...markers.map((poi) => poi.position)].filter(Boolean), [peakPosition, markers]);
   const openMap = ({ pl: "Otwórz mapę", en: "Open map", ua: "Відкрити мапу", zh: "打开地图" })[lang] || "Open map";
+  const ui = mapLabels(lang);
   if (!points.length) return null;
   return (
     <div style={{ height: 320, width: "100%", borderRadius: 18, overflow: "hidden", position: "relative", zIndex: 0 }}>
       <MapContainer center={points[0]} zoom={13} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <FitView points={points} />
-        {peakPosition && <Marker position={peakPosition} icon={DefaultIcon} title={name} alt={name || "Peak"}>
+        {peakPosition && <Marker position={peakPosition} icon={mapIcon('peak')} title={name} alt={name || ui.peak}>
           <Popup><b>{name}</b><div>{peakPosition.map((n) => n.toFixed(6)).join(", ")}</div><a href={mapLink(null, peakPosition)} target="_blank" rel="noopener noreferrer">{openMap}</a></Popup>
         </Marker>}
-        {markers.map((poi) => <Marker key={poi.id} position={poi.position} icon={poi.type_slug === "parking" ? ParkingIcon : DefaultIcon} title={poi.name} alt={poi.name || poi.type_name || "POI"}>
+        {markers.map((poi) => <Marker key={poi.id} position={poi.position} icon={mapIcon(poiKind(poi))} title={poi.name} alt={poi.name || poi.type_name || ui[poiKind(poi)]}>
           <Popup>
-            <b>{poi.name || poi.type_name || "POI"}</b>
+            <b>{poi.name || poi.type_name || ui[poiKind(poi)]}</b>
             {poi.type_name && <div>{poi.type_name}</div>}
             {poi.description && <p style={{ whiteSpace: "pre-wrap" }}>{poi.description}</p>}
             <a href={mapLink(poi.google_maps_url, poi.position)} target="_blank" rel="noopener noreferrer">{openMap}</a>

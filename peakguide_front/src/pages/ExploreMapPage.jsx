@@ -12,6 +12,7 @@ import MapOverlays from '../components/MapOverlays';
 import MapTools,{MapViewport} from '../features/map/MapTools';
 import {mapIcon,clusterIcon,mapLabels,poiKind} from '../features/map/presentation';
 import {catalogueLabels} from '../features/adminCatalogue/labels';
+import MapResultList from '../features/map/MapResultList';
 
 const copy = {
  pl: ['Mapa szczytów','Szukaj szczytu','Kraj','Wszystkie kraje','Pasmo','Wszystkie pasma','Wczytywanie szczytów…','Nie udało się pobrać szczytów.','Spróbuj ponownie','Brak szczytów dla tych filtrów.','Szczyty na mapie','Zobacz szczegóły','Nie udało się wczytać części mapy. Lista szczytów nadal działa.','Bez poprawnych współrzędnych','Lista szczytów','Przybliż grupę','Przesuwaj mapę i używaj przycisków +/−. Kliknij punkt, aby zobaczyć szczyt.'],
@@ -144,10 +145,10 @@ export default function ExploreMapPage({lang='pl'}) {
     </MapContainer>
     <MapTools open={layerPanelOpen} onOpen={setLayerPanelOpen} labels={ui} layerLabels={layers} baseLayer={baseLayer} onLayer={changeLayer} showPeaks={showPeaks} onPeaks={setShowPeaks} showPois={showPois} onPois={setShowPois} showTrails={showTrails} onTrails={setShowTrails} extra={extra} onFit={()=>setFitRequest(v=>v+1)} expanded={expanded} onExpand={()=>setExpanded(v=>!v)} poiKinds={[...new Set(mapPois.map(poiKind))]} hasRoutes={mapTrails.length>0}/>
    </div><p className="pg-map-hint">{t[16]}{showTrails&&<> {extra.geometryHelp}</>}</p></>}
-   {showPois&&<ul className="explore-map-list" aria-label={extra.pois}>{(poiState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=pois`}>{p.name}</Link></li>)}</ul>}
-   {showTrails&&<ul className="explore-map-list" aria-label={extra.trails}>{(trailState.data||[]).filter(p=>peakIds.has(Number(p.peak_id))).map(p=><li key={p.id}><Link to={`/peaks/${p.peak_slug}?tab=trails&trail=${encodeURIComponent(p.slug)}`}>{p.name}</Link></li>)}</ul>}
+   {showPois&&<MapResultList items={(poiState.data||[]).filter(p=>peakIds.has(Number(p.peak_id)))} kind="poi" lang={lang} label={extra.pois}/>}
+   {showTrails&&<MapResultList items={(trailState.data||[]).filter(p=>peakIds.has(Number(p.peak_id)))} kind="trail" lang={lang} label={extra.trails}/>}
    <h2>{t[14]}</h2>
-   {!filtered.length?<p>{t[9]}</p>:<ul className="explore-map-list">{filtered.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m · {p.range_name}</li>)}</ul>}
+   {!filtered.length?<p>{t[9]}</p>:<MapResultList items={filtered} lang={lang} label={t[14]}/>}
   </>}
  </section>;
 }

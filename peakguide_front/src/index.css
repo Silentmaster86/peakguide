@@ -1785,8 +1785,25 @@ a:focus-visible > .catalogue-card {
 .explore-map-filters label { display: grid; gap: 6px; flex: 1 1 200px; }
 .explore-map-filters input, .explore-map-filters select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--btn-bg); color: var(--text); font: inherit; }
 .explore-map-canvas { height: clamp(340px, 65vh, 650px); border-radius: 18px; overflow: hidden; position: relative; z-index: 0; }
-.explore-map-list { margin: 0; padding: 20px 20px 20px 40px; background: var(--menu-bg); border-radius: 18px; }
-.explore-map-list li { padding: 6px 0; }
+.explore-map-list { margin: 0; padding: 0; list-style: none; }
+.pg-map-results { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); gap: 14px; }
+.pg-map-results > li { min-width: 0; }
+.pg-map-result { justify-content: flex-start; gap: 10px; }
+.pg-map-result-heading { display: flex; align-items: flex-start; gap: 10px; }
+.pg-map-result-heading > div { flex: 1; min-width: 0; }
+.pg-map-result h3 { margin: 3px 0 0; font-size: 18px; line-height: 1.3; overflow-wrap: anywhere; }
+.pg-map-result h3 a { text-decoration: none; }
+.pg-map-result h3 a:hover { text-decoration: underline; }
+.pg-map-result h3 a:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 3px; }
+.pg-map-result-symbol { display: block; flex: 0 0 28px; height: 28px; }
+.pg-map-result-symbol svg { display: block; width: 100%; height: 100%; }
+.pg-map-result-kind { color: var(--muted); font-size: 12px; }
+.pg-map-result-altitude { flex: 0 0 auto; font-size: 13px; font-weight: 800; padding: 5px 8px; border-radius: 99px; border: 1px solid var(--border); background: var(--pill-bg); }
+.pg-map-result p { margin: 0; overflow-wrap: anywhere; }
+.pg-map-result-location,.pg-map-result-description { color: var(--muted); font-size: 14px; line-height: 1.5; }
+.pg-map-result-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.pg-map-result-missing { font-size: 12px; color: var(--muted); padding-top: 8px; border-top: 1px solid var(--border); }
+.pg-map-result-stats { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
 .explore-map-list a { color: var(--text); }
 .map-teaser-button { text-decoration: none; }
 
