@@ -40,3 +40,16 @@ walidacja współrzędnych i odfiltrowanie nieaktywnych POI pozostają dostępne
 To niezależny PR frontendu, przygotowany na main po #40. Zalecana kolejność
 przeglądu: #41 (nawigacja), następnie kafelki mapy. Nie wymaga SQL ani aktywacji API;
 import #40 nadal jest odłożony. Kolejny etap to pogoda i wschód/zachód słońca.
+
+## Nawigacja na stronie szczytu
+
+Po włączeniu sticky navbaru zakładki szczegółów miały nadal stały odstęp 10 px
+od góry i chowały się pod nim. Wysokość navbaru oraz zakładek jest teraz mierzona
+przy zmianie rozmiaru, języka i zawijania przycisków. Zakładki, panel boczny oraz
+margines przewijania do konkretnej trasy uwzględniają oba paski. Mierniki są
+odłączane po opuszczeniu strony. Bez nowych bibliotek, API i SQL.
+
+Poprawka jest niezależna od nowych kafelków pogody #43, ale zalecana kolejność
+przeglądu to #43, potem ta poprawka. Import katalogu #40 nadal odłożony.
+Pierwsze wejście linkiem do trasy nie jest traktowane jak powrót w historii;
+powtórzony efekt montowania React nie nadpisuje jej automatycznego przewinięcia.
