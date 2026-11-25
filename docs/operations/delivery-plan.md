@@ -19,10 +19,14 @@ importami katalogu, które na razie są odłożone. Pięć PR-ów w kolejności:
 
 Etapy 1 i 2 scalone: [#41](https://github.com/Silentmaster86/peakguide/pull/41)
 i [#42](https://github.com/Silentmaster86/peakguide/pull/42). Właściciel potwierdził
-25 listopada; odczyt GitHub potwierdza merge. Etap 3 na `ui/weather-sun-widgets`,
-na main `b0a8860`: grafika obecnej prognozy MET i obliczeń słońca, bez SQL/zmian API.
-Kolejne zależne zmiany bazować po scaleniu poprzedniego PR. Open-Meteo jest propozycją dla dłuższej prognozy i geokodowania;
-nie jest jeszcze uruchomione. MET pozostaje działającą integracją. LinkedIn po
+25 listopada; odczyt GitHub potwierdza merge. Etap 3 scalony w #43; w #44
+scalono poprawkę zakładek i linków tras. Merge obu
+potwierdzony przez właściciela i GitHub. Etap 4 na `feat/weather-search-api`,
+main `e500c36`: dwa endpointy Open-Meteo, prognoza dzienna do 15 dni i miejscowości.
+Bez SQL; korzysta z istniejącego przełącznika pogody.
+Kolejne zależne zmiany bazować po scaleniu poprzedniego PR. Open-Meteo dla
+dłuższej prognozy i geokodowania jest przygotowywane w etapie 4; nie jest jeszcze
+wdrożone. MET pozostaje działającą integracją. LinkedIn po
 sprawdzeniu wdrożonych widoków; szkice nie są screenami działającej produkcji.
 
 #40 scalony (`bd830f4`), SQL nadal odłożony. Później wyłącznie zbiorcze

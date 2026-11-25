@@ -40,6 +40,7 @@ rejestry i wszystkie kontrole; błąd drugiej partii cofa nowe zmiany pierwszej.
 - `nonkgp-04` / #38: 4/4 wiersze zgodne, właściciel przekazał verify 24 listopada.
 - #39: scalona poprawka formatowania czasu, nie wymaga SQL.
 - #41/#42: navbar, przewijanie, kafelki mapy i spójne markery scalone; bez SQL.
+- #43/#44: nowe karty pogody/słońca i poprawka zakładek scalone; bez SQL.
 - #33/#34: pogoda i światło dzienne zgłoszone przez właściciela jako działające.
 
 ## Przy następnej awarii lub odłożeniu wdrożenia
