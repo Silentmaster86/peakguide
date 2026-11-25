@@ -1,6 +1,7 @@
-import { useMemo, useState, useEffect, useRef } from 'react';
+import { useMemo, useState, useEffect, useRef, useCallback, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { latLngBounds } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fetchPeaks } from '../api/peakguide';
 import { useAsync } from '../hooks/useAsync';
@@ -49,8 +50,12 @@ function FitResults({ peaks }) {
 
 function Points({ peaks, t, ui }) {
  const map = useMap();
- const [zoom, setZoom] = useState(map.getZoom());
- useMapEvents({zoomend:()=>setZoom(map.getZoom())});
+ const subscribeToZoom=useCallback(notify=>{
+  map.on('zoomend',notify);
+  return()=>map.off('zoomend',notify);
+ },[map]);
+ // Also observes a fit that happened before this sibling subscribed to events.
+ const zoom=useSyncExternalStore(subscribeToZoom,()=>map.getZoom());
  // Merge nearby projected points, including neighbors across grid boundaries.
  const groups = useMemo(()=>{
   const clusters=[];
@@ -63,11 +68,20 @@ function Points({ peaks, t, ui }) {
   }
   return clusters.map(items=>[items.map(p=>p.slug).sort().join('|'),items]);
  },[map,peaks,zoom]);
+ function expandGroup(items) {
+  const currentZoom=map.getZoom();
+  const bounds=latLngBounds(items.map(p=>p.point));
+  const fitZoom=Math.min(map.getBoundsZoom(bounds,false,[70,70]),Math.max(14,currentZoom+2));
+  // A transitive group can span the whole viewport. Fitting the same bounds
+  // then makes no progress; always zoom further, without an intermediate zoom out.
+  const nextZoom=Math.min(map.getMaxZoom(),fitZoom<=currentZoom?currentZoom+2:fitZoom);
+  map.setView(bounds.getCenter(),nextZoom,{animate:false});
+ }
  return groups.map(([key,items])=>{
   const center=items.reduce((a,p)=>[a[0]+p.point[0]/items.length,a[1]+p.point[1]/items.length],[0,0]);
   return <Marker key={key} position={center} icon={items.length>1?clusterIcon(items.length):mapIcon('peak')} title={items.length>1?`${t[15]} (${items.length})`:items[0].peak_name} alt={items.length>1?`${items.length}`:items[0].peak_name}>
    <Popup className="pg-map-popup" maxWidth={240} minWidth={140} autoPanPaddingTopLeft={[12,165]} autoPanPaddingBottomRight={[12,48]}>
-    {items.length>1?<><button type="button" onClick={()=>map.fitBounds(items.map(p=>p.point),{padding:[35,35],maxZoom:Math.max(14,zoom+2),animate:false})}>{t[15]} ({items.length})</button><ul>{items.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m</li>)}</ul></>:<>
+    {items.length>1?<><button type="button" onClick={()=>expandGroup(items)}>{t[15]} ({items.length})</button><ul>{items.map(p=><li key={p.slug}><Link to={`/peaks/${p.slug}`}>{p.peak_name}</Link> · {p.elevation_m} m</li>)}</ul></>:<>
      <span className="pg-popup-category">{ui.peak}</span><h3>{items[0].peak_name}</h3><p className="pg-popup-altitude">{items[0].elevation_m} m</p><p>{items[0].range_name}</p><Link className="pg-popup-link" to={`/peaks/${items[0].slug}`}>{ui.details}</Link>
     </>}
    </Popup>
