@@ -6,8 +6,10 @@ import LanguageSwitcherDropdown from './LanguageSwitcherDropdown';
 import NavDropdown from './NavDropdown';
 import { useMedia } from '../hooks/useMedia';
 import { useAuth } from '../auth/useAuth';
+import { useHeightVariable } from '../hooks/useHeightVariable';
 
 export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
+  const measureNav = useHeightVariable('--main-nav-height');
 	const t = getLabels(lang);
 	const [signingOut, setSigningOut] = useState(false);
 	const [logoutError, setLogoutError] = useState(false);
@@ -59,6 +61,7 @@ export default function Navbar({ lang = 'pl', uiLang, setUiLang }) {
 
 	return (
 		<nav
+			ref={measureNav}
 			id='main-nav'
 			aria-label='Primary'
 			style={{

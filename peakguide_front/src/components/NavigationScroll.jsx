@@ -8,6 +8,7 @@ export default function NavigationScroll() {
   const navigation = useNavigationType();
   const positions = useRef(new Map());
   const previous = useRef(null);
+  const hasNavigated = useRef(false);
 
   useLayoutEffect(() => {
     const original = window.history.scrollRestoration;
@@ -18,7 +19,10 @@ export default function NavigationScroll() {
   useLayoutEffect(() => {
     const old = previous.current;
     previous.current = location;
-    const saved = positions.current.get(location.key);
+    if (old && old.key !== location.key) hasNavigated.current = true;
+    // StrictMode replays mount effects. Its initial saved zero is not a Back
+    // entry and must not overwrite a trail's own deferred scroll/focus.
+    const saved = hasNavigated.current ? positions.current.get(location.key) : undefined;
     const samePage = old?.pathname === location.pathname && old?.hash === location.hash;
     const restoreAnchor = location.hash && !(navigation === 'POP' && saved);
     let restoring = navigation === 'POP' || Boolean(location.hash) || !samePage;

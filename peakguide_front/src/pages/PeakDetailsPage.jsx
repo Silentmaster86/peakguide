@@ -18,8 +18,10 @@ import { safeUrl } from '../utils/practical.mjs';
 import { formatDuration } from '../utils/format';
 import { parseCoordinates } from '../utils/coordinates';
 import PeakDaylightCard from '../features/daylight/PeakDaylightCard';
+import { useHeightVariable } from '../hooks/useHeightVariable';
 
 export default function PeakDetailsPage({ lang = 'pl' }) {
+  const measureTabs = useHeightVariable('--peak-tabs-height');
   const { slug } = useParams();
   const isMobile = useMediaQuery('(max-width: 900px)');
 
@@ -359,7 +361,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
       {/* Tab navigation */}
 
-      <nav style={tabsWrap} aria-label={labels.sections}>
+      <nav ref={measureTabs} className="peak-detail-tabs" style={tabsWrap} aria-label={labels.sections}>
         <button
           type="button"
           onClick={() => changeTab('overview')}
@@ -520,7 +522,7 @@ export default function PeakDetailsPage({ lang = 'pl' }) {
 
             {(trails?.length ?? 0) > 0 &&
               trails.map((t) => (
-                <article key={t.slug} id={`trail-${t.slug}`} tabIndex={-1} style={{ ...itemCard, scrollMarginTop: 120 }}>
+                <article key={t.slug} id={`trail-${t.slug}`} tabIndex={-1} style={{ ...itemCard, scrollMarginTop: 'calc(var(--main-nav-height, 0px) + var(--peak-tabs-height, 0px) + 28px)' }}>
                   <div style={itemTop}>
                     <div style={itemTitle}>{t.name}<TranslationNotice contentLang={t.content_lang} lang={lang} /></div>
                     <div style={badgeRow}>
@@ -1058,7 +1060,7 @@ const muted = {
 const sideStyle = (isMobile) => ({
   // Keep sidebar sticky only on desktop
   position: isMobile ? 'static' : 'sticky',
-  top: 14,
+  top: 'calc(var(--main-nav-height, 0px) + var(--peak-tabs-height, 0px) + 24px)',
   border: '1px solid var(--border)',
   borderRadius: 22,
   padding: 16,
@@ -1428,7 +1430,7 @@ const actionBtn = {
 
 const tabsWrap = {
   position: 'sticky',
-  top: 10,
+  top: 'calc(var(--main-nav-height, 0px) + 10px)',
   zIndex: 5,
   display: 'flex',
   flexWrap: 'wrap',
