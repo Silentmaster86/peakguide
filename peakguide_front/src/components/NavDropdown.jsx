@@ -1,17 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDropdown } from '../hooks/useDropdown';
 import { useMedia } from '../hooks/useMedia';
 
 export default function NavDropdown({ label, items, align = 'right' }) {
-  const { open, setOpen, wrapRef } = useDropdown();
+  const { open, setOpen, wrapRef, onTriggerKeyDown } = useDropdown();
   const menuRef = useRef(null);
+  const initialFocus = useRef('first');
+  const menuId = useId();
+  const itemKeys = JSON.stringify(items.map(({key,disabled,type})=>[key,Boolean(disabled),type]));
   const isSmall = useMedia('(max-width: 529px)');
   useEffect(() => {
-    if (open) menuRef.current?.querySelector('a')?.focus();
-  }, [open]);
+    if (open && !menuRef.current?.contains(document.activeElement)) {
+      const items = menuRef.current?.querySelectorAll('[role="menuitem"]');
+      (initialFocus.current === 'last' ? items?.[items.length - 1] : items?.[0])?.focus();
+    }
+  }, [open,itemKeys]);
   function handleKeys(event) {
-    const links = [...menuRef.current.querySelectorAll('a')];
+    const links = [...menuRef.current.querySelectorAll('[role="menuitem"]')];
     const index = links.indexOf(document.activeElement);
     let next;
     if (event.key === 'ArrowDown') next = (index + 1) % links.length;
@@ -19,6 +25,10 @@ export default function NavDropdown({ label, items, align = 'right' }) {
     if (event.key === 'Home') next = 0;
     if (event.key === 'End') next = links.length - 1;
     if (next !== undefined) { event.preventDefault(); links[next]?.focus(); }
+    if (event.key === ' ') {
+      event.preventDefault();
+      if (document.activeElement?.matches('a[role="menuitem"]')) document.activeElement.click();
+    }
   }
 
 	return (
@@ -26,9 +36,11 @@ export default function NavDropdown({ label, items, align = 'right' }) {
 			<button
 				type='button'
 				style={styles.btn}
-				onClick={() => setOpen((v) => !v)}
+				onClick={() => { initialFocus.current = 'first'; setOpen((v) => !v); }}
+				onKeyDown={event => { initialFocus.current = event.key === 'ArrowUp' ? 'last' : 'first'; onTriggerKeyDown(event); }}
 				aria-haspopup='menu'
 				aria-expanded={open}
+				aria-controls={open ? menuId : undefined}
 			>
 				<span style={{ opacity: 0.95 }}>{label}</span>
 				<span aria-hidden='true' style={{ opacity: 0.75 }}>
@@ -42,7 +54,7 @@ export default function NavDropdown({ label, items, align = 'right' }) {
 						...styles.menu,
 						...(isSmall ? styles.menuFixed : align === 'left' ? styles.left : styles.right),
 					}}
-					ref={menuRef} onKeyDown={handleKeys} role='menu' aria-label={label}
+					id={menuId} ref={menuRef} onKeyDown={handleKeys} role='menu' aria-label={label}
 				>
 					{items.map((it) => {
 						if (it.type === 'sep') {
@@ -51,7 +63,7 @@ export default function NavDropdown({ label, items, align = 'right' }) {
 
 						if (it.disabled) {
 							return (
-								<div key={it.key} role='menuitem' aria-disabled='true' style={styles.disabledItem} title={it.tip}>
+								<div key={it.key} role='menuitem' tabIndex={-1} aria-disabled='true' style={styles.disabledItem} title={it.tip}>
 									<span style={styles.itemLabel}>{it.label}</span>
 
 									{it.pill ? <span style={styles.pill}>{it.pill}</span> : null}

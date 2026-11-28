@@ -18,7 +18,7 @@ Merge #45 potwierdzony przez właściciela i GitHub. Publiczny odczyt produkcji
 a prognoza Rysów zwraca 15 dni z Open-Meteo. Istniejąca flaga pogody wystarcza;
 MET nadal obsługuje krótką prognozę w szczegółach. Brak SQL dla tych wydań.
 
-## Profile wysokościowe — wdrożone i następna partia
+## Profile wysokościowe — wdrożone
 
 #46 scalony (`571b7f0`): Łysina z Pcimia, Śnieżnica z Gruszowca, Żar z Za Roztoki
 oraz Leskowiec z Rzyk — 530 rzeczywistych próbek. #47 scalony (`2ed0488`):
@@ -28,15 +28,17 @@ telefon/komputer oraz trzy osobne markery po wyborze Beskidu Śląskiego.
 [Wynik odczytu](../catalogue/elevation-profiles/production-rollout-46-47.json).
 To zakończone wydania; nie prosić o ponowny merge lub SQL.
 
-Następna partia na `feat/elevation-profiles-batch-05-06`: Stóg Izerski,
+#48 scalony 28 listopada (`0a85cd2`): Stóg Izerski,
 Wysoki Kamień, Czarna Góra, Kalenica i Wieżyca. Ich trasy są już wdrożone z #40.
 Pięć źródeł zawiera komplet 748 wysokości; pełne fingerprinty i geometrie
 ponownie porównano 28 listopada z pierwotnymi przeglądami.
-[Zapis kontroli źródeł](../catalogue/elevation-profiles/source-verification-2026-11-28.json). Po merge będzie **9 profili / 1278 próbek**.
+[Zapis kontroli źródeł](../catalogue/elevation-profiles/source-verification-2026-11-28.json). Wdrożono **9 profili / 1278 próbek**.
 Dzisiejszy odczyt publicznego katalogu potwierdził 9/9 zgodnych powiązań:
 [wynik](../catalogue/elevation-profiles/production-binding-2026-11-28.json).
-Nowe pięć profili jest przygotowane, nie oznaczamy ich jeszcze jako produkcyjnych.
-Właściciel wykonuje wyłącznie merge po testach; bez SQL/sekretów/konfiguracji.
+Merge potwierdzili właściciel i GitHub. Publiczny przegląd potwierdził pięć nowych
+wykresów, koniec suwaka klawiaturą, cztery języki, Light/Dark i 320/390/1440 px:
+[raport produkcyjny](../catalogue/elevation-profiles/production-rollout-48.json).
+Nie ma zaległego merge ani SQL dla #48.
 
 Utrzymanie: `python scripts/build_elevation_profiles.py --check` porównuje
 artefakty i tożsamości z jawną listą partii nonkgp-01, nonkgp-05 i nonkgp-06.
@@ -108,8 +110,8 @@ Badanie brakującego źródła nie wstrzymuje niezależnych zadań.
 [Odtwarzanie i utrzymanie](remaining-work.md).
 
 Historyczny stan przed #33/#34: frontend nie zawierał integracji pogodowej.
-Zapisywania/zdobywania szczytów nadal nie wdrożono. Cztery profile wysokościowe
-są już na produkcji z #46; następne pięć jest w przygotowaniu. Istniejące pola elevation_gain_m i dwuwymiarowe
+Zapisywania/zdobywania szczytów nadal nie wdrożono. Dziewięć profili wysokościowych
+jest na produkcji z #46/#48. Istniejące pola elevation_gain_m i dwuwymiarowe
 route_geometry nie stanowią same w sobie profilu. Sprawdzenie: aktualny main 397e464,
 przeszukanie źródeł i zależności, bez założenia nieistnienia funkcji tylko na
 podstawie jej niewidoczności na stronie.

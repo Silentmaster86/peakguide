@@ -19,16 +19,24 @@ Przyszłe pakiety nadal zbieramy do wspólnego okna. Agent przygotowuje źródł
 kod, testy i PR-y; właściciel scala oraz wykonuje ewentualny nowy produkcyjny SQL.
 Zakończenie #40 nie oznacza uruchomienia następnych importów w tle.
 
-## Następne profile — wyłącznie merge
+## Profile wysokościowe — wdrożone
 
 #46 i #47 są już scalone; produkcyjne wykresy i grupowanie sprawdzono 25 listopada.
 Nie są zaległymi merge ani importami. [Wynik kontroli](../catalogue/elevation-profiles/production-rollout-46-47.json).
 
-Gałąź `feat/elevation-profiles-batch-05-06` przygotowuje pięć dalszych profili:
-Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. Same trasy i POI
-są już wdrożone z #40. Nowe profile potrzebują jedynie merge po testach;
-**nie wykonywać żadnego nowego SQL**. To pięć przygotowanych profili, nie
-potwierdzenie ich wdrożenia. Dotychczasowe cztery profile są na produkcji.
+#48 scalony 28 listopada (`0a85cd2`), potwierdzony przez właściciela i GitHub.
+Publiczny przegląd produkcji potwierdził pięć dalszych profili: Stóg Izerski,
+Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. Sprawdzono wykresy, koniec suwaka
+klawiaturą, cztery języki, Light/Dark i szerokości 320/390/1440 px.
+[Raport](../catalogue/elevation-profiles/production-rollout-48.json).
+Łącznie wdrożono 9 profili / 1278 próbek. **Bez zaległego merge lub SQL dla #48.**
+
+## Następna poprawka — klawiatura w nawigacji
+
+Gałąź `fix/navbar-keyboard-dismissal` poprawia otwieranie menu strzałkami,
+zamykanie po Tab/Shift+Tab i wyjściu fokusu oraz początkowy fokus języka/motywu.
+Problem odtworzono na produkcji; poprawka pozostaje w przygotowaniu.
+[Zakres i dowody](../audit/2026-11-28/README.md). Tylko merge po testach, bez SQL.
 
 ## Potwierdzone — nie ponawiać
 

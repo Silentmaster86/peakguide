@@ -46,7 +46,7 @@ export default function DropdownMenu({
 	}, [open, wrapRef, minWidth]);
 
   useEffect(() => {
-    if (open) menuRef.current?.querySelector('[aria-selected="true"]:not(:disabled), button:not(:disabled)')?.focus();
+    if (open) (menuRef.current?.querySelector('[aria-selected="true"]:not(:disabled)') || menuRef.current?.querySelector('button:not(:disabled)'))?.focus();
   }, [open]);
   function handleKeys(event) {
     const buttons = [...menuRef.current.querySelectorAll('button:not(:disabled)')];

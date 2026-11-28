@@ -14,17 +14,37 @@ export function useDropdown() {
 		return () => window.removeEventListener("pointerdown", onDown);
 	}, []);
 
-	// close on Escape
+	// Close when keyboard or programmatic focus leaves the popup group.
 	useEffect(() => {
+		if (!open) return;
+		function onFocus(e) {
+			if (!wrapRef.current?.contains(e.target)) setOpen(false);
+		}
+		window.addEventListener('focusin', onFocus);
+		return () => window.removeEventListener('focusin', onFocus);
+	}, [open]);
+
+	// Start native Tab navigation at the trigger before removing popup items.
+	// Escape restores the trigger; Tab/Shift+Tab continue outside the popup.
+	useEffect(() => {
+		if (!open) return;
 		function onKey(e) {
-			if (e.key === 'Escape' && wrapRef.current?.contains(document.activeElement)) {
+			if (['Escape', 'Tab'].includes(e.key) && wrapRef.current?.contains(document.activeElement)) {
+				if (e.key === 'Escape') e.preventDefault();
         setOpen(false);
-        wrapRef.current.querySelector('button')?.focus();
+        wrapRef.current.querySelector('button')?.focus({preventScroll: true});
       }
 		}
 		window.addEventListener("keydown", onKey);
 		return () => window.removeEventListener("keydown", onKey);
-	}, []);
+	}, [open]);
 
-	return { open, setOpen, wrapRef };
+	function onTriggerKeyDown(e) {
+		if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+			e.preventDefault();
+			setOpen(true);
+		}
+	}
+
+	return { open, setOpen, wrapRef, onTriggerKeyDown };
 }

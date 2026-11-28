@@ -15,7 +15,7 @@ export default function LanguageSwitcherDropdown({
 	compact = false,
 }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
-	const { open, setOpen, wrapRef } = useDropdown();
+	const { open, setOpen, wrapRef, onTriggerKeyDown } = useDropdown();
 
 	const current = OPTIONS.find((o) => o.value === lang) || OPTIONS[0];
 
@@ -33,6 +33,7 @@ export default function LanguageSwitcherDropdown({
 				type='button'
 				style={styles.btn}
 				onClick={() => setOpen((v) => !v)}
+				onKeyDown={onTriggerKeyDown}
 				aria-haspopup='listbox'
 				aria-expanded={open}
 				aria-label={`${t.aria}: ${current.label} ${current.name}`}
