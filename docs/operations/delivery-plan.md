@@ -112,6 +112,13 @@ Badanie brakującego źródła nie wstrzymuje niezależnych zadań.
 
 ## Kryteria gotowego PR
 
+Testy przypinają `@playwright/test` do stabilnej wersji 1.64.1. Firefox dostarczany
+z 1.65.x ma [potwierdzoną regresję ARIA po Axe](https://github.com/microsoft/playwright/issues/44135),
+odtworzoną także lokalnym minimalnym przypadkiem. `e2e/aria-after-axe.spec.mjs`
+chroni skan i późniejszy odczyt etykiety/regionu. Przy przyszłej aktualizacji
+wymagany jest poprawiony silnik i zielony pełny przebieg wszystkich przeglądarek;
+nie wyłączać skanów ani zmieniać dostępnych nazw w aplikacji w celu obejścia błędu narzędzia.
+
 - Konkretny problem i wynik, zakres, zależności oraz wymagane czynności właściciela.
 - Odpowiednie testy: frontend lint/unit/build i istotne E2E; backend walidacja,
   uprawnienia i obsługa błędów; SQL lokalna transakcja/idempotencja/verify/rollback.
