@@ -27,6 +27,12 @@ it('can focus and dismiss a desktop menu containing only an unavailable item',as
  await user.keyboard('{ArrowDown}');expect(screen.getByRole('menuitem',{name:'Trailheads'})).toHaveFocus();
  await user.keyboard('{Escape}');expect(trigger).toHaveFocus();expect(screen.queryByRole('menu')).toBeNull();
 });
+it('keeps keyboard focus in an open menu when a responsive update removes the current item',async()=>{
+ const user=userEvent.setup();const view=render(<MemoryRouter><NavDropdown label="More" items={items}/></MemoryRouter>);
+ await user.click(screen.getByRole('button',{name:'More'}));expect(screen.getByRole('menuitem',{name:'Peaks'})).toHaveFocus();
+ view.rerender(<MemoryRouter><NavDropdown label="More" items={[items.at(-1)]}/></MemoryRouter>);
+ expect(screen.getByRole('menuitem',{name:'Trailheads'})).toHaveFocus();await user.keyboard('{Escape}');expect(screen.getByRole('button',{name:'More'})).toHaveFocus();
+});
 // Native focus movement after keydown is covered by Playwright: user-event
 // computes its Tab destination from the pre-event popup item, unlike browsers.
 it.each([false,true])('Tab closes More and anchors native navigation at the trigger (reverse=%s)',async reverse=>{

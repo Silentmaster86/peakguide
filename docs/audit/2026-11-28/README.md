@@ -36,6 +36,8 @@ Gałąź `fix/navbar-keyboard-dismissal`, oparta na scalonym #48:
   zamyka popup bez przejmowania fokusu.
 - Strzałki otwierają menu; „Więcej” zaczyna od pierwszej/ostatniej pozycji.
 - Język i motyw zaczynają od aktywnej opcji.
+- Jeśli zmiana szerokości przeniesie aktualny odnośnik z otwartego menu
+  do paska nawigacji, fokus pozostaje w menu na dostępnej pozycji.
 - Home/End i strzałki obejmują również opisane jako niedostępne pozycje menu;
   nie da się ich uruchomić. Space uruchamia aktywny odnośnik menu.
 - Testy komponentów i rzeczywiste Tab/Shift+Tab w Playwright rozdzielono,

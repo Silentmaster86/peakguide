@@ -38,3 +38,10 @@ test('an all-disabled desktop menu remains dismissible',async({page})=>{
  const trigger=page.locator('#main-nav').getByRole('button',{name:'More',exact:true});await trigger.focus();await page.keyboard.press('ArrowDown');await expect(page.getByRole('menuitem',{name:/Trailheads/})).toBeFocused();
  await page.keyboard.press('Escape');await expect(trigger).toBeFocused();await expect(page.getByRole('menu')).toHaveCount(0);
 });
+test('resizing an open mobile menu preserves focus when its active link moves into the navbar',async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem('peakguide_lang','en'));await page.setViewportSize({width:390,height:844});await page.goto('/weather');
+ await expect(page.getByRole('heading',{name:'Weather forecast',exact:true})).toBeVisible();const nav=page.locator('#main-nav'),trigger=nav.getByRole('button',{name:'More',exact:true});
+ await trigger.focus();await page.keyboard.press('ArrowDown');await expect(page.getByRole('menuitem',{name:'Map',exact:true})).toBeFocused();
+ await page.setViewportSize({width:1440,height:900});await expect(nav.getByRole('link',{name:'Weather',exact:true})).toBeVisible();await expect(page.getByRole('menuitem',{name:/Trailheads/})).toBeFocused();
+ await page.keyboard.press('Escape');await expect(trigger).toBeFocused();await expect(page.getByRole('menu')).toHaveCount(0);
+});

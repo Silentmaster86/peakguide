@@ -8,13 +8,14 @@ export default function NavDropdown({ label, items, align = 'right' }) {
   const menuRef = useRef(null);
   const initialFocus = useRef('first');
   const menuId = useId();
+  const itemKeys = JSON.stringify(items.map(({key,disabled,type})=>[key,Boolean(disabled),type]));
   const isSmall = useMedia('(max-width: 529px)');
   useEffect(() => {
-    if (open) {
+    if (open && !menuRef.current?.contains(document.activeElement)) {
       const items = menuRef.current?.querySelectorAll('[role="menuitem"]');
       (initialFocus.current === 'last' ? items?.[items.length - 1] : items?.[0])?.focus();
     }
-  }, [open]);
+  }, [open,itemKeys]);
   function handleKeys(event) {
     const links = [...menuRef.current.querySelectorAll('[role="menuitem"]')];
     const index = links.indexOf(document.activeElement);
