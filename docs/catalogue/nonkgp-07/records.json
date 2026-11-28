@@ -1,0 +1,1176 @@
+[
+  {
+    "kind": "trail",
+    "body": {
+      "peak_slug": "suchawa",
+      "slug": "suchawa-andrzejowka-niebieski-wejscie",
+      "start_point_name": "Andrzejówka, punkt początkowy",
+      "end_point_name": "Suchawa, punkt na niebieskim szlaku",
+      "distance_km": 1.9,
+      "elevation_gain_m": 132,
+      "time_min": 43,
+      "difficulty": null,
+      "route_type": "point-to-point",
+      "active": true,
+      "source_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "last_verified_at": "2026-11-28T00:00:00Z",
+      "map_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "route_geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              16.278288,
+              50.685368
+            ],
+            [
+              16.278333,
+              50.685243
+            ],
+            [
+              16.278298,
+              50.685156
+            ],
+            [
+              16.278246,
+              50.68503
+            ],
+            [
+              16.278203,
+              50.684909
+            ],
+            [
+              16.278226,
+              50.684811
+            ],
+            [
+              16.278272,
+              50.684659
+            ],
+            [
+              16.278383,
+              50.684471
+            ],
+            [
+              16.278412,
+              50.684424
+            ],
+            [
+              16.278624,
+              50.684072
+            ],
+            [
+              16.278833,
+              50.68366
+            ],
+            [
+              16.278944,
+              50.68344
+            ],
+            [
+              16.278918,
+              50.683346
+            ],
+            [
+              16.278884,
+              50.683254
+            ],
+            [
+              16.27887,
+              50.683196
+            ],
+            [
+              16.278825,
+              50.683139
+            ],
+            [
+              16.278312,
+              50.682957
+            ],
+            [
+              16.278025,
+              50.682871
+            ],
+            [
+              16.277625,
+              50.682781
+            ],
+            [
+              16.27716,
+              50.682646
+            ],
+            [
+              16.276747,
+              50.682493
+            ],
+            [
+              16.276413,
+              50.682371
+            ],
+            [
+              16.276179,
+              50.682243
+            ],
+            [
+              16.275824,
+              50.682031
+            ],
+            [
+              16.275644,
+              50.681885
+            ],
+            [
+              16.27547,
+              50.681698
+            ],
+            [
+              16.275201,
+              50.681279
+            ],
+            [
+              16.275077,
+              50.681142
+            ],
+            [
+              16.274986,
+              50.681033
+            ],
+            [
+              16.274752,
+              50.680873
+            ],
+            [
+              16.274487,
+              50.680642
+            ],
+            [
+              16.274304,
+              50.680328
+            ],
+            [
+              16.27418,
+              50.679972
+            ],
+            [
+              16.274125,
+              50.679661
+            ],
+            [
+              16.274134,
+              50.679298
+            ],
+            [
+              16.27406,
+              50.678977
+            ],
+            [
+              16.273978,
+              50.678741
+            ],
+            [
+              16.273999,
+              50.678556
+            ],
+            [
+              16.274087,
+              50.678395
+            ],
+            [
+              16.274094,
+              50.678331
+            ],
+            [
+              16.274081,
+              50.678265
+            ],
+            [
+              16.273931,
+              50.67814
+            ],
+            [
+              16.273783,
+              50.678029
+            ],
+            [
+              16.273664,
+              50.677838
+            ],
+            [
+              16.273559,
+              50.677646
+            ],
+            [
+              16.273439,
+              50.677492
+            ],
+            [
+              16.273326,
+              50.677392
+            ],
+            [
+              16.273168,
+              50.677268
+            ],
+            [
+              16.272925,
+              50.677127
+            ],
+            [
+              16.272664,
+              50.677024
+            ],
+            [
+              16.272396,
+              50.676951
+            ],
+            [
+              16.272115,
+              50.676895
+            ],
+            [
+              16.271699,
+              50.676839
+            ],
+            [
+              16.27143,
+              50.676848
+            ],
+            [
+              16.271099,
+              50.676867
+            ],
+            [
+              16.27072,
+              50.676899
+            ],
+            [
+              16.270587,
+              50.676978
+            ],
+            [
+              16.270549,
+              50.677125
+            ],
+            [
+              16.270444,
+              50.677275
+            ],
+            [
+              16.270117,
+              50.677586
+            ],
+            [
+              16.270068,
+              50.677722
+            ],
+            [
+              16.270121,
+              50.67781
+            ],
+            [
+              16.270358,
+              50.678017
+            ],
+            [
+              16.27049,
+              50.678241
+            ],
+            [
+              16.270534,
+              50.678385
+            ],
+            [
+              16.270529,
+              50.678541
+            ],
+            [
+              16.270494,
+              50.678656
+            ],
+            [
+              16.270438,
+              50.678772
+            ],
+            [
+              16.270298,
+              50.679006
+            ],
+            [
+              16.27013,
+              50.679249
+            ],
+            [
+              16.270077,
+              50.679392
+            ],
+            [
+              16.270097,
+              50.679697
+            ],
+            [
+              16.270014,
+              50.679843
+            ],
+            [
+              16.269887,
+              50.679987
+            ],
+            [
+              16.269786,
+              50.680028
+            ],
+            [
+              16.269516,
+              50.680103
+            ],
+            [
+              16.26939,
+              50.680165
+            ],
+            [
+              16.269226,
+              50.680216
+            ],
+            [
+              16.268998,
+              50.680232
+            ],
+            [
+              16.268794,
+              50.680249
+            ],
+            [
+              16.268619,
+              50.680265
+            ],
+            [
+              16.268268,
+              50.68027
+            ],
+            [
+              16.26789,
+              50.68037
+            ],
+            [
+              16.26752,
+              50.680427
+            ],
+            [
+              16.267416,
+              50.680432
+            ],
+            [
+              16.267107,
+              50.680455
+            ],
+            [
+              16.26671,
+              50.68051
+            ],
+            [
+              16.2664411,
+              50.6805463
+            ]
+          ]
+        ]
+      },
+      "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "geometry_verified_at": "2026-11-28T00:00:00Z",
+      "i18n": {
+        "pl": {
+          "name": "Suchawa: niebieskim z rejonu Andrzejówki",
+          "description": "Podejście w jedną stronę z rejonu schroniska Andrzejówka przez Rozdroże pod Waligórą, głównie niebieskim szlakiem. Ślad prowadzi do punktu szlakowego w rejonie Suchawy. Dalsze odejścia nie są częścią tej karty.",
+          "notes": "Dystans 1,9 km, podejście 132 m i czas 43 min dotyczą tego wariantu. Powrót zaplanuj oddzielnie; czas jest oszacowaniem serwisu. Przed wyjściem sprawdź bieżące warunki."
+        },
+        "en": {
+          "name": "Suchawa: blue trail from the Andrzejówka area",
+          "description": "One-way ascent from the Andrzejówka hut area via Rozdroże pod Waligórą, mainly on the blue trail. The track ends at a trail point in the Suchawa summit area. Further side paths are outside this route.",
+          "notes": "The 1.9 km distance, 132 m ascent and 43-minute estimate apply to this variant. Plan the return separately; the time is the provider’s estimate. Check current conditions before setting off."
+        },
+        "ua": {
+          "name": "Suchawa: синім маршрутом від району Andrzejówka",
+          "description": "Підйом в один бік від району притулку Andrzejówka через Rozdroże pod Waligórą, переважно синім маршрутом. Трек закінчується біля точки на стежці в районі вершини Suchawa. Подальші відгалуження не входять до цього маршруту.",
+          "notes": "Відстань 1,9 км, набір висоти 132 м і час 43 хв стосуються цього варіанта. Зворотний шлях плануйте окремо; час є оцінкою сервісу. Перед виходом перевірте поточні умови."
+        },
+        "zh": {
+          "name": "Suchawa：从Andrzejówka一带沿蓝色步道上行",
+          "description": "从Andrzejówka山屋一带出发，经Rozdroże pod Waligórą，主要沿蓝色步道单程上行。轨迹终点位于Suchawa山顶一带的步道点，其他支路不包含在本路线中。",
+          "notes": "本路线长1.9公里、累计爬升132米，服务商预计用时43分钟。请另行规划返程；时间仅为估计。出发前请核实当前状况。"
+        }
+      },
+      "distance_source_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "distance_verified_at": "2026-11-28T00:00:00Z",
+      "elevation_gain_source_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "elevation_gain_verified_at": "2026-11-28T00:00:00Z",
+      "time_source_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+      "time_verified_at": "2026-11-28T00:00:00Z"
+    }
+  },
+  {
+    "kind": "trail",
+    "body": {
+      "peak_slug": "lesista-wielka",
+      "slug": "lesista-wielka-mieroszow-zolty-wejscie",
+      "start_point_name": "Mieroszów, 50.666706, 16.186379",
+      "end_point_name": "Lesista Wielka 1, punkt szlakowy",
+      "distance_km": 4.8,
+      "elevation_gain_m": 350,
+      "time_min": 108,
+      "difficulty": null,
+      "route_type": "point-to-point",
+      "active": true,
+      "source_url": "https://mapa-turystyczna.pl/route/kmo2",
+      "last_verified_at": "2026-11-28T00:00:00Z",
+      "map_url": "https://mapa-turystyczna.pl/route/kmo2",
+      "gpx_url": "https://mapa-turystyczna.pl/route/kmo2.gpx",
+      "route_geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              16.186379,
+              50.666706
+            ],
+            [
+              16.186388,
+              50.666729
+            ],
+            [
+              16.18625,
+              50.666754
+            ],
+            [
+              16.186078,
+              50.666786
+            ],
+            [
+              16.186089,
+              50.666814
+            ],
+            [
+              16.186099,
+              50.666839
+            ],
+            [
+              16.186089,
+              50.666886
+            ],
+            [
+              16.185876,
+              50.666921
+            ],
+            [
+              16.185588,
+              50.666969
+            ],
+            [
+              16.185668,
+              50.66721
+            ],
+            [
+              16.185733,
+              50.667866
+            ],
+            [
+              16.185759,
+              50.667961
+            ],
+            [
+              16.18582,
+              50.6682
+            ],
+            [
+              16.185853,
+              50.668648
+            ],
+            [
+              16.18586,
+              50.668747
+            ],
+            [
+              16.18577,
+              50.669349
+            ],
+            [
+              16.185626,
+              50.669906
+            ],
+            [
+              16.185464,
+              50.670735
+            ],
+            [
+              16.185467,
+              50.671399
+            ],
+            [
+              16.185302,
+              50.672262
+            ],
+            [
+              16.185166,
+              50.672966
+            ],
+            [
+              16.185123,
+              50.673682
+            ],
+            [
+              16.185069,
+              50.674138
+            ],
+            [
+              16.184967,
+              50.674651
+            ],
+            [
+              16.184864,
+              50.675154
+            ],
+            [
+              16.184786,
+              50.675715
+            ],
+            [
+              16.184725,
+              50.676218
+            ],
+            [
+              16.184764,
+              50.676385
+            ],
+            [
+              16.184999,
+              50.676845
+            ],
+            [
+              16.185598,
+              50.677655
+            ],
+            [
+              16.185866,
+              50.677971
+            ],
+            [
+              16.185944,
+              50.678276
+            ],
+            [
+              16.185839,
+              50.679383
+            ],
+            [
+              16.185902,
+              50.680076
+            ],
+            [
+              16.185866,
+              50.68053
+            ],
+            [
+              16.185803,
+              50.680881
+            ],
+            [
+              16.185824,
+              50.681165
+            ],
+            [
+              16.18587,
+              50.681612
+            ],
+            [
+              16.185918,
+              50.681913
+            ],
+            [
+              16.186034,
+              50.682224
+            ],
+            [
+              16.186109,
+              50.682511
+            ],
+            [
+              16.186211,
+              50.68275
+            ],
+            [
+              16.186193,
+              50.68293
+            ],
+            [
+              16.186146,
+              50.683095
+            ],
+            [
+              16.185971,
+              50.683394
+            ],
+            [
+              16.185763,
+              50.683593
+            ],
+            [
+              16.185536,
+              50.683813
+            ],
+            [
+              16.185391,
+              50.684132
+            ],
+            [
+              16.185376,
+              50.684476
+            ],
+            [
+              16.185425,
+              50.684826
+            ],
+            [
+              16.185489,
+              50.685099
+            ],
+            [
+              16.185479,
+              50.685505
+            ],
+            [
+              16.18542,
+              50.685702
+            ],
+            [
+              16.18531,
+              50.685961
+            ],
+            [
+              16.185288,
+              50.685994
+            ],
+            [
+              16.185179,
+              50.686154
+            ],
+            [
+              16.185095,
+              50.686413
+            ],
+            [
+              16.185055,
+              50.686592
+            ],
+            [
+              16.185055,
+              50.686817
+            ],
+            [
+              16.184953,
+              50.687099
+            ],
+            [
+              16.1849,
+              50.687252
+            ],
+            [
+              16.184911,
+              50.687418
+            ],
+            [
+              16.184912,
+              50.687555
+            ],
+            [
+              16.18487,
+              50.687917
+            ],
+            [
+              16.184725,
+              50.688205
+            ],
+            [
+              16.184728,
+              50.688448
+            ],
+            [
+              16.184744,
+              50.688638
+            ],
+            [
+              16.184728,
+              50.688911
+            ],
+            [
+              16.184653,
+              50.689148
+            ],
+            [
+              16.184358,
+              50.68968
+            ],
+            [
+              16.184016,
+              50.690191
+            ],
+            [
+              16.183151,
+              50.691219
+            ],
+            [
+              16.183074,
+              50.691346
+            ],
+            [
+              16.183051,
+              50.691384
+            ],
+            [
+              16.183036,
+              50.691513
+            ],
+            [
+              16.182907,
+              50.691921
+            ],
+            [
+              16.182797,
+              50.692818
+            ],
+            [
+              16.18269,
+              50.693219
+            ],
+            [
+              16.182623,
+              50.6936
+            ],
+            [
+              16.182556,
+              50.693853
+            ],
+            [
+              16.182357,
+              50.694689
+            ],
+            [
+              16.182288,
+              50.695181
+            ],
+            [
+              16.18231,
+              50.695396
+            ],
+            [
+              16.182451,
+              50.695663
+            ],
+            [
+              16.182452,
+              50.695702
+            ],
+            [
+              16.182442,
+              50.695752
+            ],
+            [
+              16.182299,
+              50.695939
+            ],
+            [
+              16.182196,
+              50.696074
+            ],
+            [
+              16.182127,
+              50.696219
+            ],
+            [
+              16.18204,
+              50.69635
+            ],
+            [
+              16.181796,
+              50.696564
+            ],
+            [
+              16.181721,
+              50.69666
+            ],
+            [
+              16.181682,
+              50.696766
+            ],
+            [
+              16.181657,
+              50.696926
+            ],
+            [
+              16.181647,
+              50.697282
+            ],
+            [
+              16.181607,
+              50.697507
+            ],
+            [
+              16.181592,
+              50.697641
+            ],
+            [
+              16.181603,
+              50.697773
+            ],
+            [
+              16.181656,
+              50.698279
+            ],
+            [
+              16.18165,
+              50.698527
+            ],
+            [
+              16.1816,
+              50.698796
+            ],
+            [
+              16.181584,
+              50.698926
+            ],
+            [
+              16.181617,
+              50.699098
+            ],
+            [
+              16.181653,
+              50.699268
+            ],
+            [
+              16.181742,
+              50.699416
+            ],
+            [
+              16.181808,
+              50.69956
+            ],
+            [
+              16.181802,
+              50.699682
+            ],
+            [
+              16.181729,
+              50.699836
+            ],
+            [
+              16.181647,
+              50.700029
+            ],
+            [
+              16.1816,
+              50.700185
+            ],
+            [
+              16.181589,
+              50.700324
+            ],
+            [
+              16.181609,
+              50.700464
+            ],
+            [
+              16.181655,
+              50.700586
+            ],
+            [
+              16.181647,
+              50.700697
+            ],
+            [
+              16.181621,
+              50.700764
+            ],
+            [
+              16.181968,
+              50.70091
+            ],
+            [
+              16.182409,
+              50.701065
+            ],
+            [
+              16.182613,
+              50.701122
+            ],
+            [
+              16.182739,
+              50.701138
+            ],
+            [
+              16.182904,
+              50.701132
+            ],
+            [
+              16.183119,
+              50.701105
+            ],
+            [
+              16.18327,
+              50.701093
+            ],
+            [
+              16.184504,
+              50.701042
+            ],
+            [
+              16.185015,
+              50.701027
+            ],
+            [
+              16.185193,
+              50.701046
+            ],
+            [
+              16.18553,
+              50.701092
+            ],
+            [
+              16.185856,
+              50.701152
+            ],
+            [
+              16.18616,
+              50.701223
+            ],
+            [
+              16.186425,
+              50.701311
+            ],
+            [
+              16.186522,
+              50.701344
+            ],
+            [
+              16.18667,
+              50.701395
+            ],
+            [
+              16.186775,
+              50.701419
+            ],
+            [
+              16.186863,
+              50.701451
+            ],
+            [
+              16.187005,
+              50.701501
+            ],
+            [
+              16.187151,
+              50.701533
+            ],
+            [
+              16.187339,
+              50.701595
+            ],
+            [
+              16.1876,
+              50.70166
+            ],
+            [
+              16.187823,
+              50.701683
+            ],
+            [
+              16.188079,
+              50.701682
+            ],
+            [
+              16.188571,
+              50.701603
+            ],
+            [
+              16.188781,
+              50.701535
+            ],
+            [
+              16.189032,
+              50.701474
+            ],
+            [
+              16.189226,
+              50.701417
+            ],
+            [
+              16.189364,
+              50.701359
+            ],
+            [
+              16.1895,
+              50.701302
+            ],
+            [
+              16.189662,
+              50.701248
+            ],
+            [
+              16.189916,
+              50.701388
+            ],
+            [
+              16.190091,
+              50.701564
+            ],
+            [
+              16.190178,
+              50.701748
+            ],
+            [
+              16.190232,
+              50.701853
+            ],
+            [
+              16.190366,
+              50.701938
+            ],
+            [
+              16.1905,
+              50.702078
+            ],
+            [
+              16.190656,
+              50.702271
+            ],
+            [
+              16.190748,
+              50.702437
+            ],
+            [
+              16.190825,
+              50.702542
+            ],
+            [
+              16.190925,
+              50.702597
+            ],
+            [
+              16.191133,
+              50.702592
+            ],
+            [
+              16.191387,
+              50.7026
+            ],
+            [
+              16.191591,
+              50.702665
+            ]
+          ]
+        ]
+      },
+      "geometry_source_url": "https://mapa-turystyczna.pl/route/kmo2",
+      "geometry_verified_at": "2026-11-28T00:00:00Z",
+      "i18n": {
+        "pl": {
+          "name": "Lesista Wielka: żółtym z Mieroszowa",
+          "description": "Podejście w jedną stronę z punktu w Mieroszowie przy 50.666706, 16.186379. Początkowo drogą do żółtego szlaku w rejonie cmentarza, następnie żółtym do punktu Lesista Wielka 1.",
+          "notes": "Dystans 4,8 km, podejście 350 m i czas 1 godz. 48 min dotyczą tego podejścia. Powrót, przejście na Dzikowiec i dojście do szczelin wiatrowych nie są częścią trasy. Przed wyjściem sprawdź bieżące warunki."
+        },
+        "en": {
+          "name": "Lesista Wielka: yellow trail from Mieroszów",
+          "description": "One-way ascent from the Mieroszów starting point at 50.666706, 16.186379. Begin along the road to the yellow trail near the cemetery, then follow yellow markings to the Lesista Wielka 1 trail point.",
+          "notes": "The 4.8 km distance, 350 m ascent and 1 hr 48 min estimate apply to this ascent. The return, onward walk to Dzikowiec and access to the wind fissures are outside this route. Check current conditions before setting off."
+        },
+        "ua": {
+          "name": "Lesista Wielka: жовтим маршрутом із Mieroszów",
+          "description": "Підйом в один бік від початкової точки в Mieroszów: 50.666706, 16.186379. Спочатку дорогою до жовтого маршруту біля цвинтаря, далі за жовтими позначками до точки Lesista Wielka 1.",
+          "notes": "Відстань 4,8 км, набір висоти 350 м і орієнтовний час 1 год 48 хв стосуються цього підйому. Зворотний шлях, перехід на Dzikowiec і підхід до вітрових щілин не входять до маршруту. Перед виходом перевірте поточні умови."
+        },
+        "zh": {
+          "name": "Lesista Wielka：从Mieroszów沿黄色步道上行",
+          "description": "从Mieroszów的起点（50.666706，16.186379）单程上行。先沿道路到达公墓附近的黄色步道，再按黄色标记前往Lesista Wielka 1步道点。",
+          "notes": "本段路线长4.8公里、累计爬升350米，预计用时1小时48分钟。不包含返程、前往Dzikowiec的路段或前往风穴的支路。出发前请核实当前状况。"
+        }
+      },
+      "distance_source_url": "https://mapa-turystyczna.pl/route/kmo2",
+      "distance_verified_at": "2026-11-28T00:00:00Z",
+      "elevation_gain_source_url": "https://mapa-turystyczna.pl/route/kmo2",
+      "elevation_gain_verified_at": "2026-11-28T00:00:00Z",
+      "time_source_url": "https://mapa-turystyczna.pl/route/kmo2",
+      "time_verified_at": "2026-11-28T00:00:00Z"
+    }
+  },
+  {
+    "kind": "poi",
+    "body": {
+      "peak_slug": "suchawa",
+      "trail_id": null,
+      "type_slug": "shelter",
+      "latitude": 50.684767,
+      "longitude": 16.277919,
+      "active": true,
+      "source_url": "https://dolnoslaskie.szlaki.pttk.pl/1120-dolnoslaskie-schronisko-andrzejowka",
+      "last_verified_at": "2026-11-28T00:00:00Z",
+      "website_url": null,
+      "google_maps_url": null,
+      "i18n": {
+        "pl": {
+          "name": "Schronisko PTTK Andrzejówka",
+          "description": "Schronisko i węzeł szlaków na Przełęczy Trzech Dolin, pomiędzy Waligórą, Klinem i Graniczną. Punkt wypadowy do zaplanowania podejścia w kierunku Suchawy.",
+          "tips": "Godziny otwarcia i dostępność usług sprawdź bezpośrednio u gospodarza. Ta karta nie potwierdza wolnych noclegów ani miejsc parkingowych."
+        },
+        "en": {
+          "name": "PTTK Andrzejówka hut",
+          "description": "Mountain hut and trail junction at Przełęcz Trzech Dolin, between Waligóra, Klin and Graniczna. A base for planning an ascent towards Suchawa.",
+          "tips": "Check opening hours and available services directly with the operator. This card does not confirm accommodation or parking availability."
+        },
+        "ua": {
+          "name": "Притулок PTTK Andrzejówka",
+          "description": "Гірський притулок і вузол маршрутів на Przełęcz Trzech Dolin, між Waligóra, Klin і Graniczna. Відправна точка для планування підйому в напрямку Suchawa.",
+          "tips": "Години роботи та наявні послуги уточнюйте безпосередньо в адміністрації. Ця картка не підтверджує вільних місць для ночівлі чи паркування."
+        },
+        "zh": {
+          "name": "PTTK Andrzejówka山屋",
+          "description": "位于Przełęcz Trzech Dolin的山屋与步道交汇处，地处Waligóra、Klin和Graniczna之间，可作为规划前往Suchawa徒步路线的出发点。",
+          "tips": "请直接向经营者核实开放时间及服务。本卡片不保证有住宿空位或停车位。"
+        }
+      }
+    }
+  },
+  {
+    "kind": "poi",
+    "body": {
+      "peak_slug": "lesista-wielka",
+      "trail_id": null,
+      "type_slug": "attraction",
+      "latitude": 50.7024,
+      "longitude": 16.2037,
+      "active": true,
+      "source_url": "https://geosudety.pl/objects/show/187",
+      "last_verified_at": "2026-11-28T00:00:00Z",
+      "website_url": null,
+      "google_maps_url": null,
+      "i18n": {
+        "pl": {
+          "name": "Mała szczelina wiatrowa pod Lesistą Wielką",
+          "description": "Szczelina wiatrowa na zboczu masywu Lesistej Wielkiej — osobliwość skalna związana z wymianą powietrza w systemie spękań. Znacznik pochodzi ze społecznościowego katalogu GeoSudety.",
+          "tips": "To osobny punkt poza opisanym żółtym podejściem; dojście do niego nie jest częścią GPX. Nie wchodź do szczeliny i zachowaj odstęp od jej krawędzi."
+        },
+        "en": {
+          "name": "Small wind fissure below Lesista Wielka",
+          "description": "A wind fissure on the slope of the Lesista Wielka massif, a rock feature associated with air circulation through a network of cracks. Its marker comes from the community GeoSudety catalogue.",
+          "tips": "This is a separate point outside the described yellow-trail ascent; access to it is not included in the GPX. Do not enter the fissure and keep away from its edges."
+        },
+        "ua": {
+          "name": "Мала вітрова щілина під Lesista Wielka",
+          "description": "Вітрова щілина на схилі масиву Lesista Wielka — скельна особливість, пов’язана з циркуляцією повітря в системі тріщин. Позначка походить зі спільнотного каталогу GeoSudety.",
+          "tips": "Це окрема точка поза описаним жовтим підйомом; підхід до неї не входить до GPX. Не заходьте в щілину та тримайтеся подалі від її країв."
+        },
+        "zh": {
+          "name": "Lesista Wielka下方的小风穴",
+          "description": "位于Lesista Wielka山体坡面的一处风穴，是与岩石裂隙中空气流通有关的地质景观。位置标记来自GeoSudety社区目录。",
+          "tips": "此景点位于所述黄色上山路线之外，GPX不包含前往该点的支路。请勿进入裂隙，并与边缘保持距离。"
+        }
+      }
+    }
+  }
+]

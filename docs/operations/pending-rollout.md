@@ -31,12 +31,33 @@ klawiaturą, cztery języki, Light/Dark i szerokości 320/390/1440 px.
 [Raport](../catalogue/elevation-profiles/production-rollout-48.json).
 Łącznie wdrożono 9 profili / 1278 próbek. **Bez zaległego merge lub SQL dla #48.**
 
-## Następna poprawka — klawiatura w nawigacji
+## Nawigacja #49 — wdrożona
 
-Gałąź `fix/navbar-keyboard-dismissal` poprawia otwieranie menu strzałkami,
-zamykanie po Tab/Shift+Tab i wyjściu fokusu oraz początkowy fokus języka/motywu.
-Problem odtworzono na produkcji; poprawka pozostaje w przygotowaniu.
-[Zakres i dowody](../audit/2026-11-28/README.md). Tylko merge po testach, bez SQL.
+#49 scalony 28 listopada (`3f41a11`), potwierdzony przez właściciela i GitHub.
+Publiczny przegląd produkcji: strzałki, Tab/Shift+Tab, Escape, aktywny język/motyw,
+PL/EN/UA/ZH, Light/Dark, 390/1440 px i Axe otwartej nawigacji.
+[Raport](../audit/2026-11-28/production-rollout-49.json). Bez zaległego merge/SQL.
+
+## Partia 07 — przygotowana, SQL odłożony
+
+`feat/nonkgp-catalogue-07`: Suchawa i Lesista Wielka, 2 trasy z GPX, 2 POI,
+16 tekstów i 2 profile wysokości z 247 rzeczywistych próbek. Bez edycji szczytów.
+**Nie są jeszcze wdrożone w bazie.** Merge przygotowuje kod i pliki; SQL może
+poczekać na większe wspólne okno. Nowe profile pozostają ukryte do importu.
+
+Dokładne pliki późniejszego wdrożenia:
+
+1. `docs/catalogue/nonkgp-07/verify.sql` — odczyt przed importem.
+2. `docs/catalogue/nonkgp-07/apply.sql` — transakcja tylko nowej partii.
+3. `docs/catalogue/nonkgp-07/verify.sql` — 2/2 wiersze, trasa/POI/geometria po 1,
+   języki `[en,pl,ua,zh]`, `review_matches=true`, `package_applied=true`.
+4. Kontrola publicznej mapy i profili; nie utożsamiać merge z wykonanym SQL.
+
+[Zakres, źródła i testy](../catalogue/nonkgp-07/README.md).
+[Odczyt przed wdrożeniem](../catalogue/nonkgp-07/public-baseline.json).
+[Pełny raport katalogu](../audit/2026-11-28/catalogue-coverage.json): 88 aktywnych
+szczytów, KGP 28/28 z trasą/POI/geometrią/dostępem; poza KGP 32 bez trasy,
+35 bez POI. To obecny publiczny stan, bez doliczania przygotowanej partii 07.
 
 ## Potwierdzone — nie ponawiać
 

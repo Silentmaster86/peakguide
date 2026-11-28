@@ -1,0 +1,44 @@
+[
+  {
+    "peak_slug": "suchawa",
+    "source_page": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.6853590,16.2783265;50.6805980,16.2664580",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "296ba1b275ca89e84d811479dfc166864f2493d3cb675b3dcfbe323fcf2f5660",
+    "source_semantic_sha256": "a6c5d2f468f32ca7c10cb1f288dda1a32624212fcc7498c24e6c7609419a50d8",
+    "points": 88,
+    "segments": 1,
+    "first": [
+      16.278288,
+      50.685368
+    ],
+    "last": [
+      16.2664411,
+      50.6805463
+    ],
+    "coordinates_sha256": "b8e9ba282ff0543b9b5859ab9ade4807d767d47c8d93c436a0da8466186838b4",
+    "verified_at": "2026-11-28T00:00:00Z"
+  },
+  {
+    "peak_slug": "lesista-wielka",
+    "source_page": "https://mapa-turystyczna.pl/route/kmo2",
+    "source_gpx": "https://mapa-turystyczna.pl/route/kmo2.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "9bacd9c55bab93f24ec5e26306d9b61b5c0ffadf7fa391febf4f70a7910974a5",
+    "source_semantic_sha256": "094e31b0a6d0657ad40e25c4d9502b57febedff40ced2b3947b7f3064df8c17d",
+    "points": 159,
+    "segments": 1,
+    "first": [
+      16.186379,
+      50.666706
+    ],
+    "last": [
+      16.191591,
+      50.702665
+    ],
+    "coordinates_sha256": "528e873704b145425b045b8b8a32bb3fa1b5ca0187850056747ae87271b827ac",
+    "verified_at": "2026-11-28T00:00:00Z"
+  }
+]

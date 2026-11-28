@@ -53,14 +53,26 @@ profili). Merge potwierdzili właściciel i GitHub. Publiczny przegląd produkcj
 potwierdził wszystkie pięć wykresów, klawiaturę, cztery języki, Light/Dark
 i 320/390/1440 px (`production-rollout-48.json`). Nie ponawiać #48 ani SQL.
 
-Następna poprawka `fix/navbar-keyboard-dismissal`: menu nawigacji, języka
-i motywu. Produkcyjny błąd: Tab zostawia popup otwarty; strzałki nie otwierają
-menu. Dodatkowo selektor początkowego fokusu wskazywał pierwszy element zamiast
-aktywnego języka/motywu. Poprawka jest przygotowywana, nie wdrożona.
-Dowody i zakres: `docs/audit/2026-11-28/README.md`. Bez SQL.
+#49 scalony 28 listopada (`3f41a11`), potwierdzony przez właściciela i GitHub.
+Publiczna produkcja przeszła 8 kontroli PL/EN/UA/ZH, Light/Dark, 390/1440 px:
+menu strzałkami, Tab/Shift+Tab, Escape i fokus aktywnej opcji. Raport:
+`docs/audit/2026-11-28/production-rollout-49.json`. Nie ponawiać merge ani SQL.
+
+Następna partia `feat/nonkgp-catalogue-07`: Suchawa i Lesista Wielka.
+2 trasy/GPX, 2 POI, 16 tekstów PL/EN/UA/ZH, 247 próbek i 2 profile wysokości.
+Nie zmienia szczytów ani ich współrzędnych. Dane są przygotowane, **nie wdrożone**.
+SQL jest odłożony do większego okna; dokładne apply/verify/rollback w
+`docs/catalogue/nonkgp-07/`. Merge nie uruchamia SQL. Profile pojawią się dopiero
+przy dokładnie zgodnym rekordzie po imporcie. Na produkcji pozostaje 9 profili;
+w gałęzi jest 11 / 1525 próbek. Społecznościowe źródło POI szczeliny wiatrowej
+jest jawne; dojście do tego punktu nie jest częścią żółtej trasy.
+
+Aktualny publiczny audyt: `docs/audit/2026-11-28/catalogue-coverage.json` i CSV.
+88 aktywnych szczytów; poza KGP 32 bez trasy i 35 bez POI, bez doliczania partii 07.
+Nie powtarzać #37/#38/#40, #46/#47/#48/#49.
 
 Rejestr `docs/catalogue/elevation-profiles/review.json` wskazuje dla każdej trasy
-`catalogue_batch`; generator akceptuje wyłącznie nonkgp-01/05/06 i sprawdza
+`catalogue_batch`; generator akceptuje wyłącznie nonkgp-01/05/06/07 i sprawdza
 rodzica, każdy punkt geometrii, źródło oraz wysokości. Wykres pojawia się tylko
 przy zgodności z bieżącym rekordem. Narzędzia:
 `scripts/build_elevation_profiles.py --check` / `--check --check-sources`.
