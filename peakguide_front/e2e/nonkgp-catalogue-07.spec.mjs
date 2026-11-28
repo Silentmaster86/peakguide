@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures/catalogue-test.mjs';
 import {readFileSync} from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
 import {profileText} from '../src/features/elevation/text.js';

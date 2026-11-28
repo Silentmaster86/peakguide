@@ -14,8 +14,8 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'], launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined } } },
     { name: 'mobile', use: { ...devices['Pixel 7'], launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined } } },
     ...(process.env.PLAYWRIGHT_CROSS_BROWSER ? [
-      // Concurrent Firefox Axe scans can crash the page. Keep every check,
-      // but run one Firefox worker; Chromium/WebKit keep the shared limit.
+      // Keep heavy Firefox Axe scans serialized as well as process-isolated
+      // in the catalogue fixture. Chromium/WebKit keep the shared limit.
       {name:'firefox',workers:1,use:{...devices['Desktop Firefox']}},
       {name:'webkit',use:{...devices['Desktop Safari']}},
     ] : []),
