@@ -40,12 +40,13 @@ PL/EN/UA/ZH, Light/Dark, 390/1440 px i Axe otwartej nawigacji.
 
 ## Partia 07 — przygotowana, SQL odłożony
 
+#50 scalony (`9ccbc0a`, 28 listopada), potwierdzenie właściciela i GitHub.
 `feat/nonkgp-catalogue-07`: Suchawa i Lesista Wielka, 2 trasy z GPX, 2 POI,
 16 tekstów i 2 profile wysokości z 247 rzeczywistych próbek. Bez edycji szczytów.
 **Nie są jeszcze wdrożone w bazie.** Merge przygotowuje kod i pliki; SQL może
 poczekać na większe wspólne okno. Nowe profile pozostają ukryte do importu.
 
-Dokładne pliki późniejszego wdrożenia:
+Osobne pliki partii 07 (alternatywa dla wspólnego okna poniżej):
 
 1. `docs/catalogue/nonkgp-07/verify.sql` — odczyt przed importem.
 2. `docs/catalogue/nonkgp-07/apply.sql` — transakcja tylko nowej partii.
@@ -58,6 +59,28 @@ Dokładne pliki późniejszego wdrożenia:
 [Pełny raport katalogu](../audit/2026-11-28/catalogue-coverage.json): 88 aktywnych
 szczytów, KGP 28/28 z trasą/POI/geometrią/dostępem; poza KGP 32 bez trasy,
 35 bez POI. To obecny publiczny stan, bez doliczania przygotowanej partii 07.
+
+## Partia 08 i wspólne okno 07–08 — przygotowane, bez importu
+
+Wołek, Trzy Korony, Zamkowa Góra w Górach Opawskich i Srebrna Kopa:
+4 trasy/POI, 32 teksty PL/EN/UA/ZH, 842 punkty GPX i 4 profile.
+[Zakres i źródła](../catalogue/nonkgp-08/README.md),
+[publiczny stan przed importem](../catalogue/nonkgp-08/public-baseline.json).
+Nie zmieniają szczytów ani danych partii 07. Na razie właściciel tylko scala kod.
+
+**Docelowy pojedynczy import obejmuje sześć szczytów, nie wymaga osobnych wkleiń:**
+
+1. `docs/catalogue/nonkgp-07-08/verify.sql` — 6 wierszy przed importem.
+2. `docs/catalogue/nonkgp-07-08/apply.sql` — jedna transakcja obu partii.
+3. Ponownie wspólne `verify.sql` — 6/6 wierszy z trasą/POI/geometrią po 1,
+   oba zestawy języków `[en,pl,ua,zh]`, obie flagi `true`.
+4. Publiczny przegląd sześciu kart/profili. Dopiero wtedy potwierdzamy wdrożenie.
+
+[Pełna instrukcja wspólnego okna](../catalogue/nonkgp-07-08/README.md).
+SQL nadal odłożony. Nie ponawiać #37/#38/#40. Kod przygotowuje 15 profili / 2367
+próbek; produkcja ma 9 / 1278 do wykonania nowego SQL.
+Po udanym imporcie sześciu nowych par liczby braków powinny spaść z 32/35 do
+26/29 (trasy/POI poza KGP); wymaga to potwierdzenia, nie jest obecnym wynikiem.
 
 ## Potwierdzone — nie ponawiać
 

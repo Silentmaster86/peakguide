@@ -1,0 +1,86 @@
+[
+  {
+    "peak_slug": "wolek",
+    "source_page": "https://mapa-turystyczna.pl/route?q=50.8235430,15.9458360;50.8380240,15.9354440",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.8235430,15.9458360;50.8380240,15.9354440",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "e36aae554de6f0dbac45b9d2bf14f4256bcead1518697b0e97f31c2f2ea8cf12",
+    "source_semantic_sha256": "76c7679801b5975b758e37aa7a82b25697e1c02d9961bc960006664c15fd0faa",
+    "points": 166,
+    "segments": 1,
+    "first": [
+      15.945836,
+      50.823543
+    ],
+    "last": [
+      15.935477,
+      50.838019
+    ],
+    "coordinates_sha256": "74a360843b642ddea830186e015b2e77801b767ddf683c80b22c4696c2d0fc4c",
+    "verified_at": "2026-11-28T00:00:00Z"
+  },
+  {
+    "peak_slug": "trzy-korony",
+    "source_page": "https://mapa-turystyczna.pl/route/1cd3e",
+    "source_gpx": "https://mapa-turystyczna.pl/route/1cd3e.gpx",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "f3d493df4d1053519daa37bb07011b365e251071c47c517562620f89b743c858",
+    "source_semantic_sha256": "715d5b5fa4edb8c28e8e574008392f9a90263ec4742ab1b3d1ed4c3659387109",
+    "points": 188,
+    "segments": 1,
+    "first": [
+      20.4111921,
+      49.4022489
+    ],
+    "last": [
+      20.414215,
+      49.413833
+    ],
+    "coordinates_sha256": "9067acceb629503760b9008e9cfb8dd91c6f24441b0bf3a68ecd43ced74fe20c",
+    "verified_at": "2026-11-28T00:00:00Z"
+  },
+  {
+    "peak_slug": "zamkowa-gora",
+    "source_page": "https://mapa-turystyczna.pl/route?q=50.2877390,17.4729770;50.27271111,17.45885000",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.2877390,17.4729770;50.27271111,17.45885000",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "2710c4d37fd53b211f01adaa7bd2f600282453b0d83501538baf5cd87b016bc4",
+    "source_semantic_sha256": "5deb4feaed989e51dec3ee81451df9d60817ff44b571535299f98eea7c5bcdba",
+    "points": 171,
+    "segments": 1,
+    "first": [
+      17.472977,
+      50.287739
+    ],
+    "last": [
+      17.458823,
+      50.272707
+    ],
+    "coordinates_sha256": "b502f85319ba2017e0047f89d0bd1777cb5c17e281045e7d3eaeac0288127ede",
+    "verified_at": "2026-11-28T00:00:00Z"
+  },
+  {
+    "peak_slug": "srebrna-kopa",
+    "source_page": "https://mapa-turystyczna.pl/route?q=50.2877390,17.4729770;50.27271111,17.45885000;50.25692778,17.45519722",
+    "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.2877390,17.4729770;50.27271111,17.45885000;50.25692778,17.45519722",
+    "adaptation": "none",
+    "time_policy": "mapa_relative_export_times",
+    "source_sha256": "c77e81e5b7a7e33f18683636a4b5734d976c59adf71839dc0a768c327d90d141",
+    "source_semantic_sha256": "d89a8781b097dce3dc4be5f7ad899f6fad13d7552c6d9184857c82a8dead794a",
+    "points": 317,
+    "segments": 1,
+    "first": [
+      17.472977,
+      50.287739
+    ],
+    "last": [
+      17.4550557,
+      50.2569801
+    ],
+    "coordinates_sha256": "d63f1d2ead905cf0bd4832775b426b9c7f430fce5e0b9016dfca6dddb032d464",
+    "verified_at": "2026-11-28T00:00:00Z"
+  }
+]

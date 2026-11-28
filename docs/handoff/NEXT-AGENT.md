@@ -4,6 +4,22 @@ Stan: 28 listopada 2026. Repo: Silentmaster86/peakguide.
 Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
 Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
+## Bieżące przekazanie — merge #50 potwierdzony
+
+#50 scalony 28 listopada (`9ccbc0a`), potwierdzenie właściciela i GitHub.
+Suchawa i Lesista Wielka: kod gotowy, **SQL partii 07 nadal odłożony**.
+Nowa partia 08: Wołek, Trzy Korony, Zamkowa Góra (Góry Opawskie), Srebrna Kopa.
+Cztery trasy/POI, 32 tłumaczenia i 842 próbki profili. Nie zmienia tożsamości szczytów.
+
+Wspólne przyszłe okno: `docs/catalogue/nonkgp-07-08/README.md`, jeden `apply.sql`
+i jeden `verify.sql`. Razem 6 tras, 6 POI, 48 tłumaczeń, 1089 nowych próbek.
+To **przygotowane pakiety**, nie potwierdzenie importu. Na razie tylko merge.
+Nie prosić o ponowienie zakończonych importów #37/#38/#40 ani merge #45–#50.
+Na produkcji pozostaje 9 profili / 1278 próbek; kod przygotowuje 15 / 2367,
+z czego 6 profili czeka na SQL 07/08. Publiczny audyt nadal: poza KGP 32 bez
+trasy i 35 bez POI; przygotowanych pakietów nie odejmować od tych braków.
+
+
 ## Bieżący stan — najpierw przeczytaj
 
 #37/nonkgp-03 i #38/nonkgp-04 mają potwierdzone wyniki właściciela z 24 listopada
@@ -58,13 +74,13 @@ Publiczna produkcja przeszła 8 kontroli PL/EN/UA/ZH, Light/Dark, 390/1440 px:
 menu strzałkami, Tab/Shift+Tab, Escape i fokus aktywnej opcji. Raport:
 `docs/audit/2026-11-28/production-rollout-49.json`. Nie ponawiać merge ani SQL.
 
-Następna partia `feat/nonkgp-catalogue-07`: Suchawa i Lesista Wielka.
+Scalona partia #50 `feat/nonkgp-catalogue-07`: Suchawa i Lesista Wielka.
 2 trasy/GPX, 2 POI, 16 tekstów PL/EN/UA/ZH, 247 próbek i 2 profile wysokości.
 Nie zmienia szczytów ani ich współrzędnych. Dane są przygotowane, **nie wdrożone**.
 SQL jest odłożony do większego okna; dokładne apply/verify/rollback w
 `docs/catalogue/nonkgp-07/`. Merge nie uruchamia SQL. Profile pojawią się dopiero
 przy dokładnie zgodnym rekordzie po imporcie. Na produkcji pozostaje 9 profili;
-w gałęzi jest 11 / 1525 próbek. Społecznościowe źródło POI szczeliny wiatrowej
+Po #50 kod przygotował 11 / 1525 próbek; partia 08 rozszerza to do 15 / 2367. Społecznościowe źródło POI szczeliny wiatrowej
 jest jawne; dojście do tego punktu nie jest częścią żółtej trasy.
 
 Aktualny publiczny audyt: `docs/audit/2026-11-28/catalogue-coverage.json` i CSV.

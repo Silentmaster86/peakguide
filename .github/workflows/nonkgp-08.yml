@@ -1,0 +1,41 @@
+name: Non-KGP batch 08 and grouped 07-08
+on:
+  pull_request:
+    paths: &reviewed_paths
+      - 'docs/catalogue/nonkgp-07/**'
+      - 'docs/catalogue/nonkgp-08/**'
+      - 'docs/catalogue/nonkgp-07-08/**'
+      - 'scripts/build_nonkgp_08.py'
+      - 'scripts/build_nonkgp_07_08.py'
+      - 'scripts/test_nonkgp_08.py'
+      - 'supabase/tests/nonkgp_08_test.py'
+      - 'supabase/tests/catalogue_management_fixture.sql'
+      - 'supabase/migrations/202611150014_catalogue_management.sql'
+      - '.github/workflows/nonkgp-08.yml'
+  push:
+    branches: [main]
+    paths: *reviewed_paths
+permissions:
+  contents: read
+jobs:
+  reviewed-data:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.5
+        env:
+          POSTGRES_PASSWORD: local-test-only
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGPASSWORD: local-test-only
+      PGHOST: localhost
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/build_nonkgp_08.py --check
+      - run: python scripts/build_nonkgp_07_08.py --check
+      - run: python -m unittest discover -s scripts -p 'test_*.py'
+      - run: createdb -U postgres nonkgp_08_test
+      - run: python supabase/tests/nonkgp_08_test.py

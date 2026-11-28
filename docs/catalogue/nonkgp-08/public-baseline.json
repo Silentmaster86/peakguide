@@ -1,0 +1,70 @@
+{
+  "observed_at": "2026-11-28T15:29:09.789527+00:00",
+  "scope": "Anonymous public tourist rows; hidden drafts are not visible. SQL refuses any existing active/inactive content.",
+  "production_writes": false,
+  "public_totals": {
+    "peaks": 88,
+    "trails": 56,
+    "pois": 53,
+    "trail_access": 34,
+    "trail_parking": 31
+  },
+  "peaks": [
+    {
+      "identity": {
+        "id": 43,
+        "slug": "wolek",
+        "range_id": 8,
+        "latitude": 50.838024,
+        "longitude": 15.935444,
+        "elevation_m": 878,
+        "active": true,
+        "is_korona": false
+      },
+      "visible_trails": 0,
+      "visible_pois": 0
+    },
+    {
+      "identity": {
+        "id": 57,
+        "slug": "srebrna-kopa",
+        "range_id": 15,
+        "latitude": 50.2567,
+        "longitude": 17.4556,
+        "elevation_m": 785,
+        "active": true,
+        "is_korona": false
+      },
+      "visible_trails": 0,
+      "visible_pois": 0
+    },
+    {
+      "identity": {
+        "id": 79,
+        "slug": "trzy-korony",
+        "range_id": 26,
+        "latitude": 49.4136,
+        "longitude": 20.4144,
+        "elevation_m": 982,
+        "active": true,
+        "is_korona": false
+      },
+      "visible_trails": 0,
+      "visible_pois": 0
+    },
+    {
+      "identity": {
+        "id": 142,
+        "slug": "zamkowa-gora",
+        "range_id": 15,
+        "latitude": 50.272778,
+        "longitude": 17.458889,
+        "elevation_m": 571,
+        "active": true,
+        "is_korona": false
+      },
+      "visible_trails": 0,
+      "visible_pois": 0
+    }
+  ]
+}
