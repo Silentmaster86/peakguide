@@ -1,0 +1,22 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+import {profileText} from '../src/features/elevation/text.js';
+import {localeFor} from '../src/utils/format.js';
+const languages=['pl','en','ua','zh'];
+const trails=['nonkgp-05','nonkgp-06'].flatMap(batch=>JSON.parse(readFileSync(new URL(`../../docs/catalogue/${batch}/records.json`,import.meta.url),'utf8')).filter(row=>row.kind==='trail').map(row=>row.body));
+for(const [i,body]of trails.entries())test(`reviewed profile: ${body.peak_slug}`,async({page})=>{
+ const data=JSON.parse(readFileSync(new URL(`../src/features/elevation/data/${body.slug}.json`,import.meta.url),'utf8'));
+ const lang=languages[i%languages.length],theme=i%2?'dark':'light',t=profileText[lang];
+ const peak={id:data.peak_id,slug:data.peak_slug,active:true,is_korona:false,latitude:null,longitude:null,peaks_i18n:languages.map(lang=>({lang,name:data.peak_slug}))};
+ const trail={...body,id:600+i,peak_id:data.peak_id,trails_i18n:Object.entries(body.i18n).map(([lang,text])=>({lang,...text}))};
+ await page.addInitScript(({lang,theme})=>{localStorage.setItem('peakguide_lang',lang);localStorage.setItem('ui_theme_mode',theme);},{lang,theme});
+ await page.route('https://test.supabase.co/**',route=>{const u=new URL(route.request().url()),table=u.pathname.split('/').at(-1);return route.fulfill({json:table==='peaks'&&u.searchParams.has('slug')?peak:table==='trails'?[trail]:[]});});
+ const loads=[];page.on('request',request=>{const u=request.url();if(u.includes('/src/features/elevation/data/')&&!u.includes('index.json'))loads.push(u);});
+ await page.goto(`/peaks/${data.peak_slug}?tab=trails&trail=${body.slug}`);const widget=page.locator('.elevation-profile');await expect(widget.locator('summary').first()).toHaveText(t.title);expect(loads).toEqual([]);
+ await widget.locator('summary').first().click();await expect(widget.getByRole('img')).toHaveAccessibleName(new RegExp(t.title));expect(loads).toHaveLength(1);expect(loads[0]).toContain(body.slug+'.json');
+ const slider=widget.getByRole('slider',{name:t.point});await slider.focus();await page.keyboard.press('End');await expect(slider).toHaveValue(String(data.point_count-1));
+ const last=data.segments.at(-1).at(-1),number=(v,d)=>new Intl.NumberFormat(localeFor(lang),{maximumFractionDigits:d}).format(v);
+ await expect(slider).toHaveAttribute('aria-valuetext',`${number(last[3]/1000,2)} km · ${number(last[2],1)} m`);
+ await expect(widget.getByRole('link')).toHaveAttribute('href',body.geometry_source_url);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+});

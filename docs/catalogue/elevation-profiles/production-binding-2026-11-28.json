@@ -1,0 +1,71 @@
+{
+  "checked_at": "2026-11-28T09:41:30.122Z",
+  "method": "Public read-only catalogue API through browser",
+  "production_writes": false,
+  "scope": "Identity, GPX/source URLs and every geometry point; five new profile UIs await merge",
+  "checks": [
+    {
+      "trail_slug": "lysina-pcim-kudlacze-wejscie",
+      "peak_id": 70,
+      "public_route_id": 39,
+      "review_matches": true,
+      "profile_ui_status": "deployed_in_46"
+    },
+    {
+      "trail_slug": "snieznica-gruszowiec-wejscie",
+      "peak_id": 69,
+      "public_route_id": 40,
+      "review_matches": true,
+      "profile_ui_status": "deployed_in_46"
+    },
+    {
+      "trail_slug": "zar-za-roztoki-czarny-wejscie",
+      "peak_id": 76,
+      "public_route_id": 41,
+      "review_matches": true,
+      "profile_ui_status": "deployed_in_46"
+    },
+    {
+      "trail_slug": "leskowiec-rzyki-mydlarze-wejscie",
+      "peak_id": 75,
+      "public_route_id": 42,
+      "review_matches": true,
+      "profile_ui_status": "deployed_in_46"
+    },
+    {
+      "trail_slug": "stog-izerski-swieradow-czerwony-wejscie",
+      "peak_id": 33,
+      "public_route_id": 56,
+      "review_matches": true,
+      "profile_ui_status": "prepared_in_current_branch"
+    },
+    {
+      "trail_slug": "wysoki-kamien-szklarska-gorna-czerwony-wejscie",
+      "peak_id": 34,
+      "public_route_id": 57,
+      "review_matches": true,
+      "profile_ui_status": "prepared_in_current_branch"
+    },
+    {
+      "trail_slug": "czarna-gora-miedzygorze-lesieniec-wejscie",
+      "peak_id": 31,
+      "public_route_id": 58,
+      "review_matches": true,
+      "profile_ui_status": "prepared_in_current_branch"
+    },
+    {
+      "trail_slug": "kalenica-jugowska-zimna-polanka-wejscie",
+      "peak_id": 39,
+      "public_route_id": 59,
+      "review_matches": true,
+      "profile_ui_status": "prepared_in_current_branch"
+    },
+    {
+      "trail_slug": "wiezyca-dom-turysty-zolty-wejscie",
+      "peak_id": 82,
+      "public_route_id": 60,
+      "review_matches": true,
+      "profile_ui_status": "prepared_in_current_branch"
+    }
+  ]
+}

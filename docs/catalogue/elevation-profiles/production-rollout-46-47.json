@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-11-25T17:15:36.309Z",
+  "url": "https://peak-guide.netlify.app",
+  "production_writes": false,
+  "checks": [
+    {
+      "kind": "elevation_profile",
+      "peak_slug": "lysina",
+      "trail_slug": "lysina-pcim-kudlacze-wejscie",
+      "theme": "light",
+      "width": 390,
+      "source_samples": 208,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "kind": "elevation_profile",
+      "peak_slug": "snieznica",
+      "trail_slug": "snieznica-gruszowiec-wejscie",
+      "theme": "dark",
+      "width": 1440,
+      "source_samples": 100,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "kind": "elevation_profile",
+      "peak_slug": "gora-zar",
+      "trail_slug": "zar-za-roztoki-czarny-wejscie",
+      "theme": "light",
+      "width": 390,
+      "source_samples": 121,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "kind": "elevation_profile",
+      "peak_slug": "leskowiec",
+      "trail_slug": "leskowiec-rzyki-mydlarze-wejscie",
+      "theme": "dark",
+      "width": 1440,
+      "source_samples": 101,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "kind": "map_initial_groups",
+      "range": "beskid-slaski",
+      "initial_individual_markers": 3,
+      "manual_zoom_required": false
+    }
+  ]
+}

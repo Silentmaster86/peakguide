@@ -1,6 +1,6 @@
 # PeakGuide — karta dla kolejnego agenta
 
-Stan: 25 listopada 2026. Repo: Silentmaster86/peakguide.
+Stan: 28 listopada 2026. Repo: Silentmaster86/peakguide.
 Produkcja: https://peak-guide.netlify.app/. React/Vite w `peakguide_front`, Supabase.
 Języki UI/danych: pl/en/ua/zh; poczta: pl/en/uk/zh. Chiński uproszczony.
 
@@ -34,18 +34,30 @@ na produkcji: odczyt publiczny zwrócił 200 i 15 dni prognozy Rysów. Kontrakt
 oraz ograniczenia: `docs/operations/weather.md`. Nie ponawiać konfiguracji/merge.
 SQL #40 zakończony i potwierdzony przez właściciela; nie ponawiać.
 
-PR #46 na `feat/trail-elevation-profile`: profile czterech już wdrożonych
-tras nonkgp-01, 530 próbek z GPX. Wysokości i pełne fingerprinty sprawdzono
-25 listopada. Interfejs pokazuje profil tylko po dopasowaniu sluga, peak_id,
-adresu GPX, źródła i każdego punktu geometrii do bieżącego rekordu. Zmiana
-przebiegu ukrywa profil zamiast pokazywać inny wariant. Brak SQL i nowych usług.
-Źródła/próbki: `docs/catalogue/elevation-profiles/review.json`; generator:
-`scripts/build_elevation_profiles.py --check` oraz opcjonalne `--check-sources`.
-Właściciel scala #46; nie oznaczać profili jako wdrożonych bez merge.
-#47 (`fix/map-cluster-zoom`) poprawia grupowanie i przybliżanie markerów. Jest
-niezależny od #46; dowolna kolejność merge, bez SQL.
-LinkedIn (4 języki i rzeczywiste screeny): po kontroli wdrożonego interfejsu,
-publikacja tylko przez właściciela.
+#46 scalony (`571b7f0`): cztery profile nonkgp-01 z 530 próbek. #47 scalony
+(`2ed0488`): poprawione początkowe grupowanie i przybliżanie markerów. Właściciel
+i GitHub potwierdzili oba merge. Agent wykonał odczyt produkcji: cztery wykresy
+z poprawnym końcem suwaka/klawiaturą, Light/Dark i szerokościami 390/1440 px;
+mapa od razu pokazuje trzy markery Beskidu Śląskiego. Raport:
+`docs/catalogue/elevation-profiles/production-rollout-46-47.json`.
+Nie prosić o ponowienie #40, #46 ani #47.
+
+Następna partia `feat/elevation-profiles-batch-05-06`: pięć profili dla już
+wdrożonych z #40 tras Stogu Izerskiego, Wysokiego Kamienia, Czarnej Góry,
+Kalenicy i Wieżycy. 748 nowych próbek, razem 9 profili / 1278 próbek w gałęzi.
+Źródła wszystkich dziewięciu profili ponownie odczytano 28 listopada;
+`docs/catalogue/elevation-profiles/source-verification-2026-11-28.json` zawiera wynik.
+Publiczny odczyt katalogu 28 listopada potwierdził 9/9 zgodnych tożsamości,
+adresów GPX/źródeł i geometrii (`production-binding-2026-11-28.json` w folderze
+profili). Nowe pięć nie jest jeszcze wdrożone. Nie zmienia SQL, tras, POI ani parametrów
+w bazie; właściciel wykonuje tylko merge po testach.
+
+Rejestr `docs/catalogue/elevation-profiles/review.json` wskazuje dla każdej trasy
+`catalogue_batch`; generator akceptuje wyłącznie nonkgp-01/05/06 i sprawdza
+rodzica, każdy punkt geometrii, źródło oraz wysokości. Wykres pojawia się tylko
+przy zgodności z bieżącym rekordem. Narzędzia:
+`scripts/build_elevation_profiles.py --check` / `--check --check-sources`.
+Pakiet LinkedIn przekazany właścicielowi; nie publikować za niego w tle.
 
 ## Wcześniejsze wdrożenia bazy — zakończone
 

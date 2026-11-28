@@ -1,0 +1,97 @@
+{
+  "checked_at": "2026-11-28T09:39:49.569467+00:00",
+  "method": "Read-only provider GPX check through build_elevation_profiles.py --check --check-sources",
+  "production_writes": false,
+  "checks": [
+    {
+      "catalogue_batch": "nonkgp-01",
+      "peak_slug": "lysina",
+      "trail_slug": "lysina-pcim-kudlacze-wejscie",
+      "source_gpx": "https://malopolska.szlaki.pttk.pl/item/gpx/309",
+      "source_semantic_sha256": "4caa66cd80f7f90f3b6fa1442dc72cc8eb68e291d40ac46bc8d1dc52c61c079e",
+      "samples_sha256": "f2691137f3e3cd7c512a94f03eb8463881ccb731b48063751884be00036c3b5e",
+      "point_count": 208,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-01",
+      "peak_slug": "snieznica",
+      "trail_slug": "snieznica-gruszowiec-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/yoez.gpx",
+      "source_semantic_sha256": "6e5ea1639d5b2d7ec4ef9e04764f051cf6d5221e925984906cf1dd8aa8d0f91e",
+      "samples_sha256": "79b2fc850049e875db838b65394a99a7bb11548a23083ba80fc3f27ed9dea1ee",
+      "point_count": 100,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-01",
+      "peak_slug": "gora-zar",
+      "trail_slug": "zar-za-roztoki-czarny-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/3bedx.gpx",
+      "source_semantic_sha256": "9b6a67b9e87a56fdeddcb4898212ae31d8fc6141cb31fa0b3f96eebc6b26c459",
+      "samples_sha256": "a34e11e56594ce982af8772a1c80e4ae7bc18f20ae426aa86d1522ecb742b34c",
+      "point_count": 121,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-01",
+      "peak_slug": "leskowiec",
+      "trail_slug": "leskowiec-rzyki-mydlarze-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/3npty.gpx",
+      "source_semantic_sha256": "6a4338ca58ed92a77e0e0573744c6cd3c7318a12f6f21b11e252c74c5aca12f0",
+      "samples_sha256": "8291496cf4711ee2cf0cb5a1bd909fbf1dc69eeee5e8380a3131260c4484ce79",
+      "point_count": 101,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-05",
+      "peak_slug": "stog-izerski",
+      "trail_slug": "stog-izerski-swieradow-czerwony-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/mau3.gpx",
+      "source_semantic_sha256": "d097c1dd305251b5607ebebc28421b14bf1fbdaeb355703ef049793347888c16",
+      "samples_sha256": "6d188f53f7fb8bdd62e7ebbb7f9148ba005ba46da97491bd979029b740161d27",
+      "point_count": 186,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-05",
+      "peak_slug": "wysoki-kamien",
+      "trail_slug": "wysoki-kamien-szklarska-gorna-czerwony-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/iv1r.gpx",
+      "source_semantic_sha256": "96a600400083f3b27f661c21a7c7f77ff625ee7fde1eb8430e2a3544535d70f2",
+      "samples_sha256": "ef0c96e07b88a0a8ef0c07475d2c3fdc1a781fc1eafd78a5365211a936bfdb2e",
+      "point_count": 159,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-06",
+      "peak_slug": "czarna-gora",
+      "trail_slug": "czarna-gora-miedzygorze-lesieniec-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/l083.gpx",
+      "source_semantic_sha256": "b528fe8804f365a260ef05183b57d855129aecc1f5c73a7ace20e05c0d910a96",
+      "samples_sha256": "f4f854f69a8ad86883d7a5b1aa43aa500c10fbdb1a8c9e5498f4244c210b1eb6",
+      "point_count": 264,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-06",
+      "peak_slug": "kalenica",
+      "trail_slug": "kalenica-jugowska-zimna-polanka-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/6vs3.gpx",
+      "source_semantic_sha256": "2c674b479dff626b8d6a02b39b8926021b3e5f8e2a714f4d99db6e334ccf19bc",
+      "samples_sha256": "b36115db53f7dbcbc642588221fdc53b99a890d326fc03b3deb5f644f3ce0733",
+      "point_count": 113,
+      "source_matches_review": true
+    },
+    {
+      "catalogue_batch": "nonkgp-06",
+      "peak_slug": "wiezyca",
+      "trail_slug": "wiezyca-dom-turysty-zolty-wejscie",
+      "source_gpx": "https://mapa-turystyczna.pl/route/export?q=50.8925670,16.7269250;50.8867150,16.7288170",
+      "source_semantic_sha256": "ee0cf5b0e34be7f198ba85760001d02d2d91202ae0d5ec843d49d5d4e4a845fc",
+      "samples_sha256": "159d16a5d7b36ff22dbfe11052d3cde7147ea4507c0a4390068a56bf5cb04ab1",
+      "point_count": 26,
+      "source_matches_review": true
+    }
+  ]
+}

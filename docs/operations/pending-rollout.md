@@ -1,6 +1,6 @@
 # Kolejka wdrożeń — merge i SQL osobno
 
-Stan: 25 listopada 2026. Właściciel potwierdził verify #37 (5/5) i #38 (4/4):
+Stan: 28 listopada 2026. Właściciel potwierdził verify #37 (5/5) i #38 (4/4):
 po 1 trasie, POI i geometrii, PL/EN/UA/ZH, review_matches/package_applied=true.
 **Nie ma już zaległego SQL z #37/#38. Nie powtarzać importów.** #39 scalony, bez SQL.
 
@@ -19,15 +19,16 @@ Przyszłe pakiety nadal zbieramy do wspólnego okna. Agent przygotowuje źródł
 kod, testy i PR-y; właściciel scala oraz wykonuje ewentualny nowy produkcyjny SQL.
 Zakończenie #40 nie oznacza uruchomienia następnych importów w tle.
 
-## Kolejny frontend — profile wysokościowe
+## Następne profile — wyłącznie merge
 
-#45 scalony; pogoda jest na produkcji (publiczny odczyt 25 listopada: 15 dni
-Rysów). [#46](https://github.com/Silentmaster86/peakguide/pull/46) przygotowuje cztery profile istniejących tras nonkgp-01:
-Łysina, Śnieżnica, Żar, Leskowiec. Będzie wymagał wyłącznie merge po testach.
-Bez SQL, sekretów, nowego API i ponowienia wcześniejszych importów. To cztery
-sprawdzone ślady, nie komplet profili wszystkich tras.
-[#47](https://github.com/Silentmaster86/peakguide/pull/47) poprawia początkowe grupowanie
-i przybliżanie markerów. Oba PR-y czekają na merge, w dowolnej kolejności; bez SQL.
+#46 i #47 są już scalone; produkcyjne wykresy i grupowanie sprawdzono 25 listopada.
+Nie są zaległymi merge ani importami. [Wynik kontroli](../catalogue/elevation-profiles/production-rollout-46-47.json).
+
+Gałąź `feat/elevation-profiles-batch-05-06` przygotowuje pięć dalszych profili:
+Stóg Izerski, Wysoki Kamień, Czarna Góra, Kalenica, Wieżyca. Same trasy i POI
+są już wdrożone z #40. Nowe profile potrzebują jedynie merge po testach;
+**nie wykonywać żadnego nowego SQL**. To pięć przygotowanych profili, nie
+potwierdzenie ich wdrożenia. Dotychczasowe cztery profile są na produkcji.
 
 ## Potwierdzone — nie ponawiać
 
@@ -46,6 +47,7 @@ i przybliżanie markerów. Oba PR-y czekają na merge, w dowolnej kolejności; b
 - #41/#42: navbar, przewijanie, kafelki mapy i spójne markery scalone; bez SQL.
 - #43/#44: nowe karty pogody/słońca i poprawka zakładek scalone; bez SQL.
 - #45: pełna strona /weather i backend scalone 25 listopada; publiczna prognoza działa.
+- #46/#47: pierwsze cztery profile i poprawka grup markerów scalone; publiczny UI zweryfikowany.
 - #33/#34: pogoda i światło dzienne zgłoszone przez właściciela jako działające.
 
 ## Przy następnej awarii lub odłożeniu wdrożenia

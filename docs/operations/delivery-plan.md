@@ -1,6 +1,6 @@
 # Kolejne wydania PeakGuide — plan wykonawczy
 
-Stan: 25 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
+Stan: 28 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i PR-y.
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
 
@@ -18,33 +18,39 @@ Merge #45 potwierdzony przez właściciela i GitHub. Publiczny odczyt produkcji
 a prognoza Rysów zwraca 15 dni z Open-Meteo. Istniejąca flaga pogody wystarcza;
 MET nadal obsługuje krótką prognozę w szczegółach. Brak SQL dla tych wydań.
 
-## Teraz — profile wysokościowe, bez SQL
+## Profile wysokościowe — wdrożone i następna partia
 
-Podejmujemy pozycję 20 poniższego planu; import #40 jest już zakończony.
-Pierwsza partia obejmuje cztery już wdrożone trasy: Łysina z Pcimia, Śnieżnica
-z Gruszowca, Żar z Za Roztoki i Leskowiec z Rzyk. 530/530 punktów ma wysokości
-w GPX. Źródła porównano 25 listopada ze wcześniejszymi pełnymi fingerprintami;
-przebieg i kierunek są zgodne z istniejącymi rekordami nonkgp-01. Publiczny odczyt
-Supabase potwierdził 4/4 zgodnych geometrii i adresów źródeł; wynik zapisano w
-`docs/catalogue/elevation-profiles/production-verification.json`. To potwierdza
-przygotowanie danych, nie wdrożenie interfejsu profili.
+#46 scalony (`571b7f0`): Łysina z Pcimia, Śnieżnica z Gruszowca, Żar z Za Roztoki
+oraz Leskowiec z Rzyk — 530 rzeczywistych próbek. #47 scalony (`2ed0488`):
+początkowe grupowanie i przybliżanie markerów. GitHub i właściciel potwierdzili merge.
+Agent sprawdził produkcję 25 listopada: cztery wykresy, klawiatura, Light/Dark,
+telefon/komputer oraz trzy osobne markery po wyborze Beskidu Śląskiego.
+[Wynik odczytu](../catalogue/elevation-profiles/production-rollout-46-47.json).
+To zakończone wydania; nie prosić o ponowny merge lub SQL.
 
-- Agent: generuje profile z rzeczywistych próbek, implementuje wykres/suwak/tabelę,
-  cztery języki, Light/Dark i testy. Nie wylicza wykresu z sumy podejść.
-- Właściciel: merge gotowego PR po CI. Bez SQL, sekretów i zmian konfiguracji.
-- Pozostałe trasy: dopiero po weryfikacji właściwych GPX i wysokości; nie obiecujemy
-  jeszcze profilu całego katalogu. Znaczniki mapy i dane szczytów bez zmian.
-- LinkedIn: można przygotować materiały z wdrożonego frontendu po kontroli strony.
-  Publikacja pozostaje działaniem właściciela; nie publikować w tle.
+Następna partia na `feat/elevation-profiles-batch-05-06`: Stóg Izerski,
+Wysoki Kamień, Czarna Góra, Kalenica i Wieżyca. Ich trasy są już wdrożone z #40.
+Pięć źródeł zawiera komplet 748 wysokości; pełne fingerprinty i geometrie
+ponownie porównano 28 listopada z pierwotnymi przeglądami.
+[Zapis kontroli źródeł](../catalogue/elevation-profiles/source-verification-2026-11-28.json). Po merge będzie **9 profili / 1278 próbek**.
+Dzisiejszy odczyt publicznego katalogu potwierdził 9/9 zgodnych powiązań:
+[wynik](../catalogue/elevation-profiles/production-binding-2026-11-28.json).
+Nowe pięć profili jest przygotowane, nie oznaczamy ich jeszcze jako produkcyjnych.
+Właściciel wykonuje wyłącznie merge po testach; bez SQL/sekretów/konfiguracji.
 
-Utrzymanie profili: `python scripts/build_elevation_profiles.py --check` sprawdza
-artefakty i tożsamości względem nonkgp-01. `--check --check-sources` dodatkowo
-czyta cztery publiczne GPX i odmawia po zmianie pełnego fingerprintu lub próbek.
-`docs/catalogue/elevation-profiles/review.json` zawiera sprawdzone wysokości;
-`peakguide_front/src/features/elevation/data/` to generowane pliki. Zmian wysokości
-nie zatwierdzać wyłącznie ponownym wygenerowaniem hashy — wymagają odczytu źródła.
-Przerwy w danych/segmentach nie dostają łączników. Dystans Haversine ze śladu jest
-osobną wartością od opublikowanego dystansu trasy; nie zmienia parametrów w bazie.
+Utrzymanie: `python scripts/build_elevation_profiles.py --check` porównuje
+artefakty i tożsamości z jawną listą partii nonkgp-01, nonkgp-05 i nonkgp-06.
+`--check --check-sources` dodatkowo czyta dziewięć publicznych GPX i odmawia
+po zmianie pełnego fingerprintu lub próbek. Nie przyjmuje dowolnej ścieżki partii.
+`docs/catalogue/elevation-profiles/review.json` zawiera sprawdzone wysokości
+z oznaczeniem partii; `peakguide_front/src/features/elevation/data/` to pliki
+generowane. Wcześniejsze cztery artefakty profili pozostają identyczne.
+Zmian wysokości nie zatwierdzać samym przeliczeniem hashy — wymagają źródła.
+Przerwy w danych/segmentach nie dostają łączników; dystans Haversine śladu jest
+osobny od opublikowanego dystansu i nie zmienia parametrów w bazie.
+
+Pakiet LinkedIn (jeden tekst PL/EN/UA/ZH, screeny produkcji, opisy alternatywne)
+został przekazany właścicielowi. Publikacja pozostaje jego działaniem.
 
 #40 scalony (`bd830f4`), SQL wykonany i potwierdzony przez właściciela
 25 listopada: 5/5 zgodnych wierszy, po trasie/POI/geometrii i cztery języki.
@@ -102,8 +108,8 @@ Badanie brakującego źródła nie wstrzymuje niezależnych zadań.
 [Odtwarzanie i utrzymanie](remaining-work.md).
 
 Historyczny stan przed #33/#34: frontend nie zawierał integracji pogodowej.
-Zapisywania/zdobywania szczytów nadal nie wdrożono. Profile wysokościowe są
-w przygotowaniu jako oddzielny PR; nie są jeszcze na produkcji. Istniejące pola elevation_gain_m i dwuwymiarowe
+Zapisywania/zdobywania szczytów nadal nie wdrożono. Cztery profile wysokościowe
+są już na produkcji z #46; następne pięć jest w przygotowaniu. Istniejące pola elevation_gain_m i dwuwymiarowe
 route_geometry nie stanowią same w sobie profilu. Sprawdzenie: aktualny main 397e464,
 przeszukanie źródeł i zależności, bez założenia nieistnienia funkcji tylko na
 podstawie jej niewidoczności na stronie.

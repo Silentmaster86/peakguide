@@ -24,7 +24,8 @@ Zachowano pełne pojedyncze segmenty, bez przycinania, upraszczania lub dopisywa
 zaczyna się w ośrodku narciarskim; Kalenica nie prowadzi przez Zygmuntówkę;
 Wieżyca nie obejmuje dalszej trasy na Ślężę. Krótki dystans Wieżycy nie oznacza
 łatwego spaceru: źródło gminne opisuje stromy żółty wariant. `difficulty=null`;
-kolor oznacza szlak, nie klasę trudności. Geometria 2D, brak deklaracji profilu.
+kolor oznacza szlak, nie klasę trudności. Import zachowuje geometrię 2D. Profile wysokościowe powstają osobno z
+rzeczywistych wysokości w GPX, nie z samej geometrii lub sumy podejść.
 
 Odrzucono kartę `3rqa1` Wieżycy: przy przeglądzie zawierała 12,6 km / 734 m /
 270 min przez Ślężę, mimo krótszego tytułu w wyszukiwarce. Nowy GPX jest odrębnym
