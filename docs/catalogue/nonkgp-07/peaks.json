@@ -1,0 +1,22 @@
+[
+  {
+    "id": 47,
+    "slug": "lesista-wielka",
+    "range_id": 10,
+    "latitude": 50.702722,
+    "longitude": 16.190222,
+    "elevation_m": 851,
+    "active": true,
+    "is_korona": false
+  },
+  {
+    "id": 48,
+    "slug": "suchawa",
+    "range_id": 10,
+    "latitude": 50.680556,
+    "longitude": 16.265556,
+    "elevation_m": 928,
+    "active": true,
+    "is_korona": false
+  }
+]

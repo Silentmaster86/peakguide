@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-11-28T14:49:33.918Z",
+  "base": "https://peak-guide.netlify.app",
+  "production_writes": false,
+  "checks": [
+    {
+      "lang": "pl",
+      "theme": "light",
+      "width": 390,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "pl",
+      "theme": "light",
+      "width": 1440,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "ua",
+      "theme": "light",
+      "width": 390,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "ua",
+      "theme": "light",
+      "width": 1440,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "zh",
+      "theme": "dark",
+      "width": 390,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    },
+    {
+      "lang": "zh",
+      "theme": "dark",
+      "width": 1440,
+      "keyboard": true,
+      "navbar_axe_violations": 0,
+      "no_horizontal_overflow": true
+    }
+  ],
+  "merged_pr": 49,
+  "merge_commit": "3f41a117fdf952536137b42313f207d95d31f9b0",
+  "merged_at": "2026-11-28T13:07:39Z"
+}

@@ -48,11 +48,11 @@ class ElevationProfilesTest(unittest.TestCase):
 
     def test_reviewed_assets_match_offline_generator(self):
         generated = profiles.generate()
-        self.assertEqual(len(generated), 10)
+        self.assertEqual(len(generated), 12)
         for name, content in generated.items():
             self.assertEqual((profiles.OUTPUT/name).read_text(encoding='utf-8'), content)
         rows = [json.loads(content) for name, content in generated.items() if name != 'index.json']
-        self.assertEqual(sum(r['height_count'] for r in rows), 1278)
+        self.assertEqual(sum(r['height_count'] for r in rows), 1525)
         self.assertTrue(all(r['point_count'] == r['height_count'] for r in rows))
 
     def test_source_or_geometry_edits_need_review(self):

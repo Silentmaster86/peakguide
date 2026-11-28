@@ -41,8 +41,8 @@ wykresów, koniec suwaka klawiaturą, cztery języki, Light/Dark i 320/390/1440 
 Nie ma zaległego merge ani SQL dla #48.
 
 Utrzymanie: `python scripts/build_elevation_profiles.py --check` porównuje
-artefakty i tożsamości z jawną listą partii nonkgp-01, nonkgp-05 i nonkgp-06.
-`--check --check-sources` dodatkowo czyta dziewięć publicznych GPX i odmawia
+artefakty i tożsamości z jawną listą partii nonkgp-01, nonkgp-05, nonkgp-06 i przygotowaną nonkgp-07.
+`--check --check-sources` dodatkowo czyta przejrzane publiczne GPX i odmawia
 po zmianie pełnego fingerprintu lub próbek. Nie przyjmuje dowolnej ścieżki partii.
 `docs/catalogue/elevation-profiles/review.json` zawiera sprawdzone wysokości
 z oznaczeniem partii; `peakguide_front/src/features/elevation/data/` to pliki
@@ -181,3 +181,19 @@ wymaga osobnego przeglądu pasma i tożsamości dwóch wież.
 zbiorczego verify: po trasie/POI/geometrii, cztery języki i obie kontrole true.
 [Historia wdrożenia](../catalogue/nonkgp-05-06/README.md).
 Nie ponawiać wspólnego ani osobnych importów 05/06.
+
+
+## Aktualizacja po #49 i kolejna partia
+
+#49 scalony 28 listopada (`3f41a11`); menu klawiaturą, aktywne opcje, Light/Dark
+oraz 4 języki sprawdzono na produkcji w 8 widokach. [Raport](../audit/2026-11-28/production-rollout-49.json).
+
+[Partia 07](../catalogue/nonkgp-07/README.md) przygotowuje Suchawę i Lesistą Wielką:
+2 trasy z GPX, 2 POI, 16 tekstów, 247 próbek i 2 profile. Bez edycji szczytów.
+Właściciel scala kod; SQL odkładamy do większego wspólnego okna. To przygotowanie,
+nie potwierdzenie wdrożenia. Po wykonaniu importu możliwe będzie 11 profili / 1525
+próbek; obecnie produkcja ma 9 profili. [Kolejka i pliki](pending-rollout.md).
+
+[Świeży audyt](../audit/2026-11-28/catalogue-coverage.json) nadal wykazuje 32 szczyty
+poza KGP bez trasy i 35 bez POI. Źródła/tożsamości następnych rekordów należy
+sprawdzać oddzielnie; liczniki nie potwierdzają jakości ani dostępności szlaków.

@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-11-28T14:51:13.902310+00:00",
+  "scope": "Anonymous public tourist rows; hidden drafts are not visible. SQL refuses any existing active/inactive content.",
+  "production_writes": false,
+  "peaks": [
+    {
+      "identity": {
+        "id": 47,
+        "slug": "lesista-wielka",
+        "range_id": 10,
+        "latitude": 50.702722,
+        "longitude": 16.190222,
+        "elevation_m": 851,
+        "active": true,
+        "is_korona": false
+      },
+      "visible_trails": 0,
+      "visible_pois": 0
+    },
+    {
+      "identity": {
+        "id": 48,
+        "slug": "suchawa",
+        "range_id": 10,
+        "latitude": 50.680556,
+        "longitude": 16.265556,
+        "elevation_m": 928,
+        "active": true,
+        "is_korona": false
+      },
+      "visible_trails": 0,
+      "visible_pois": 0
+    }
+  ]
+}

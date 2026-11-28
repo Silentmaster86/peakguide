@@ -12,7 +12,7 @@ from build_foreign_gpx_01 import semantic_gpx_hash
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / 'docs/catalogue/elevation-profiles/review.json'
 OUTPUT = ROOT / 'peakguide_front/src/features/elevation/data'
-CATALOGUE_BATCHES = {'nonkgp-01', 'nonkgp-05', 'nonkgp-06'}
+CATALOGUE_BATCHES = {'nonkgp-01', 'nonkgp-05', 'nonkgp-06', 'nonkgp-07'}
 
 
 def samples_hash(segments):

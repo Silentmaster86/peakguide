@@ -43,5 +43,15 @@
     "peak_id": 82,
     "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.8925670,16.7269250;50.8867150,16.7288170",
     "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.8925670,16.7269250;50.8867150,16.7288170"
+  },
+  "suchawa-andrzejowka-niebieski-wejscie": {
+    "peak_id": 48,
+    "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.6853590,16.2783265;50.6805980,16.2664580",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.6853590,16.2783265;50.6805980,16.2664580"
+  },
+  "lesista-wielka-mieroszow-zolty-wejscie": {
+    "peak_id": 47,
+    "gpx_url": "https://mapa-turystyczna.pl/route/kmo2.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/kmo2"
   }
 }
