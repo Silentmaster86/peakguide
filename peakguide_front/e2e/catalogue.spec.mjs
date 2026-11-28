@@ -117,6 +117,9 @@ test('main navigation menu supports keyboard focus and Escape', async ({ page })
   await trigger.click();
   await expect(page.getByRole('menu', { name: 'More' })).toBeVisible();
   await page.keyboard.press('End');
+  await expect(page.getByRole('menuitem', { name: /Trailheads/ })).toBeFocused();
+  await expect(page.getByRole('menuitem', { name: /Trailheads/ })).toHaveAttribute('aria-disabled', 'true');
+  await page.keyboard.press('ArrowUp');
   await expect(page.getByRole('menuitem', { name: /FAQ/ })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(trigger).toBeFocused();

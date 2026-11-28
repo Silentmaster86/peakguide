@@ -27,10 +27,14 @@ test('language and theme keep their selected value focused, and Tab closes their
   await trigger.focus();await page.keyboard.press('ArrowUp');await expect(list.getByRole('option',{selected:true})).toBeFocused();await page.keyboard.press('Shift+Tab');await expect(list).toHaveCount(0);await expect(trigger).not.toBeFocused();
  }
 });
-test('Space follows the mobile Weather link and an all-disabled desktop menu remains dismissible',async({page})=>{
+test('Space follows the mobile Weather link',async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('peakguide_lang','en'));await page.setViewportSize({width:390,height:844});await page.goto('/');
  const trigger=page.locator('#main-nav').getByRole('button',{name:'More',exact:true});await trigger.focus();await page.keyboard.press('ArrowDown');await page.keyboard.press('ArrowDown');await expect(page.getByRole('menuitem',{name:'Weather',exact:true})).toBeFocused();
- await page.keyboard.press('Space');await expect(page).toHaveURL('/weather');await expect(page.getByRole('menu')).toHaveCount(0);
- await page.setViewportSize({width:1440,height:900});await trigger.focus();await page.keyboard.press('ArrowDown');await expect(page.getByRole('menuitem',{name:/Trailheads/})).toBeFocused();
+ await page.keyboard.press('Space');await expect(page).toHaveURL('/weather');await expect(page.getByRole('heading',{name:'Weather forecast',exact:true})).toBeVisible();await expect(page.getByRole('menu')).toHaveCount(0);
+});
+test('an all-disabled desktop menu remains dismissible',async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem('peakguide_lang','en'));await page.setViewportSize({width:1440,height:900});await page.goto('/weather');
+ await expect(page.getByRole('heading',{name:'Weather forecast',exact:true})).toBeVisible();
+ const trigger=page.locator('#main-nav').getByRole('button',{name:'More',exact:true});await trigger.focus();await page.keyboard.press('ArrowDown');await expect(page.getByRole('menuitem',{name:/Trailheads/})).toBeFocused();
  await page.keyboard.press('Escape');await expect(trigger).toBeFocused();await expect(page.getByRole('menu')).toHaveCount(0);
 });
