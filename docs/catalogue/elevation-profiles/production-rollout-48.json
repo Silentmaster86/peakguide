@@ -1,0 +1,87 @@
+{
+  "checked_at": "2026-11-28T10:58:24.414Z",
+  "base": "https://peak-guide.netlify.app",
+  "production_writes": false,
+  "profiles": [
+    {
+      "peak_slug": "stog-izerski",
+      "lang": "pl",
+      "theme": "light",
+      "width": 390,
+      "samples": 186,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "peak_slug": "wysoki-kamien",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "samples": 159,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "peak_slug": "czarna-gora",
+      "lang": "ua",
+      "theme": "light",
+      "width": 390,
+      "samples": 264,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "peak_slug": "kalenica",
+      "lang": "zh",
+      "theme": "dark",
+      "width": 1440,
+      "samples": 113,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    },
+    {
+      "peak_slug": "wiezyca",
+      "lang": "zh",
+      "theme": "light",
+      "width": 320,
+      "samples": 26,
+      "rendered": true,
+      "keyboard_end": true,
+      "no_horizontal_overflow": true
+    }
+  ],
+  "weather": [
+    {
+      "width": 390,
+      "theme": "light",
+      "no_horizontal_overflow": true,
+      "violations": []
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "no_horizontal_overflow": true,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "no_horizontal_overflow": true,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "no_horizontal_overflow": true,
+      "violations": []
+    }
+  ],
+  "merged_pr": 48,
+  "merge_commit": "0a85cd28ffb98cf417cd4a5db141564e40befed6",
+  "merged_at": "2026-11-28T10:56:42Z",
+  "method": "Public Chromium UI: profile slider End; weather Axe WCAG 2 A/AA, 2.1 AA, 2.2 AA. No authenticated actions."
+}

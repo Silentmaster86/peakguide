@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-11-28T10:59:41.631Z",
+  "production_writes": false,
+  "checks": [
+    {
+      "width": 390,
+      "action": "ArrowDown on More",
+      "expanded": "false"
+    },
+    {
+      "width": 390,
+      "action": "Tab from More popup",
+      "expanded": "true",
+      "focus": {
+        "tag": "BUTTON",
+        "text": "Peaks"
+      }
+    },
+    {
+      "width": 390,
+      "action": "Tab from language popup",
+      "expanded": "true"
+    },
+    {
+      "width": 1440,
+      "action": "ArrowDown on More",
+      "expanded": "false"
+    },
+    {
+      "width": 1440,
+      "action": "Tab from More popup",
+      "expanded": "true",
+      "focus": {
+        "tag": "BUTTON",
+        "text": "Peaks"
+      }
+    },
+    {
+      "width": 1440,
+      "action": "Tab from language popup",
+      "expanded": "true"
+    }
+  ]
+}

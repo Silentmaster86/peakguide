@@ -42,15 +42,22 @@ mapa od razu pokazuje trzy markery Beskidu Śląskiego. Raport:
 `docs/catalogue/elevation-profiles/production-rollout-46-47.json`.
 Nie prosić o ponowienie #40, #46 ani #47.
 
-Następna partia `feat/elevation-profiles-batch-05-06`: pięć profili dla już
+#48 scalony 28 listopada (`0a85cd2`): pięć profili dla już
 wdrożonych z #40 tras Stogu Izerskiego, Wysokiego Kamienia, Czarnej Góry,
-Kalenicy i Wieżycy. 748 nowych próbek, razem 9 profili / 1278 próbek w gałęzi.
+Kalenicy i Wieżycy. 748 nowych próbek, razem 9 profili / 1278 próbek na produkcji.
 Źródła wszystkich dziewięciu profili ponownie odczytano 28 listopada;
 `docs/catalogue/elevation-profiles/source-verification-2026-11-28.json` zawiera wynik.
 Publiczny odczyt katalogu 28 listopada potwierdził 9/9 zgodnych tożsamości,
 adresów GPX/źródeł i geometrii (`production-binding-2026-11-28.json` w folderze
-profili). Nowe pięć nie jest jeszcze wdrożone. Nie zmienia SQL, tras, POI ani parametrów
-w bazie; właściciel wykonuje tylko merge po testach.
+profili). Merge potwierdzili właściciel i GitHub. Publiczny przegląd produkcji
+potwierdził wszystkie pięć wykresów, klawiaturę, cztery języki, Light/Dark
+i 320/390/1440 px (`production-rollout-48.json`). Nie ponawiać #48 ani SQL.
+
+Następna poprawka `fix/navbar-keyboard-dismissal`: menu nawigacji, języka
+i motywu. Produkcyjny błąd: Tab zostawia popup otwarty; strzałki nie otwierają
+menu. Dodatkowo selektor początkowego fokusu wskazywał pierwszy element zamiast
+aktywnego języka/motywu. Poprawka jest przygotowywana, nie wdrożona.
+Dowody i zakres: `docs/audit/2026-11-28/README.md`. Bez SQL.
 
 Rejestr `docs/catalogue/elevation-profiles/review.json` wskazuje dla każdej trasy
 `catalogue_batch`; generator akceptuje wyłącznie nonkgp-01/05/06 i sprawdza

@@ -6,7 +6,7 @@ const STORAGE_KEY = "ui_theme_mode"; // "system" | "light" | "dark"
 
 export default function DesktopThemeSwitcher({ lang = "pl", compact = false }) {
 	const t = useMemo(() => getLabels(lang), [lang]);
-	const { open, setOpen, wrapRef } = useDropdown();
+	const { open, setOpen, wrapRef, onTriggerKeyDown } = useDropdown();
 	const [mode, setMode] = useState(readStoredMode());
 
 	// apply theme + persist
@@ -29,6 +29,7 @@ export default function DesktopThemeSwitcher({ lang = "pl", compact = false }) {
 				type='button'
 				style={styles.btn}
 				onClick={() => setOpen((v) => !v)}
+				onKeyDown={onTriggerKeyDown}
 				aria-haspopup='listbox'
 				aria-expanded={open}
 				aria-label={`${t.aria}: ${current.label}`}
