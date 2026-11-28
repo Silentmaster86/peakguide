@@ -12,6 +12,7 @@ from build_foreign_gpx_01 import semantic_gpx_hash
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / 'docs/catalogue/elevation-profiles/review.json'
 OUTPUT = ROOT / 'peakguide_front/src/features/elevation/data'
+CATALOGUE_BATCHES = {'nonkgp-01', 'nonkgp-05', 'nonkgp-06'}
 
 
 def samples_hash(segments):
@@ -80,23 +81,33 @@ def source_samples(raw, adaptation):
 
 def generate():
     rows = json.loads(REVIEW.read_text(encoding='utf-8'))
-    parent = ROOT / 'docs/catalogue/nonkgp-01'
-    trails = {r['body']['slug']: r['body'] for r in json.loads((parent/'records.json').read_text(encoding='utf-8')) if r['kind'] == 'trail'}
-    source_reviews = {r['peak_slug']: r for r in json.loads((parent/'geometry-review.json').read_text(encoding='utf-8'))}
-    files, index = {}, {}
+    files, index, parents = {}, {}, {}
     for row in rows:
+        batch = row.get('catalogue_batch')
+        if batch not in CATALOGUE_BATCHES:
+            raise ValueError('Unreviewed catalogue batch')
+        parent = ROOT / 'docs/catalogue' / batch
+        if batch not in parents:
+            trails = {r['body']['slug']: r['body'] for r in json.loads((parent/'records.json').read_text(encoding='utf-8')) if r['kind'] == 'trail'}
+            source_reviews = {r['peak_slug']: r for r in json.loads((parent/'geometry-review.json').read_text(encoding='utf-8'))}
+            peaks = {r['slug']: r for r in json.loads((parent/'peaks.json').read_text(encoding='utf-8'))}
+            parents[batch] = trails, source_reviews, peaks
+        trails, source_reviews, peaks = parents[batch]
         slug, samples = row['trail_slug'], row['segments']
-        if slug in index or slug not in trails:
+        if slug in index or slug not in trails or row['peak_slug'] not in source_reviews or row['peak_slug'] not in peaks:
             raise ValueError('Duplicate or unknown trail')
         trail, source = trails[slug], source_reviews[row['peak_slug']]
         if samples_hash(samples) != row['samples_sha256']:
             raise ValueError('Elevation samples changed; review required')
-        if source['peak_id'] != row['peak_id'] or trail['peak_slug'] != row['peak_slug']:
+        peak_id = peaks[row['peak_slug']]['id']
+        if peak_id != row['peak_id'] or source.get('peak_id', peak_id) != row['peak_id'] or trail['peak_slug'] != row['peak_slug']:
             raise ValueError('Peak identity changed')
         for key in ['gpx_url', 'geometry_source_url']:
             if trail[key] != row[key]:
                 raise ValueError('Trail identity changed: ' + key)
-        for key in ['source_url', 'source_gpx', 'source_semantic_sha256', 'time_policy', 'adaptation']:
+        if row['source_url'] != source.get('source_url', source.get('source_page')):
+            raise ValueError('Source page changed')
+        for key in ['source_gpx', 'source_semantic_sha256', 'time_policy', 'adaptation']:
             if source[key] != row[key]:
                 raise ValueError('Source review changed: ' + key)
         if [[p[:2] for p in s] for s in samples] != trail['route_geometry']['coordinates']:

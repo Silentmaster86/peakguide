@@ -48,11 +48,11 @@ class ElevationProfilesTest(unittest.TestCase):
 
     def test_reviewed_assets_match_offline_generator(self):
         generated = profiles.generate()
-        self.assertEqual(len(generated), 5)
+        self.assertEqual(len(generated), 10)
         for name, content in generated.items():
             self.assertEqual((profiles.OUTPUT/name).read_text(encoding='utf-8'), content)
         rows = [json.loads(content) for name, content in generated.items() if name != 'index.json']
-        self.assertEqual(sum(r['height_count'] for r in rows), 530)
+        self.assertEqual(sum(r['height_count'] for r in rows), 1278)
         self.assertTrue(all(r['point_count'] == r['height_count'] for r in rows))
 
     def test_source_or_geometry_edits_need_review(self):
@@ -68,6 +68,23 @@ class ElevationProfilesTest(unittest.TestCase):
                 rows[0]['peak_id'] = 999
             else:
                 rows[0]['source_semantic_sha256'] = 'changed'
+            with tempfile.TemporaryDirectory() as folder:
+                path = Path(folder)/'review.json'
+                path.write_text(json.dumps(rows), encoding='utf-8')
+                with patch.object(profiles, 'REVIEW', path), self.assertRaises(ValueError):
+                    profiles.generate()
+
+    def test_catalogue_family_and_source_cannot_be_swapped(self):
+        original = json.loads(profiles.REVIEW.read_text(encoding='utf-8'))
+        for change in ['wrong_batch', 'unreviewed_batch', 'wrong_gpx']:
+            rows = copy.deepcopy(original)
+            row = next(r for r in rows if r['peak_slug'] == 'stog-izerski')
+            if change == 'wrong_batch':
+                row['catalogue_batch'] = 'nonkgp-06'
+            elif change == 'unreviewed_batch':
+                row['catalogue_batch'] = '../nonkgp-05'
+            else:
+                row['source_gpx'] = next(r['source_gpx'] for r in rows if r['peak_slug'] == 'wiezyca')
             with tempfile.TemporaryDirectory() as folder:
                 path = Path(folder)/'review.json'
                 path.write_text(json.dumps(rows), encoding='utf-8')

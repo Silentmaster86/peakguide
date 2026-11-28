@@ -18,5 +18,30 @@
     "peak_id": 75,
     "gpx_url": "https://mapa-turystyczna.pl/route/3npty.gpx",
     "geometry_source_url": "https://mapa-turystyczna.pl/route/3npty"
+  },
+  "stog-izerski-swieradow-czerwony-wejscie": {
+    "peak_id": 33,
+    "gpx_url": "https://mapa-turystyczna.pl/route/mau3.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/mau3"
+  },
+  "wysoki-kamien-szklarska-gorna-czerwony-wejscie": {
+    "peak_id": 34,
+    "gpx_url": "https://mapa-turystyczna.pl/route/iv1r.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/iv1r"
+  },
+  "czarna-gora-miedzygorze-lesieniec-wejscie": {
+    "peak_id": 31,
+    "gpx_url": "https://mapa-turystyczna.pl/route/l083.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/l083"
+  },
+  "kalenica-jugowska-zimna-polanka-wejscie": {
+    "peak_id": 39,
+    "gpx_url": "https://mapa-turystyczna.pl/route/6vs3.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/6vs3"
+  },
+  "wiezyca-dom-turysty-zolty-wejscie": {
+    "peak_id": 82,
+    "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.8925670,16.7269250;50.8867150,16.7288170",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.8925670,16.7269250;50.8867150,16.7288170"
   }
 }
