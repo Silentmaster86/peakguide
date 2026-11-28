@@ -1,0 +1,20 @@
+{
+  "reviewed_on": "2026-11-28",
+  "changes_applied": false,
+  "excluded_candidates": [
+    {
+      "peak_id": 80,
+      "slug": "sokolica",
+      "observed": {
+        "range_id": 26,
+        "range_slug": "pieniny",
+        "latitude": 49.58434,
+        "longitude": 19.56425,
+        "elevation_m": 1367
+      },
+      "issue": "The current row associates Pieniny with a 1367 m summit and a distant location. The PTTK Trzy Korony page describes the Pieniny Sokolica as 747 m. Identity is unresolved; do not attach a Pieniny route to this row by name alone.",
+      "source_url": "https://malopolska.szlaki.pttk.pl/2309-pttk-malopolska-trzy-korony",
+      "next_step": "Review primary location sources, all peak descriptions, range identity and weather allowlist before preparing a separately guarded correction. This batch changes none of them."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "reviewed_on": "2026-11-28",
+  "park_waypoints": {
+    "source_url": "https://go.zopk.pl/korona/",
+    "gpx_url": "https://zopk.pl/wp-content/uploads/2025/04/korona_GO-1.gpx",
+    "source_sha256": "a5c12473e845b2da69905eeba863085a27fb2a71c611c1fe411983ddef785716",
+    "use": "identity_and_poi_only",
+    "track_points": 0,
+    "selected_points": [
+      {
+        "name": "Srebrna Kopa",
+        "latitude": 50.25692778,
+        "longitude": 17.45519722,
+        "height_m": 785
+      },
+      {
+        "name": "Zamkowa Gora",
+        "latitude": 50.27271111,
+        "longitude": 17.45885,
+        "height_m": 571
+      }
+    ]
+  },
+  "pieniny_notice": {
+    "source_url": "https://piepn.gov.pl/komunikat-turystyczny",
+    "observed_statement": "Wszystkie szlaki na terenie Parku otwarte",
+    "scope": "Snapshot at review time only. Not a live access guarantee. Historical October closure reports are not propagated into current route notes."
+  },
+  "pieniny_gallery": {
+    "source_url": "https://piepn.gov.pl/trzy-korony-i-sokolica",
+    "scope": "Current primary park page for fees and access; prices/hours are not copied into static records."
+  }
+}

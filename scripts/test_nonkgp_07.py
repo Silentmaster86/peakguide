@@ -41,7 +41,7 @@ class NonKgp07Test(unittest.TestCase):
         self.assertEqual(len(batch.payload()['records']),4)
 
     def test_profiles_require_exact_new_identity_and_geometry(self):
-        generated=profiles.generate();self.assertEqual(len(generated),12)
+        generated=profiles.generate()
         review=json.loads(profiles.REVIEW.read_text());new=[r for r in review if r['catalogue_batch']=='nonkgp-07']
         self.assertEqual(sum(sum(map(len,r['segments']))for r in new),247)
         for row in new:

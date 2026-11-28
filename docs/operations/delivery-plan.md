@@ -4,6 +4,22 @@ Stan: 28 listopada 2026. Agent przygotowuje kod, backend, testy, dokumentację i
 Właściciel sprawdza i scala PR-y. Produkcyjne SQL/sekrety wymagają właściciela;
 nie wykonywać ich w tle. Brak informacji właściciela nie oznacza zgody na merge.
 
+## Bieżące przekazanie — merge #50 potwierdzony
+
+#50 scalony 28 listopada (`9ccbc0a`), potwierdzenie właściciela i GitHub.
+Suchawa i Lesista Wielka: kod gotowy, **SQL partii 07 nadal odłożony**.
+Nowa partia 08: Wołek, Trzy Korony, Zamkowa Góra (Góry Opawskie), Srebrna Kopa.
+Cztery trasy/POI, 32 tłumaczenia i 842 próbki profili. Nie zmienia tożsamości szczytów.
+
+Wspólne przyszłe okno: `docs/catalogue/nonkgp-07-08/README.md`, jeden `apply.sql`
+i jeden `verify.sql`. Razem 6 tras, 6 POI, 48 tłumaczeń, 1089 nowych próbek.
+To **przygotowane pakiety**, nie potwierdzenie importu. Na razie tylko merge.
+Nie prosić o ponowienie zakończonych importów #37/#38/#40 ani merge #45–#50.
+Na produkcji pozostaje 9 profili / 1278 próbek; kod przygotowuje 15 / 2367,
+z czego 6 profili czeka na SQL 07/08. Publiczny audyt nadal: poza KGP 32 bez
+trasy i 35 bez POI; przygotowanych pakietów nie odejmować od tych braków.
+
+
 ## Pięć etapów frontendu — ukończone
 
 | Etap | Zakres | Stan |
@@ -41,7 +57,7 @@ wykresów, koniec suwaka klawiaturą, cztery języki, Light/Dark i 320/390/1440 
 Nie ma zaległego merge ani SQL dla #48.
 
 Utrzymanie: `python scripts/build_elevation_profiles.py --check` porównuje
-artefakty i tożsamości z jawną listą partii nonkgp-01, nonkgp-05, nonkgp-06 i przygotowaną nonkgp-07.
+artefakty i tożsamości z jawną listą partii nonkgp-01, nonkgp-05, nonkgp-06 oraz przygotowanymi nonkgp-07 i nonkgp-08.
 `--check --check-sources` dodatkowo czyta przejrzane publiczne GPX i odmawia
 po zmianie pełnego fingerprintu lub próbek. Nie przyjmuje dowolnej ścieżki partii.
 `docs/catalogue/elevation-profiles/review.json` zawiera sprawdzone wysokości
@@ -95,6 +111,13 @@ Pogoda i poprawki UX nie muszą czekać na wszystkie partie katalogu.
 Badanie brakującego źródła nie wstrzymuje niezależnych zadań.
 
 ## Kryteria gotowego PR
+
+Testy przypinają `@playwright/test` do stabilnej wersji 1.64.1. Firefox dostarczany
+z 1.65.x ma [potwierdzoną regresję ARIA po Axe](https://github.com/microsoft/playwright/issues/44135),
+odtworzoną także lokalnym minimalnym przypadkiem. `e2e/aria-after-axe.spec.mjs`
+chroni skan i późniejszy odczyt etykiety/regionu. Przy przyszłej aktualizacji
+wymagany jest poprawiony silnik i zielony pełny przebieg wszystkich przeglądarek;
+nie wyłączać skanów ani zmieniać dostępnych nazw w aplikacji w celu obejścia błędu narzędzia.
 
 - Konkretny problem i wynik, zakres, zależności oraz wymagane czynności właściciela.
 - Odpowiednie testy: frontend lint/unit/build i istotne E2E; backend walidacja,

@@ -53,5 +53,25 @@
     "peak_id": 47,
     "gpx_url": "https://mapa-turystyczna.pl/route/kmo2.gpx",
     "geometry_source_url": "https://mapa-turystyczna.pl/route/kmo2"
+  },
+  "wolek-redzinska-zolty-niebieski-wejscie": {
+    "peak_id": 43,
+    "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.8235430,15.9458360;50.8380240,15.9354440",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.8235430,15.9458360;50.8380240,15.9354440"
+  },
+  "trzy-korony-sromowce-szopka-wejscie": {
+    "peak_id": 79,
+    "gpx_url": "https://mapa-turystyczna.pl/route/1cd3e.gpx",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route/1cd3e"
+  },
+  "zamkowa-gora-pokrzywna-czerwony-wejscie": {
+    "peak_id": 142,
+    "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.2877390,17.4729770;50.27271111,17.45885000",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.2877390,17.4729770;50.27271111,17.45885000"
+  },
+  "srebrna-kopa-pokrzywna-zamkowa-wejscie": {
+    "peak_id": 57,
+    "gpx_url": "https://mapa-turystyczna.pl/route/export?q=50.2877390,17.4729770;50.27271111,17.45885000;50.25692778,17.45519722",
+    "geometry_source_url": "https://mapa-turystyczna.pl/route?q=50.2877390,17.4729770;50.27271111,17.45885000;50.25692778,17.45519722"
   }
 }
